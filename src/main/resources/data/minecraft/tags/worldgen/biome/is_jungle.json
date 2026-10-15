@@ -1,0 +1,27 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:afrique_australe/sparse_jungle",
+  "domaine_terre:afrique_est/sparse_jungle",
+  "domaine_terre:afrique_tropicale/jungle",
+  "domaine_terre:afrique_tropicale/sparse_jungle",
+  "domaine_terre:amazonie/jungle",
+  "domaine_terre:amazonie/sparse_jungle",
+  "domaine_terre:amerique_centrale/jungle",
+  "domaine_terre:amerique_centrale/sparse_jungle",
+  "domaine_terre:andes/sparse_jungle",
+  "domaine_terre:asie_sud_est/bamboo_jungle",
+  "domaine_terre:asie_sud_est/jungle",
+  "domaine_terre:asie_sud_est/sparse_jungle",
+  "domaine_terre:australie/sparse_jungle",
+  "domaine_terre:chine/bamboo_jungle",
+  "domaine_terre:chine/jungle",
+  "domaine_terre:chine/sparse_jungle",
+  "domaine_terre:inde/bamboo_jungle",
+  "domaine_terre:inde/jungle",
+  "domaine_terre:inde/sparse_jungle",
+  "domaine_terre:japon_coree/bamboo_jungle",
+  "domaine_terre:melanesie/jungle",
+  "domaine_terre:melanesie/sparse_jungle"
+ ]
+}

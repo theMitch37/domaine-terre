@@ -1,0 +1,14 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:nouvelle_zelande/beach",
+  "domaine_terre:nouvelle_zelande/forest",
+  "domaine_terre:nouvelle_zelande/jagged_peaks",
+  "domaine_terre:nouvelle_zelande/meadow",
+  "domaine_terre:nouvelle_zelande/old_growth_pine_taiga",
+  "domaine_terre:nouvelle_zelande/plains",
+  "domaine_terre:nouvelle_zelande/snowy_slopes",
+  "domaine_terre:nouvelle_zelande/stony_shore",
+  "domaine_terre:nouvelle_zelande/windswept_hills"
+ ]
+}

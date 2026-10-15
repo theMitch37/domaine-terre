@@ -1,0 +1,13 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:asie_sud_est/bamboo_jungle",
+  "domaine_terre:asie_sud_est/beach",
+  "domaine_terre:asie_sud_est/jungle",
+  "domaine_terre:asie_sud_est/mangrove_swamp",
+  "domaine_terre:asie_sud_est/sparse_jungle",
+  "domaine_terre:asie_sud_est/stony_peaks",
+  "domaine_terre:asie_sud_est/stony_shore",
+  "domaine_terre:asie_sud_est/swamp"
+ ]
+}

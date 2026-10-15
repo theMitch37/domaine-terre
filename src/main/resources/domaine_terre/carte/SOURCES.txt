@@ -1,0 +1,5 @@
+Données géographiques utilisées par le mod Domaine d'Aubin - Terre :
+- Côtes, lacs, fleuves : Natural Earth (domaine public), naturalearthdata.com
+- Relief : ETOPO 2022, NOAA National Centers for Environmental Information (domaine public)
+- Climat : Beck, H. E., et al. High-resolution (1 km) Köppen-Geiger maps for 1901–2099 based on
+  constrained CMIP6 projections. Scientific Data 10, 724 (2023). Licence CC BY 4.0.

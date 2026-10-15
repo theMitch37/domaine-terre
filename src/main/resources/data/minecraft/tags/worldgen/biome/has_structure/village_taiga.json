@@ -1,0 +1,14 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:alpine/taiga",
+  "domaine_terre:boreale/taiga",
+  "domaine_terre:continentale/taiga",
+  "domaine_terre:grandes_plaines/taiga",
+  "domaine_terre:japon_coree/taiga",
+  "domaine_terre:nordique/taiga",
+  "domaine_terre:ouest_mexique/taiga",
+  "domaine_terre:siberie/taiga",
+  "domaine_terre:steppes_tibet/taiga"
+ ]
+}

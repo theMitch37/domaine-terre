@@ -1,0 +1,14 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:afrique_australe/badlands",
+  "domaine_terre:andes/badlands",
+  "domaine_terre:australie/badlands",
+  "domaine_terre:australie/eroded_badlands",
+  "domaine_terre:moyen_orient/badlands",
+  "domaine_terre:ouest_mexique/badlands",
+  "domaine_terre:ouest_mexique/eroded_badlands",
+  "domaine_terre:ouest_mexique/wooded_badlands",
+  "domaine_terre:sahara_sahel/badlands"
+ ]
+}

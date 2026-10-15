@@ -1,0 +1,16 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:alpine/forest",
+  "domaine_terre:alpine/frozen_peaks",
+  "domaine_terre:alpine/grove",
+  "domaine_terre:alpine/jagged_peaks",
+  "domaine_terre:alpine/meadow",
+  "domaine_terre:alpine/plains",
+  "domaine_terre:alpine/snowy_slopes",
+  "domaine_terre:alpine/stony_shore",
+  "domaine_terre:alpine/taiga",
+  "domaine_terre:alpine/windswept_forest",
+  "domaine_terre:alpine/windswept_hills"
+ ]
+}

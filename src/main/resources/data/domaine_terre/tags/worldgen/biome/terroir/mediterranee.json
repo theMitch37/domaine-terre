@@ -1,0 +1,15 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:mediterranee/beach",
+  "domaine_terre:mediterranee/flower_forest",
+  "domaine_terre:mediterranee/forest",
+  "domaine_terre:mediterranee/meadow",
+  "domaine_terre:mediterranee/plains",
+  "domaine_terre:mediterranee/stony_peaks",
+  "domaine_terre:mediterranee/stony_shore",
+  "domaine_terre:mediterranee/sunflower_plains",
+  "domaine_terre:mediterranee/windswept_forest",
+  "domaine_terre:mediterranee/windswept_hills"
+ ]
+}

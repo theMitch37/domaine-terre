@@ -1,0 +1,10 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:antarctique/frozen_peaks",
+  "domaine_terre:antarctique/ice_spikes",
+  "domaine_terre:antarctique/snowy_beach",
+  "domaine_terre:antarctique/snowy_plains",
+  "domaine_terre:antarctique/snowy_slopes"
+ ]
+}

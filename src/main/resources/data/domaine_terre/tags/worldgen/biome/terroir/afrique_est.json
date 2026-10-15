@@ -1,0 +1,13 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:afrique_est/beach",
+  "domaine_terre:afrique_est/meadow",
+  "domaine_terre:afrique_est/savanna",
+  "domaine_terre:afrique_est/savanna_plateau",
+  "domaine_terre:afrique_est/snowy_slopes",
+  "domaine_terre:afrique_est/sparse_jungle",
+  "domaine_terre:afrique_est/stony_peaks",
+  "domaine_terre:afrique_est/windswept_savanna"
+ ]
+}

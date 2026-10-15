@@ -1,0 +1,15 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:inde/bamboo_jungle",
+  "domaine_terre:inde/beach",
+  "domaine_terre:inde/desert",
+  "domaine_terre:inde/frozen_peaks",
+  "domaine_terre:inde/jagged_peaks",
+  "domaine_terre:inde/jungle",
+  "domaine_terre:inde/mangrove_swamp",
+  "domaine_terre:inde/plains",
+  "domaine_terre:inde/savanna",
+  "domaine_terre:inde/sparse_jungle"
+ ]
+}

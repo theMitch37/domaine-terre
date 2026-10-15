@@ -1,0 +1,12 @@
+{
+ "replace": false,
+ "values": [
+  "#domaine_terre:terroir/asie_sud_est",
+  "#domaine_terre:terroir/chine",
+  "#domaine_terre:terroir/inde",
+  "#domaine_terre:terroir/japon_coree",
+  "#domaine_terre:terroir/moyen_orient",
+  "#domaine_terre:terroir/siberie",
+  "#domaine_terre:terroir/steppes_tibet"
+ ]
+}

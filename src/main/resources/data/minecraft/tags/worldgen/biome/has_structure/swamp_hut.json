@@ -1,0 +1,12 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:afrique_tropicale/swamp",
+  "domaine_terre:amazonie/swamp",
+  "domaine_terre:asie_sud_est/swamp",
+  "domaine_terre:boreale/swamp",
+  "domaine_terre:chine/swamp",
+  "domaine_terre:grandes_plaines/swamp",
+  "domaine_terre:siberie/swamp"
+ ]
+}

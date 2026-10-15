@@ -1,0 +1,16 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:steppes_tibet/desert",
+  "domaine_terre:steppes_tibet/frozen_peaks",
+  "domaine_terre:steppes_tibet/grove",
+  "domaine_terre:steppes_tibet/jagged_peaks",
+  "domaine_terre:steppes_tibet/plains",
+  "domaine_terre:steppes_tibet/snowy_plains",
+  "domaine_terre:steppes_tibet/snowy_slopes",
+  "domaine_terre:steppes_tibet/stony_peaks",
+  "domaine_terre:steppes_tibet/sunflower_plains",
+  "domaine_terre:steppes_tibet/taiga",
+  "domaine_terre:steppes_tibet/windswept_gravelly_hills"
+ ]
+}

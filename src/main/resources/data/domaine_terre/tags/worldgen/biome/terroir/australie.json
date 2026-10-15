@@ -1,0 +1,16 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:australie/badlands",
+  "domaine_terre:australie/beach",
+  "domaine_terre:australie/birch_forest",
+  "domaine_terre:australie/desert",
+  "domaine_terre:australie/eroded_badlands",
+  "domaine_terre:australie/flower_forest",
+  "domaine_terre:australie/forest",
+  "domaine_terre:australie/plains",
+  "domaine_terre:australie/savanna",
+  "domaine_terre:australie/savanna_plateau",
+  "domaine_terre:australie/sparse_jungle"
+ ]
+}

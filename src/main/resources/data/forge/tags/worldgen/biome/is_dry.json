@@ -1,0 +1,27 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:afrique_australe/badlands",
+  "domaine_terre:afrique_australe/desert",
+  "domaine_terre:afrique_australe/windswept_savanna",
+  "domaine_terre:afrique_est/windswept_savanna",
+  "domaine_terre:andes/badlands",
+  "domaine_terre:andes/desert",
+  "domaine_terre:australie/badlands",
+  "domaine_terre:australie/desert",
+  "domaine_terre:australie/eroded_badlands",
+  "domaine_terre:cone_sud/desert",
+  "domaine_terre:inde/desert",
+  "domaine_terre:maghreb/desert",
+  "domaine_terre:maghreb/windswept_savanna",
+  "domaine_terre:moyen_orient/badlands",
+  "domaine_terre:moyen_orient/desert",
+  "domaine_terre:ouest_mexique/badlands",
+  "domaine_terre:ouest_mexique/desert",
+  "domaine_terre:ouest_mexique/eroded_badlands",
+  "domaine_terre:ouest_mexique/wooded_badlands",
+  "domaine_terre:sahara_sahel/badlands",
+  "domaine_terre:sahara_sahel/desert",
+  "domaine_terre:steppes_tibet/desert"
+ ]
+}

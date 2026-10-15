@@ -1,0 +1,18 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:siberie/birch_forest",
+  "domaine_terre:siberie/frozen_peaks",
+  "domaine_terre:siberie/grove",
+  "domaine_terre:siberie/old_growth_pine_taiga",
+  "domaine_terre:siberie/old_growth_spruce_taiga",
+  "domaine_terre:siberie/snowy_beach",
+  "domaine_terre:siberie/snowy_plains",
+  "domaine_terre:siberie/snowy_slopes",
+  "domaine_terre:siberie/snowy_taiga",
+  "domaine_terre:siberie/stony_shore",
+  "domaine_terre:siberie/swamp",
+  "domaine_terre:siberie/taiga",
+  "domaine_terre:siberie/windswept_forest"
+ ]
+}

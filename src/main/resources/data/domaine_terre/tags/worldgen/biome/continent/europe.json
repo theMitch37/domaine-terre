@@ -1,0 +1,10 @@
+{
+ "replace": false,
+ "values": [
+  "#domaine_terre:terroir/alpine",
+  "#domaine_terre:terroir/atlantique",
+  "#domaine_terre:terroir/continentale",
+  "#domaine_terre:terroir/mediterranee",
+  "#domaine_terre:terroir/nordique"
+ ]
+}

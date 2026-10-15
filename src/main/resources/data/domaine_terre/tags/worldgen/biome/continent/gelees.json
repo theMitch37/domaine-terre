@@ -1,0 +1,7 @@
+{
+ "replace": false,
+ "values": [
+  "#domaine_terre:terroir/antarctique",
+  "#domaine_terre:terroir/arctique"
+ ]
+}

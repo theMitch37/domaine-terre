@@ -1,0 +1,13 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:arctique/frozen_peaks",
+  "domaine_terre:arctique/ice_spikes",
+  "domaine_terre:arctique/jagged_peaks",
+  "domaine_terre:arctique/snowy_beach",
+  "domaine_terre:arctique/snowy_plains",
+  "domaine_terre:arctique/snowy_slopes",
+  "domaine_terre:arctique/snowy_taiga",
+  "domaine_terre:arctique/stony_shore"
+ ]
+}

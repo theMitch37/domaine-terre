@@ -1,0 +1,11 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:amerique_centrale/beach",
+  "domaine_terre:amerique_centrale/jungle",
+  "domaine_terre:amerique_centrale/mangrove_swamp",
+  "domaine_terre:amerique_centrale/savanna",
+  "domaine_terre:amerique_centrale/sparse_jungle",
+  "domaine_terre:amerique_centrale/stony_peaks"
+ ]
+}

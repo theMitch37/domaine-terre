@@ -1,0 +1,20 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:ouest_mexique/badlands",
+  "domaine_terre:ouest_mexique/beach",
+  "domaine_terre:ouest_mexique/desert",
+  "domaine_terre:ouest_mexique/eroded_badlands",
+  "domaine_terre:ouest_mexique/grove",
+  "domaine_terre:ouest_mexique/jagged_peaks",
+  "domaine_terre:ouest_mexique/old_growth_pine_taiga",
+  "domaine_terre:ouest_mexique/plains",
+  "domaine_terre:ouest_mexique/savanna",
+  "domaine_terre:ouest_mexique/snowy_slopes",
+  "domaine_terre:ouest_mexique/stony_peaks",
+  "domaine_terre:ouest_mexique/stony_shore",
+  "domaine_terre:ouest_mexique/taiga",
+  "domaine_terre:ouest_mexique/windswept_hills",
+  "domaine_terre:ouest_mexique/wooded_badlands"
+ ]
+}

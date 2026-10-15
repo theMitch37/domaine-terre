@@ -1,0 +1,17 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:afrique_australe/savanna",
+  "domaine_terre:afrique_est/savanna",
+  "domaine_terre:afrique_tropicale/savanna",
+  "domaine_terre:amazonie/savanna",
+  "domaine_terre:amerique_centrale/savanna",
+  "domaine_terre:australie/savanna",
+  "domaine_terre:cone_sud/savanna",
+  "domaine_terre:inde/savanna",
+  "domaine_terre:maghreb/savanna",
+  "domaine_terre:moyen_orient/savanna",
+  "domaine_terre:ouest_mexique/savanna",
+  "domaine_terre:sahara_sahel/savanna"
+ ]
+}

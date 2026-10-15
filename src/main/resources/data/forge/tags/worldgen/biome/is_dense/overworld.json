@@ -1,0 +1,20 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:afrique_tropicale/jungle",
+  "domaine_terre:amazonie/jungle",
+  "domaine_terre:amerique_centrale/jungle",
+  "domaine_terre:asie_sud_est/jungle",
+  "domaine_terre:atlantique/dark_forest",
+  "domaine_terre:boreale/old_growth_spruce_taiga",
+  "domaine_terre:chine/jungle",
+  "domaine_terre:cone_sud/old_growth_spruce_taiga",
+  "domaine_terre:continentale/dark_forest",
+  "domaine_terre:continentale/old_growth_birch_forest",
+  "domaine_terre:grandes_plaines/dark_forest",
+  "domaine_terre:inde/jungle",
+  "domaine_terre:melanesie/jungle",
+  "domaine_terre:nordique/old_growth_spruce_taiga",
+  "domaine_terre:siberie/old_growth_spruce_taiga"
+ ]
+}

@@ -1,0 +1,205 @@
+[
+ {
+  "index": 1,
+  "cle": "atlantique",
+  "nom": "Atlantique",
+  "continent": "europe",
+  "couleur": "#5c96c8"
+ },
+ {
+  "index": 2,
+  "cle": "mediterranee",
+  "nom": "Méditerranée",
+  "continent": "europe",
+  "couleur": "#e8a046"
+ },
+ {
+  "index": 3,
+  "cle": "continentale",
+  "nom": "Continentale",
+  "continent": "europe",
+  "couleur": "#78af5f"
+ },
+ {
+  "index": 4,
+  "cle": "nordique",
+  "nom": "Nordique",
+  "continent": "europe",
+  "couleur": "#46738c"
+ },
+ {
+  "index": 5,
+  "cle": "alpine",
+  "nom": "Alpine",
+  "continent": "europe",
+  "couleur": "#afb4c8"
+ },
+ {
+  "index": 6,
+  "cle": "maghreb",
+  "nom": "Maghreb",
+  "continent": "afrique",
+  "couleur": "#cd784b"
+ },
+ {
+  "index": 7,
+  "cle": "sahara_sahel",
+  "nom": "Sahara-Sahel",
+  "continent": "afrique",
+  "couleur": "#f0cd82"
+ },
+ {
+  "index": 8,
+  "cle": "afrique_tropicale",
+  "nom": "Afrique tropicale",
+  "continent": "afrique",
+  "couleur": "#3c8737"
+ },
+ {
+  "index": 9,
+  "cle": "afrique_est",
+  "nom": "Afrique de l'Est",
+  "continent": "afrique",
+  "couleur": "#a56e3c"
+ },
+ {
+  "index": 10,
+  "cle": "afrique_australe",
+  "nom": "Australe et Madagascar",
+  "continent": "afrique",
+  "couleur": "#c8aa5a"
+ },
+ {
+  "index": 11,
+  "cle": "moyen_orient",
+  "nom": "Moyen-Orient",
+  "continent": "asie",
+  "couleur": "#d7b478"
+ },
+ {
+  "index": 12,
+  "cle": "steppes_tibet",
+  "nom": "Steppes et Tibet",
+  "continent": "asie",
+  "couleur": "#b9be82"
+ },
+ {
+  "index": 13,
+  "cle": "siberie",
+  "nom": "Sibérie",
+  "continent": "asie",
+  "couleur": "#6e8c7d"
+ },
+ {
+  "index": 14,
+  "cle": "inde",
+  "nom": "Inde",
+  "continent": "asie",
+  "couleur": "#e6783c"
+ },
+ {
+  "index": 15,
+  "cle": "chine",
+  "nom": "Chine",
+  "continent": "asie",
+  "couleur": "#c84646"
+ },
+ {
+  "index": 16,
+  "cle": "japon_coree",
+  "nom": "Japon-Corée",
+  "continent": "asie",
+  "couleur": "#eb96b9"
+ },
+ {
+  "index": 17,
+  "cle": "asie_sud_est",
+  "nom": "Asie du Sud-Est",
+  "continent": "asie",
+  "couleur": "#50a55a"
+ },
+ {
+  "index": 18,
+  "cle": "boreale",
+  "nom": "Boréale",
+  "continent": "ameriques",
+  "couleur": "#5a7d69"
+ },
+ {
+  "index": 19,
+  "cle": "grandes_plaines",
+  "nom": "Grandes plaines et Est",
+  "continent": "ameriques",
+  "couleur": "#afc35f"
+ },
+ {
+  "index": 20,
+  "cle": "ouest_mexique",
+  "nom": "Ouest aride et Mexique",
+  "continent": "ameriques",
+  "couleur": "#d27d46"
+ },
+ {
+  "index": 21,
+  "cle": "amerique_centrale",
+  "nom": "Amérique centrale et Caraïbes",
+  "continent": "ameriques",
+  "couleur": "#3caf96"
+ },
+ {
+  "index": 22,
+  "cle": "amazonie",
+  "nom": "Amazonie",
+  "continent": "ameriques",
+  "couleur": "#28732d"
+ },
+ {
+  "index": 23,
+  "cle": "andes",
+  "nom": "Andes",
+  "continent": "ameriques",
+  "couleur": "#9682a0"
+ },
+ {
+  "index": 24,
+  "cle": "cone_sud",
+  "nom": "Cône sud",
+  "continent": "ameriques",
+  "couleur": "#96b9cd"
+ },
+ {
+  "index": 25,
+  "cle": "australie",
+  "nom": "Australie",
+  "continent": "oceanie",
+  "couleur": "#d76e37"
+ },
+ {
+  "index": 26,
+  "cle": "nouvelle_zelande",
+  "nom": "Nouvelle-Zélande",
+  "continent": "oceanie",
+  "couleur": "#5faa78"
+ },
+ {
+  "index": 27,
+  "cle": "melanesie",
+  "nom": "Mélanésie",
+  "continent": "oceanie",
+  "couleur": "#329678"
+ },
+ {
+  "index": 28,
+  "cle": "arctique",
+  "nom": "Arctique",
+  "continent": "gelees",
+  "couleur": "#e1ebf5"
+ },
+ {
+  "index": 29,
+  "cle": "antarctique",
+  "nom": "Antarctique",
+  "continent": "gelees",
+  "couleur": "#cdd7e6"
+ }
+]

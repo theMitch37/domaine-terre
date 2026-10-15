@@ -1,0 +1,14 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:moyen_orient/badlands",
+  "domaine_terre:moyen_orient/beach",
+  "domaine_terre:moyen_orient/desert",
+  "domaine_terre:moyen_orient/plains",
+  "domaine_terre:moyen_orient/savanna",
+  "domaine_terre:moyen_orient/snowy_slopes",
+  "domaine_terre:moyen_orient/stony_peaks",
+  "domaine_terre:moyen_orient/stony_shore",
+  "domaine_terre:moyen_orient/windswept_hills"
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:boreale/birch_forest",
+  "domaine_terre:boreale/frozen_peaks",
+  "domaine_terre:boreale/grove",
+  "domaine_terre:boreale/jagged_peaks",
+  "domaine_terre:boreale/old_growth_pine_taiga",
+  "domaine_terre:boreale/old_growth_spruce_taiga",
+  "domaine_terre:boreale/snowy_beach",
+  "domaine_terre:boreale/snowy_plains",
+  "domaine_terre:boreale/snowy_slopes",
+  "domaine_terre:boreale/snowy_taiga",
+  "domaine_terre:boreale/stony_shore",
+  "domaine_terre:boreale/swamp",
+  "domaine_terre:boreale/taiga"
+ ]
+}

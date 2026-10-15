@@ -1,0 +1,16 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:japon_coree/bamboo_jungle",
+  "domaine_terre:japon_coree/beach",
+  "domaine_terre:japon_coree/birch_forest",
+  "domaine_terre:japon_coree/cherry_grove",
+  "domaine_terre:japon_coree/forest",
+  "domaine_terre:japon_coree/grove",
+  "domaine_terre:japon_coree/meadow",
+  "domaine_terre:japon_coree/plains",
+  "domaine_terre:japon_coree/snowy_slopes",
+  "domaine_terre:japon_coree/stony_shore",
+  "domaine_terre:japon_coree/taiga"
+ ]
+}

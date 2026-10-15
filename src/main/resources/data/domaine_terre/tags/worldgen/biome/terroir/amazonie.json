@@ -1,0 +1,11 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:amazonie/beach",
+  "domaine_terre:amazonie/jungle",
+  "domaine_terre:amazonie/mangrove_swamp",
+  "domaine_terre:amazonie/savanna",
+  "domaine_terre:amazonie/sparse_jungle",
+  "domaine_terre:amazonie/swamp"
+ ]
+}

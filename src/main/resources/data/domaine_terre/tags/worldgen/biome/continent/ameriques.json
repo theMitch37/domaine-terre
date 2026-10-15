@@ -1,0 +1,12 @@
+{
+ "replace": false,
+ "values": [
+  "#domaine_terre:terroir/amazonie",
+  "#domaine_terre:terroir/amerique_centrale",
+  "#domaine_terre:terroir/andes",
+  "#domaine_terre:terroir/boreale",
+  "#domaine_terre:terroir/cone_sud",
+  "#domaine_terre:terroir/grandes_plaines",
+  "#domaine_terre:terroir/ouest_mexique"
+ ]
+}

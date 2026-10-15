@@ -1,0 +1,38 @@
+# Compile le mod Terre puis l'addon Lieux uniques à chaque envoi sur GitHub.
+# Les jars sont téléchargeables dans l'onglet Actions (section « Artifacts » du run).
+name: Compilation
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v3
+
+      - name: Mod Terre
+        run: |
+          chmod +x gradlew
+          ./gradlew build --no-daemon
+
+      - name: Addon Lieux uniques
+        run: |
+          mkdir -p lieux/libs
+          cp build/libs/domaine_terre-*.jar lieux/libs/
+          cd lieux
+          chmod +x gradlew
+          ./gradlew build --no-daemon
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mods-domaine-aubin
+          path: |
+            build/libs/domaine_terre-*.jar
+            lieux/build/libs/domaine_terre_lieux-*.jar

@@ -1,0 +1,31 @@
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+
+# Files from Forge MDK
+forge*changelog.txt
+
+# Domaine d'Aubin : données brutes (plusieurs Go, régénérables avec outils/) et jars copiés
+donnees
+lieux/libs
+*.jar
+!gradle/wrapper/gradle-wrapper.jar

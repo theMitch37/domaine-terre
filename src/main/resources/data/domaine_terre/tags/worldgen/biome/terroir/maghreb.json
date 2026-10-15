@@ -1,0 +1,14 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:maghreb/beach",
+  "domaine_terre:maghreb/desert",
+  "domaine_terre:maghreb/plains",
+  "domaine_terre:maghreb/savanna",
+  "domaine_terre:maghreb/savanna_plateau",
+  "domaine_terre:maghreb/stony_peaks",
+  "domaine_terre:maghreb/stony_shore",
+  "domaine_terre:maghreb/windswept_hills",
+  "domaine_terre:maghreb/windswept_savanna"
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:afrique_australe/desert",
+  "domaine_terre:andes/desert",
+  "domaine_terre:australie/desert",
+  "domaine_terre:cone_sud/desert",
+  "domaine_terre:inde/desert",
+  "domaine_terre:maghreb/desert",
+  "domaine_terre:moyen_orient/desert",
+  "domaine_terre:ouest_mexique/desert",
+  "domaine_terre:sahara_sahel/desert",
+  "domaine_terre:steppes_tibet/desert"
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:atlantique/beach",
+  "domaine_terre:atlantique/birch_forest",
+  "domaine_terre:atlantique/dark_forest",
+  "domaine_terre:atlantique/flower_forest",
+  "domaine_terre:atlantique/forest",
+  "domaine_terre:atlantique/meadow",
+  "domaine_terre:atlantique/plains",
+  "domaine_terre:atlantique/stony_shore",
+  "domaine_terre:atlantique/sunflower_plains",
+  "domaine_terre:atlantique/windswept_hills"
+ ]
+}

@@ -1,0 +1,8 @@
+{
+ "replace": false,
+ "values": [
+  "#domaine_terre:terroir/australie",
+  "#domaine_terre:terroir/melanesie",
+  "#domaine_terre:terroir/nouvelle_zelande"
+ ]
+}

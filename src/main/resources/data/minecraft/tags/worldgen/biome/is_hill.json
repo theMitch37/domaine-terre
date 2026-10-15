@@ -1,0 +1,22 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:alpine/windswept_forest",
+  "domaine_terre:alpine/windswept_hills",
+  "domaine_terre:andes/windswept_gravelly_hills",
+  "domaine_terre:atlantique/windswept_hills",
+  "domaine_terre:cone_sud/windswept_hills",
+  "domaine_terre:continentale/windswept_hills",
+  "domaine_terre:grandes_plaines/windswept_hills",
+  "domaine_terre:maghreb/windswept_hills",
+  "domaine_terre:mediterranee/windswept_forest",
+  "domaine_terre:mediterranee/windswept_hills",
+  "domaine_terre:moyen_orient/windswept_hills",
+  "domaine_terre:nordique/windswept_forest",
+  "domaine_terre:nordique/windswept_hills",
+  "domaine_terre:nouvelle_zelande/windswept_hills",
+  "domaine_terre:ouest_mexique/windswept_hills",
+  "domaine_terre:siberie/windswept_forest",
+  "domaine_terre:steppes_tibet/windswept_gravelly_hills"
+ ]
+}

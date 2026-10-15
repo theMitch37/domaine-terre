@@ -1,0 +1,10 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:melanesie/beach",
+  "domaine_terre:melanesie/jungle",
+  "domaine_terre:melanesie/mangrove_swamp",
+  "domaine_terre:melanesie/sparse_jungle",
+  "domaine_terre:melanesie/stony_peaks"
+ ]
+}

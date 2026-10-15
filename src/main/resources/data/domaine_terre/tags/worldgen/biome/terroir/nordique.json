@@ -1,0 +1,19 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:nordique/beach",
+  "domaine_terre:nordique/frozen_peaks",
+  "domaine_terre:nordique/grove",
+  "domaine_terre:nordique/jagged_peaks",
+  "domaine_terre:nordique/old_growth_pine_taiga",
+  "domaine_terre:nordique/old_growth_spruce_taiga",
+  "domaine_terre:nordique/snowy_beach",
+  "domaine_terre:nordique/snowy_plains",
+  "domaine_terre:nordique/snowy_slopes",
+  "domaine_terre:nordique/snowy_taiga",
+  "domaine_terre:nordique/stony_shore",
+  "domaine_terre:nordique/taiga",
+  "domaine_terre:nordique/windswept_forest",
+  "domaine_terre:nordique/windswept_hills"
+ ]
+}
