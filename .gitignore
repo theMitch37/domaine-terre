@@ -28,4 +28,4 @@ forge*changelog.txt
 donnees
 lieux/libs
 *.jar
-!gradle/wrapper/gradle-wrapper.jar
+!**/gradle/wrapper/gradle-wrapper.jar
