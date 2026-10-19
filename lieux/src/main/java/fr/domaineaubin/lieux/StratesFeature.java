@@ -45,7 +45,7 @@ public class StratesFeature extends Feature<NoneFeatureConfiguration> {
                             if (b.getFluidState().isEmpty() && !b.isAir()) niveau.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
                         }
                         sommet = t;
-                    } else if (sommet < t) {
+                    } else if (sommet < t && cible >= SCULPTE_MIN) {
                         for (int y = Math.max(sommet + 1, SCULPTE_MIN); y <= t; y++) {
                             niveau.setBlock(pos.set(x, y, z), Blocks.STONE.defaultBlockState(), 2);
                         }
@@ -54,10 +54,10 @@ public class StratesFeature extends Feature<NoneFeatureConfiguration> {
                     modifie = true;
                 }
                 // le plateau garde son sol (herbe, forêt) : seules les parois et le fond sont colorés
-                int haut = Math.min(sommet, (int) Math.floor(rebord) - 2);
-                for (int y = haut; y >= GrandCanyon.FOND - 6; y--) {
+                for (int y = sommet; y >= GrandCanyon.FOND - 6; y--) {
                     BlockState b = niveau.getBlockState(pos.set(x, y, z));
                     if (!remplacable(b)) continue;
+                    if (y >= rebord - 2 && b.is(BlockTags.DIRT)) continue;
                     niveau.setBlock(pos, strate(x, y, z, rebord), 2);
                     modifie = true;
                 }

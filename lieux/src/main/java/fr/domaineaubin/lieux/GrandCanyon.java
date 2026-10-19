@@ -154,26 +154,28 @@ public final class GrandCanyon implements Lieu {
         double lon = Terrain.lon(x), lat = Terrain.lat(z);
         double e = echant(alt, lon, lat), p = echant(plateau, lon, lat), r = echant(fleuve, lon, lat);
         double db = echant(distance, lon, lat) * 100.0 * Terrain.BLOCS_PAR_DEGRE / 111_320.0;
-        double w = demiLargeur();
+        // le canyon naît à Lees Ferry et finit aux Grand Wash Cliffs : il s'y rétrécit jusqu'au lit du fleuve
+        double intensite = lisse((lon - LON_GRAND_WASH) / 0.25) * (1.0 - lisse((lon - LON_LEES_FERRY + 0.25) / 0.25));
+        double w = demiLargeur() * Math.max(intensite, 0.06);
         // parois découpées : amphithéâtres, éperons et canyons latéraux
-        double d = db;
-        if (db >= 6.0) {
-            d = Math.max(6.0, db + bruit.noise(x / (w * 0.9), 0.0, z / (w * 0.9)) * w * 0.35
+        double d = db, plancher = Math.min(6.0, w * 0.3);
+        if (db >= plancher) {
+            double wf = demiLargeur();
+            d = Math.max(plancher, db + bruit.noise(x / (wf * 0.9), 0.0, z / (wf * 0.9)) * w * 0.35
                     + bruit.noise(x / 23.0, 1.0, z / 23.0) * w * 0.07);
         }
         double t = d / w;
         double g = Mth.clamp(profil(Mth.clamp(t, 0.0, 1.0)), 0.0, 1.0);
         // buttes isolées (temples de Vishnu, Zoroaster…) : sommet vers le Supai, flancs en gradins
         if (t > 0.28 && t < 0.92) {
-            double b = bruitButtes.noise(x / (w * 0.45), 7.0, z / (w * 0.45));
+            double wb = demiLargeur();
+            double b = bruitButtes.noise(x / (wb * 0.45), 7.0, z / (wb * 0.45));
             if (b > 0.25) {
                 double sb = Mth.clamp((b - 0.25) / 0.15, 0.0, 1.0);
                 double gt = SOMMET_COUCHE[3] + (1.0 - sb) * (g - SOMMET_COUCHE[3]);
                 g = Math.min(g, gradin(gt));
             }
         }
-        // le canyon naît à Lees Ferry et finit aux Grand Wash Cliffs
-        double intensite = lisse((lon - LON_GRAND_WASH) / 0.12) * (1.0 - lisse((lon - LON_LEES_FERRY) / 0.08));
         double bord = Math.min(Math.min(lon - lon0, lonMax() - lon), Math.min(lat0 - lat, lat - latMin()));
         return new Point(e, p, r, db, t, g, intensite, lisse(bord / FONDU));
     }
@@ -204,7 +206,7 @@ public final class GrandCanyon implements Lieu {
     }
 
     private static boolean dansCanyon(Point pt) {
-        return pt.t() < 1.1 && pt.intensite() * pt.fondu() > 0.3;
+        return pt.t() < 1.1 && pt.fondu() > 0.3;
     }
 
     // ---------------------------------------------------------------- Lieu
@@ -239,7 +241,6 @@ public final class GrandCanyon implements Lieu {
             // autour du canyon : rejoint le plateau réel sur une bande courte
             y = Mth.lerp(lisse((pt.t() - 1.0) / 0.45), rebord, base);
         }
-        y = Mth.lerp(pt.intensite(), base, y);
         // le Colorado (~6 blocs de large) et les lacs (Mead, Mohave, Powell) au niveau du fleuve
         double lit = Math.max(1.0 - lisse((pt.distBlocs() - 2.5) / 1.5), 1.0 - lisse((pt.e() - pt.r() - 6.0) / 20.0));
         y = Mth.lerp(lit, y, FOND);

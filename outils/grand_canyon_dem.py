@@ -76,6 +76,17 @@ P = ndimage.gaussian_filter(P, 3)
 P = np.maximum(P, E)
 P = np.maximum(P, R + 1)
 
+# niveau du rebord pour la coupe dessinée (~19 km de demi-largeur en 1:250) : le plateau réel pris AU-DELÀ
+# de cette bande, prolongé vers le fleuve (le vrai canyon, plus étroit, ne doit pas compter)
+hors = (dist > 22000).astype(np.float32)
+num = ndimage.gaussian_filter(E * hors, 12); den = ndimage.gaussian_filter(hors, 12)
+for _ in range(6):                       # combler l'intérieur par diffusion
+    plein = den > 0.05
+    num = np.where(plein, num, ndimage.gaussian_filter(num, 12)); den = np.where(plein, den, ndimage.gaussian_filter(den, 12))
+P = np.where(den > 1e-4, num / np.maximum(den, 1e-4), E)
+P = ndimage.gaussian_filter(P, 2)
+P = np.maximum(P, R + 1)
+
 # ---------------------------------------------------------------- élargissement du canyon
 # La hauteur du monde est fixe : 1 350 m de profondeur tiennent dans ~85 blocs, alors qu'en 1:250 un bloc
 # fait 250 m de large. Sans rien faire, le canyon serait ~15 fois plus raide qu'en vrai (aiguilles, fentes).

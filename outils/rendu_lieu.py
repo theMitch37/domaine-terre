@@ -72,32 +72,29 @@ def modele_proc(X,Z):
     fx=(lon-lon0)/pl-.5; fy=(lat0-lat)/pa-.5
     s=lambda g: ndimage.map_coordinates(g,[fy,fx],order=1,mode='nearest')
     e=s(E);p=s(P);r=s(R);dist=s(D)*100
-    db=dist/250.0*(BPD/445.28)          # distance en blocs (1:250)
-    w=W0
-    d=db+bruit(X,Z,w*0.9,1)*w*0.35+bruit(X,Z,23,2)*w*0.07
-    d=np.where(db<6,db,np.maximum(d,6))
+    db=dist*BPD/111320.0
+    lis=lambda t: (lambda u: u*u*(3-2*u))(np.clip(t,0,1))
+    inten=lis((lon+114.10)/0.25)*(1-lis((lon+111.62+0.25)/0.25))
+    w=W0*np.maximum(inten,0.06)
+    pl_=np.minimum(6.0,w*0.3)
+    d=db+bruit(X,Z,W0*0.9,1)*w*0.35+bruit(X,Z,23,2)*w*0.07
+    d=np.where(db<pl_,db,np.maximum(d,pl_))
     t=d/w
     g=profil(np.clip(t,0,1))
-    b=bruit(X,Z,w*0.45,7)
+    b=bruit(X,Z,W0*0.45,7)
     temple=(t>0.28)&(t<0.92)&(b>0.25)
     sb=np.clip((b-0.25)/0.15,0,1)
-    gt=cum[3]+(1-sb)*(g-cum[3])                      # sommet au niveau de l'Hermit/Supai
-    gt=cum[np.clip(np.searchsorted(cum,gt),0,13)]    # en gradins, sur les limites de couches
+    gt=cum[3]+(1-sb)*(g-cum[3])
+    gt=cum[np.clip(np.searchsorted(cum,gt),0,13)]
     g=np.where(temple,np.minimum(g,gt),g)
-    reb=np.vectorize(blocs)(p)
-    inten=np.clip((lon+114.10)/0.12,0,1)*np.clip(1-(lon+111.62)/0.08,0,1)
+    reb=np.vectorize(blocs)(p); base=np.vectorize(blocs)(e)
     ycan=reb-g*(reb-PIED)
-    base=np.vectorize(blocs)(e)
-    v=np.clip((t-1)/0.45,0,1); v=v*v*(3-2*v)
+    v=lis((t-1)/0.45)
     y=np.where(t<=1,ycan,reb+(base-reb)*v)
-    y=base+(y-base)*inten
-    lit=np.maximum(1-np.clip((db-2.5)/1.5,0,1),1-np.clip((e-r-6)/20,0,1))
+    lit=np.maximum(1-lis((db-2.5)/1.5),1-lis((e-r-6)/20))
     y=y+(FOND-y)*lit
-    canyon=(t<1.05)&(inten>0.3)
+    canyon=(t<1.1)
     return y,canyon,reb,g
-# rendu oblique façon Minecraft : colonnes peintes de l'arrière vers l'avant
-
-
 def rendu(Y, COL, out, K=3, VY=1.0, ZY=0.55, base=40):
     H,W=Y.shape; top=Y.max()
     hpx=int((H*ZY+(top-base)*VY)*K)+K*4
