@@ -36,4 +36,14 @@ public interface Lieu {
     default double basBiome(int x, int z, double hauteur) {
         return hauteur - 16.0;
     }
+
+    /**
+     * L'aquifère doit-il prendre le niveau de la mer dans cette colonne (fleuve, lac du lieu) ?
+     * L'aquifère vanilla décide par cases de 16 blocs : un lieu dont l'eau est étroite (fleuve au fond d'un
+     * canyon) doit répondre oui sur une bande large autour, sinon le lit reste à sec par endroits.
+     * Par défaut : seulement là où le sol est sous le niveau de la mer.
+     */
+    default boolean inonde(int x, int z, double hauteur) {
+        return hauteur < 67.0;
+    }
 }

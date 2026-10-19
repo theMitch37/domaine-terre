@@ -285,7 +285,10 @@ public final class Terrain {
      */
     public double inondation(int x, int z) {
         Colonne c = colonne(x, z);
-        if (c.lieu() && c.h() < NIVEAU_MER + 4) return 2.0;
+        if (c.lieu()) {
+            Lieu l = LieuxTerre.a(x, z);
+            if (l != null && l.inonde(x, z, c.h())) return 2.0;
+        }
         Riviere r = c.r();
         if (r == null || r.distance() > r.demiLargeur() + 40.0) return 0.0;
         double k = Mth.clamp((VALLEE_SECHE - r.niveau()) / (VALLEE_SECHE - VALLEE_EAU), 0.0, 1.0);

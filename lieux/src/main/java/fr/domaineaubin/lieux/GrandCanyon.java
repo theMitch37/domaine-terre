@@ -225,6 +225,13 @@ public final class GrandCanyon implements Lieu {
         return pt.canyon() * pt.fondu() > 0.3;
     }
 
+    /** Tout le canyon et les abords des lacs : l'aquifère y prend le niveau de la mer (le fleuve ne s'assèche plus). */
+    @Override
+    public boolean inonde(int x, int z, double hauteur) {
+        Point pt = point(x, z);
+        return pt.canyon() * pt.fondu() > 0.05 || pt.dist() < 3000.0 || pt.e() - pt.r() < 60.0;
+    }
+
     /** Dans le canyon, son biome descend jusqu'au fond (sinon les replats et parois prennent le biome froid du plateau). */
     @Override
     public double basBiome(int x, int z, double hauteur) {
