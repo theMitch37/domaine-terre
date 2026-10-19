@@ -76,6 +76,29 @@ P = ndimage.gaussian_filter(P, 3)
 P = np.maximum(P, E)
 P = np.maximum(P, R + 1)
 
+# ---------------------------------------------------------------- élargissement du canyon
+# La hauteur du monde est fixe : 1 350 m de profondeur tiennent dans ~85 blocs, alors qu'en 1:250 un bloc
+# fait 250 m de large. Sans rien faire, le canyon serait ~15 fois plus raide qu'en vrai (aiguilles, fentes).
+# On l'élargit donc ELARG fois autour du talweg : un point à la distance d du fleuve lit le relief réel à la
+# distance s(d) = d / ELARG, puis s rattrape d entre A et B (le plateau autour est un peu tassé). Le fleuve
+# et tout ce qui est loin restent à leur vraie place.
+ELARG, A_KM = 3.0, 24.0
+pente = 2.0                                  # rattrapage : s grandit 2 fois plus vite que d
+B_KM = A_KM * (2.0 - 1.0 / ELARG)            # s(B) = B
+# point du fleuve le plus proche, lissé : évite les éventails dans les virages et les coutures entre méandres
+qy = ndimage.gaussian_filter(iy.astype(np.float32), 8)
+qx = ndimage.gaussian_filter(ix.astype(np.float32), 8)
+gy, gx = np.mgrid[0:H, 0:W].astype(np.float32)
+dkm = np.hypot((gy - qy) * my, (gx - qx) * mx) / 1000.0
+skm = np.where(dkm <= A_KM, dkm / ELARG, np.where(dkm <= B_KM, A_KM / ELARG + (dkm - A_KM) * pente, dkm))
+ratio = np.where(dkm > 1e-6, skm / np.maximum(dkm, 1e-6), 1.0)
+sy = qy + (gy - qy) * ratio
+sx = qx + (gx - qx) * ratio
+def deformer(G):
+    return ndimage.map_coordinates(G.astype(np.float32), [sy, sx], order=1, mode="nearest")
+E, P, R = deformer(E), deformer(P), deformer(R)
+print(f"élargissement x{ELARG} jusqu'à {A_KM:.0f} km du fleuve, raccord jusqu'à {B_KM:.0f} km")
+
 blob = struct.pack("<4d2i", LON0, LAT0, PAS, PAS, W, H)
 for g in (E, P, R, D):
     blob += np.round(g).astype("<i2").tobytes()

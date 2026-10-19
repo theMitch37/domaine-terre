@@ -35,7 +35,25 @@ public class StratesFeature extends Feature<NoneFeatureConfiguration> {
                 double[] s = GrandCanyon.INSTANCE.strates(x, z);
                 if (s == null) continue;
                 double rebord = s[0], span = s[1];
-                int sommet = niveau.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x, z);
+                int sommet = niveau.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x, z) - 1;
+                // sculpture : le sol prend exactement la hauteur nette (falaises verticales, replats), au-dessus de l'eau
+                double cible = GrandCanyon.INSTANCE.hauteurNette(x, z);
+                if (!Double.isNaN(cible)) {
+                    int t = Math.max(SCULPTE_MIN, (int) Math.floor(cible));
+                    if (sommet > t) {
+                        for (int y = sommet; y > t; y--) {
+                            BlockState b = niveau.getBlockState(pos.set(x, y, z));
+                            if (b.getFluidState().isEmpty() && !b.isAir()) niveau.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
+                        }
+                        sommet = t;
+                    } else if (sommet < t) {
+                        for (int y = Math.max(sommet + 1, SCULPTE_MIN); y <= t; y++) {
+                            niveau.setBlock(pos.set(x, y, z), Blocks.STONE.defaultBlockState(), 2);
+                        }
+                        sommet = t;
+                    }
+                    modifie = true;
+                }
                 // le plateau garde son sol (herbe, forêt) : seules les parois et le fond sont colorés
                 int haut = Math.min(sommet, (int) Math.floor(rebord) - 2);
                 for (int y = haut; y >= GrandCanyon.FOND - 6; y--) {
@@ -48,6 +66,9 @@ public class StratesFeature extends Feature<NoneFeatureConfiguration> {
         }
         return modifie;
     }
+
+    /** On ne sculpte qu'au-dessus de l'eau (le lit et les lacs restent ceux du terrain, remplis par l'aquifère). */
+    private static final int SCULPTE_MIN = 64;
 
     private static boolean remplacable(BlockState b) {
         if (b.isAir() || !b.getFluidState().isEmpty()) return false;

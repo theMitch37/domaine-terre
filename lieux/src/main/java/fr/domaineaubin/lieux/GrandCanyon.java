@@ -17,6 +17,8 @@ import java.util.zip.GZIPInputStream;
  * Grand Canyon (Arizona), d'après le relief réel (ETOPO 2022, un point tous les 450 m) : tracé du Colorado,
  * Marble Canyon, canyons latéraux, buttes et plateaux à leur vraie place, du lac Powell au lac Mohave.
  * <p>
+ * La hauteur du monde étant fixe, le canyon réel serait ~15 fois trop raide en 1:250 : les données sont
+ * élargies 3 fois autour du talweg (le fleuve et les environs lointains restent à leur place).
  * Le relief est remis à l'échelle verticale du mod : le rebord garde sa hauteur (plateau réel), le fleuve
  * descend sous le niveau de la mer (l'aquifère le remplit), et la paroi suit les vraies couches géologiques
  * (Kaibab, Coconino, Supai, Redwall, Tonto, schiste de Vishnu…) : falaise raide pour les couches dures,
@@ -41,7 +43,6 @@ public final class GrandCanyon implements Lieu {
     /** Couches réelles sous le rebord : épaisseur (m) et falaise (dure) ou pente (tendre). */
     private static final double[] EPAISSEUR = {90, 70, 100, 100, 70, 70, 70, 70, 150, 120, 100, 60};
     private static final boolean[] FALAISE = {true, false, true, false, true, false, true, false, true, true, false, true};
-    private static final int TONTO = 10;
     private static final double SOMME;
     static {
         double s = 0;
@@ -133,30 +134,37 @@ public final class GrandCanyon implements Lieu {
         double e = echant(alt, lon, lat), p = echant(plateau, lon, lat), r = echant(fleuve, lon, lat);
         double dist = echant(distance, lon, lat) * 100.0;
         // canyon : creusé sous le plateau, près du Colorado, entre Lees Ferry et les Grand Wash Cliffs
-        double canyon = lisse((p - e - 40.0) / 150.0)
+        double canyon = lisse((p - e - 15.0) / 60.0)
                 * lisse((lon - LON_GRAND_WASH) / 0.12) * (1.0 - lisse((lon - LON_LEES_FERRY) / 0.08))
-                * (1.0 - lisse((dist - 15000.0) / 10000.0));
+                * (1.0 - lisse((dist - 32000.0) / 10000.0));
         double bord = Math.min(Math.min(lon - lon0, lonMax() - lon), Math.min(lat0 - lat, lat - latMin()));
         return new Point(lon, lat, e, p, r, dist, canyon, lisse(bord / FONDU));
     }
 
-    /** Épaisseurs des couches pour un canyon de profondeur span (m) : Vishnu ≤ 300 m, le surplus élargit le Tonto. */
+    /**
+     * Épaisseurs des couches pour un canyon de profondeur span (m) : la gorge de Vishnu fait au plus 300 m,
+     * les autres couches s'étirent ensemble pour remplir le reste (Marble Canyon, moins profond, s'arrête plus haut).
+     */
     private static double epaisseur(int i, double span) {
-        double surplus = Math.max(span - SOMME, 0.0);
-        double vishnu = Math.min(surplus, 300.0);
+        double vishnu = Math.min(Math.max(span - SOMME, 0.0), 300.0);
         if (i == EPAISSEUR.length) return vishnu;
-        return i == TONTO ? EPAISSEUR[i] + surplus - vishnu : EPAISSEUR[i];
+        return EPAISSEUR[i] * Math.max(1.0, (span - vishnu) / SOMME);
     }
 
-    /** Profondeur « sculptée » : les falaises concentrent leur hauteur au milieu de leur couche (paroi raide). */
-    private static double sculpte(double dm, double span) {
+    /**
+     * Profondeur « sculptée ». Version nette (bloc par bloc, pour la feature) : chaque couche dure devient une
+     * falaise verticale suivie d'un replat. Version douce (pour le bruit du terrain, interpolé tous les 4 blocs) :
+     * simple suivi du relief, sinon l'interpolation vanilla fabrique des pics et des surplombs.
+     */
+    private static double sculpte(double dm, double span, boolean net) {
+        if (!net) return dm;
         double out = 0.0, a = 0.0;
         for (int i = 0; i < NB_COUCHES; i++) {
             double ep = epaisseur(i, span);
             if (ep <= 0) continue;
             double u = Mth.clamp((dm - a) / ep, 0.0, 1.0);
             boolean falaise = i == EPAISSEUR.length || FALAISE[i];
-            out += ep * (falaise ? Mth.clamp((u - 0.5) * 3.0 + 0.5, 0.0, 1.0) : u);
+            out += ep * (falaise ? Mth.clamp((u - 0.5) * 8.0 + 0.5, 0.0, 1.0) : u);
             a += ep;
         }
         return out;
@@ -188,10 +196,21 @@ public final class GrandCanyon implements Lieu {
 
     @Override
     public double hauteur(int x, int z, double h) {
+        return calcul(point(x, z), h, false);
+    }
+
+    /** Hauteur exacte du sol (y) avec les falaises nettes, ou NaN si la colonne n'est pas dans le canyon. */
+    public double hauteurNette(int x, int z) {
+        if (!concerne(x, z)) return Double.NaN;
         Point pt = point(x, z);
+        if (pt.canyon() * pt.fondu() <= 0.3) return Double.NaN;
+        return calcul(pt, Terrain.get().hauteur(x, z), true);
+    }
+
+    private double calcul(Point pt, double h, boolean net) {
         double base = Terrain.blocsDepuisAltitude(pt.e());
         double rebord = yRebord(pt);
-        double paroi = rebord - Math.min(sculpte(pt.profondeur(), pt.span()) / pt.span(), 1.0) * (rebord - PIED);
+        double paroi = rebord - Math.min(sculpte(pt.profondeur(), pt.span(), net) / pt.span(), 1.0) * (rebord - PIED);
         double y = Mth.lerp(pt.canyon(), base, paroi);
         // le Colorado (~5 blocs de large en 1:250) et les lacs (Mead, Mohave, Powell) au niveau du fleuve
         double lit = Math.max(1.0 - lisse((pt.dist() - 350.0) / 250.0), 1.0 - lisse((pt.e() - pt.r() - 6.0) / 20.0));
