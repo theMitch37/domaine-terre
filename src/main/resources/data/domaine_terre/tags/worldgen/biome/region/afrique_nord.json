@@ -1,0 +1,7 @@
+{
+ "replace": false,
+ "values": [
+  "#domaine_terre:terroir/maghreb",
+  "#domaine_terre:terroir/sahara_sahel"
+ ]
+}

@@ -22,6 +22,8 @@ import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterList;
 import net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterLists;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.levelgen.synth.ImprovedNoise;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -62,6 +64,9 @@ public class TerroirBiomeSource extends BiomeSource {
     }
 
     private final int echelle;
+
+    /** Décalage des points de lecture des cartes terroir et climat : frontières irrégulières, pas en escalier. */
+    private static final ImprovedNoise BRUIT_FRONTIERE = new ImprovedNoise(RandomSource.create(20261019L));
 
     public TerroirBiomeSource(HolderGetter<Biome> biomes, HolderGetter<MultiNoiseBiomeSourceParameterList> parametres, int echelle) {
         this.biomes = biomes;
@@ -176,13 +181,20 @@ public class TerroirBiomeSource extends BiomeSource {
                 if (lieux.get(i).dansBiome(bx, bz)) return t.lieux().get(i);
             }
         }
-        int terroir = Terrain.get().carte().terroir(Terrain.lon(bx), Terrain.lat(bz));
+        // les cartes ont des pixels de 3' (~22 blocs en 1:250) : on lit à un point décalé par un bruit
+        double fx = bx + BRUIT_FRONTIERE.noise(bx / 70.0, 0.0, bz / 70.0) * 30.0
+                + BRUIT_FRONTIERE.noise(bx / 17.0, 3.0, bz / 17.0) * 9.0;
+        double fz = bz + BRUIT_FRONTIERE.noise(bx / 70.0, 7.0, bz / 70.0) * 30.0
+                + BRUIT_FRONTIERE.noise(bx / 17.0, 11.0, bz / 17.0) * 9.0;
+        double lonF = Terrain.lon(fx), latF = Terrain.lat(fz);
+        int terroir = Terrain.get().carte().terroir(lonF, latF);
+        boolean lac = terroir > 0 && Terrain.get().carte().lac(lonF, latF);
         Climate.ParameterList<Holder<Biome>> liste =
                 terroir > 0 && terroir < t.parTerroir().size() ? t.parTerroir().get(terroir) : t.mer();
         Climate.TargetPoint p = sampler.sample(x, y, z);
         double lat = Math.abs(Terrain.lat(bz));
         double temp, hum;
-        int k = Terrain.get().carte().climat(Terrain.lon(bx), Terrain.lat(bz));
+        int k = Terrain.get().carte().climat(lonF, latF);
         if (terroir <= 0 || terroir >= t.parTerroir().size()) {
             // océans : température selon la latitude (chaud aux tropiques, gelé aux pôles)
             temp = 0.95 - lat * 0.0215 + p.temperature() / 10000.0 * 0.08;
@@ -203,7 +215,8 @@ public class TerroirBiomeSource extends BiomeSource {
         Climate.TargetPoint reel = new Climate.TargetPoint(
                 Climate.quantizeCoord((float) Math.max(-1.0, Math.min(1.0, temp))),
                 Climate.quantizeCoord((float) Math.max(-1.0, Math.min(1.0, hum))),
-                p.continentalness(), p.erosion(),
+                // lac intérieur : biomes de terre du terroir (pas d'océan ni de plage, donc pas de faune marine)
+                lac ? Math.max(p.continentalness(), Climate.quantizeCoord(0.1F)) : p.continentalness(), p.erosion(),
                 // biomes de grottes seulement à plus de 16 blocs sous le sol
                 (y << 2) > Terrain.get().hauteur(bx, bz) - 16 ? 0L : p.depth(), p.weirdness());
         return liste.findValue(reel);

@@ -63,9 +63,9 @@ public class StratesFeature extends Feature<NoneFeatureConfiguration> {
         else if (f >= 0.78) bloc = Blocks.RED_TERRACOTTA;         // schistes de Hermit
         else if (f >= 0.70) bloc = Blocks.ORANGE_TERRACOTTA;      // groupe de Supai
         else if (f >= 0.64) bloc = Blocks.RED_TERRACOTTA;
-        else if (f >= 0.50) bloc = Blocks.TERRACOTTA;             // calcaire de Redwall
-        else if (f >= 0.42) bloc = Blocks.LIGHT_GRAY_TERRACOTTA;  // schistes de Bright Angel (Tonto)
-        else if (f >= 0.33) bloc = Blocks.BROWN_TERRACOTTA;       // grès de Tapeats
+        else if (f >= 0.44) bloc = Blocks.TERRACOTTA;             // calcaire de Redwall
+        else if (f >= 0.29) bloc = Blocks.LIGHT_GRAY_TERRACOTTA;  // schistes de Bright Angel (Tonto)
+        else if (f >= 0.24) bloc = Blocks.BROWN_TERRACOTTA;       // grès de Tapeats
         else if (y <= 61) bloc = Blocks.RED_SAND;                 // lit du Colorado
         else bloc = Blocks.DEEPSLATE;                             // schiste de Vishnu (gorge intérieure)
         return bloc.defaultBlockState();

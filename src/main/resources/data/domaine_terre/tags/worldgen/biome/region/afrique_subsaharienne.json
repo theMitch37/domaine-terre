@@ -1,0 +1,8 @@
+{
+ "replace": false,
+ "values": [
+  "#domaine_terre:terroir/afrique_australe",
+  "#domaine_terre:terroir/afrique_est",
+  "#domaine_terre:terroir/afrique_tropicale"
+ ]
+}

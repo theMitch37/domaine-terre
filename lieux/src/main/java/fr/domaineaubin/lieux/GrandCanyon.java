@@ -11,7 +11,8 @@ import net.minecraft.world.level.levelgen.synth.ImprovedNoise;
  * Grand Canyon (Arizona) : canyon en terrasses creusé le long du Colorado, de Lees Ferry au lac Mead.
  * Le plateau est relevé autour du canyon, le fond descend sous le niveau de la mer : le Colorado
  * y coule tout seul (aquifère), comme les autres fleuves du mod Terre.
- * Largeur exagérée (×3) pour rester grandiose ; hauteur identique à toutes les échelles.
+ * Réglé pour l'échelle 1:250 (référence du modpack). La hauteur du monde ne change pas avec l'échelle :
+ * la largeur ne suit donc l'échelle qu'en partie (racine), pour garder la même allure encaissée partout.
  */
 public final class GrandCanyon implements Lieu {
     public static final GrandCanyon INSTANCE = new GrandCanyon();
@@ -44,10 +45,15 @@ public final class GrandCanyon implements Lieu {
 
     // ---------------------------------------------------------------- géométrie
 
-    /** Demi-largeur du canyon (blocs) : 8 km réels ×3, au moins 60 blocs. */
+    /** Échelle de référence : tous les réglages sont faits pour elle. */
+    public static final int ECHELLE_REFERENCE = 250;
+
+    /**
+     * Demi-largeur du canyon (blocs) : ~90 en 1:250, ~75 en 1:500, ~63 en 1:1000.
+     * Elle grandit un peu avec l'échelle, sans la suivre complètement (la profondeur, elle, est fixe).
+     */
     public static double demiLargeur() {
-        double blocsParKm = Terrain.BLOCS_PAR_DEGRE / 111.32;
-        return Math.max(8.0 * blocsParKm * 3.0, 60.0);
+        return 75.0 * Math.pow(500.0 / Terrain.echelle(), 0.26);
     }
 
     private static boolean dansEmprise(int x, int z) {
@@ -58,7 +64,7 @@ public final class GrandCanyon implements Lieu {
     /** Hauteur du rebord (y) : plateau de Kaibab à l'est (~2 300 m), plus bas vers le lac Mead. */
     private double rebord(int x, int z) {
         double t = Mth.clamp((Terrain.lon(x) - LON_LAC_MEAD) / (LON_LEES_FERRY - LON_LAC_MEAD), 0.0, 1.0);
-        return Mth.lerp(t, 124.0, 142.0) + bruit.noise(x / 90.0, 3.0, z / 90.0) * 2.0;
+        return Mth.lerp(t, 130.0, 150.0) + bruit.noise(x / 90.0, 3.0, z / 90.0) * 2.0;
     }
 
     /** Intensité 0..1 : le canyon naît à Lees Ferry, se creuse dans Marble Canyon, s'ouvre sur le lac Mead. */
@@ -75,7 +81,7 @@ public final class GrandCanyon implements Lieu {
         if (ce == null) return -1;
         double d = ce[0];
         double w = demiLargeur();
-        if (d > w * 2.2) return -1;
+        if (d > w * 2.0) return -1;
         if (d < 6.0) return d;  // le lit du fleuve reste net
         double n = bruit.noise(x / (w * 0.9), 0.0, z / (w * 0.9)) * w * 0.35
                 + bruit.noise(x / 23.0, 1.0, z / 23.0) * w * 0.07;
@@ -85,20 +91,20 @@ public final class GrandCanyon implements Lieu {
     /** Fraction de la profondeur (0 = fond, 1 = rebord) selon la distance relative t = d / demi-largeur. */
     private double profil(int x, int z, double t) {
         double f;
-        if (t < 0.06) f = 0.0;                                                   // lit du Colorado
-        else if (t < 0.16) f = 0.32 * lisse((t - 0.06) / 0.10);                  // gorge intérieure (schiste)
-        else if (t < 0.40) f = 0.32 + 0.08 * ((t - 0.16) / 0.24);                // plateau de Tonto
-        else if (t < 1.0) {                                                       // 4 gradins jusqu'au rebord
-            double s = (t - 0.40) / 0.15;
-            int k = Math.min(3, (int) s);
+        if (t < 0.05) f = 0.0;                                                   // lit du Colorado
+        else if (t < 0.13) f = 0.26 * lisse((t - 0.05) / 0.08);                  // gorge intérieure (schiste), raide
+        else if (t < 0.22) f = 0.26 + 0.05 * ((t - 0.13) / 0.09);                // plateau de Tonto, étroit
+        else if (t < 1.0) {                                                       // 5 gradins : falaise puis replat
+            double s = (t - 0.22) / 0.156;
+            int k = Math.min(4, (int) s);
             double u = s - k;
-            f = 0.40 + 0.15 * (k + lisse(Math.min(1.0, u / 0.35)));
+            f = 0.31 + 0.138 * (k + lisse(Math.min(1.0, u / 0.4)));
         } else f = 1.0;
         // buttes et « temples » isolés au milieu du canyon (Vishnu, Zoroaster…)
-        if (t > 0.28 && t < 0.97) {
+        if (t > 0.24 && t < 0.95) {
             double w = demiLargeur();
             double b = bruitButtes.noise(x / (w * 0.45), 7.0, z / (w * 0.45));
-            if (b > 0.30) f = Math.max(f, 0.40 + 0.50 * lisse(Mth.clamp((b - 0.30) / 0.10, 0.0, 1.0)));
+            if (b > 0.30) f = Math.max(f, 0.31 + 0.60 * lisse(Mth.clamp((b - 0.30) / 0.10, 0.0, 1.0)));
         }
         return f;
     }
@@ -122,8 +128,8 @@ public final class GrandCanyon implements Lieu {
         if (d <= w) {
             cible = FOND + profil(x, z, d / w) * (rebord - FOND);
         } else {
-            // plateau autour du canyon : remonte au niveau du rebord puis rejoint le relief réel
-            double v = lisse(Mth.clamp((d - w) / (w * 1.2), 0.0, 1.0));
+            // autour du canyon : rejoint le relief réel en douceur, sur une bande courte
+            double v = lisse(Mth.clamp((d - w) / (w * 0.45), 0.0, 1.0));
             cible = Mth.lerp(v, rebord, h);
         }
         return Mth.lerp(e, h, cible);
@@ -133,15 +139,15 @@ public final class GrandCanyon implements Lieu {
     public boolean dansBiome(int x, int z) {
         if (!dansEmprise(x, z)) return false;
         double d = distance(x, z);
-        // un peu plus large que le canyon : le rebord est couvert, pas de bande d'un autre biome (ni de neige) sur les parois
-        return d >= 0 && d <= demiLargeur() * 1.08 && intensite(x) > 0.02;
+        // couvre toute la zone retouchée (rebord et raccord compris) : pas de biome froid ni de neige sur les bords
+        return d >= 0 && d <= demiLargeur() * 1.45 && intensite(x) > 0.02;
     }
 
     /** Pour les strates : la colonne est-elle dans le canyon, et quel est son rebord ? NaN sinon. */
     public double rebordSiCanyon(int x, int z) {
         if (!dansEmprise(x, z)) return Double.NaN;
         double d = distance(x, z);
-        if (d < 0 || d > demiLargeur() * 1.02 || intensite(x) <= 0.02) return Double.NaN;
+        if (d < 0 || d > demiLargeur() * 1.03 || intensite(x) <= 0.02) return Double.NaN;
         return rebord(x, z);
     }
 

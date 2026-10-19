@@ -25,7 +25,7 @@ public final class CarteTerre {
 
     private final short[] relief;      // altitude en mètres
     private final byte[] cote;         // 128 + 4 x distance signée à la côte (minutes d'arc, + vers l'intérieur)
-    private final byte[] terroir;      // 0 = mer, 1..29
+    private final byte[] terroir;      // 0 = mer, 1..29 ; bit 128 = lac intérieur de ce terroir
     private final byte[] climat;       // 0 = mer, 1..30 = classe Köppen-Geiger (Beck et al. 2023)
     private final String[] nomsTerroirs;
     private final String[] continents = new String[256];
@@ -133,7 +133,12 @@ public final class CarteTerre {
     }
 
     public int terroir(double lon, double lat) {
-        return terroir[idx(Mth.floor(gx(lon) + 0.5), Mth.floor(gy(lat) + 0.5))] & 0xFF;
+        return terroir[idx(Mth.floor(gx(lon) + 0.5), Mth.floor(gy(lat) + 0.5))] & 0x7F;
+    }
+
+    /** Lac intérieur (eau qui ne touche pas l'océan) : il porte le terroir de ses rives. */
+    public boolean lac(double lon, double lat) {
+        return (terroir[idx(Mth.floor(gx(lon) + 0.5), Mth.floor(gy(lat) + 0.5))] & 0x80) != 0;
     }
 
     /** Classe de climat Köppen-Geiger (0 = mer ou inconnue). */

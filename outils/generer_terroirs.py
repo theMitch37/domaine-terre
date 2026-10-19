@@ -56,6 +56,29 @@ for t in terroirs:
 for c, v in par_continent.items():
     ecrire_tag(f"domaine_terre:continent/{c}", v)
 ecrire_tag("domaine_terre:terroirs", [f"#domaine_terre:terroir/{t['cle']}" for t in terroirs])
+# régions : découpage plus fin que les continents (les 25 aires culturelles viendront plus tard)
+REGIONS = {
+    "amerique_nord": ["boreale", "grandes_plaines", "ouest_mexique"],
+    "amerique_centrale": ["amerique_centrale"],
+    "amerique_sud": ["amazonie", "andes", "cone_sud"],
+    "europe_nord": ["nordique"],
+    "europe_ouest": ["atlantique", "continentale", "alpine"],
+    "europe_sud": ["mediterranee"],
+    "afrique_nord": ["maghreb", "sahara_sahel"],
+    "afrique_subsaharienne": ["afrique_tropicale", "afrique_est", "afrique_australe"],
+    "moyen_orient": ["moyen_orient"],
+    "asie_centrale": ["steppes_tibet"],
+    "asie_nord": ["siberie"],
+    "asie_sud": ["inde"],
+    "asie_est": ["chine", "japon_coree"],
+    "asie_sud_est": ["asie_sud_est"],
+    "oceanie": ["australie", "nouvelle_zelande", "melanesie"],
+    "arctique": ["arctique"],
+    "antarctique": ["antarctique"],
+}
+assert sorted(c for v in REGIONS.values() for c in v) == sorted(t["cle"] for t in terroirs), "terroir sans région"
+for r, v in REGIONS.items():
+    ecrire_tag(f"domaine_terre:region/{r}", [f"#domaine_terre:terroir/{c}" for c in v])
 
 # 3) noms affichés (F3, cartes) : « Plaines (Méditerranée) »
 lang = {}

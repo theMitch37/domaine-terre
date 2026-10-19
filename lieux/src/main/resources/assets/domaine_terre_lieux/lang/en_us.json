@@ -1,3 +1,4 @@
 {
- "biome.domaine_terre_lieux.grand_canyon": "Grand Canyon"
+ "biome.domaine_terre_lieux.grand_canyon": "Grand Canyon",
+ "message.domaine_terre_lieux.echelle": "Unique places: tuned for the 1:250 scale. This world is 1:%s, so the Grand Canyon and other places may look less polished."
 }
