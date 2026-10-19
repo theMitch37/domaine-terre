@@ -67,6 +67,7 @@ PROF=[(1.00,cum[0]),(0.97,cum[1]),(0.90,cum[2]),(0.87,cum[3]),(0.76,cum[4]),(0.7
 PT=np.array([p[0] for p in PROF][::-1]); PG=np.array([p[1] for p in PROF][::-1])
 def profil(t): return np.interp(t,PT,PG)
 W0=75.0
+E3=ndimage.gaussian_filter(E,6)
 def modele_proc(X,Z):
     lon=X/BPD; lat=-Z/BPD
     fx=(lon-lon0)/pl-.5; fy=(lat0-lat)/pa-.5
@@ -88,9 +89,10 @@ def modele_proc(X,Z):
     gt=cum[np.clip(np.searchsorted(cum,gt),0,13)]
     g=np.where(temple,np.minimum(g,gt),g)
     reb=np.vectorize(blocs)(p); base=np.vectorize(blocs)(e)
-    ycan=reb-g*(reb-PIED)
-    v=lis((t-1)/0.45)
-    y=np.where(t<=1,ycan,reb+(base-reb)*v)
+    # le terrain du mod (h) est approché par le relief réel ; le canyon ne fait que creuser dedans
+    # (le mod lit une carte à 3' : relief réel lissé ~6 points de 15")
+    h=np.vectorize(blocs)(s(E3))+bruit(X,Z,48,11)*3
+    y=np.where(t<=1,np.minimum(h,reb-g*(reb-PIED)),h)
     lit=np.maximum(1-lis((db-2.5)/1.5),1-lis((e-r-6)/20))
     y=y+(FOND-y)*lit
     canyon=(t<1.1)
