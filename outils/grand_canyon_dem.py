@@ -82,7 +82,7 @@ P = np.maximum(P, R + 1)
 # On l'élargit donc ELARG fois autour du talweg : un point à la distance d du fleuve lit le relief réel à la
 # distance s(d) = d / ELARG, puis s rattrape d entre A et B (le plateau autour est un peu tassé). Le fleuve
 # et tout ce qui est loin restent à leur vraie place.
-ELARG, A_KM = 3.0, 24.0
+ELARG, A_KM = 1.0, 24.0
 pente = 2.0                                  # rattrapage : s grandit 2 fois plus vite que d
 B_KM = A_KM * (2.0 - 1.0 / ELARG)            # s(B) = B
 # point du fleuve le plus proche, lissé : évite les éventails dans les virages et les coutures entre méandres
@@ -96,7 +96,8 @@ sy = qy + (gy - qy) * ratio
 sx = qx + (gx - qx) * ratio
 def deformer(G):
     return ndimage.map_coordinates(G.astype(np.float32), [sy, sx], order=1, mode="nearest")
-E, P, R = deformer(E), deformer(P), deformer(R)
+if ELARG > 1.0:
+    E, P, R = deformer(E), deformer(P), deformer(R)
 print(f"élargissement x{ELARG} jusqu'à {A_KM:.0f} km du fleuve, raccord jusqu'à {B_KM:.0f} km")
 
 blob = struct.pack("<4d2i", LON0, LAT0, PAS, PAS, W, H)

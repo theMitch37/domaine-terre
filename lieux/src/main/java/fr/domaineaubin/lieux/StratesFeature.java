@@ -32,9 +32,8 @@ public class StratesFeature extends Feature<NoneFeatureConfiguration> {
         for (int dx = 0; dx < 16; dx++) {
             for (int dz = 0; dz < 16; dz++) {
                 int x = x0 + dx, z = z0 + dz;
-                double[] s = GrandCanyon.INSTANCE.strates(x, z);
-                if (s == null) continue;
-                double rebord = s[0], span = s[1];
+                double rebord = GrandCanyon.INSTANCE.rebordSiCanyon(x, z);
+                if (Double.isNaN(rebord)) continue;
                 int sommet = niveau.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x, z) - 1;
                 // sculpture : le sol prend exactement la hauteur nette (falaises verticales, replats), au-dessus de l'eau
                 double cible = GrandCanyon.INSTANCE.hauteurNette(x, z);
@@ -59,7 +58,7 @@ public class StratesFeature extends Feature<NoneFeatureConfiguration> {
                 for (int y = haut; y >= GrandCanyon.FOND - 6; y--) {
                     BlockState b = niveau.getBlockState(pos.set(x, y, z));
                     if (!remplacable(b)) continue;
-                    niveau.setBlock(pos, strate(x, y, z, rebord, span), 2);
+                    niveau.setBlock(pos, strate(x, y, z, rebord), 2);
                     modifie = true;
                 }
             }
@@ -93,11 +92,11 @@ public class StratesFeature extends Feature<NoneFeatureConfiguration> {
             Blocks.DEEPSLATE,              // schiste de Vishnu (gorge intérieure)
     };
 
-    private static BlockState strate(int x, int y, int z, double rebord, double span) {
+    private static BlockState strate(int x, int y, int z, double rebord) {
         if (y <= 61) return Blocks.SAND.defaultBlockState();          // berges et lit du Colorado
-        double dm = GrandCanyon.profondeurReelle(y, rebord, span);
+        double f = GrandCanyon.fraction(y, rebord);
         // légère ondulation des couches pour éviter des lignes parfaitement droites
-        dm += ((((x * 73856093) ^ (z * 19349663)) & 7) - 3.5) * 2.0;
-        return COUCHES[GrandCanyon.couche(dm, span)].defaultBlockState();
+        f += ((((x * 73856093) ^ (z * 19349663)) & 7) - 3.5) * 0.0015;
+        return COUCHES[GrandCanyon.couche(f)].defaultBlockState();
     }
 }

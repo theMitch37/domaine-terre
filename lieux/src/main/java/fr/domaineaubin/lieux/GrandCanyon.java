@@ -4,6 +4,8 @@ import fr.domaineaubin.terre.api.Lieu;
 import fr.domaineaubin.terre.monde.Terrain;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.levelgen.synth.ImprovedNoise;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -14,17 +16,13 @@ import java.nio.ByteOrder;
 import java.util.zip.GZIPInputStream;
 
 /**
- * Grand Canyon (Arizona), d'après le relief réel (ETOPO 2022, un point tous les 450 m) : tracé du Colorado,
- * Marble Canyon, canyons latéraux, buttes et plateaux à leur vraie place, du lac Powell au lac Mohave.
- * <p>
- * La hauteur du monde étant fixe, le canyon réel serait ~15 fois trop raide en 1:250 : les données sont
- * élargies 3 fois autour du talweg (le fleuve et les environs lointains restent à leur place).
- * Le relief est remis à l'échelle verticale du mod : le rebord garde sa hauteur (plateau réel), le fleuve
- * descend sous le niveau de la mer (l'aquifère le remplit), et la paroi suit les vraies couches géologiques
- * (Kaibab, Coconino, Supai, Redwall, Tonto, schiste de Vishnu…) : falaise raide pour les couches dures,
- * pente pour les tendres. Les lacs Mead et Mohave sont remplis au niveau du fleuve.
- * Réglé pour l'échelle 1:250 (les largeurs sont réelles à toutes les échelles, la hauteur est fixe).
- * Données préparées par outils/grand_canyon_dem.py.
+ * Grand Canyon (Arizona). Le tracé vient du réel : talweg du Colorado retrouvé dans le relief ETOPO 2022,
+ * niveau des plateaux, lacs Mead, Mohave et Powell à leur vraie forme. La coupe, elle, est dessinée : la hauteur
+ * du monde étant fixe, le relief réel serait ~15 fois trop raide en 1:250 (aiguilles, lames).
+ * Profil d'après les vraies couches, du rebord au fleuve : Kaibab (falaise), Toroweap, Coconino (falaise claire),
+ * Hermit, Supai en gradins, grande falaise Redwall-Muav, plateau de Tonto, Tapeats, gorge de Vishnu.
+ * Du bruit découpe les parois (amphithéâtres, éperons) et dresse des buttes en gradins (temples).
+ * Réglé pour l'échelle 1:250. Données préparées par outils/grand_canyon_dem.py.
  */
 public final class GrandCanyon implements Lieu {
     public static final GrandCanyon INSTANCE = new GrandCanyon();
@@ -40,24 +38,43 @@ public final class GrandCanyon implements Lieu {
     /** Grand Wash Cliffs (fin du Grand Canyon à l'ouest) et Lees Ferry (début de Marble Canyon à l'est). */
     private static final double LON_GRAND_WASH = -114.10, LON_LEES_FERRY = -111.62;
 
-    /** Couches réelles sous le rebord : épaisseur (m) et falaise (dure) ou pente (tendre). */
-    private static final double[] EPAISSEUR = {90, 70, 100, 100, 70, 70, 70, 70, 150, 120, 100, 60};
-    private static final boolean[] FALAISE = {true, false, true, false, true, false, true, false, true, true, false, true};
-    private static final double SOMME;
+    /** Épaisseurs réelles (m) des couches, du rebord au fleuve, et forme de la paroi (falaise ou pente). */
+    private static final double[] EPAISSEUR = {90, 70, 100, 100, 70, 70, 70, 70, 150, 120, 100, 60, 300};
+    public static final int NB_COUCHES = EPAISSEUR.length;
+    /** Fraction de profondeur au sommet de chaque couche (0 = rebord, 1 = fleuve). */
+    private static final double[] SOMMET_COUCHE = new double[NB_COUCHES + 1];
     static {
-        double s = 0;
-        for (double e : EPAISSEUR) s += e;
-        SOMME = s;
+        double tot = 0;
+        for (double e : EPAISSEUR) tot += e;
+        double a = 0;
+        for (int i = 0; i < NB_COUCHES; i++) {
+            SOMMET_COUCHE[i] = a / tot;
+            a += EPAISSEUR[i];
+        }
+        SOMMET_COUCHE[NB_COUCHES] = 1.0;
     }
-    /** Nombre de couches : les 12 ci-dessus + le schiste de Vishnu (gorge intérieure, au plus 300 m). */
-    public static final int NB_COUCHES = EPAISSEUR.length + 1;
+    /**
+     * Coupe du canyon : distance relative au fleuve t (1 = rebord) -> fraction de profondeur.
+     * Les couches dures occupent une bande étroite (falaise), les tendres une bande large (pente, replat).
+     */
+    private static final double[] PROFIL_T = {1.00, 0.97, 0.90, 0.87, 0.76, 0.74, 0.66, 0.64, 0.56, 0.52, 0.50, 0.22, 0.20, 0.05, 0.0};
+    private static final double[] PROFIL_G = new double[PROFIL_T.length];
+    static {
+        for (int i = 0; i <= NB_COUCHES; i++) PROFIL_G[i] = SOMMET_COUCHE[i];
+        PROFIL_G[NB_COUCHES + 1] = 1.0;
+    }
 
     private double lon0, lat0, pasLon, pasLat;
     private int largeur, hauteurGrille;
     private short[] alt, plateau, fleuve, distance;
     private volatile boolean charge;
+    private final ImprovedNoise bruit;
+    private final ImprovedNoise bruitButtes;
 
     private GrandCanyon() {
+        RandomSource r = RandomSource.create(36_1066_112L);
+        bruit = new ImprovedNoise(r);
+        bruitButtes = new ImprovedNoise(r);
     }
 
     @Override
@@ -122,67 +139,72 @@ public final class GrandCanyon implements Lieu {
 
     // ---------------------------------------------------------------- géométrie
 
-    /** Valeurs d'une colonne : altitude, rebord, fleuve (m), distance au fleuve (m), poids du canyon et du lieu. */
-    private record Point(double lon, double lat, double e, double p, double r, double dist, double canyon, double fondu) {
-        double profondeur() { return p - e; }
-        double span() { return Math.max(p - r, 1.0); }
+    /** Demi-largeur du canyon en blocs (~75 en 1:250), un peu plus large aux petites échelles. */
+    public static double demiLargeur() {
+        return 75.0 * Math.pow((double) ECHELLE_REFERENCE / Terrain.echelle(), 0.26);
+    }
+
+    /** Valeurs d'une colonne. */
+    private record Point(double e, double p, double r, double distBlocs, double t, double fraction,
+                         double intensite, double fondu) {
     }
 
     private Point point(int x, int z) {
         charger();
         double lon = Terrain.lon(x), lat = Terrain.lat(z);
         double e = echant(alt, lon, lat), p = echant(plateau, lon, lat), r = echant(fleuve, lon, lat);
-        double dist = echant(distance, lon, lat) * 100.0;
-        // canyon : creusé sous le plateau, près du Colorado, entre Lees Ferry et les Grand Wash Cliffs
-        double canyon = lisse((p - e - 15.0) / 60.0)
-                * lisse((lon - LON_GRAND_WASH) / 0.12) * (1.0 - lisse((lon - LON_LEES_FERRY) / 0.08))
-                * (1.0 - lisse((dist - 32000.0) / 10000.0));
+        double db = echant(distance, lon, lat) * 100.0 * Terrain.BLOCS_PAR_DEGRE / 111_320.0;
+        double w = demiLargeur();
+        // parois découpées : amphithéâtres, éperons et canyons latéraux
+        double d = db;
+        if (db >= 6.0) {
+            d = Math.max(6.0, db + bruit.noise(x / (w * 0.9), 0.0, z / (w * 0.9)) * w * 0.35
+                    + bruit.noise(x / 23.0, 1.0, z / 23.0) * w * 0.07);
+        }
+        double t = d / w;
+        double g = Mth.clamp(profil(Mth.clamp(t, 0.0, 1.0)), 0.0, 1.0);
+        // buttes isolées (temples de Vishnu, Zoroaster…) : sommet vers le Supai, flancs en gradins
+        if (t > 0.28 && t < 0.92) {
+            double b = bruitButtes.noise(x / (w * 0.45), 7.0, z / (w * 0.45));
+            if (b > 0.25) {
+                double sb = Mth.clamp((b - 0.25) / 0.15, 0.0, 1.0);
+                double gt = SOMMET_COUCHE[3] + (1.0 - sb) * (g - SOMMET_COUCHE[3]);
+                g = Math.min(g, gradin(gt));
+            }
+        }
+        // le canyon naît à Lees Ferry et finit aux Grand Wash Cliffs
+        double intensite = lisse((lon - LON_GRAND_WASH) / 0.12) * (1.0 - lisse((lon - LON_LEES_FERRY) / 0.08));
         double bord = Math.min(Math.min(lon - lon0, lonMax() - lon), Math.min(lat0 - lat, lat - latMin()));
-        return new Point(lon, lat, e, p, r, dist, canyon, lisse(bord / FONDU));
+        return new Point(e, p, r, db, t, g, intensite, lisse(bord / FONDU));
     }
 
-    /**
-     * Épaisseurs des couches pour un canyon de profondeur span (m) : la gorge de Vishnu fait au plus 300 m,
-     * les autres couches s'étirent ensemble pour remplir le reste (Marble Canyon, moins profond, s'arrête plus haut).
-     */
-    private static double epaisseur(int i, double span) {
-        double vishnu = Math.min(Math.max(span - SOMME, 0.0), 300.0);
-        if (i == EPAISSEUR.length) return vishnu;
-        return EPAISSEUR[i] * Math.max(1.0, (span - vishnu) / SOMME);
-    }
-
-    /**
-     * Profondeur « sculptée ». Version nette (bloc par bloc, pour la feature) : chaque couche dure devient une
-     * falaise verticale suivie d'un replat. Version douce (pour le bruit du terrain, interpolé tous les 4 blocs) :
-     * simple suivi du relief, sinon l'interpolation vanilla fabrique des pics et des surplombs.
-     */
-    private static double sculpte(double dm, double span, boolean net) {
-        if (!net) return dm;
-        double out = 0.0, a = 0.0;
-        for (int i = 0; i < NB_COUCHES; i++) {
-            double ep = epaisseur(i, span);
-            if (ep <= 0) continue;
-            double u = Mth.clamp((dm - a) / ep, 0.0, 1.0);
-            boolean falaise = i == EPAISSEUR.length || FALAISE[i];
-            out += ep * (falaise ? Mth.clamp((u - 0.5) * 8.0 + 0.5, 0.0, 1.0) : u);
-            a += ep;
+    private static double profil(double t) {
+        for (int i = 0; i < PROFIL_T.length - 1; i++) {
+            double t0 = PROFIL_T[i], t1 = PROFIL_T[i + 1];
+            if (t <= t0 && t >= t1) return Mth.lerp((t0 - t) / (t0 - t1), PROFIL_G[i], PROFIL_G[i + 1]);
         }
-        return out;
+        return t > 1.0 ? 0.0 : 1.0;
     }
 
-    /** Couche géologique (0 = Kaibab … 12 = Vishnu) à une profondeur dm (m) sous le rebord. */
-    public static int couche(double dm, double span) {
-        double a = 0.0;
+    /** Arrondit une fraction de profondeur au sommet de couche suivant (vers le bas) : gradins. */
+    private static double gradin(double g) {
+        for (int i = 0; i <= NB_COUCHES; i++) if (SOMMET_COUCHE[i] >= g) return SOMMET_COUCHE[i];
+        return 1.0;
+    }
+
+    /** Couche géologique (0 = Kaibab … 12 = Vishnu) à une fraction de profondeur sous le rebord. */
+    public static int couche(double fraction) {
         int c = 0;
-        for (int i = 0; i < NB_COUCHES; i++) {
-            if (dm >= a) c = i;
-            a += epaisseur(i, span);
-        }
+        for (int i = 0; i < NB_COUCHES; i++) if (fraction >= SOMMET_COUCHE[i]) c = i;
         return c;
     }
 
     private static double yRebord(Point pt) {
         return Terrain.blocsDepuisAltitude(pt.p());
+    }
+
+    private static boolean dansCanyon(Point pt) {
+        return pt.t() < 1.1 && pt.intensite() * pt.fondu() > 0.3;
     }
 
     // ---------------------------------------------------------------- Lieu
@@ -196,40 +218,44 @@ public final class GrandCanyon implements Lieu {
 
     @Override
     public double hauteur(int x, int z, double h) {
-        return calcul(point(x, z), h, false);
+        return calcul(point(x, z), h);
     }
 
-    /** Hauteur exacte du sol (y) avec les falaises nettes, ou NaN si la colonne n'est pas dans le canyon. */
+    /** Hauteur exacte du sol (y) pour la sculpture bloc par bloc, ou NaN hors du canyon. */
     public double hauteurNette(int x, int z) {
         if (!concerne(x, z)) return Double.NaN;
         Point pt = point(x, z);
-        if (pt.canyon() * pt.fondu() <= 0.3) return Double.NaN;
-        return calcul(pt, Terrain.get().hauteur(x, z), true);
+        if (!dansCanyon(pt)) return Double.NaN;
+        return calcul(pt, Terrain.get().hauteur(x, z));
     }
 
-    private double calcul(Point pt, double h, boolean net) {
+    private double calcul(Point pt, double h) {
         double base = Terrain.blocsDepuisAltitude(pt.e());
         double rebord = yRebord(pt);
-        double paroi = rebord - Math.min(sculpte(pt.profondeur(), pt.span(), net) / pt.span(), 1.0) * (rebord - PIED);
-        double y = Mth.lerp(pt.canyon(), base, paroi);
-        // le Colorado (~5 blocs de large en 1:250) et les lacs (Mead, Mohave, Powell) au niveau du fleuve
-        double lit = Math.max(1.0 - lisse((pt.dist() - 350.0) / 250.0), 1.0 - lisse((pt.e() - pt.r() - 6.0) / 20.0));
+        double y;
+        if (pt.t() <= 1.0) {
+            y = rebord - pt.fraction() * (rebord - PIED);
+        } else {
+            // autour du canyon : rejoint le plateau réel sur une bande courte
+            y = Mth.lerp(lisse((pt.t() - 1.0) / 0.45), rebord, base);
+        }
+        y = Mth.lerp(pt.intensite(), base, y);
+        // le Colorado (~6 blocs de large) et les lacs (Mead, Mohave, Powell) au niveau du fleuve
+        double lit = Math.max(1.0 - lisse((pt.distBlocs() - 2.5) / 1.5), 1.0 - lisse((pt.e() - pt.r() - 6.0) / 20.0));
         y = Mth.lerp(lit, y, FOND);
         return Mth.lerp(pt.fondu(), h, y);
     }
 
     @Override
     public boolean dansBiome(int x, int z) {
-        if (!concerne(x, z)) return false;
-        Point pt = point(x, z);
-        return pt.canyon() * pt.fondu() > 0.3;
+        return concerne(x, z) && dansCanyon(point(x, z));
     }
 
     /** Tout le canyon et les abords des lacs : l'aquifère y prend le niveau de la mer (le fleuve ne s'assèche plus). */
     @Override
     public boolean inonde(int x, int z, double hauteur) {
         Point pt = point(x, z);
-        return pt.canyon() * pt.fondu() > 0.05 || pt.dist() < 3000.0 || pt.e() - pt.r() < 60.0;
+        return dansCanyon(pt) || pt.t() < 1.5 || pt.e() - pt.r() < 60.0;
     }
 
     /** Dans le canyon, son biome descend jusqu'au fond (sinon les replats et parois prennent le biome froid du plateau). */
@@ -238,19 +264,16 @@ public final class GrandCanyon implements Lieu {
         return FOND - 10.0;
     }
 
-    /**
-     * Pour les strates : {y du rebord, profondeur réelle du canyon en m} si la colonne est dans le canyon, sinon null.
-     */
-    public double[] strates(int x, int z) {
-        if (!concerne(x, z)) return null;
+    /** Pour les strates : y du rebord si la colonne est dans le canyon, sinon NaN. */
+    public double rebordSiCanyon(int x, int z) {
+        if (!concerne(x, z)) return Double.NaN;
         Point pt = point(x, z);
-        if (pt.canyon() * pt.fondu() <= 0.3) return null;
-        return new double[]{yRebord(pt), pt.span()};
+        return dansCanyon(pt) ? yRebord(pt) : Double.NaN;
     }
 
-    /** Profondeur réelle (m) sous le rebord d'un bloc à la hauteur y. */
-    public static double profondeurReelle(double y, double rebord, double span) {
-        return Mth.clamp((rebord - y) / (rebord - PIED), 0.0, 1.0) * span;
+    /** Fraction de profondeur (0 = rebord, 1 = fleuve) d'un bloc à la hauteur y. */
+    public static double fraction(double y, double rebord) {
+        return Mth.clamp((rebord - y) / (rebord - PIED), 0.0, 1.0);
     }
 
     private static double lisse(double t) {
