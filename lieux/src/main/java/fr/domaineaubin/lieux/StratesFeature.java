@@ -32,13 +32,16 @@ public class StratesFeature extends Feature<NoneFeatureConfiguration> {
         for (int dx = 0; dx < 16; dx++) {
             for (int dz = 0; dz < 16; dz++) {
                 int x = x0 + dx, z = z0 + dz;
-                double rebord = GrandCanyon.INSTANCE.rebordSiCanyon(x, z);
-                if (Double.isNaN(rebord)) continue;
+                double[] s = GrandCanyon.INSTANCE.strates(x, z);
+                if (s == null) continue;
+                double rebord = s[0], span = s[1];
                 int sommet = niveau.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x, z);
-                for (int y = sommet; y >= GrandCanyon.FOND - 6; y--) {
+                // le plateau garde son sol (herbe, forêt) : seules les parois et le fond sont colorés
+                int haut = Math.min(sommet, (int) Math.floor(rebord) - 2);
+                for (int y = haut; y >= GrandCanyon.FOND - 6; y--) {
                     BlockState b = niveau.getBlockState(pos.set(x, y, z));
                     if (!remplacable(b)) continue;
-                    niveau.setBlock(pos, strate(x, y, z, rebord), 2);
+                    niveau.setBlock(pos, strate(x, y, z, rebord, span), 2);
                     modifie = true;
                 }
             }
@@ -52,22 +55,28 @@ public class StratesFeature extends Feature<NoneFeatureConfiguration> {
                 || b.is(Blocks.SAND) || b.is(Blocks.RED_SAND) || b.is(BlockTags.SNOW) || b.is(Blocks.CLAY);
     }
 
-    /** Strate selon la hauteur relative dans le canyon (0 = fond, 1 = rebord). */
-    private static BlockState strate(int x, int y, int z, double rebord) {
-        double f = (y - GrandCanyon.FOND) / (rebord - GrandCanyon.FOND);
+    /** Couches réelles du Grand Canyon, du rebord au fleuve (voir GrandCanyon). */
+    private static final Block[] COUCHES = {
+            Blocks.WHITE_TERRACOTTA,       // calcaire de Kaibab (rebord, crème)
+            Blocks.TERRACOTTA,             // formation de Toroweap
+            Blocks.SMOOTH_SANDSTONE,       // grès de Coconino (bande claire)
+            Blocks.RED_TERRACOTTA,         // schistes de Hermit (pente rouge)
+            Blocks.ORANGE_TERRACOTTA,      // groupe de Supai : gradins rouges et orangés
+            Blocks.RED_TERRACOTTA,
+            Blocks.ORANGE_TERRACOTTA,
+            Blocks.RED_TERRACOTTA,
+            Blocks.TERRACOTTA,             // calcaire de Redwall (grande falaise)
+            Blocks.LIGHT_GRAY_TERRACOTTA,  // calcaire de Muav
+            Blocks.LIGHT_GRAY_TERRACOTTA,  // schistes de Bright Angel (plateau de Tonto)
+            Blocks.BROWN_TERRACOTTA,       // grès de Tapeats
+            Blocks.DEEPSLATE,              // schiste de Vishnu (gorge intérieure)
+    };
+
+    private static BlockState strate(int x, int y, int z, double rebord, double span) {
+        if (y <= 61) return Blocks.SAND.defaultBlockState();          // berges et lit du Colorado
+        double dm = GrandCanyon.profondeurReelle(y, rebord, span);
         // légère ondulation des couches pour éviter des lignes parfaitement droites
-        f += (((x * 73856093) ^ (z * 19349663)) & 7) * 0.0015;
-        Block bloc;
-        if (f >= 0.93) bloc = Blocks.WHITE_TERRACOTTA;            // calcaire de Kaibab
-        else if (f >= 0.86) bloc = Blocks.SMOOTH_SANDSTONE;       // grès de Coconino
-        else if (f >= 0.78) bloc = Blocks.RED_TERRACOTTA;         // schistes de Hermit
-        else if (f >= 0.70) bloc = Blocks.ORANGE_TERRACOTTA;      // groupe de Supai
-        else if (f >= 0.64) bloc = Blocks.RED_TERRACOTTA;
-        else if (f >= 0.44) bloc = Blocks.TERRACOTTA;             // calcaire de Redwall
-        else if (f >= 0.29) bloc = Blocks.LIGHT_GRAY_TERRACOTTA;  // schistes de Bright Angel (Tonto)
-        else if (f >= 0.24) bloc = Blocks.BROWN_TERRACOTTA;       // grès de Tapeats
-        else if (y <= 61) bloc = Blocks.RED_SAND;                 // lit du Colorado
-        else bloc = Blocks.DEEPSLATE;                             // schiste de Vishnu (gorge intérieure)
-        return bloc.defaultBlockState();
+        dm += ((((x * 73856093) ^ (z * 19349663)) & 7) - 3.5) * 2.0;
+        return COUCHES[GrandCanyon.couche(dm, span)].defaultBlockState();
     }
 }

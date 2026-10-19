@@ -174,11 +174,14 @@ public class TerroirBiomeSource extends BiomeSource {
     public Holder<Biome> getNoiseBiome(int x, int y, int z, Climate.Sampler sampler) {
         Tables t = tables();
         int bx = x << 2, bz = z << 2;
-        // lieu unique en surface : son biome passe avant le terroir
-        if (!t.lieux().isEmpty() && (y << 2) > Terrain.get().hauteur(bx, bz) - 16) {
+        // lieu unique : son biome passe avant le terroir (en surface, ou plus bas si le lieu le demande)
+        if (!t.lieux().isEmpty()) {
             List<Lieu> lieux = LieuxTerre.liste();
             for (int i = 0; i < lieux.size() && i < t.lieux().size(); i++) {
-                if (lieux.get(i).dansBiome(bx, bz)) return t.lieux().get(i);
+                Lieu l = lieux.get(i);
+                if (l.dansBiome(bx, bz) && (y << 2) > l.basBiome(bx, bz, Terrain.get().hauteur(bx, bz))) {
+                    return t.lieux().get(i);
+                }
             }
         }
         // les cartes ont des pixels de 3' (~22 blocs en 1:250) : on lit à un point décalé par un bruit

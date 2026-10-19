@@ -26,4 +26,14 @@ public interface Lieu {
 
     /** La colonne porte-t-elle le biome du lieu en surface ? */
     boolean dansBiome(int x, int z);
+
+    /**
+     * Hauteur (y) au-dessus de laquelle le biome du lieu s'applique dans une colonne {@link #dansBiome}.
+     * Par défaut 16 blocs sous le sol (les grottes gardent leurs biomes). Un lieu très en relief (canyon)
+     * peut descendre plus bas pour couvrir toutes ses parois.
+     * @param hauteur hauteur visée du sol dans cette colonne
+     */
+    default double basBiome(int x, int z, double hauteur) {
+        return hauteur - 16.0;
+    }
 }
