@@ -4,7 +4,11 @@ name: Compilation
 
 on:
   push:
+    branches-ignore: [jars]
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -36,3 +40,19 @@ jobs:
           path: |
             build/libs/domaine_terre-*.jar
             lieux/build/libs/domaine_terre_lieux-*.jar
+
+      # Range aussi les jars sur la branche « jars » (un seul commit, remplacé à chaque compilation),
+      # pour pouvoir les récupérer avec git sans passer par le stockage des artifacts.
+      - name: Publier les jars sur la branche jars
+        run: |
+          mkdir -p /tmp/jars
+          cp build/libs/domaine_terre-*.jar lieux/build/libs/domaine_terre_lieux-*.jar /tmp/jars/
+          rm -f /tmp/jars/*-sources.jar /tmp/jars/*-slim.jar
+          printf 'branche=%s\ncommit=%s\ndate=%s\n' "$GITHUB_REF_NAME" "$GITHUB_SHA" "$(date -u +%FT%TZ)" > /tmp/jars/SOURCE.txt
+          cd /tmp/jars
+          git init -q -b jars
+          git config user.name "github-actions[bot]"
+          git config user.email "41898+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Jars de $GITHUB_REF_NAME @ ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" jars
