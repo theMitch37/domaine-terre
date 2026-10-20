@@ -27,14 +27,16 @@ public final class CarteTerre {
     private final byte[] cote;         // 128 + 4 x distance signée à la côte (minutes d'arc, + vers l'intérieur)
     private final byte[] terroir;      // 0 = mer, 1..29 ; bit 128 = lac intérieur de ce terroir
     private final byte[] climat;       // 0 = mer, 1..30 = classe Köppen-Geiger (Beck et al. 2023)
+    private final byte[] biomes;       // 0 = pas de biome fixe, sinon index dans biomes.json (null si carte absente)
     private final String[] nomsTerroirs;
     private final String[] continents = new String[256];
 
-    private CarteTerre(short[] relief, byte[] cote, byte[] terroir, byte[] climat, String[] noms) {
+    private CarteTerre(short[] relief, byte[] cote, byte[] terroir, byte[] climat, byte[] biomes, String[] noms) {
         this.relief = relief;
         this.cote = cote;
         this.terroir = terroir;
         this.climat = climat;
+        this.biomes = biomes;
         this.nomsTerroirs = noms;
     }
 
@@ -51,6 +53,8 @@ public final class CarteTerre {
             byte[] cot = lireOctets("cotes.png", ligne);
             byte[] ter = lireOctets("terroirs.png", ligne);
             byte[] cli = lireOctets("climat.png", ligne);
+            byte[] bio = CarteTerre.class.getResource("/domaine_terre/carte/biomes.png") != null
+                    ? lireOctets("biomes.png", ligne) : null;
             String[] noms = new String[256];
             try (InputStream in = ouvrir("terroirs.json")) {
                 JsonArray tab = JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8)).getAsJsonArray();
@@ -61,7 +65,7 @@ public final class CarteTerre {
             }
             noms[0] = "Mer|mer";
             DomaineTerre.LOGGER.info("Cartes de la Terre chargées en {} ms", System.currentTimeMillis() - t0);
-            return new CarteTerre(rel, cot, ter, cli, noms);
+            return new CarteTerre(rel, cot, ter, cli, bio, noms);
         } catch (IOException e) {
             throw new UncheckedIOException("Impossible de charger les cartes de la Terre", e);
         }
@@ -144,6 +148,12 @@ public final class CarteTerre {
     /** Classe de climat Köppen-Geiger (0 = mer ou inconnue). */
     public int climat(double lon, double lat) {
         return climat[idx(Mth.floor(gx(lon) + 0.5), Mth.floor(gy(lat) + 0.5))] & 0xFF;
+    }
+
+    /** Biome fixe de la carte des biomes (index dans biomes.json, 0 = aucun). */
+    public int biome(double lon, double lat) {
+        if (biomes == null) return 0;
+        return biomes[idx(Mth.floor(gx(lon) + 0.5), Mth.floor(gy(lat) + 0.5))] & 0xFF;
     }
 
     public String nomTerroir(int index) {

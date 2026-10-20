@@ -60,7 +60,8 @@ public class TerroirBiomeSource extends BiomeSource {
     private volatile Tables tables;
 
     private record Tables(List<Climate.ParameterList<Holder<Biome>>> parTerroir, Climate.ParameterList<Holder<Biome>> mer,
-                          Set<Holder<Biome>> tous, List<String> cles, List<Holder<Biome>> lieux) {
+                          Set<Holder<Biome>> tous, List<String> cles, List<Holder<Biome>> lieux,
+                          List<Holder<Biome>[]> fixes) {
     }
 
     private final int echelle;
@@ -135,7 +136,28 @@ public class TerroirBiomeSource extends BiomeSource {
                 lieux.add(h);
                 tous.add(h);
             }
-            tables = new Tables(parTerroir, new Climate.ParameterList<>(mer), tous, cles, lieux);
+            // carte des biomes fixe : pour chaque terroir, la copie de chaque biome de biomes.json (null si absente)
+            List<Holder<Biome>[]> fixes = new ArrayList<>();
+            fixes.add(null);
+            List<String> noms = new ArrayList<>();
+            noms.add("");
+            if (TerroirBiomeSource.class.getResource("/domaine_terre/carte/biomes.json") != null) {
+                for (JsonElement e : lireJson("biomes.json").getAsJsonArray()) noms.add(e.getAsString());
+            }
+            for (int i = 1; i < cles.size(); i++) {
+                @SuppressWarnings("unchecked")
+                Holder<Biome>[] tab = new Holder[noms.size()];
+                for (int b = 1; b < noms.size(); b++) {
+                    var h = biomes.get(ResourceKey.create(Registries.BIOME,
+                            new ResourceLocation(DomaineTerre.MOD_ID, cles.get(i) + "/" + noms.get(b))));
+                    if (h.isPresent()) {
+                        tab[b] = h.get();
+                        tous.add(h.get());
+                    }
+                }
+                fixes.add(tab);
+            }
+            tables = new Tables(parTerroir, new Climate.ParameterList<>(mer), tous, cles, lieux, fixes);
             return tables;
         }
     }
@@ -222,7 +244,20 @@ public class TerroirBiomeSource extends BiomeSource {
                 lac ? Math.max(p.continentalness(), Climate.quantizeCoord(0.1F)) : p.continentalness(), p.erosion(),
                 // biomes de grottes seulement à plus de 16 blocs sous le sol
                 (y << 2) > Terrain.get().hauteur(bx, bz) - 16 ? 0L : p.depth(), p.weirdness());
-        return liste.findValue(reel);
+        Holder<Biome> choix = liste.findValue(reel);
+        // carte des biomes fixe : à la surface des terres, le vrai biome remplace le choix climatique.
+        // Océans, plages, côtes rocheuses et grottes gardent le choix vanilla.
+        if (terroir > 0 && terroir < t.fixes().size()) {
+            String chemin = choix.unwrapKey().map(c -> c.location().getPath()).orElse("");
+            int fin = chemin.lastIndexOf('/');
+            String type = fin >= 0 ? chemin.substring(fin + 1) : chemin;
+            if (!OCEANS.contains(type) && !CAVERNES.contains(type) && !COTES.contains(type)) {
+                int b = Terrain.get().carte().biome(lonF, latF);
+                Holder<Biome>[] tab = t.fixes().get(terroir);
+                if (b > 0 && b < tab.length && tab[b] != null) return tab[b];
+            }
+        }
+        return choix;
     }
 
     /**
