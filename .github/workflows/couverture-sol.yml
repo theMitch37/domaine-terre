@@ -41,7 +41,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git add outils/donnees/couverture_igbp_3min.png
+          git add -f outils/donnees/couverture_igbp_3min.png
           git commit -m "Couverture du sol Copernicus LC100 2019 réduite à 3' (automatique)" || exit 0
           for i in 1 2 3; do
             git fetch origin "${GITHUB_REF_NAME}" && git rebase "origin/${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
