@@ -422,7 +422,8 @@
           "if_true": {
            "biome_is": [
             "minecraft:wooded_badlands",
-            "domaine_terre:ouest_mexique/wooded_badlands"
+            "domaine_terre:ouest_mexique/wooded_badlands",
+            "domaine_terre:australie/wooded_badlands"
            ],
            "type": "minecraft:biome"
           },
@@ -528,7 +529,22 @@
             "domaine_terre:asie_sud_est/swamp",
             "domaine_terre:boreale/swamp",
             "domaine_terre:grandes_plaines/swamp",
-            "domaine_terre:amazonie/swamp"
+            "domaine_terre:amazonie/swamp",
+            "domaine_terre:atlantique/swamp",
+            "domaine_terre:mediterranee/swamp",
+            "domaine_terre:continentale/swamp",
+            "domaine_terre:maghreb/swamp",
+            "domaine_terre:sahara_sahel/swamp",
+            "domaine_terre:afrique_est/swamp",
+            "domaine_terre:afrique_australe/swamp",
+            "domaine_terre:moyen_orient/swamp",
+            "domaine_terre:steppes_tibet/swamp",
+            "domaine_terre:inde/swamp",
+            "domaine_terre:ouest_mexique/swamp",
+            "domaine_terre:amerique_centrale/swamp",
+            "domaine_terre:cone_sud/swamp",
+            "domaine_terre:australie/swamp",
+            "domaine_terre:melanesie/swamp"
            ],
            "type": "minecraft:biome"
           },
@@ -587,7 +603,15 @@
             "domaine_terre:grandes_plaines/mangrove_swamp",
             "domaine_terre:amerique_centrale/mangrove_swamp",
             "domaine_terre:amazonie/mangrove_swamp",
-            "domaine_terre:melanesie/mangrove_swamp"
+            "domaine_terre:melanesie/mangrove_swamp",
+            "domaine_terre:sahara_sahel/mangrove_swamp",
+            "domaine_terre:afrique_est/mangrove_swamp",
+            "domaine_terre:afrique_australe/mangrove_swamp",
+            "domaine_terre:moyen_orient/mangrove_swamp",
+            "domaine_terre:chine/mangrove_swamp",
+            "domaine_terre:ouest_mexique/mangrove_swamp",
+            "domaine_terre:cone_sud/mangrove_swamp",
+            "domaine_terre:australie/mangrove_swamp"
            ],
            "type": "minecraft:biome"
           },
@@ -655,7 +679,8 @@
          "domaine_terre:australie/badlands",
          "domaine_terre:ouest_mexique/eroded_badlands",
          "domaine_terre:australie/eroded_badlands",
-         "domaine_terre:ouest_mexique/wooded_badlands"
+         "domaine_terre:ouest_mexique/wooded_badlands",
+         "domaine_terre:australie/wooded_badlands"
         ],
         "type": "minecraft:biome"
        },
@@ -1018,7 +1043,8 @@
                "domaine_terre:boreale/frozen_peaks",
                "domaine_terre:andes/frozen_peaks",
                "domaine_terre:arctique/frozen_peaks",
-               "domaine_terre:antarctique/frozen_peaks"
+               "domaine_terre:antarctique/frozen_peaks",
+               "domaine_terre:cone_sud/frozen_peaks"
               ],
               "type": "minecraft:biome"
              },
@@ -1104,7 +1130,11 @@
                "domaine_terre:cone_sud/snowy_slopes",
                "domaine_terre:nouvelle_zelande/snowy_slopes",
                "domaine_terre:arctique/snowy_slopes",
-               "domaine_terre:antarctique/snowy_slopes"
+               "domaine_terre:antarctique/snowy_slopes",
+               "domaine_terre:continentale/snowy_slopes",
+               "domaine_terre:afrique_tropicale/snowy_slopes",
+               "domaine_terre:inde/snowy_slopes",
+               "domaine_terre:amazonie/snowy_slopes"
               ],
               "type": "minecraft:biome"
              },
@@ -1179,7 +1209,8 @@
                "domaine_terre:andes/jagged_peaks",
                "domaine_terre:cone_sud/jagged_peaks",
                "domaine_terre:nouvelle_zelande/jagged_peaks",
-               "domaine_terre:arctique/jagged_peaks"
+               "domaine_terre:arctique/jagged_peaks",
+               "domaine_terre:siberie/jagged_peaks"
               ],
               "type": "minecraft:biome"
              },
@@ -1228,7 +1259,9 @@
                "domaine_terre:japon_coree/grove",
                "domaine_terre:boreale/grove",
                "domaine_terre:ouest_mexique/grove",
-               "domaine_terre:andes/grove"
+               "domaine_terre:andes/grove",
+               "domaine_terre:continentale/grove",
+               "domaine_terre:chine/grove"
               ],
               "type": "minecraft:biome"
              },
@@ -1295,7 +1328,12 @@
                  "domaine_terre:ouest_mexique/stony_peaks",
                  "domaine_terre:amerique_centrale/stony_peaks",
                  "domaine_terre:andes/stony_peaks",
-                 "domaine_terre:melanesie/stony_peaks"
+                 "domaine_terre:melanesie/stony_peaks",
+                 "domaine_terre:afrique_australe/stony_peaks",
+                 "domaine_terre:inde/stony_peaks",
+                 "domaine_terre:boreale/stony_peaks",
+                 "domaine_terre:amazonie/stony_peaks",
+                 "domaine_terre:cone_sud/stony_peaks"
                 ],
                 "type": "minecraft:biome"
                },
@@ -1414,7 +1452,18 @@
                  "domaine_terre:grandes_plaines/windswept_hills",
                  "domaine_terre:ouest_mexique/windswept_hills",
                  "domaine_terre:cone_sud/windswept_hills",
-                 "domaine_terre:nouvelle_zelande/windswept_hills"
+                 "domaine_terre:nouvelle_zelande/windswept_hills",
+                 "domaine_terre:afrique_est/windswept_hills",
+                 "domaine_terre:afrique_australe/windswept_hills",
+                 "domaine_terre:steppes_tibet/windswept_hills",
+                 "domaine_terre:siberie/windswept_hills",
+                 "domaine_terre:inde/windswept_hills",
+                 "domaine_terre:chine/windswept_hills",
+                 "domaine_terre:japon_coree/windswept_hills",
+                 "domaine_terre:asie_sud_est/windswept_hills",
+                 "domaine_terre:boreale/windswept_hills",
+                 "domaine_terre:amazonie/windswept_hills",
+                 "domaine_terre:australie/windswept_hills"
                 ],
                 "type": "minecraft:biome"
                },
@@ -1513,7 +1562,18 @@
                  "domaine_terre:ouest_mexique/desert",
                  "domaine_terre:andes/desert",
                  "domaine_terre:cone_sud/desert",
-                 "domaine_terre:australie/desert"
+                 "domaine_terre:australie/desert",
+                 "domaine_terre:mediterranee/desert",
+                 "domaine_terre:continentale/desert",
+                 "domaine_terre:afrique_tropicale/desert",
+                 "domaine_terre:afrique_est/desert",
+                 "domaine_terre:siberie/desert",
+                 "domaine_terre:chine/desert",
+                 "domaine_terre:asie_sud_est/desert",
+                 "domaine_terre:grandes_plaines/desert",
+                 "domaine_terre:amerique_centrale/desert",
+                 "domaine_terre:amazonie/desert",
+                 "domaine_terre:melanesie/desert"
                 ],
                 "type": "minecraft:biome"
                },
@@ -1570,7 +1630,21 @@
                "minecraft:windswept_savanna",
                "domaine_terre:maghreb/windswept_savanna",
                "domaine_terre:afrique_est/windswept_savanna",
-               "domaine_terre:afrique_australe/windswept_savanna"
+               "domaine_terre:afrique_australe/windswept_savanna",
+               "domaine_terre:mediterranee/windswept_savanna",
+               "domaine_terre:sahara_sahel/windswept_savanna",
+               "domaine_terre:afrique_tropicale/windswept_savanna",
+               "domaine_terre:moyen_orient/windswept_savanna",
+               "domaine_terre:inde/windswept_savanna",
+               "domaine_terre:chine/windswept_savanna",
+               "domaine_terre:asie_sud_est/windswept_savanna",
+               "domaine_terre:grandes_plaines/windswept_savanna",
+               "domaine_terre:ouest_mexique/windswept_savanna",
+               "domaine_terre:amerique_centrale/windswept_savanna",
+               "domaine_terre:amazonie/windswept_savanna",
+               "domaine_terre:cone_sud/windswept_savanna",
+               "domaine_terre:australie/windswept_savanna",
+               "domaine_terre:melanesie/windswept_savanna"
               ],
               "type": "minecraft:biome"
              },
@@ -1756,7 +1830,20 @@
                "domaine_terre:nordique/old_growth_spruce_taiga",
                "domaine_terre:siberie/old_growth_spruce_taiga",
                "domaine_terre:boreale/old_growth_spruce_taiga",
-               "domaine_terre:cone_sud/old_growth_spruce_taiga"
+               "domaine_terre:cone_sud/old_growth_spruce_taiga",
+               "domaine_terre:atlantique/old_growth_spruce_taiga",
+               "domaine_terre:mediterranee/old_growth_pine_taiga",
+               "domaine_terre:mediterranee/old_growth_spruce_taiga",
+               "domaine_terre:continentale/old_growth_pine_taiga",
+               "domaine_terre:continentale/old_growth_spruce_taiga",
+               "domaine_terre:alpine/old_growth_spruce_taiga",
+               "domaine_terre:moyen_orient/old_growth_pine_taiga",
+               "domaine_terre:steppes_tibet/old_growth_pine_taiga",
+               "domaine_terre:inde/old_growth_pine_taiga",
+               "domaine_terre:chine/old_growth_pine_taiga",
+               "domaine_terre:grandes_plaines/old_growth_pine_taiga",
+               "domaine_terre:grandes_plaines/old_growth_spruce_taiga",
+               "domaine_terre:ouest_mexique/old_growth_spruce_taiga"
               ],
               "type": "minecraft:biome"
              },
@@ -1836,7 +1923,15 @@
                "domaine_terre:grandes_plaines/mangrove_swamp",
                "domaine_terre:amerique_centrale/mangrove_swamp",
                "domaine_terre:amazonie/mangrove_swamp",
-               "domaine_terre:melanesie/mangrove_swamp"
+               "domaine_terre:melanesie/mangrove_swamp",
+               "domaine_terre:sahara_sahel/mangrove_swamp",
+               "domaine_terre:afrique_est/mangrove_swamp",
+               "domaine_terre:afrique_australe/mangrove_swamp",
+               "domaine_terre:moyen_orient/mangrove_swamp",
+               "domaine_terre:chine/mangrove_swamp",
+               "domaine_terre:ouest_mexique/mangrove_swamp",
+               "domaine_terre:cone_sud/mangrove_swamp",
+               "domaine_terre:australie/mangrove_swamp"
               ],
               "type": "minecraft:biome"
              },
@@ -1971,7 +2066,8 @@
                "domaine_terre:boreale/frozen_peaks",
                "domaine_terre:andes/frozen_peaks",
                "domaine_terre:arctique/frozen_peaks",
-               "domaine_terre:antarctique/frozen_peaks"
+               "domaine_terre:antarctique/frozen_peaks",
+               "domaine_terre:cone_sud/frozen_peaks"
               ],
               "type": "minecraft:biome"
              },
@@ -2057,7 +2153,11 @@
                "domaine_terre:cone_sud/snowy_slopes",
                "domaine_terre:nouvelle_zelande/snowy_slopes",
                "domaine_terre:arctique/snowy_slopes",
-               "domaine_terre:antarctique/snowy_slopes"
+               "domaine_terre:antarctique/snowy_slopes",
+               "domaine_terre:continentale/snowy_slopes",
+               "domaine_terre:afrique_tropicale/snowy_slopes",
+               "domaine_terre:inde/snowy_slopes",
+               "domaine_terre:amazonie/snowy_slopes"
               ],
               "type": "minecraft:biome"
              },
@@ -2132,7 +2232,8 @@
                "domaine_terre:andes/jagged_peaks",
                "domaine_terre:cone_sud/jagged_peaks",
                "domaine_terre:nouvelle_zelande/jagged_peaks",
-               "domaine_terre:arctique/jagged_peaks"
+               "domaine_terre:arctique/jagged_peaks",
+               "domaine_terre:siberie/jagged_peaks"
               ],
               "type": "minecraft:biome"
              },
@@ -2155,7 +2256,9 @@
                "domaine_terre:japon_coree/grove",
                "domaine_terre:boreale/grove",
                "domaine_terre:ouest_mexique/grove",
-               "domaine_terre:andes/grove"
+               "domaine_terre:andes/grove",
+               "domaine_terre:continentale/grove",
+               "domaine_terre:chine/grove"
               ],
               "type": "minecraft:biome"
              },
@@ -2213,7 +2316,12 @@
                  "domaine_terre:ouest_mexique/stony_peaks",
                  "domaine_terre:amerique_centrale/stony_peaks",
                  "domaine_terre:andes/stony_peaks",
-                 "domaine_terre:melanesie/stony_peaks"
+                 "domaine_terre:melanesie/stony_peaks",
+                 "domaine_terre:afrique_australe/stony_peaks",
+                 "domaine_terre:inde/stony_peaks",
+                 "domaine_terre:boreale/stony_peaks",
+                 "domaine_terre:amazonie/stony_peaks",
+                 "domaine_terre:cone_sud/stony_peaks"
                 ],
                 "type": "minecraft:biome"
                },
@@ -2332,7 +2440,18 @@
                  "domaine_terre:grandes_plaines/windswept_hills",
                  "domaine_terre:ouest_mexique/windswept_hills",
                  "domaine_terre:cone_sud/windswept_hills",
-                 "domaine_terre:nouvelle_zelande/windswept_hills"
+                 "domaine_terre:nouvelle_zelande/windswept_hills",
+                 "domaine_terre:afrique_est/windswept_hills",
+                 "domaine_terre:afrique_australe/windswept_hills",
+                 "domaine_terre:steppes_tibet/windswept_hills",
+                 "domaine_terre:siberie/windswept_hills",
+                 "domaine_terre:inde/windswept_hills",
+                 "domaine_terre:chine/windswept_hills",
+                 "domaine_terre:japon_coree/windswept_hills",
+                 "domaine_terre:asie_sud_est/windswept_hills",
+                 "domaine_terre:boreale/windswept_hills",
+                 "domaine_terre:amazonie/windswept_hills",
+                 "domaine_terre:australie/windswept_hills"
                 ],
                 "type": "minecraft:biome"
                },
@@ -2431,7 +2550,18 @@
                  "domaine_terre:ouest_mexique/desert",
                  "domaine_terre:andes/desert",
                  "domaine_terre:cone_sud/desert",
-                 "domaine_terre:australie/desert"
+                 "domaine_terre:australie/desert",
+                 "domaine_terre:mediterranee/desert",
+                 "domaine_terre:continentale/desert",
+                 "domaine_terre:afrique_tropicale/desert",
+                 "domaine_terre:afrique_est/desert",
+                 "domaine_terre:siberie/desert",
+                 "domaine_terre:chine/desert",
+                 "domaine_terre:asie_sud_est/desert",
+                 "domaine_terre:grandes_plaines/desert",
+                 "domaine_terre:amerique_centrale/desert",
+                 "domaine_terre:amazonie/desert",
+                 "domaine_terre:melanesie/desert"
                 ],
                 "type": "minecraft:biome"
                },
@@ -2488,7 +2618,21 @@
                "minecraft:windswept_savanna",
                "domaine_terre:maghreb/windswept_savanna",
                "domaine_terre:afrique_est/windswept_savanna",
-               "domaine_terre:afrique_australe/windswept_savanna"
+               "domaine_terre:afrique_australe/windswept_savanna",
+               "domaine_terre:mediterranee/windswept_savanna",
+               "domaine_terre:sahara_sahel/windswept_savanna",
+               "domaine_terre:afrique_tropicale/windswept_savanna",
+               "domaine_terre:moyen_orient/windswept_savanna",
+               "domaine_terre:inde/windswept_savanna",
+               "domaine_terre:chine/windswept_savanna",
+               "domaine_terre:asie_sud_est/windswept_savanna",
+               "domaine_terre:grandes_plaines/windswept_savanna",
+               "domaine_terre:ouest_mexique/windswept_savanna",
+               "domaine_terre:amerique_centrale/windswept_savanna",
+               "domaine_terre:amazonie/windswept_savanna",
+               "domaine_terre:cone_sud/windswept_savanna",
+               "domaine_terre:australie/windswept_savanna",
+               "domaine_terre:melanesie/windswept_savanna"
               ],
               "type": "minecraft:biome"
              },
@@ -2628,7 +2772,15 @@
                "domaine_terre:grandes_plaines/mangrove_swamp",
                "domaine_terre:amerique_centrale/mangrove_swamp",
                "domaine_terre:amazonie/mangrove_swamp",
-               "domaine_terre:melanesie/mangrove_swamp"
+               "domaine_terre:melanesie/mangrove_swamp",
+               "domaine_terre:sahara_sahel/mangrove_swamp",
+               "domaine_terre:afrique_est/mangrove_swamp",
+               "domaine_terre:afrique_australe/mangrove_swamp",
+               "domaine_terre:moyen_orient/mangrove_swamp",
+               "domaine_terre:chine/mangrove_swamp",
+               "domaine_terre:ouest_mexique/mangrove_swamp",
+               "domaine_terre:cone_sud/mangrove_swamp",
+               "domaine_terre:australie/mangrove_swamp"
               ],
               "type": "minecraft:biome"
              },
@@ -2718,7 +2870,18 @@
             "domaine_terre:ouest_mexique/desert",
             "domaine_terre:andes/desert",
             "domaine_terre:cone_sud/desert",
-            "domaine_terre:australie/desert"
+            "domaine_terre:australie/desert",
+            "domaine_terre:mediterranee/desert",
+            "domaine_terre:continentale/desert",
+            "domaine_terre:afrique_tropicale/desert",
+            "domaine_terre:afrique_est/desert",
+            "domaine_terre:siberie/desert",
+            "domaine_terre:chine/desert",
+            "domaine_terre:asie_sud_est/desert",
+            "domaine_terre:grandes_plaines/desert",
+            "domaine_terre:amerique_centrale/desert",
+            "domaine_terre:amazonie/desert",
+            "domaine_terre:melanesie/desert"
            ],
            "type": "minecraft:biome"
           },
@@ -2778,7 +2941,9 @@
             "domaine_terre:andes/jagged_peaks",
             "domaine_terre:cone_sud/jagged_peaks",
             "domaine_terre:nouvelle_zelande/jagged_peaks",
-            "domaine_terre:arctique/jagged_peaks"
+            "domaine_terre:arctique/jagged_peaks",
+            "domaine_terre:siberie/jagged_peaks",
+            "domaine_terre:cone_sud/frozen_peaks"
            ],
            "type": "minecraft:biome"
           },

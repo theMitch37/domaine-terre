@@ -9,6 +9,16 @@
   "domaine_terre:moyen_orient/snowy_slopes",
   "domaine_terre:moyen_orient/stony_peaks",
   "domaine_terre:moyen_orient/stony_shore",
-  "domaine_terre:moyen_orient/windswept_hills"
+  "domaine_terre:moyen_orient/windswept_hills",
+  "domaine_terre:moyen_orient/forest",
+  "domaine_terre:moyen_orient/taiga",
+  "domaine_terre:moyen_orient/old_growth_pine_taiga",
+  "domaine_terre:moyen_orient/snowy_plains",
+  "domaine_terre:moyen_orient/meadow",
+  "domaine_terre:moyen_orient/savanna_plateau",
+  "domaine_terre:moyen_orient/windswept_savanna",
+  "domaine_terre:moyen_orient/sparse_jungle",
+  "domaine_terre:moyen_orient/swamp",
+  "domaine_terre:moyen_orient/mangrove_swamp"
  ]
 }

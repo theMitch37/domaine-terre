@@ -12,6 +12,13 @@
   "domaine_terre:maghreb/savanna",
   "domaine_terre:moyen_orient/savanna",
   "domaine_terre:ouest_mexique/savanna",
-  "domaine_terre:sahara_sahel/savanna"
+  "domaine_terre:sahara_sahel/savanna",
+  "domaine_terre:mediterranee/savanna",
+  "domaine_terre:steppes_tibet/savanna",
+  "domaine_terre:chine/savanna",
+  "domaine_terre:asie_sud_est/savanna",
+  "domaine_terre:grandes_plaines/savanna",
+  "domaine_terre:andes/savanna",
+  "domaine_terre:melanesie/savanna"
  ]
 }

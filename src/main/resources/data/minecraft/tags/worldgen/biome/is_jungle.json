@@ -22,6 +22,18 @@
   "domaine_terre:inde/sparse_jungle",
   "domaine_terre:japon_coree/bamboo_jungle",
   "domaine_terre:melanesie/jungle",
-  "domaine_terre:melanesie/sparse_jungle"
+  "domaine_terre:melanesie/sparse_jungle",
+  "domaine_terre:mediterranee/sparse_jungle",
+  "domaine_terre:sahara_sahel/sparse_jungle",
+  "domaine_terre:afrique_est/jungle",
+  "domaine_terre:afrique_australe/jungle",
+  "domaine_terre:moyen_orient/sparse_jungle",
+  "domaine_terre:grandes_plaines/sparse_jungle",
+  "domaine_terre:ouest_mexique/jungle",
+  "domaine_terre:ouest_mexique/sparse_jungle",
+  "domaine_terre:andes/jungle",
+  "domaine_terre:cone_sud/jungle",
+  "domaine_terre:cone_sud/sparse_jungle",
+  "domaine_terre:australie/jungle"
  ]
 }

@@ -15,6 +15,18 @@
   "domaine_terre:inde/jungle",
   "domaine_terre:melanesie/jungle",
   "domaine_terre:nordique/old_growth_spruce_taiga",
-  "domaine_terre:siberie/old_growth_spruce_taiga"
+  "domaine_terre:siberie/old_growth_spruce_taiga",
+  "domaine_terre:atlantique/old_growth_spruce_taiga",
+  "domaine_terre:mediterranee/old_growth_spruce_taiga",
+  "domaine_terre:continentale/old_growth_spruce_taiga",
+  "domaine_terre:alpine/old_growth_spruce_taiga",
+  "domaine_terre:afrique_est/jungle",
+  "domaine_terre:afrique_australe/jungle",
+  "domaine_terre:grandes_plaines/old_growth_spruce_taiga",
+  "domaine_terre:ouest_mexique/old_growth_spruce_taiga",
+  "domaine_terre:ouest_mexique/jungle",
+  "domaine_terre:andes/jungle",
+  "domaine_terre:cone_sud/jungle",
+  "domaine_terre:australie/jungle"
  ]
 }

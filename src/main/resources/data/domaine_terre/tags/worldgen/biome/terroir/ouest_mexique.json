@@ -15,6 +15,17 @@
   "domaine_terre:ouest_mexique/stony_shore",
   "domaine_terre:ouest_mexique/taiga",
   "domaine_terre:ouest_mexique/windswept_hills",
-  "domaine_terre:ouest_mexique/wooded_badlands"
+  "domaine_terre:ouest_mexique/wooded_badlands",
+  "domaine_terre:ouest_mexique/forest",
+  "domaine_terre:ouest_mexique/birch_forest",
+  "domaine_terre:ouest_mexique/old_growth_spruce_taiga",
+  "domaine_terre:ouest_mexique/snowy_plains",
+  "domaine_terre:ouest_mexique/meadow",
+  "domaine_terre:ouest_mexique/savanna_plateau",
+  "domaine_terre:ouest_mexique/windswept_savanna",
+  "domaine_terre:ouest_mexique/jungle",
+  "domaine_terre:ouest_mexique/sparse_jungle",
+  "domaine_terre:ouest_mexique/swamp",
+  "domaine_terre:ouest_mexique/mangrove_swamp"
  ]
 }

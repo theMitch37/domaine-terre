@@ -8,6 +8,14 @@
   "domaine_terre:afrique_est/snowy_slopes",
   "domaine_terre:afrique_est/sparse_jungle",
   "domaine_terre:afrique_est/stony_peaks",
-  "domaine_terre:afrique_est/windswept_savanna"
+  "domaine_terre:afrique_est/windswept_savanna",
+  "domaine_terre:afrique_est/plains",
+  "domaine_terre:afrique_est/forest",
+  "domaine_terre:afrique_est/taiga",
+  "domaine_terre:afrique_est/windswept_hills",
+  "domaine_terre:afrique_est/desert",
+  "domaine_terre:afrique_est/jungle",
+  "domaine_terre:afrique_est/swamp",
+  "domaine_terre:afrique_est/mangrove_swamp"
  ]
 }

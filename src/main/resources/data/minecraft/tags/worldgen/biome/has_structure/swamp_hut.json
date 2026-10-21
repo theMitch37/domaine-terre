@@ -7,6 +7,21 @@
   "domaine_terre:boreale/swamp",
   "domaine_terre:chine/swamp",
   "domaine_terre:grandes_plaines/swamp",
-  "domaine_terre:siberie/swamp"
+  "domaine_terre:siberie/swamp",
+  "domaine_terre:atlantique/swamp",
+  "domaine_terre:mediterranee/swamp",
+  "domaine_terre:continentale/swamp",
+  "domaine_terre:maghreb/swamp",
+  "domaine_terre:sahara_sahel/swamp",
+  "domaine_terre:afrique_est/swamp",
+  "domaine_terre:afrique_australe/swamp",
+  "domaine_terre:moyen_orient/swamp",
+  "domaine_terre:steppes_tibet/swamp",
+  "domaine_terre:inde/swamp",
+  "domaine_terre:ouest_mexique/swamp",
+  "domaine_terre:amerique_centrale/swamp",
+  "domaine_terre:cone_sud/swamp",
+  "domaine_terre:australie/swamp",
+  "domaine_terre:melanesie/swamp"
  ]
 }

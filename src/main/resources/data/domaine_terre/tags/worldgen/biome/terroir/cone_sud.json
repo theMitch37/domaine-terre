@@ -11,6 +11,18 @@
   "domaine_terre:cone_sud/snowy_slopes",
   "domaine_terre:cone_sud/stony_shore",
   "domaine_terre:cone_sud/sunflower_plains",
-  "domaine_terre:cone_sud/windswept_hills"
+  "domaine_terre:cone_sud/windswept_hills",
+  "domaine_terre:cone_sud/birch_forest",
+  "domaine_terre:cone_sud/taiga",
+  "domaine_terre:cone_sud/snowy_taiga",
+  "domaine_terre:cone_sud/snowy_plains",
+  "domaine_terre:cone_sud/meadow",
+  "domaine_terre:cone_sud/frozen_peaks",
+  "domaine_terre:cone_sud/stony_peaks",
+  "domaine_terre:cone_sud/windswept_savanna",
+  "domaine_terre:cone_sud/jungle",
+  "domaine_terre:cone_sud/sparse_jungle",
+  "domaine_terre:cone_sud/swamp",
+  "domaine_terre:cone_sud/mangrove_swamp"
  ]
 }

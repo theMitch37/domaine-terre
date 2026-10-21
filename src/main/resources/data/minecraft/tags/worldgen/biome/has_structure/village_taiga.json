@@ -9,6 +9,25 @@
   "domaine_terre:nordique/taiga",
   "domaine_terre:ouest_mexique/taiga",
   "domaine_terre:siberie/taiga",
-  "domaine_terre:steppes_tibet/taiga"
+  "domaine_terre:steppes_tibet/taiga",
+  "domaine_terre:atlantique/taiga",
+  "domaine_terre:mediterranee/taiga",
+  "domaine_terre:maghreb/taiga",
+  "domaine_terre:sahara_sahel/taiga",
+  "domaine_terre:afrique_tropicale/taiga",
+  "domaine_terre:afrique_est/taiga",
+  "domaine_terre:afrique_australe/taiga",
+  "domaine_terre:moyen_orient/taiga",
+  "domaine_terre:inde/taiga",
+  "domaine_terre:chine/taiga",
+  "domaine_terre:asie_sud_est/taiga",
+  "domaine_terre:amerique_centrale/taiga",
+  "domaine_terre:amazonie/taiga",
+  "domaine_terre:andes/taiga",
+  "domaine_terre:cone_sud/taiga",
+  "domaine_terre:australie/taiga",
+  "domaine_terre:nouvelle_zelande/taiga",
+  "domaine_terre:melanesie/taiga",
+  "domaine_terre:arctique/taiga"
  ]
 }

@@ -13,6 +13,16 @@
   "domaine_terre:chine/sparse_jungle",
   "domaine_terre:chine/stony_peaks",
   "domaine_terre:chine/stony_shore",
-  "domaine_terre:chine/swamp"
+  "domaine_terre:chine/swamp",
+  "domaine_terre:chine/taiga",
+  "domaine_terre:chine/old_growth_pine_taiga",
+  "domaine_terre:chine/snowy_plains",
+  "domaine_terre:chine/grove",
+  "domaine_terre:chine/windswept_hills",
+  "domaine_terre:chine/desert",
+  "domaine_terre:chine/savanna",
+  "domaine_terre:chine/savanna_plateau",
+  "domaine_terre:chine/windswept_savanna",
+  "domaine_terre:chine/mangrove_swamp"
  ]
 }

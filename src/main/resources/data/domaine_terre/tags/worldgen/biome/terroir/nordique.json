@@ -14,6 +14,11 @@
   "domaine_terre:nordique/stony_shore",
   "domaine_terre:nordique/taiga",
   "domaine_terre:nordique/windswept_forest",
-  "domaine_terre:nordique/windswept_hills"
+  "domaine_terre:nordique/windswept_hills",
+  "domaine_terre:nordique/plains",
+  "domaine_terre:nordique/sunflower_plains",
+  "domaine_terre:nordique/forest",
+  "domaine_terre:nordique/birch_forest",
+  "domaine_terre:nordique/meadow"
  ]
 }

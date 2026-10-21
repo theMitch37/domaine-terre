@@ -10,6 +10,13 @@
   "domaine_terre:andes/snowy_slopes",
   "domaine_terre:andes/sparse_jungle",
   "domaine_terre:andes/stony_peaks",
-  "domaine_terre:andes/windswept_gravelly_hills"
+  "domaine_terre:andes/windswept_gravelly_hills",
+  "domaine_terre:andes/plains",
+  "domaine_terre:andes/forest",
+  "domaine_terre:andes/taiga",
+  "domaine_terre:andes/snowy_plains",
+  "domaine_terre:andes/savanna",
+  "domaine_terre:andes/savanna_plateau",
+  "domaine_terre:andes/jungle"
  ]
 }

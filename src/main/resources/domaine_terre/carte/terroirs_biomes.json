@@ -9,7 +9,11 @@
   "meadow",
   "windswept_hills",
   "beach",
-  "stony_shore"
+  "stony_shore",
+  "taiga",
+  "old_growth_spruce_taiga",
+  "snowy_plains",
+  "swamp"
  ],
  "mediterranee": [
   "plains",
@@ -21,7 +25,15 @@
   "windswept_forest",
   "stony_peaks",
   "beach",
-  "stony_shore"
+  "stony_shore",
+  "taiga",
+  "old_growth_pine_taiga",
+  "old_growth_spruce_taiga",
+  "desert",
+  "savanna",
+  "windswept_savanna",
+  "sparse_jungle",
+  "swamp"
  ],
  "continentale": [
   "plains",
@@ -35,7 +47,14 @@
   "taiga",
   "windswept_hills",
   "beach",
-  "stony_shore"
+  "stony_shore",
+  "old_growth_pine_taiga",
+  "old_growth_spruce_taiga",
+  "snowy_plains",
+  "grove",
+  "snowy_slopes",
+  "desert",
+  "swamp"
  ],
  "nordique": [
   "taiga",
@@ -51,7 +70,12 @@
   "jagged_peaks",
   "beach",
   "snowy_beach",
-  "stony_shore"
+  "stony_shore",
+  "plains",
+  "sunflower_plains",
+  "forest",
+  "birch_forest",
+  "meadow"
  ],
  "alpine": [
   "meadow",
@@ -64,7 +88,9 @@
   "taiga",
   "forest",
   "plains",
-  "stony_shore"
+  "stony_shore",
+  "old_growth_spruce_taiga",
+  "snowy_plains"
  ],
  "maghreb": [
   "plains",
@@ -75,7 +101,12 @@
   "windswept_hills",
   "stony_peaks",
   "beach",
-  "stony_shore"
+  "stony_shore",
+  "forest",
+  "taiga",
+  "snowy_plains",
+  "meadow",
+  "swamp"
  ],
  "sahara_sahel": [
   "desert",
@@ -83,7 +114,15 @@
   "savanna_plateau",
   "badlands",
   "stony_peaks",
-  "beach"
+  "beach",
+  "plains",
+  "forest",
+  "taiga",
+  "meadow",
+  "windswept_savanna",
+  "sparse_jungle",
+  "swamp",
+  "mangrove_swamp"
  ],
  "afrique_tropicale": [
   "jungle",
@@ -91,7 +130,15 @@
   "savanna",
   "swamp",
   "mangrove_swamp",
-  "beach"
+  "beach",
+  "plains",
+  "forest",
+  "taiga",
+  "meadow",
+  "snowy_slopes",
+  "desert",
+  "savanna_plateau",
+  "windswept_savanna"
  ],
  "afrique_est": [
   "savanna",
@@ -101,7 +148,15 @@
   "meadow",
   "stony_peaks",
   "snowy_slopes",
-  "beach"
+  "beach",
+  "plains",
+  "forest",
+  "taiga",
+  "windswept_hills",
+  "desert",
+  "jungle",
+  "swamp",
+  "mangrove_swamp"
  ],
  "afrique_australe": [
   "savanna",
@@ -112,7 +167,16 @@
   "plains",
   "sparse_jungle",
   "beach",
-  "stony_shore"
+  "stony_shore",
+  "forest",
+  "taiga",
+  "snowy_plains",
+  "meadow",
+  "windswept_hills",
+  "stony_peaks",
+  "jungle",
+  "swamp",
+  "mangrove_swamp"
  ],
  "moyen_orient": [
   "desert",
@@ -123,7 +187,17 @@
   "stony_peaks",
   "snowy_slopes",
   "beach",
-  "stony_shore"
+  "stony_shore",
+  "forest",
+  "taiga",
+  "old_growth_pine_taiga",
+  "snowy_plains",
+  "meadow",
+  "savanna_plateau",
+  "windswept_savanna",
+  "sparse_jungle",
+  "swamp",
+  "mangrove_swamp"
  ],
  "steppes_tibet": [
   "plains",
@@ -136,7 +210,14 @@
   "jagged_peaks",
   "stony_peaks",
   "grove",
-  "taiga"
+  "taiga",
+  "forest",
+  "birch_forest",
+  "old_growth_pine_taiga",
+  "meadow",
+  "windswept_hills",
+  "savanna",
+  "swamp"
  ],
  "siberie": [
   "taiga",
@@ -151,7 +232,14 @@
   "windswept_forest",
   "swamp",
   "snowy_beach",
-  "stony_shore"
+  "stony_shore",
+  "plains",
+  "sunflower_plains",
+  "forest",
+  "meadow",
+  "windswept_hills",
+  "jagged_peaks",
+  "desert"
  ],
  "inde": [
   "jungle",
@@ -163,7 +251,18 @@
   "mangrove_swamp",
   "jagged_peaks",
   "frozen_peaks",
-  "beach"
+  "beach",
+  "forest",
+  "taiga",
+  "old_growth_pine_taiga",
+  "snowy_plains",
+  "meadow",
+  "windswept_hills",
+  "snowy_slopes",
+  "stony_peaks",
+  "savanna_plateau",
+  "windswept_savanna",
+  "swamp"
  ],
  "chine": [
   "forest",
@@ -178,7 +277,17 @@
   "stony_peaks",
   "snowy_slopes",
   "beach",
-  "stony_shore"
+  "stony_shore",
+  "taiga",
+  "old_growth_pine_taiga",
+  "snowy_plains",
+  "grove",
+  "windswept_hills",
+  "desert",
+  "savanna",
+  "savanna_plateau",
+  "windswept_savanna",
+  "mangrove_swamp"
  ],
  "japon_coree": [
   "cherry_grove",
@@ -191,7 +300,9 @@
   "grove",
   "snowy_slopes",
   "beach",
-  "stony_shore"
+  "stony_shore",
+  "snowy_plains",
+  "windswept_hills"
  ],
  "asie_sud_est": [
   "jungle",
@@ -201,7 +312,16 @@
   "swamp",
   "stony_peaks",
   "beach",
-  "stony_shore"
+  "stony_shore",
+  "plains",
+  "forest",
+  "taiga",
+  "meadow",
+  "windswept_hills",
+  "desert",
+  "savanna",
+  "savanna_plateau",
+  "windswept_savanna"
  ],
  "boreale": [
   "taiga",
@@ -216,7 +336,12 @@
   "jagged_peaks",
   "swamp",
   "snowy_beach",
-  "stony_shore"
+  "stony_shore",
+  "plains",
+  "forest",
+  "meadow",
+  "windswept_hills",
+  "stony_peaks"
  ],
  "grandes_plaines": [
   "plains",
@@ -229,7 +354,17 @@
   "mangrove_swamp",
   "taiga",
   "windswept_hills",
-  "beach"
+  "beach",
+  "old_growth_pine_taiga",
+  "old_growth_spruce_taiga",
+  "snowy_taiga",
+  "snowy_plains",
+  "meadow",
+  "desert",
+  "savanna",
+  "savanna_plateau",
+  "windswept_savanna",
+  "sparse_jungle"
  ],
  "ouest_mexique": [
   "badlands",
@@ -246,7 +381,18 @@
   "stony_peaks",
   "windswept_hills",
   "beach",
-  "stony_shore"
+  "stony_shore",
+  "forest",
+  "birch_forest",
+  "old_growth_spruce_taiga",
+  "snowy_plains",
+  "meadow",
+  "savanna_plateau",
+  "windswept_savanna",
+  "jungle",
+  "sparse_jungle",
+  "swamp",
+  "mangrove_swamp"
  ],
  "amerique_centrale": [
   "jungle",
@@ -254,7 +400,15 @@
   "mangrove_swamp",
   "savanna",
   "stony_peaks",
-  "beach"
+  "beach",
+  "plains",
+  "forest",
+  "taiga",
+  "meadow",
+  "desert",
+  "savanna_plateau",
+  "windswept_savanna",
+  "swamp"
  ],
  "amazonie": [
   "jungle",
@@ -262,7 +416,18 @@
   "swamp",
   "mangrove_swamp",
   "savanna",
-  "beach"
+  "beach",
+  "plains",
+  "forest",
+  "taiga",
+  "snowy_plains",
+  "meadow",
+  "windswept_hills",
+  "snowy_slopes",
+  "stony_peaks",
+  "desert",
+  "savanna_plateau",
+  "windswept_savanna"
  ],
  "andes": [
   "meadow",
@@ -274,7 +439,14 @@
   "grove",
   "sparse_jungle",
   "desert",
-  "badlands"
+  "badlands",
+  "plains",
+  "forest",
+  "taiga",
+  "snowy_plains",
+  "savanna",
+  "savanna_plateau",
+  "jungle"
  ],
  "cone_sud": [
   "plains",
@@ -287,7 +459,19 @@
   "snowy_slopes",
   "jagged_peaks",
   "beach",
-  "stony_shore"
+  "stony_shore",
+  "birch_forest",
+  "taiga",
+  "snowy_taiga",
+  "snowy_plains",
+  "meadow",
+  "frozen_peaks",
+  "stony_peaks",
+  "windswept_savanna",
+  "jungle",
+  "sparse_jungle",
+  "swamp",
+  "mangrove_swamp"
  ],
  "australie": [
   "desert",
@@ -300,7 +484,16 @@
   "beach",
   "forest",
   "flower_forest",
-  "birch_forest"
+  "birch_forest",
+  "taiga",
+  "snowy_plains",
+  "meadow",
+  "windswept_hills",
+  "wooded_badlands",
+  "windswept_savanna",
+  "jungle",
+  "swamp",
+  "mangrove_swamp"
  ],
  "nouvelle_zelande": [
   "forest",
@@ -311,14 +504,26 @@
   "snowy_slopes",
   "jagged_peaks",
   "beach",
-  "stony_shore"
+  "stony_shore",
+  "taiga",
+  "snowy_plains"
  ],
  "melanesie": [
   "jungle",
   "sparse_jungle",
   "mangrove_swamp",
   "stony_peaks",
-  "beach"
+  "beach",
+  "plains",
+  "forest",
+  "taiga",
+  "snowy_plains",
+  "meadow",
+  "desert",
+  "savanna",
+  "savanna_plateau",
+  "windswept_savanna",
+  "swamp"
  ],
  "arctique": [
   "snowy_plains",
@@ -328,13 +533,17 @@
   "jagged_peaks",
   "snowy_taiga",
   "snowy_beach",
-  "stony_shore"
+  "stony_shore",
+  "plains",
+  "taiga",
+  "meadow"
  ],
  "antarctique": [
   "snowy_plains",
   "ice_spikes",
   "snowy_slopes",
   "frozen_peaks",
-  "snowy_beach"
+  "snowy_beach",
+  "plains"
  ]
 }

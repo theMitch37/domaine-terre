@@ -13,6 +13,13 @@
   "domaine_terre:siberie/stony_shore",
   "domaine_terre:siberie/swamp",
   "domaine_terre:siberie/taiga",
-  "domaine_terre:siberie/windswept_forest"
+  "domaine_terre:siberie/windswept_forest",
+  "domaine_terre:siberie/plains",
+  "domaine_terre:siberie/sunflower_plains",
+  "domaine_terre:siberie/forest",
+  "domaine_terre:siberie/meadow",
+  "domaine_terre:siberie/windswept_hills",
+  "domaine_terre:siberie/jagged_peaks",
+  "domaine_terre:siberie/desert"
  ]
 }

@@ -17,6 +17,17 @@
   "domaine_terre:nouvelle_zelande/windswept_hills",
   "domaine_terre:ouest_mexique/windswept_hills",
   "domaine_terre:siberie/windswept_forest",
-  "domaine_terre:steppes_tibet/windswept_gravelly_hills"
+  "domaine_terre:steppes_tibet/windswept_gravelly_hills",
+  "domaine_terre:afrique_est/windswept_hills",
+  "domaine_terre:afrique_australe/windswept_hills",
+  "domaine_terre:steppes_tibet/windswept_hills",
+  "domaine_terre:siberie/windswept_hills",
+  "domaine_terre:inde/windswept_hills",
+  "domaine_terre:chine/windswept_hills",
+  "domaine_terre:japon_coree/windswept_hills",
+  "domaine_terre:asie_sud_est/windswept_hills",
+  "domaine_terre:boreale/windswept_hills",
+  "domaine_terre:amazonie/windswept_hills",
+  "domaine_terre:australie/windswept_hills"
  ]
 }

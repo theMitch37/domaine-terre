@@ -39,6 +39,18 @@
   "domaine_terre:sahara_sahel/badlands",
   "domaine_terre:sahara_sahel/beach",
   "domaine_terre:sahara_sahel/desert",
-  "domaine_terre:steppes_tibet/desert"
+  "domaine_terre:steppes_tibet/desert",
+  "domaine_terre:mediterranee/desert",
+  "domaine_terre:continentale/desert",
+  "domaine_terre:afrique_tropicale/desert",
+  "domaine_terre:afrique_est/desert",
+  "domaine_terre:siberie/desert",
+  "domaine_terre:chine/desert",
+  "domaine_terre:asie_sud_est/desert",
+  "domaine_terre:grandes_plaines/desert",
+  "domaine_terre:amerique_centrale/desert",
+  "domaine_terre:amazonie/desert",
+  "domaine_terre:australie/wooded_badlands",
+  "domaine_terre:melanesie/desert"
  ]
 }

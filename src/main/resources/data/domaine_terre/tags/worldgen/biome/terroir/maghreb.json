@@ -9,6 +9,11 @@
   "domaine_terre:maghreb/stony_peaks",
   "domaine_terre:maghreb/stony_shore",
   "domaine_terre:maghreb/windswept_hills",
-  "domaine_terre:maghreb/windswept_savanna"
+  "domaine_terre:maghreb/windswept_savanna",
+  "domaine_terre:maghreb/forest",
+  "domaine_terre:maghreb/taiga",
+  "domaine_terre:maghreb/snowy_plains",
+  "domaine_terre:maghreb/meadow",
+  "domaine_terre:maghreb/swamp"
  ]
 }

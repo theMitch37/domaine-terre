@@ -6,6 +6,14 @@
   "domaine_terre:sahara_sahel/desert",
   "domaine_terre:sahara_sahel/savanna",
   "domaine_terre:sahara_sahel/savanna_plateau",
-  "domaine_terre:sahara_sahel/stony_peaks"
+  "domaine_terre:sahara_sahel/stony_peaks",
+  "domaine_terre:sahara_sahel/plains",
+  "domaine_terre:sahara_sahel/forest",
+  "domaine_terre:sahara_sahel/taiga",
+  "domaine_terre:sahara_sahel/meadow",
+  "domaine_terre:sahara_sahel/windswept_savanna",
+  "domaine_terre:sahara_sahel/sparse_jungle",
+  "domaine_terre:sahara_sahel/swamp",
+  "domaine_terre:sahara_sahel/mangrove_swamp"
  ]
 }

@@ -13,6 +13,11 @@
   "domaine_terre:boreale/snowy_taiga",
   "domaine_terre:boreale/stony_shore",
   "domaine_terre:boreale/swamp",
-  "domaine_terre:boreale/taiga"
+  "domaine_terre:boreale/taiga",
+  "domaine_terre:boreale/plains",
+  "domaine_terre:boreale/forest",
+  "domaine_terre:boreale/meadow",
+  "domaine_terre:boreale/windswept_hills",
+  "domaine_terre:boreale/stony_peaks"
  ]
 }

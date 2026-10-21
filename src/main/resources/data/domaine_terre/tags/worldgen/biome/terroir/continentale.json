@@ -12,6 +12,13 @@
   "domaine_terre:continentale/stony_shore",
   "domaine_terre:continentale/sunflower_plains",
   "domaine_terre:continentale/taiga",
-  "domaine_terre:continentale/windswept_hills"
+  "domaine_terre:continentale/windswept_hills",
+  "domaine_terre:continentale/old_growth_pine_taiga",
+  "domaine_terre:continentale/old_growth_spruce_taiga",
+  "domaine_terre:continentale/snowy_plains",
+  "domaine_terre:continentale/grove",
+  "domaine_terre:continentale/snowy_slopes",
+  "domaine_terre:continentale/desert",
+  "domaine_terre:continentale/swamp"
  ]
 }

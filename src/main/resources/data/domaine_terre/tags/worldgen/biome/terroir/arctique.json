@@ -8,6 +8,9 @@
   "domaine_terre:arctique/snowy_plains",
   "domaine_terre:arctique/snowy_slopes",
   "domaine_terre:arctique/snowy_taiga",
-  "domaine_terre:arctique/stony_shore"
+  "domaine_terre:arctique/stony_shore",
+  "domaine_terre:arctique/plains",
+  "domaine_terre:arctique/taiga",
+  "domaine_terre:arctique/meadow"
  ]
 }

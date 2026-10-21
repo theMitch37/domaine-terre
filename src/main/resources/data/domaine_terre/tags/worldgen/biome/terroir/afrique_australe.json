@@ -9,6 +9,15 @@
   "domaine_terre:afrique_australe/savanna_plateau",
   "domaine_terre:afrique_australe/sparse_jungle",
   "domaine_terre:afrique_australe/stony_shore",
-  "domaine_terre:afrique_australe/windswept_savanna"
+  "domaine_terre:afrique_australe/windswept_savanna",
+  "domaine_terre:afrique_australe/forest",
+  "domaine_terre:afrique_australe/taiga",
+  "domaine_terre:afrique_australe/snowy_plains",
+  "domaine_terre:afrique_australe/meadow",
+  "domaine_terre:afrique_australe/windswept_hills",
+  "domaine_terre:afrique_australe/stony_peaks",
+  "domaine_terre:afrique_australe/jungle",
+  "domaine_terre:afrique_australe/swamp",
+  "domaine_terre:afrique_australe/mangrove_swamp"
  ]
 }

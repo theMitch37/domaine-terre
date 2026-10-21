@@ -11,6 +11,16 @@
   "domaine_terre:grandes_plaines/sunflower_plains",
   "domaine_terre:grandes_plaines/swamp",
   "domaine_terre:grandes_plaines/taiga",
-  "domaine_terre:grandes_plaines/windswept_hills"
+  "domaine_terre:grandes_plaines/windswept_hills",
+  "domaine_terre:grandes_plaines/old_growth_pine_taiga",
+  "domaine_terre:grandes_plaines/old_growth_spruce_taiga",
+  "domaine_terre:grandes_plaines/snowy_taiga",
+  "domaine_terre:grandes_plaines/snowy_plains",
+  "domaine_terre:grandes_plaines/meadow",
+  "domaine_terre:grandes_plaines/desert",
+  "domaine_terre:grandes_plaines/savanna",
+  "domaine_terre:grandes_plaines/savanna_plateau",
+  "domaine_terre:grandes_plaines/windswept_savanna",
+  "domaine_terre:grandes_plaines/sparse_jungle"
  ]
 }

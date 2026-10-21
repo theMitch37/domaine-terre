@@ -31,6 +31,13 @@
   "domaine_terre:siberie/frozen_peaks",
   "domaine_terre:steppes_tibet/frozen_peaks",
   "domaine_terre:steppes_tibet/jagged_peaks",
-  "domaine_terre:steppes_tibet/stony_peaks"
+  "domaine_terre:steppes_tibet/stony_peaks",
+  "domaine_terre:afrique_australe/stony_peaks",
+  "domaine_terre:siberie/jagged_peaks",
+  "domaine_terre:inde/stony_peaks",
+  "domaine_terre:boreale/stony_peaks",
+  "domaine_terre:amazonie/stony_peaks",
+  "domaine_terre:cone_sud/frozen_peaks",
+  "domaine_terre:cone_sud/stony_peaks"
  ]
 }

@@ -5,6 +5,16 @@
   "domaine_terre:melanesie/jungle",
   "domaine_terre:melanesie/mangrove_swamp",
   "domaine_terre:melanesie/sparse_jungle",
-  "domaine_terre:melanesie/stony_peaks"
+  "domaine_terre:melanesie/stony_peaks",
+  "domaine_terre:melanesie/plains",
+  "domaine_terre:melanesie/forest",
+  "domaine_terre:melanesie/taiga",
+  "domaine_terre:melanesie/snowy_plains",
+  "domaine_terre:melanesie/meadow",
+  "domaine_terre:melanesie/desert",
+  "domaine_terre:melanesie/savanna",
+  "domaine_terre:melanesie/savanna_plateau",
+  "domaine_terre:melanesie/windswept_savanna",
+  "domaine_terre:melanesie/swamp"
  ]
 }

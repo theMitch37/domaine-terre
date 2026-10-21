@@ -10,6 +10,17 @@
   "domaine_terre:inde/mangrove_swamp",
   "domaine_terre:inde/plains",
   "domaine_terre:inde/savanna",
-  "domaine_terre:inde/sparse_jungle"
+  "domaine_terre:inde/sparse_jungle",
+  "domaine_terre:inde/forest",
+  "domaine_terre:inde/taiga",
+  "domaine_terre:inde/old_growth_pine_taiga",
+  "domaine_terre:inde/snowy_plains",
+  "domaine_terre:inde/meadow",
+  "domaine_terre:inde/windswept_hills",
+  "domaine_terre:inde/snowy_slopes",
+  "domaine_terre:inde/stony_peaks",
+  "domaine_terre:inde/savanna_plateau",
+  "domaine_terre:inde/windswept_savanna",
+  "domaine_terre:inde/swamp"
  ]
 }

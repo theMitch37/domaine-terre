@@ -11,6 +11,12 @@
   "domaine_terre:inde/bamboo_jungle",
   "domaine_terre:inde/jungle",
   "domaine_terre:japon_coree/bamboo_jungle",
-  "domaine_terre:melanesie/jungle"
+  "domaine_terre:melanesie/jungle",
+  "domaine_terre:afrique_est/jungle",
+  "domaine_terre:afrique_australe/jungle",
+  "domaine_terre:ouest_mexique/jungle",
+  "domaine_terre:andes/jungle",
+  "domaine_terre:cone_sud/jungle",
+  "domaine_terre:australie/jungle"
  ]
 }

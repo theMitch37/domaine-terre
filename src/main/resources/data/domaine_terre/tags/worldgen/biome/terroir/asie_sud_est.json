@@ -8,6 +8,15 @@
   "domaine_terre:asie_sud_est/sparse_jungle",
   "domaine_terre:asie_sud_est/stony_peaks",
   "domaine_terre:asie_sud_est/stony_shore",
-  "domaine_terre:asie_sud_est/swamp"
+  "domaine_terre:asie_sud_est/swamp",
+  "domaine_terre:asie_sud_est/plains",
+  "domaine_terre:asie_sud_est/forest",
+  "domaine_terre:asie_sud_est/taiga",
+  "domaine_terre:asie_sud_est/meadow",
+  "domaine_terre:asie_sud_est/windswept_hills",
+  "domaine_terre:asie_sud_est/desert",
+  "domaine_terre:asie_sud_est/savanna",
+  "domaine_terre:asie_sud_est/savanna_plateau",
+  "domaine_terre:asie_sud_est/windswept_savanna"
  ]
 }

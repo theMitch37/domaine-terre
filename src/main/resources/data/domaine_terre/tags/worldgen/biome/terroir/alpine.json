@@ -11,6 +11,8 @@
   "domaine_terre:alpine/stony_shore",
   "domaine_terre:alpine/taiga",
   "domaine_terre:alpine/windswept_forest",
-  "domaine_terre:alpine/windswept_hills"
+  "domaine_terre:alpine/windswept_hills",
+  "domaine_terre:alpine/old_growth_spruce_taiga",
+  "domaine_terre:alpine/snowy_plains"
  ]
 }

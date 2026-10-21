@@ -6,6 +6,14 @@
   "domaine_terre:amerique_centrale/mangrove_swamp",
   "domaine_terre:amerique_centrale/savanna",
   "domaine_terre:amerique_centrale/sparse_jungle",
-  "domaine_terre:amerique_centrale/stony_peaks"
+  "domaine_terre:amerique_centrale/stony_peaks",
+  "domaine_terre:amerique_centrale/plains",
+  "domaine_terre:amerique_centrale/forest",
+  "domaine_terre:amerique_centrale/taiga",
+  "domaine_terre:amerique_centrale/meadow",
+  "domaine_terre:amerique_centrale/desert",
+  "domaine_terre:amerique_centrale/savanna_plateau",
+  "domaine_terre:amerique_centrale/windswept_savanna",
+  "domaine_terre:amerique_centrale/swamp"
  ]
 }

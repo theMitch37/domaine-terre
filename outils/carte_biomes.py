@@ -259,6 +259,22 @@ poser(np.isin(bio, [IDX["savanna"]]) & (pente >= 45), "windswept_savanna")
 if not a.couverture:
     poser(ARIDE & (alt >= 1800) & (pente >= 45), "stony_peaks")
 
+# ------------------------------------------------------------------ nettoyage
+# un pixel fait ~22 blocs en 1:250 : un biome qui n'a presque aucun voisin pareil ferait des confettis.
+# Il prend le biome le plus présent autour de lui (deux passes).
+for _ in range(2):
+    comptes = np.zeros((len(BIOMES) + 1, H, W), np.uint8)
+    for dy in (-1, 0, 1):
+        for dx in (-1, 0, 1):
+            if dy == 0 and dx == 0:
+                continue
+            v = np.roll(np.roll(bio, dy, axis=0), dx, axis=1)
+            for b in range(1, len(BIOMES) + 1):
+                comptes[b] += v == b
+    pareils = np.take_along_axis(comptes, bio[None].astype(np.int64), axis=0)[0]
+    seul = terre & (bio > 0) & (pareils <= 1)
+    bio[seul] = np.argmax(comptes[1:], axis=0)[seul].astype(np.uint8) + 1
+
 # ------------------------------------------------------------------ sorties
 bio[~terre] = 0
 Image.fromarray(bio).save(f"{CARTE}/biomes.png", optimize=True)

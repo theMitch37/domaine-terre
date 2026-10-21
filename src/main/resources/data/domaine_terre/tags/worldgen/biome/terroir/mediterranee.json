@@ -10,6 +10,14 @@
   "domaine_terre:mediterranee/stony_shore",
   "domaine_terre:mediterranee/sunflower_plains",
   "domaine_terre:mediterranee/windswept_forest",
-  "domaine_terre:mediterranee/windswept_hills"
+  "domaine_terre:mediterranee/windswept_hills",
+  "domaine_terre:mediterranee/taiga",
+  "domaine_terre:mediterranee/old_growth_pine_taiga",
+  "domaine_terre:mediterranee/old_growth_spruce_taiga",
+  "domaine_terre:mediterranee/desert",
+  "domaine_terre:mediterranee/savanna",
+  "domaine_terre:mediterranee/windswept_savanna",
+  "domaine_terre:mediterranee/sparse_jungle",
+  "domaine_terre:mediterranee/swamp"
  ]
 }

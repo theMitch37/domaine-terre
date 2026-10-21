@@ -6,6 +6,17 @@
   "domaine_terre:amazonie/mangrove_swamp",
   "domaine_terre:amazonie/savanna",
   "domaine_terre:amazonie/sparse_jungle",
-  "domaine_terre:amazonie/swamp"
+  "domaine_terre:amazonie/swamp",
+  "domaine_terre:amazonie/plains",
+  "domaine_terre:amazonie/forest",
+  "domaine_terre:amazonie/taiga",
+  "domaine_terre:amazonie/snowy_plains",
+  "domaine_terre:amazonie/meadow",
+  "domaine_terre:amazonie/windswept_hills",
+  "domaine_terre:amazonie/snowy_slopes",
+  "domaine_terre:amazonie/stony_peaks",
+  "domaine_terre:amazonie/desert",
+  "domaine_terre:amazonie/savanna_plateau",
+  "domaine_terre:amazonie/windswept_savanna"
  ]
 }

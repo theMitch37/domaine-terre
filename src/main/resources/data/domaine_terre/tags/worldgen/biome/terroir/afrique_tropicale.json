@@ -6,6 +6,14 @@
   "domaine_terre:afrique_tropicale/mangrove_swamp",
   "domaine_terre:afrique_tropicale/savanna",
   "domaine_terre:afrique_tropicale/sparse_jungle",
-  "domaine_terre:afrique_tropicale/swamp"
+  "domaine_terre:afrique_tropicale/swamp",
+  "domaine_terre:afrique_tropicale/plains",
+  "domaine_terre:afrique_tropicale/forest",
+  "domaine_terre:afrique_tropicale/taiga",
+  "domaine_terre:afrique_tropicale/meadow",
+  "domaine_terre:afrique_tropicale/snowy_slopes",
+  "domaine_terre:afrique_tropicale/desert",
+  "domaine_terre:afrique_tropicale/savanna_plateau",
+  "domaine_terre:afrique_tropicale/windswept_savanna"
  ]
 }
