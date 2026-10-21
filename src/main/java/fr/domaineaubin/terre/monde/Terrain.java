@@ -13,14 +13,16 @@ import net.minecraft.world.level.levelgen.synth.ImprovedNoise;
 public final class Terrain {
     /** 1:1000 : un degré de longitude ou de latitude = 111,32 blocs. */
     /** Blocs par degré : 1:1000 = 111,32 ; 1:500 = 222,64 ; 1:250 = 445,28 (défaut). Fixé au démarrage du monde. */
-    public static volatile double BLOCS_PAR_DEGRE = 222.64;
+    public static volatile double BLOCS_PAR_DEGRE = 445.28;
     private static volatile int echelle = 250;
 
     /** Active l'échelle du monde chargé (250, 500 ou 1000). */
     public static synchronized void activer(int nouvelle) {
-        if (nouvelle != echelle) {
+        double bpd = 111.32 * 1000.0 / nouvelle;
+        // on compare aussi les blocs par degré : l'échelle et BLOCS_PAR_DEGRE doivent toujours aller ensemble
+        if (nouvelle != echelle || bpd != BLOCS_PAR_DEGRE) {
             echelle = nouvelle;
-            BLOCS_PAR_DEGRE = 111.32 * 1000.0 / nouvelle;
+            BLOCS_PAR_DEGRE = bpd;
             Terrain t = instance;
             if (t != null) t.fleuves = null;   // les fleuves dépendent de l'échelle
             generation++;                       // invalide les caches de colonnes
