@@ -147,13 +147,18 @@ public class TerroirBiomeSource extends BiomeSource {
             for (int i = 1; i < cles.size(); i++) {
                 @SuppressWarnings("unchecked")
                 Holder<Biome>[] tab = new Holder[noms.size()];
+                // seulement les copies qui existent (terroirs_biomes.json) : demander une clé absente
+                // au registre déjà gelé fait planter le jeu au lieu de répondre « absent »
+                Set<String> existants = new HashSet<>();
+                if (listes.has(cles.get(i))) {
+                    for (JsonElement e : listes.getAsJsonArray(cles.get(i))) existants.add(e.getAsString());
+                }
                 for (int b = 1; b < noms.size(); b++) {
-                    var h = biomes.get(ResourceKey.create(Registries.BIOME,
+                    if (!existants.contains(noms.get(b))) continue;
+                    Holder<Biome> h = biomes.getOrThrow(ResourceKey.create(Registries.BIOME,
                             new ResourceLocation(DomaineTerre.MOD_ID, cles.get(i) + "/" + noms.get(b))));
-                    if (h.isPresent()) {
-                        tab[b] = h.get();
-                        tous.add(h.get());
-                    }
+                    tab[b] = h;
+                    tous.add(h);
                 }
                 fixes.add(tab);
             }
