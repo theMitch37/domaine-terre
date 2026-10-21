@@ -107,3 +107,29 @@ print(f"{len(crees)} copies créées :", ", ".join(crees))
 print(f"{len(reglees)} températures relevées :")
 for r in reglees:
     print("  ", r)
+
+# grès sur les pentes raides des déserts : le sable seulement sur le plat (plus de murs de sable verticaux)
+def est_regle_gres(r):
+    try:
+        return r["then_run"]["if_true"]["type"] == "minecraft:steep" and \
+            r["then_run"]["then_run"]["then_run"]["result_state"]["Name"] == "minecraft:sandstone"
+    except (KeyError, TypeError):
+        return False
+def biomes_desert():
+    noms = ["minecraft:desert"]
+    for cle in listes:
+        if "desert" in listes[cle] and os.path.exists(f"{BIO}/{cle}/desert.json"):
+            noms.append(f"domaine_terre:{cle}/desert")
+    return noms
+seq = ns["surface_rule"]["sequence"][1]["then_run"]["sequence"]
+seq[:] = [r for r in seq if not est_regle_gres(r)]
+seq.insert(0, {"type": "minecraft:condition",
+               "if_true": {"type": "minecraft:biome", "biome_is": biomes_desert()},
+               "then_run": {"type": "minecraft:condition", "if_true": {"type": "minecraft:steep"},
+                            "then_run": {"type": "minecraft:condition",
+                                         "if_true": {"type": "minecraft:stone_depth", "offset": 0, "add_surface_depth": True,
+                                                     "secondary_depth_range": 0, "surface_type": "floor"},
+                                         "then_run": {"type": "minecraft:block",
+                                                      "result_state": {"Name": "minecraft:sandstone"}}}}})
+ecrire(ns_p, ns)
+print("règle grès :", len(biomes_desert()), "biomes désert")

@@ -76,14 +76,16 @@ def modele_proc(X,Z):
     db=dist*BPD/111320.0
     lis=lambda t: (lambda u: u*u*(3-2*u))(np.clip(t,0,1))
     inten=lis((lon+114.10)/0.25)*(1-lis((lon+111.62+0.25)/0.25))
-    w=W0*np.maximum(inten,0.06)
+    w=W0*np.maximum(inten,0.55)
+    vv=1-lis(inten/0.6)          # 1 aux extrémités : vallée en V au lieu d'une fente
     pl_=np.minimum(6.0,w*0.3)
     d=db+bruit(X,Z,W0*0.9,1)*w*0.35+bruit(X,Z,23,2)*w*0.07
     d=np.where(db<pl_,db,np.maximum(d,pl_))
     t=d/w
     g=profil(np.clip(t,0,1))
+    g=g+(np.clip((1-t)/0.85,0,1)-g)*vv
     b=bruit(X,Z,W0*0.45,7)
-    temple=(t>0.28)&(t<0.92)&(b>0.25)
+    temple=(t>0.28)&(t<0.92)&(b>0.25)&(vv<0.5)
     sb=np.clip((b-0.25)/0.15,0,1)
     gt=cum[3]+(1-sb)*(g-cum[3])
     gt=cum[np.clip(np.searchsorted(cum,gt),0,13)]
@@ -92,7 +94,9 @@ def modele_proc(X,Z):
     # le terrain du mod (h) est approché par le relief réel ; le canyon ne fait que creuser dedans
     # (le mod lit une carte à 3' : relief réel lissé ~6 points de 15")
     h=np.vectorize(blocs)(s(E3))+bruit(X,Z,48,11)*3
-    y=np.where(t<=1,np.minimum(h,reb-g*(reb-PIED)),h)
+    k=lis((t-0.80)/0.15)
+    plafond=h+(1-k)*np.clip(reb-h,0,16)   # à l'intérieur, la coupe passe jusqu'à 16 blocs au-dessus du terrain
+    y=np.where(t<=1,np.minimum(plafond,reb-g*(reb-PIED)),h)
     lit=np.maximum(1-lis((db-2.5)/1.5),1-lis((e-r-6)/20))
     y=y+(FOND-y)*lit
     canyon=(t<1.1)

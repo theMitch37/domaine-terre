@@ -409,6 +409,58 @@
     "then_run": {
      "sequence": [
       {
+       "type": "minecraft:condition",
+       "if_true": {
+        "type": "minecraft:biome",
+        "biome_is": [
+         "minecraft:desert",
+         "domaine_terre:mediterranee/desert",
+         "domaine_terre:continentale/desert",
+         "domaine_terre:maghreb/desert",
+         "domaine_terre:sahara_sahel/desert",
+         "domaine_terre:afrique_tropicale/desert",
+         "domaine_terre:afrique_est/desert",
+         "domaine_terre:afrique_australe/desert",
+         "domaine_terre:moyen_orient/desert",
+         "domaine_terre:steppes_tibet/desert",
+         "domaine_terre:siberie/desert",
+         "domaine_terre:inde/desert",
+         "domaine_terre:chine/desert",
+         "domaine_terre:asie_sud_est/desert",
+         "domaine_terre:grandes_plaines/desert",
+         "domaine_terre:ouest_mexique/desert",
+         "domaine_terre:amerique_centrale/desert",
+         "domaine_terre:amazonie/desert",
+         "domaine_terre:andes/desert",
+         "domaine_terre:cone_sud/desert",
+         "domaine_terre:australie/desert",
+         "domaine_terre:melanesie/desert"
+        ]
+       },
+       "then_run": {
+        "type": "minecraft:condition",
+        "if_true": {
+         "type": "minecraft:steep"
+        },
+        "then_run": {
+         "type": "minecraft:condition",
+         "if_true": {
+          "type": "minecraft:stone_depth",
+          "offset": 0,
+          "add_surface_depth": true,
+          "secondary_depth_range": 0,
+          "surface_type": "floor"
+         },
+         "then_run": {
+          "type": "minecraft:block",
+          "result_state": {
+           "Name": "minecraft:sandstone"
+          }
+         }
+        }
+       }
+      },
+      {
        "if_true": {
         "offset": 0,
         "add_surface_depth": false,

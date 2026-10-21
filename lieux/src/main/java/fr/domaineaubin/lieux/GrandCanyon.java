@@ -146,7 +146,7 @@ public final class GrandCanyon implements Lieu {
 
     /** Valeurs d'une colonne. */
     private record Point(double e, double p, double r, double distBlocs, double t, double fraction,
-                         double intensite, double fondu) {
+                         double intensite, double fondu, double v) {
     }
 
     private Point point(int x, int z) {
@@ -156,7 +156,9 @@ public final class GrandCanyon implements Lieu {
         double db = echant(distance, lon, lat) * 100.0 * Terrain.BLOCS_PAR_DEGRE / 111_320.0;
         // le canyon naît à Lees Ferry et finit aux Grand Wash Cliffs : il s'y rétrécit jusqu'au lit du fleuve
         double intensite = lisse((lon - LON_GRAND_WASH) / 0.25) * (1.0 - lisse((lon - LON_LEES_FERRY + 0.25) / 0.25));
-        double w = demiLargeur() * Math.max(intensite, 0.06);
+        // aux extrémités, plus de fente étroite (lames d'un bloc) : une vallée en V d'au moins ~80 blocs de large
+        double w = demiLargeur() * Math.max(intensite, 0.55);
+        double v = 1.0 - lisse(intensite / 0.6);
         // parois découpées : amphithéâtres, éperons et canyons latéraux
         double d = db, plancher = Math.min(6.0, w * 0.3);
         if (db >= plancher) {
@@ -166,8 +168,9 @@ public final class GrandCanyon implements Lieu {
         }
         double t = d / w;
         double g = Mth.clamp(profil(Mth.clamp(t, 0.0, 1.0)), 0.0, 1.0);
+        g = Mth.lerp(v, g, Mth.clamp((1.0 - t) / 0.85, 0.0, 1.0));
         // buttes isolées (temples de Vishnu, Zoroaster…) : sommet vers le Supai, flancs en gradins
-        if (t > 0.28 && t < 0.92) {
+        if (t > 0.28 && t < 0.92 && v < 0.5) {
             double wb = demiLargeur();
             double b = bruitButtes.noise(x / (wb * 0.45), 7.0, z / (wb * 0.45));
             if (b > 0.25) {
@@ -177,7 +180,7 @@ public final class GrandCanyon implements Lieu {
             }
         }
         double bord = Math.min(Math.min(lon - lon0, lonMax() - lon), Math.min(lat0 - lat, lat - latMin()));
-        return new Point(e, p, r, db, t, g, intensite, lisse(bord / FONDU));
+        return new Point(e, p, r, db, t, g, intensite, lisse(bord / FONDU), v);
     }
 
     private static double profil(double t) {
@@ -223,23 +226,39 @@ public final class GrandCanyon implements Lieu {
         return calcul(point(x, z), h);
     }
 
-    /** Hauteur exacte du sol (y) pour la sculpture bloc par bloc, ou NaN hors du canyon. */
+    /**
+     * Hauteur exacte du sol (y) pour la sculpture bloc par bloc, ou NaN si la colonne n'est pas taillée.
+     * Seules les colonnes vraiment taillées par la coupe (ou le lit) sont sculptées. Ailleurs, le sol naturel
+     * (arrondi tous les 4 blocs par Minecraft) reste tel quel : sinon une marche de 1-2 blocs, un muret,
+     * apparaissait le long du rebord.
+     */
     public double hauteurNette(int x, int z) {
         if (!concerne(x, z)) return Double.NaN;
         Point pt = point(x, z);
-        if (!dansCanyon(pt)) return Double.NaN;
-        return Terrain.get().hauteur(x, z);    // la hauteur finale du terrain, appliquée bloc par bloc
+        if (!dansCanyon(pt) || pt.t() > 1.0) return Double.NaN;
+        double finale = Terrain.get().hauteur(x, z);
+        if (pt.t() > 0.9 && finale < coupe(pt) - 0.5) return Double.NaN;   // terrain plus bas que la coupe : pas taillé
+        return finale;
+    }
+
+    private static double coupe(Point pt) {
+        double rebord = yRebord(pt);
+        return rebord - pt.fraction() * (rebord - PIED);
     }
 
     /**
-     * Le canyon est CREUSÉ dans le paysage, jamais construit dessus : la coupe part du niveau du plateau réel,
-     * mais le sol ne monte jamais au-dessus du terrain du mod (h). Hors du canyon, le terrain n'est pas touché.
+     * Le canyon est CREUSÉ dans le paysage : la coupe part du niveau du plateau réel. Près du rebord, le sol ne monte
+     * jamais au-dessus du terrain du mod (h), sinon des murailles. À l'intérieur, la coupe décide, jusqu'à 16 blocs
+     * au-dessus de h : un petit creux du terrain du mod ne perce plus le sommet d'une butte.
+     * Hors du canyon, le terrain n'est pas touché.
      */
     private double calcul(Point pt, double h) {
         double y = h;
         if (pt.t() <= 1.0) {
             double rebord = yRebord(pt);
-            y = Math.min(h, rebord - pt.fraction() * (rebord - PIED));
+            double k = lisse((pt.t() - 0.80) / 0.15);
+            double plafond = h + (1.0 - k) * Mth.clamp(rebord - h, 0.0, 16.0);
+            y = Math.min(plafond, coupe(pt));
         }
         // le Colorado (~6 blocs de large) et les lacs (Mead, Mohave, Powell) au niveau du fleuve
         double lit = Math.max(1.0 - lisse((pt.distBlocs() - 2.5) / 1.5), 1.0 - lisse((pt.e() - pt.r() - 6.0) / 20.0));
