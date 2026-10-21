@@ -54,8 +54,11 @@ pente = np.sqrt((gx / dx) ** 2 + (gy / 5.56) ** 2)
 # couverture du sol IGBP (0 = inconnue)
 lc = np.zeros((H, W), np.int16)
 if a.couverture:
-    import tifffile
-    src = tifffile.imread(a.couverture)
+    if a.couverture.lower().endswith(".png"):
+        src = np.array(Image.open(a.couverture))
+    else:
+        import tifffile
+        src = tifffile.imread(a.couverture)
     if src.ndim > 2:
         src = src[..., 0] if src.shape[-1] < 8 else src[0]
     hs, ws = src.shape

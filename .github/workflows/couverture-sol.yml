@@ -1,0 +1,45 @@
+# Télécharge la carte de couverture du sol Copernicus LC100 (2019, CC BY 4.0) et la réduit à la grille 3' du mod.
+# Le résultat (outils/donnees/couverture_igbp_3min.png, ~1 Mo) est ajouté à la branche.
+# Se lance quand l'outil ou ce fichier change, ou à la main.
+name: Couverture du sol
+
+on:
+  push:
+    branches-ignore: [jars]
+    paths:
+      - outils/couverture_sol.py
+      - .github/workflows/couverture-sol.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reduire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Outils Python
+        run: pip install rasterio numpy pillow
+      - name: Téléchargement (1,7 Go)
+        run: |
+          mkdir -p /tmp/lc
+          curl -L --retry 5 --retry-delay 20 -o /tmp/lc/lc100.tif \
+            "https://zenodo.org/records/3939050/files/PROBAV_LC100_global_v3.0.1_2019-nrt_Discrete-Classification-map_EPSG-4326.tif?download=1"
+          ls -la /tmp/lc
+      - name: Réduction à la grille 3'
+        run: |
+          mkdir -p outils/donnees
+          python outils/couverture_sol.py /tmp/lc/lc100.tif outils/donnees/couverture_igbp_3min.png
+      - name: Ajout à la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add outils/donnees/couverture_igbp_3min.png
+          git commit -m "Couverture du sol Copernicus LC100 2019 réduite à 3' (automatique)" || exit 0
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
