@@ -89,7 +89,7 @@ os.makedirs(f"{RES}/assets/domaine_terre/lang", exist_ok=True)
 for l in ("fr_fr", "en_us"):
     json.dump(lang, open(f"{RES}/assets/domaine_terre/lang/{l}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
-# 4) types de monde : « Par défaut » = Terre 1:500 ; en plus Terre 1:1000 et Terre 1:250
+# 4) types de monde : « Par défaut » = Terre 1:250 (échelle des lieux uniques) ; en plus Terre 1:500 et Terre 1:1000
 def preset(echelle):
     return {"dimensions": {
         "minecraft:overworld": {"type": "minecraft:overworld", "generator": {"type": "minecraft:noise",
@@ -101,13 +101,13 @@ def preset(echelle):
 def ecrire(p, d):
     os.makedirs(os.path.dirname(p), exist_ok=True)
     json.dump(d, open(p, "w", encoding="utf-8"), indent=1)
-ecrire(f"{RES}/data/minecraft/worldgen/world_preset/normal.json", preset(500))
+ecrire(f"{RES}/data/minecraft/worldgen/world_preset/normal.json", preset(250))
 ecrire(f"{RES}/data/domaine_terre/worldgen/world_preset/terre_1000.json", preset(1000))
-ecrire(f"{RES}/data/domaine_terre/worldgen/world_preset/terre_250.json", preset(250))
+ecrire(f"{RES}/data/domaine_terre/worldgen/world_preset/terre_500.json", preset(500))
 ecrire(f"{RES}/data/minecraft/tags/worldgen/world_preset/normal.json",
-       {"replace": False, "values": ["domaine_terre:terre_1000", "domaine_terre:terre_250"]})
+       {"replace": False, "values": ["domaine_terre:terre_500", "domaine_terre:terre_1000"]})
 lang["generator.domaine_terre.terre_1000"] = "Terre 1:1000 (petite)"
-lang["generator.domaine_terre.terre_250"] = "Terre 1:250 (grande)"
+lang["generator.domaine_terre.terre_500"] = "Terre 1:500 (moyenne)"
 for l in ("fr_fr", "en_us"):
     json.dump(lang, open(f"{RES}/assets/domaine_terre/lang/{l}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 

@@ -7,7 +7,7 @@
     "settings": "minecraft:overworld",
     "biome_source": {
      "type": "domaine_terre:terre",
-     "echelle": 250
+     "echelle": 500
     }
    }
   },

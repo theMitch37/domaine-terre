@@ -12,9 +12,9 @@ import net.minecraft.world.level.levelgen.synth.ImprovedNoise;
  */
 public final class Terrain {
     /** 1:1000 : un degré de longitude ou de latitude = 111,32 blocs. */
-    /** Blocs par degré : 1:1000 = 111,32 ; 1:500 = 222,64 (défaut) ; 1:250 = 445,28. Fixé au démarrage du monde. */
+    /** Blocs par degré : 1:1000 = 111,32 ; 1:500 = 222,64 ; 1:250 = 445,28 (défaut). Fixé au démarrage du monde. */
     public static volatile double BLOCS_PAR_DEGRE = 222.64;
-    private static volatile int echelle = 500;
+    private static volatile int echelle = 250;
 
     /** Active l'échelle du monde chargé (250, 500 ou 1000). */
     public static synchronized void activer(int nouvelle) {
