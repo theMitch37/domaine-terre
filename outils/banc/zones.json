@@ -1,0 +1,9 @@
+{
+ "_": "Zones générées par le banc d'essai (blocs, échelle 1:250) : [x0, x1, z0, z1], marge comprise.",
+ "verdon": [2680, 2940, -19560, -19430],
+ "etretat": [15, 205, -22190, -22090],
+ "moher": [-4275, -4125, -23655, -23520],
+ "douvres": [480, 670, -22820, -22705],
+ "pilat": [-605, -478, -19940, -19770],
+ "mont_saint_michel": [-865, -580, -21775, -21610]
+}

@@ -1,0 +1,83 @@
+# Banc d'essai : compile les mods, lance un vrai serveur Forge, génère les chunks des lieux (outils/banc/zones.json)
+# et range leurs blocs sur la branche « banc » (un seul commit, remplacé à chaque passage).
+# Le rendu se fait ensuite hors du jeu : python3 outils/banc/rendu.py <lieu.npz> <image.png>
+name: Banc d'essai
+
+on:
+  push:
+    branches: ['lieux-*']
+  workflow_dispatch:
+    inputs:
+      lieux:
+        description: "Lieux à générer, séparés par des virgules (vide = tous)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: banc-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  banc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v3
+
+      - name: Mods
+        run: |
+          chmod +x gradlew
+          ./gradlew build --no-daemon
+          mkdir -p lieux/libs
+          cp build/libs/domaine_terre-*.jar lieux/libs/
+          cd lieux && chmod +x gradlew && ./gradlew build --no-daemon
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Outils Python
+        run: pip install numpy
+
+      - uses: actions/cache@v4
+        with:
+          path: /tmp/serveur/libraries
+          key: forge-serveur-1.20.1-47.4.10
+
+      - name: Serveur Forge
+        run: |
+          mkdir -p /tmp/serveur && cd /tmp/serveur
+          if [ ! -f libraries/net/minecraftforge/forge/1.20.1-47.4.10/unix_args.txt ]; then
+            curl -fL --retry 5 -o installer.jar \
+              https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.10/forge-1.20.1-47.4.10-installer.jar
+            java -jar installer.jar --installServer > install.log 2>&1 || (tail -50 install.log; exit 1)
+          fi
+          rm -rf mods banc && mkdir mods
+          cp $GITHUB_WORKSPACE/build/libs/domaine_terre-*.jar $GITHUB_WORKSPACE/lieux/build/libs/domaine_terre_lieux-*.jar mods/
+          rm -f mods/*-sources.jar mods/*-slim.jar
+          ls mods
+
+      - name: Génération des lieux
+        run: python outils/banc/serveur.py /tmp/serveur outils/banc/zones.json /tmp/banc ${{ github.event.inputs.lieux }}
+
+      - name: Résultats sur la branche banc
+        if: always()
+        run: |
+          mkdir -p /tmp/banc
+          cp /tmp/serveur/logs/latest.log /tmp/banc/latest.log 2>/dev/null || true
+          cp -r /tmp/serveur/crash-reports /tmp/banc/ 2>/dev/null || true
+          printf 'branche=%s\ncommit=%s\ndate=%s\nresultat=%s\n' "$GITHUB_REF_NAME" "$GITHUB_SHA" "$(date -u +%FT%TZ)" "${{ job.status }}" > /tmp/banc/SOURCE.txt
+          cd /tmp/banc
+          git init -q -b banc
+          git config user.name "github-actions[bot]"
+          git config user.email "41898+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Banc d'essai de $GITHUB_REF_NAME @ ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" banc
