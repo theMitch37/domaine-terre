@@ -28,6 +28,7 @@ public class DomaineLieux {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         FEATURES.register(bus);
         LieuxTerre.inscrire(GrandCanyon.INSTANCE);
+        LieuxTerre.inscrire(Verdon.INSTANCE);
         LOGGER.info("Domaine d'Aubin - Lieux uniques : {} lieu(x) inscrit(s).", LieuxTerre.liste().size());
     }
 }

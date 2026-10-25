@@ -52,6 +52,8 @@ public final class CommandesDomaine {
         LIEUX.put("tokyo", new double[]{35.676, 139.650});
         LIEUX.put("new_york", new double[]{40.713, -74.006});
         LIEUX.put("grand_canyon", new double[]{36.107, -112.113});
+        LIEUX.put("verdon", new double[]{43.800, 6.310});
+        LIEUX.put("sainte_croix", new double[]{43.7655, 6.1525});
         LIEUX.put("amazonie", new double[]{-3.465, -62.215});
         LIEUX.put("rio", new double[]{-22.907, -43.173});
         LIEUX.put("andes", new double[]{-13.163, -72.545});

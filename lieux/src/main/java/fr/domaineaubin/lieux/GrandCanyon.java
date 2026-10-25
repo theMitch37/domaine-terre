@@ -1,19 +1,15 @@
 package fr.domaineaubin.lieux;
 
-import fr.domaineaubin.terre.api.Lieu;
 import fr.domaineaubin.terre.monde.Terrain;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.synth.ImprovedNoise;
 
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UncheckedIOException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.zip.GZIPInputStream;
+import static fr.domaineaubin.lieux.ReliefLieu.lisse;
 
 /**
  * Grand Canyon (Arizona). Le tracé vient du réel : talweg du Colorado retrouvé dans le relief ETOPO 2022,
@@ -24,7 +20,7 @@ import java.util.zip.GZIPInputStream;
  * Du bruit découpe les parois (amphithéâtres, éperons) et dresse des buttes en gradins (temples).
  * Réglé pour l'échelle 1:250. Données préparées par outils/grand_canyon_dem.py.
  */
-public final class GrandCanyon implements Lieu {
+public final class GrandCanyon implements LieuSculpte {
     public static final GrandCanyon INSTANCE = new GrandCanyon();
 
     /** Échelle de référence : tous les réglages sont faits pour elle. */
@@ -64,10 +60,8 @@ public final class GrandCanyon implements Lieu {
         PROFIL_G[NB_COUCHES + 1] = 1.0;
     }
 
-    private double lon0, lat0, pasLon, pasLat;
-    private int largeur, hauteurGrille;
-    private short[] alt, plateau, fleuve, distance;
-    private volatile boolean charge;
+    /** Grilles : 0 altitude réelle, 1 plateau (rebord), 2 niveau du Colorado, 3 distance au talweg (hm). */
+    private final ReliefLieu relief = new ReliefLieu("grand_canyon.bin");
     private final ImprovedNoise bruit;
     private final ImprovedNoise bruitButtes;
 
@@ -87,56 +81,6 @@ public final class GrandCanyon implements Lieu {
         return new ResourceLocation(DomaineLieux.MOD_ID, "grand_canyon");
     }
 
-    // ---------------------------------------------------------------- données
-
-    private void charger() {
-        if (charge) return;
-        synchronized (this) {
-            if (charge) return;
-            try (InputStream in = GrandCanyon.class.getResourceAsStream("/domaine_terre_lieux/grand_canyon.bin")) {
-                if (in == null) throw new IOException("grand_canyon.bin introuvable");
-                byte[] tout = new GZIPInputStream(in).readAllBytes();
-                ByteBuffer b = ByteBuffer.wrap(tout).order(ByteOrder.LITTLE_ENDIAN);
-                lon0 = b.getDouble();
-                lat0 = b.getDouble();
-                pasLon = b.getDouble();
-                pasLat = b.getDouble();
-                largeur = b.getInt();
-                hauteurGrille = b.getInt();
-                int n = largeur * hauteurGrille;
-                alt = lireGrille(b, n);
-                plateau = lireGrille(b, n);
-                fleuve = lireGrille(b, n);
-                distance = lireGrille(b, n);
-            } catch (IOException e) {
-                throw new UncheckedIOException("Impossible de charger le relief du Grand Canyon", e);
-            }
-            charge = true;
-        }
-    }
-
-    private static short[] lireGrille(ByteBuffer b, int n) {
-        short[] g = new short[n];
-        b.asShortBuffer().get(g);
-        b.position(b.position() + 2 * n);
-        return g;
-    }
-
-    private double lonMax() { return lon0 + largeur * pasLon; }
-    private double latMin() { return lat0 - hauteurGrille * pasLat; }
-
-    /** Interpolation bilinéaire d'une grille au point (lon, lat). */
-    private double echant(short[] g, double lon, double lat) {
-        double fx = (lon - lon0) / pasLon - 0.5, fy = (lat0 - lat) / pasLat - 0.5;
-        int ix = Mth.floor(fx), iy = Mth.floor(fy);
-        double tx = fx - ix, ty = fy - iy;
-        return Mth.lerp(ty, Mth.lerp(tx, v(g, ix, iy), v(g, ix + 1, iy)), Mth.lerp(tx, v(g, ix, iy + 1), v(g, ix + 1, iy + 1)));
-    }
-
-    private double v(short[] g, int x, int y) {
-        return g[Mth.clamp(y, 0, hauteurGrille - 1) * largeur + Mth.clamp(x, 0, largeur - 1)];
-    }
-
     // ---------------------------------------------------------------- géométrie
 
     /** Demi-largeur du canyon en blocs (~75 en 1:250), un peu plus large aux petites échelles. */
@@ -150,10 +94,9 @@ public final class GrandCanyon implements Lieu {
     }
 
     private Point point(int x, int z) {
-        charger();
         double lon = Terrain.lon(x), lat = Terrain.lat(z);
-        double e = echant(alt, lon, lat), p = echant(plateau, lon, lat), r = echant(fleuve, lon, lat);
-        double db = echant(distance, lon, lat) * 100.0 * Terrain.BLOCS_PAR_DEGRE / 111_320.0;
+        double e = relief.echant(0, lon, lat), p = relief.echant(1, lon, lat), r = relief.echant(2, lon, lat);
+        double db = relief.echant(3, lon, lat) * 100.0 * Terrain.BLOCS_PAR_DEGRE / 111_320.0;
         // le canyon naît à Lees Ferry et finit aux Grand Wash Cliffs : il s'y rétrécit jusqu'au lit du fleuve
         double intensite = lisse((lon - LON_GRAND_WASH) / 0.25) * (1.0 - lisse((lon - LON_LEES_FERRY + 0.25) / 0.25));
         // aux extrémités, plus de fente étroite (lames d'un bloc) : une vallée en V d'au moins ~80 blocs de large
@@ -179,8 +122,7 @@ public final class GrandCanyon implements Lieu {
                 g = Math.min(g, gradin(gt));
             }
         }
-        double bord = Math.min(Math.min(lon - lon0, lonMax() - lon), Math.min(lat0 - lat, lat - latMin()));
-        return new Point(e, p, r, db, t, g, intensite, lisse(bord / FONDU), v);
+        return new Point(e, p, r, db, t, g, intensite, lisse(relief.distanceBord(lon, lat) / FONDU), v);
     }
 
     private static double profil(double t) {
@@ -216,9 +158,7 @@ public final class GrandCanyon implements Lieu {
 
     @Override
     public boolean concerne(int x, int z) {
-        charger();
-        double lon = Terrain.lon(x), lat = Terrain.lat(z);
-        return lon > lon0 && lon < lonMax() && lat < lat0 && lat > latMin();
+        return relief.contient(x, z);
     }
 
     @Override
@@ -232,6 +172,7 @@ public final class GrandCanyon implements Lieu {
      * (arrondi tous les 4 blocs par Minecraft) reste tel quel : sinon une marche de 1-2 blocs, un muret,
      * apparaissait le long du rebord.
      */
+    @Override
     public double hauteurNette(int x, int z) {
         if (!concerne(x, z)) return Double.NaN;
         Point pt = point(x, z);
@@ -285,7 +226,8 @@ public final class GrandCanyon implements Lieu {
     }
 
     /** Pour les strates : y du rebord si la colonne est dans le canyon, sinon NaN. */
-    public double rebordSiCanyon(int x, int z) {
+    @Override
+    public double rebordSiParoi(int x, int z) {
         if (!concerne(x, z)) return Double.NaN;
         Point pt = point(x, z);
         return dansCanyon(pt) ? yRebord(pt) : Double.NaN;
@@ -296,8 +238,34 @@ public final class GrandCanyon implements Lieu {
         return Mth.clamp((rebord - y) / (rebord - PIED), 0.0, 1.0);
     }
 
-    private static double lisse(double t) {
-        t = Mth.clamp(t, 0.0, 1.0);
-        return t * t * (3 - 2 * t);
+    // ---------------------------------------------------------------- couches
+
+    /** Couches réelles du Grand Canyon, du rebord au fleuve. */
+    private static final Block[] COUCHES = {
+            Blocks.WHITE_TERRACOTTA,       // calcaire de Kaibab (rebord, crème)
+            Blocks.TERRACOTTA,             // formation de Toroweap
+            Blocks.SMOOTH_SANDSTONE,       // grès de Coconino (bande claire)
+            Blocks.RED_TERRACOTTA,         // schistes de Hermit (pente rouge)
+            Blocks.ORANGE_TERRACOTTA,      // groupe de Supai : gradins rouges et orangés
+            Blocks.RED_TERRACOTTA,
+            Blocks.ORANGE_TERRACOTTA,
+            Blocks.RED_TERRACOTTA,
+            Blocks.TERRACOTTA,             // calcaire de Redwall (grande falaise)
+            Blocks.LIGHT_GRAY_TERRACOTTA,  // calcaire de Muav
+            Blocks.LIGHT_GRAY_TERRACOTTA,  // schistes de Bright Angel (plateau de Tonto)
+            Blocks.BROWN_TERRACOTTA,       // grès de Tapeats
+            Blocks.DEEPSLATE,              // schiste de Vishnu (gorge intérieure)
+    };
+
+    @Override
+    public BlockState strate(int x, int y, int z, double rebord) {
+        if (y <= 61) return Blocks.SAND.defaultBlockState();          // berges et lit du Colorado
+        double f = fraction(y, rebord) + StratesFeature.ondulation(x, z);
+        return COUCHES[couche(f)].defaultBlockState();
+    }
+
+    @Override
+    public int fondStrates() {
+        return (int) FOND - 6;
     }
 }
