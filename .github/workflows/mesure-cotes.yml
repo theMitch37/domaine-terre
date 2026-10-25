@@ -1,0 +1,52 @@
+# Mesure le coût d'un trait de côte haute résolution (GSHHG) face à Natural Earth 10m (étape B de la mer fidèle).
+# Résultat : outils/donnees/mesure_cotes.txt, ajouté à la branche.
+name: Mesure des côtes
+
+on:
+  push:
+    branches: ['mesure-*']
+    paths:
+      - outils/mesure_cotes.py
+      - .github/workflows/mesure-cotes.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  mesurer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Outils Python
+        run: pip install numpy scipy shapely pyogrio matplotlib
+      - name: Téléchargement GSHHG 2.3.7 et Natural Earth 10m
+        run: |
+          mkdir -p /tmp/cotes && cd /tmp/cotes
+          curl -fL --retry 5 --retry-delay 20 -o gshhg.zip \
+            https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/gshhg-shp-2.3.7.zip \
+          || curl -fL --retry 5 --retry-delay 20 -o gshhg.zip \
+            https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-shp-2.3.7.zip
+          unzip -q gshhg.zip -d gshhg
+          curl -fL --retry 5 --retry-delay 20 -o ne.zip https://naciscdn.org/naturalearth/10m/physical/ne_10m_land.zip
+          unzip -q ne.zip -d ne
+          ls -la gshhg/GSHHS_shp/h gshhg/GSHHS_shp/f ne
+      - name: Mesure
+        run: |
+          mkdir -p outils/donnees
+          python outils/mesure_cotes.py /tmp/cotes/gshhg/GSHHS_shp /tmp/cotes/ne/ne_10m_land.shp outils/donnees/mesure_cotes.txt
+      - name: Ajout à la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add -f outils/donnees/mesure_cotes.txt
+          git commit -m "Mesure des côtes GSHHG / Natural Earth (automatique)" || exit 0
+          for i in 1 2 3; do
+            git fetch origin "${GITHUB_REF_NAME}" && git rebase "origin/${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep 10
+          done
+          exit 1
