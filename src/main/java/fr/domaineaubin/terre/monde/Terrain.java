@@ -288,8 +288,9 @@ public final class Terrain {
             // mer fidèle (0.3.2) : le fond suit la profondeur réelle ; plus il est haut, moins il a de liberté
             f = Mth.lerp(Mth.clamp((c.h() - 40.0) / 18.0, 0.0, 1.0), 8.0, 18.0);
         } else {
-            double p = Mth.clamp(c.pente() / 80.0, 0.0, 1.0);
-            f = Mth.lerp(p, 8.0, 5.0);
+            // relief 100 % Terre (0.3.2) : le terrain colle à la hauteur visée (relief réel + bruitDetail à graine fixe),
+            // sans la liberté du relief vanilla ; connu au bloc près (terre_py) et identique dans tous les mondes
+            f = 30.0;
         }
         // près des cours d'eau, le terrain colle au profil de la vallée (pas de bosses dans le lit ni de creux sur la rive)
         Riviere r = c.r();
@@ -304,7 +305,7 @@ public final class Terrain {
     /** Pics déchiquetés seulement dans les vraies montagnes raides. */
     public double dentelure(int x, int z) {
         Colonne c = colonne(x, z);
-        if (c.sd() < 0 || c.r() != null || c.poids() >= 1.0) return 0.0;
+        if (true) return 0.0;                 // relief 100 % Terre : pas de pics vanilla (à réimplanter à notre façon)
         double alt = c.alt();
         return Mth.clamp((c.pente() - 40.0) / 120.0, 0.0, 1.0) * Mth.clamp((alt - 1200.0) / 1500.0, 0.0, 1.0) * 0.2
                 * (1.0 - c.poids());
