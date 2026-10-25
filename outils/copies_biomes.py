@@ -26,12 +26,15 @@ def charger(p):
     return json.load(open(p, encoding="utf-8"))
 
 # hasard vanilla retiré (Terre 0.3.2) : on le réimplantera à notre façon
-RETIRES = {"minecraft:lake_lava_surface", "minecraft:lake_lava_underground"}
+# (registre : notes/retire-vanilla.md)
+RETIRES = {"minecraft:lake_lava_surface", "minecraft:lake_lava_underground", "minecraft:spring_water",
+           "minecraft:spring_lava", "minecraft:spring_lava_frozen", "minecraft:monster_room", "minecraft:monster_room_deep"}
 
 
 def ecrire(p, d):
     if isinstance(d, dict) and isinstance(d.get("features"), list):
         d["features"] = [[f for f in etape if f not in RETIRES] for etape in d["features"]]
+        d["carvers"] = {}                                   # grottes et ravins retirés
     json.dump(d, open(p, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
 
 # fichiers à compléter

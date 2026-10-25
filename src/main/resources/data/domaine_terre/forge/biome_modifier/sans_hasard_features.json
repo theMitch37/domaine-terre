@@ -1,0 +1,1 @@
+{"type": "forge:remove_features", "biomes": "#minecraft:is_overworld", "features": ["minecraft:lake_lava_surface", "minecraft:lake_lava_underground", "minecraft:spring_water", "minecraft:spring_lava", "minecraft:spring_lava_frozen", "minecraft:monster_room", "minecraft:monster_room_deep"]}

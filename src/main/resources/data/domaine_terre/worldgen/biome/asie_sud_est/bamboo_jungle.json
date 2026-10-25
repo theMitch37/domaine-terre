@@ -20,23 +20,14 @@
   "water_color": 4159204,
   "water_fog_color": 329011
  },
- "carvers": {
-  "air": [
-   "minecraft:cave",
-   "minecraft:cave_extra_underground",
-   "minecraft:canyon"
-  ]
- },
+ "carvers": {},
  "features": [
   [],
   [],
   [
    "minecraft:amethyst_geode"
   ],
-  [
-   "minecraft:monster_room",
-   "minecraft:monster_room_deep"
-  ],
+  [],
   [],
   [],
   [
@@ -70,10 +61,7 @@
    "minecraft:disk_gravel"
   ],
   [],
-  [
-   "minecraft:spring_water",
-   "minecraft:spring_lava"
-  ],
+  [],
   [
    "minecraft:glow_lichen",
    "minecraft:bamboo",
