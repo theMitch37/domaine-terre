@@ -175,6 +175,10 @@ def falaise(X, Z, h, db, s, haut, pied, graine, amp=2.5, retour=120.0, plongeant
     face = (np.abs(e) < 2.5) & haute
     taille = face | plage | ((db < 0) & (db > -6)) | (plongeante & (e < 0) & (e > -6))
     typ[taille] |= TAILLEE
+    # toute paroi raide porte les couches de la falaise (sinon pierre nue ou escalier d'herbe là où le trait est oblique)
+    gz, gx = np.gradient(y)
+    raide = ndimage.binary_dilation((np.hypot(gx, gz) > 1.4) & (haut > 2.5) & (e > -4), iterations=1)
+    typ[raide & (typ & 15 == PLATEAU)] |= TAILLEE
     typ[(e >= 2.5) & (e < 14) & haute] |= REMBLAI
     sommet = np.where(e >= -3, ztop, 63.0)
     return y, typ, sommet, e
@@ -234,6 +238,18 @@ def sur_falaise(e, X, Z, lat, lon):
     return np.array([X[j, i], Z[j, i]])
 
 
+def parois(y, typ, haut_min=66.0):
+    """Après fin_de_lieu : toute paroi raide et haute porte les couches de la falaise (taillée, classe plateau).
+    Sinon, là où la falaise sort de la zone ou rejoint un relief du mod, une paroi de pierre nue ou d'herbe en escalier."""
+    gz, gx = np.gradient(y)
+    raide = ndimage.binary_dilation((np.hypot(gx, gz) > 1.4) & (y > haut_min), iterations=1)
+    cl = typ & 15
+    haut_fond = raide & (cl == FOND) & (y > 62.5)
+    typ = np.where(haut_fond, (typ & ~15) | PLATEAU, typ)
+    typ = np.where(raide & ((typ & 15) == PLATEAU), typ | TAILLEE, typ)
+    return typ
+
+
 def fin_de_lieu(y, h, typ, X, Z, marge=12):
     """Sécurité : le lieu rejoint le terrain du mod au bord de la zone (il doit déjà être fini bien avant)."""
     f = lisse(bord_zone(X, Z, marge))
@@ -277,6 +293,7 @@ def etretat():
             y, typ, sommet = aiguille(X, Z, y, typ, sommet, c, 3.0, 19.0)
             print(f"  Aiguille : {c.round(1)}")
     y, f = fin_de_lieu(y, h, typ, X, Z)
+    typ = parois(y, typ)
     travail = ((typ & (TAILLEE | REMBLAI)) > 0) & (f > 0.2)
     typ = finir_types(typ, travail)
     ecrire("etretat", X, Z, x0, z0, y, h, sommet, typ, creux)
@@ -295,6 +312,9 @@ def moher():
     # 8 km en vrai (32 blocs) : allongée le long de la côte, sinon un bloc trapu ; 120 m au sud, 214 m au nord
     haut = courbe(S, [(0, 0), (25, 0), (50, 20), (s_tour - 30, 25), (s_tour + 5, 30), (s_tour + 45, 29),
                       (s_fin - 20, 0)])
+    # seulement la côte principale : l'île d'Inisheer, coupée par le bord de la zone, recevait un pan de falaise isolé
+    d_cote = cote.arbre.query(np.c_[X.ravel(), Z.ravel()])[0].reshape(X.shape)
+    haut = haut * (1 - lisse((d_cote - 18) / 10))
     y, typ, sommet, e = falaise(X, Z, h, db, S, haut, pied=0.0, graine=21, amp=3.5, plongeante=True)
     # Branaunmore : piton au pied de la tour d'O'Brien, séparé de la falaise par un chenal d'au moins 7 blocs
     p = sur_falaise(e, X, Z, *(lambda q: (-q[1] / BPD, q[0] / BPD))(cote.point(s_tour)))
@@ -308,6 +328,7 @@ def moher():
     sommet = np.where(m, top, sommet)
     print(f"  Branaunmore : {c.round(1)}, haut y {top:.1f}")
     y, f = fin_de_lieu(y, h, typ, X, Z)
+    typ = parois(y, typ)
     typ = finir_types(typ, ((typ & (TAILLEE | REMBLAI)) > 0) & (f > 0.2))
     ecrire("moher", X, Z, x0, z0, y, h, sommet, typ)
 
@@ -328,6 +349,7 @@ def douvres():
                       (fin - 10, 0)])
     y, typ, sommet, e = falaise(X, Z, h, db, S, haut, pied=1.5, graine=31, amp=1.6)
     y, f = fin_de_lieu(y, h, typ, X, Z)
+    typ = parois(y, typ)
     typ = finir_types(typ, ((typ & (TAILLEE | REMBLAI)) > 0) & (f > 0.2))
     ecrire("douvres", X, Z, x0, z0, y, h, sommet, typ)
 
@@ -405,7 +427,14 @@ def mont_saint_michel():
     ferme = np.r_[lisse_p, lisse_p[:1]]
     dedans = Path(ferme).contains_points(np.c_[X.ravel(), Z.ravel()]).reshape(X.shape)
     d_rive = ndimage.distance_transform_edt(dedans)                  # distance au rivage, dans la baie
-    d_ouvert = distance_polyligne(X, Z, [RIVAGE[-1], RIVAGE[0]])[0]  # distance à l'ouverture sur la mer
+    # au large de l'ouverture (de la pointe du Grouin à Granville), la mer : le trait de côte du mod, trop grossier,
+    # y laissait une bande de terre qui fermait la baie
+    a, b = lisse_p[-1], lisse_p[0]                                   # bouts du rivage lissé (celui de `dedans`)
+    large = np.array([a, [a[0], Z.min() - 20], [X.min() - 20, Z.min() - 20], [X.min() - 20, b[1]], b])
+    au_large = Path(large).contains_points(np.c_[X.ravel(), Z.ravel()]).reshape(X.shape) & ~dedans
+    # et le mince liseré entre les deux polygones
+    au_large |= ~dedans & ndimage.binary_dilation(dedans, iterations=6) & ndimage.binary_dilation(au_large, iterations=6)
+    d_ouvert = ndimage.distance_transform_edt(~au_large)             # distance à l'ouverture sur la mer
     # estran : sable sec à y 63,5 près du fond de la baie, qui descend doucement vers le large (bords lobés)
     lobes = 14 * bruit(X, Z, 26, 51) + 6 * bruit(X, Z, 9, 52)
     # marée basse : sable sur presque toute la baie, il ne s'enfonce sous l'eau qu'en approchant du large
@@ -426,16 +455,25 @@ def mont_saint_michel():
     mare = (bruit(X, Z, 11, 55) > 0.62) & (vers_large > 0.15) & dedans
     mare = ndimage.binary_opening(mare, iterations=2)
     # herbus (prés salés) le long du rivage sud, avec leur bord irrégulier
-    herbus = dedans & (d_rive < 9 + 6 * bruit(X, Z, 19, 56)) & (vers_large < 0.55)
+    herbus = dedans & (d_rive < 9 + 6 * bruit(X, Z, 19, 56)) & (vers_large < 0.55) & (d_ouvert > 24)
     y = np.where(dedans, estran, h)
     y = np.where(dedans & mare, np.minimum(y, 61.5), y)
     y = np.where(chenal, np.minimum(y, fond_chenal), y)
-    y = np.where(herbus & ~chenal, 63.7 + 0.3 * lisse(d_rive / 4), y)
-    # la côte autour : rien ne change hors de la baie, sauf un raccord doux là où le terrain est plus bas
+    y = np.where(herbus & ~chenal, 63.55 + 0.3 * lisse(d_rive / 4), y)  # jamais pile 64
+    # Banc du 25/10 : hors d'un lieu, le jeu laisse au relief vanilla ~2-3 blocs de liberté au-dessus du terrain du mod.
+    # La mer du mod devant la baie (peu profonde, y 60-61) sortait de l'eau et fermait la baie, et la terre autour
+    # la dominait comme un trou. Le lieu tient donc aussi la mer de la zone et une ceinture basse de polders.
+    mer = ~dedans & ((sd < 0) | au_large)
+    y = np.where(mer, np.minimum(h, 60.5), y)
     d_dehors = ndimage.distance_transform_edt(~dedans)
-    raccord = ~dedans & (d_dehors < 10) & (h < 64.0) & (sd >= 0)        # seulement la terre ferme du mod
-    y = np.where(raccord, np.maximum(h, 63.7), y)
+    polder = ~dedans & ~mer & (d_dehors < 30)
+    y = np.where(polder, 64.5 + np.maximum(h - 64.5, 0) * lisse(d_dehors / 30) ** 1.5, y)
+    d_mer = ndimage.distance_transform_edt(~mer)
+    y = np.where(polder, np.minimum(y, 63.6 + 0.35 * d_mer), y)       # grève en pente douce vers la mer, pas de marche
+    raccord = polder & (d_dehors < 16)
     typ = np.zeros(X.shape, np.int32)
+    typ[mer] = SABLE | TAILLEE | INONDE
+    typ[raccord] = PRE | TAILLEE
     tangue = (bruit(X, Z, 10, 57) > 0.35) & (vers_large > 0.1)
     typ[dedans] = np.where(tangue[dedans], VASE, SABLE)
     typ[dedans & (mare | chenal)] = CHENAL
@@ -450,7 +488,7 @@ def mont_saint_michel():
         y = np.where(m, prof, y)
         typ = np.where(m, ROC, typ)
         sommet = np.where(m, prof, sommet)
-    travail = dedans | (typ == ROC) | raccord
+    travail = dedans | (typ == ROC) | raccord | mer
     typ[travail] |= TAILLEE
     typ[dedans] |= INONDE
     y, f = fin_de_lieu(y, h, typ, X, Z)
