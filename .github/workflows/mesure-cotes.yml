@@ -24,27 +24,30 @@ jobs:
           python-version: "3.12"
       - name: Outils Python
         run: pip install numpy scipy shapely pyogrio matplotlib
-      - name: Téléchargement GSHHG 2.3.7 et Natural Earth 10m
+      - name: Téléchargement et mesure (journal toujours rapporté sur la branche)
         run: |
-          mkdir -p /tmp/cotes && cd /tmp/cotes
-          # premier passage : exit 60 (certificat) sur une des sources ; on essaie chaque miroir et on dit lequel répond
-          ok=0
-          for u in https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-shp-2.3.7.zip \
-                   https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/gshhg-shp-2.3.7.zip \
-                   http://www.soest.hawaii.edu/pwessel/gshhg/gshhg-shp-2.3.7.zip; do
-            echo "== $u"
-            if curl -fL --retry 3 --retry-delay 10 -o gshhg.zip "$u"; then ok=1; break; else echo "échec ($?)"; fi
-          done
-          [ $ok = 1 ] || exit 1
-          unzip -q gshhg.zip -d gshhg
-          # Natural Earth 10m depuis son dépôt GitHub (même données que naciscdn)
-          base=https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/10m_physical
-          mkdir -p ne && for e in shp shx dbf prj; do curl -fL --retry 5 -o ne/ne_10m_land.$e $base/ne_10m_land.$e; done
-          ls -la gshhg/GSHHS_shp/h gshhg/GSHHS_shp/f ne
-      - name: Mesure
-        run: |
-          mkdir -p outils/donnees
-          python outils/mesure_cotes.py /tmp/cotes/gshhg/GSHHS_shp /tmp/cotes/ne/ne_10m_land.shp outils/donnees/mesure_cotes.txt
+          mkdir -p outils/donnees /tmp/cotes
+          J=$PWD/outils/donnees/mesure_cotes.txt
+          {
+            cd /tmp/cotes
+            ok=0
+            for u in https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-shp-2.3.7.zip \
+                     https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/gshhg-shp-2.3.7.zip \
+                     http://www.soest.hawaii.edu/pwessel/gshhg/gshhg-shp-2.3.7.zip \
+                     https://github.com/GenericMappingTools/gshhg-gmt/releases/download/2.3.7/gshhg-shp-2.3.7.zip; do
+              echo "== $u"
+              if curl -sSfL --retry 3 --retry-delay 10 -o gshhg.zip "$u"; then ok=1; echo "ok $(stat -c %s gshhg.zip) octets"; break; fi
+            done
+            base=https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/10m_physical
+            mkdir -p ne && for e in shp shx dbf prj; do curl -sSfL --retry 5 -o ne/ne_10m_land.$e $base/ne_10m_land.$e || echo "NE $e : échec"; done
+            ls -la ne
+            if [ $ok = 1 ]; then
+              unzip -q gshhg.zip -d gshhg && ls gshhg/GSHHS_shp/h | head
+              cd $GITHUB_WORKSPACE
+              python outils/mesure_cotes.py /tmp/cotes/gshhg/GSHHS_shp /tmp/cotes/ne/ne_10m_land.shp /tmp/cotes/resultat.txt && cat /tmp/cotes/resultat.txt
+            fi
+          } > /tmp/journal.txt 2>&1 || true
+          cp /tmp/journal.txt "$J"; cat "$J"
       - name: Ajout à la branche
         run: |
           git config user.name "github-actions[bot]"
