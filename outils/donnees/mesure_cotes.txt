@@ -1,28 +1,24 @@
 == https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-shp-2.3.7.zip
-curl: (60) SSL certificate problem: unable to get local issuer certificate
-More details here: https://curl.se/docs/sslcerts.html
-
-curl failed to verify the legitimacy of the server and therefore could not
-establish a secure connection to it. To learn more about this situation and
-how to fix it, please visit the web page mentioned above.
+curl: (28) Failed to connect to www.soest.hawaii.edu port 443 after 134106 ms: Couldn't connect to server
+curl: (28) Failed to connect to www.soest.hawaii.edu port 443 after 133350 ms: Couldn't connect to server
+curl: (28) Failed to connect to www.soest.hawaii.edu port 443 after 133351 ms: Couldn't connect to server
+curl: (28) Failed to connect to www.soest.hawaii.edu port 443 after 133350 ms: Couldn't connect to server
 == https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/gshhg-shp-2.3.7.zip
 curl: (22) The requested URL returned error: 404
 == http://www.soest.hawaii.edu/pwessel/gshhg/gshhg-shp-2.3.7.zip
-curl: (60) SSL certificate problem: unable to get local issuer certificate
-More details here: https://curl.se/docs/sslcerts.html
-
-curl failed to verify the legitimacy of the server and therefore could not
-establish a secure connection to it. To learn more about this situation and
-how to fix it, please visit the web page mentioned above.
+curl: (28) Failed to connect to www.soest.hawaii.edu port 80 after 134906 ms: Couldn't connect to server
+curl: (28) Failed to connect to www.soest.hawaii.edu port 80 after 133352 ms: Couldn't connect to server
+curl: (28) Failed to connect to www.soest.hawaii.edu port 80 after 133357 ms: Couldn't connect to server
+curl: (28) Failed to connect to www.soest.hawaii.edu port 80 after 133350 ms: Couldn't connect to server
 == https://github.com/GenericMappingTools/gshhg-gmt/releases/download/2.3.7/gshhg-shp-2.3.7.zip
 ok 149157845 octets
 total 7020
-drwxr-xr-x 2 runner runner    4096 Oct 25 19:43 .
-drwxr-xr-x 3 runner runner    4096 Oct 25 19:43 ..
--rw-r--r-- 1 runner runner     350 Oct 25 19:43 ne_10m_land.dbf
--rw-r--r-- 1 runner runner     145 Oct 25 19:43 ne_10m_land.prj
--rw-r--r-- 1 runner runner 7166824 Oct 25 19:43 ne_10m_land.shp
--rw-r--r-- 1 runner runner     188 Oct 25 19:43 ne_10m_land.shx
+drwxr-xr-x 2 runner runner    4096 Oct 25 21:08 .
+drwxr-xr-x 3 runner runner    4096 Oct 25 21:08 ..
+-rw-r--r-- 1 runner runner     350 Oct 25 21:08 ne_10m_land.dbf
+-rw-r--r-- 1 runner runner     145 Oct 25 21:08 ne_10m_land.prj
+-rw-r--r-- 1 runner runner 7166824 Oct 25 21:08 ne_10m_land.shp
+-rw-r--r-- 1 runner runner     188 Oct 25 21:08 ne_10m_land.shx
 GSHHS_h_L1.dbf
 GSHHS_h_L1.prj
 GSHHS_h_L1.shp
@@ -33,62 +29,62 @@ GSHHS_h_L2.shp
 GSHHS_h_L2.shx
 GSHHS_h_L3.dbf
 GSHHS_h_L3.prj
-Mesure des côtes haute résolution (étape B, Terre 0.3.2)
+Lacs GSHHG full (niveau 2) : 6660
+  ≥ 1 bloc : 6594
+  ≥ 1 km² (16 blocs) : 6559
+  ≥ 25 km² : 3370
+  ≥ 1 000 km² : 179
 
-== Natural Earth 10m (côte actuelle)
-polygones 6837 | points 446175 | côtes 945,528 km = 3,782,113 blocs
-  îles et terres ≥ 1 bloc : 6328
-  îles et terres ≥ 16 blocs (1 km²) : 5618
-  îles et terres ≥ 400 blocs (25 km²) : 2807
-  carte 0.5 case(s)/bloc, tuiles 256² (1.150°) traversées par la côte : 6273
-    masque 1 bit compressé : 2.3 Mo | distance signée 1 octet : 15.4 Mo   (échantillon 40 tuiles, 1 s)
+Lacs connus : altitude réelle / médiane du relief sous le lac / minimum / cases 3'
+  Léman                  réel   372 m | médiane      -1 | min      -1 | 25 cases | 538 km²
+  Lac Supérieur          réel   183 m | médiane     111 | min      -1 | 9653 cases | 208,265 km²
+  Baïkal                 réel   456 m | médiane     271 | min       4 | 1738 cases | 32,210 km²
+  Titicaca               réel  3812 m | médiane      -1 | min      -1 | 275 cases | 8,164 km²
+  Victoria               réel  1134 m | médiane    1143 | min    1133 | 2248 cases | 69,529 km²
+  Ladoga                 réel     5 m | médiane       4 | min       3 | 1184 cases | 17,806 km²
+  Caspienne              réel   -28 m | médiane     -65 | min   -1033 | 17214 cases | 397,880 km²
+  Lac de Sainte-Croix    réel   477 m | absent de GSHHG
+  Lac d'Annecy           réel   447 m | médiane    1134 | min    1040 | 2 cases | 24 km²
+  Lac de Garde           réel    65 m | médiane     300 | min      65 | 17 cases | 356 km²
+  Mer Morte              réel  -430 m | médiane    -422 | min    -427 | 35 cases | 966 km²
+  Tanganyika             réel   773 m | médiane     927 | min     779 | 1069 cases | 32,958 km²
+  Lac Majeur             réel   193 m | médiane     859 | min     589 | 7 cases | 202 km²
+  Lac Balaton            réel   104 m | médiane     104 | min     104 | 26 cases | 557 km²
 
-== GSHHG high
-polygones 145079 | points 1659788 | côtes 1,498,994 km = 5,995,977 blocs
-  îles et terres ≥ 1 bloc : 73267
-  îles et terres ≥ 16 blocs (1 km²) : 20522
-  îles et terres ≥ 400 blocs (25 km²) : 3287
-  carte 0.5 case(s)/bloc, tuiles 256² (1.150°) traversées par la côte : 6082
-    masque 1 bit compressé : 2.2 Mo | distance signée 1 octet : 15.0 Mo   (échantillon 40 tuiles, 11 s)
-  carte 1 case(s)/bloc, tuiles 256² (0.575°) traversées par la côte : 14374
-    masque 1 bit compressé : 4.4 Mo | distance signée 1 octet : 48.6 Mo   (échantillon 40 tuiles, 10 s)
+Altitude médiane estimée des 3370 lacs ≥ 25 km² :
+  -1000000000 à 0      m : 143
+       0 à 200    m : 1507
+     200 à 500    m : 1021
+     500 à 1000   m : 307
+    1000 à 2000   m : 192
+    2000 à 1000000000 m : 200
 
-== GSHHG full
-polygones 180167 | points 9696440 | côtes 1,679,446 km = 6,717,782 blocs
-  îles et terres ≥ 1 bloc : 113781
-  îles et terres ≥ 16 blocs (1 km²) : 21752
-  îles et terres ≥ 400 blocs (25 km²) : 3303
-  carte 0.5 case(s)/bloc, tuiles 256² (1.150°) traversées par la côte : 6059
-    masque 1 bit compressé : 2.8 Mo | distance signée 1 octet : 19.1 Mo   (échantillon 40 tuiles, 21 s)
-  carte 1 case(s)/bloc, tuiles 256² (0.575°) traversées par la côte : 14401
-    masque 1 bit compressé : 5.6 Mo | distance signée 1 octet : 61.0 Mo   (échantillon 40 tuiles, 16 s)
+Lacs GSHHG full (niveau 2) : 6660
+  ≥ 1 bloc : 6594
+  ≥ 1 km² (16 blocs) : 6559
+  ≥ 25 km² : 3370
+  ≥ 1 000 km² : 179
 
-Mesure des côtes haute résolution (étape B, Terre 0.3.2)
+Lacs connus : altitude réelle / médiane du relief sous le lac / minimum / cases 3'
+  Léman                  réel   372 m | médiane      -1 | min      -1 | 25 cases | 538 km²
+  Lac Supérieur          réel   183 m | médiane     111 | min      -1 | 9653 cases | 208,265 km²
+  Baïkal                 réel   456 m | médiane     271 | min       4 | 1738 cases | 32,210 km²
+  Titicaca               réel  3812 m | médiane      -1 | min      -1 | 275 cases | 8,164 km²
+  Victoria               réel  1134 m | médiane    1143 | min    1133 | 2248 cases | 69,529 km²
+  Ladoga                 réel     5 m | médiane       4 | min       3 | 1184 cases | 17,806 km²
+  Caspienne              réel   -28 m | médiane     -65 | min   -1033 | 17214 cases | 397,880 km²
+  Lac de Sainte-Croix    réel   477 m | absent de GSHHG
+  Lac d'Annecy           réel   447 m | médiane    1134 | min    1040 | 2 cases | 24 km²
+  Lac de Garde           réel    65 m | médiane     300 | min      65 | 17 cases | 356 km²
+  Mer Morte              réel  -430 m | médiane    -422 | min    -427 | 35 cases | 966 km²
+  Tanganyika             réel   773 m | médiane     927 | min     779 | 1069 cases | 32,958 km²
+  Lac Majeur             réel   193 m | médiane     859 | min     589 | 7 cases | 202 km²
+  Lac Balaton            réel   104 m | médiane     104 | min     104 | 26 cases | 557 km²
 
-== Natural Earth 10m (côte actuelle)
-polygones 6837 | points 446175 | côtes 945,528 km = 3,782,113 blocs
-  îles et terres ≥ 1 bloc : 6328
-  îles et terres ≥ 16 blocs (1 km²) : 5618
-  îles et terres ≥ 400 blocs (25 km²) : 2807
-  carte 0.5 case(s)/bloc, tuiles 256² (1.150°) traversées par la côte : 6273
-    masque 1 bit compressé : 2.3 Mo | distance signée 1 octet : 15.4 Mo   (échantillon 40 tuiles, 1 s)
-
-== GSHHG high
-polygones 145079 | points 1659788 | côtes 1,498,994 km = 5,995,977 blocs
-  îles et terres ≥ 1 bloc : 73267
-  îles et terres ≥ 16 blocs (1 km²) : 20522
-  îles et terres ≥ 400 blocs (25 km²) : 3287
-  carte 0.5 case(s)/bloc, tuiles 256² (1.150°) traversées par la côte : 6082
-    masque 1 bit compressé : 2.2 Mo | distance signée 1 octet : 15.0 Mo   (échantillon 40 tuiles, 11 s)
-  carte 1 case(s)/bloc, tuiles 256² (0.575°) traversées par la côte : 14374
-    masque 1 bit compressé : 4.4 Mo | distance signée 1 octet : 48.6 Mo   (échantillon 40 tuiles, 10 s)
-
-== GSHHG full
-polygones 180167 | points 9696440 | côtes 1,679,446 km = 6,717,782 blocs
-  îles et terres ≥ 1 bloc : 113781
-  îles et terres ≥ 16 blocs (1 km²) : 21752
-  îles et terres ≥ 400 blocs (25 km²) : 3303
-  carte 0.5 case(s)/bloc, tuiles 256² (1.150°) traversées par la côte : 6059
-    masque 1 bit compressé : 2.8 Mo | distance signée 1 octet : 19.1 Mo   (échantillon 40 tuiles, 21 s)
-  carte 1 case(s)/bloc, tuiles 256² (0.575°) traversées par la côte : 14401
-    masque 1 bit compressé : 5.6 Mo | distance signée 1 octet : 61.0 Mo   (échantillon 40 tuiles, 16 s)
+Altitude médiane estimée des 3370 lacs ≥ 25 km² :
+  -1000000000 à 0      m : 143
+       0 à 200    m : 1507
+     200 à 500    m : 1021
+     500 à 1000   m : 307
+    1000 à 2000   m : 192
+    2000 à 1000000000 m : 200
