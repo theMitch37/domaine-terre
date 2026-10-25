@@ -1,0 +1,54 @@
+# Construit la carte des côtes fines de Terre (GSHHG full au bloc près, grands lacs Natural Earth)
+# et l'ajoute à la branche : src/main/resources/domaine_terre/carte/cotes_fines.bin. Journal : outils/donnees/cotes_fines.log
+name: Côtes fines
+
+on:
+  push:
+    branches: ['lieux-*']
+    paths:
+      - outils/cotes_fines.py
+      - .github/workflows/cotes-fines.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  construire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Outils Python
+        run: pip install numpy shapely pyogrio rasterio
+      - name: Téléchargement et construction (journal toujours rapporté)
+        run: |
+          mkdir -p outils/donnees /tmp/cotes
+          {
+            set -e
+            cd /tmp/cotes
+            curl -sSfL --retry 5 --retry-delay 20 -o gshhg.zip \
+              https://github.com/GenericMappingTools/gshhg-gmt/releases/download/2.3.7/gshhg-shp-2.3.7.zip
+            unzip -q gshhg.zip -d gshhg
+            base=https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/10m_physical
+            mkdir -p ne && for e in shp shx dbf prj; do curl -sSfL --retry 5 -o ne/ne_10m_lakes.$e $base/ne_10m_lakes.$e; done
+            cd $GITHUB_WORKSPACE
+            python outils/cotes_fines.py /tmp/cotes/gshhg/GSHHS_shp /tmp/cotes/ne/ne_10m_lakes.shp \
+              src/main/resources/domaine_terre/carte/cotes_fines.bin
+          } > /tmp/journal.txt 2>&1 || echo "ÉCHEC" >> /tmp/journal.txt
+          cp /tmp/journal.txt outils/donnees/cotes_fines.log; cat outils/donnees/cotes_fines.log
+      - name: Ajout à la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add -f outils/donnees/cotes_fines.log
+          [ -f src/main/resources/domaine_terre/carte/cotes_fines.bin ] && git add -f src/main/resources/domaine_terre/carte/cotes_fines.bin
+          git commit -m "Côtes fines GSHHG full au bloc près (automatique)" || exit 0
+          for i in 1 2 3; do
+            git fetch origin "${GITHUB_REF_NAME}" && git rebase "origin/${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep 10
+          done
+          exit 1
