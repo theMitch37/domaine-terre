@@ -153,6 +153,8 @@ def falaise(X, Z, h, db, s, haut, pied, graine, amp=2.5, retour=120.0, plongeant
     haute = haut > 2.5
     ztop = 63.5 + haut
     # plateau : rejoint le terrain du mod en pente douce ; rebord légèrement arrondi
+    # ... et l'a rejoint AVANT le bord de la zone : sinon fin_de_lieu le rabattait en 12 blocs (talus d'herbe raide)
+    retour = np.clip(e + bord_zone(X, Z, 1) - 16, 30, retour)
     plat = h + np.maximum(0.0, ztop - h) * (1 - lisse(e / retour))
     plat -= 1.1 * (1 - lisse(e / 3.0)) * haute
     y = np.where(e >= 0, np.maximum(h, plat), h)
@@ -259,16 +261,17 @@ def fin_de_lieu(y, h, typ, X, Z, marge=12):
 # ---------------------------------------------------------------- Étretat
 
 def etretat():
-    X, Z, x0, z0 = grille(-0.08, 0.48, 49.56, 49.84)
+    X, Z, x0, z0 = grille(-0.08, 0.48, 49.44, 49.84)
     h, sd = T.hauteur_base(X, Z)
     db = sd * BPD / 60.0
     cote = Cote(X, Z, db, (49.58, 0.0))                             # abscisse du sud-ouest au nord-est
     S = cote.s
     v, fin = cote.s_de(49.7085, 0.2105), cote.L[-1]
+    s0 = cote.s_de(49.562, 0.094)                                    # début d'origine (la zone descend jusqu'au Havre)
     # En vrai, Manneporte, Porte d'Aval, la ville et Porte d'Amont tiennent en 3 km (12 blocs) : les distances le long
     # de la côte sont étirées autour de la ville, comme les hauteurs. Côte d'Albâtre : falaises sur toute la zone,
     # creusées de valleuses, qui s'abaissent aux deux bouts.
-    haut = courbe(S, [(0, 0), (15, 0), (40, 21), (v - 30, 26), (v - 12, 27), (v - 4, 2), (v + 4, 2), (v + 12, 25),
+    haut = courbe(S, [(0, 0), (s0 + 15, 0), (s0 + 40, 21), (v - 30, 26), (v - 12, 27), (v - 4, 2), (v + 4, 2), (v + 12, 25),
                       (v + 45, 25), (v + 56, 16), (v + 64, 16), (v + 78, 24), (fin - 30, 23), (fin - 12, 0)])
     y, typ, sommet, e = falaise(X, Z, h, db, S, haut, pied=2.0, graine=11)
     creux = []
@@ -302,7 +305,7 @@ def etretat():
 # ---------------------------------------------------------------- Moher
 
 def moher():
-    X, Z, x0, z0 = grille(-9.62, -9.28, 52.84, 53.10)
+    X, Z, x0, z0 = grille(-9.62, -9.16, 52.84, 53.10)
     h, sd = T.hauteur_base(X, Z)
     db = sd * BPD / 60.0
     cote = Cote(X, Z, db, (52.86, -9.50))                           # du sud (Hag's Head) vers le nord
@@ -336,12 +339,12 @@ def moher():
 # ---------------------------------------------------------------- Douvres
 
 def douvres():
-    X, Z, x0, z0 = grille(1.05, 1.52, 51.00, 51.24)
+    X, Z, x0, z0 = grille(1.05, 1.52, 51.00, 51.40)
     h, sd = T.hauteur_base(X, Z)
     db = sd * BPD / 60.0
     cote = Cote(X, Z, db, (51.07, 1.10))                            # d'ouest (Folkestone) en est (Kingsdown)
     S = cote.s
-    d, fin = cote.s_de(51.122, 1.312), cote.L[-1]
+    d, fin = cote.s_de(51.122, 1.312), cote.s_de(51.24, 1.41)    # fin : Kingsdown (la côte de Deal, basse, continue au nord)
     # ~100 m, faîte ondulé : falaise de Shakespeare à l'ouest, vallée de la Dour (la ville), combes sèches,
     # baie de St Margaret ; distances étirées le long de la côte comme à Étretat
     haut = courbe(S, [(0, 0), (15, 0), (40, 20), (d - 40, 23), (d - 22, 18), (d - 12, 21), (d - 7, 0), (d + 7, 0),
