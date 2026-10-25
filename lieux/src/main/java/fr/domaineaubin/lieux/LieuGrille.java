@@ -28,7 +28,7 @@ import java.util.zip.GZIPInputStream;
  */
 public final class LieuGrille implements LieuSculpte {
     /** Classes de matériau (bits 0-3 de la grille 2), comme dans lieux_cotiers.py. */
-    static final int PLATEAU = 1, PLAGE = 2, FOND = 3, ROC = 4, AIGUILLE = 5, DUNE = 6, VASE = 7, CHENAL = 8, PRE = 9, SABLE = 10;
+    static final int CREUSE = 0, PLATEAU = 1, PLAGE = 2, FOND = 3, ROC = 4, AIGUILLE = 5, DUNE = 6, VASE = 7, CHENAL = 8, PRE = 9, SABLE = 10;
     static final int TAILLEE = 16, REMBLAI = 32, BIOME = 64, INONDE = 128;
 
     /** Palettes de roches. */
@@ -149,27 +149,43 @@ public final class LieuGrille implements LieuSculpte {
         return bloc(type(x, z) & 15, x, y, z, rebord, true).defaultBlockState();
     }
 
+    /** Petite ondulation verticale des lits de roche (-1, 0 ou 1), lente le long de la paroi. */
+    private static int vague(int x, int z) {
+        return (int) Math.round(0.8 * Math.sin(x * 0.11 + z * 0.07) + 0.45 * Math.sin(x * 0.031 - z * 0.053));
+    }
+
+    private static final int[] LITS_CRAIE = {4, 8, 13, 17, 22, 26, 31, 35};
+    private static final int[] LITS_CRAIE_PURE = {6, 14, 22, 30};
+    private static final int[] BANCS_MOHER = {3, 9, 14, 21, 27, 32, 38};
+
     private Block bloc(int cl, int x, int y, int z, double top, boolean dessus) {
         switch (palette) {
             case CRAIE, CRAIE_PURE -> {
-                if (cl == PLAGE || cl == FOND) return Blocks.GRAVEL;                      // galets
-                if (cl == PLATEAU && dessus) return Blocks.GRASS_BLOCK;
-                if (cl == PLATEAU && y >= top - 2) return Blocks.DIRT;
-                int pas = palette == Palette.CRAIE ? 5 : 8;                             // lits de silex
-                if (Math.floorMod(y - 63, pas) == 0 && h2(x, z, y) % 7 != 0) return Blocks.TUFF;
-                return h2(Math.floorDiv(x, 3), Math.floorDiv(z, 3), Math.floorDiv(y, 4)) % 5 == 0 ? Blocks.DIORITE : Blocks.CALCITE;
+                if (cl == PLAGE) return h2(x, z, 0) % 6 == 0 ? Blocks.CALCITE : Blocks.GRAVEL;     // galets, blocs de craie
+                if (cl == FOND) return h2(x, z, 1) % 3 == 0 ? Blocks.CALCITE : Blocks.GRAVEL;      // platier
+                if (cl == PLATEAU && dessus && y > 63) return Blocks.GRASS_BLOCK;
+                if (cl == PLATEAU && y >= top - 2 && y > 64) return Blocks.DIRT;
+                if (y <= 64) return h2(x, z, y) % 3 == 0 ? Blocks.MOSSY_COBBLESTONE : Blocks.DIORITE; // pied verdi
+                int r = y - 63 + vague(x, z);
+                int[] lits = palette == Palette.CRAIE ? LITS_CRAIE : LITS_CRAIE_PURE;
+                int couverture = palette == Palette.CRAIE ? 6 : 4;
+                for (int k : lits) {
+                    // lits de silex : fins, en pointillés
+                    if (r == k && h2(Math.floorDiv(x, 3), Math.floorDiv(z, 3), k) % 10 < couverture) return Blocks.TUFF;
+                }
+                // coulures verticales grises, discrètes
+                if (h2(Math.floorDiv(x, 2), Math.floorDiv(z, 2), 77) % 13 == 0 && y < top - 3) return Blocks.DIORITE;
+                return Blocks.CALCITE;
             }
             case MOHER -> {
-                if (cl == PLAGE || cl == FOND) return Blocks.STONE;
-                if (cl == PLATEAU && dessus) return Blocks.GRASS_BLOCK;
-                if (cl == PLATEAU && y >= top - 2) return Blocks.DIRT;
-                // grès et schistes en lits sombres
-                return switch (Math.floorMod(Math.floorDiv(y, 2), 6)) {
-                    case 0, 1 -> Blocks.DEEPSLATE;
-                    case 2, 4 -> Blocks.TUFF;
-                    case 3 -> Blocks.PACKED_MUD;
-                    default -> Blocks.COBBLED_DEEPSLATE;
-                };
+                if (cl == PLAGE || cl == FOND) return h2(x, z, 2) % 3 == 0 ? Blocks.COBBLESTONE : Blocks.STONE;
+                if (cl == PLATEAU && dessus && y > 63) return Blocks.GRASS_BLOCK;
+                if (cl == PLATEAU && y >= top - 2 && y > 64) return Blocks.DIRT;
+                int r = y - 60 + vague(x, z);
+                for (int k : BANCS_MOHER) if (r == k) return Blocks.DRIPSTONE_BLOCK;              // bancs de grès
+                int m = h2(Math.floorDiv(x, 2), Math.floorDiv(z, 2), Math.floorDiv(y, 3));
+                if (m % 4 == 0) return Blocks.COBBLED_DEEPSLATE;                                  // schistes
+                return m % 7 == 0 ? Blocks.TUFF : Blocks.DEEPSLATE;
             }
             case DUNE -> {
                 return y >= top - 6 ? Blocks.SAND : Blocks.SANDSTONE;
@@ -177,11 +193,12 @@ public final class LieuGrille implements LieuSculpte {
             case BAIE -> {
                 if (cl == ROC) {
                     if (dessus && h2(x, z, 0) % 3 == 0) return Blocks.GRASS_BLOCK;
-                    return h2(Math.floorDiv(x, 2), Math.floorDiv(z, 2), Math.floorDiv(y, 3)) % 3 != 0 ? Blocks.GRANITE : Blocks.STONE;
+                    int m = h2(Math.floorDiv(x, 2), Math.floorDiv(z, 2), Math.floorDiv(y, 3));
+                    return m % 3 == 0 ? Blocks.ANDESITE : (m % 5 == 0 ? Blocks.TUFF : Blocks.STONE);   // granite gris
                 }
-                if (cl == PRE) return dessus ? Blocks.GRASS_BLOCK : Blocks.DIRT;
-                if (cl == VASE && dessus) return Blocks.MUD;                              // vasière
-                return y >= 58 ? Blocks.SAND : Blocks.STONE;
+                if (cl == PRE) return dessus ? Blocks.GRASS_BLOCK : Blocks.DIRT;                  // herbus
+                if (cl == VASE && dessus) return Blocks.CLAY;                                     // tangue mouillée
+                return y >= 57 ? Blocks.SAND : Blocks.STONE;
             }
         }
         return Blocks.STONE;
@@ -224,7 +241,9 @@ public final class LieuGrille implements LieuSculpte {
         if (l == null) return;
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
         for (int[] v : l) {
-            niveau.setBlock(pos.set(v[0], v[1], v[2]), bloc(v[3], v[0], v[1], v[2], 999, false).defaultBlockState(), 2);
+            BlockState b = v[3] == CREUSE ? (v[1] <= 62 ? Blocks.WATER : Blocks.AIR).defaultBlockState()   // arches
+                    : bloc(v[3], v[0], v[1], v[2], 999, false).defaultBlockState();
+            niveau.setBlock(pos.set(v[0], v[1], v[2]), b, 2);
         }
     }
 }

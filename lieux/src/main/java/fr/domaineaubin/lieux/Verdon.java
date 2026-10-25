@@ -278,6 +278,7 @@ public final class Verdon implements LieuSculpte {
     @Override
     public BlockState sommet(int x, int y, int z, double rebord) {
         if (point(x, z).proche().t() > 1.0) return Blocks.GRASS_BLOCK.defaultBlockState();   // plateau remblayé
+        if (y > 63 && y >= rebord - 7) return Blocks.GRASS_BLOCK.defaultBlockState();       // tête de gorge peu profonde
         double f = fraction(y, rebord);
         if (f >= 0.50 && f < 0.72 && y > 63) return Blocks.GRASS_BLOCK.defaultBlockState();
         return strate(x, y, z, rebord);

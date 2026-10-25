@@ -7,41 +7,64 @@ import sys
 import numpy as np
 from PIL import Image, ImageDraw
 
-COUL = {"calcite": (223, 224, 220), "diorite": (188, 188, 188), "tuff": (108, 109, 102), "gravel": (131, 127, 126),
+COUL = {"mossy_cobblestone": (110, 125, 100), "cobblestone": (120, 120, 120), "andesite": (136, 136, 137),
+        "dripstone_block": (134, 107, 92), "clay": (160, 166, 179), "calcite": (223, 224, 220), "diorite": (188, 188, 188), "tuff": (108, 109, 102), "gravel": (131, 127, 126),
         "grass": (110, 150, 70), "dirt": (134, 96, 67), "stone": (125, 125, 125), "water": (55, 95, 190),
         "deepslate": (80, 80, 84), "packed_mud": (142, 106, 79), "cobbled_deepslate": (77, 77, 80),
         "sand": (219, 207, 163), "sandstone": (216, 203, 155), "mud": (60, 57, 61), "granite": (149, 103, 85)}
 PALETTE = {"etretat": "craie", "douvres": "craie_pure", "moher": "moher", "pilat": "dune", "mont_saint_michel": "baie"}
-PLATEAU, PLAGE, FOND, ROC, AIGUILLE, DUNE, VASE, CHENAL, PRE = 1, 2, 3, 4, 5, 6, 7, 8, 9
+PLATEAU, PLAGE, FOND, ROC, AIGUILLE, DUNE, VASE, CHENAL, PRE, SABLE = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 
 
 def h2(x, z, s=0):
     return ((x * 73856093) ^ (z * 19349663) ^ (s * 83492791)) & 1023
 
 
+def vague(x, z):
+    import math
+    return math.floor(0.8 * math.sin(x * 0.11 + z * 0.07) + 0.45 * math.sin(x * 0.031 - z * 0.053) + 0.5)
+
+
+LITS = {"craie": ([4, 8, 13, 17, 22, 26, 31, 35], 6), "craie_pure": ([6, 14, 22, 30], 4)}
+BANCS_MOHER = [3, 9, 14, 21, 27, 32, 38]
+
+
 def bloc(pal, cl, x, y, z, top, dessus):
-    """Copie (approchée pour les taches) de LieuGrille.strate / dessus."""
-    if cl == 0:
+    """Copie exacte de LieuGrille.bloc."""
+    if cl == 0 and pal != "baie":
         return "grass" if dessus else ("dirt" if y >= top - 3 else "stone")
     if pal in ("craie", "craie_pure"):
-        if cl in (PLAGE, FOND): return "gravel"
-        if cl == PLATEAU and dessus: return "grass"
-        if cl == PLATEAU and y >= top - 2: return "dirt"
-        pas = 5 if pal == "craie" else 8
-        if (y - 63) % pas == 0 and h2(x, z, y) % 7: return "tuff"
-        return "diorite" if h2(x // 3, z // 3, y // 4) % 5 == 0 else "calcite"
+        if cl == PLAGE: return "calcite" if h2(x, z, 0) % 6 == 0 else "gravel"
+        if cl == FOND: return "calcite" if h2(x, z, 1) % 3 == 0 else "gravel"
+        if cl == PLATEAU and dessus and y > 63: return "grass"
+        if cl == PLATEAU and y >= top - 2 and y > 64: return "dirt"
+        if y <= 64: return "mossy_cobblestone" if h2(x, z, y) % 3 == 0 else "diorite"
+        r = y - 63 + vague(x, z)
+        lits, couv = LITS[pal]
+        for k in lits:
+            if r == k and h2(x // 3, z // 3, k) % 10 < couv: return "tuff"
+        if h2(x // 2, z // 2, 77) % 13 == 0 and y < top - 3: return "diorite"
+        return "calcite"
     if pal == "moher":
-        if cl in (PLAGE, FOND): return "stone"
-        if cl == PLATEAU and dessus: return "grass"
-        if cl == PLATEAU and y >= top - 2: return "dirt"
-        return ["deepslate", "deepslate", "tuff", "packed_mud", "tuff", "cobbled_deepslate"][(y // 2) % 6]
+        if cl in (PLAGE, FOND): return "cobblestone" if h2(x, z, 2) % 3 == 0 else "stone"
+        if cl == PLATEAU and dessus and y > 63: return "grass"
+        if cl == PLATEAU and y >= top - 2 and y > 64: return "dirt"
+        r = y - 60 + vague(x, z)
+        if r in BANCS_MOHER: return "dripstone_block"
+        m = h2(x // 2, z // 2, y // 3)
+        if m % 4 == 0: return "cobbled_deepslate"
+        return "tuff" if m % 7 == 0 else "deepslate"
     if pal == "dune":
         return "sand" if y >= top - 6 else "sandstone"
     if pal == "baie":
-        if cl == ROC: return "grass" if (dessus and h2(x, z) % 3 == 0) else ("granite" if h2(x // 2, z // 2, y // 3) % 3 else "stone")
+        if cl == ROC:
+            if dessus and h2(x, z, 0) % 3 == 0: return "grass"
+            m = h2(x // 2, z // 2, y // 3)
+            return "andesite" if m % 3 == 0 else ("tuff" if m % 5 == 0 else "stone")
         if cl == PRE: return "grass" if dessus else "dirt"
-        if cl == VASE and dessus: return "mud"
-        return "sand" if y >= 58 else "stone"
+        if cl == VASE and dessus: return "clay"
+        if cl == 0: return "grass" if dessus else ("dirt" if y >= top - 3 else "stone")
+        return "sand" if y >= 57 else "stone"
     return "stone"
 
 

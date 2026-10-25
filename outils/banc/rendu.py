@@ -1,6 +1,7 @@
 """Rendu isométrique des VRAIS blocs générés par le banc d'essai (outils/banc/serveur.py).
 
-Usage : python3 outils/banc/rendu.py <lieu.npz> <image.png> [px_par_bloc] [--nord] [--carte] [x0 x1 z0 z1]
+Usage : python3 outils/banc/rendu.py <lieu.npz> <image.png> [px_par_bloc] [--nord] [--rot=1|2|3] [--carte] [x0 x1 z0 z1]
+(--rot tourne la zone d'un quart de tour par cran avant la vue : quatre angles en tout)
 Couleurs approchées par bloc (pas de textures ni de lumière). Vue depuis le sud-est, ou le nord-ouest avec --nord.
 --carte : vue du dessus ombrée (contrôle du plan seulement : une forme se juge en perspective).
 """
@@ -27,10 +28,14 @@ COUL = {
     "obsidian": (20, 18, 30), "bedrock": (60, 60, 60), "netherrack": (100, 40, 40),
 }
 FLUIDE = {"water", "bubble_column", "seagrass", "tall_seagrass", "kelp", "kelp_plant"}
-PLANTES = ("grass", "tall_grass", "fern", "large_fern", "dandelion", "poppy", "flower", "tulip", "daisy", "orchid",
-           "allium", "bluet", "cornflower", "lily", "dead_bush", "sugar_cane", "sweet_berry", "mushroom", "vine",
-           "glow_lichen", "pumpkin", "melon", "torch", "carpet", "petals", "sapling", "bush", "lichen", "rail", "wheat",
-           "carrots", "potatoes", "beetroots", "hanging_roots", "moss_carpet", "pointed_dripstone", "button", "pressure_plate")
+PLANTES = {"grass", "short_grass", "tall_grass", "fern", "large_fern", "dandelion", "poppy", "blue_orchid", "allium",
+           "azure_bluet", "oxeye_daisy", "cornflower", "lily_of_the_valley", "sunflower", "lilac", "rose_bush", "peony",
+           "dead_bush", "sugar_cane", "sweet_berry_bush", "brown_mushroom", "red_mushroom", "vine", "glow_lichen",
+           "torch", "wall_torch", "pink_petals", "hanging_roots", "moss_carpet", "pointed_dripstone", "snow",
+           "cave_vines", "cave_vines_plant", "small_dripleaf", "big_dripleaf", "big_dripleaf_stem", "spore_blossom",
+           "wheat", "carrots", "potatoes", "beetroots", "seagrass", "tall_seagrass", "kelp", "kelp_plant", "lily_pad"}
+SUFFIXES_PLANTES = ("_sapling", "_tulip", "_carpet", "_button", "_pressure_plate", "_rail", "rail", "_coral",
+                    "_coral_fan", "_wall_fan", "_banner", "_sign")
 
 
 def couleur(nom):
@@ -49,13 +54,13 @@ def classes(noms):
     k = np.zeros(len(noms), np.uint8)
     for i, n in enumerate(noms):
         c = n.split(":")[-1]
-        if c in ("air", "cave_air", "void_air") or any(p in c for p in PLANTES): k[i] = 0
+        if c in ("air", "cave_air", "void_air") or (c in PLANTES and c not in FLUIDE) or c.endswith(SUFFIXES_PLANTES): k[i] = 0
         elif c in FLUIDE: k[i] = 1
         else: k[i] = 2
     return k
 
 
-def rendu(npz, out, K=3, nord=False, carte=False, fenetre=None):
+def rendu(npz, out, K=3, nord=False, carte=False, fenetre=None, rot=0):
     d = np.load(npz)
     noms = [str(n) for n in d["noms"]]; B = d["blocs"]; x0, y0, z0 = int(d["x0"]), int(d["y0"]), int(d["z0"])
     if fenetre:
@@ -63,6 +68,8 @@ def rendu(npz, out, K=3, nord=False, carte=False, fenetre=None):
         B = B[c - z0:e - z0, :, a - x0:b - x0]; x0, z0 = a, c
     if nord:
         B = B[::-1, :, ::-1]
+    if rot:
+        B = np.ascontiguousarray(np.rot90(B, rot, axes=(0, 2)))
     kl = classes(noms)[B]                                      # [z, y, x]
     cols = np.array([couleur(n) or (0, 0, 0) for n in noms], float)
     D, H, W = B.shape
@@ -114,4 +121,5 @@ def rendu(npz, out, K=3, nord=False, carte=False, fenetre=None):
 if __name__ == "__main__":
     a = [v for v in sys.argv[1:] if not v.startswith("--")]
     fen = list(map(int, a[3:7])) if len(a) >= 7 else None
-    rendu(a[0], a[1], int(a[2]) if len(a) > 2 else 3, "--nord" in sys.argv, "--carte" in sys.argv, fen)
+    rot = next((int(v[6:]) for v in sys.argv if v.startswith("--rot=")), 0)
+    rendu(a[0], a[1], int(a[2]) if len(a) > 2 else 3, "--nord" in sys.argv, "--carte" in sys.argv, fen, rot)
