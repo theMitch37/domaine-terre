@@ -1,60 +1,20 @@
 180167 terres, 186 grands lacs (1 s)
-15522 tuiles traversées par une côte (6 s)
-tuiles pleines : 50846 terre, 130510 mer (132 s)
-  0/15522 (132 s)
-  1000/15522 (133 s)
-  2000/15522 (135 s)
-  3000/15522 (138 s)
-  4000/15522 (141 s)
-  5000/15522 (145 s)
-  6000/15522 (149 s)
-  7000/15522 (152 s)
-  8000/15522 (156 s)
-  9000/15522 (160 s)
-  10000/15522 (164 s)
-  11000/15522 (167 s)
-  12000/15522 (168 s)
-  13000/15522 (169 s)
-  14000/15522 (170 s)
-concurrent.futures.process._RemoteTraceback: 
-"""
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/process.py", line 264, in _process_worker
-    r = call_item.fn(*call_item.args, **call_item.kwargs)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/process.py", line 213, in _process_chunk
-    return [fn(*args) for args in chunk]
-            ^^^^^^^^^
-  File "/home/runner/work/domaine-terre/domaine-terre/outils/cotes_fines.py", line 87, in raster
-    terres = [shapely.clip_by_rect(_POLYS[i], lon0, lat0 - PAS, lon0 + PAS, lat0) for i in _ARBRE.query(boite)]
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/shapely/constructive.py", line 414, in clip_by_rect
-    return lib.clip_by_rect(
-           ^^^^^^^^^^^^^^^^^
-shapely.errors.GEOSException: IllegalArgumentException: Invalid number of points in LinearRing found 3 - must be 0 or >= 4
-"""
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/home/runner/work/domaine-terre/domaine-terre/outils/cotes_fines.py", line 150, in <module>
-    main()
-  File "/home/runner/work/domaine-terre/domaine-terre/outils/cotes_fines.py", line 127, in main
-    for n, (idx, m) in enumerate(ex.map(raster, mixtes, chunksize=16)):
-                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/process.py", line 636, in _chain_from_iterable_of_lists
-    for element in iterable:
-                   ^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
-    yield _result_or_cancel(fs.pop())
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
-    return fut.result(timeout)
-           ^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/_base.py", line 449, in result
-    return self.__get_result()
-           ^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
-    raise self._exception
-shapely.errors.GEOSException: IllegalArgumentException: Invalid number of points in LinearRing found 3 - must be 0 or >= 4
-ÉCHEC
+15522 tuiles traversées par une côte (15 s)
+tuiles pleines : 50846 terre, 130510 mer (298 s)
+  0/15522 (298 s)
+  1000/15522 (300 s)
+  2000/15522 (303 s)
+  3000/15522 (308 s)
+  4000/15522 (313 s)
+  5000/15522 (320 s)
+  6000/15522 (326 s)
+  7000/15522 (332 s)
+  8000/15522 (338 s)
+  9000/15522 (344 s)
+  10000/15522 (350 s)
+  11000/15522 (356 s)
+  12000/15522 (358 s)
+  13000/15522 (360 s)
+  14000/15522 (362 s)
+  15000/15522 (364 s)
+écrit src/main/resources/domaine_terre/carte/cotes_fines.bin : 5.8 Mo, 15441 tuiles mixtes, 366 s
