@@ -357,7 +357,8 @@ def pilat():
     plage = (db >= 0) & (u <= 0)
     y = np.where(plage, np.minimum(np.maximum(y, 63.5 + 0.5 * lisse(db / 4)), 64.4), y)
     typ = np.zeros(X.shape, np.int32)
-    sable = (dune > 0.4) & (db >= 0)
+    # tout le versant au vent est en sable jusqu'à la crête (sinon un anneau d'herbe au pied de la dune)
+    sable = (db >= 0) & (longueur > 0.05) & (((u > 0) & (db < crete + 2)) | (dune > 0.4))
     typ[sable] = DUNE | TAILLEE
     typ[plage] = SABLE | TAILLEE
     typ[db < 0] |= INONDE
@@ -407,7 +408,8 @@ def mont_saint_michel():
     d_ouvert = distance_polyligne(X, Z, [RIVAGE[-1], RIVAGE[0]])[0]  # distance à l'ouverture sur la mer
     # estran : sable sec à y 63,5 près du fond de la baie, qui descend doucement vers le large (bords lobés)
     lobes = 14 * bruit(X, Z, 26, 51) + 6 * bruit(X, Z, 9, 52)
-    vers_large = np.clip((95 - d_ouvert + lobes) / 70, 0, 1)         # 0 au fond de la baie, 1 près de l'ouverture
+    # marée basse : sable sur presque toute la baie, il ne s'enfonce sous l'eau qu'en approchant du large
+    vers_large = np.clip((38 - d_ouvert + lobes) / 40, 0, 1)         # 0 au fond de la baie, 1 près de l'ouverture
     estran = 63.6 - 4.2 * lisse(vers_large) ** 1.4
     # chenaux qui serpentent (Couesnon, Sée-Sélune), plus larges vers le large
     chenal = np.zeros(X.shape, bool); fond_chenal = np.full(X.shape, 99.0)
@@ -431,7 +433,7 @@ def mont_saint_michel():
     y = np.where(herbus & ~chenal, 63.7 + 0.3 * lisse(d_rive / 4), y)
     # la côte autour : rien ne change hors de la baie, sauf un raccord doux là où le terrain est plus bas
     d_dehors = ndimage.distance_transform_edt(~dedans)
-    raccord = ~dedans & (d_dehors < 10) & (h < 64.0)
+    raccord = ~dedans & (d_dehors < 10) & (h < 64.0) & (sd >= 0)        # seulement la terre ferme du mod
     y = np.where(raccord, np.maximum(h, 63.7), y)
     typ = np.zeros(X.shape, np.int32)
     tangue = (bruit(X, Z, 10, 57) > 0.35) & (vers_large > 0.1)
