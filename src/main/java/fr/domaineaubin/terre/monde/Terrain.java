@@ -53,12 +53,14 @@ public final class Terrain {
     private final CarteTerre carte;
     private final ImprovedNoise bruitCote;
     private final ImprovedNoise bruitDetail;
+    private final CotesFines cotes;
 
     private Terrain(CarteTerre carte) {
         this.carte = carte;
         RandomSource r = RandomSource.create(20261014L);
-        this.bruitCote = new ImprovedNoise(r);
+        this.bruitCote = new ImprovedNoise(r);       // gardé (même hasard pour bruitDetail) ; inutile avec les côtes fines
         this.bruitDetail = new ImprovedNoise(r);
+        this.cotes = CotesFines.charger();
     }
 
     public CarteTerre carte() { return carte; }
@@ -104,11 +106,23 @@ public final class Terrain {
     public static double x(double lon) { return lon * BLOCS_PAR_DEGRE; }
     public static double z(double lat) { return -lat * BLOCS_PAR_DEGRE; }
 
-    /** Distance signée à la côte (minutes d'arc), avec un bruit qui découpe le trait de côte. */
+    /** Minutes d'arc par case de la carte des côtes fines. */
+    private static final double MIN_PAR_CASE = 60.0 / CotesFines.CASES_PAR_DEGRE;
+
+    /**
+     * Distance signée à la côte (minutes d'arc, positive dans les terres).
+     * 0.3.2 : le vrai trait de côte au bloc près (GSHHG full) près des côtes, sans bruit inventé ; plus loin,
+     * la carte 3' donne l'ordre de grandeur, avec le signe de la carte fine.
+     */
     public double distanceCote(int x, int z) {
-        double sd = carte.cote(lon(x), lat(z));
-        double n = bruitCote.noise(x / 37.0, 0, z / 37.0) * 0.8 + bruitCote.noise(x / 11.0, 10, z / 11.0) * 0.35;
-        return sd + n;
+        double grossiere = carte.cote(lon(x), lat(z));
+        if (cotes == null) {
+            return grossiere + bruitCote.noise(x / 37.0, 0, z / 37.0) * 0.8 + bruitCote.noise(x / 11.0, 10, z / 11.0) * 0.35;
+        }
+        double fine = cotes.distance(lon(x + 0.5), lat(z + 0.5));
+        if (Math.abs(fine) < CotesFines.RAYON) return fine * MIN_PAR_CASE;
+        double bord = CotesFines.RAYON * MIN_PAR_CASE;
+        return fine > 0 ? Math.max(grossiere, bord) : Math.min(grossiere, -bord);
     }
 
     public double altitudeReelle(int x, int z) {

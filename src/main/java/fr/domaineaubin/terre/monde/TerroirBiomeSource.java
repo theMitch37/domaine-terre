@@ -258,7 +258,7 @@ public class TerroirBiomeSource extends BiomeSource {
             String type = fin >= 0 ? chemin.substring(fin + 1) : chemin;
             // plages et côtes rocheuses : seulement au bord de la vraie mer (moins de 3' de la côte, hors lac).
             // Ailleurs (lac Mead, plateaux), le bruit vanilla inventait des côtes rocheuses grises et enneigées.
-            boolean vraieCote = COTES.contains(type) && !lac && Terrain.get().carte().cote(lonF, latF) < 3.0;
+            boolean vraieCote = COTES.contains(type) && !lac && Terrain.get().distanceCote(bx, bz) < 3.0;
             if (!OCEANS.contains(type) && !CAVERNES.contains(type) && !vraieCote) {
                 int b = Terrain.get().carte().biome(lonF, latF);
                 Holder<Biome>[] tab = t.fixes().get(terroir);

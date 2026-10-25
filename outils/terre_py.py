@@ -1,7 +1,7 @@
 """Copie Python du terrain du mod Terre (trait de côte et hauteur de base), pour placer et contrôler les lieux.
 
 Reproduit au bloc près : Random de Java (LegacyRandomSource), ImprovedNoise de Minecraft, la carte des côtes
-(cotes.png, bilinéaire) et la hauteur de base (relief.png bicubique + détail). Les fleuves ne sont pas copiés.
+(côtes fines GSHHG au bloc près, sinon cotes.png bilinéaire) et la hauteur de base (relief.png bicubique + détail). Les fleuves ne sont pas copiés.
 """
 import os
 import numpy as np
@@ -94,16 +94,87 @@ def _idx(g, ix, iy):
     return g[np.clip(iy, 0, H - 1), np.mod(ix, W)]
 
 
-def distance_cote(x, z):
-    """Terrain.distanceCote : distance signée à la côte en minutes d'arc (positive dans les terres)."""
+def _distance_grossiere(x, z):
     cotes, _ = _cartes()
     lon, lat = x / BPD, -z / BPD
     fx = (lon + 180) / 360 * 7200 - 0.5; fy = (90 - lat) / 180 * 3600 - 0.5
     ix, iy = np.floor(fx).astype(int), np.floor(fy).astype(int); tx, ty = fx - ix, fy - iy
     a, b, c, d = _idx(cotes, ix, iy), _idx(cotes, ix + 1, iy), _idx(cotes, ix, iy + 1), _idx(cotes, ix + 1, iy + 1)
-    sd = (a + (b - a) * tx) * (1 - ty) + (c + (d - c) * tx) * ty
-    n = BRUIT_COTE.noise(x / 37.0, 0, z / 37.0) * 0.8 + BRUIT_COTE.noise(x / 11.0, 10, z / 11.0) * 0.35
-    return sd + n
+    return (a + (b - a) * tx) * (1 - ty) + (c + (d - c) * tx) * ty
+
+
+# ---------------------------------------------------------------- côtes fines (CotesFines.java, outils/cotes_fines.py)
+RAYON_FIN = 48
+_fines = None
+
+
+def _cotes_fines():
+    global _fines
+    if _fines is None:
+        import struct, zlib
+        chemin = CARTE + "cotes_fines.bin"
+        if not os.path.exists(chemin):
+            _fines = False
+            return _fines
+        b = open(chemin, "rb").read()
+        assert b[:4] == b"COTE"
+        _, _, T, TX, TY = struct.unpack_from("<idiii", b, 4)
+        o = 4 + struct.calcsize("<idiii")
+        etat = np.frombuffer(b, np.uint8, TX * TY, o).reshape(TY, TX); o += TX * TY
+        n, = struct.unpack_from("<i", b, o); o += 4
+        tab = np.frombuffer(b, "<i4", 2 * n, o).reshape(n, 2); o += 8 * n
+        pos = {}
+        for k, L in tab:
+            pos[int(k)] = (o, int(L)); o += int(L)
+        _fines = dict(b=b, T=T, TX=TX, TY=TY, etat=etat, pos=pos, zlib=zlib)
+    return _fines
+
+
+def _masque_fin(gx0, gy0, W, H):
+    """Terre (True) des cases [gx0, gx0+W) x [gy0, gy0+H)."""
+    F = _cotes_fines(); T, TX, TY = F["T"], F["TX"], F["TY"]
+    m = np.zeros((H, W), bool)
+    for ty in range(gy0 // T, (gy0 + H - 1) // T + 1):
+        for tx in range(gx0 // T, (gx0 + W - 1) // T + 1):
+            ya, yb = max(ty * T, gy0), min((ty + 1) * T, gy0 + H)
+            xa, xb = max(tx * T, gx0), min((tx + 1) * T, gx0 + W)
+            if ty < 0 or ty >= TY:
+                t = np.full((T, T), ty >= TY)
+            else:
+                e = F["etat"][ty, tx % TX]
+                if e != 2:
+                    t = np.full((T, T), bool(e))
+                else:
+                    o, L = F["pos"][int(ty * TX + tx % TX)]
+                    t = np.unpackbits(np.frombuffer(F["zlib"].decompress(F["b"][o:o + L]), np.uint8)).reshape(T, T).astype(bool)
+            m[ya - gy0:yb - gy0, xa - gx0:xb - gx0] = t[ya - ty * T:yb - ty * T, xa - tx * T:xb - tx * T]
+    return m
+
+
+def distance_fine(x, z):
+    """CotesFines.distance en cases (≈ blocs à 1:250), bornée à ±48, au 1/16 près comme en Java."""
+    from scipy import ndimage
+    x = np.asarray(x, float); z = np.asarray(z, float)
+    gx = np.floor(x + 0.5 + 180 * BPD).astype(np.int64); gy = np.floor(z + 0.5 + 90 * BPD).astype(np.int64)
+    M = RAYON_FIN
+    gx0, gy0 = int(gx.min()) - M, int(gy.min()) - M
+    W, H = int(gx.max()) - gx0 + M + 1, int(gy.max()) - gy0 + M + 1
+    m = _masque_fin(gx0, gy0, W, H)
+    d = np.where(m, ndimage.distance_transform_edt(m) - 0.5, -(ndimage.distance_transform_edt(~m) - 0.5))
+    d = np.clip(d, -M, M)
+    return np.round(d[gy - gy0, gx - gx0] * 16) / 16
+
+
+def distance_cote(x, z):
+    """Terrain.distanceCote : distance signée à la côte en minutes d'arc (positive dans les terres)."""
+    x = np.asarray(x, float); z = np.asarray(z, float)
+    sd = _distance_grossiere(x, z)
+    if not _cotes_fines():
+        n = BRUIT_COTE.noise(x / 37.0, 0, z / 37.0) * 0.8 + BRUIT_COTE.noise(x / 11.0, 10, z / 11.0) * 0.35
+        return sd + n
+    f = distance_fine(x, z)
+    mpc = 60 / 445.28; bord = RAYON_FIN * mpc
+    return np.where(np.abs(f) < RAYON_FIN, f * mpc, np.where(f > 0, np.maximum(sd, bord), np.minimum(sd, -bord)))
 
 
 def _cub(p0, p1, p2, p3, t):
