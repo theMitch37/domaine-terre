@@ -90,6 +90,13 @@ public final class ReliefLieu {
         return Mth.lerp(ty, Mth.lerp(tx, v(g, ix, iy), v(g, ix + 1, iy)), Mth.lerp(tx, v(g, ix, iy + 1), v(g, ix + 1, iy + 1)));
     }
 
+    /** Valeur brute de la grille i à la case la plus proche de (lon, lat) (grilles de classes, de drapeaux). */
+    public int valeur(int i, double lon, double lat) {
+        charger();
+        int ix = Mth.floor((lon - lon0) / pasLon), iy = Mth.floor((lat0 - lat) / pasLat);
+        return grilles[i][Mth.clamp(iy, 0, hauteur - 1) * largeur + Mth.clamp(ix, 0, largeur - 1)];
+    }
+
     private double v(short[] g, int x, int y) {
         return g[Mth.clamp(y, 0, hauteur - 1) * largeur + Mth.clamp(x, 0, largeur - 1)];
     }

@@ -59,7 +59,8 @@ def modele(X, Z):
     reb = blocs(p)
     inten = 1 - lis((sb - 118) / 30)
     pres_v = 1 - lis((sb - 140) / 40)
-    pres_a = lis((lat - 43.706) / 0.010)
+    inten_a = lis((lat - 43.712) / 0.012)
+    pres_a = lis((lat - 43.700) / 0.010)
 
     def branche(dist, w0, inten, pres, graine):
         vv = 1 - lis(inten / 0.6)
@@ -78,7 +79,7 @@ def modele(X, Z):
         y = y + (FOND - y) * lit
         return h + (y - h) * pres, t, pres
     yv, tv, pv = branche(dv, W_V, inten, pres_v, 1)
-    ya, ta, pa_ = branche(da, W_A, np.ones_like(da), pres_a, 3)
+    ya, ta, pa_ = branche(da, W_A, inten_a, pres_a, 3)
     y = np.minimum(yv, ya)
     # lac de Sainte-Croix
     # le lac est au niveau de la mer (y 62) au lieu de sa vraie hauteur (y ~79) : la cuvette autour reprend le

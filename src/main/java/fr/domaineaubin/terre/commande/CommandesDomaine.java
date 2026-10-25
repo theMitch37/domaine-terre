@@ -54,6 +54,11 @@ public final class CommandesDomaine {
         LIEUX.put("grand_canyon", new double[]{36.107, -112.113});
         LIEUX.put("verdon", new double[]{43.800, 6.310});
         LIEUX.put("sainte_croix", new double[]{43.7655, 6.1525});
+        LIEUX.put("etretat", new double[]{49.700, 0.205});
+        LIEUX.put("moher", new double[]{52.968, -9.415});
+        LIEUX.put("douvres", new double[]{51.1409, 1.3542});
+        LIEUX.put("pilat", new double[]{44.589, -1.200});
+        LIEUX.put("mont_saint_michel", new double[]{48.6121, -1.5114});
         LIEUX.put("amazonie", new double[]{-3.465, -62.215});
         LIEUX.put("rio", new double[]{-22.907, -43.173});
         LIEUX.put("andes", new double[]{-13.163, -72.545});

@@ -16,8 +16,8 @@
 - API for the *Unique Places* addon.
 
 ### Important
+- **No extra dependency**: only Forge 1.20.1.
 - **Start a new world.** Existing worlds still open (their scale is saved), but newly generated chunks will use the new biome map and won't match the old ones.
-- Recommended companion mod: **Ecologics** (required by the modpack's terroir datapack).
 
 Land cover data: Copernicus Global Land Service, Land Cover 100m v3.0.1 (2019), CC BY 4.0.
 
@@ -39,7 +39,7 @@ Land cover data: Copernicus Global Land Service, Land Cover 100m v3.0.1 (2019), 
 - API pour l'addon *Lieux uniques*.
 
 ### Important
+- **Aucune dépendance en plus** : seulement Forge 1.20.1.
 - **Créez un nouveau monde.** Les anciens mondes s'ouvrent toujours (leur échelle est enregistrée), mais les nouveaux chunks suivront la nouvelle carte des biomes et ne raccorderont pas avec les anciens.
-- Mod conseillé : **Ecologics** (nécessaire au datapack des terroirs du modpack).
 
 Données de couverture du sol : Copernicus Global Land Service, Land Cover 100m v3.0.1 (2019), CC BY 4.0.

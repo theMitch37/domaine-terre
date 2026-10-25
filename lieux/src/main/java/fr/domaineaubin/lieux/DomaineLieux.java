@@ -29,6 +29,12 @@ public class DomaineLieux {
         FEATURES.register(bus);
         LieuxTerre.inscrire(GrandCanyon.INSTANCE);
         LieuxTerre.inscrire(Verdon.INSTANCE);
+        // lot 1 (Europe) : lieux en grille, calculés par outils/lieux_cotiers.py
+        LieuxTerre.inscrire(new LieuGrille("etretat", LieuGrille.Palette.CRAIE));
+        LieuxTerre.inscrire(new LieuGrille("moher", LieuGrille.Palette.MOHER));
+        LieuxTerre.inscrire(new LieuGrille("douvres", LieuGrille.Palette.CRAIE_PURE));
+        LieuxTerre.inscrire(new LieuGrille("pilat", LieuGrille.Palette.DUNE));
+        LieuxTerre.inscrire(new LieuGrille("mont_saint_michel", LieuGrille.Palette.BAIE));
         LOGGER.info("Domaine d'Aubin - Lieux uniques : {} lieu(x) inscrit(s).", LieuxTerre.liste().size());
     }
 }

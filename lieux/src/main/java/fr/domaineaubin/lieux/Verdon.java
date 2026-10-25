@@ -90,10 +90,11 @@ public final class Verdon implements LieuSculpte {
         // en amont du Point Sublime, la gorge s'ouvre en vallée en V puis s'efface avant Castellane
         double inten = 1.0 - lisse((sb - 118.0) / 30.0);
         double presV = 1.0 - lisse((sb - 140.0) / 40.0);
-        // l'Artuby s'efface vers le sud
-        double presA = lisse((lat - 43.706) / 0.010);
+        // l'Artuby s'ouvre en vallée en V vers le sud, puis s'efface (comme le Verdon en amont)
+        double intenA = lisse((lat - 43.712) / 0.012);
+        double presA = lisse((lat - 43.700) / 0.010);
         Branche v = branche(x, z, dv, W_V, inten, presV, bruitV, bruitV2);
-        Branche a = branche(x, z, da, W_A, 1.0, presA, bruitA, bruitA2);
+        Branche a = branche(x, z, da, W_A, intenA, presA, bruitA, bruitA2);
         return new Point(e, rebord, lac, v, a, lisse(relief.distanceBord(lon, lat) / FONDU));
     }
 

@@ -48,7 +48,9 @@ public class StratesFeature extends Feature<NoneFeatureConfiguration> {
                     if (sommet > t) {
                         for (int y = sommet; y > t; y--) {
                             BlockState b = niveau.getBlockState(pos.set(x, y, z));
-                            if (b.getFluidState().isEmpty() && !b.isAir()) niveau.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
+                            // sous le niveau de la mer, on creuse de l'eau (le moteur ne la fait pas couler pendant la génération)
+                            if (b.getFluidState().isEmpty() && !b.isAir())
+                                niveau.setBlock(pos, (y <= 62 ? Blocks.WATER : Blocks.AIR).defaultBlockState(), 2);
                         }
                         sommet = t;
                     } else if (sommet < t && cible >= min) {
@@ -77,6 +79,13 @@ public class StratesFeature extends Feature<NoneFeatureConfiguration> {
                     niveau.setBlock(pos, y == sommet ? lieu.sommet(x, y, z, rebord) : lieu.strate(x, y, z, rebord), 2);
                     modifie = true;
                 }
+            }
+        }
+        // blocs en surplomb (arches) des lieux qui touchent ce chunk
+        for (Lieu l : LieuxTerre.liste()) {
+            if (l instanceof LieuSculpte lieu && (lieu.concerne(x0, z0) || lieu.concerne(x0 + 15, z0)
+                    || lieu.concerne(x0, z0 + 15) || lieu.concerne(x0 + 15, z0 + 15))) {
+                lieu.poser(niveau, x0, z0);
             }
         }
         return modifie;

@@ -2,6 +2,11 @@
  "replace": false,
  "values": [
   "domaine_terre_lieux:grand_canyon",
-  "domaine_terre_lieux:verdon"
+  "domaine_terre_lieux:verdon",
+  "domaine_terre_lieux:etretat",
+  "domaine_terre_lieux:moher",
+  "domaine_terre_lieux:douvres",
+  "domaine_terre_lieux:pilat",
+  "domaine_terre_lieux:mont_saint_michel"
  ]
 }

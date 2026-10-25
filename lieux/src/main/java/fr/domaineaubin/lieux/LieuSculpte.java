@@ -48,6 +48,13 @@ public interface LieuSculpte extends Lieu {
         return y >= rebord - 2;
     }
 
+    /**
+     * Blocs en surplomb (arches…) que le relief, une hauteur par colonne, ne peut pas décrire.
+     * Appelé une fois par chunk qui touche le lieu, après la sculpture ; ne poser que dans ce chunk.
+     */
+    default void poser(net.minecraft.world.level.WorldGenLevel niveau, int x0, int z0) {
+    }
+
     /** y le plus bas recoloré. */
     int fondStrates();
 
