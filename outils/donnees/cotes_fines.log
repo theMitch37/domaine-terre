@@ -1,13 +1,21 @@
 180167 terres, 186 grands lacs (1 s)
-15522 tuiles traversées par une côte (15 s)
-tuiles pleines : 50846 terre, 130510 mer (299 s)
-  0/15522 (299 s)
-  1000/15522 (302 s)
-  2000/15522 (314 s)
-  3000/15522 (336 s)
-  4000/15522 (361 s)
-  5000/15522 (396 s)
-  6000/15522 (436 s)
+15522 tuiles traversées par une côte (6 s)
+tuiles pleines : 50846 terre, 130510 mer (132 s)
+  0/15522 (132 s)
+  1000/15522 (133 s)
+  2000/15522 (135 s)
+  3000/15522 (138 s)
+  4000/15522 (141 s)
+  5000/15522 (145 s)
+  6000/15522 (149 s)
+  7000/15522 (152 s)
+  8000/15522 (156 s)
+  9000/15522 (160 s)
+  10000/15522 (164 s)
+  11000/15522 (167 s)
+  12000/15522 (168 s)
+  13000/15522 (169 s)
+  14000/15522 (170 s)
 concurrent.futures.process._RemoteTraceback: 
 """
 Traceback (most recent call last):
@@ -17,24 +25,21 @@ Traceback (most recent call last):
   File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/process.py", line 213, in _process_chunk
     return [fn(*args) for args in chunk]
             ^^^^^^^^^
-  File "/home/runner/work/domaine-terre/domaine-terre/outils/cotes_fines.py", line 86, in raster
-    terres = [_POLYS[i].intersection(boite) for i in _ARBRE.query(boite)]
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/shapely/decorators.py", line 184, in wrapper
-    result = func(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/shapely/geometry/base.py", line 706, in intersection
-    return shapely.lib.intersection_scalar(self, other)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-shapely.errors.GEOSException: TopologyException: side location conflict at -69.748549999999994 43.761505. This can occur if the input geometry is invalid.
+  File "/home/runner/work/domaine-terre/domaine-terre/outils/cotes_fines.py", line 87, in raster
+    terres = [shapely.clip_by_rect(_POLYS[i], lon0, lat0 - PAS, lon0 + PAS, lat0) for i in _ARBRE.query(boite)]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/shapely/constructive.py", line 414, in clip_by_rect
+    return lib.clip_by_rect(
+           ^^^^^^^^^^^^^^^^^
+shapely.errors.GEOSException: IllegalArgumentException: Invalid number of points in LinearRing found 3 - must be 0 or >= 4
 """
 
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "/home/runner/work/domaine-terre/domaine-terre/outils/cotes_fines.py", line 149, in <module>
+  File "/home/runner/work/domaine-terre/domaine-terre/outils/cotes_fines.py", line 150, in <module>
     main()
-  File "/home/runner/work/domaine-terre/domaine-terre/outils/cotes_fines.py", line 126, in main
+  File "/home/runner/work/domaine-terre/domaine-terre/outils/cotes_fines.py", line 127, in main
     for n, (idx, m) in enumerate(ex.map(raster, mixtes, chunksize=16)):
                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/process.py", line 636, in _chain_from_iterable_of_lists
@@ -51,5 +56,5 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^
   File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
     raise self._exception
-shapely.errors.GEOSException: TopologyException: side location conflict at -69.748549999999994 43.761505. This can occur if the input geometry is invalid.
+shapely.errors.GEOSException: IllegalArgumentException: Invalid number of points in LinearRing found 3 - must be 0 or >= 4
 ÉCHEC
