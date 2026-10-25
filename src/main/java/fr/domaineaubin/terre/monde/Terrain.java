@@ -312,7 +312,9 @@ public final class Terrain {
         Colonne c = colonne(x, z);
         // un lieu qui veut de la terre en mer (aiguille, arche, Mont-Saint-Michel) la garde ; partout ailleurs, plafond
         if (c.sd() >= 0 || c.h() >= PLAFOND_MER + 1.0) return 1.0;
-        return Mth.clamp(PLAFOND_MER + 0.5 - y, -1.0, 1.0);
+        // franchement négatif : les « barrières » des aquifères vanilla ajoutent de la densité près des niveaux d'eau
+        // et refaisaient des îlots d'un bloc à y 62 avec un plafond trop doux (-0,5)
+        return y <= PLAFOND_MER ? 1.0 : -20.0;
     }
 
     /**

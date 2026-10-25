@@ -56,7 +56,7 @@ public record TerreFunction(Sortie sortie) implements DensityFunction.SimpleFunc
         CONTINENTS("continents", -1.1, 0.5),
         EROSION("erosion", -1.0, 1.0),
         INONDATION("inondation", 0.0, 2.0),
-        PLAFOND("plafond", -1.0, 1.0),
+        PLAFOND("plafond", -20.0, 1.0),
         PLANCHER("plancher", -1.0, 0.5);
 
         public static final Codec<Sortie> CODEC = StringRepresentable.fromEnum(Sortie::values);
