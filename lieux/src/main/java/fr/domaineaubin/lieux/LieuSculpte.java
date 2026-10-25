@@ -28,6 +28,14 @@ public interface LieuSculpte extends Lieu {
         return Double.NaN;
     }
 
+    /**
+     * Zone protégée du hasard vanilla : aucun vide (grotte, ravin, poche d'eau) n'y est laissé sous la surface visée.
+     * Par défaut : le biome du lieu, là où le lieu tient entièrement le terrain.
+     */
+    default boolean protege(int x, int z) {
+        return dansBiome(x, z) && poids(x, z) > 0.9;
+    }
+
     /** Bloc de la paroi à la hauteur y (sous le rebord). */
     BlockState strate(int x, int y, int z, double rebord);
 

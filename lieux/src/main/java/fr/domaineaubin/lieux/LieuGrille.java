@@ -22,7 +22,8 @@ import java.util.zip.GZIPInputStream;
 /**
  * Lieu « en grille » : toute la forme est calculée hors du jeu (outils/lieux_cotiers.py), au bloc près en 1:250,
  * sur le trait de côte exact du mod. Ce code ne fait que relire les grilles (ReliefLieu) :
- * 0 = écart de hauteur avec le terrain du mod (x 16), 1 = dessus des couches (x 16), 2 = classe + drapeaux.
+ * 0 = écart de hauteur avec le terrain du mod (x 16), 1 = dessus des couches (x 16), 2 = classe + drapeaux,
+ * 3 = emprise du lieu (x 1000, voir {@link fr.domaineaubin.terre.api.Lieu#poids}).
  * Les arches (surplombs) sont dans un fichier .vox à part. Le rendu outils/rendu_grille.py relit les mêmes données.
  */
 public final class LieuGrille implements LieuSculpte {
@@ -75,13 +76,20 @@ public final class LieuGrille implements LieuSculpte {
     }
 
     @Override
+    public double poids(int x, int z) {
+        if (!concerne(x, z)) return 0.0;
+        return relief.echant(3, Terrain.lon(x), Terrain.lat(z)) / 1000.0;
+    }
+
+    @Override
     public boolean dansBiome(int x, int z) {
         return concerne(x, z) && (type(x, z) & BIOME) != 0;
     }
 
     @Override
     public boolean inonde(int x, int z, double hauteur) {
-        return (type(x, z) & INONDE) != 0 || hauteur < 62.5;
+        // seulement l'eau voulue (mer au pied des falaises, baie) : inonder tout ce qui est bas dessinait le rectangle
+        return (type(x, z) & INONDE) != 0;
     }
 
     /** Le biome couvre toute la hauteur des falaises. */

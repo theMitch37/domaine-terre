@@ -52,8 +52,12 @@ def ecrire(nom, X, Z, x0, z0, y, h, sommet, typ, vox=None):
     H, W = X.shape
     lon0, lat0, pas = (x0 - 0.5) / BPD, (-z0 + 0.5) / BPD, 1 / BPD
     delta = np.clip(np.round((y - h) * 16), -32000, 32000)
+    # emprise du lieu (Lieu.poids) : 1 là où il agit, puis passage progressif au terrain libre du mod
+    agit = (np.abs(y - h) > 0.2) | ((typ & (TAILLEE | REMBLAI | INONDE)) > 0)
+    poids = np.clip(ndimage.gaussian_filter(ndimage.binary_dilation(agit, iterations=4).astype(float), 3) * 1.6, 0, 1)
+    poids *= T.lisse(bord_zone(X, Z, 10))
     blob = struct.pack("<4d2i", lon0, lat0, pas, pas, W, H)
-    for g in (delta, np.round(sommet * 16), typ):
+    for g in (delta, np.round(sommet * 16), typ, np.round(poids * 1000)):
         blob += np.asarray(g).astype("<i2").tobytes()
     with gzip.open(SORTIE + nom + ".bin", "wb", 9) as f:
         f.write(blob)
@@ -63,7 +67,7 @@ def ecrire(nom, X, Z, x0, z0, y, h, sommet, typ, vox=None):
             f.write(struct.pack("<i", len(v)))
             for (x, yy, z, c) in v:
                 f.write(struct.pack("<3ib", int(x), int(yy), int(z), int(c)))
-    np.savez_compressed(f"/tmp/lieu_{nom}.npz", X=X, Z=Z, y=y, h=h, sommet=sommet, typ=typ,
+    np.savez_compressed(f"/tmp/lieu_{nom}.npz", X=X, Z=Z, y=y, h=h, sommet=sommet, typ=typ, poids=poids,
                         vox=np.asarray(vox if vox is not None else np.zeros((0, 4)), int))
     print(f"{nom} : {W} x {H} blocs, sol {y.min():.0f} à {y.max():.0f}, "
           f"{int(((typ & TAILLEE) > 0).sum())} colonnes taillées, {0 if vox is None else len(vox)} blocs en surplomb")
@@ -99,6 +103,7 @@ def falaise(X, Z, h, sd, haut, pied, graine, retour=55.0):
     typ[plateau] = PLATEAU
     typ[plage] = PLAGE
     typ[(db < 0) & (db > -6)] = FOND
+    typ[db < 0] |= INONDE
     taille = (np.abs(e) < 3.5) | plage | ((db < 0) & (db > -5))
     typ[taille] |= TAILLEE
     typ[plateau & (e >= 3.5) & (e < 12)] |= REMBLAI

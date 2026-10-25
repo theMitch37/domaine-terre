@@ -161,6 +161,13 @@ public final class GrandCanyon implements LieuSculpte {
         return relief.contient(x, z);
     }
 
+    /** Emprise : 1 dans la zone, 0 sur ses bords (même fondu que le relief). */
+    @Override
+    public double poids(int x, int z) {
+        if (!concerne(x, z)) return 0.0;
+        return lisse(relief.distanceBord(Terrain.lon(x), Terrain.lat(z)) / FONDU);
+    }
+
     @Override
     public double hauteur(int x, int z, double h) {
         return calcul(point(x, z), h);

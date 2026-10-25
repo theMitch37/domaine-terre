@@ -66,7 +66,10 @@ public final class Terrain {
     // ---------------------------------------------------------------- cache par colonne
 
     /** Valeurs partagées d'une colonne : calculées une fois, réutilisées par toutes les sorties et les biomes. */
-    private record Colonne(int x, int z, int generation, double sd, double alt, double pente, Riviere r, double h, boolean lieu) {
+    private record Colonne(int x, int z, int generation, double sd, double alt, double pente, Riviere r, double h, double poids) {
+        boolean lieu() {
+            return poids > 0.0;
+        }
     }
 
     private static volatile int generation = 0;
@@ -86,8 +89,12 @@ public final class Terrain {
         double h = calculerHauteur(x, z, sd, alt, pente, r);
         // lieux uniques (addons) : ils reprennent la main sur le relief de leur zone
         Lieu lieu = LieuxTerre.liste().isEmpty() ? null : LieuxTerre.a(x, z);
-        if (lieu != null) h = lieu.hauteur(x, z, h);
-        c = new Colonne(x, z, g, sd, alt, pente, r, h, lieu != null);
+        double poids = 0.0;
+        if (lieu != null) {
+            h = lieu.hauteur(x, z, h);
+            poids = Mth.clamp(lieu.poids(x, z), 0.0, 1.0);
+        }
+        c = new Colonne(x, z, g, sd, alt, pente, r, h, poids);
         tab[i] = c;
         return c;
     }
@@ -259,25 +266,30 @@ public final class Terrain {
     /** Grand facteur = terrain collé à la hauteur visée (plat) ; petit facteur = relief plus libre. */
     public double facteur(int x, int z) {
         Colonne c = colonne(x, z);
-        if (c.lieu()) return 30.0;          // lieu sculpté : le terrain suit exactement sa forme
-        if (c.sd() < 0) return 6.0;
-        double p = Mth.clamp(c.pente() / 80.0, 0.0, 1.0);
-        double f = Mth.lerp(p, 8.0, 5.0);
+        double f;
+        if (c.sd() < 0) {
+            f = 6.0;
+        } else {
+            double p = Mth.clamp(c.pente() / 80.0, 0.0, 1.0);
+            f = Mth.lerp(p, 8.0, 5.0);
+        }
         // près des cours d'eau, le terrain colle au profil de la vallée (pas de bosses dans le lit ni de creux sur la rive)
         Riviere r = c.r();
         if (r != null) {
             double t = Mth.clamp(1.0 - (r.distance() - r.demiLargeur()) / largeurVallee(r), 0.0, 1.0);
             f = Mth.lerp(t, f, 30.0);
         }
-        return f;
+        // lieu sculpté : le terrain suit exactement sa forme, avec un passage progressif vers le relief libre
+        return c.lieu() ? Mth.lerp(c.poids(), f, 30.0) : f;
     }
 
     /** Pics déchiquetés seulement dans les vraies montagnes raides. */
     public double dentelure(int x, int z) {
         Colonne c = colonne(x, z);
-        if (c.sd() < 0 || c.r() != null || c.lieu()) return 0.0;
+        if (c.sd() < 0 || c.r() != null || c.poids() >= 1.0) return 0.0;
         double alt = c.alt();
-        return Mth.clamp((c.pente() - 40.0) / 120.0, 0.0, 1.0) * Mth.clamp((alt - 1200.0) / 1500.0, 0.0, 1.0) * 0.2;
+        return Mth.clamp((c.pente() - 40.0) / 120.0, 0.0, 1.0) * Mth.clamp((alt - 1200.0) / 1500.0, 0.0, 1.0) * 0.2
+                * (1.0 - c.poids());
     }
 
     /**

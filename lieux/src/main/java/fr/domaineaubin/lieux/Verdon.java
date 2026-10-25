@@ -68,8 +68,11 @@ public final class Verdon implements LieuSculpte {
 
     // ---------------------------------------------------------------- géométrie
 
-    /** Une gorge (Verdon ou Artuby) dans une colonne : distance relative t, fraction de profondeur g, présence. */
-    private record Branche(double dist, double t, double g, double pres) {
+    /**
+     * Une gorge (Verdon ou Artuby) dans une colonne : distance relative t, fraction de profondeur g, présence,
+     * et profondeur relative prof (1 = gorge entière ; vers 0, le fond remonte jusqu'au plateau : tête de gorge).
+     */
+    private record Branche(double dist, double t, double g, double pres, double prof) {
     }
 
     private record Point(double e, double rebord, double lac, Branche v, Branche a, double fondu) {
@@ -87,12 +90,12 @@ public final class Verdon implements LieuSculpte {
         double sb = relief.echant(3, lon, lat) * 1e-4 * bpd;
         double da = relief.echant(4, lon, lat) * 1e-5 * bpd;
         double lac = relief.echant(5, lon, lat) * 1e-5 * bpd;
-        // en amont du Point Sublime, la gorge s'ouvre en vallée en V puis s'efface avant Castellane
-        double inten = 1.0 - lisse((sb - 118.0) / 30.0);
-        double presV = 1.0 - lisse((sb - 140.0) / 40.0);
-        // l'Artuby s'ouvre en vallée en V vers le sud, puis s'efface (comme le Verdon en amont)
-        double intenA = lisse((lat - 43.712) / 0.012);
-        double presA = lisse((lat - 43.700) / 0.010);
+        // en amont du Point Sublime, le fond remonte peu à peu jusqu'au plateau : la gorge finit en tête de gorge
+        // (avant : vallée en V qui s'effaçait, d'où une rampe d'herbe ; et un puits fermé au bout de l'Artuby)
+        double inten = 1.0 - lisse((sb - 112.0) / 48.0);
+        double presV = 1.0 - lisse((sb - 155.0) / 25.0);
+        double intenA = lisse((lat - 43.704) / 0.026);
+        double presA = lisse((lat - 43.697) / 0.008);
         Branche v = branche(x, z, dv, W_V, inten, presV, bruitV, bruitV2);
         Branche a = branche(x, z, da, W_A, intenA, presA, bruitA, bruitA2);
         return new Point(e, rebord, lac, v, a, lisse(relief.distanceBord(lon, lat) / FONDU));
@@ -100,9 +103,9 @@ public final class Verdon implements LieuSculpte {
 
     private static Branche branche(int x, int z, double dist, double w0, double inten, double pres,
                                    ImprovedNoise b1, ImprovedNoise b2) {
-        double vv = 1.0 - lisse(inten / 0.6);
-        // la vallée en V s'élargit (pente ~2 blocs par bloc) : un V étroit et profond ferait des lames
-        double w = w0 * (Math.max(inten, 0.7) + 1.6 * vv);
+        double prof = lisse(inten);
+        // la tête de gorge se resserre un peu en remontant ; les parois restent verticales
+        double w = w0 * (0.65 + 0.35 * prof);
         // bruit à grande échelle seulement : les parois sont presque verticales, un bruit fin y ferait des aiguilles
         double plancher = Math.min(4.0, w * 0.3), d = dist;
         if (dist >= plancher) {
@@ -112,8 +115,7 @@ public final class Verdon implements LieuSculpte {
         }
         double t = d / w;
         double g = Mth.clamp(profil(Mth.clamp(t, 0.0, 1.0)), 0.0, 1.0);
-        g = Mth.lerp(vv, g, Mth.clamp((1.0 - t) / 0.85, 0.0, 1.0));
-        return new Branche(dist, t, g, pres);
+        return new Branche(dist, t, g, pres, prof);
     }
 
     private static double profil(double t) {
@@ -125,8 +127,13 @@ public final class Verdon implements LieuSculpte {
         return t > 1.0 ? 0.0 : 1.0;
     }
 
+    /** Pied des parois de cette branche : au-dessus de l'eau dans la gorge, puis il remonte vers le plateau. */
+    private static double pied(Point pt, Branche b) {
+        return Mth.lerp(b.prof(), pt.rebord() - 2.5, PIED);
+    }
+
     private static double coupe(Point pt, Branche b) {
-        return pt.rebord() - b.g() * (pt.rebord() - PIED);
+        return pt.rebord() - b.g() * (pt.rebord() - pied(pt, b));
     }
 
     /**
@@ -140,8 +147,10 @@ public final class Verdon implements LieuSculpte {
             double plafond = h + (1.0 - k) * Mth.clamp(pt.rebord() - h, 0.0, 12.0);
             y = Math.min(plafond, coupe(pt, b));
         }
+        // lit de la rivière : en eau dans la gorge, puis lit sec qui remonte avec le fond (la rivière y prend sa source)
         double lit = 1.0 - lisse((b.dist() - 2.4) / 1.2);
-        y = Mth.lerp(lit, y, FOND);
+        double fondLit = Mth.lerp(lisse((b.prof() - 0.55) / 0.4), pied(pt, b) - 1.0, FOND);
+        y = Mth.lerp(lit, y, Math.min(y, fondLit));
         return Mth.lerp(b.pres(), h, y);
     }
 
@@ -182,6 +191,17 @@ public final class Verdon implements LieuSculpte {
      * Le biome déborde de ~13 blocs au-delà du rebord (plus que la bande de remblai) : Minecraft ne lance la sculpture (StratesFeature) que dans
      * les chunks qui contiennent le biome du lieu. Sans cette marge, des chunks du rebord restaient bruts.
      */
+    /** Emprise : 1 dans la gorge et la cuvette du lac, puis passage progressif au terrain libre du mod. */
+    @Override
+    public double poids(int x, int z) {
+        if (!concerne(x, z)) return 0.0;
+        Point pt = point(x, z);
+        double v = (1.0 - lisse((pt.v().t() - 1.6) / 0.6)) * pt.v().pres();
+        double a = (1.0 - lisse((pt.a().t() - 1.6) / 0.6)) * pt.a().pres();
+        double l = 1.0 - lisse((pt.lac() - BASSIN) / 20.0);
+        return pt.fondu() * Math.max(Math.max(v, a), l);
+    }
+
     @Override
     public boolean dansBiome(int x, int z) {
         if (!concerne(x, z)) return false;

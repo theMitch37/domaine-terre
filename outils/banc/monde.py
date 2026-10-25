@@ -75,7 +75,7 @@ def _indices(section):
         return np.zeros(4096, np.int64), pal
     bits = max(4, int(np.ceil(np.log2(len(pal)))))
     vpl = 64 // bits
-    longs = np.asarray(bs["data"]).view(np.uint64)
+    longs = np.asarray(bs["data"]).astype(np.int64).view(np.uint64)    # gros-boutiste -> natif
     sh = (np.arange(vpl, dtype=np.uint64) * np.uint64(bits))
     vals = (longs[:, None] >> sh[None, :]) & np.uint64((1 << bits) - 1)
     return vals.reshape(-1)[:4096].astype(np.int64), pal

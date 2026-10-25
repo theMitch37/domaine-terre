@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "fr.domaineaubin.lieux.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "domaine_terre_lieux.refmap.json",
+  "mixins": ["StructureMixin"],
+  "injectors": {"defaultRequire": 1}
+}

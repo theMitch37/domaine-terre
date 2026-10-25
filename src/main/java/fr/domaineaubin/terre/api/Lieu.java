@@ -24,6 +24,15 @@ public interface Lieu {
      */
     double hauteur(int x, int z, double h);
 
+    /**
+     * Emprise du lieu dans cette colonne, de 0 (terrain du mod intact) à 1 (le terrain suit exactement {@link #hauteur}).
+     * Doit passer progressivement de 1 à 0 vers les bords : sinon le relief libre du mod reprend d'un coup et on voit
+     * le rectangle des données du lieu. Par défaut 1 sur toute la zone {@link #concerne}.
+     */
+    default double poids(int x, int z) {
+        return 1.0;
+    }
+
     /** La colonne porte-t-elle le biome du lieu en surface ? */
     boolean dansBiome(int x, int z);
 

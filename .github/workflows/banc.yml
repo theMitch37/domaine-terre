@@ -65,13 +65,17 @@ jobs:
           ls mods
 
       - name: Génération des lieux
-        run: python outils/banc/serveur.py /tmp/serveur outils/banc/zones.json /tmp/banc ${{ github.event.inputs.lieux }}
+        run: |
+          set -o pipefail
+          mkdir -p /tmp/banc
+          python outils/banc/serveur.py /tmp/serveur outils/banc/zones.json /tmp/banc ${{ github.event.inputs.lieux }} 2>&1 | tee /tmp/banc_script.log
 
       - name: Résultats sur la branche banc
         if: always()
         run: |
           mkdir -p /tmp/banc
           cp /tmp/serveur/logs/latest.log /tmp/banc/latest.log 2>/dev/null || true
+          cp /tmp/banc_script.log /tmp/banc/script.log 2>/dev/null || true
           cp -r /tmp/serveur/crash-reports /tmp/banc/ 2>/dev/null || true
           printf 'branche=%s\ncommit=%s\ndate=%s\nresultat=%s\n' "$GITHUB_REF_NAME" "$GITHUB_SHA" "$(date -u +%FT%TZ)" "${{ job.status }}" > /tmp/banc/SOURCE.txt
           cd /tmp/banc
