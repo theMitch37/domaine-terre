@@ -1,10 +1,12 @@
 """Carte des côtes fines de Terre 0.3.2 (étape B de la « mer fidèle ») : le vrai trait de côte au bloc près.
 
 Lancé par .github/workflows/cotes-fines.yml (GSHHG ne se télécharge pas depuis le poste de travail).
-Usage : python outils/cotes_fines.py <GSHHS_shp> <ne_10m_lakes.shp> <sortie cotes_fines.bin>
+Usage : python outils/cotes_fines.py <GSHHS_shp> <sortie cotes_fines.bin>
 
 Source : GSHHG 2.3.7 « full » (Wessel & Smith, LGPL), niveau 1 (terres / océan) et niveau 5 (Antarctique, front
-des glaces). Comme la carte actuelle, les grands lacs de Natural Earth (scalerank <= 4) sont comptés comme de l'eau.
+des glaces). Seule la mer Caspienne (le plus grand lac du niveau 2, sous le niveau de la mer) est comptée comme de
+l'eau : les lacs d'altitude (Léman, Grands Lacs, Baïkal…) attendent l'eau en altitude, sinon ils deviendraient
+des cuvettes au niveau de la mer.
 
 Grille : une case par bloc à l'échelle 1:250 (BPD = 445,28 blocs par degré). La case gx couvre les longitudes
 [-180 + gx/BPD, -180 + (gx+1)/BPD[ et la case gy les latitudes ]90 - (gy+1)/BPD, 90 - gy/BPD].
@@ -118,12 +120,15 @@ def etat_centres(polys, lacs, idx):
 
 
 def main():
-    dos, lacs_shp, sortie = sys.argv[1:4]
+    dos, sortie = sys.argv[1:3]
     t0 = time.time()
     polys = charger(sorted(glob.glob(os.path.join(dos, "f", "GSHHS_f_L1.shp"))) +
                     sorted(glob.glob(os.path.join(dos, "f", "GSHHS_f_L5.shp"))))
-    lacs = charger([lacs_shp], grand_lac)
-    print(f"{len(polys)} terres, {len(lacs)} grands lacs ({time.time() - t0:.0f} s)", flush=True)
+    lacs2 = charger(sorted(glob.glob(os.path.join(dos, "f", "GSHHS_f_L2.shp"))))
+    lacs = [max(lacs2, key=lambda p: p.area)]                         # mer Caspienne
+    c = lacs[0].centroid
+    print(f"{len(polys)} terres ; lac gardé : centre {c.x:.1f}, {c.y:.1f} ({time.time() - t0:.0f} s)", flush=True)
+    assert 46 < c.x < 54 and 36 < c.y < 47, "le plus grand lac devrait être la Caspienne"
     mixtes = sorted(tuiles_traversees(polys + lacs))
     print(f"{len(mixtes)} tuiles traversées par une côte ({time.time() - t0:.0f} s)", flush=True)
     etat = np.zeros(TX * TY, np.uint8)

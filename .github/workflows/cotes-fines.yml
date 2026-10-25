@@ -1,4 +1,4 @@
-# Construit la carte des côtes fines de Terre (GSHHG full au bloc près, grands lacs Natural Earth)
+# Construit la carte des côtes fines de Terre (GSHHG full au bloc près, mer Caspienne)
 # et l'ajoute à la branche : src/main/resources/domaine_terre/carte/cotes_fines.bin. Journal : outils/donnees/cotes_fines.log
 name: Côtes fines
 
@@ -33,11 +33,8 @@ jobs:
             curl -sSfL --retry 5 --retry-delay 20 -o gshhg.zip \
               https://github.com/GenericMappingTools/gshhg-gmt/releases/download/2.3.7/gshhg-shp-2.3.7.zip
             unzip -q gshhg.zip -d gshhg
-            base=https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/10m_physical
-            mkdir -p ne && for e in shp shx dbf prj; do curl -sSfL --retry 5 -o ne/ne_10m_lakes.$e $base/ne_10m_lakes.$e; done
             cd $GITHUB_WORKSPACE
-            python outils/cotes_fines.py /tmp/cotes/gshhg/GSHHS_shp /tmp/cotes/ne/ne_10m_lakes.shp \
-              src/main/resources/domaine_terre/carte/cotes_fines.bin
+            python outils/cotes_fines.py /tmp/cotes/gshhg/GSHHS_shp src/main/resources/domaine_terre/carte/cotes_fines.bin
           } > /tmp/journal.txt 2>&1 || echo "ÉCHEC" >> /tmp/journal.txt
           cp /tmp/journal.txt outils/donnees/cotes_fines.log; cat outils/donnees/cotes_fines.log
       - name: Ajout à la branche
