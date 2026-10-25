@@ -77,6 +77,15 @@ def _init(polys, lacs):
     _ARBRE, _ARBRE_LACS = shapely.STRtree(polys), shapely.STRtree(lacs)
 
 
+def decouper(g, x0, y0, x1, y1):
+    """Partie de g dans le rectangle ; si GEOS refuse (anneau dégénéré, géométrie invalide), g entier :
+    rasterio le dessine quand même, seulement plus lentement."""
+    try:
+        return shapely.clip_by_rect(g, x0, y0, x1, y1)
+    except shapely.errors.GEOSException:
+        return g
+
+
 def raster(idx):
     ty, tx = divmod(idx, TX)
     lon0, lat0 = -180 + tx * PAS, 90 - ty * PAS
@@ -84,11 +93,11 @@ def raster(idx):
     tr = from_origin(lon0, lat0, 1 / BPD, 1 / BPD)
     m = np.zeros((T, T), np.uint8)
     # clip_by_rect : rapide et tolérant aux géométries invalides (GSHHG en a quelques-unes)
-    terres = [shapely.clip_by_rect(_POLYS[i], lon0, lat0 - PAS, lon0 + PAS, lat0) for i in _ARBRE.query(boite)]
+    terres = [decouper(_POLYS[i], lon0, lat0 - PAS, lon0 + PAS, lat0) for i in _ARBRE.query(boite)]
     terres = [g for g in terres if not g.is_empty]
     if terres:
         features.rasterize(terres, out=m, transform=tr, default_value=1, all_touched=False)
-    lacs = [shapely.clip_by_rect(_LACS[i], lon0, lat0 - PAS, lon0 + PAS, lat0) for i in _ARBRE_LACS.query(boite)]
+    lacs = [decouper(_LACS[i], lon0, lat0 - PAS, lon0 + PAS, lat0) for i in _ARBRE_LACS.query(boite)]
     lacs = [g for g in lacs if not g.is_empty]
     if lacs:
         features.rasterize(lacs, out=m, transform=tr, default_value=0, all_touched=False)
