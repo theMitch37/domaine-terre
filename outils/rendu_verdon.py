@@ -23,8 +23,8 @@ W_V, W_A = 13.0, 8.0
 FONDU = 0.03
 NIV_LAC = 473.0           # lac de Sainte-Croix (m)
 BASSIN = 30.0             # rayon (blocs) de la cuvette du lac
-PROFIL_T = [1.00, 0.94, 0.74, 0.62, 0.46, 0.30, 0.0]
-PROFIL_G = [0.00, 0.50, 0.62, 0.66, 0.95, 1.00, 1.0]
+PROFIL_T = [1.00, 1.00, 0.74, 0.62, 0.54, 0.54, 0.30, 0.0]   # falaises : marches verticales (t répété)
+PROFIL_G = [0.00, 0.50, 0.62, 0.66, 0.66, 0.95, 1.00, 1.0]
 
 def lis(t):
     t = np.clip(t, 0, 1); return t * t * (3 - 2 * t)
@@ -37,7 +37,14 @@ def bruit(X, Z, ech, graine):
     g = ndimage.gaussian_filter(g, 1.0, mode="wrap"); g /= g.std()
     return ndimage.map_coordinates(g, [(Z / ech) % 64, (X / ech) % 64], order=3, mode="grid-wrap") * 0.5
 def profil(t):
-    return np.interp(t, PROFIL_T[::-1], PROFIL_G[::-1])
+    """Comme Verdon.profil : le premier segment qui contient t l'emporte."""
+    g = np.ones_like(t)
+    for i in reversed(range(len(PROFIL_T) - 1)):
+        t0, t1 = PROFIL_T[i], PROFIL_T[i + 1]
+        if t0 == t1: continue
+        m = (t <= t0) & (t >= t1)
+        g = np.where(m, PROFIL_G[i] + (PROFIL_G[i + 1] - PROFIL_G[i]) * (t0 - t) / (t0 - t1), g)
+    return g
 
 def modele(X, Z):
     lon = X / BPD; lat = -Z / BPD
@@ -55,8 +62,8 @@ def modele(X, Z):
     pres_a = lis((lat - 43.706) / 0.010)
 
     def branche(dist, w0, inten, pres, graine):
-        w = w0 * np.maximum(inten, 0.7)
         vv = 1 - lis(inten / 0.6)
+        w = w0 * (np.maximum(inten, 0.7) + 1.6 * vv)   # la vallée en V s'élargit (sinon des lames)
         plancher = np.minimum(4.0, w * 0.3)
         # bruit à grande échelle seulement : les parois sont presque verticales, un bruit fin y ferait des aiguilles
         d = dist + bruit(X, Z, w0 * 0.8, graine) * w * 0.20 + bruit(X, Z, 25, graine + 1) * w * 0.12

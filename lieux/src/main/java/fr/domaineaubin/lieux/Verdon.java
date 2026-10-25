@@ -36,9 +36,11 @@ public final class Verdon implements LieuSculpte {
     /**
      * Coupe : distance relative à la rivière t (1 = rebord) -> fraction de profondeur sous le rebord.
      * Grande falaise (la moitié de la hauteur), vires, falaise basse, puis berges et rivière.
+     * Les falaises sont des marches de largeur nulle (t répété) : une colonne est soit en haut, soit en bas.
+     * Une falaise « presque » verticale laisserait des colonnes à mi-hauteur, qui font des lames dans le jeu.
      */
-    private static final double[] PROFIL_T = {1.00, 0.94, 0.74, 0.62, 0.46, 0.30, 0.0};
-    private static final double[] PROFIL_G = {0.00, 0.50, 0.62, 0.66, 0.95, 1.00, 1.0};
+    private static final double[] PROFIL_T = {1.00, 1.00, 0.74, 0.62, 0.54, 0.54, 0.30, 0.0};
+    private static final double[] PROFIL_G = {0.00, 0.50, 0.62, 0.66, 0.66, 0.95, 1.00, 1.0};
 
     /** Grilles : 0 altitude, 1 plateau, 2 distance au Verdon, 3 abscisse le long du Verdon, 4 distance à l'Artuby, 5 lac. */
     private final ReliefLieu relief = new ReliefLieu("verdon.bin");
@@ -97,8 +99,9 @@ public final class Verdon implements LieuSculpte {
 
     private static Branche branche(int x, int z, double dist, double w0, double inten, double pres,
                                    ImprovedNoise b1, ImprovedNoise b2) {
-        double w = w0 * Math.max(inten, 0.7);
         double vv = 1.0 - lisse(inten / 0.6);
+        // la vallée en V s'élargit (pente ~2 blocs par bloc) : un V étroit et profond ferait des lames
+        double w = w0 * (Math.max(inten, 0.7) + 1.6 * vv);
         // bruit à grande échelle seulement : les parois sont presque verticales, un bruit fin y ferait des aiguilles
         double plancher = Math.min(4.0, w * 0.3), d = dist;
         if (dist >= plancher) {
@@ -115,6 +118,7 @@ public final class Verdon implements LieuSculpte {
     private static double profil(double t) {
         for (int i = 0; i < PROFIL_T.length - 1; i++) {
             double t0 = PROFIL_T[i], t1 = PROFIL_T[i + 1];
+            if (t0 == t1) continue;                         // falaise : marche verticale
             if (t <= t0 && t >= t1) return Mth.lerp((t0 - t) / (t0 - t1), PROFIL_G[i], PROFIL_G[i + 1]);
         }
         return t > 1.0 ? 0.0 : 1.0;
@@ -170,11 +174,16 @@ public final class Verdon implements LieuSculpte {
         return calcul(point(x, z), h);
     }
 
+    /**
+     * Le biome déborde de ~8 blocs au-delà du rebord : Minecraft ne lance la sculpture (StratesFeature) que dans
+     * les chunks qui contiennent le biome du lieu. Sans cette marge, des chunks du rebord restaient bruts.
+     */
     @Override
     public boolean dansBiome(int x, int z) {
         if (!concerne(x, z)) return false;
         Point pt = point(x, z);
-        return dansGorge(pt) || (pt.lac() < 1.5 && pt.fondu() > 0.3);
+        if (pt.fondu() <= 0.3) return false;
+        return (pt.v().t() < 1.6 && pt.v().pres() > 0.3) || (pt.a().t() < 1.6 && pt.a().pres() > 0.3) || pt.lac() < 1.5;
     }
 
     /** Toute la gorge et le lac : l'aquifère y prend le niveau de la mer (la rivière ne s'assèche pas). */

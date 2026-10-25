@@ -98,8 +98,18 @@ fx = (LON0 + (gx + 0.5) * PAS - LON_T) / PAS_T - 0.5
 def rech(G, order=1):
     return ndimage.map_coordinates(G.astype(np.float32), [fy, fx], order=order, mode="nearest")
 Es = rech(ndimage.gaussian_filter(E1, 2))
-grilles = [Es, rech(P), np.minimum(rech(DV) * 1e5, 32000), np.minimum(rech(SV) * 1e4, 32000),
-           np.minimum(rech(DA) * 1e5, 32000), np.clip(rech(L) * 1e5, -32000, 32000)]
+# arêtes trop minces entre deux boucles de la rivière : une ouverture (érosion puis dilatation) de la distance
+# abaisse les crêtes plus étroites que le disque sans changer les pentes normales (un cône reste un cône).
+# Sinon une arête de 1-2 blocs avec 40 blocs de falaise de chaque côté, une lame, restait entre les méandres.
+R_ARETE = 8                                   # cellules de 4" (~4 blocs en 1:250)
+yy, xx = np.mgrid[-R_ARETE:R_ARETE + 1, -R_ARETE:R_ARETE + 1]
+DISQUE = xx * xx + yy * yy <= R_ARETE * R_ARETE
+# l'abscisse (point de la rivière le plus proche) saute là où la rivière fait une épingle : on la lisse
+# (~7 blocs), elle ne règle que des transitions lentes (gorge -> vallée en V -> fin)
+def sans_aretes(Dd):
+    return ndimage.grey_opening(Dd, footprint=DISQUE)
+grilles = [Es, rech(P), np.minimum(sans_aretes(rech(DV)) * 1e5, 32000), np.minimum(ndimage.gaussian_filter(rech(SV), 14) * 1e4, 32000),
+           np.minimum(sans_aretes(rech(DA)) * 1e5, 32000), np.clip(rech(L) * 1e5, -32000, 32000)]
 
 blob = struct.pack("<4d2i", LON0, LAT0, PAS, PAS, W, H)
 for g in grilles:
