@@ -268,7 +268,8 @@ public final class Terrain {
         Colonne c = colonne(x, z);
         double f;
         if (c.sd() < 0) {
-            f = 6.0;
+            // mer fidèle (0.3.2) : le fond suit la profondeur réelle ; plus il est haut, moins il a de liberté
+            f = Mth.lerp(Mth.clamp((c.h() - 40.0) / 18.0, 0.0, 1.0), 8.0, 18.0);
         } else {
             double p = Mth.clamp(c.pente() / 80.0, 0.0, 1.0);
             f = Mth.lerp(p, 8.0, 5.0);
@@ -290,6 +291,30 @@ public final class Terrain {
         double alt = c.alt();
         return Mth.clamp((c.pente() - 40.0) / 120.0, 0.0, 1.0) * Mth.clamp((alt - 1200.0) / 1500.0, 0.0, 1.0) * 0.2
                 * (1.0 - c.poids());
+    }
+
+    /** Haut du fond marin : jamais au-dessus de y 61 (l'eau à 62), pour qu'aucune île inventée ne sorte de l'eau. */
+    public static final int PLAFOND_MER = NIVEAU_MER - 2;
+
+    /**
+     * Plafond de densité (min avec la densité finale) : en mer hors des lieux, tout bloc au-dessus de y 61 est vide.
+     * Seules les vraies îles (terres de la carte) dépassent de l'eau. Ailleurs, sans effet (1 garde le signe).
+     */
+    public double plafond(int x, int y, int z) {
+        Colonne c = colonne(x, z);
+        if (c.sd() >= 0 || c.poids() > 0.0) return 1.0;
+        return Mth.clamp(PLAFOND_MER + 0.5 - y, -1.0, 1.0);
+    }
+
+    /**
+     * Plancher de densité (max avec la densité finale) : sur la terre ferme au bord de la mer, le sol ne descend pas
+     * sous la mer (pas de mares ni de lagunes inventées). Seulement de y 58 à 62, hors fleuves et lieux.
+     */
+    public double plancher(int x, int y, int z) {
+        if (y < NIVEAU_MER - 5 || y > NIVEAU_MER - 1) return -1.0;
+        Colonne c = colonne(x, z);
+        if (c.sd() < 0 || c.r() != null || c.poids() > 0.0 || c.h() < NIVEAU_MER) return -1.0;
+        return 0.5;
     }
 
     /**

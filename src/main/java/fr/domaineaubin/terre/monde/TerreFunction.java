@@ -29,6 +29,8 @@ public record TerreFunction(Sortie sortie) implements DensityFunction.SimpleFunc
             case CONTINENTS -> t.continents(x, z);
             case EROSION -> t.erosion(x, z);
             case INONDATION -> t.inondation(x, z);
+            case PLAFOND -> t.plafond(x, ctx.blockY(), z);
+            case PLANCHER -> t.plancher(x, ctx.blockY(), z);
         };
     }
 
@@ -53,7 +55,9 @@ public record TerreFunction(Sortie sortie) implements DensityFunction.SimpleFunc
         JAGGEDNESS("jaggedness", 0.0, 1.0),
         CONTINENTS("continents", -1.1, 0.5),
         EROSION("erosion", -1.0, 1.0),
-        INONDATION("inondation", 0.0, 2.0);
+        INONDATION("inondation", 0.0, 2.0),
+        PLAFOND("plafond", -1.0, 1.0),
+        PLANCHER("plancher", -1.0, 0.5);
 
         public static final Codec<Sortie> CODEC = StringRepresentable.fromEnum(Sortie::values);
 
