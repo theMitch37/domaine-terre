@@ -1,0 +1,94 @@
+== https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-shp-2.3.7.zip
+curl: (60) SSL certificate problem: unable to get local issuer certificate
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+== https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/gshhg-shp-2.3.7.zip
+curl: (22) The requested URL returned error: 404
+== http://www.soest.hawaii.edu/pwessel/gshhg/gshhg-shp-2.3.7.zip
+curl: (60) SSL certificate problem: unable to get local issuer certificate
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+== https://github.com/GenericMappingTools/gshhg-gmt/releases/download/2.3.7/gshhg-shp-2.3.7.zip
+ok 149157845 octets
+total 7020
+drwxr-xr-x 2 runner runner    4096 Oct 25 19:43 .
+drwxr-xr-x 3 runner runner    4096 Oct 25 19:43 ..
+-rw-r--r-- 1 runner runner     350 Oct 25 19:43 ne_10m_land.dbf
+-rw-r--r-- 1 runner runner     145 Oct 25 19:43 ne_10m_land.prj
+-rw-r--r-- 1 runner runner 7166824 Oct 25 19:43 ne_10m_land.shp
+-rw-r--r-- 1 runner runner     188 Oct 25 19:43 ne_10m_land.shx
+GSHHS_h_L1.dbf
+GSHHS_h_L1.prj
+GSHHS_h_L1.shp
+GSHHS_h_L1.shx
+GSHHS_h_L2.dbf
+GSHHS_h_L2.prj
+GSHHS_h_L2.shp
+GSHHS_h_L2.shx
+GSHHS_h_L3.dbf
+GSHHS_h_L3.prj
+Mesure des côtes haute résolution (étape B, Terre 0.3.2)
+
+== Natural Earth 10m (côte actuelle)
+polygones 6837 | points 446175 | côtes 945,528 km = 3,782,113 blocs
+  îles et terres ≥ 1 bloc : 6328
+  îles et terres ≥ 16 blocs (1 km²) : 5618
+  îles et terres ≥ 400 blocs (25 km²) : 2807
+  carte 0.5 case(s)/bloc, tuiles 256² (1.150°) traversées par la côte : 6273
+    masque 1 bit compressé : 2.3 Mo | distance signée 1 octet : 15.4 Mo   (échantillon 40 tuiles, 1 s)
+
+== GSHHG high
+polygones 145079 | points 1659788 | côtes 1,498,994 km = 5,995,977 blocs
+  îles et terres ≥ 1 bloc : 73267
+  îles et terres ≥ 16 blocs (1 km²) : 20522
+  îles et terres ≥ 400 blocs (25 km²) : 3287
+  carte 0.5 case(s)/bloc, tuiles 256² (1.150°) traversées par la côte : 6082
+    masque 1 bit compressé : 2.2 Mo | distance signée 1 octet : 15.0 Mo   (échantillon 40 tuiles, 11 s)
+  carte 1 case(s)/bloc, tuiles 256² (0.575°) traversées par la côte : 14374
+    masque 1 bit compressé : 4.4 Mo | distance signée 1 octet : 48.6 Mo   (échantillon 40 tuiles, 10 s)
+
+== GSHHG full
+polygones 180167 | points 9696440 | côtes 1,679,446 km = 6,717,782 blocs
+  îles et terres ≥ 1 bloc : 113781
+  îles et terres ≥ 16 blocs (1 km²) : 21752
+  îles et terres ≥ 400 blocs (25 km²) : 3303
+  carte 0.5 case(s)/bloc, tuiles 256² (1.150°) traversées par la côte : 6059
+    masque 1 bit compressé : 2.8 Mo | distance signée 1 octet : 19.1 Mo   (échantillon 40 tuiles, 21 s)
+  carte 1 case(s)/bloc, tuiles 256² (0.575°) traversées par la côte : 14401
+    masque 1 bit compressé : 5.6 Mo | distance signée 1 octet : 61.0 Mo   (échantillon 40 tuiles, 16 s)
+
+Mesure des côtes haute résolution (étape B, Terre 0.3.2)
+
+== Natural Earth 10m (côte actuelle)
+polygones 6837 | points 446175 | côtes 945,528 km = 3,782,113 blocs
+  îles et terres ≥ 1 bloc : 6328
+  îles et terres ≥ 16 blocs (1 km²) : 5618
+  îles et terres ≥ 400 blocs (25 km²) : 2807
+  carte 0.5 case(s)/bloc, tuiles 256² (1.150°) traversées par la côte : 6273
+    masque 1 bit compressé : 2.3 Mo | distance signée 1 octet : 15.4 Mo   (échantillon 40 tuiles, 1 s)
+
+== GSHHG high
+polygones 145079 | points 1659788 | côtes 1,498,994 km = 5,995,977 blocs
+  îles et terres ≥ 1 bloc : 73267
+  îles et terres ≥ 16 blocs (1 km²) : 20522
+  îles et terres ≥ 400 blocs (25 km²) : 3287
+  carte 0.5 case(s)/bloc, tuiles 256² (1.150°) traversées par la côte : 6082
+    masque 1 bit compressé : 2.2 Mo | distance signée 1 octet : 15.0 Mo   (échantillon 40 tuiles, 11 s)
+  carte 1 case(s)/bloc, tuiles 256² (0.575°) traversées par la côte : 14374
+    masque 1 bit compressé : 4.4 Mo | distance signée 1 octet : 48.6 Mo   (échantillon 40 tuiles, 10 s)
+
+== GSHHG full
+polygones 180167 | points 9696440 | côtes 1,679,446 km = 6,717,782 blocs
+  îles et terres ≥ 1 bloc : 113781
+  îles et terres ≥ 16 blocs (1 km²) : 21752
+  îles et terres ≥ 400 blocs (25 km²) : 3303
+  carte 0.5 case(s)/bloc, tuiles 256² (1.150°) traversées par la côte : 6059
+    masque 1 bit compressé : 2.8 Mo | distance signée 1 octet : 19.1 Mo   (échantillon 40 tuiles, 21 s)
+  carte 1 case(s)/bloc, tuiles 256² (0.575°) traversées par la côte : 14401
+    masque 1 bit compressé : 5.6 Mo | distance signée 1 octet : 61.0 Mo   (échantillon 40 tuiles, 16 s)
