@@ -8,6 +8,7 @@ import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
@@ -28,5 +29,14 @@ public abstract class FluidesMixin {
             if (y < Math.min(-54, mer) && Terrain.get().enMer(x, z)) return eau;
             return vanilla.computeFluid(x, y, z);
         });
+    }
+
+    /**
+     * 0.3.2 : plus de carvers (grottes et ravins creusés) dans aucun biome, vanilla compris
+     * (forge:remove_carvers n'existe pas en 1.20.1). Registre : notes/retire-vanilla.md.
+     */
+    @Inject(method = "applyCarvers", at = @At("HEAD"), cancellable = true)
+    private void domaineTerre$sansCarvers(CallbackInfo info) {
+        info.cancel();
     }
 }

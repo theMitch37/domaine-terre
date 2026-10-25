@@ -14,7 +14,7 @@ Ces retraits valent pour les nouveaux mondes (Terre 0.3.2 et suivantes).
 | Sources d'eau et de lave (`spring_*`) | 0.3.2 | idem | Filets d'eau qui coulent des falaises au hasard | Vraies sources, résurgences (Fontaine de Vaucluse…) |
 | Donjons (`monster_room`) | 0.3.2 | idem | Aléatoires, et sans grottes ils seraient emmurés | Nos propres souterrains |
 | Grottes de bruit (fromages, spaghettis, entrées, piliers) et nouilles | 0.3.2 | `noise_settings/overworld.json` (densité finale = `sloped_cheese`) | Percent les falaises, les lieux, les cuvettes des lacs | Vrais réseaux karstiques (Padirac, gouffres, grottes célèbres) |
-| Carvers (grottes, ravins) | 0.3.2 | biomes du mod, biome modifier `sans_carvers` | Idem | Idem ; vrais canyons via les lieux |
+| Carvers (grottes, ravins) | 0.3.2 | biomes du mod, `FluidesMixin.applyCarvers` (tous les biomes) | Idem | Idem ; vrais canyons via les lieux |
 | Structures vanilla (villages, temples, épaves, avant-postes, ruines, monuments, manoirs, cités antiques, mines…) | 0.3.2 | `StructuresMixin` (Terre) | Posées au hasard, sans rapport avec la géographie | Villes et villages réels (suite de mods « structures ») |
 
 Gardé exprès : forteresses (`stronghold`, accès à l'End) ; minerais et géodes ; structures des autres mods.
