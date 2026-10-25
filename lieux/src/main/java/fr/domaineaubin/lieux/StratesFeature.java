@@ -58,6 +58,16 @@ public class StratesFeature extends Feature<NoneFeatureConfiguration> {
                         sommet = t;
                     }
                     modifie = true;
+                } else {
+                    double r = lieu.remblai(x, z);
+                    if (!Double.isNaN(r) && sommet < Math.floor(r) - 1 && r >= min) {
+                        int t = (int) Math.floor(r);
+                        for (int y = Math.max(sommet + 1, min); y <= t; y++) {
+                            niveau.setBlock(pos.set(x, y, z), Blocks.STONE.defaultBlockState(), 2);
+                        }
+                        sommet = t;
+                        modifie = true;
+                    }
                 }
                 // le plateau garde son sol (herbe, forêt) : seules les parois et le fond sont colorés
                 for (int y = sommet; y >= lieu.fondStrates(); y--) {

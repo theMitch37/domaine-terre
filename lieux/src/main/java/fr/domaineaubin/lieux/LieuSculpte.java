@@ -18,6 +18,16 @@ public interface LieuSculpte extends Lieu {
      */
     double hauteurNette(int x, int z);
 
+    /**
+     * Hauteur (y) jusqu'à laquelle combler une colonne NON taillée, sans jamais la creuser, ou NaN.
+     * Minecraft calcule le terrain tous les 4 blocs puis interpole : au bord d'une falaise verticale, le plateau
+     * est arrondi vers le bas sur 2-3 blocs et la roche brute apparaît. On ne comble qu'au-delà d'un bloc d'écart
+     * (sinon des murets d'un bloc).
+     */
+    default double remblai(int x, int z) {
+        return Double.NaN;
+    }
+
     /** Bloc de la paroi à la hauteur y (sous le rebord). */
     BlockState strate(int x, int y, int z, double rebord);
 

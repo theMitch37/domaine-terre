@@ -158,8 +158,9 @@ public final class Verdon implements LieuSculpte {
         return Mth.lerp(pt.fondu(), h, y);
     }
 
+    /** Colonnes traitées par la sculpture : la gorge et une bande de plateau au-delà du rebord (remblai). */
     private static boolean dansGorge(Point pt) {
-        return pt.fondu() > 0.3 && ((pt.v().t() < 1.1 && pt.v().pres() > 0.3) || (pt.a().t() < 1.1 && pt.a().pres() > 0.3));
+        return pt.fondu() > 0.3 && ((pt.v().t() < 1.3 && pt.v().pres() > 0.3) || (pt.a().t() < 1.3 && pt.a().pres() > 0.3));
     }
 
     // ---------------------------------------------------------------- Lieu
@@ -217,6 +218,16 @@ public final class Verdon implements LieuSculpte {
         return finale;
     }
 
+    /** Bande de plateau juste au-delà du rebord : comblée jusqu'au terrain visé si Minecraft l'a arrondie. */
+    @Override
+    public double remblai(int x, int z) {
+        if (!concerne(x, z)) return Double.NaN;
+        Point pt = point(x, z);
+        Branche b = pt.proche();
+        if (!dansGorge(pt) || b.t() <= 1.0) return Double.NaN;
+        return Terrain.get().hauteur(x, z);
+    }
+
     // ---------------------------------------------------------------- roche
 
     private static double fraction(double y, double rebord) {
@@ -243,6 +254,7 @@ public final class Verdon implements LieuSculpte {
     /** Les vires (replats à mi-hauteur) sont herbeuses : arbres et buissons peuvent y pousser. */
     @Override
     public BlockState sommet(int x, int y, int z, double rebord) {
+        if (point(x, z).proche().t() > 1.0) return Blocks.GRASS_BLOCK.defaultBlockState();   // plateau remblayé
         double f = fraction(y, rebord);
         if (f >= 0.50 && f < 0.72 && y > 63) return Blocks.GRASS_BLOCK.defaultBlockState();
         return strate(x, y, z, rebord);
