@@ -83,11 +83,12 @@ def raster(idx):
     boite = shapely.box(lon0, lat0 - PAS, lon0 + PAS, lat0)
     tr = from_origin(lon0, lat0, 1 / BPD, 1 / BPD)
     m = np.zeros((T, T), np.uint8)
-    terres = [_POLYS[i].intersection(boite) for i in _ARBRE.query(boite)]
+    # clip_by_rect : rapide et tolérant aux géométries invalides (GSHHG en a quelques-unes)
+    terres = [shapely.clip_by_rect(_POLYS[i], lon0, lat0 - PAS, lon0 + PAS, lat0) for i in _ARBRE.query(boite)]
     terres = [g for g in terres if not g.is_empty]
     if terres:
         features.rasterize(terres, out=m, transform=tr, default_value=1, all_touched=False)
-    lacs = [_LACS[i].intersection(boite) for i in _ARBRE_LACS.query(boite)]
+    lacs = [shapely.clip_by_rect(_LACS[i], lon0, lat0 - PAS, lon0 + PAS, lat0) for i in _ARBRE_LACS.query(boite)]
     lacs = [g for g in lacs if not g.is_empty]
     if lacs:
         features.rasterize(lacs, out=m, transform=tr, default_value=0, all_touched=False)
