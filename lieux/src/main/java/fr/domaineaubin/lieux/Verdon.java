@@ -160,7 +160,9 @@ public final class Verdon implements LieuSculpte {
 
     /** Colonnes traitées par la sculpture : la gorge et une bande de plateau au-delà du rebord (remblai). */
     private static boolean dansGorge(Point pt) {
-        return pt.fondu() > 0.3 && ((pt.v().t() < 1.3 && pt.v().pres() > 0.3) || (pt.a().t() < 1.3 && pt.a().pres() > 0.3));
+        // ~8 blocs au-delà du rebord : Minecraft y arrondit le plateau vers le bas (interpolation tous les 4 blocs
+        // + bruit des parois). Une bande plus étroite laissait un muret comblé et une tranchée derrière.
+        return pt.fondu() > 0.3 && ((pt.v().t() < 1.6 && pt.v().pres() > 0.3) || (pt.a().t() < 1.6 && pt.a().pres() > 0.3));
     }
 
     // ---------------------------------------------------------------- Lieu
@@ -176,7 +178,7 @@ public final class Verdon implements LieuSculpte {
     }
 
     /**
-     * Le biome déborde de ~8 blocs au-delà du rebord : Minecraft ne lance la sculpture (StratesFeature) que dans
+     * Le biome déborde de ~13 blocs au-delà du rebord (plus que la bande de remblai) : Minecraft ne lance la sculpture (StratesFeature) que dans
      * les chunks qui contiennent le biome du lieu. Sans cette marge, des chunks du rebord restaient bruts.
      */
     @Override
@@ -184,7 +186,7 @@ public final class Verdon implements LieuSculpte {
         if (!concerne(x, z)) return false;
         Point pt = point(x, z);
         if (pt.fondu() <= 0.3) return false;
-        return (pt.v().t() < 1.6 && pt.v().pres() > 0.3) || (pt.a().t() < 1.6 && pt.a().pres() > 0.3) || pt.lac() < 1.5;
+        return (pt.v().t() < 2.0 && pt.v().pres() > 0.3) || (pt.a().t() < 2.0 && pt.a().pres() > 0.3) || pt.lac() < 1.5;
     }
 
     /** Toute la gorge et le lac : l'aquifère y prend le niveau de la mer (la rivière ne s'assèche pas). */
