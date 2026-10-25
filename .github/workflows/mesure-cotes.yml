@@ -7,6 +7,7 @@ on:
     branches: ['mesure-*']
     paths:
       - outils/mesure_cotes.py
+      - outils/mesure_lacs.py
       - .github/workflows/mesure-cotes.yml
   workflow_dispatch:
 
@@ -23,7 +24,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Outils Python
-        run: pip install numpy scipy shapely pyogrio matplotlib
+        run: pip install numpy scipy shapely pyogrio matplotlib pillow
       - name: Téléchargement et mesure (journal toujours rapporté sur la branche)
         run: |
           mkdir -p outils/donnees /tmp/cotes
@@ -44,7 +45,7 @@ jobs:
             if [ $ok = 1 ]; then
               unzip -q gshhg.zip -d gshhg && ls gshhg/GSHHS_shp/h | head
               cd $GITHUB_WORKSPACE
-              python outils/mesure_cotes.py /tmp/cotes/gshhg/GSHHS_shp /tmp/cotes/ne/ne_10m_land.shp /tmp/cotes/resultat.txt && cat /tmp/cotes/resultat.txt
+              python outils/mesure_lacs.py /tmp/cotes/gshhg/GSHHS_shp /tmp/cotes/lacs.txt && cat /tmp/cotes/lacs.txt
             fi
           } > /tmp/journal.txt 2>&1 || true
           cp /tmp/journal.txt "$J"; cat "$J"
