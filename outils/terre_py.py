@@ -120,7 +120,10 @@ def relief(lon, lat):
 
 def blocs(a):
     a = np.asarray(a, float)
-    return np.where(a < 0, np.where(a > -200, 62 + a / 200 * 17, 45 - np.minimum((-a - 200) / 5800, 1) * 15),
+    mer = np.select([a > -200, a > -1000, a > -4000, a > -6000],
+                    [62 + a / 200 * 20, 42 + (a + 200) / 800 * 14, 28 + (a + 1000) / 3000 * 20, 8 + (a + 4000) / 2000 * 8],
+                    -np.minimum((-a - 6000) / 5000, 1) * 50)
+    return np.where(a < 0, mer,
                     np.where(a <= 500, 64 + a / 500 * 16, np.where(a <= 2000, 80 + (a - 500) / 1500 * 60,
                                                                     140 + np.minimum((a - 2000) / 6800, 1) * 160)))
 

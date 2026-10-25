@@ -126,8 +126,12 @@ public final class Terrain {
     /** Correspondance altitude réelle (m) -> hauteur Minecraft (y), voir le plan v1. */
     public static double blocsDepuisAltitude(double alt) {
         if (alt < 0) {
-            if (alt > -200) return 62 + alt / 200.0 * 17;                       // plateau continental : y 45 à 62
-            return 45 - Math.min((-alt - 200) / 5800.0, 1.0) * 15;              // grands fonds : y 30 à 45
+            // océans profonds (0.3.2) : y 0 pour les abysses, le y négatif réservé aux fosses (Mariannes vers y -50)
+            if (alt > -200) return 62 + alt / 200.0 * 20;                       // plateau continental : y 42 à 62 (10 m/bloc)
+            if (alt > -1000) return 42 + (alt + 200) / 800.0 * 14;              // talus : y 28 à 42
+            if (alt > -4000) return 28 + (alt + 1000) / 3000.0 * 20;            // glacis et plaines abyssales : y 8 à 28
+            if (alt > -6000) return 8 + (alt + 4000) / 2000.0 * 8;              // abysses : y 0 à 8
+            return -Math.min((-alt - 6000) / 5000.0, 1.0) * 50;                 // fosses : y -50 à 0
         }
         if (alt <= 500) return 64 + alt / 500.0 * 16;                            // plaines : y 64 à 80
         if (alt <= 2000) return 80 + (alt - 500) / 1500.0 * 60;                  // collines et plateaux : y 80 à 140
