@@ -1,0 +1,55 @@
+180167 terres, 186 grands lacs (1 s)
+15522 tuiles traversées par une côte (15 s)
+tuiles pleines : 50846 terre, 130510 mer (299 s)
+  0/15522 (299 s)
+  1000/15522 (302 s)
+  2000/15522 (314 s)
+  3000/15522 (336 s)
+  4000/15522 (361 s)
+  5000/15522 (396 s)
+  6000/15522 (436 s)
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/process.py", line 264, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/process.py", line 213, in _process_chunk
+    return [fn(*args) for args in chunk]
+            ^^^^^^^^^
+  File "/home/runner/work/domaine-terre/domaine-terre/outils/cotes_fines.py", line 86, in raster
+    terres = [_POLYS[i].intersection(boite) for i in _ARBRE.query(boite)]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/shapely/decorators.py", line 184, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/shapely/geometry/base.py", line 706, in intersection
+    return shapely.lib.intersection_scalar(self, other)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+shapely.errors.GEOSException: TopologyException: side location conflict at -69.748549999999994 43.761505. This can occur if the input geometry is invalid.
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/runner/work/domaine-terre/domaine-terre/outils/cotes_fines.py", line 149, in <module>
+    main()
+  File "/home/runner/work/domaine-terre/domaine-terre/outils/cotes_fines.py", line 126, in main
+    for n, (idx, m) in enumerate(ex.map(raster, mixtes, chunksize=16)):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/process.py", line 636, in _chain_from_iterable_of_lists
+    for element in iterable:
+                   ^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+shapely.errors.GEOSException: TopologyException: side location conflict at -69.748549999999994 43.761505. This can occur if the input geometry is invalid.
+ÉCHEC
