@@ -1,0 +1,4 @@
+Données géographiques utilisées par l'addon Domaine d'Aubin - Lieux uniques :
+- Relief des lieux (Grand Canyon...) : ETOPO 2022 (15 secondes d'arc), NOAA National Centers for
+  Environmental Information (domaine public). doi:10.25921/fd45-gt74
+- Les coupes (couches de roche, profils des falaises) sont dessinées à la main d'après la géologie réelle.

@@ -3,3 +3,6 @@ Données géographiques utilisées par le mod Domaine d'Aubin - Terre :
 - Relief : ETOPO 2022, NOAA National Centers for Environmental Information (domaine public)
 - Climat : Beck, H. E., et al. High-resolution (1 km) Köppen-Geiger maps for 1901–2099 based on
   constrained CMIP6 projections. Scientific Data 10, 724 (2023). Licence CC BY 4.0.
+- Couverture du sol (biomes) : Buchhorn, M., et al. Copernicus Global Land Service: Land Cover 100m:
+  collection 3: epoch 2019: Globe (V3.0.1). Zenodo (2020). doi:10.5281/zenodo.3939050. Licence CC BY 4.0.
+  Données réduites en classes IGBP à 3 minutes d'arc, puis converties en biomes Minecraft.
