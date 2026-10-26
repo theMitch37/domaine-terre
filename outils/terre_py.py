@@ -208,8 +208,8 @@ def pente(x, z):
     return np.sqrt(gx * gx + gz * gz) / (2 * d * 111.32)
 
 
-def hauteur_base(x, z):
-    """Terrain.hauteurBase (sans les fleuves), lacs compris (étape C1) : hauteur visée du sol en y."""
+def hauteur_base(x, z, eaux=True):
+    """Terrain.colonne sans les lieux : hauteur visée du sol en y, fleuves et lacs compris."""
     X, Z = np.asarray(x, float), np.asarray(z, float)
     sd = distance_cote(x, z); lon, lat = x / BPD, -z / BPD
     alt = relief(lon, lat)
@@ -220,6 +220,9 @@ def hauteur_base(x, z):
     h_mer = blocs(np.minimum(alt, -1))
     mer = NIVEAU_MER - 1 + (np.minimum(h_mer, NIVEAU_MER - 1) - NIVEAU_MER + 1) * lisse(-sd / 2)
     h = np.where(sd >= 0, terre, mer)
+    if not eaux:                                    # sans fleuves ni lacs (pour le plafond des lacs)
+        return h, sd
+    h, _ = appliquer_rivieres(h, X if np.ndim(x) else np.array(x), Z if np.ndim(z) else np.array(z), sd)
     h, _, _ = appliquer_lacs(h, X if np.ndim(x) else np.array(x), Z if np.ndim(z) else np.array(z), sd)
     return h, sd
 
@@ -273,39 +276,69 @@ def _segments_fleuves():
     return _fleuves
 
 
-def influence_fleuves(X, Z):
-    """Marge (blocs) au-delà de la zone où un fleuve du mod creuse sa vallée : < 0 dans la vallée.
-    Comme Terrain.riviereBrute/calculerHauteur : la vallée s'étend sur demiLargeur + largeurVallee autour de l'axe,
-    largeurVallee = clamp((niveau - 63) x 4, 2 x demiLargeur, 64) avec niveau = fond de vallée lissé (minimum du relief
-    en 5 points espacés de 0,055°) ; pas de vallée si ce fond dépasse y 86 (vallée sèche).
-    Un lieu en tuiles ne doit rien sculpter là (terre_py ne copie pas le profil des vallées)."""
+PROFONDEUR = {1: 6, 2: 4, 3: 2}                # Terrain.profondeur
+VALLEE_EAU, VALLEE_SECHE = 80.0, 86.0
+
+
+def _niveau_vallee(fx, fz):
+    """Terrain.niveauVallee : minimum du relief en 5 points espacés de 0,055°, en y."""
+    lo, la, dd = fx / BPD, -fz / BPD, 0.055
+    mini = np.minimum.reduce([relief(lo + a, la + b) for a, b in ((0, 0), (dd, 0), (-dd, 0), (0, dd), (0, -dd))])
+    return blocs(np.maximum(mini, 1))
+
+
+def rivieres(X, Z):
+    """Fleuves.proche + Terrain.riviereBrute : pour chaque colonne, le cours d'eau retenu (plus petit d - demi-largeur)
+    s'il influence la colonne. Rend (présent, distance, demi-largeur, profondeur, niveau du fond de vallée)."""
     s = _segments_fleuves()
+    X = np.asarray(X, float); Z = np.asarray(Z, float)
     x0, x1, z0, z1 = X.min(), X.max(), Z.min(), Z.max()
-    m = 30 + VALLEE_MAX + 50
+    m = 30 + VALLEE_MAX + 2
     k = (np.maximum(s[:, 0], s[:, 2]) > x0 - m) & (np.minimum(s[:, 0], s[:, 2]) < x1 + m) & \
         (np.maximum(s[:, 1], s[:, 3]) > z0 - m) & (np.minimum(s[:, 1], s[:, 3]) < z1 + m)
-    dmin = np.full(X.shape, np.inf); cx = np.zeros(X.shape); cz = np.zeros(X.shape); hw = np.zeros(X.shape)
+    score = np.full(X.shape, np.inf); dmin = np.zeros(X.shape); cx = np.zeros(X.shape); cz = np.zeros(X.shape)
+    cl = np.zeros(X.shape, np.int64)
     for ax, az, bx, bz, c in s[k]:
+        ax, az, bx, bz = (float(np.float32(v)) for v in (ax, az, bx, bz))     # Java : segments en float
         dx, dz = bx - ax, bz - az
-        t = np.clip(((X - ax) * dx + (Z - az) * dz) / max(dx * dx + dz * dz, 1e-9), 0, 1)
+        l2 = dx * dx + dz * dz
+        t = np.clip(((X - ax) * dx + (Z - az) * dz) / l2, 0, 1) if l2 > 0 else np.zeros(X.shape)
         px, pz = ax + t * dx, az + t * dz
         d = np.hypot(X - px, Z - pz)
-        mieux = d < dmin
-        dmin = np.where(mieux, d, dmin); cx = np.where(mieux, px, cx); cz = np.where(mieux, pz, cz)
-        hw = np.where(mieux, DEMI_LARGEUR[int(c)], hw)
-    if not np.isfinite(dmin).any():
-        return dmin
-    pres = np.isfinite(dmin) & (dmin < hw + VALLEE_MAX + 5)
-    marge = np.full(X.shape, np.inf)
-    if pres.any():
-        fx, fz = np.floor(cx[pres]), np.floor(cz[pres])
-        lo, la, dd = fx / BPD, -fz / BPD, 0.055
-        mini = np.minimum.reduce([relief(lo + a, la + b) for a, b in ((0, 0), (dd, 0), (-dd, 0), (0, dd), (0, -dd))])
-        niveau = blocs(np.maximum(mini, 1))
-        larg = np.clip((niveau - NIVEAU_MER) * 4, 2 * hw[pres], VALLEE_MAX)
-        mm = dmin[pres] - hw[pres] - larg
-        mm = np.where(niveau >= 86.0, np.inf, mm)          # vallée sèche : le fleuve ne creuse rien
-        marge[pres] = mm
+        sc = d - DEMI_LARGEUR[int(c)]
+        mieux = sc < score
+        score = np.where(mieux, sc, score); dmin = np.where(mieux, d, dmin)
+        cx = np.where(mieux, px, cx); cz = np.where(mieux, pz, cz); cl = np.where(mieux, int(c), cl)
+    hw = np.where(cl > 0, np.vectorize(lambda c: DEMI_LARGEUR.get(int(c), 4.5))(np.maximum(cl, 1)), 0.0)
+    present = np.isfinite(score) & (dmin <= hw + VALLEE_MAX)
+    niveau = np.zeros(X.shape)
+    if present.any():
+        niveau[present] = _niveau_vallee(np.floor(cx[present]), np.floor(cz[present]))
+    prof = np.vectorize(lambda c: PROFONDEUR.get(int(c), 2))(np.maximum(cl, 1))
+    return present, dmin, hw, prof, niveau
+
+
+def appliquer_rivieres(h, X, Z, sd):
+    """Terrain.calculerHauteur : lits et vallées des cours d'eau en eau (sur la terre ferme)."""
+    present, d, hw, prof, niveau = rivieres(X, Z)
+    present &= np.asarray(sd) >= 0
+    k = np.clip((VALLEE_SECHE - niveau) / (VALLEE_SECHE - VALLEE_EAU), 0, 1)
+    larg = np.clip((niveau - NIVEAU_MER) * 4.0, 2.0 * hw, VALLEE_MAX)
+    u = d / np.maximum(hw, 1e-9)
+    lit = (NIVEAU_MER - 1) - np.maximum(1.0, prof * (1 - u * u)) + 0.5
+    t = lisse(np.clip((d - hw) / np.maximum(larg, 1e-9), 0, 1))
+    rive = (NIVEAU_MER + 0.5) + (h - (NIVEAU_MER + 0.5)) * t
+    cible = np.where(d <= hw, lit, rive)
+    hr = np.minimum(h, h + (cible - h) * k)
+    return np.where(present & (k > 0), hr, h), present
+
+
+def influence_fleuves(X, Z):
+    """Marge (blocs) au-delà de la zone où un fleuve du mod creuse sa vallée : < 0 dans la vallée (comme Terrain :
+    demi-largeur + largeurVallee selon le fond lissé, rien si vallée sèche). Un lieu en tuiles n'y sculpte rien."""
+    present, d, hw, prof, niveau = rivieres(X, Z)
+    larg = np.clip((niveau - NIVEAU_MER) * 4.0, 2.0 * hw, VALLEE_MAX)
+    marge = np.where(present & (niveau < VALLEE_SECHE), d - hw - larg, np.inf)
     return marge
 
 
@@ -326,16 +359,19 @@ def _carte_lacs():
             return _lacs
         b = open(chemin, "rb").read()
         assert b[:4] == b"LACS"
-        _, _, t, tx, ty = struct.unpack_from("<idiii", b, 4)
+        version, _, t, tx, ty = struct.unpack_from("<idiii", b, 4)
         p = 4 + struct.calcsize("<idiii")
         (L,) = struct.unpack_from("<i", b, p); p += 4
-        tab = np.frombuffer(b, "<f4", 2 * L, p).reshape(L, 2); p += 8 * L
+        nv = 2 if version == 1 else 3
+        tab = np.frombuffer(b, "<f4", nv * L, p).reshape(L, nv); p += 4 * nv * L
         (n,) = struct.unpack_from("<i", b, p); p += 4
         idx = np.frombuffer(b, "<i4", 2 * n, p).reshape(n, 2); p += 8 * n
         debut = {}
         for k, lg in idx:
             debut[int(k)] = (p, int(lg)); p += int(lg)
+        pla = tab[:, 2] if nv == 3 else np.full(L, 3.4e38, np.float32)
         _lacs = {"b": b, "T": t, "TX": tx, "TY": ty, "alt": np.r_[0, tab[:, 0]], "sup": np.r_[0, tab[:, 1]],
+                 "plafond": np.r_[3.4e38, pla].astype(float),
                  "debut": debut, "cache": {}}
     return _lacs
 
@@ -403,7 +439,7 @@ def appliquer_lacs(h, X, Z, sd):
         return h, sans, sans
     lac, d = lacs_proches(X, Z)
     lac = np.where(sd >= 0, lac, 0)
-    niv = niveau_lac(c["alt"][lac])
+    niv = np.minimum(niveau_lac(c["alt"][lac]), c["plafond"][lac]).astype(np.int64)
     sup = c["sup"][lac]
     pmax = np.clip(2.0 + 2.2 * np.log10(sup + 1.0), 2.0, 14.0)
     larg = np.clip(pmax * 3.0, 4.0, 40.0)

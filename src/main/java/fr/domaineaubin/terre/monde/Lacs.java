@@ -33,17 +33,20 @@ public final class Lacs {
 
     private final int tx, ty;
     private final float[] altitude, superficie;   // par lac (index 1..L ; 0 inutilisé)
+    private final float[] plafond;                // niveau maximal en y (version 2, outils/lacs_niveaux.py)
     private final int[] debut, longueur;          // par tuile : position dans `donnees`, -1 sans lac
     private final byte[] donnees;
     private final ConcurrentHashMap<Integer, char[]> ids = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<Integer, long[]> calculs = new ConcurrentHashMap<>();
     private static final char[] VIDE = new char[0];
 
-    private Lacs(int tx, int ty, float[] altitude, float[] superficie, int[] debut, int[] longueur, byte[] donnees) {
+    private Lacs(int tx, int ty, float[] altitude, float[] superficie, float[] plafond, int[] debut, int[] longueur,
+                 byte[] donnees) {
         this.tx = tx;
         this.ty = ty;
         this.altitude = altitude;
         this.superficie = superficie;
+        this.plafond = plafond;
         this.debut = debut;
         this.longueur = longueur;
         this.donnees = donnees;
@@ -61,15 +64,18 @@ public final class Lacs {
             ByteBuffer b = ByteBuffer.wrap(tout).order(ByteOrder.LITTLE_ENDIAN);
             byte[] magie = new byte[4];
             b.get(magie);
-            if (!"LACS".equals(new String(magie)) || b.getInt() != 1) throw new IOException("format inconnu");
+            if (!"LACS".equals(new String(magie))) throw new IOException("format inconnu");
+            int version = b.getInt();
+            if (version != 1 && version != 2) throw new IOException("version inconnue " + version);
             b.getDouble();
             if (b.getInt() != T) throw new IOException("taille de tuile inattendue");
             int tx = b.getInt(), ty = b.getInt();
             int l = b.getInt();
-            float[] alt = new float[l + 1], sup = new float[l + 1];
+            float[] alt = new float[l + 1], sup = new float[l + 1], pla = new float[l + 1];
             for (int k = 1; k <= l; k++) {
                 alt[k] = b.getFloat();
                 sup[k] = b.getFloat();
+                pla[k] = version >= 2 ? b.getFloat() : Float.MAX_VALUE;
             }
             int n = b.getInt();
             int[] debut = new int[tx * ty], longueur = new int[tx * ty];
@@ -85,7 +91,7 @@ public final class Lacs {
                 pos += longueur[cles[i]];
             }
             DomaineTerre.LOGGER.info("Lacs chargés : {} lacs sur {} tuiles en {} ms", l, n, System.currentTimeMillis() - t0);
-            return new Lacs(tx, ty, alt, sup, debut, longueur, tout);
+            return new Lacs(tx, ty, alt, sup, pla, debut, longueur, tout);
         } catch (IOException e) {
             DomaineTerre.LOGGER.error("Carte des lacs illisible : pas de lacs en altitude", e);
             return null;
@@ -95,6 +101,14 @@ public final class Lacs {
     /** Altitude réelle de la surface du lac (m). */
     public double altitude(int lac) {
         return altitude[lac];
+    }
+
+    /**
+     * Niveau maximal de l'eau du lac (y) : la médiane du terrain généré autour de lui, moins un. L'altitude réelle d'un
+     * lac de montagne dépasse souvent le relief du mod (lissé à 3') : sans ce plafond, il serait perché.
+     */
+    public double plafond(int lac) {
+        return plafond[lac];
     }
 
     /** Superficie réelle du lac (km²). */

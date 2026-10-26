@@ -104,7 +104,7 @@ public final class Terrain {
         int niveauLac = SANS_LAC, bergeLac = SANS_LAC, eauLac = SANS_LAC;
         Lacs.Proche lp = sd >= 0 && lacs != null ? lacs.proche(lon(x + 0.5), lat(z + 0.5)) : null;
         if (lp != null) {
-            int niv = niveauLac(lacs.altitude(lp.lac()));
+            int niv = (int) Math.min(niveauLac(lacs.altitude(lp.lac())), lacs.plafond(lp.lac()));
             if (lp.distance() > 0) {
                 h = fondLac(niv, lp.distance(), lacs.superficie(lp.lac()));
                 niveauLac = niv;
