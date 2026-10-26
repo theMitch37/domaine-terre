@@ -23,7 +23,7 @@ public final class Fleuves {
     /** Rayon (blocs) dans lequel le segment le plus proche est garanti trouvé. */
     public static final double RAYON_INDEX = 256.0;
 
-    /** Résultat d'une recherche : distance au lit, classe, point le plus proche sur l'axe du lit. */
+    /** Résultat d'une recherche : distance au lit, classe, point le plus proche sur l'axe du lit, niveau de l'eau (y). */
     public record Proche(double distance, int classe, double cx, double cz, int niveau) {
     }
 
@@ -35,9 +35,13 @@ public final class Fleuves {
     private final float[] ax, az, bx, bz;
     private final byte[] classe;
     private final short[] niveauA, niveauB;
+    /** Bit 1 : le sommet A est la source du cours d'eau ; bit 2 : le sommet B (le lit ne déborde pas au-delà). */
+    private final byte[] source;
     private final Long2ObjectOpenHashMap<int[]> grille;
 
-    private Fleuves(float[] ax, float[] az, float[] bx, float[] bz, byte[] classe, short[] niveauA, short[] niveauB, Long2ObjectOpenHashMap<int[]> grille) {
+    private Fleuves(float[] ax, float[] az, float[] bx, float[] bz, byte[] classe, short[] niveauA, short[] niveauB, byte[] source,
+                    Long2ObjectOpenHashMap<int[]> grille) {
+        this.source = source;
         this.ax = ax; this.az = az; this.bx = bx; this.bz = bz;
         this.classe = classe;
         this.niveauA = niveauA;
@@ -63,6 +67,7 @@ public final class Fleuves {
         float[] ax = new float[n], az = new float[n], bx = new float[n], bz = new float[n];
         byte[] cl = new byte[n];
         short[] nva = new short[n], nvb = new short[n];
+        byte[] src = new byte[n];
         Long2ObjectOpenHashMap<IntArrayList> tmp = new Long2ObjectOpenHashMap<>();
         int i = 0;
         for (JsonElement e : tab) {
@@ -70,12 +75,26 @@ public final class Fleuves {
             int c = o.get("c").getAsInt();
             JsonArray p = o.getAsJsonArray("p");
             double marge = Math.max(Terrain.demiLargeur(c) + Terrain.VALLEE_MAX, RAYON_INDEX);
+            // niveau de l'eau à chaque sommet (étape C2) : depuis le fond de vallée réel, puis il ne fait que descendre
+            // de l'amont (le bout le plus haut) vers l'aval : jamais d'eau qui remonte le long d'un cours d'eau
+            int nb = p.size() / 2;
+            int[] nivS = new int[nb];
+            for (int s = 0; s < nb; s++)
+                nivS[s] = calcul.niveau(p.get(2 * s).getAsDouble() * blocsParDegre, -p.get(2 * s + 1).getAsDouble() * blocsParDegre);
+            boolean amontAuDebut = nb > 1 && nivS[0] >= nivS[nb - 1];
+            if (amontAuDebut) {
+                for (int s = 1; s < nb; s++) nivS[s] = Math.min(nivS[s], nivS[s - 1]);
+            } else {
+                for (int s = nb - 2; s >= 0; s--) nivS[s] = Math.min(nivS[s], nivS[s + 1]);
+            }
             for (int k = 0; k + 3 < p.size(); k += 2) {
                 double x1 = p.get(k).getAsDouble() * blocsParDegre, z1 = -p.get(k + 1).getAsDouble() * blocsParDegre;
                 double x2 = p.get(k + 2).getAsDouble() * blocsParDegre, z2 = -p.get(k + 3).getAsDouble() * blocsParDegre;
                 ax[i] = (float) x1; az[i] = (float) z1; bx[i] = (float) x2; bz[i] = (float) z2; cl[i] = (byte) c;
-                nva[i] = (short) calcul.niveau(x1, z1);
-                nvb[i] = (short) calcul.niveau(x2, z2);
+                nva[i] = (short) nivS[k / 2];
+                nvb[i] = (short) nivS[k / 2 + 1];
+                if (amontAuDebut && k == 0) src[i] |= 1;
+                if (!amontAuDebut && k + 4 >= p.size()) src[i] |= 2;
                 int c0x = (int) Math.floor((Math.min(x1, x2) - marge) / CELLULE), c1x = (int) Math.floor((Math.max(x1, x2) + marge) / CELLULE);
                 int c0z = (int) Math.floor((Math.min(z1, z2) - marge) / CELLULE), c1z = (int) Math.floor((Math.max(z1, z2) + marge) / CELLULE);
                 for (int gx = c0x; gx <= c1x; gx++)
@@ -95,7 +114,7 @@ public final class Fleuves {
         Long2ObjectOpenHashMap<int[]> grille = new Long2ObjectOpenHashMap<>(tmp.size());
         tmp.long2ObjectEntrySet().forEach(en -> grille.put(en.getLongKey(), en.getValue().toIntArray()));
         DomaineTerre.LOGGER.info("Fleuves chargés : {} segments en {} ms", n, System.currentTimeMillis() - t0);
-        return new Fleuves(ax, az, bx, bz, cl, nva, nvb, grille);
+        return new Fleuves(ax, az, bx, bz, cl, nva, nvb, src, grille);
     }
 
     /**
@@ -111,16 +130,18 @@ public final class Fleuves {
             double x1 = ax[id], z1 = az[id], dx = bx[id] - x1, dz = bz[id] - z1;
             double l2 = dx * dx + dz * dz;
             double t = l2 > 0 ? ((x - x1) * dx + (z - z1) * dz) / l2 : 0;
+            // au-delà de la source, pas de lit (sinon une mare ronde) : seulement la pente de la vallée
+            boolean auDela = (t < 0 && (source[id] & 1) != 0) || (t > 1 && (source[id] & 2) != 0);
             t = Math.max(0, Math.min(1, t));
             double px = x1 + t * dx, pz = z1 + t * dz;
             double d = Math.sqrt((x - px) * (x - px) + (z - pz) * (z - pz));
+            if (auDela) d += Terrain.demiLargeur(classe[id]);
             double score = d - Terrain.demiLargeur(classe[id]);
             if (score < meilleur) {
                 meilleur = score;
                 double nv = niveauA[id] + (niveauB[id] - niveauA[id]) * t;
-                // biefs plats : le niveau ne change que par paliers de 3 blocs (cascades entre deux)
-                int palier = Terrain.NIVEAU_MER + 3 * (int) Math.floor((nv - Terrain.NIVEAU_MER) / 3.0);
-                res = new Proche(d, classe[id], px, pz, palier);
+                // biefs plats : le niveau ne change que par marches d'un bloc (petites chutes, rapides)
+                res = new Proche(d, classe[id], px, pz, (int) Math.floor(nv));
             }
         }
         return res;

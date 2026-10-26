@@ -71,7 +71,7 @@ public final class Terrain {
 
     /** Valeurs partagées d'une colonne : calculées une fois, réutilisées par toutes les sorties et les biomes. */
     private record Colonne(int x, int z, int generation, double sd, double alt, double pente, Riviere r, double h, double poids,
-                           int niveauLac, int bergeLac, int eauLac) {
+                           int niveauLac, int bergeLac, int eauLac, int eauRiv, int bergeRiv) {
         boolean lieu() {
             return poids > 0.0;
         }
@@ -102,6 +102,9 @@ public final class Terrain {
         double h = calculerHauteur(x, z, sd, alt, pente, r);
         // lacs (étape C1) : cuvette dans le lac, berges qui descendent jusqu'à son niveau autour
         int niveauLac = SANS_LAC, bergeLac = SANS_LAC, eauLac = SANS_LAC;
+        int eauRiv = SANS_LAC, bergeRiv = SANS_LAC;
+        if (r != null && r.distance() <= r.demiLargeur() + EAU_RIVIERE) eauRiv = r.eau();
+        if (r != null && r.distance() > r.demiLargeur() && r.distance() <= r.demiLargeur() + BERGE_RIVIERE) bergeRiv = r.eau();
         Lacs.Proche lp = sd >= 0 && lacs != null ? lacs.proche(lon(x + 0.5), lat(z + 0.5)) : null;
         if (lp != null) {
             int niv = (int) Math.min(niveauLac(lacs.altitude(lp.lac())), lacs.plafond(lp.lac()));
@@ -121,8 +124,11 @@ public final class Terrain {
         if (lieu != null) {
             h = lieu.hauteur(x, z, h);
             poids = Mth.clamp(lieu.poids(x, z), 0.0, 1.0);
+            // un lieu sculpté (Grand Canyon, Verdon) gère l'eau de son cours d'eau lui-même (niveau de la mer)
+            eauRiv = SANS_LAC;
+            bergeRiv = SANS_LAC;
         }
-        c = new Colonne(x, z, g, sd, alt, pente, r, h, poids, niveauLac, bergeLac, eauLac);
+        c = new Colonne(x, z, g, sd, alt, pente, r, h, poids, niveauLac, bergeLac, eauLac, eauRiv, bergeRiv);
         tab[i] = c;
         return c;
     }
@@ -229,19 +235,26 @@ public final class Terrain {
      */
     static final double BERGE = 20.0;
 
-    /** Niveau d'eau que les aquifères prennent ici : celui du lac, dans le lac et sur sa berge ; sinon SANS_LAC. */
+    /**
+     * Niveau d'eau que les aquifères prennent ici : celui du lac (dans le lac et sur sa berge), sinon celui du cours
+     * d'eau (dans le lit et jusqu'à EAU_RIVIERE cases autour), sinon SANS_LAC (la mer).
+     */
     public int niveauLac(int x, int z) {
-        return colonne(x, z).eauLac();
+        Colonne c = colonne(x, z);
+        return c.eauLac() != SANS_LAC ? c.eauLac() : c.eauRiv();
     }
 
-    /** Fond de vallée (y lissé) en dessous duquel le fleuve est en eau ; au-dessus de VALLEE_SECHE, plus de vallée. */
+    /** Ancien seuil (avant l'étape C2, toute l'eau au niveau de la mer) : plus utilisé, gardé pour les addons. */
     public static final double VALLEE_EAU = 80.0, VALLEE_SECHE = 86.0;
     /** Largeur maximale de la pente douce entre la rive et le terrain naturel, en blocs. */
     public static final double VALLEE_MAX = 64.0;
 
-    /** Largeur de la pente de vallée : plus le fleuve est encaissé, plus elle est large (pas de falaises). */
-    public static double largeurVallee(Riviere r) {
-        return Mth.clamp((r.niveau() - NIVEAU_MER) * 4.0, 2.0 * r.demiLargeur(), VALLEE_MAX);
+    /**
+     * Largeur de la pente de vallée à une colonne de hauteur h : plus le cours d'eau est encaissé, plus elle est large
+     * (pente ~1 pour 2, pas de falaises), au moins deux demi-largeurs du lit.
+     */
+    public static double largeurVallee(Riviere r, double h) {
+        return Mth.clamp((h - r.eau()) * 2.0, 2.0 * r.demiLargeur(), VALLEE_MAX);
     }
 
     /**
@@ -256,26 +269,29 @@ public final class Terrain {
     private double calculerHauteur(int x, int z, double sd, double alt, double pente, Riviere r) {
         double h = hauteurBase(x, z, sd, alt, pente);
         if (r == null) return h;
-        double k = Mth.clamp((VALLEE_SECHE - r.niveau()) / (VALLEE_SECHE - VALLEE_EAU), 0.0, 1.0);
-        if (k <= 0.0) return h;
-        double cible;
+        // étape C2 : chaque cours d'eau a son niveau (r.eau(), qui descend vers l'aval), en altitude comme en plaine
+        int w = r.eau();
         if (r.distance() <= r.demiLargeur()) {
-            // lit : profil en creux sous la surface de l'eau (y 62)
+            // lit : profil en creux sous la surface de l'eau
             double u = r.distance() / r.demiLargeur();
-            cible = (NIVEAU_MER - 1) - Math.max(1.0, r.profondeur() * (1.0 - u * u)) + 0.5;
-        } else {
-            // rive à un bloc au-dessus de l'eau, puis pente douce jusqu'au terrain naturel
-            double t = lisse(Mth.clamp((r.distance() - r.demiLargeur()) / largeurVallee(r), 0.0, 1.0));
-            cible = Mth.lerp(t, NIVEAU_MER + 0.5, h);
+            return Math.min(h, (w - 1) - Math.max(1.0, r.profondeur() * (1.0 - u * u)) + 0.5);
         }
-        return Math.min(h, Mth.lerp(k, h, cible));
+        // rive un demi-bloc au-dessus de l'eau, puis pente douce jusqu'au terrain naturel
+        double t = lisse(Mth.clamp((r.distance() - r.demiLargeur()) / largeurVallee(r, h), 0.0, 1.0));
+        double v = Math.min(h, Mth.lerp(t, w + 0.5, h));
+        // la berge tient l'eau : jamais sous le niveau du cours d'eau près du lit
+        return r.distance() <= r.demiLargeur() + BERGE_RIVIERE ? Math.max(v, w + 0.6) : v;
     }
 
     // ---------------------------------------------------------------- fleuves
 
     /** Infos d'un cours d'eau au voisinage d'une colonne. */
-    public record Riviere(double distance, double demiLargeur, double niveau, int profondeur, int classe, int cx, int cz) {
+    public record Riviere(double distance, double demiLargeur, double niveau, int profondeur, int classe, int cx, int cz,
+                          int eau) {
     }
+
+    /** Berge (cases au-delà du lit) tenue au-dessus de l'eau ; et largeur où l'aquifère prend le niveau du cours d'eau. */
+    static final double BERGE_RIVIERE = 4.0, EAU_RIVIERE = 20.0;
 
     private volatile Fleuves fleuves;
 
@@ -319,7 +335,8 @@ public final class Terrain {
         if (p.distance() > hw + VALLEE_MAX) return null;
         // fond de vallée pris sur l'axe du cours d'eau : le même d'une rive à l'autre
         double niveau = niveauVallee(Mth.floor(p.cx()), Mth.floor(p.cz()));
-        return new Riviere(p.distance(), hw, niveau, profondeur(p.classe()), p.classe(), Mth.floor(p.cx()), Mth.floor(p.cz()));
+        return new Riviere(p.distance(), hw, niveau, profondeur(p.classe()), p.classe(), Mth.floor(p.cx()), Mth.floor(p.cz()),
+                p.niveau());
     }
 
     /**
@@ -333,10 +350,13 @@ public final class Terrain {
         return blocsDepuisAltitude(Math.max(m, 1.0));
     }
 
-    /** Niveau de l'eau d'un tronçon : suit le relief réel lissé, jamais sous la mer. */
+    /**
+     * Niveau de l'eau (y de la première couche d'air : l'eau remplit y < niveau) à un sommet de cours d'eau (étape C2) :
+     * deux blocs sous le fond de vallée réel lissé, jamais sous la mer. Fleuves.charger le fait ensuite descendre de
+     * l'amont vers l'aval sans jamais remonter.
+     */
     private int niveauEau(double x, double z) {
-        double alt = carte.relief(lon(x), lat(z));
-        return Math.max(NIVEAU_MER, Mth.floor(blocsDepuisAltitude(Math.max(alt, 1.0))) - 1);
+        return Math.max(NIVEAU_MER, Mth.floor(niveauVallee(Mth.floor(x), Mth.floor(z))) - 2);
     }
 
     /** Hauteur visée du sol sans les fleuves. */
@@ -374,7 +394,7 @@ public final class Terrain {
         // près des cours d'eau, le terrain colle au profil de la vallée (pas de bosses dans le lit ni de creux sur la rive)
         Riviere r = c.r();
         if (r != null) {
-            double t = Mth.clamp(1.0 - (r.distance() - r.demiLargeur()) / largeurVallee(r), 0.0, 1.0);
+            double t = Mth.clamp(1.0 - (r.distance() - r.demiLargeur()) / VALLEE_MAX, 0.0, 1.0);
             f = Mth.lerp(t, f, 30.0);
         }
         // lieu sculpté : le terrain suit exactement sa forme, avec un passage progressif vers le relief libre
@@ -420,6 +440,8 @@ public final class Terrain {
         // berge d'un lac : le terrain, interpolé par le jeu sur des cellules de 4 blocs, ne doit pas descendre sous
         // l'eau du lac voisin (sinon l'eau s'échappe de la cuvette)
         if (c.bergeLac() != SANS_LAC) return y <= c.bergeLac() && y >= c.bergeLac() - 6 ? 0.5 : -1.0;
+        // berge d'un cours d'eau (étape C2) : pareil, l'eau reste dans le lit
+        if (c.bergeRiv() != SANS_LAC && c.eauLac() == SANS_LAC) return y <= c.bergeRiv() && y >= c.bergeRiv() - 6 ? 0.5 : -1.0;
         if (y < NIVEAU_MER - 5 || y > NIVEAU_MER - 1) return -1.0;
         if (c.sd() < 0 || c.r() != null || c.h() < NIVEAU_MER) return -1.0;
         return 0.5;
@@ -437,10 +459,7 @@ public final class Terrain {
             Lieu l = LieuxTerre.a(x, z);
             if (l != null && l.inonde(x, z, c.h())) return 2.0;
         }
-        Riviere r = c.r();
-        if (r == null || r.distance() > r.demiLargeur() + 40.0) return 0.0;
-        double k = Mth.clamp((VALLEE_SECHE - r.niveau()) / (VALLEE_SECHE - VALLEE_EAU), 0.0, 1.0);
-        return k > 0.5 ? 2.0 : 0.0;
+        return c.eauRiv() != SANS_LAC ? 2.0 : 0.0;   // lit et abords d'un cours d'eau : niveau du cours d'eau
     }
 
     /** Continentalité vanilla (sert au choix des biomes : océan, côte, intérieur). */

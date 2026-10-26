@@ -222,7 +222,7 @@ def hauteur_base(x, z, eaux=True):
     h = np.where(sd >= 0, terre, mer)
     if not eaux:                                    # sans fleuves ni lacs (pour le plafond des lacs)
         return h, sd
-    h, _ = appliquer_rivieres(h, X if np.ndim(x) else np.array(x), Z if np.ndim(z) else np.array(z), sd)
+    h, _, _, _ = appliquer_rivieres(h, X if np.ndim(x) else np.array(x), Z if np.ndim(z) else np.array(z), sd)
     h, _, _ = appliquer_lacs(h, X if np.ndim(x) else np.array(x), Z if np.ndim(z) else np.array(z), sd)
     return h, sd
 
@@ -251,9 +251,14 @@ def sol_exact(x0, z0, W, D):
     den = sum(a * FC[jj, ii] for a, jj, ii in w)
     sol = np.ceil(num / den).astype(int) - 1
     # berges des lacs : plancher de densité (Terrain.plancher), rien sous l'eau du lac voisin sur 4 cases
-    _, _, berge = appliquer_lacs(np.zeros(X.shape), X.astype(float), Z.astype(float), distance_cote(X.astype(float), Z.astype(float)))
-    a_berge = berge != np.iinfo(np.int64).min
-    return np.where(a_berge, np.maximum(sol, berge), sol)
+    Xf, Zf = X.astype(float), Z.astype(float)
+    sdf = distance_cote(Xf, Zf)
+    sans = np.iinfo(np.int64).min
+    _, eau_lac, berge = appliquer_lacs(np.zeros(X.shape), Xf, Zf, sdf)
+    _, _, _, berge_riv = appliquer_rivieres(np.zeros(X.shape), Xf, Zf, sdf)
+    lac_eau = _eau_lac_large(Xf, Zf, sdf)
+    sol = np.where(berge != sans, np.maximum(sol, berge), sol)
+    return np.where((berge_riv != sans) & ~lac_eau, np.maximum(sol, berge_riv), sol)
 
 
 DEMI_LARGEUR = {1: 30.0, 2: 12.0, 3: 4.5}     # Terrain.demiLargeur
@@ -262,16 +267,35 @@ _fleuves = None
 
 
 def _segments_fleuves():
+    """Segments des cours d'eau (Fleuves.charger) : ax, az, bx, bz, classe, niveau d'eau en a, niveau en b.
+    Niveau d'un sommet (étape C2) : deux blocs sous le fond de vallée réel lissé, jamais sous la mer ; puis il ne fait que
+    descendre de l'amont (le bout le plus haut) vers l'aval."""
     global _fleuves
     if _fleuves is None:
         import json
-        seg = []
-        for r in json.load(open(os.path.join(CARTE, "fleuves.json"))):
-            p = np.array(r["p"], float).reshape(-1, 2)
-            if len(p) < 2:
+        tab = json.load(open(os.path.join(CARTE, "fleuves.json")))
+        polys = [np.array(r["p"], float).reshape(-1, 2) for r in tab]
+        tout = np.vstack([q for q in polys if len(q)])
+        xs, zs = tout[:, 0] * BPD, -tout[:, 1] * BPD
+        niv_tout = np.maximum(NIVEAU_MER, np.floor(_niveau_vallee(np.floor(xs), np.floor(zs))).astype(np.int64) - 2)
+        seg, k = [], 0
+        for r, q in zip(tab, polys):
+            n = len(q)
+            nv = niv_tout[k:k + n].copy(); k += n
+            if n < 2:
                 continue
-            xs, zs = p[:, 0] * BPD, -p[:, 1] * BPD
-            seg.append(np.c_[xs[:-1], zs[:-1], xs[1:], zs[1:], np.full(len(p) - 1, r["c"])])
+            amont_debut = nv[0] >= nv[-1]
+            if amont_debut:
+                nv = np.minimum.accumulate(nv)
+            else:
+                nv = np.minimum.accumulate(nv[::-1])[::-1]
+            src = np.zeros(n - 1)
+            if amont_debut:
+                src[0] += 1
+            else:
+                src[-1] += 2
+            x, z = q[:, 0] * BPD, -q[:, 1] * BPD
+            seg.append(np.c_[x[:-1], z[:-1], x[1:], z[1:], np.full(n - 1, r["c"]), nv[:-1], nv[1:], src])
         _fleuves = np.vstack(seg)
     return _fleuves
 
@@ -297,49 +321,55 @@ def rivieres(X, Z):
     k = (np.maximum(s[:, 0], s[:, 2]) > x0 - m) & (np.minimum(s[:, 0], s[:, 2]) < x1 + m) & \
         (np.maximum(s[:, 1], s[:, 3]) > z0 - m) & (np.minimum(s[:, 1], s[:, 3]) < z1 + m)
     score = np.full(X.shape, np.inf); dmin = np.zeros(X.shape); cx = np.zeros(X.shape); cz = np.zeros(X.shape)
-    cl = np.zeros(X.shape, np.int64)
-    for ax, az, bx, bz, c in s[k]:
+    cl = np.zeros(X.shape, np.int64); eau = np.zeros(X.shape, np.int64)
+    for ax, az, bx, bz, c, na, nb, src in s[k]:
         ax, az, bx, bz = (float(np.float32(v)) for v in (ax, az, bx, bz))     # Java : segments en float
         dx, dz = bx - ax, bz - az
         l2 = dx * dx + dz * dz
-        t = np.clip(((X - ax) * dx + (Z - az) * dz) / l2, 0, 1) if l2 > 0 else np.zeros(X.shape)
+        t0 = ((X - ax) * dx + (Z - az) * dz) / l2 if l2 > 0 else np.zeros(X.shape)
+        au_dela = ((t0 < 0) & ((int(src) & 1) > 0)) | ((t0 > 1) & ((int(src) & 2) > 0))
+        t = np.clip(t0, 0, 1)
         px, pz = ax + t * dx, az + t * dz
-        d = np.hypot(X - px, Z - pz)
+        d = np.hypot(X - px, Z - pz) + np.where(au_dela, DEMI_LARGEUR[int(c)], 0.0)
         sc = d - DEMI_LARGEUR[int(c)]
         mieux = sc < score
         score = np.where(mieux, sc, score); dmin = np.where(mieux, d, dmin)
         cx = np.where(mieux, px, cx); cz = np.where(mieux, pz, cz); cl = np.where(mieux, int(c), cl)
+        eau = np.where(mieux, np.floor(na + (nb - na) * t).astype(np.int64), eau)
     hw = np.where(cl > 0, np.vectorize(lambda c: DEMI_LARGEUR.get(int(c), 4.5))(np.maximum(cl, 1)), 0.0)
     present = np.isfinite(score) & (dmin <= hw + VALLEE_MAX)
     niveau = np.zeros(X.shape)
     if present.any():
         niveau[present] = _niveau_vallee(np.floor(cx[present]), np.floor(cz[present]))
     prof = np.vectorize(lambda c: PROFONDEUR.get(int(c), 2))(np.maximum(cl, 1))
-    return present, dmin, hw, prof, niveau
+    return present, dmin, hw, prof, niveau, eau
+
+
+BERGE_RIVIERE, EAU_RIVIERE = 4.0, 20.0             # Terrain
 
 
 def appliquer_rivieres(h, X, Z, sd):
-    """Terrain.calculerHauteur : lits et vallées des cours d'eau en eau (sur la terre ferme)."""
-    present, d, hw, prof, niveau = rivieres(X, Z)
+    """Terrain.calculerHauteur (étape C2) : lit sous le niveau du cours d'eau, rive un demi-bloc au-dessus, pente douce
+    jusqu'au terrain ; berge jamais sous l'eau près du lit. Rend (h, présent, niveau de l'eau, berge pour le plancher)."""
+    present, d, hw, prof, niveau, w = rivieres(X, Z)
     present &= np.asarray(sd) >= 0
-    k = np.clip((VALLEE_SECHE - niveau) / (VALLEE_SECHE - VALLEE_EAU), 0, 1)
-    larg = np.clip((niveau - NIVEAU_MER) * 4.0, 2.0 * hw, VALLEE_MAX)
     u = d / np.maximum(hw, 1e-9)
-    lit = (NIVEAU_MER - 1) - np.maximum(1.0, prof * (1 - u * u)) + 0.5
+    lit = (w - 1) - np.maximum(1.0, prof * (1 - u * u)) + 0.5
+    larg = np.clip((h - w) * 2.0, 2.0 * hw, VALLEE_MAX)
     t = lisse(np.clip((d - hw) / np.maximum(larg, 1e-9), 0, 1))
-    rive = (NIVEAU_MER + 0.5) + (h - (NIVEAU_MER + 0.5)) * t
-    cible = np.where(d <= hw, lit, rive)
-    hr = np.minimum(h, h + (cible - h) * k)
-    return np.where(present & (k > 0), hr, h), present
+    rive = np.minimum(h, (w + 0.5) + (h - (w + 0.5)) * t)
+    rive = np.where(d <= hw + BERGE_RIVIERE, np.maximum(rive, w + 0.6), rive)
+    hr = np.where(d <= hw, np.minimum(h, lit), rive)
+    sans = np.iinfo(np.int64).min
+    berge = np.where(present & (d > hw) & (d <= hw + BERGE_RIVIERE), w, sans)
+    return np.where(present, hr, h), present, w, berge
 
 
 def influence_fleuves(X, Z):
     """Marge (blocs) au-delà de la zone où un fleuve du mod creuse sa vallée : < 0 dans la vallée (comme Terrain :
     demi-largeur + largeurVallee selon le fond lissé, rien si vallée sèche). Un lieu en tuiles n'y sculpte rien."""
-    present, d, hw, prof, niveau = rivieres(X, Z)
-    larg = np.clip((niveau - NIVEAU_MER) * 4.0, 2.0 * hw, VALLEE_MAX)
-    marge = np.where(present & (niveau < VALLEE_SECHE), d - hw - larg, np.inf)
-    return marge
+    present, d, hw, prof, niveau, w = rivieres(X, Z)
+    return np.where(present, d - hw - VALLEE_MAX, np.inf)        # toute la vallée possible (étape C2 : toujours en eau)
 
 
 # ---------------------------------------------------------------- lacs (étape C1), comme Lacs.java et Terrain
@@ -454,3 +484,12 @@ def appliquer_lacs(h, X, Z, sd):
     dedans = (lac > 0) & (d > 0); autour = (lac > 0) & (d <= 0)
     h = np.where(dedans, fond, np.where(autour, berge, h))
     return h, np.where(dedans, niv, sans), np.where(autour & (dh < BERGE), niv, sans)
+
+
+def _eau_lac_large(X, Z, sd):
+    """Colonnes où l'aquifère prend le niveau d'un lac (dans le lac et à moins de BERGE cases) : Terrain.eauLac."""
+    c = _carte_lacs()
+    if not c:
+        return np.zeros(X.shape, bool)
+    lac, d = lacs_proches(X, Z)
+    return (lac > 0) & (np.asarray(sd) >= 0) & ((d > 0) | (-d <= BERGE))

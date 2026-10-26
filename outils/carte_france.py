@@ -125,18 +125,18 @@ def calcul(lon0, lon1, lat0, lat1, pas):
             X = X.astype(float); Z = Z.astype(float)
             s = T.distance_cote(X, Z)
             hb, _ = T.hauteur_base(X, Z)
-            riv, d, hw, _, _ = T.rivieres(X, Z)
+            riv, d, hw, _, _, weau = T.rivieres(X, Z)
             lac, dl = T.lacs_proches(X, Z)
             h[j0:j1, i0:i1] = hb; sd[j0:j1, i0:i1] = s
             e = np.zeros(X.shape, np.int8)
             e[s < 0] = 1
-            e[(s >= 0) & riv & (hb < 62.5)] = 3
+            e[(s >= 0) & riv & (hb < weau - 0.5)] = 3                    # lit sous le niveau du cours d'eau
             e[(lac > 0) & (dl > 0)] = 2
             eau[j0:j1, i0:i1] = e
             c = T._carte_lacs()
             if c:
                 nl = np.minimum(T.niveau_lac(c["alt"][lac]), c["plafond"][lac]) - 1
-                niv[j0:j1, i0:i1] = np.where(e == 2, nl, 62)
+                niv[j0:j1, i0:i1] = np.where(e == 2, nl, np.where(e == 3, weau - 1, 62))
             bio[j0:j1, i0:i1] = biome(X, Z)
         print(f"  lignes {j1}/{D} ({time.time() - t0:.0f} s)", flush=True)
     return x0, z0, W, D, h, sd, eau, niv, bio
