@@ -135,6 +135,41 @@ def finir_types(typ, travail, marge_biome=7):
     return typ
 
 
+def en_tuiles(nom, X, Z, y, h, sommet, typ, sd, vox=None, marge=10, limite=None):
+    """Écrit un lieu dans les tuiles (outils/tuiles.py) : colonnes sculptées = ce que le lieu change (hauteur, taille,
+    remblai, biome) élargi de `marge` blocs ; au-delà, terrain calculé. Contrôle que les colonnes sculptées
+    rejoignent le terrain calculé à leur bord et ne touchent pas le bord de la zone."""
+    if limite is not None:                                      # le lieu s'arrête là (îles, autres côtes de la zone)
+        y = np.where(limite, y, h); typ = np.where(limite, typ, 0)
+    role = (typ & (TAILLEE | REMBLAI | BIOME)) > 0
+    y = np.where(~role & (np.abs(y - h) < 0.15), h, y)          # restes de fondu (< 0,15 bloc) : terrain calculé
+    change = (np.abs(y - h) > 0.01) | role
+    actif = ndimage.binary_dilation(change, iterations=marge)
+    typ = np.where(actif & (sd < 0), typ | INONDE, typ)          # la mer d'un lieu reste en eau (aquifère au niveau de la mer)
+    typ = np.where(actif, typ, 0)
+    ecrites = tu.poser(nom, int(X[0, 0]), int(Z[0, 0]), y, sommet, typ, actif)
+    vox = sorted(set(vox or []))
+    chemin_vox = SORTIE + nom + ".vox"
+    if vox:
+        with gzip.GzipFile(chemin_vox, "wb", 9, mtime=0) as f:
+            f.write(struct.pack("<i", len(vox)))
+            for (x, yy, z, c) in vox:
+                f.write(struct.pack("<3ib", int(x), int(yy), int(z), int(c)))
+    elif os.path.exists(chemin_vox):
+        os.remove(chemin_vox)
+    if os.path.exists(SORTIE + nom + ".bin"):
+        os.remove(SORTIE + nom + ".bin")                         # ancien format (grille lon/lat)
+    np.savez_compressed(f"/tmp/lieu_{nom}.npz", X=X, Z=Z, y=y, h=h, sommet=sommet, typ=typ, poids=actif.astype(float),
+                        vox=np.asarray(vox if vox else np.zeros((0, 4)), int))
+    bord_actif = actif & ndimage.binary_dilation(~actif)
+    frac = np.abs(y - np.round(y))
+    print(f"{nom} (tuiles {ecrites}) : {int(actif.sum())} colonnes, sol {y.min():.1f} à {y.max():.1f}, "
+          f"{int(((typ & TAILLEE) > 0).sum())} taillées, {len(vox)} blocs creusés | contrôles : écart au bord des colonnes "
+          f"sculptées {np.abs(y - h)[bord_actif].max():.3f}, actif au bord de la zone {int(actif[bord_zone(X, Z, 1) < 2].sum())}, "
+          f"{int(((frac < 0.02) & ((typ & TAILLEE) > 0) & (np.abs(y - h) > 0.01)).sum())} colonnes taillées sur un entier")
+    return typ, actif
+
+
 # ---------------------------------------------------------------- falaises de bord de mer
 
 def falaise(X, Z, h, db, s, haut, pied, graine, amp=2.5, retour=120.0, plongeante=False):
@@ -183,6 +218,11 @@ def falaise(X, Z, h, db, s, haut, pied, graine, amp=2.5, retour=120.0, plongeant
     raide = ndimage.binary_dilation((np.hypot(gx, gz) > 1.4) & (haut > 2.5) & (e > -4), iterations=1)
     typ[raide & (typ & 15 == PLATEAU)] |= TAILLEE
     typ[(e >= 2.5) & (e < 14) & haute] |= REMBLAI
+    # hors des tronçons de falaise, la côte reste celle du terrain calculé (pas de platier ni de plage taillés
+    # tout le long de la zone : ils sortaient du lieu jusqu'au bord de la zone)
+    hors = (haut <= 0.5) & ((e < 0) | (db < 0))
+    y = np.where(hors, h, y)
+    typ = np.where(hors, typ & INONDE, typ)
     sommet = np.where(e >= -3, ztop, 63.0)
     return y, typ, sommet, e
 
@@ -306,20 +346,21 @@ def etretat():
 # ---------------------------------------------------------------- Moher
 
 def moher():
-    X, Z, x0, z0 = grille(-9.62, -9.16, 52.84, 53.10)
+    """Falaises de Moher, en tuiles (26/10). 8 km en vrai (32 blocs) : allongées le long de la côte. La falaise naît
+    dans la baie de Liscannor, monte à Hag's Head (120 m), culmine près de la tour d'O'Brien (214 m), puis s'abaisse
+    vers Doolin et au-delà sur ~50 blocs : plus de pan posé à pleine hauteur qui s'arrête net."""
+    X, Z, x0, z0 = grille(-9.75, -9.05, 52.80, 53.22)
     h, sd = T.hauteur_base(X, Z)
     db = sd * BPD / 60.0
-    cote = Cote(X, Z, db, (52.86, -9.50))                           # du sud (Hag's Head) vers le nord
+    cote = Cote(X, Z, db, (52.86, -9.50))                           # du sud (Spanish Point) vers le nord
     S = cote.s
-    s_tour = cote.s_de(52.9719, -9.4265)
-    s_fin = cote.L[-1]
-    # 8 km en vrai (32 blocs) : allongée le long de la côte, sinon un bloc trapu ; 120 m au sud, 214 m au nord
-    haut = courbe(S, [(0, 0), (25, 0), (50, 20), (s_tour - 30, 25), (s_tour + 5, 30), (s_tour + 45, 29),
-                      (s_fin - 20, 0)])
-    # seulement la côte principale : l'île d'Inisheer, coupée par le bord de la zone, recevait un pan de falaise isolé
+    s_hag, s_tour, s_doolin = cote.s_de(52.95, -9.47), cote.s_de(52.9719, -9.4265), cote.s_de(53.017, -9.40)
+    haut = courbe(S, [(s_hag - 45, 0), (s_hag - 22, 9), (s_hag, 20), (s_tour - 5, 25), (s_tour + 5, 30),
+                      (s_tour + 16, 28), (s_doolin - 6, 12), (s_doolin + 8, 0)])
+    # seulement la côte principale (pas les îles d'Aran ni les îlots)
     d_cote = cote.arbre.query(np.c_[X.ravel(), Z.ravel()])[0].reshape(X.shape)
     haut = haut * (1 - lisse((d_cote - 18) / 10))
-    y, typ, sommet, e = falaise(X, Z, h, db, S, haut, pied=0.0, graine=21, amp=3.5, plongeante=True)
+    y, typ, sommet, e = falaise(X, Z, h, db, S, haut, pied=0.0, graine=21, amp=3.5, retour=150.0, plongeante=True)
     # Branaunmore : piton au pied de la tour d'O'Brien, séparé de la falaise par un chenal d'au moins 7 blocs
     p = sur_falaise(e, X, Z, *(lambda q: (-q[1] / BPD, q[0] / BPD))(cote.point(s_tour)))
     n = normale(db, X, Z, p)
@@ -334,28 +375,30 @@ def moher():
     y, f = fin_de_lieu(y, h, typ, X, Z)
     typ = parois(y, typ)
     typ = finir_types(typ, ((typ & (TAILLEE | REMBLAI)) > 0) & (f > 0.2))
-    ecrire("moher", X, Z, x0, z0, y, h, sommet, typ)
+    limite = (S > s_hag - 60) & (S < s_doolin + 50) & (d_cote < 175)
+    en_tuiles("moher", X, Z, y, h, sommet, typ, sd, limite=limite)
 
 
 # ---------------------------------------------------------------- Douvres
 
 def douvres():
-    X, Z, x0, z0 = grille(1.05, 1.52, 51.00, 51.40)
+    """Falaises blanches de Douvres, en tuiles (26/10). ~100 m, faîte ondulé : la falaise commence à Folkestone
+    (la côte plus à l'ouest est basse), falaise de Shakespeare, trouée de la Dour (la ville), falaises de l'est,
+    baie de St Margaret, puis elle s'abaisse jusqu'à Kingsdown et Deal (côte basse)."""
+    X, Z, x0, z0 = grille(0.95, 1.62, 50.95, 51.42)
     h, sd = T.hauteur_base(X, Z)
     db = sd * BPD / 60.0
-    cote = Cote(X, Z, db, (51.07, 1.10))                            # d'ouest (Folkestone) en est (Kingsdown)
+    cote = Cote(X, Z, db, (51.07, 1.00))                            # d'ouest (Hythe) en est puis au nord (Deal)
     S = cote.s
-    d, fin = cote.s_de(51.122, 1.312), cote.s_de(51.24, 1.41)    # fin : Kingsdown (la côte de Deal, basse, continue au nord)
-    # ~100 m, faîte ondulé : falaise de Shakespeare à l'ouest, vallée de la Dour (la ville), combes sèches,
-    # baie de St Margaret ; distances étirées le long de la côte comme à Étretat
-    haut = courbe(S, [(0, 0), (15, 0), (40, 20), (d - 40, 23), (d - 22, 18), (d - 12, 21), (d - 7, 0), (d + 7, 0),
-                      (d + 13, 22), (d + 30, 24), (d + 40, 15), (d + 50, 24), (d + 62, 22), (fin - 22, 8),
-                      (fin - 10, 0)])
-    y, typ, sommet, e = falaise(X, Z, h, db, S, haut, pied=1.5, graine=31, amp=1.6)
+    F, D, M, K = (cote.s_de(51.08, 1.17), cote.s_de(51.122, 1.312), cote.s_de(51.15, 1.385), cote.s_de(51.18, 1.40))
+    haut = courbe(S, [(F - 24, 0), (F - 6, 6), (F + 11, 17), (F + 40, 22), (D - 35, 23), (D - 18, 19), (D - 10, 21),
+                      (D - 6, 0), (D + 6, 0), (D + 12, 22), (D + 27, 24), (M - 5, 16), (M, 15), (M + 7, 20),
+                      (K - 3, 13), (K + 7, 5), (K + 17, 0)])
+    y, typ, sommet, e = falaise(X, Z, h, db, S, haut, pied=1.5, graine=31, amp=1.6, retour=150.0)
     y, f = fin_de_lieu(y, h, typ, X, Z)
     typ = parois(y, typ)
     typ = finir_types(typ, ((typ & (TAILLEE | REMBLAI)) > 0) & (f > 0.2))
-    ecrire("douvres", X, Z, x0, z0, y, h, sommet, typ)
+    en_tuiles("douvres", X, Z, y, h, sommet, typ, sd)
 
 
 # ---------------------------------------------------------------- dune du Pilat
