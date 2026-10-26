@@ -381,7 +381,12 @@ public final class Terrain {
      * l'amont vers l'aval sans jamais remonter.
      */
     private int niveauEau(double x, double z) {
-        return Math.max(NIVEAU_MER, Mth.floor(niveauVallee(Mth.floor(x), Mth.floor(z))) - 2);
+        int n = Math.max(NIVEAU_MER, Mth.floor(niveauVallee(Mth.floor(x), Mth.floor(z))) - 2);
+        // près d'un lac, ETOPO met une valeur vide (≈ 0 m) : le cours d'eau ne descend pas sous le niveau du lac
+        int xi = Mth.floor(x), zi = Mth.floor(z);
+        Lacs.Proche lp = lacs != null ? lacs.proche(lon(xi + 0.5), lat(zi + 0.5)) : null;
+        if (lp != null) n = Math.max(n, (int) Math.min(niveauLac(lacs.altitude(lp.lac())), lacs.plafond(lp.lac())));
+        return n;
     }
 
     /** Hauteur visée du sol sans les fleuves. */

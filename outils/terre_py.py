@@ -283,6 +283,12 @@ def _segments_fleuves():
         tout = np.vstack([q for q in polys if len(q)])
         xs, zs = tout[:, 0] * BPD, -tout[:, 1] * BPD
         niv_tout = np.maximum(NIVEAU_MER, np.floor(_niveau_vallee(np.floor(xs), np.floor(zs))).astype(np.int64) - 2)
+        # près d'un lac (48 cases), jamais sous le niveau du lac (ETOPO met une valeur vide sous les lacs)
+        lac_pts = _lacs_points(np.floor(xs), np.floor(zs))
+        c = _carte_lacs()
+        if c:
+            nl = np.minimum(niveau_lac(c["alt"][lac_pts]), c["plafond"][lac_pts]).astype(np.int64)
+            niv_tout = np.where(lac_pts > 0, np.maximum(niv_tout, nl), niv_tout)
         seg, k = [], 0
         for r, q in zip(tab, polys):
             n = len(q)
@@ -520,3 +526,42 @@ def _eau_lac_large(X, Z, sd):
         return np.zeros(X.shape, bool)
     lac, d = lacs_proches(X, Z)
     return (lac > 0) & (np.asarray(sd) >= 0) & ((d > 0) | (-d <= BERGE))
+
+
+def _lacs_points(X, Z):
+    """Lac le plus proche (dans RAYON_LAC cases) de points épars, comme Lacs.proche : regroupés par tuile de lacs."""
+    from scipy import ndimage
+    c = _carte_lacs()
+    X = np.asarray(X, float); Z = np.asarray(Z, float)
+    res = np.zeros(X.shape, np.int64)
+    if not c:
+        return res
+    T_ = c["T"]; M = RAYON_LAC + 2
+    gx = np.floor(X + 0.5 + 180 * BPD).astype(np.int64); gy = np.floor(Z + 0.5 + 90 * BPD).astype(np.int64)
+    tx, ty = gx // T_, gy // T_
+    cles = {}
+    for k in np.unique(ty * 100000 + tx):
+        tyi, txi = divmod(int(k), 100000)
+        if not any(_ids_tuile(c, txi + a, tyi + b) is not None for a in (-1, 0, 1) for b in (-1, 0, 1)):
+            continue
+        sel = (tx == txi) & (ty == tyi)
+        a0, b0 = txi * T_ - M, tyi * T_ - M
+        ids = np.zeros((T_ + 2 * M, T_ + 2 * M), np.int64)
+        for tyy in range((b0) // T_, (b0 + T_ + 2 * M - 1) // T_ + 1):
+            for txx in range((a0) // T_, (a0 + T_ + 2 * M - 1) // T_ + 1):
+                m = _ids_tuile(c, txx, tyy)
+                if m is None:
+                    continue
+                j0, i0 = max(tyy * T_, b0), max(txx * T_, a0)
+                j1, i1 = min((tyy + 1) * T_, b0 + T_ + 2 * M), min((txx + 1) * T_, a0 + T_ + 2 * M)
+                ids[j0 - b0:j1 - b0, i0 - a0:i1 - a0] = m[j0 - tyy * T_:j1 - tyy * T_, i0 - txx * T_:i1 - txx * T_]
+        if not ids.any():
+            continue
+        eau = ids > 0
+        d_hors, (ji, ii) = ndimage.distance_transform_edt(~eau, return_indices=True)
+        lj, li = gy[sel] - b0, gx[sel] - a0
+        dans = eau[lj, li]
+        v = np.where(dans, 1.0, -(d_hors[lj, li] - 0.5))
+        num = np.where(dans, ids[lj, li], ids[ji[lj, li], ii[lj, li]])
+        res[sel] = np.where(np.round(v * 16) / 16 < -RAYON_LAC + 1e-9, 0, num)
+    return res
