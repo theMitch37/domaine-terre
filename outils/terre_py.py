@@ -385,7 +385,12 @@ def influence_fleuves(X, Z):
     """Marge (blocs) au-delà de la zone où un fleuve du mod creuse sa vallée : < 0 dans la vallée (comme Terrain :
     demi-largeur + largeurVallee selon le fond lissé, rien si vallée sèche). Un lieu en tuiles n'y sculpte rien."""
     present, d, hw, prof, niveau, w = rivieres(X, Z)
-    return np.where(present, d - hw - VALLEE_MAX, np.inf)        # toute la vallée possible (étape C2 : toujours en eau)
+    # la vallée réelle (Terrain.largeurVallee depuis le terrain sans les eaux) : près d'une embouchure, sur un plateau
+    # bas, elle est bien plus étroite que VALLEE_MAX (sinon les falaises d'Étretat s'abaissaient jusqu'à 100 blocs de
+    # la Seine)
+    h0, _ = hauteur_base(np.asarray(X, float), np.asarray(Z, float), eaux=False)
+    larg = np.clip((h0 - w) * 2, 2 * hw, VALLEE_MAX)
+    return np.where(present, d - hw - larg, np.inf)
 
 
 # ---------------------------------------------------------------- lacs (étape C1), comme Lacs.java et Terrain

@@ -158,7 +158,9 @@ def en_tuiles(nom, X, Z, y, h, sommet, typ, sd, vox=None, marge=10, limite=None)
     role = (typ & (TAILLEE | REMBLAI | BIOME)) > 0
     y = np.where(~role & (np.abs(y - h) < 0.15), h, y)          # restes de fondu (< 0,15 bloc) : terrain calculé
     change = (np.abs(y - h) > 0.01) | role
-    actif = ndimage.binary_dilation(change, iterations=marge)
+    # jamais dans la vallée d'un fleuve, même par la marge : une colonne de lieu y couperait le cours d'eau (le lieu
+    # l'emporte sur le fleuve en jeu) ; le lieu y est déjà redescendu au terrain calculé
+    actif = ndimage.binary_dilation(change, iterations=marge) & hors_fleuve
     typ = np.where(actif & (sd < 0), typ | INONDE, typ)          # la mer d'un lieu reste en eau (aquifère au niveau de la mer)
     typ = np.where(actif, typ, 0)
     ecrites = tu.poser(nom, int(X[0, 0]), int(Z[0, 0]), y, sommet, typ, actif)
