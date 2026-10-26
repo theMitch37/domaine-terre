@@ -99,6 +99,11 @@ public final class Terrain {
         double alt = altitudeReelle(x, z);
         double pente = sd >= 0 ? pente(x, z) : 0.0;
         Riviere r = sd >= 0 ? riviereBrute(x, z) : null;
+        Lacs.Proche lp = sd >= 0 && lacs != null ? lacs.proche(lon(x + 0.5), lat(z + 0.5)) : null;
+        int nivLac = lp == null ? SANS_LAC : (int) Math.min(niveauLac(lacs.altitude(lp.lac())), lacs.plafond(lp.lac()));
+        // près d'un lac (et dedans), un cours d'eau prend au moins le niveau du lac : il y entre et en sort à niveau
+        boolean presLac = lp != null && (lp.distance() > 0 || -lp.distance() <= BERGE);
+        if (r != null && presLac && r.eau() < nivLac) r = r.avecEau(nivLac);
         double h = calculerHauteur(x, z, sd, alt, pente, r);
         // lacs (étape C1) : cuvette dans le lac, berges qui descendent jusqu'à son niveau autour
         int niveauLac = SANS_LAC, bergeLac = SANS_LAC, eauLac = SANS_LAC;
@@ -106,16 +111,17 @@ public final class Terrain {
         if (r != null && r.distance() <= r.demiLargeur() + EAU_RIVIERE) eauRiv = r.eau();
         if (r != null && r.distance() > r.demiLargeur() && r.distance() <= r.demiLargeur() + BERGE_RIVIERE) bergeRiv = r.eau();
         if (r != null && r.distance() <= r.demiLargeur()) litRiv = r.eau();
-        Lacs.Proche lp = sd >= 0 && lacs != null ? lacs.proche(lon(x + 0.5), lat(z + 0.5)) : null;
         if (lp != null) {
-            int niv = (int) Math.min(niveauLac(lacs.altitude(lp.lac())), lacs.plafond(lp.lac()));
+            int niv = nivLac;
             if (lp.distance() > 0) {
                 h = fondLac(niv, lp.distance(), lacs.superficie(lp.lac()));
                 niveauLac = niv;
                 eauLac = niv;
             } else {
-                h = bergeLac(h, niv, -lp.distance());
-                if (-lp.distance() < BERGE) bergeLac = niv;
+                // le lit et la berge d'un cours d'eau gardent leur forme (à niveau du lac) : la berge du lac ne les comble pas
+                boolean litOuBerge = r != null && r.distance() <= r.demiLargeur() + BERGE_RIVIERE;
+                if (!litOuBerge) h = bergeLac(h, niv, -lp.distance());
+                if (-lp.distance() < BERGE && !litOuBerge) bergeLac = niv;
                 if (-lp.distance() <= BERGE) eauLac = niv;
             }
         }
@@ -303,6 +309,10 @@ public final class Terrain {
     /** Infos d'un cours d'eau au voisinage d'une colonne. */
     public record Riviere(double distance, double demiLargeur, double niveau, int profondeur, int classe, int cx, int cz,
                           int eau) {
+        /** Le même cours d'eau avec un autre niveau d'eau (près d'un lac). */
+        Riviere avecEau(int e) {
+            return new Riviere(distance, demiLargeur, niveau, profondeur, classe, cx, cz, e);
+        }
     }
 
     /** Berge (cases au-delà du lit) tenue au-dessus de l'eau ; et largeur où l'aquifère prend le niveau du cours d'eau. */

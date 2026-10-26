@@ -222,8 +222,11 @@ def hauteur_base(x, z, eaux=True):
     h = np.where(sd >= 0, terre, mer)
     if not eaux:                                    # sans fleuves ni lacs (pour le plafond des lacs)
         return h, sd
-    h, _, _, _ = appliquer_rivieres(h, X if np.ndim(x) else np.array(x), Z if np.ndim(z) else np.array(z), sd)
-    h, _, _ = appliquer_lacs(h, X if np.ndim(x) else np.array(x), Z if np.ndim(z) else np.array(z), sd)
+    Xa = X if np.ndim(x) else np.array(x); Za = Z if np.ndim(z) else np.array(z)
+    _, _, nivl, pres = niveaux_lacs(Xa, Za, sd)
+    h, _, _, _ = appliquer_rivieres(h, Xa, Za, sd, np.where(pres, nivl, np.iinfo(np.int64).min))
+    lb = _RIV_CACHE["present"] & (_RIV_CACHE["d"] <= _RIV_CACHE["hw"] + BERGE_RIVIERE)
+    h, _, _ = appliquer_lacs(h, X if np.ndim(x) else np.array(x), Z if np.ndim(z) else np.array(z), sd, lb)
     return h, sd
 
 
@@ -254,8 +257,10 @@ def sol_exact(x0, z0, W, D):
     Xf, Zf = X.astype(float), Z.astype(float)
     sdf = distance_cote(Xf, Zf)
     sans = np.iinfo(np.int64).min
-    _, eau_lac, berge = appliquer_lacs(np.zeros(X.shape), Xf, Zf, sdf)
-    _, _, _, berge_riv = appliquer_rivieres(np.zeros(X.shape), Xf, Zf, sdf)
+    _, _, nivl, pres = niveaux_lacs(Xf, Zf, sdf)
+    _, _, _, berge_riv = appliquer_rivieres(np.zeros(X.shape), Xf, Zf, sdf, np.where(pres, nivl, sans))
+    lb = _RIV_CACHE["present"] & (_RIV_CACHE["d"] <= _RIV_CACHE["hw"] + BERGE_RIVIERE)
+    _, eau_lac, berge = appliquer_lacs(np.zeros(X.shape), Xf, Zf, sdf, lb)
     lac_eau = _eau_lac_large(Xf, Zf, sdf)
     sol = np.where(berge != sans, np.maximum(sol, berge), sol)
     return np.where((berge_riv != sans) & ~lac_eau, np.maximum(sol, berge_riv), sol)
@@ -346,13 +351,18 @@ def rivieres(X, Z):
 
 
 BERGE_RIVIERE, EAU_RIVIERE = 4.0, 20.0             # Terrain
+_RIV_CACHE = {}
 
 
-def appliquer_rivieres(h, X, Z, sd):
+def appliquer_rivieres(h, X, Z, sd, w_min=None):
     """Terrain.calculerHauteur (étape C2) : lit sous le niveau du cours d'eau, rive un demi-bloc au-dessus, pente douce
-    jusqu'au terrain ; berge jamais sous l'eau près du lit. Rend (h, présent, niveau de l'eau, berge pour le plancher)."""
+    jusqu'au terrain ; berge jamais sous l'eau près du lit. w_min : niveau minimal (près d'un lac, celui du lac).
+    Rend (h, présent, niveau de l'eau, berge pour le plancher)."""
     present, d, hw, prof, niveau, w = rivieres(X, Z)
     present &= np.asarray(sd) >= 0
+    if w_min is not None:
+        w = np.maximum(w, w_min)
+    _RIV_CACHE["d"], _RIV_CACHE["hw"], _RIV_CACHE["present"] = d, hw, present
     u = d / np.maximum(hw, 1e-9)
     lit = (w - 1) - np.maximum(1.0, prof * (1 - u * u)) + 0.5
     larg = np.clip((h - w) * 2.0, 2.0 * hw, VALLEE_MAX)
@@ -461,7 +471,20 @@ def niveau_lac(alt):
     return np.floor(y).astype(np.int64)
 
 
-def appliquer_lacs(h, X, Z, sd):
+def niveaux_lacs(X, Z, sd):
+    """(numéro du lac, distance signée, niveau d'eau du lac, près du lac (dedans ou à moins de BERGE cases))."""
+    c = _carte_lacs()
+    if not c:
+        z = np.zeros(np.shape(X), np.int64)
+        return z, np.zeros(np.shape(X)), z, np.zeros(np.shape(X), bool)
+    lac, d = lacs_proches(X, Z)
+    lac = np.where(np.asarray(sd) >= 0, lac, 0)
+    niv = np.minimum(niveau_lac(c["alt"][lac]), c["plafond"][lac]).astype(np.int64)
+    pres = (lac > 0) & ((d > 0) | (-d <= BERGE))
+    return lac, d, niv, pres
+
+
+def appliquer_lacs(h, X, Z, sd, lit_berge=None):
     """Terrain.colonne : cuvette dans les lacs, berges autour. Rend (h, niveau d'eau du lac ou None, niveau de berge)."""
     c = _carte_lacs()
     sans = np.full(h.shape, np.iinfo(np.int64).min)
@@ -482,8 +505,12 @@ def appliquer_lacs(h, X, Z, sd):
     t = lisse(np.clip((dh - 36.0) / 12.0, 0, 1))
     berge = berge + (h - berge) * t
     dedans = (lac > 0) & (d > 0); autour = (lac > 0) & (d <= 0)
-    h = np.where(dedans, fond, np.where(autour, berge, h))
-    return h, np.where(dedans, niv, sans), np.where(autour & (dh < BERGE), niv, sans)
+    if lit_berge is not None:                     # lit et berge d'un cours d'eau : la berge du lac ne les comble pas
+        autour_forme = autour & ~lit_berge
+    else:
+        autour_forme = autour
+    h = np.where(dedans, fond, np.where(autour_forme, berge, h))
+    return h, np.where(dedans, niv, sans), np.where(autour_forme & (dh < BERGE), niv, sans)
 
 
 def _eau_lac_large(X, Z, sd):
