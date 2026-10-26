@@ -27,11 +27,95 @@ def couleur_mer(h):
     return np.array([86, 150, 210]) * (1 - t) + np.array([22, 52, 112]) * t
 
 
+_BIOMES = None
+
+
+def biome(X, Z):
+    """Biome fixe de la carte du mod (biomes.png, index dans biomes.json ; 0 = aucun), lu au plus proche comme
+    CarteTerre.biome (le jeu décale le point de lecture d'un bruit : les frontières y sont plus irrégulières)."""
+    global _BIOMES
+    if _BIOMES is None:
+        from PIL import Image as I
+        _BIOMES = np.array(I.open(os.path.join(T.CARTE, "biomes.png")))
+    Hh, Ww = _BIOMES.shape
+    lon, lat = X / T.BPD, -Z / T.BPD
+    gx = np.floor((lon + 180) / 360 * Ww - 0.5 + 0.5).astype(int) % Ww
+    gy = np.clip(np.floor((90 - lat) / 180 * Hh - 0.5 + 0.5).astype(int), 0, Hh - 1)
+    return _BIOMES[gy, gx]
+
+
+# couleurs des blocs sur les cartes du jeu (MapColor)
+HERBE, FEUILLES, SABLE, PIERRE, NEIGE, EAU = (127, 178, 56), (0, 124, 0), (247, 233, 163), (112, 112, 112), (255, 255, 255), (64, 64, 255)
+TERRE, PODZOL, ORANGE, CALCAIRE, GLACE, ARGILE = (151, 109, 77), (129, 86, 49), (216, 127, 51), (209, 177, 161), (160, 160, 255), (164, 168, 184)
+# biome : (part d'arbres, sol, arbres enneigés)
+STYLE = {"plains": (0.04, HERBE, 0), "sunflower_plains": (0.03, HERBE, 0), "forest": (0.80, HERBE, 0),
+         "birch_forest": (0.78, HERBE, 0), "flower_forest": (0.65, HERBE, 0), "dark_forest": (0.95, HERBE, 0),
+         "taiga": (0.80, PODZOL, 0), "old_growth_pine_taiga": (0.88, PODZOL, 0), "old_growth_spruce_taiga": (0.88, PODZOL, 0),
+         "snowy_taiga": (0.60, NEIGE, 1), "snowy_plains": (0.02, NEIGE, 1), "grove": (0.55, NEIGE, 1), "meadow": (0.03, HERBE, 0),
+         "cherry_grove": (0.55, HERBE, 0), "windswept_hills": (0.12, HERBE, 0), "windswept_forest": (0.55, HERBE, 0),
+         "snowy_slopes": (0.0, NEIGE, 1), "frozen_peaks": (0.0, GLACE, 1), "jagged_peaks": (0.0, NEIGE, 1),
+         "stony_peaks": (0.0, PIERRE, 0), "desert": (0.0, SABLE, 0), "badlands": (0.0, ORANGE, 0),
+         "wooded_badlands": (0.30, ORANGE, 0), "eroded_badlands": (0.0, ORANGE, 0), "savanna": (0.12, HERBE, 0),
+         "savanna_plateau": (0.12, HERBE, 0), "windswept_savanna": (0.10, HERBE, 0), "jungle": (0.95, HERBE, 0),
+         "sparse_jungle": (0.55, HERBE, 0), "bamboo_jungle": (0.95, HERBE, 0), "swamp": (0.55, HERBE, 0),
+         "mangrove_swamp": (0.80, HERBE, 0)}
+
+
+def hasard(X, Z, graine):
+    v = (X.astype(np.int64) * 73856093) ^ (Z.astype(np.int64) * 19349663) ^ (graine * 83492791)
+    return ((v * 2654435761) & 0xFFFFFF) / float(0xFFFFFF)
+
+
+def style_minecraft(h, eau, niv, bio, sd, X, Z, sculpte, typ, pas):
+    """Couleurs façon carte Minecraft : un bloc par pixel (le dessus de la colonne), ombre selon le voisin au nord
+    (plus haut 255, pareil 220, plus bas 180), eau en damier selon la profondeur."""
+    import json
+    noms = json.load(open(os.path.join(T.CARTE, "biomes.json")))
+    D, W = h.shape
+    part = np.zeros((D, W)); sol = np.zeros((D, W, 3)); neige = np.zeros((D, W), bool)
+    sol[:] = HERBE
+    for i, n in enumerate(noms):
+        if n in STYLE:
+            m = bio == i + 1                                             # 0 = aucun, k = k-ième de biomes.json
+            a, c, sn = STYLE[n]
+            part[m] = a; sol[m] = c; neige[m] = sn
+    # hauteur : roche puis neige en haute montagne, pas d'arbres au-dessus de la limite des arbres
+    haut = h >= 175
+    sol = np.where((h >= 150)[..., None] & ~neige[..., None], np.array(PIERRE), sol)
+    sol = np.where(haut[..., None], np.array(NEIGE), sol)
+    part = np.where(h >= 150, part * np.clip((175 - h) / 25, 0, 1), part)
+    plage = (sd >= 0) & (sd * T.BPD / 60 < 3) & (h < 66)
+    sol = np.where(plage[..., None], np.array(SABLE), sol)
+    part = np.where(plage, 0, part)
+    arbre = hasard(X, Z, 7) < part
+    col = np.where(arbre[..., None], np.where(neige[..., None], np.array(NEIGE), np.array(FEUILLES)), sol)
+    # lieux sculptés
+    cl = typ & 15
+    col = np.where((sculpte & np.isin(cl, [2, 6, 10]))[..., None], np.array(SABLE), col)
+    col = np.where((sculpte & (cl == 7))[..., None], np.array(ARGILE), col)
+    gz, gx = np.gradient(h / pas)
+    falaise = sculpte & ((typ & 16) > 0) & np.isin(cl, [1, 3, 4, 5]) & (np.hypot(gx, gz) > 2.0)
+    col = np.where(falaise[..., None], np.array(CALCAIRE), col)
+    # relief : comme la carte du jeu, comparé au voisin du nord (en blocs de hauteur, un pixel = pas blocs)
+    hb = np.floor(h)
+    nord = np.vstack([hb[:1], hb[:-1]])
+    f = np.where(hb > nord, 1.0, np.where(hb == nord, 220 / 255, 180 / 255))
+    col = col * f[..., None]
+    # eau : profondeur en damier (MapColor de l'eau)
+    dans = eau > 0
+    prof = np.maximum(niv - hb, 0)
+    v = prof * 0.1 + ((np.arange(W)[None, :] + np.arange(D)[:, None]) & 1) * 0.2
+    fe = np.where(v < 0.5, 1.0, np.where(v > 0.9, 180 / 255, 220 / 255))
+    col = np.where(dans[..., None], np.array(EAU) * fe[..., None], col)
+    return col
+
+
 def calcul(lon0, lon1, lat0, lat1, pas):
     x0, x1 = int(np.floor(lon0 * T.BPD)), int(np.ceil(lon1 * T.BPD))
     z0, z1 = int(np.floor(-lat1 * T.BPD)), int(np.ceil(-lat0 * T.BPD))
     W, D = (x1 - x0) // pas, (z1 - z0) // pas
     h = np.zeros((D, W)); sd = np.zeros((D, W)); eau = np.zeros((D, W), np.int8)   # 1 mer, 2 lac, 3 fleuve
+    niv = np.full((D, W), 62.0); bio = np.zeros((D, W), np.int16)
     B = 512 // pas
     t0 = time.time()
     for j0 in range(0, D, B):
@@ -49,32 +133,26 @@ def calcul(lon0, lon1, lat0, lat1, pas):
             e[(s >= 0) & riv & (hb < 62.5)] = 3
             e[(lac > 0) & (dl > 0)] = 2
             eau[j0:j1, i0:i1] = e
+            c = T._carte_lacs()
+            if c:
+                nl = np.minimum(T.niveau_lac(c["alt"][lac]), c["plafond"][lac]) - 1
+                niv[j0:j1, i0:i1] = np.where(e == 2, nl, 62)
+            bio[j0:j1, i0:i1] = biome(X, Z)
         print(f"  lignes {j1}/{D} ({time.time() - t0:.0f} s)", flush=True)
-    return x0, z0, W, D, h, sd, eau
+    return x0, z0, W, D, h, sd, eau, niv, bio
 
 
 def dessiner(sortie, lon0, lon1, lat0, lat1, pas):
-    x0, z0, W, D, h, sd, eau = calcul(lon0, lon1, lat0, lat1, pas)
+    x0, z0, W, D, h, sd, eau, niv, bio = calcul(lon0, lon1, lat0, lat1, pas)
     # tuiles sculptées : hauteurs et classes des lieux
     haut, sommet, typ, lieu = tu.lire_zone(x0, z0, W * pas, D * pas)
     haut = haut[pas // 2::pas, pas // 2::pas][:D, :W]; typ = typ[pas // 2::pas, pas // 2::pas][:D, :W]
     sculpte = haut != tu.VIDE
     h = np.where(sculpte, haut / 16.0, h)
     eau = np.where(sculpte & (h < 62.5), 1, np.where(sculpte, 0, eau))
-    cl = typ & 15
-    col = couleur_terre(h)
-    col = np.where((eau == 0)[..., None] & (sd >= 0)[..., None] & (sd * T.BPD / 60 < 2.5)[..., None] & (h < 66)[..., None],
-                   np.array([214, 200, 150]), col)                                           # plages
-    roche = sculpte & ((cl == 1) | (cl == 4) | (cl == 5)) & ((typ & 16) > 0)
-    col = np.where((sculpte & np.isin(cl, [6, 10, 2]))[..., None], np.array([226, 210, 160]), col)  # dune, sable, plage
-    col = np.where((sculpte & (cl == 7))[..., None], np.array([150, 150, 140]), col)               # tangue
-    col = np.where(roche[..., None], np.array([225, 225, 220]), col)                               # falaises
-    gz, gx = np.gradient(h * 0.6 / pas)
-    ombre = np.clip(1.0 + (gx - gz) * 0.9, 0.45, 1.5)[..., None]
-    col = col * ombre
-    col = np.where((eau == 1)[..., None], couleur_mer(h), col)
-    col = np.where((eau == 2)[..., None], np.array([70, 140, 205]), col)
-    col = np.where((eau == 3)[..., None], np.array([70, 140, 205]), col)
+    Xp, Zp = np.meshgrid(x0 + pas * np.arange(W) + pas // 2, z0 + pas * np.arange(D) + pas // 2)
+    niv = np.where(sculpte & (eau == 1), 62, niv)
+    col = style_minecraft(h, eau, niv, bio, sd, Xp, Zp, sculpte, typ, pas)
     img = Image.fromarray(np.clip(col, 0, 255).astype(np.uint8))
     dr = ImageDraw.Draw(img, "RGBA")
     # grille des tuiles (512 blocs) : traits fins ; tuiles sculptées : cadre orange plein
@@ -86,8 +164,8 @@ def dessiner(sortie, lon0, lon1, lat0, lat1, pas):
         z = (tz * t - z0) / pas
         dr.line([(0, z), (W, z)], fill=(255, 255, 255, 55), width=1)
     try:
-        police = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", max(12, 54 // pas))
-        petite = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", max(10, 36 // pas))
+        police = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 18 if pas >= 2 else 14)
+        petite = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 12 if pas >= 2 else 9)
     except OSError:
         police = petite = ImageFont.load_default()
     noms = {}
@@ -95,7 +173,7 @@ def dessiner(sortie, lon0, lon1, lat0, lat1, pas):
         a, b = (tx * t - x0) / pas, (tz * t - z0) / pas
         if b + t / pas < 0 or a + t / pas < 0 or a > W or b > D:
             continue
-        dr.rectangle([a, b, a + t / pas, b + t / pas], outline=(255, 140, 0, 255), width=2, fill=(255, 140, 0, 40))
+        dr.rectangle([a, b, a + t / pas, b + t / pas], outline=(255, 140, 0, 255), width=2)
         for n in tu.Tuile.lire(tx, tz).lieux:
             noms.setdefault(n, []).append((a + t / pas / 2, b + t / pas / 2))
     beaux = {"etretat": "Étretat", "mont_saint_michel": "Mont-Saint-Michel", "pilat": "Dune du Pilat",
