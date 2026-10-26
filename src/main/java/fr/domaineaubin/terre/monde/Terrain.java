@@ -71,7 +71,7 @@ public final class Terrain {
 
     /** Valeurs partagées d'une colonne : calculées une fois, réutilisées par toutes les sorties et les biomes. */
     private record Colonne(int x, int z, int generation, double sd, double alt, double pente, Riviere r, double h, double poids,
-                           int niveauLac, int bergeLac) {
+                           int niveauLac, int bergeLac, int eauLac) {
         boolean lieu() {
             return poids > 0.0;
         }
@@ -101,16 +101,18 @@ public final class Terrain {
         Riviere r = sd >= 0 ? riviereBrute(x, z) : null;
         double h = calculerHauteur(x, z, sd, alt, pente, r);
         // lacs (étape C1) : cuvette dans le lac, berges qui descendent jusqu'à son niveau autour
-        int niveauLac = SANS_LAC, bergeLac = SANS_LAC;
+        int niveauLac = SANS_LAC, bergeLac = SANS_LAC, eauLac = SANS_LAC;
         Lacs.Proche lp = sd >= 0 && lacs != null ? lacs.proche(lon(x + 0.5), lat(z + 0.5)) : null;
         if (lp != null) {
             int niv = niveauLac(lacs.altitude(lp.lac()));
             if (lp.distance() > 0) {
                 h = fondLac(niv, lp.distance(), lacs.superficie(lp.lac()));
                 niveauLac = niv;
+                eauLac = niv;
             } else {
                 h = bergeLac(h, niv, -lp.distance());
                 if (-lp.distance() < BERGE) bergeLac = niv;
+                if (-lp.distance() <= BERGE) eauLac = niv;
             }
         }
         // lieux uniques (addons) : ils reprennent la main sur le relief de leur zone
@@ -120,7 +122,7 @@ public final class Terrain {
             h = lieu.hauteur(x, z, h);
             poids = Mth.clamp(lieu.poids(x, z), 0.0, 1.0);
         }
-        c = new Colonne(x, z, g, sd, alt, pente, r, h, poids, niveauLac, bergeLac);
+        c = new Colonne(x, z, g, sd, alt, pente, r, h, poids, niveauLac, bergeLac, eauLac);
         tab[i] = c;
         return c;
     }
@@ -210,7 +212,7 @@ public final class Terrain {
         double haut = niveau + 0.6, brut = h;
         // ETOPO met une valeur vide (≈ 0 m) sous les lacs, qui déborde sur la rive (cases de 5 km) : près d'un lac, le
         // terrain ne descend pas sous son niveau (marge qui se relâche de 0,3 bloc par bloc en s'éloignant)
-        h = Math.max(h, haut - 0.3 * Math.max(d - 3.0, 0.0));
+        h = Math.max(h, haut - 0.3 * Math.max(d - BERGE, 0.0));
         // la berge monte de plus en plus raide (vallée glaciaire) puis rejoint le relief entre 36 et 48 cases
         double x = Math.max(d - 2.0, 0.0);
         h = Math.min(h, haut + 0.6 * x + 0.02 * x * x);
@@ -218,12 +220,16 @@ public final class Terrain {
         return Mth.lerp(lisse(Mth.clamp((d - 36.0) / 12.0, 0.0, 1.0)), h, brut);
     }
 
-    /** Largeur (cases) de la berge tenue au-dessus de l'eau du lac par le plancher de densité. */
-    static final double BERGE = 4.0;
+    /**
+     * Largeur (cases) de la berge tenue au-dessus de l'eau du lac (terrain et plancher de densité). Les aquifères du jeu
+     * décident de l'eau par cellules d'environ 16 blocs, à partir d'un point qui peut tomber sur la rive : jusqu'à
+     * BERGE cases du lac, l'aquifère reçoit donc le niveau du lac (FluidesMixin), et le sol y reste au-dessus de l'eau.
+     */
+    static final double BERGE = 20.0;
 
-    /** Niveau de l'eau du lac de cette colonne, ou SANS_LAC (pour le choix du fluide des aquifères). */
+    /** Niveau d'eau que les aquifères prennent ici : celui du lac, dans le lac et sur sa berge ; sinon SANS_LAC. */
     public int niveauLac(int x, int z) {
-        return colonne(x, z).niveauLac();
+        return colonne(x, z).eauLac();
     }
 
     /** Fond de vallée (y lissé) en dessous duquel le fleuve est en eau ; au-dessus de VALLEE_SECHE, plus de vallée. */
@@ -424,7 +430,7 @@ public final class Terrain {
      */
     public double inondation(int x, int z) {
         Colonne c = colonne(x, z);
-        if (c.lac()) return 2.0;                 // dans un lac, l'aquifère prend le niveau du lac (FluidesMixin)
+        if (c.eauLac() != SANS_LAC) return 2.0;  // lac et sa berge : l'aquifère prend le niveau du lac (FluidesMixin)
         if (c.lieu()) {
             Lieu l = LieuxTerre.a(x, z);
             if (l != null && l.inonde(x, z, c.h())) return 2.0;

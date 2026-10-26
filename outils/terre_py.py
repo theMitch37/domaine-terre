@@ -311,7 +311,7 @@ def influence_fleuves(X, Z):
 
 # ---------------------------------------------------------------- lacs (étape C1), comme Lacs.java et Terrain
 RAYON_LAC = 48
-BERGE = 4.0
+BERGE = 20.0                                   # Terrain.BERGE
 _lacs = None
 
 
@@ -409,7 +409,7 @@ def appliquer_lacs(h, X, Z, sd):
     larg = np.clip(pmax * 3.0, 4.0, 40.0)
     fond = niv - 1.4 - (pmax - 1.0) * lisse(np.clip(d / larg, 0, 1))
     dh = -d
-    berge = np.maximum(h, niv + 0.6 - 0.3 * np.maximum(dh - 3.0, 0.0))
+    berge = np.maximum(h, niv + 0.6 - 0.3 * np.maximum(dh - BERGE, 0.0))
     xx = np.maximum(dh - 2.0, 0.0)
     berge = np.minimum(berge, niv + 0.6 + 0.6 * xx + 0.02 * xx * xx)
     berge = np.where(dh < 3.0, np.maximum(berge, niv + 0.6), berge)
