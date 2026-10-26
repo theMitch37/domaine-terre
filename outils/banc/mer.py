@@ -2,6 +2,7 @@
 
 Usage : python3 outils/banc/mer.py <dossier des .npz du banc>
 Île inventée : colonne en mer d'après la carte (distance à la côte < 0), hors lieu, dont le sol dépasse y 61.
+Fond à sec : colonne en mer d'après la carte, sol sous la mer (y ≤ 61) et pas d'eau au-dessus (lieux compris).
 Mare inventée : colonne de terre ferme (> 0,5' de la côte), hors lieu et hors fleuve, dont l'eau monte au-dessus du sol.
 Le poids des lieux en grille vient de /tmp/lieu_<nom>.npz (outils/lieux_cotiers.py) ; sans lui, toute la zone compte.
 """
@@ -34,8 +35,10 @@ def controle(chemin):
             P[max(-j0, 0):D - j0, max(-i0, 0):W - i0] < 0.01
     iles = (sd < 0) & hors & (sol > 61)
     mares = (sd > 0.5) & hors & (eau > sol) & (eau <= 62)
+    sec = (sd < 0) & (sol >= -64) & (sol <= 61) & (eau <= sol)
     print(f"{nom:20s} mer {int(((sd < 0) & hors).sum()):6d} col. -> îles inventées {int(iles.sum()):5d} "
-          f"| terre {int(((sd > 0.5) & hors).sum()):6d} col. -> mares au niveau de la mer {int(mares.sum()):5d}")
+          f"| terre {int(((sd > 0.5) & hors).sum()):6d} col. -> mares au niveau de la mer {int(mares.sum()):5d} "
+          f"| fond à sec {int(sec.sum()):5d}")
     return int(iles.sum())
 
 
