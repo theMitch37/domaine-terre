@@ -694,7 +694,10 @@ def cervin():
     S, R = 252.0, 58.0
     base = 168.0
     # faces irrégulières : grands bombements et creux (couloirs), épaule sur l'arête du Hörnli (nord-est)
-    N = N * (1 + 0.10 * bruit(X, Z, 18, 706) + 0.04 * bruit(X, Z, 7, 707))
+    N = N * (1 + 0.14 * bruit(X, Z, 18, 706) + 0.05 * bruit(X, Z, 7, 707))
+    # faces creusées (couloirs au milieu de chaque face) : les arêtes ressortent
+    mn, mx = np.minimum(np.abs(u2), np.abs(v2)), np.maximum(np.abs(u2), np.abs(v2)) + 1e-6
+    N = N * (1 + 0.10 * (1 - (mn / mx) ** 2) * lisse(np.clip(N / 15, 0, 1)))
     epaule = np.exp(-((u2 - 14) ** 2 + (v2 + 14) ** 2) / 40.0) * 5.0
     yp = S - (S - base) * np.clip(N / R, 0, None) ** 0.72 + epaule
     arete = np.abs(np.abs(u2) - np.abs(v2)) < 1.5
@@ -703,9 +706,11 @@ def cervin():
     y = np.maximum(h, yp)
     # glaciers : nappes de glace autour du pied (rondes, bord irrégulier), qui descendent vers les vallées
     rr = np.hypot(u, v)
-    gl_niv = np.maximum(h + 1.5, 182.0 - 0.10 * np.maximum(rr - 45, 0) + 2.0 * bruit(X, Z, 25, 703))
-    glacier = (rr > 30) & (rr < 95 + 12 * bruit(X, Z, 30, 708)) & (yp < gl_niv + 1.0)
-    y = np.where(glacier, np.maximum(y, gl_niv + 0.6 * bruit(X, Z, 9, 704)), y)
+    gl_niv = 182.0 - 0.10 * np.maximum(rr - 45, 0) + 2.0 * bruit(X, Z, 25, 703)
+    # la glace ne fait jamais plus de 3 blocs d'épaisseur au-dessus du terrain : pas de falaise de glace au bord
+    gl_niv = np.minimum(gl_niv, h + 3.0 * lisse(np.clip((95 - rr) / 25, 0, 1)) + 0.3)
+    glacier = (rr > 30) & (rr < 95 + 12 * bruit(X, Z, 30, 708)) & (yp < gl_niv + 1.0) & (gl_niv > h + 0.4)
+    y = np.where(glacier, np.maximum(y, gl_niv + 0.4 * bruit(X, Z, 9, 704)), y)
     N = np.maximum(N, rr / 1.6)
     w = 1 - lisse(np.clip((N - R * 1.4) / 35, 0, 1))
     w = loin_des_fleuves(X, Z, ndimage.gaussian_filter(w, 2))
