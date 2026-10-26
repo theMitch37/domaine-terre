@@ -193,14 +193,16 @@ public final class Terrain {
     }
 
     /**
-     * Fond du lac à `d` cases du rivage : une couche d'eau au bord, puis le fond descend en pente douce jusqu'à une
+     * Fond du lac à `d` cases du rivage : une petite marche sous l'eau au bord (sinon le jeu, qui interpole le terrain
+     * sur des cellules de 4 blocs, relève le bord du lac au-dessus de l'eau et les lacs étroits perdent un tiers de
+     * leur largeur), puis le fond descend en pente douce jusqu'à une
      * profondeur qui grandit avec la superficie (pas de données de profondeur : 3 blocs pour 1 km², 8 pour le Léman,
      * 12 pour le Baïkal), comme le reste exagérée.
      */
     static double fondLac(int niveau, double d, double superficie) {
         double pmax = Mth.clamp(2.0 + 2.2 * Math.log10(superficie + 1.0), 2.0, 14.0);
         double largeur = Mth.clamp(pmax * 3.0, 4.0, 40.0);
-        return niveau - 1.4 - (pmax - 1.0) * lisse(Mth.clamp(d / largeur, 0.0, 1.0));
+        return niveau - 2.9 - (pmax - 1.0) * lisse(Mth.clamp(d / largeur, 0.0, 1.0));
     }
 
     /**

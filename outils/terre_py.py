@@ -407,7 +407,7 @@ def appliquer_lacs(h, X, Z, sd):
     sup = c["sup"][lac]
     pmax = np.clip(2.0 + 2.2 * np.log10(sup + 1.0), 2.0, 14.0)
     larg = np.clip(pmax * 3.0, 4.0, 40.0)
-    fond = niv - 1.4 - (pmax - 1.0) * lisse(np.clip(d / larg, 0, 1))
+    fond = niv - 2.9 - (pmax - 1.0) * lisse(np.clip(d / larg, 0, 1))
     dh = -d
     berge = np.maximum(h, niv + 0.6 - 0.3 * np.maximum(dh - BERGE, 0.0))
     xx = np.maximum(dh - 2.0, 0.0)
