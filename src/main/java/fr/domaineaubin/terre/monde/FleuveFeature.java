@@ -35,15 +35,22 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
                 int x = x0 + dx, z = z0 + dz;
                 int w = t.eauLit(x, z);
                 if (w == Terrain.SANS_LAC) continue;
-                int bas = niveau.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x, z);
-                for (int y = bas; y < w; y++) {
-                    if (niveau.getBlockState(pos.set(x, y, z)).isAir()) {
+                // de la surface de l'eau vers le bas, tant qu'il y a de l'air (la carte de hauteur du moteur n'est pas
+                // fiable ici : un lieu vient peut-être de creuser son lit dans ce chunk, StratesFeature)
+                boolean eauEnHaut = false;
+                for (int y = w - 1; y >= w - 64; y--) {
+                    BlockState b = niveau.getBlockState(pos.set(x, y, z));
+                    if (b.isAir()) {
                         niveau.setBlock(pos, eau, 2);
                         modifie = true;
+                    } else if (b.getFluidState().isEmpty()) {
+                        break;
                     }
+                    if (y == w - 1) eauEnHaut = true;
                 }
                 // marche : un voisin du lit est plus bas, l'eau de surface doit couler (sinon un mur d'eau immobile)
-                if (w - 1 >= bas && (plusBas(t, x + 1, z, w) || plusBas(t, x - 1, z, w) || plusBas(t, x, z + 1, w)
+                if (eauEnHaut && niveau.getBlockState(pos.set(x, w - 1, z)).is(Blocks.WATER)
+                        && (plusBas(t, x + 1, z, w) || plusBas(t, x - 1, z, w) || plusBas(t, x, z + 1, w)
                         || plusBas(t, x, z - 1, w))) {
                     niveau.scheduleTick(pos.set(x, w - 1, z), Fluids.WATER, 1);
                 }
