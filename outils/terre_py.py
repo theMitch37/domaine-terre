@@ -219,3 +219,28 @@ def hauteur_base(x, z):
     h_mer = blocs(np.minimum(alt, -1))
     mer = NIVEAU_MER - 1 + (np.minimum(h_mer, NIVEAU_MER - 1) - NIVEAU_MER + 1) * lisse(-sd / 2)
     return np.where(sd >= 0, terre, mer), sd
+
+
+def facteur(h, sd):
+    """Terrain.facteur hors fleuves et hors lieux (un lieu met aussi 30)."""
+    return np.where(sd >= 0, 30.0, 8.0 + 10.0 * np.clip((h - 40.0) / 18.0, 0, 1))
+
+
+def sol_exact(x0, z0, W, D):
+    """Dessus du sol réel (y du bloc plein le plus haut) sur la grille [x0, x0+W) x [z0, z0+D), hors fleuves et lieux.
+
+    Depuis 0.3.2 la densité est linéaire en y : 4 * facteur * (H - y) / 128 (sloped_cheese sans coude ni bruit 3D),
+    interpolée par le jeu sur des cellules de 4 x 8 x 4 blocs. Le sol passe donc à y* = moyenne des H aux 4 coins de la
+    cellule, pondérée par l'interpolation et le facteur ; le bloc le plus haut est ceil(y*) - 1.
+    """
+    cx0, cz0 = (x0 // 4) * 4, (z0 // 4) * 4
+    nx, nz = (x0 + W - cx0) // 4 + 2, (z0 + D - cz0) // 4 + 2
+    GX, GZ = np.meshgrid(cx0 + 4.0 * np.arange(nx), cz0 + 4.0 * np.arange(nz))
+    HC, SDC = hauteur_base(GX, GZ); FC = facteur(HC, SDC)
+    X, Z = np.meshgrid(np.arange(x0, x0 + W), np.arange(z0, z0 + D))
+    i, j = (X - cx0) // 4, (Z - cz0) // 4
+    tx, tz = (X - cx0 - 4 * i) / 4.0, (Z - cz0 - 4 * j) / 4.0
+    w = [((1 - tx) * (1 - tz), j, i), (tx * (1 - tz), j, i + 1), ((1 - tx) * tz, j + 1, i), (tx * tz, j + 1, i + 1)]
+    num = sum(a * FC[jj, ii] * HC[jj, ii] for a, jj, ii in w)
+    den = sum(a * FC[jj, ii] for a, jj, ii in w)
+    return np.ceil(num / den).astype(int) - 1

@@ -15,6 +15,7 @@ Ces retraits valent pour les nouveaux mondes (Terre 0.3.2 et suivantes).
 | Donjons (`monster_room`) | 0.3.2 | idem | Aléatoires, et sans grottes ils seraient emmurés | Nos propres souterrains |
 | Grottes de bruit (fromages, spaghettis, entrées, piliers) et nouilles | 0.3.2 | `noise_settings/overworld.json` (densité finale = `sloped_cheese`) | Percent les falaises, les lieux, les cuvettes des lacs | Vrais réseaux karstiques (Padirac, gouffres, grottes célèbres) |
 | Carvers (grottes, ravins) | 0.3.2 | biomes du mod, `FluidesMixin.applyCarvers` (tous les biomes) | Idem | Idem ; vrais canyons via les lieux |
+| Bruit 3D vanilla du relief (`base_3d_noise`) et coude de densité (`quarter_negative`) | 0.3.2 | `density_function/overworld/sloped_cheese.json` (densité linéaire 4 × facteur × profondeur) | Bruit propre à chaque graine (±1 bloc) ; le coude, interpolé sur les cellules de 8 blocs, montait le sol de 1,5 à 3 blocs au-dessus de la hauteur visée | Détail du terrain par notre `bruitDetail` (graine fixe) ; pics de montagne à notre façon |
 | Structures vanilla (villages, temples, épaves, avant-postes, ruines, monuments, manoirs, cités antiques, mines…) | 0.3.2 | `StructuresMixin` (Terre) | Posées au hasard, sans rapport avec la géographie | Villes et villages réels (suite de mods « structures ») |
 
 Gardé exprès : forteresses (`stronghold`, accès à l'End) ; minerais et géodes ; structures des autres mods.
