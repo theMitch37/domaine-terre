@@ -1,0 +1,30 @@
+6573 lacs ≥ 0.5 km² (sur 6660), 1437 îles de lacs (0 s)
+  altitudes 0/6573 (29 s)
+  altitudes 500/6573 (49 s)
+  altitudes 1000/6573 (77 s)
+  altitudes 1500/6573 (103 s)
+  altitudes 2000/6573 (126 s)
+  altitudes 2500/6573 (147 s)
+  altitudes 3000/6573 (169 s)
+  altitudes 3500/6573 (190 s)
+  altitudes 4000/6573 (209 s)
+  altitudes 4500/6573 (230 s)
+  altitudes 5000/6573 (248 s)
+  altitudes 5500/6573 (265 s)
+  altitudes 6000/6573 (281 s)
+  altitudes 6500/6573 (301 s)
+altitudes : 6573 lues dans Copernicus, 0 dans ETOPO (305 s)
+  Léman      : lac 361, 368.0 m, 538 km²
+  Annecy     : lac 3799, 445.5 m, 24 km²
+  Baïkal     : lac 6, 455.0 m, 32210 km²
+  Titicaca   : lac 34, 3808.5 m, 8164 km²
+  Supérieur  : lac 1, 180.5 m, 208265 km²
+  Constance  : lac 415, 394.0 m, 453 km²
+10642 tuiles candidates (305 s)
+  tuiles 0/10642 (306 s)
+  tuiles 2000/10642 (309 s)
+  tuiles 4000/10642 (313 s)
+  tuiles 6000/10642 (315 s)
+  tuiles 8000/10642 (318 s)
+  tuiles 10000/10642 (321 s)
+écrit src/main/resources/domaine_terre/carte/lacs.bin : 3.0 Mo, 6573 lacs, 7199 tuiles, 321 s
