@@ -1,4 +1,5 @@
-# Mesure HydroLAKES pour l'étape C1 (lacs en altitude) : téléchargement, tailles, altitudes et profondeurs de lacs connus.
+# Mesure pour l'étape C1 (lacs en altitude) : altitude de surface des lacs GSHHG lue dans Copernicus DEM GLO-90
+# (AWS Open Data). HydroLAKES refuse le téléchargement automatique (403).
 # Résultat : outils/donnees/mesure_lacs.txt, ajouté à la branche.
 name: Mesure des lacs
 
@@ -6,7 +7,7 @@ on:
   push:
     branches: ['mesure-*']
     paths:
-      - outils/mesure_hydrolakes.py
+      - outils/mesure_lacs_dem.py
       - .github/workflows/mesure-lacs.yml
   workflow_dispatch:
 
@@ -23,25 +24,17 @@ jobs:
         with:
           python-version: "3.12"
       - name: Outils Python
-        run: pip install numpy pyogrio
+        run: pip install numpy shapely pyogrio rasterio
       - name: Téléchargement et mesure (journal toujours rapporté sur la branche)
         run: |
           mkdir -p outils/donnees /tmp/lacs
           J=$PWD/outils/donnees/mesure_lacs.txt
           {
             cd /tmp/lacs
-            ok=0
-            for u in https://data.hydrosheds.org/file/hydrolakes/HydroLAKES_polys_v10_shp.zip \
-                     https://data.hydrosheds.org/file/hydrolakes/HydroLAKES_polys_v10_gdb.zip; do
-              echo "== $u"
-              if curl -sSfL --retry 3 --retry-delay 15 -o hl.zip "$u"; then ok=1; echo "ok $(stat -c %s hl.zip) octets"; break; fi
-            done
-            if [ $ok = 1 ]; then
-              unzip -q hl.zip -d hl && find hl -maxdepth 3 | head -20
-              shp=$(find hl -name '*.shp' | head -1); [ -z "$shp" ] && shp=$(find hl -name '*.gdb' | head -1)
-              cd $GITHUB_WORKSPACE
-              python outils/mesure_hydrolakes.py "/tmp/lacs/$shp" /tmp/lacs/mesure.txt && cat /tmp/lacs/mesure.txt
-            fi
+            curl -sSfL --retry 3 -o gshhg.zip https://github.com/GenericMappingTools/gshhg-gmt/releases/download/2.3.7/gshhg-shp-2.3.7.zip \
+              && unzip -q gshhg.zip 'GSHHS_shp/f/*' -d gshhg && ls gshhg/GSHHS_shp/f
+            cd $GITHUB_WORKSPACE
+            python outils/mesure_lacs_dem.py /tmp/lacs/gshhg/GSHHS_shp /tmp/lacs/mesure.txt
           } > /tmp/journal.txt 2>&1 || true
           cp /tmp/journal.txt "$J"; cat "$J"
       - name: Ajout à la branche
@@ -49,7 +42,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
           git add -f outils/donnees/mesure_lacs.txt
-          git commit -m "Mesure HydroLAKES (automatique)" || exit 0
+          git commit -m "Mesure des lacs (automatique)" || exit 0
           for i in 1 2 3; do
             git fetch origin "${GITHUB_REF_NAME}" && git rebase "origin/${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
             sleep 10
