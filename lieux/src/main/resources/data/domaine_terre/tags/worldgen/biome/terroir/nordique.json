@@ -1,0 +1,9 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre_lieux:gullfoss",
+  "domaine_terre_lieux:skogafoss",
+  "domaine_terre_lieux:geiranger",
+  "domaine_terre_lieux:preikestolen"
+ ]
+}

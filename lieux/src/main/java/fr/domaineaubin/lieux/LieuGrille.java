@@ -29,16 +29,23 @@ import java.util.zip.GZIPInputStream;
 public final class LieuGrille implements LieuSculpte {
     /** Classes de matériau (bits 0-3 de la grille 2), comme dans lieux_cotiers.py. */
     static final int CREUSE = 0, PLATEAU = 1, PLAGE = 2, FOND = 3, ROC = 4, AIGUILLE = 5, DUNE = 6, VASE = 7, CHENAL = 8, PRE = 9, SABLE = 10;
+    /** Lot 2 (montagne) : neige, glace, éboulis, mousse, lit d'un torrent ou d'un lac. */
+    static final int NEIGE = 11, GLACE = 12, EBOULIS = 13, MOUSSE = 14, LIT = 15;
     static final int TAILLEE = 16, REMBLAI = 32, BIOME = 64, INONDE = 128;
 
     /** Palettes de roches. */
-    public enum Palette { CRAIE, CRAIE_PURE, MOHER, DUNE, BAIE }
+    public enum Palette { CRAIE, CRAIE_PURE, MOHER, DUNE, BAIE,
+        /** Lot 2 : calcaire des Pyrénées (Gavarnie), basalte d'Islande, travertin (Plitvice), gneiss de Norvège,
+         *  gneiss sombre du Cervin, dolomie claire (Tre Cime). */
+        CALCAIRE, BASALTE, TRAVERTIN, GNEISS, CERVIN, DOLOMIE }
 
     private final String id;
     private final Palette palette;
     /** Grille lon/lat (ancien format), ou null pour un lieu en tuiles ({@link Tuiles}). */
     private final ReliefLieu relief;
     private volatile Long2ObjectOpenHashMap<List<int[]>> surplombs;
+    /** y le plus bas recoloré en couches (les lieux de montagne s'arrêtent plus haut). */
+    private final int fond;
 
     public LieuGrille(String id, Palette palette) {
         this(id, palette, false);
@@ -46,9 +53,15 @@ public final class LieuGrille implements LieuSculpte {
 
     /** @param enTuiles le lieu est sculpté dans les tuiles (hauteurs exactes, bords recollés au terrain calculé) */
     public LieuGrille(String id, Palette palette, boolean enTuiles) {
+        this(id, palette, enTuiles, 50);
+    }
+
+    /** @param fond y le plus bas recoloré (lieux de montagne : sous le pied de leurs parois, pas jusqu'à y 50) */
+    public LieuGrille(String id, Palette palette, boolean enTuiles, int fond) {
         this.id = id;
         this.palette = palette;
         this.relief = enTuiles ? null : new ReliefLieu(id + ".bin");
+        this.fond = fond;
     }
 
     @Override
@@ -109,7 +122,14 @@ public final class LieuGrille implements LieuSculpte {
     /** Le biome couvre toute la hauteur des falaises. */
     @Override
     public double basBiome(int x, int z, double hauteur) {
-        return 45.0;
+        return Math.min(45.0, fond - 5.0);
+    }
+
+    /** Eau propre au lieu (lot 2) : torrents, lacs, cascades en altitude, lue dans les tuiles. */
+    @Override
+    public int eau(int x, int z) {
+        if (relief != null || !concerne(x, z)) return Integer.MIN_VALUE;
+        return Tuiles.eau(x, z);
     }
 
     @Override
@@ -133,12 +153,12 @@ public final class LieuGrille implements LieuSculpte {
 
     @Override
     public int sculpteMin() {
-        return 55;
+        return Math.min(55, fond);
     }
 
     @Override
     public int fondStrates() {
-        return 50;
+        return fond;
     }
 
     /** Le sol naturel (herbe, terre) n'est gardé que sur les colonnes non taillées. */
@@ -203,6 +223,77 @@ public final class LieuGrille implements LieuSculpte {
             }
             case DUNE -> {
                 return y >= top - 6 ? Blocks.SAND : Blocks.SANDSTONE;
+            }
+            case CALCAIRE -> {
+                // calcaire en gros bancs gris, vires d'herbe et de neige, éboulis au pied (Gavarnie)
+                if (cl == NEIGE) return dessus ? Blocks.SNOW_BLOCK : Blocks.STONE;
+                if (cl == EBOULIS) return h2(x, z, y) % 3 == 0 ? Blocks.COBBLESTONE : Blocks.GRAVEL;
+                if (cl == LIT) return h2(x, z, y) % 4 == 0 ? Blocks.MOSSY_COBBLESTONE : Blocks.GRAVEL;
+                if ((cl == PLATEAU || cl == PRE) && dessus) return Blocks.GRASS_BLOCK;
+                if ((cl == PLATEAU || cl == PRE) && y >= top - 2) return Blocks.DIRT;
+                int r = Math.floorMod(y + vague(x, z), 11);
+                if (r == 0) return Blocks.TUFF;                                                   // joints de bancs
+                if (r <= 3) return Blocks.ANDESITE;
+                if (r == 7) return Blocks.CALCITE;
+                return h2(Math.floorDiv(x, 3), Math.floorDiv(z, 3), Math.floorDiv(y, 4)) % 9 == 0 ? Blocks.DIORITE : Blocks.STONE;
+            }
+            case BASALTE -> {
+                // orgues de basalte, mousse sur le dessus (Gullfoss, Skógafoss)
+                if (cl == LIT) return h2(x, z, y) % 3 == 0 ? Blocks.COBBLED_DEEPSLATE : Blocks.GRAVEL;
+                if (cl == MOUSSE && dessus) return h2(x, z, 0) % 4 == 0 ? Blocks.GRASS_BLOCK : Blocks.MOSS_BLOCK;
+                if ((cl == PLATEAU || cl == PRE) && dessus) return h2(x, z, 0) % 3 == 0 ? Blocks.MOSS_BLOCK : Blocks.GRASS_BLOCK;
+                if ((cl == PLATEAU || cl == PRE || cl == MOUSSE) && y >= top - 1) return Blocks.DIRT;
+                if (cl == EBOULIS) return Blocks.GRAVEL;
+                int r = Math.floorMod(y - 60 + vague(x, z), 9);
+                if (r == 0) return Blocks.TUFF;                                                   // lits de cendres
+                return h2(x, z, Math.floorDiv(y, 5)) % 5 == 0 ? Blocks.SMOOTH_BASALT : Blocks.BASALT;
+            }
+            case TRAVERTIN -> {
+                // barrages de travertin moussus, lacs au fond clair, canyon calcaire (Plitvice)
+                if (cl == LIT) return h2(x, z, y) % 3 == 0 ? Blocks.CLAY : Blocks.CALCITE;
+                if (cl == MOUSSE) return dessus ? Blocks.MOSS_BLOCK : (h2(x, z, y) % 3 == 0 ? Blocks.DRIPSTONE_BLOCK : Blocks.CALCITE);
+                if ((cl == PLATEAU || cl == PRE) && dessus) return Blocks.GRASS_BLOCK;
+                if ((cl == PLATEAU || cl == PRE) && y >= top - 2) return Blocks.DIRT;
+                if (cl == EBOULIS) return Blocks.GRAVEL;
+                int r = Math.floorMod(y + vague(x, z), 7);
+                if (r == 0) return Blocks.DIORITE;
+                return h2(Math.floorDiv(x, 2), Math.floorDiv(z, 2), Math.floorDiv(y, 3)) % 6 == 0 ? Blocks.ANDESITE : Blocks.STONE;
+            }
+            case GNEISS -> {
+                // gneiss gris rayé, mousse et herbe sur les replats (Geiranger, Preikestolen)
+                if (cl == LIT || cl == FOND) return h2(x, z, y) % 3 == 0 ? Blocks.GRAVEL : Blocks.STONE;
+                if (cl == NEIGE) return dessus ? Blocks.SNOW_BLOCK : Blocks.STONE;
+                if ((cl == PLATEAU || cl == PRE || cl == MOUSSE) && dessus)
+                    return cl == MOUSSE || h2(x, z, 0) % 4 == 0 ? Blocks.MOSS_BLOCK : Blocks.GRASS_BLOCK;
+                if ((cl == PLATEAU || cl == PRE || cl == MOUSSE) && y >= top - 1) return Blocks.DIRT;
+                if (cl == EBOULIS) return h2(x, z, y) % 2 == 0 ? Blocks.COBBLESTONE : Blocks.GRAVEL;
+                int r = Math.floorMod(y + 2 * vague(x, z) + Math.floorDiv(x + z, 9), 8);
+                if (r == 0) return Blocks.DEEPSLATE;                                              // veines sombres
+                if (r == 3) return Blocks.DIORITE;
+                return h2(Math.floorDiv(x, 2), Math.floorDiv(z, 2), Math.floorDiv(y, 3)) % 4 == 0 ? Blocks.ANDESITE : Blocks.STONE;
+            }
+            case CERVIN -> {
+                // gneiss sombre, neige sur les replats, glace des glaciers, éboulis gris
+                if (cl == GLACE) return dessus ? Blocks.SNOW_BLOCK : (h2(x, z, y) % 5 == 0 ? Blocks.BLUE_ICE : Blocks.PACKED_ICE);
+                if (cl == NEIGE) return dessus ? Blocks.SNOW_BLOCK : Blocks.STONE;
+                if (cl == EBOULIS) return h2(x, z, y) % 3 == 0 ? Blocks.ANDESITE : Blocks.GRAVEL;
+                if ((cl == PLATEAU || cl == PRE) && dessus) return Blocks.GRASS_BLOCK;
+                if ((cl == PLATEAU || cl == PRE) && y >= top - 1) return Blocks.DIRT;
+                int r = Math.floorMod(y + vague(x, z), 6);
+                if (r == 0) return Blocks.COBBLED_DEEPSLATE;
+                if (r == 3) return Blocks.TUFF;
+                return h2(Math.floorDiv(x, 2), Math.floorDiv(z, 2), Math.floorDiv(y, 3)) % 3 == 0 ? Blocks.DEEPSLATE : Blocks.STONE;
+            }
+            case DOLOMIE -> {
+                // dolomie claire en fines strates, pierriers au pied (Tre Cime)
+                if (cl == NEIGE) return dessus ? Blocks.SNOW_BLOCK : Blocks.DIORITE;
+                if (cl == EBOULIS) return h2(x, z, y) % 3 == 0 ? Blocks.DIORITE : Blocks.GRAVEL;
+                if ((cl == PLATEAU || cl == PRE) && dessus) return Blocks.GRASS_BLOCK;
+                if ((cl == PLATEAU || cl == PRE) && y >= top - 1) return Blocks.DIRT;
+                int r = Math.floorMod(y + vague(x, z), 5);
+                if (r == 0) return Blocks.STONE;
+                if (r == 2) return Blocks.DIORITE;
+                return h2(Math.floorDiv(x, 3), Math.floorDiv(z, 3), Math.floorDiv(y, 4)) % 7 == 0 ? Blocks.TUFF : Blocks.CALCITE;
             }
             case BAIE -> {
                 if (cl == ROC) {

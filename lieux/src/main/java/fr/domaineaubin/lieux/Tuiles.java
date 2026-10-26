@@ -18,11 +18,12 @@ import java.util.zip.GZIPInputStream;
  * Une tuile sans fichier garde le terrain calculé par le mod Terre. Une tuile sculptée donne, colonne par colonne,
  * soit « terrain calculé », soit la hauteur exacte voulue par un lieu ; ses colonnes sculptées rejoignent le terrain
  * calculé à leur bord (calculé hors du jeu au bloc près, outils/tuiles.py) : ni poids ni fondu.
+ * Version 2 (lot 2) : niveau d'eau du lieu par colonne (torrents, lacs, bassins en altitude, cascades).
  * Format : voir outils/tuiles.py. Chargées à la demande, ensuite en lecture seule (thread-safe).
  */
 public final class Tuiles {
     public static final int TAILLE = 512, VIDE = -32768;
-    private static final int MAGIE = 0x454C5554, VERSION = 1;
+    private static final int MAGIE = 0x454C5554;
     private static final String DOSSIER = "/domaine_terre_lieux/tuiles/";
 
     /** Une tuile chargée. */
@@ -30,9 +31,11 @@ public final class Tuiles {
         final String[] lieux;
         final short[] haut, sommet;
         final byte[] type, lieu;
+        /** Niveau de l'eau du lieu (version 2), ou null (version 1 : aucune eau propre au lieu). */
+        final short[] eau;
 
-        private Tuile(String[] lieux, short[] haut, short[] sommet, byte[] type, byte[] lieu) {
-            this.lieux = lieux; this.haut = haut; this.sommet = sommet; this.type = type; this.lieu = lieu;
+        private Tuile(String[] lieux, short[] haut, short[] sommet, byte[] type, byte[] lieu, short[] eau) {
+            this.lieux = lieux; this.haut = haut; this.sommet = sommet; this.type = type; this.lieu = lieu; this.eau = eau;
         }
     }
 
@@ -95,7 +98,9 @@ public final class Tuiles {
         try (InputStream in = Tuiles.class.getResourceAsStream(res)) {
             if (in == null) throw new IOException(res + " introuvable");
             ByteBuffer b = ByteBuffer.wrap(new GZIPInputStream(in).readAllBytes()).order(ByteOrder.LITTLE_ENDIAN);
-            if (b.getInt() != MAGIE || b.getInt() != VERSION || b.getInt() != tx || b.getInt() != tz)
+            if (b.getInt() != MAGIE) throw new IOException(res + " : en-tête invalide");
+            int version = b.getInt();
+            if ((version != 1 && version != 2) || b.getInt() != tx || b.getInt() != tz)
                 throw new IOException(res + " : en-tête invalide");
             String[] lieux = new String[b.getInt()];
             for (int i = 0; i < lieux.length; i++) {
@@ -110,7 +115,12 @@ public final class Tuiles {
             b.asShortBuffer().get(sommet); b.position(b.position() + 2 * n);
             b.get(type);
             b.get(lieu);
-            return new Tuile(lieux, haut, sommet, type, lieu);
+            short[] eau = null;
+            if (version >= 2) {
+                eau = new short[n];
+                b.asShortBuffer().get(eau);
+            }
+            return new Tuile(lieux, haut, sommet, type, lieu, eau);
         } catch (IOException e) {
             throw new UncheckedIOException("Impossible de charger la tuile " + res, e);
         }
@@ -140,6 +150,14 @@ public final class Tuiles {
     public static double sommet(int x, int z) {
         Tuile t = a(x, z);
         return t == null ? Double.NaN : t.sommet[indice(x, z)] / 16.0;
+    }
+
+    /** Niveau de l'eau du lieu dans cette colonne (l'eau remplit y &lt; niveau), ou Integer.MIN_VALUE. */
+    public static int eau(int x, int z) {
+        Tuile t = a(x, z);
+        if (t == null || t.eau == null) return Integer.MIN_VALUE;
+        short e = t.eau[indice(x, z)];
+        return e == VIDE ? Integer.MIN_VALUE : e;
     }
 
     /** Classe + drapeaux (comme LieuGrille), 0 hors lieu. */

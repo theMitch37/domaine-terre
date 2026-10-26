@@ -55,4 +55,14 @@ public interface Lieu {
     default boolean inonde(int x, int z, double hauteur) {
         return hauteur < 67.0;
     }
+
+    /**
+     * Eau propre au lieu dans cette colonne (lot 2 : torrents, lacs et bassins en altitude) : niveau de l'eau (elle
+     * remplit y &lt; niveau), ou {@link Integer#MIN_VALUE} pour aucune. Posée comme le lit d'un cours d'eau
+     * (FleuveFeature, sans aquifère) : là où une colonne d'eau touche une colonne d'eau plus basse, l'eau déborde et
+     * tombe (cascade). Par défaut : aucune.
+     */
+    default int eau(int x, int z) {
+        return Integer.MIN_VALUE;
+    }
 }

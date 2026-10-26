@@ -135,6 +135,12 @@ public final class Terrain {
             eauRiv = SANS_LAC;
             bergeRiv = SANS_LAC;
             litRiv = SANS_LAC;
+            // lot 2 : eau propre au lieu (torrents, lacs, cascades en altitude), posée comme un lit par FleuveFeature
+            int el = lieu.eau(x, z);
+            if (el != SANS_LAC) {
+                eauRiv = el;
+                litRiv = el;
+            }
         }
         if (niveauLac != SANS_LAC) litRiv = SANS_LAC;          // dans un lac, c'est l'eau du lac
         c = new Colonne(x, z, g, sd, alt, pente, r, h, poids, niveauLac, bergeLac, eauLac, eauRiv, bergeRiv, litRiv);

@@ -30,6 +30,7 @@ SORTIE = os.path.join(T.RACINE, "lieux/src/main/resources/domaine_terre_lieux/")
 BPD = T.BPD
 # classes de matériau (Java : LieuGrille)
 CREUSE, PLATEAU, PLAGE, FOND, ROC, AIGUILLE, DUNE, VASE, CHENAL, PRE, SABLE = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+NEIGE, GLACE, EBOULIS, MOUSSE, LIT = 11, 12, 13, 14, 15            # lot 2 (montagne)
 TAILLEE, REMBLAI, BIOME, INONDE = 16, 32, 64, 128
 lisse = T.lisse
 
@@ -141,12 +142,14 @@ def finir_types(typ, travail, marge_biome=7):
     return typ
 
 
-def en_tuiles(nom, X, Z, y, h, sommet, typ, sd, vox=None, marge=10, limite=None):
+def en_tuiles(nom, X, Z, y, h, sommet, typ, sd, vox=None, marge=10, limite=None, eau=None, garder_fleuves=True):
     """Écrit un lieu dans les tuiles (outils/tuiles.py) : colonnes sculptées = ce que le lieu change (hauteur, taille,
     remblai, biome) élargi de `marge` blocs ; au-delà, terrain calculé. Contrôle que les colonnes sculptées
     rejoignent le terrain calculé à leur bord et ne touchent pas le bord de la zone."""
     # jamais dans la vallée d'un fleuve : le Python ne copie pas son profil, la tuile l'effacerait
-    hors_fleuve = T.influence_fleuves(X, Z) > 3
+    # (garder_fleuves=False : le lieu reprend lui-même le cours d'eau du mod — même terrain h et même eau — pour s'y
+    # raccorder, comme la Hvítá de Gullfoss qui se jette dans la Þjórsá)
+    hors_fleuve = T.influence_fleuves(X, Z) > 3 if garder_fleuves else np.ones(X.shape, bool)
     limite = hors_fleuve if limite is None else (limite & hors_fleuve)
     # le lieu s'arrête là (fleuves, îles, autres côtes) : il y redescend au terrain calculé sur 30 blocs, sans coupure
     w = lisse(ndimage.distance_transform_edt(limite) / 30.0)
@@ -163,7 +166,12 @@ def en_tuiles(nom, X, Z, y, h, sommet, typ, sd, vox=None, marge=10, limite=None)
     actif = ndimage.binary_dilation(change, iterations=marge) & hors_fleuve
     typ = np.where(actif & (sd < 0), typ | INONDE, typ)          # la mer d'un lieu reste en eau (aquifère au niveau de la mer)
     typ = np.where(actif, typ, 0)
-    ecrites = tu.poser(nom, int(X[0, 0]), int(Z[0, 0]), y, sommet, typ, actif)
+    if eau is not None:                                         # eau du lieu (lot 2) : seulement sur ses colonnes
+        perdue = np.isfinite(eau) & ~actif
+        if perdue.any():
+            print(f"  ATTENTION : {int(perdue.sum())} colonnes d'eau hors des colonnes sculptées (ignorées)")
+        eau = np.where(actif, eau, np.nan)
+    ecrites = tu.poser(nom, int(X[0, 0]), int(Z[0, 0]), y, sommet, typ, actif, eau=eau)
     vox = sorted(set(vox or []))
     chemin_vox = SORTIE + nom + ".vox"
     if vox:
@@ -176,7 +184,8 @@ def en_tuiles(nom, X, Z, y, h, sommet, typ, sd, vox=None, marge=10, limite=None)
     if os.path.exists(SORTIE + nom + ".bin"):
         os.remove(SORTIE + nom + ".bin")                         # ancien format (grille lon/lat)
     np.savez_compressed(f"/tmp/lieu_{nom}.npz", X=X, Z=Z, y=y, h=h, sommet=sommet, typ=typ, poids=actif.astype(float),
-                        vox=np.asarray(vox if vox else np.zeros((0, 4)), int))
+                        vox=np.asarray(vox if vox else np.zeros((0, 4)), int),
+                        eau=eau if eau is not None else np.full(X.shape, np.nan))
     if limite is not None:                                      # coupure franche là où la limite tranche le lieu ?
         coupe = limite & ndimage.binary_dilation(~limite)
         print(f"  coupure à la limite (fleuves, bornes) : écart max {np.abs(y - h)[coupe].max() if coupe.any() else 0:.2f}")

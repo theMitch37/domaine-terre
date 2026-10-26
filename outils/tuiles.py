@@ -6,17 +6,21 @@ calculé », soit la hauteur exacte voulue. Ses colonnes sculptées rejoignent l
 de poids, pas de fondu. Resculpter un lieu ne réécrit que les tuiles qu'il touche.
 
 Fichier lieux/src/main/resources/domaine_terre_lieux/tuiles/<tx>_<tz>.bin (gzip sans date, petit-boutiste) :
-  int32 MAGIE 0x454C5554 (« TULE »), int32 version 1, int32 tx, int32 tz, int32 n lieux, puis pour chaque lieu
+  int32 MAGIE 0x454C5554 (« TULE »), int32 version 2, int32 tx, int32 tz, int32 n lieux, puis pour chaque lieu
   int16 longueur + identifiant UTF-8 ; puis 512 x 512 valeurs (ligne z, colonne x, du nord-ouest) de :
   int16 HAUT = y visé x 16 (-32768 = terrain calculé), int16 SOMMET = repère des couches x 16,
-  uint8 TYPE = classe + drapeaux (comme LieuGrille), uint8 LIEU = numéro du lieu + 1 (0 = aucun).
+  uint8 TYPE = classe + drapeaux (comme LieuGrille), uint8 LIEU = numéro du lieu + 1 (0 = aucun),
+  (version 2, lot 2) int16 EAU = niveau de l'eau du lieu (l'eau remplit y < EAU ; -32768 = pas d'eau du lieu) :
+  torrents, lacs et bassins en altitude, posés comme le lit d'un cours d'eau (FleuveFeature) ; là où un bassin
+  touche un bassin plus bas, l'eau déborde (cascade).
+La version 1 (sans EAU) se lit encore.
 Index : tuiles/index.txt, une ligne « tx tz » par tuile.
 """
 import gzip, io, os, struct
 import numpy as np
 
 T = 512
-MAGIE, VERSION, VIDE = 0x454C5554, 1, -32768
+MAGIE, VERSION, VIDE = 0x454C5554, 2, -32768
 DOSSIER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..",
                        "lieux/src/main/resources/domaine_terre_lieux/tuiles/")
 
@@ -33,6 +37,7 @@ class Tuile:
         self.sommet = np.zeros((T, T), np.int16)
         self.type = np.zeros((T, T), np.uint8)
         self.lieu = np.zeros((T, T), np.uint8)
+        self.eau = np.full((T, T), VIDE, np.int16)
 
     @staticmethod
     def lire(tx, tz):
@@ -41,7 +46,7 @@ class Tuile:
             return t
         b = gzip.open(chemin(tx, tz)).read()
         magie, version, ftx, ftz, n = struct.unpack_from("<5i", b, 0)
-        assert magie == MAGIE and version == VERSION and (ftx, ftz) == (tx, tz), chemin(tx, tz)
+        assert magie == MAGIE and version in (1, 2) and (ftx, ftz) == (tx, tz), chemin(tx, tz)
         p = 20
         for _ in range(n):
             (l,) = struct.unpack_from("<h", b, p); p += 2
@@ -50,7 +55,9 @@ class Tuile:
         t.haut = np.frombuffer(b, "<i2", N, p).reshape(T, T).copy(); p += 2 * N
         t.sommet = np.frombuffer(b, "<i2", N, p).reshape(T, T).copy(); p += 2 * N
         t.type = np.frombuffer(b, "u1", N, p).reshape(T, T).copy(); p += N
-        t.lieu = np.frombuffer(b, "u1", N, p).reshape(T, T).copy()
+        t.lieu = np.frombuffer(b, "u1", N, p).reshape(T, T).copy(); p += N
+        if version >= 2:
+            t.eau = np.frombuffer(b, "<i2", N, p).reshape(T, T).copy()
         return t
 
     def retirer(self, nom):
@@ -59,7 +66,7 @@ class Tuile:
             return
         k = self.lieux.index(nom) + 1
         m = self.lieu == k
-        self.haut[m] = VIDE; self.sommet[m] = 0; self.type[m] = 0; self.lieu[m] = 0
+        self.haut[m] = VIDE; self.sommet[m] = 0; self.type[m] = 0; self.lieu[m] = 0; self.eau[m] = VIDE
         self.lieu[self.lieu > k] -= 1
         self.lieux.remove(nom)
 
@@ -74,6 +81,7 @@ class Tuile:
             e = nom.encode("utf-8"); blob += struct.pack("<h", len(e)) + e
         blob += self.haut.astype("<i2").tobytes() + self.sommet.astype("<i2").tobytes()
         blob += self.type.astype("u1").tobytes() + self.lieu.astype("u1").tobytes()
+        blob += self.eau.astype("<i2").tobytes()
         tampon = io.BytesIO()
         with gzip.GzipFile(fileobj=tampon, mode="wb", compresslevel=9, mtime=0) as f:   # sans date : rien ne change si la forme ne change pas
             f.write(blob)
@@ -99,10 +107,14 @@ def ecrire_index():
             f.write(f"{tx} {tz}\n")
 
 
-def poser(nom, x0, z0, y, sommet, typ, actif):
+def poser(nom, x0, z0, y, sommet, typ, actif, eau=None):
     """Sculpte le lieu `nom` dans les tuiles : grille de colonnes à partir de (x0, z0) ; seules les colonnes `actif`
-    sont sculptées (hauteur exacte y), les autres restent « terrain calculé ». Efface d'abord l'ancien lieu partout.
+    sont sculptées (hauteur exacte y), les autres restent « terrain calculé ». `eau` : niveau d'eau du lieu par
+    colonne (entier, l'eau remplit y < eau ; VIDE ou NaN = pas d'eau). Efface d'abord l'ancien lieu partout.
     Rend la liste des tuiles écrites."""
+    if eau is None:
+        eau = np.full(y.shape, VIDE)
+    eau = np.where(np.isfinite(eau), eau, VIDE)
     D, W = y.shape
     touchees = {(tx, tz) for tx, tz in index()}
     for tx in range(x0 // T, (x0 + W - 1) // T + 1):
@@ -125,7 +137,8 @@ def poser(nom, x0, z0, y, sommet, typ, actif):
                 raise ValueError(f"{nom} chevauche un autre lieu dans la tuile {tx} {tz}")
             t.lieux.append(nom); k = len(t.lieux)
             sj = slice(j0 + z0 - tz * T, j1 + z0 - tz * T); si = slice(i0 + x0 - tx * T, i1 + x0 - tx * T)
-            for grille, val in ((t.haut, np.round(y * 16)), (t.sommet, np.round(sommet * 16)), (t.type, typ), (t.lieu, k)):
+            for grille, val in ((t.haut, np.round(y * 16)), (t.sommet, np.round(sommet * 16)), (t.type, typ), (t.lieu, k),
+                                (t.eau, eau)):
                 v = np.broadcast_to(val, y.shape)[j0:j1, i0:i1]
                 grille[sj, si] = np.where(a, v, grille[sj, si])
         if a.any() or avant:
@@ -137,7 +150,7 @@ def poser(nom, x0, z0, y, sommet, typ, actif):
 def lire_zone(x0, z0, W, D):
     """Grilles (haut x16, sommet x16, type, nom du lieu) d'une zone, depuis les tuiles (contrôles, rendus)."""
     haut = np.full((D, W), VIDE, np.int32); sommet = np.zeros((D, W)); typ = np.zeros((D, W), np.int32)
-    lieu = np.full((D, W), "", object)
+    lieu = np.full((D, W), "", object); eau = np.full((D, W), VIDE, np.int32)
     for tx in range(x0 // T, (x0 + W - 1) // T + 1):
         for tz in range(z0 // T, (z0 + D - 1) // T + 1):
             if not os.path.exists(chemin(tx, tz)):
@@ -150,4 +163,6 @@ def lire_zone(x0, z0, W, D):
             typ[j0:j1, i0:i1] = t.type[sj, si]
             noms = np.array([""] + t.lieux, object)
             lieu[j0:j1, i0:i1] = noms[t.lieu[sj, si]]
+            eau[j0:j1, i0:i1] = t.eau[sj, si]
+    lire_zone.eau = eau                                         # niveau d'eau du lieu (VIDE = aucun), à part : compatibilité
     return haut, sommet, typ, lieu

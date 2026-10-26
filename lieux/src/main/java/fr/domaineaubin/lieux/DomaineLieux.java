@@ -35,6 +35,15 @@ public class DomaineLieux {
         LieuxTerre.inscrire(new LieuGrille("douvres", LieuGrille.Palette.CRAIE_PURE, true));
         LieuxTerre.inscrire(new LieuGrille("pilat", LieuGrille.Palette.DUNE, true));   // en tuiles (26/10)
         LieuxTerre.inscrire(new LieuGrille("mont_saint_michel", LieuGrille.Palette.BAIE, true));
+        // lot 2 (montagne, cascades, fjords), calculés par outils/lieux_montagne.py ; eau propre aux lieux
+        LieuxTerre.inscrire(new LieuGrille("gavarnie", LieuGrille.Palette.CALCAIRE, true, 100));
+        LieuxTerre.inscrire(new LieuGrille("gullfoss", LieuGrille.Palette.BASALTE, true, 50));
+        LieuxTerre.inscrire(new LieuGrille("skogafoss", LieuGrille.Palette.BASALTE, true, 50));
+        LieuxTerre.inscrire(new LieuGrille("plitvice", LieuGrille.Palette.TRAVERTIN, true, 60));
+        LieuxTerre.inscrire(new LieuGrille("geiranger", LieuGrille.Palette.GNEISS, true, 40));
+        LieuxTerre.inscrire(new LieuGrille("preikestolen", LieuGrille.Palette.GNEISS, true, 40));
+        LieuxTerre.inscrire(new LieuGrille("cervin", LieuGrille.Palette.CERVIN, true, 140));
+        LieuxTerre.inscrire(new LieuGrille("tre_cime", LieuGrille.Palette.DOLOMIE, true, 120));
         LOGGER.info("Domaine d'Aubin - Lieux uniques : {} lieu(x) inscrit(s).", LieuxTerre.liste().size());
     }
 }
