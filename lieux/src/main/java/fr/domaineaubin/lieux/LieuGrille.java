@@ -274,7 +274,9 @@ public final class LieuGrille implements LieuSculpte {
             }
             case CERVIN -> {
                 // gneiss sombre, neige sur les replats, glace des glaciers, éboulis gris
-                if (cl == GLACE) return dessus ? Blocks.SNOW_BLOCK : (h2(x, z, y) % 5 == 0 ? Blocks.BLUE_ICE : Blocks.PACKED_ICE);
+                // glacier : neige dessus, 4 blocs de glace dessous, puis la roche (pas une montagne de glace)
+                if (cl == GLACE && dessus) return Blocks.SNOW_BLOCK;
+                if (cl == GLACE && y >= top - 4) return h2(x, z, y) % 5 == 0 ? Blocks.BLUE_ICE : Blocks.PACKED_ICE;
                 if (cl == NEIGE) return dessus ? Blocks.SNOW_BLOCK : Blocks.STONE;
                 if (cl == EBOULIS) return h2(x, z, y) % 3 == 0 ? Blocks.ANDESITE : Blocks.GRAVEL;
                 if ((cl == PLATEAU || cl == PRE) && dessus) return Blocks.GRASS_BLOCK;
