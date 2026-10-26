@@ -36,13 +36,19 @@ public final class LieuGrille implements LieuSculpte {
 
     private final String id;
     private final Palette palette;
+    /** Grille lon/lat (ancien format), ou null pour un lieu en tuiles ({@link Tuiles}). */
     private final ReliefLieu relief;
     private volatile Long2ObjectOpenHashMap<List<int[]>> surplombs;
 
     public LieuGrille(String id, Palette palette) {
+        this(id, palette, false);
+    }
+
+    /** @param enTuiles le lieu est sculpté dans les tuiles (hauteurs exactes, bords recollés au terrain calculé) */
+    public LieuGrille(String id, Palette palette, boolean enTuiles) {
         this.id = id;
         this.palette = palette;
-        this.relief = new ReliefLieu(id + ".bin");
+        this.relief = enTuiles ? null : new ReliefLieu(id + ".bin");
     }
 
     @Override
@@ -56,10 +62,12 @@ public final class LieuGrille implements LieuSculpte {
     }
 
     private int type(int x, int z) {
+        if (relief == null) return Tuiles.type(x, z);
         return relief.valeur(2, Terrain.lon(x), Terrain.lat(z)) & 0xFF;
     }
 
     private double dessusCouches(int x, int z) {
+        if (relief == null) return Tuiles.sommet(x, z);
         return relief.echant(1, Terrain.lon(x), Terrain.lat(z)) / 16.0;
     }
 
@@ -67,17 +75,23 @@ public final class LieuGrille implements LieuSculpte {
 
     @Override
     public boolean concerne(int x, int z) {
+        if (relief == null) return id.equals(Tuiles.lieu(x, z));
         return relief.contient(x, z);
     }
 
     @Override
     public double hauteur(int x, int z, double h) {
+        if (relief == null) {
+            double t = Tuiles.hauteur(x, z);
+            return Double.isNaN(t) ? h : t;
+        }
         return h + relief.echant(0, Terrain.lon(x), Terrain.lat(z)) / 16.0;
     }
 
     @Override
     public double poids(int x, int z) {
         if (!concerne(x, z)) return 0.0;
+        if (relief == null) return 1.0;      // tuile : la colonne sculptée suit exactement sa hauteur
         return relief.echant(3, Terrain.lon(x), Terrain.lat(z)) / 1000.0;
     }
 

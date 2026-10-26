@@ -24,6 +24,7 @@ from scipy.spatial import cKDTree
 from matplotlib.path import Path
 from skimage import measure
 import terre_py as T
+import tuiles as tu
 
 SORTIE = os.path.join(T.RACINE, "lieux/src/main/resources/domaine_terre_lieux/")
 BPD = T.BPD
@@ -360,37 +361,61 @@ def douvres():
 # ---------------------------------------------------------------- dune du Pilat
 
 def pilat():
-    X, Z, x0, z0 = grille(-1.34, -1.08, 44.42, 44.76)
+    """Dune du Pilat, en tuiles (26/10) : une longue crête parallèle à la côte, de la passe du bassin d'Arcachon vers
+    le sud, haute au Pilat puis abaissée en cordon dunaire (les dunes des Landes continuent vers le sud) au lieu
+    de finir net. Face océan longue et douce, face forêt raide (pente d'éboulement du sable), crête vive.
+    En vrai 2,9 km x 600 m x 105 m (12 x 2,5 blocs !) : ~320 x 90 blocs, 22 de haut au plus.
+    Zone large (240 x 380) : la dune ne touche jamais le bord, rien n'est coupé en ligne droite."""
+    x0, z0, W, D = -660, -19900, 240, 380
+    X, Z = np.meshgrid(np.arange(x0, x0 + W, dtype=float), np.arange(z0, z0 + D, dtype=float))
     h, sd = T.hauteur_base(X, Z)
-    db = sd * BPD / 60.0
-    lat = -Z / BPD
-    # 2,7 km x 500 m x 105 m en vrai (11 x 2 blocs !) : exagérée à ~150 x 75 blocs, 19 de haut.
-    # Face à l'océan : longue pente douce ; côté forêt : pente raide (talus d'éboulement du sable).
-    H = 19.0
-    s = (lat - 44.589) * BPD                                         # blocs, + vers le nord
-    longueur = lisse((78 - np.abs(s + 6 * np.sign(s))) / 30)        # fins progressives
-    hauteur = H * longueur * (0.92 + 0.08 * lisse((-s + 20) / 60))   # un peu plus haute au sud, comme la vraie
-    pied = 6.0 + 3.0 * bruit(X, Z, 23, 41)                           # plage au pied
-    crete = pied + 50.0 + 6.0 * bruit(X, Z, 40, 42) + 4.0 * np.sin(s / 21.0)
-    u = db - pied
-    vent = lisse(np.clip(u / (crete - pied), 0, 1)) ** 0.9            # pente au vent, convexe près de la crête
-    abri = 1 - lisse(np.clip((db - crete) / 19.0, 0, 1)) ** 0.7        # face sous le vent, raide
-    forme = np.where(db < crete, vent, abri) * (u > 0)
-    ondes = 0.45 * bruit(X, Z, 5.0, 43) * (db < crete) * forme       # rides du vent
-    dune = hauteur * forme + ondes * longueur
-    y = np.where(db >= 0, h + np.maximum(dune, 0), h)
-    plage = (db >= 0) & (u <= 0)
-    y = np.where(plage, np.minimum(np.maximum(y, 63.5 + 0.5 * lisse(db / 4)), 64.4), y)
+    db = sd * BPD / 60.0                                               # blocs depuis l'eau, + dans les terres
+    # axe de la côte océane : x de la première terre depuis l'ouest, ligne par ligne, lissé
+    terre = sd >= 0
+    xc = np.array([X[k, np.argmax(terre[k])] if terre[k].any() else np.nan for k in range(D)])
+    ok = ~np.isnan(xc); xc = np.interp(np.arange(D), np.flatnonzero(ok), xc[ok])
+    xc = ndimage.gaussian_filter1d(xc, 10, mode="nearest")
+    n = X - xc[:, None]                                                # blocs depuis l'axe de la côte, + vers l'est
+    s = -44.589 * BPD - Z                                              # blocs le long de la côte, + vers le nord
+    # hauteur de crête le long de la côte : bout nord raide face à la passe, plus haute au sud, puis cordon
+    Hs = courbe(-s, [(-18, 0.0), (12, 17.0), (30, 20.0), (45, 18.5), (80, 22.0), (110, 19.5), (150, 11.0),
+                     (200, 6.0), (250, 3.5), (300, 0.0)])
+    Hs = Hs * (1 + 0.06 * bruit(X, Z, 60, 51))
+    b = 7.0 + 2.0 * bruit(X, Z, 30, 52)                                # plage au pied
+    larg_vent = 2.6 * Hs + 6.0                                         # face océan
+    larg_abri = 1.25 * Hs + 3.0                                        # face forêt (~37°)
+    nc = b + larg_vent + 3.0 * np.sin(s / 37.0) + 2.0 * bruit(X, Z, 45, 53)   # crête
+    u = np.clip((n - b) / np.maximum(nc - b, 1), 0, 1)
+    vent = 0.7 * u ** 1.3 + 0.3 * lisse(u)
+    v = np.clip((n - nc) / np.maximum(larg_abri, 1), 0, 1)
+    abri = (1 - v) ** 1.2
+    forme = np.where(n < nc, vent, abri) * (n > b)
+    rides = 0.35 * bruit(X, Z, 5.0, 54) * (n < nc) * forme * lisse(Hs / 4)
+    dune = np.maximum(Hs * forme + rides, 0)
+    y = np.where(terre, h + dune, h)
     typ = np.zeros(X.shape, np.int32)
-    # tout le versant au vent est en sable jusqu'à la crête (sinon un anneau d'herbe au pied de la dune)
-    sable = (db >= 0) & (longueur > 0.05) & (((u > 0) & (db < crete + 2)) | (dune > 0.4))
+    long_dune = Hs > 0.8
+    plage = terre & long_dune & (db < b)
+    y = np.where(plage, np.minimum(np.maximum(y, 63.5 + 0.4 * lisse(db / 4)), 64.4), y)
+    # versant au vent en sable de la plage à la crête (sinon une bande d'herbe entre la plage et la dune)
+    sable = terre & long_dune & ((dune > 0.3) | ((db >= b) & (n < nc))) & ~plage
     typ[sable] = DUNE | TAILLEE
     typ[plage] = SABLE | TAILLEE
-    typ[db < 0] |= INONDE
+    typ = finir_types(typ, sable | plage)
     sommet = y.copy()
-    y, f = fin_de_lieu(y, h, typ, X, Z)
-    typ = finir_types(typ, (sable | plage) & (f > 0.2))
-    ecrire("pilat", X, Z, x0, z0, y, h, sommet, typ)
+    # colonnes sculptées de la tuile : le lieu et sa marge (biome compris) ; au-delà, terrain calculé
+    actif = ndimage.binary_dilation(sable | plage | (dune > 0.02), iterations=10) & terre
+    typ[~actif] = 0
+    ecrites = tu.poser("pilat", x0, z0, y, sommet, typ, actif)
+    np.savez_compressed("/tmp/lieu_pilat.npz", X=X, Z=Z, y=y, h=h, sommet=sommet, typ=typ, poids=actif.astype(float),
+                        vox=np.zeros((0, 4), int))
+    # contrôles : la dune ne touche pas le bord de la zone ; au bord des colonnes sculptées, y = terrain calculé
+    bord_actif = actif & ndimage.binary_dilation(~actif & terre)
+    frac = np.abs(y - np.round(y))
+    print(f"pilat (tuiles {ecrites}) : {int(actif.sum())} colonnes, sol {y[terre].min():.1f} à {y.max():.1f}, "
+          f"{int(((typ & TAILLEE) > 0).sum())} taillées | contrôles : écart au bord des colonnes sculptées "
+          f"{np.abs(y - h)[bord_actif].max():.3f}, actif au bord de la zone {int(actif[bord_zone(X, Z, 1) < 2].sum())}, "
+          f"{int(((frac < 0.02) & ((typ & TAILLEE) > 0)).sum())} colonnes taillées sur un entier")
 
 
 # ---------------------------------------------------------------- baie du Mont-Saint-Michel

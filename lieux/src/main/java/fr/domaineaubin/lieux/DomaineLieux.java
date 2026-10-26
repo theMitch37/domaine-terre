@@ -33,7 +33,7 @@ public class DomaineLieux {
         LieuxTerre.inscrire(new LieuGrille("etretat", LieuGrille.Palette.CRAIE));
         LieuxTerre.inscrire(new LieuGrille("moher", LieuGrille.Palette.MOHER));
         LieuxTerre.inscrire(new LieuGrille("douvres", LieuGrille.Palette.CRAIE_PURE));
-        LieuxTerre.inscrire(new LieuGrille("pilat", LieuGrille.Palette.DUNE));
+        LieuxTerre.inscrire(new LieuGrille("pilat", LieuGrille.Palette.DUNE, true));   // en tuiles (26/10)
         LieuxTerre.inscrire(new LieuGrille("mont_saint_michel", LieuGrille.Palette.BAIE));
         LOGGER.info("Domaine d'Aubin - Lieux uniques : {} lieu(x) inscrit(s).", LieuxTerre.liste().size());
     }
