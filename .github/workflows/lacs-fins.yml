@@ -1,0 +1,51 @@
+# Construit la carte des lacs de Terre (étape C1) : GSHHG full niveau 2 au bloc près + altitude de surface Copernicus GLO-90
+# et l'ajoute à la branche : src/main/resources/domaine_terre/carte/lacs.bin. Journal : outils/donnees/lacs_fins.log
+name: Lacs fins
+
+on:
+  push:
+    branches: ['lieux-*']
+    paths:
+      - outils/lacs_fins.py
+      - .github/workflows/lacs-fins.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  construire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Outils Python
+        run: pip install numpy shapely pyogrio rasterio pillow
+      - name: Téléchargement et construction (journal toujours rapporté)
+        run: |
+          mkdir -p outils/donnees /tmp/cotes
+          {
+            set -e
+            cd /tmp/cotes
+            curl -sSfL --retry 5 --retry-delay 20 -o gshhg.zip \
+              https://github.com/GenericMappingTools/gshhg-gmt/releases/download/2.3.7/gshhg-shp-2.3.7.zip
+            unzip -q gshhg.zip 'GSHHS_shp/f/*' -d gshhg
+            cd $GITHUB_WORKSPACE
+            python outils/lacs_fins.py /tmp/cotes/gshhg/GSHHS_shp src/main/resources/domaine_terre/carte/lacs.bin
+          } > /tmp/journal.txt 2>&1 || echo "ÉCHEC" >> /tmp/journal.txt
+          cp /tmp/journal.txt outils/donnees/lacs_fins.log; cat outils/donnees/lacs_fins.log
+      - name: Ajout à la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add -f outils/donnees/lacs_fins.log
+          [ -f src/main/resources/domaine_terre/carte/lacs.bin ] && git add -f src/main/resources/domaine_terre/carte/lacs.bin
+          git commit -m "Lacs au bloc près, altitude Copernicus (automatique)" || exit 0
+          for i in 1 2 3; do
+            git fetch origin "${GITHUB_REF_NAME}" && git rebase "origin/${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep 10
+          done
+          exit 1
