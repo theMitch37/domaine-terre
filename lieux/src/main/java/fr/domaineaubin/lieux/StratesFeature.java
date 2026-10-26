@@ -111,12 +111,10 @@ public class StratesFeature extends Feature<NoneFeatureConfiguration> {
                 }
             }
         }
-        // blocs en surplomb (arches) des lieux qui touchent ce chunk
+        // blocs en surplomb (arches) : chaque lieu cherche lui-même ceux de ce chunk (index par chunk) ; avec les tuiles,
+        // les coins du chunk peuvent être hors du lieu (en mer) alors qu'une arche le traverse
         for (Lieu l : LieuxTerre.liste()) {
-            if (l instanceof LieuSculpte lieu && (lieu.concerne(x0, z0) || lieu.concerne(x0 + 15, z0)
-                    || lieu.concerne(x0, z0 + 15) || lieu.concerne(x0 + 15, z0 + 15))) {
-                lieu.poser(niveau, x0, z0);
-            }
+            if (l instanceof LieuSculpte lieu) lieu.poser(niveau, x0, z0);
         }
         return modifie;
     }

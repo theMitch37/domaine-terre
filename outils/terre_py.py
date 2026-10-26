@@ -244,3 +244,59 @@ def sol_exact(x0, z0, W, D):
     num = sum(a * FC[jj, ii] * HC[jj, ii] for a, jj, ii in w)
     den = sum(a * FC[jj, ii] for a, jj, ii in w)
     return np.ceil(num / den).astype(int) - 1
+
+
+DEMI_LARGEUR = {1: 30.0, 2: 12.0, 3: 4.5}     # Terrain.demiLargeur
+VALLEE_MAX = 64.0                              # Terrain.VALLEE_MAX
+_fleuves = None
+
+
+def _segments_fleuves():
+    global _fleuves
+    if _fleuves is None:
+        import json
+        seg = []
+        for r in json.load(open(os.path.join(CARTE, "fleuves.json"))):
+            p = np.array(r["p"], float).reshape(-1, 2)
+            if len(p) < 2:
+                continue
+            xs, zs = p[:, 0] * BPD, -p[:, 1] * BPD
+            seg.append(np.c_[xs[:-1], zs[:-1], xs[1:], zs[1:], np.full(len(p) - 1, r["c"])])
+        _fleuves = np.vstack(seg)
+    return _fleuves
+
+
+def influence_fleuves(X, Z):
+    """Marge (blocs) au-delà de la zone où un fleuve du mod creuse sa vallée : < 0 dans la vallée.
+    Comme Terrain.riviereBrute/calculerHauteur : la vallée s'étend sur demiLargeur + largeurVallee autour de l'axe,
+    largeurVallee = clamp((niveau - 63) x 4, 2 x demiLargeur, 64) avec niveau = fond de vallée lissé (minimum du relief
+    en 5 points espacés de 0,055°) ; pas de vallée si ce fond dépasse y 86 (vallée sèche).
+    Un lieu en tuiles ne doit rien sculpter là (terre_py ne copie pas le profil des vallées)."""
+    s = _segments_fleuves()
+    x0, x1, z0, z1 = X.min(), X.max(), Z.min(), Z.max()
+    m = 30 + VALLEE_MAX + 50
+    k = (np.maximum(s[:, 0], s[:, 2]) > x0 - m) & (np.minimum(s[:, 0], s[:, 2]) < x1 + m) & \
+        (np.maximum(s[:, 1], s[:, 3]) > z0 - m) & (np.minimum(s[:, 1], s[:, 3]) < z1 + m)
+    dmin = np.full(X.shape, np.inf); cx = np.zeros(X.shape); cz = np.zeros(X.shape); hw = np.zeros(X.shape)
+    for ax, az, bx, bz, c in s[k]:
+        dx, dz = bx - ax, bz - az
+        t = np.clip(((X - ax) * dx + (Z - az) * dz) / max(dx * dx + dz * dz, 1e-9), 0, 1)
+        px, pz = ax + t * dx, az + t * dz
+        d = np.hypot(X - px, Z - pz)
+        mieux = d < dmin
+        dmin = np.where(mieux, d, dmin); cx = np.where(mieux, px, cx); cz = np.where(mieux, pz, cz)
+        hw = np.where(mieux, DEMI_LARGEUR[int(c)], hw)
+    if not np.isfinite(dmin).any():
+        return dmin
+    pres = np.isfinite(dmin) & (dmin < hw + VALLEE_MAX + 5)
+    marge = np.full(X.shape, np.inf)
+    if pres.any():
+        fx, fz = np.floor(cx[pres]), np.floor(cz[pres])
+        lo, la, dd = fx / BPD, -fz / BPD, 0.055
+        mini = np.minimum.reduce([relief(lo + a, la + b) for a, b in ((0, 0), (dd, 0), (-dd, 0), (0, dd), (0, -dd))])
+        niveau = blocs(np.maximum(mini, 1))
+        larg = np.clip((niveau - NIVEAU_MER) * 4, 2 * hw[pres], VALLEE_MAX)
+        mm = dmin[pres] - hw[pres] - larg
+        mm = np.where(niveau >= 86.0, np.inf, mm)          # vallée sèche : le fleuve ne creuse rien
+        marge[pres] = mm
+    return marge

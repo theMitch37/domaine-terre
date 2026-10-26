@@ -87,6 +87,12 @@ class Cote:
         self.s = ndimage.gaussian_filter(L[i].reshape(X.shape), 4)
         self.arbre = arbre
 
+    def distance_troncon(self, X, Z, s0, s1):
+        """Distance (blocs) de chaque colonne au tronçon de côte entre les abscisses s0 et s1 : sert à borner un lieu
+        (l'abscisse lissée saute d'une rive à l'autre en mer, elle ne convient pas pour ça)."""
+        m = (self.L >= s0) & (self.L <= s1)
+        return cKDTree(self.pts[m]).query(np.c_[X.ravel(), Z.ravel()])[0].reshape(X.shape)
+
     def s_de(self, lat, lon):
         _, i = self.arbre.query(bloc_de(lat, lon))
         return float(self.L[i])
@@ -139,8 +145,16 @@ def en_tuiles(nom, X, Z, y, h, sommet, typ, sd, vox=None, marge=10, limite=None)
     """Écrit un lieu dans les tuiles (outils/tuiles.py) : colonnes sculptées = ce que le lieu change (hauteur, taille,
     remblai, biome) élargi de `marge` blocs ; au-delà, terrain calculé. Contrôle que les colonnes sculptées
     rejoignent le terrain calculé à leur bord et ne touchent pas le bord de la zone."""
-    if limite is not None:                                      # le lieu s'arrête là (îles, autres côtes de la zone)
-        y = np.where(limite, y, h); typ = np.where(limite, typ, 0)
+    # jamais dans la vallée d'un fleuve : le Python ne copie pas son profil, la tuile l'effacerait
+    hors_fleuve = T.influence_fleuves(X, Z) > 3
+    limite = hors_fleuve if limite is None else (limite & hors_fleuve)
+    # le lieu s'arrête là (fleuves, îles, autres côtes) : il y redescend au terrain calculé sur 30 blocs, sans coupure
+    w = lisse(ndimage.distance_transform_edt(limite) / 30.0)
+    attenue = (w < 0.999) & (np.abs(y - h) > 1.0) & ((typ & TAILLEE) > 0)
+    if attenue.any():
+        print(f"  ATTENTION : {int(attenue.sum())} colonnes taillées abaissées par la limite (élargir les bornes ?)")
+    y = h + (y - h) * w
+    typ = np.where(limite, typ, 0)
     role = (typ & (TAILLEE | REMBLAI | BIOME)) > 0
     y = np.where(~role & (np.abs(y - h) < 0.15), h, y)          # restes de fondu (< 0,15 bloc) : terrain calculé
     change = (np.abs(y - h) > 0.01) | role
@@ -161,6 +175,9 @@ def en_tuiles(nom, X, Z, y, h, sommet, typ, sd, vox=None, marge=10, limite=None)
         os.remove(SORTIE + nom + ".bin")                         # ancien format (grille lon/lat)
     np.savez_compressed(f"/tmp/lieu_{nom}.npz", X=X, Z=Z, y=y, h=h, sommet=sommet, typ=typ, poids=actif.astype(float),
                         vox=np.asarray(vox if vox else np.zeros((0, 4)), int))
+    if limite is not None:                                      # coupure franche là où la limite tranche le lieu ?
+        coupe = limite & ndimage.binary_dilation(~limite)
+        print(f"  coupure à la limite (fleuves, bornes) : écart max {np.abs(y - h)[coupe].max() if coupe.any() else 0:.2f}")
     bord_actif = actif & ndimage.binary_dilation(~actif)
     frac = np.abs(y - np.round(y))
     print(f"{nom} (tuiles {ecrites}) : {int(actif.sum())} colonnes, sol {y.min():.1f} à {y.max():.1f}, "
@@ -302,19 +319,22 @@ def fin_de_lieu(y, h, typ, X, Z, marge=12):
 # ---------------------------------------------------------------- Étretat
 
 def etretat():
-    X, Z, x0, z0 = grille(-0.08, 0.48, 49.44, 49.84)
+    """Étretat sur la côte d'Albâtre, en tuiles (26/10). La falaise commence au cap de la Hève (au-dessus du Havre,
+    comme en vrai), se creuse aux vraies valleuses (Étretat, Yport, Fécamp), remonte au cap Fagnet puis s'abaisse vers
+    Saint-Pierre-en-Port : plus de fin coupée par le bord de la zone. Les distances le long de la côte sont étirées
+    autour d'Étretat (Manneporte, Porte d'Aval, Porte d'Amont tiennent en 3 km, soit 12 blocs)."""
+    X, Z, x0, z0 = grille(-0.12, 0.62, 49.42, 49.95)
     h, sd = T.hauteur_base(X, Z)
     db = sd * BPD / 60.0
     cote = Cote(X, Z, db, (49.58, 0.0))                             # abscisse du sud-ouest au nord-est
     S = cote.s
-    v, fin = cote.s_de(49.7085, 0.2105), cote.L[-1]
-    s0 = cote.s_de(49.562, 0.094)                                    # début d'origine (la zone descend jusqu'au Havre)
-    # En vrai, Manneporte, Porte d'Aval, la ville et Porte d'Amont tiennent en 3 km (12 blocs) : les distances le long
-    # de la côte sont étirées autour de la ville, comme les hauteurs. Côte d'Albâtre : falaises sur toute la zone,
-    # creusées de valleuses, qui s'abaissent aux deux bouts.
-    haut = courbe(S, [(0, 0), (s0 + 15, 0), (s0 + 40, 21), (v - 30, 26), (v - 12, 27), (v - 4, 2), (v + 4, 2), (v + 12, 25),
-                      (v + 45, 25), (v + 56, 16), (v + 64, 16), (v + 78, 24), (fin - 30, 23), (fin - 12, 0)])
-    y, typ, sommet, e = falaise(X, Z, h, db, S, haut, pied=2.0, graine=11)
+    hv, v = cote.s_de(49.512, 0.067), cote.s_de(49.7085, 0.2105)
+    yp, fe, fa = cote.s_de(49.737, 0.315), cote.s_de(49.757, 0.374), cote.s_de(49.767, 0.39)
+    haut = courbe(S, [(hv - 22, 0), (hv - 6, 16), (hv + 10, 21), (v - 30, 26), (v - 12, 27), (v - 4, 2), (v + 4, 2),
+                      (v + 12, 25), (yp - 9, 25), (yp - 3, 3), (yp + 3, 3), (yp + 9, 23), (fe - 9, 24), (fe - 3, 2),
+                      (fe + 4, 2), (fa, 19), (fa + 20, 17), (fa + 45, 8), (fa + 65, 0)])
+    d_cote = cote.arbre.query(np.c_[X.ravel(), Z.ravel()])[0].reshape(X.shape)
+    y, typ, sommet, e = falaise(X, Z, h, db, S, haut, pied=2.0, graine=11, retour=150.0)
     creux = []
     j_h = lambda p: float(haut[int(round(p[1] - z0)), int(round(p[0] - x0))])
     # Manneporte, Porte d'Aval (et l'Aiguille au large de sa pointe), Porte d'Amont : promontoires pleins, percés
@@ -340,7 +360,8 @@ def etretat():
     typ = parois(y, typ)
     travail = ((typ & (TAILLEE | REMBLAI)) > 0) & (f > 0.2)
     typ = finir_types(typ, travail)
-    ecrire("etretat", X, Z, x0, z0, y, h, sommet, typ, creux)
+    limite = cote.distance_troncon(X, Z, hv - 40, fa + 85) < 175
+    en_tuiles("etretat", X, Z, y, h, sommet, typ, sd, vox=creux, limite=limite)
 
 
 # ---------------------------------------------------------------- Moher
@@ -379,7 +400,7 @@ def moher():
     y, f = fin_de_lieu(y, h, typ, X, Z)
     typ = parois(y, typ)
     typ = finir_types(typ, ((typ & (TAILLEE | REMBLAI)) > 0) & (f > 0.2))
-    limite = (S > s_hag - 60) & (S < s_fanore + 35) & (d_cote < 175)
+    limite = cote.distance_troncon(X, Z, s_hag - 70, s_fanore + 40) < 175
     en_tuiles("moher", X, Z, y, h, sommet, typ, sd, limite=limite)
 
 
@@ -491,28 +512,39 @@ def distance_polyligne(X, Z, pts):
 
 
 def mont_saint_michel():
-    X, Z, x0, z0 = grille(-1.93, -1.33, 48.57, 48.87)
+    """Baie du Mont-Saint-Michel, en tuiles (26/10), sur la VRAIE baie (côte GSHHG) : plus de rivage dessiné à la main,
+    ni de mer tenue de force, ni de ceinture de polders (ils compensaient le relief vanilla trop haut et la mer qui
+    sortait de l'eau, réglés le 25-26/10). La baie = la mer en deçà de la ligne pointe du Grouin - Granville.
+    Marée basse : estran de sable et de tangue, chenaux qui serpentent (Couesnon, Sée-Sélune), herbus, le Mont et
+    Tombelaine (granite, exagérés)."""
+    X, Z, x0, z0 = grille(-1.93, -1.30, 48.50, 48.87)
     h, sd = T.hauteur_base(X, Z)
-    # le rivage de la baie, lissé (spline) : pas de segments droits
+    # ouverture de la baie : de la pointe du Grouin à la pointe du Roc (Granville) ; la baie est du côté du Mont
+    a, b, mont = bloc_de(48.716, -1.843), bloc_de(48.834, -1.612), bloc_de(48.6361, -1.5115)
+    t = (b - a) / np.linalg.norm(b - a); nrm = np.array([-t[1], t[0]])
+    if (mont - a) @ nrm < 0:
+        nrm = -nrm
+    cote_baie = (X - a[0]) * nrm[0] + (Z - a[1]) * nrm[1]          # blocs depuis la ligne d'ouverture, + dans la baie
+    mer = sd < 0
+    lab, n = ndimage.label(mer & (cote_baie > 0))
+    j0, i0 = int(round(mont[1] - z0)), int(round(mont[0] - x0))
+    # la baie : la mer intérieure reliée au Mont (le Mont lui-même peut être une petite île de la carte)
+    k = lab[max(j0 - 6, 0):j0 + 7, max(i0 - 6, 0):i0 + 7]
+    k = np.bincount(k[k > 0]).argmax() if (k > 0).any() else 0
+    dedans = lab == k if k else mer & (cote_baie > 0)
+    # la côte GSHHG suit ici la pleine mer de trop près : le fond de la baie (grèves autour du Mont, à sec seulement à
+    # marée basse) y est de la terre. On y ajoute la grève relevée sur la vraie géographie (RIVAGE), lissée.
     P = np.array([bloc_de(la, lo) for la, lo in RIVAGE])
     tt = np.r_[0, np.cumsum(np.hypot(*np.diff(P, axis=0).T))]
     fin = np.linspace(0, tt[-1], 600)
     lisse_p = np.c_[np.interp(fin, tt, ndimage.gaussian_filter1d(P[:, 0], 1.2)),
                     np.interp(fin, tt, ndimage.gaussian_filter1d(P[:, 1], 1.2))]
-    ferme = np.r_[lisse_p, lisse_p[:1]]
-    dedans = Path(ferme).contains_points(np.c_[X.ravel(), Z.ravel()]).reshape(X.shape)
+    greve = Path(np.r_[lisse_p, lisse_p[:1]]).contains_points(np.c_[X.ravel(), Z.ravel()]).reshape(X.shape)
+    dedans = ndimage.binary_closing(dedans | (greve & (cote_baie > 0)), iterations=2) & (cote_baie > 0)
     d_rive = ndimage.distance_transform_edt(dedans)                  # distance au rivage, dans la baie
-    # au large de l'ouverture (de la pointe du Grouin à Granville), la mer : le trait de côte du mod, trop grossier,
-    # y laissait une bande de terre qui fermait la baie
-    a, b = lisse_p[-1], lisse_p[0]                                   # bouts du rivage lissé (celui de `dedans`)
-    large = np.array([a, [a[0], Z.min() - 20], [X.min() - 20, Z.min() - 20], [X.min() - 20, b[1]], b])
-    au_large = Path(large).contains_points(np.c_[X.ravel(), Z.ravel()]).reshape(X.shape) & ~dedans
-    # et le mince liseré entre les deux polygones
-    au_large |= ~dedans & ndimage.binary_dilation(dedans, iterations=6) & ndimage.binary_dilation(au_large, iterations=6)
-    d_ouvert = ndimage.distance_transform_edt(~au_large)             # distance à l'ouverture sur la mer
+    d_ouvert = np.maximum(cote_baie, 0)                              # distance à l'ouverture sur la mer
     # estran : sable sec à y 63,5 près du fond de la baie, qui descend doucement vers le large (bords lobés)
     lobes = 14 * bruit(X, Z, 26, 51) + 6 * bruit(X, Z, 9, 52)
-    # marée basse : sable sur presque toute la baie, il ne s'enfonce sous l'eau qu'en approchant du large
     vers_large = np.clip((38 - d_ouvert + lobes) / 40, 0, 1)         # 0 au fond de la baie, 1 près de l'ouverture
     estran = 63.6 - 4.2 * lisse(vers_large) ** 1.4
     # chenaux qui serpentent (Couesnon, Sée-Sélune), plus larges vers le large
@@ -520,7 +552,6 @@ def mont_saint_michel():
     for riv, g in ((COUESNON, 53), (SEE_SELUNE, 54)):
         d, sp = distance_polyligne(X, Z, riv)
         meandre = 5.0 * np.sin(sp / 13.0 + g) + 2.5 * bruit(X, Z, 15, g)
-        # méandre : on décale la distance avec un bruit le long du cours
         d2, _ = distance_polyligne(X + meandre * 0.7, Z + meandre * 0.5, riv)
         larg = 1.6 + 2.2 * lisse(sp / 220)
         c = (d2 < larg) & dedans
@@ -529,32 +560,23 @@ def mont_saint_michel():
     # mares : grandes et rares (pas de damier)
     mare = (bruit(X, Z, 11, 55) > 0.62) & (vers_large > 0.15) & dedans
     mare = ndimage.binary_opening(mare, iterations=2)
-    # herbus (prés salés) le long du rivage sud, avec leur bord irrégulier
+    # herbus (prés salés) le long du rivage, avec leur bord irrégulier
     herbus = dedans & (d_rive < 9 + 6 * bruit(X, Z, 19, 56)) & (vers_large < 0.55) & (d_ouvert > 24)
-    y = np.where(dedans, estran, h)
+    y = np.where(dedans, np.maximum(estran, h), h)                   # l'estran ne creuse jamais sous le fond réel
     y = np.where(dedans & mare, np.minimum(y, 61.5), y)
     y = np.where(chenal, np.minimum(y, fond_chenal), y)
     y = np.where(herbus & ~chenal, 63.55 + 0.3 * lisse(d_rive / 4), y)  # jamais pile 64
-    # Banc du 25/10 : hors d'un lieu, le jeu laisse au relief vanilla ~2-3 blocs de liberté au-dessus du terrain du mod.
-    # La mer du mod devant la baie (peu profonde, y 60-61) sortait de l'eau et fermait la baie, et la terre autour
-    # la dominait comme un trou. Le lieu tient donc aussi la mer de la zone et une ceinture basse de polders.
-    mer = ~dedans & ((sd < 0) | au_large)
-    y = np.where(mer, np.minimum(h, 60.5), y)
-    d_dehors = ndimage.distance_transform_edt(~dedans)
-    polder = ~dedans & ~mer & (d_dehors < 30)
-    y = np.where(polder, 64.5 + np.maximum(h - 64.5, 0) * lisse(d_dehors / 30) ** 1.5, y)
-    d_mer = ndimage.distance_transform_edt(~mer)
-    y = np.where(polder, np.minimum(y, 63.6 + 0.35 * d_mer), y)       # grève en pente douce vers la mer, pas de marche
-    raccord = polder & (d_dehors < 16)
+    # vers le large, l'estran rejoint le fond réel en pente douce (pas de marche à la sortie de la baie)
+    fondu = lisse(np.clip((cote_baie - 2) / 25, 0, 1))
+    y = np.where(dedans, h + (y - h) * fondu, y)
     typ = np.zeros(X.shape, np.int32)
-    typ[mer] = SABLE | TAILLEE | INONDE
-    typ[raccord] = PRE | TAILLEE
     tangue = (bruit(X, Z, 10, 57) > 0.35) & (vers_large > 0.1)
     typ[dedans] = np.where(tangue[dedans], VASE, SABLE)
     typ[dedans & (mare | chenal)] = CHENAL
     typ[herbus & ~chenal] = PRE
     sommet = np.full(X.shape, 63.0)
     # le Mont (granite, 80 m) et Tombelaine, exagérés : roc de ~16 blocs, 22 de haut, flancs raides
+    roc = np.zeros(X.shape, bool)
     for (la, lo, R, Hm, rx) in [(48.6361, -1.5115, 8.5, 22.0, 1.15), (48.6757, -1.5669, 4.5, 8.0, 1.3)]:
         c = bloc_de(la, lo)
         r = np.hypot((X - c[0]) / rx, Z - c[1]) / R
@@ -563,12 +585,12 @@ def mont_saint_michel():
         y = np.where(m, prof, y)
         typ = np.where(m, ROC, typ)
         sommet = np.where(m, prof, sommet)
-    travail = dedans | (typ == ROC) | raccord | mer
+        roc |= m
+    travail = (dedans & (fondu > 0.05)) | roc
     typ[travail] |= TAILLEE
     typ[dedans] |= INONDE
-    y, f = fin_de_lieu(y, h, typ, X, Z)
-    typ = finir_types(typ, travail & (f > 0.2))
-    ecrire("mont_saint_michel", X, Z, x0, z0, y, h, sommet, typ)
+    typ = finir_types(typ, travail)
+    en_tuiles("mont_saint_michel", X, Z, y, h, sommet, typ, sd)
 
 
 LIEUX = {"etretat": etretat, "moher": moher, "douvres": douvres, "pilat": pilat, "mont_saint_michel": mont_saint_michel}
