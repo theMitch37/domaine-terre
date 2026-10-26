@@ -71,7 +71,7 @@ public final class Terrain {
 
     /** Valeurs partagées d'une colonne : calculées une fois, réutilisées par toutes les sorties et les biomes. */
     private record Colonne(int x, int z, int generation, double sd, double alt, double pente, Riviere r, double h, double poids,
-                           int niveauLac, int bergeLac, int eauLac, int eauRiv, int bergeRiv) {
+                           int niveauLac, int bergeLac, int eauLac, int eauRiv, int bergeRiv, int litRiv) {
         boolean lieu() {
             return poids > 0.0;
         }
@@ -102,9 +102,10 @@ public final class Terrain {
         double h = calculerHauteur(x, z, sd, alt, pente, r);
         // lacs (étape C1) : cuvette dans le lac, berges qui descendent jusqu'à son niveau autour
         int niveauLac = SANS_LAC, bergeLac = SANS_LAC, eauLac = SANS_LAC;
-        int eauRiv = SANS_LAC, bergeRiv = SANS_LAC;
+        int eauRiv = SANS_LAC, bergeRiv = SANS_LAC, litRiv = SANS_LAC;
         if (r != null && r.distance() <= r.demiLargeur() + EAU_RIVIERE) eauRiv = r.eau();
         if (r != null && r.distance() > r.demiLargeur() && r.distance() <= r.demiLargeur() + BERGE_RIVIERE) bergeRiv = r.eau();
+        if (r != null && r.distance() <= r.demiLargeur()) litRiv = r.eau();
         Lacs.Proche lp = sd >= 0 && lacs != null ? lacs.proche(lon(x + 0.5), lat(z + 0.5)) : null;
         if (lp != null) {
             int niv = (int) Math.min(niveauLac(lacs.altitude(lp.lac())), lacs.plafond(lp.lac()));
@@ -127,8 +128,10 @@ public final class Terrain {
             // un lieu sculpté (Grand Canyon, Verdon) gère l'eau de son cours d'eau lui-même (niveau de la mer)
             eauRiv = SANS_LAC;
             bergeRiv = SANS_LAC;
+            litRiv = SANS_LAC;
         }
-        c = new Colonne(x, z, g, sd, alt, pente, r, h, poids, niveauLac, bergeLac, eauLac, eauRiv, bergeRiv);
+        if (niveauLac != SANS_LAC) litRiv = SANS_LAC;          // dans un lac, c'est l'eau du lac
+        c = new Colonne(x, z, g, sd, alt, pente, r, h, poids, niveauLac, bergeLac, eauLac, eauRiv, bergeRiv, litRiv);
         tab[i] = c;
         return c;
     }
@@ -235,13 +238,25 @@ public final class Terrain {
      */
     static final double BERGE = 20.0;
 
-    /**
-     * Niveau d'eau que les aquifères prennent ici : celui du lac (dans le lac et sur sa berge), sinon celui du cours
-     * d'eau (dans le lit et jusqu'à EAU_RIVIERE cases autour), sinon SANS_LAC (la mer).
-     */
+    /** Niveau d'eau que les aquifères prennent ici : celui du lac (dans le lac et sur sa berge), sinon SANS_LAC. */
     public int niveauLac(int x, int z) {
+        return colonne(x, z).eauLac();
+    }
+
+    /**
+     * Lit et abords d'un cours d'eau (hors lac) : les aquifères n'y mettent pas d'eau (FluidesMixin), c'est FleuveFeature
+     * qui remplit le lit, colonne par colonne, à son niveau. Les aquifères décident par cellules de ~16 blocs : là où le
+     * niveau descend d'un bloc tous les quelques blocs, ils noyaient l'aval au niveau de l'amont et posaient des
+     * barrières de pierre dans le lit.
+     */
+    public boolean sansAquifere(int x, int z) {
         Colonne c = colonne(x, z);
-        return c.eauLac() != SANS_LAC ? c.eauLac() : c.eauRiv();
+        return c.eauLac() == SANS_LAC && c.eauRiv() != SANS_LAC;
+    }
+
+    /** Niveau de l'eau (l'eau remplit y < niveau) du lit d'un cours d'eau dans cette colonne, ou SANS_LAC. */
+    public int eauLit(int x, int z) {
+        return colonne(x, z).litRiv();
     }
 
     /** Ancien seuil (avant l'étape C2, toute l'eau au niveau de la mer) : plus utilisé, gardé pour les addons. */

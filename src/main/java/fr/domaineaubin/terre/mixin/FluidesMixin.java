@@ -28,6 +28,7 @@ public abstract class FluidesMixin {
         Aquifer.FluidStatus eau = new Aquifer.FluidStatus(mer, reglages.defaultFluid());
         // lacs en altitude (étape C1) : dans un lac, l'eau monte jusqu'au niveau de ce lac
         Aquifer.FluidStatus[] lacs = new Aquifer.FluidStatus[512];
+        Aquifer.FluidStatus sec = new Aquifer.FluidStatus(-2048, Blocks.AIR.defaultBlockState());
         retour.setReturnValue((x, y, z) -> {
             Terrain t = Terrain.get();
             int niv = t.niveauLac(x, z);
@@ -36,6 +37,7 @@ public abstract class FluidesMixin {
                 if (s == null) lacs[niv + 128] = s = new Aquifer.FluidStatus(niv, reglages.defaultFluid());
                 return s;
             }
+            if (t.sansAquifere(x, z)) return sec;          // lit d'un cours d'eau : FleuveFeature y met l'eau
             if (y < Math.min(-54, mer) && t.enMer(x, z)) return eau;
             return vanilla.computeFluid(x, y, z);
         });
