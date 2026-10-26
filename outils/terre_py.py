@@ -209,7 +209,8 @@ def pente(x, z):
 
 
 def hauteur_base(x, z):
-    """Terrain.hauteurBase (sans les fleuves) : hauteur visée du sol en y."""
+    """Terrain.hauteurBase (sans les fleuves), lacs compris (étape C1) : hauteur visée du sol en y."""
+    X, Z = np.asarray(x, float), np.asarray(z, float)
     sd = distance_cote(x, z); lon, lat = x / BPD, -z / BPD
     alt = relief(lon, lat)
     p = np.clip(pente(x, z) / 80, 0, 1)
@@ -218,7 +219,9 @@ def hauteur_base(x, z):
     terre = NIVEAU_MER + 0.6 + (np.maximum(h_terre, NIVEAU_MER + 0.6) - NIVEAU_MER - 0.6) * lisse(sd / 2)
     h_mer = blocs(np.minimum(alt, -1))
     mer = NIVEAU_MER - 1 + (np.minimum(h_mer, NIVEAU_MER - 1) - NIVEAU_MER + 1) * lisse(-sd / 2)
-    return np.where(sd >= 0, terre, mer), sd
+    h = np.where(sd >= 0, terre, mer)
+    h, _, _ = appliquer_lacs(h, X if np.ndim(x) else np.array(x), Z if np.ndim(z) else np.array(z), sd)
+    return h, sd
 
 
 def facteur(h, sd):
@@ -243,7 +246,11 @@ def sol_exact(x0, z0, W, D):
     w = [((1 - tx) * (1 - tz), j, i), (tx * (1 - tz), j, i + 1), ((1 - tx) * tz, j + 1, i), (tx * tz, j + 1, i + 1)]
     num = sum(a * FC[jj, ii] * HC[jj, ii] for a, jj, ii in w)
     den = sum(a * FC[jj, ii] for a, jj, ii in w)
-    return np.ceil(num / den).astype(int) - 1
+    sol = np.ceil(num / den).astype(int) - 1
+    # berges des lacs : plancher de densité (Terrain.plancher), rien sous l'eau du lac voisin sur 4 cases
+    _, _, berge = appliquer_lacs(np.zeros(X.shape), X.astype(float), Z.astype(float), distance_cote(X.astype(float), Z.astype(float)))
+    a_berge = berge != np.iinfo(np.int64).min
+    return np.where(a_berge, np.maximum(sol, berge), sol)
 
 
 DEMI_LARGEUR = {1: 30.0, 2: 12.0, 3: 4.5}     # Terrain.demiLargeur
@@ -300,3 +307,114 @@ def influence_fleuves(X, Z):
         mm = np.where(niveau >= 86.0, np.inf, mm)          # vallée sèche : le fleuve ne creuse rien
         marge[pres] = mm
     return marge
+
+
+# ---------------------------------------------------------------- lacs (étape C1), comme Lacs.java et Terrain
+RAYON_LAC = 48
+BERGE = 4.0
+_lacs = None
+
+
+def _carte_lacs():
+    """lacs.bin (outils/lacs_fins.py) : table des lacs et index des tuiles."""
+    global _lacs
+    if _lacs is None:
+        import struct
+        chemin = os.path.join(CARTE, "lacs.bin")
+        if not os.path.exists(chemin):
+            _lacs = False
+            return _lacs
+        b = open(chemin, "rb").read()
+        assert b[:4] == b"LACS"
+        _, _, t, tx, ty = struct.unpack_from("<idiii", b, 4)
+        p = 4 + struct.calcsize("<idiii")
+        (L,) = struct.unpack_from("<i", b, p); p += 4
+        tab = np.frombuffer(b, "<f4", 2 * L, p).reshape(L, 2); p += 8 * L
+        (n,) = struct.unpack_from("<i", b, p); p += 4
+        idx = np.frombuffer(b, "<i4", 2 * n, p).reshape(n, 2); p += 8 * n
+        debut = {}
+        for k, lg in idx:
+            debut[int(k)] = (p, int(lg)); p += int(lg)
+        _lacs = {"b": b, "T": t, "TX": tx, "TY": ty, "alt": np.r_[0, tab[:, 0]], "sup": np.r_[0, tab[:, 1]],
+                 "debut": debut, "cache": {}}
+    return _lacs
+
+
+def _ids_tuile(c, txi, tyi):
+    import zlib
+    k = tyi * c["TX"] + (txi % c["TX"])
+    if k not in c["debut"] or tyi < 0 or tyi >= c["TY"]:
+        return None
+    if k not in c["cache"]:
+        p, lg = c["debut"][k]
+        c["cache"][k] = np.frombuffer(zlib.decompress(c["b"][p:p + lg]), "<u2").reshape(c["T"], c["T"])
+    return c["cache"][k]
+
+
+def lacs_proches(X, Z):
+    """(numéro du lac le plus proche, distance signée à son rivage en cases, + dans le lac) comme Lacs.proche :
+    0 et 0 au-delà de RAYON_LAC. X, Z : grille régulière de colonnes (pas 1)."""
+    from scipy import ndimage
+    c = _carte_lacs()
+    lac = np.zeros(X.shape, np.int64); dist = np.zeros(X.shape)
+    if not c:
+        return lac, dist
+    T_ = c["T"]
+    gx0, gy0 = int(np.floor(X.min() + 0.5 + 180 * BPD)), int(np.floor(Z.min() + 0.5 + 90 * BPD))
+    gx1, gy1 = int(np.floor(X.max() + 0.5 + 180 * BPD)), int(np.floor(Z.max() + 0.5 + 90 * BPD))
+    M = RAYON_LAC + 2
+    a0, a1, b0, b1 = gx0 - M, gx1 + M + 1, gy0 - M, gy1 + M + 1
+    ids = np.zeros((b1 - b0, a1 - a0), np.int64)
+    for tyi in range(b0 // T_, (b1 - 1) // T_ + 1):
+        for txi in range(a0 // T_, (a1 - 1) // T_ + 1):
+            m = _ids_tuile(c, txi, tyi)
+            if m is None:
+                continue
+            j0, i0 = max(tyi * T_, b0), max(txi * T_, a0)
+            j1, i1 = min((tyi + 1) * T_, b1), min((txi + 1) * T_, a1)
+            ids[j0 - b0:j1 - b0, i0 - a0:i1 - a0] = m[j0 - tyi * T_:j1 - tyi * T_, i0 - txi * T_:i1 - txi * T_]
+    if not ids.any():
+        return lac, dist
+    eau = ids > 0
+    d_hors, (ji, ii) = ndimage.distance_transform_edt(~eau, return_indices=True)
+    d_dans = ndimage.distance_transform_edt(eau)
+    gx = np.floor(X + 0.5 + 180 * BPD).astype(np.int64) - a0
+    gy = np.floor(Z + 0.5 + 90 * BPD).astype(np.int64) - b0
+    dans = eau[gy, gx]
+    v = np.where(dans, d_dans[gy, gx] - 0.5, -(d_hors[gy, gx] - 0.5))
+    num = np.where(dans, ids[gy, gx], ids[ji[gy, gx], ii[gy, gx]])
+    v = np.round(np.clip(v, -RAYON_LAC, RAYON_LAC) * 16) / 16
+    loin = v < -RAYON_LAC + 1e-9
+    lac = np.where(loin, 0, num); dist = np.where(loin, 0.0, v)
+    return lac, dist
+
+
+def niveau_lac(alt):
+    alt = np.asarray(alt, float)
+    y = np.where(alt < 0, 64 + alt / 500 * 16, blocs(np.maximum(alt, 0)))
+    return np.floor(y).astype(np.int64)
+
+
+def appliquer_lacs(h, X, Z, sd):
+    """Terrain.colonne : cuvette dans les lacs, berges autour. Rend (h, niveau d'eau du lac ou None, niveau de berge)."""
+    c = _carte_lacs()
+    sans = np.full(h.shape, np.iinfo(np.int64).min)
+    if not c:
+        return h, sans, sans
+    lac, d = lacs_proches(X, Z)
+    lac = np.where(sd >= 0, lac, 0)
+    niv = niveau_lac(c["alt"][lac])
+    sup = c["sup"][lac]
+    pmax = np.clip(2.0 + 2.2 * np.log10(sup + 1.0), 2.0, 14.0)
+    larg = np.clip(pmax * 3.0, 4.0, 40.0)
+    fond = niv - 1.4 - (pmax - 1.0) * lisse(np.clip(d / larg, 0, 1))
+    dh = -d
+    berge = np.maximum(h, niv + 0.6 - 0.3 * np.maximum(dh - 3.0, 0.0))
+    xx = np.maximum(dh - 2.0, 0.0)
+    berge = np.minimum(berge, niv + 0.6 + 0.6 * xx + 0.02 * xx * xx)
+    berge = np.where(dh < 3.0, np.maximum(berge, niv + 0.6), berge)
+    t = lisse(np.clip((dh - 36.0) / 12.0, 0, 1))
+    berge = berge + (h - berge) * t
+    dedans = (lac > 0) & (d > 0); autour = (lac > 0) & (d <= 0)
+    h = np.where(dedans, fond, np.where(autour, berge, h))
+    return h, np.where(dedans, niv, sans), np.where(autour & (dh < BERGE), niv, sans)

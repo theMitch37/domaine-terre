@@ -54,6 +54,7 @@ public final class Terrain {
     private final ImprovedNoise bruitCote;
     private final ImprovedNoise bruitDetail;
     private final CotesFines cotes;
+    private final Lacs lacs;
 
     private Terrain(CarteTerre carte) {
         this.carte = carte;
@@ -61,6 +62,7 @@ public final class Terrain {
         this.bruitCote = new ImprovedNoise(r);       // gardé (même hasard pour bruitDetail) ; inutile avec les côtes fines
         this.bruitDetail = new ImprovedNoise(r);
         this.cotes = CotesFines.charger();
+        this.lacs = Lacs.charger();
     }
 
     public CarteTerre carte() { return carte; }
@@ -68,11 +70,20 @@ public final class Terrain {
     // ---------------------------------------------------------------- cache par colonne
 
     /** Valeurs partagées d'une colonne : calculées une fois, réutilisées par toutes les sorties et les biomes. */
-    private record Colonne(int x, int z, int generation, double sd, double alt, double pente, Riviere r, double h, double poids) {
+    private record Colonne(int x, int z, int generation, double sd, double alt, double pente, Riviere r, double h, double poids,
+                           int niveauLac, int bergeLac) {
         boolean lieu() {
             return poids > 0.0;
         }
+
+        /** Dans un lac (eau de lac à niveauLac) ? */
+        boolean lac() {
+            return niveauLac != SANS_LAC;
+        }
     }
+
+    /** Pas de lac dans cette colonne. */
+    public static final int SANS_LAC = Integer.MIN_VALUE;
 
     private static volatile int generation = 0;
     private static final int TAILLE_CACHE = 256;
@@ -89,6 +100,19 @@ public final class Terrain {
         double pente = sd >= 0 ? pente(x, z) : 0.0;
         Riviere r = sd >= 0 ? riviereBrute(x, z) : null;
         double h = calculerHauteur(x, z, sd, alt, pente, r);
+        // lacs (étape C1) : cuvette dans le lac, berges qui descendent jusqu'à son niveau autour
+        int niveauLac = SANS_LAC, bergeLac = SANS_LAC;
+        Lacs.Proche lp = sd >= 0 && lacs != null ? lacs.proche(lon(x + 0.5), lat(z + 0.5)) : null;
+        if (lp != null) {
+            int niv = niveauLac(lacs.altitude(lp.lac()));
+            if (lp.distance() > 0) {
+                h = fondLac(niv, lp.distance(), lacs.superficie(lp.lac()));
+                niveauLac = niv;
+            } else {
+                h = bergeLac(h, niv, -lp.distance());
+                if (-lp.distance() < BERGE) bergeLac = niv;
+            }
+        }
         // lieux uniques (addons) : ils reprennent la main sur le relief de leur zone
         Lieu lieu = LieuxTerre.liste().isEmpty() ? null : LieuxTerre.a(x, z);
         double poids = 0.0;
@@ -96,7 +120,7 @@ public final class Terrain {
             h = lieu.hauteur(x, z, h);
             poids = Mth.clamp(lieu.poids(x, z), 0.0, 1.0);
         }
-        c = new Colonne(x, z, g, sd, alt, pente, r, h, poids);
+        c = new Colonne(x, z, g, sd, alt, pente, r, h, poids, niveauLac, bergeLac);
         tab[i] = c;
         return c;
     }
@@ -153,6 +177,53 @@ public final class Terrain {
 
     private static double lisse(double t) {
         return t * t * (3 - 2 * t);
+    }
+
+    // ---------------------------------------------------------------- lacs (étape C1)
+
+    /**
+     * Niveau de l'eau d'un lac (y de la première couche d'air au-dessus de l'eau : l'eau remplit y < niveau), depuis
+     * l'altitude réelle de sa surface, avec la même courbe que la terre (sous 0 m, la pente des plaines continue).
+     */
+    public static int niveauLac(double altitude) {
+        double y = altitude < 0 ? 64 + altitude / 500.0 * 16 : blocsDepuisAltitude(altitude);
+        return Mth.floor(y);
+    }
+
+    /**
+     * Fond du lac à `d` cases du rivage : une couche d'eau au bord, puis le fond descend en pente douce jusqu'à une
+     * profondeur qui grandit avec la superficie (pas de données de profondeur : 3 blocs pour 1 km², 8 pour le Léman,
+     * 12 pour le Baïkal), comme le reste exagérée.
+     */
+    static double fondLac(int niveau, double d, double superficie) {
+        double pmax = Mth.clamp(2.0 + 2.2 * Math.log10(superficie + 1.0), 2.0, 14.0);
+        double largeur = Mth.clamp(pmax * 3.0, 4.0, 40.0);
+        return niveau - 1.4 - (pmax - 1.0) * lisse(Mth.clamp(d / largeur, 0.0, 1.0));
+    }
+
+    /**
+     * Berge à `d` cases du lac : le terrain descend jusqu'au niveau de l'eau en pente douce (0,6 bloc par bloc) ;
+     * sur les 3 premières cases, jamais plus bas que l'eau (la cuvette doit tenir l'eau du lac) ; plus loin, il ne
+     * descend sous l'eau que peu à peu (0,3 bloc par bloc).
+     */
+    static double bergeLac(double h, int niveau, double d) {
+        double haut = niveau + 0.6, brut = h;
+        // ETOPO met une valeur vide (≈ 0 m) sous les lacs, qui déborde sur la rive (cases de 5 km) : près d'un lac, le
+        // terrain ne descend pas sous son niveau (marge qui se relâche de 0,3 bloc par bloc en s'éloignant)
+        h = Math.max(h, haut - 0.3 * Math.max(d - 3.0, 0.0));
+        // la berge monte de plus en plus raide (vallée glaciaire) puis rejoint le relief entre 36 et 48 cases
+        double x = Math.max(d - 2.0, 0.0);
+        h = Math.min(h, haut + 0.6 * x + 0.02 * x * x);
+        if (d < 3.0) h = Math.max(h, haut);
+        return Mth.lerp(lisse(Mth.clamp((d - 36.0) / 12.0, 0.0, 1.0)), h, brut);
+    }
+
+    /** Largeur (cases) de la berge tenue au-dessus de l'eau du lac par le plancher de densité. */
+    static final double BERGE = 4.0;
+
+    /** Niveau de l'eau du lac de cette colonne, ou SANS_LAC (pour le choix du fluide des aquifères). */
+    public int niveauLac(int x, int z) {
+        return colonne(x, z).niveauLac();
     }
 
     /** Fond de vallée (y lissé) en dessous duquel le fleuve est en eau ; au-dessus de VALLEE_SECHE, plus de vallée. */
@@ -337,8 +408,11 @@ public final class Terrain {
      * sous la mer (pas de mares ni de lagunes inventées). Seulement de y 58 à 62, hors fleuves et creux voulus par un lieu.
      */
     public double plancher(int x, int y, int z) {
-        if (y < NIVEAU_MER - 5 || y > NIVEAU_MER - 1) return -1.0;
         Colonne c = colonne(x, z);
+        // berge d'un lac : le terrain, interpolé par le jeu sur des cellules de 4 blocs, ne doit pas descendre sous
+        // l'eau du lac voisin (sinon l'eau s'échappe de la cuvette)
+        if (c.bergeLac() != SANS_LAC) return y <= c.bergeLac() && y >= c.bergeLac() - 6 ? 0.5 : -1.0;
+        if (y < NIVEAU_MER - 5 || y > NIVEAU_MER - 1) return -1.0;
         if (c.sd() < 0 || c.r() != null || c.h() < NIVEAU_MER) return -1.0;
         return 0.5;
     }
@@ -350,6 +424,7 @@ public final class Terrain {
      */
     public double inondation(int x, int z) {
         Colonne c = colonne(x, z);
+        if (c.lac()) return 2.0;                 // dans un lac, l'aquifère prend le niveau du lac (FluidesMixin)
         if (c.lieu()) {
             Lieu l = LieuxTerre.a(x, z);
             if (l != null && l.inonde(x, z, c.h())) return 2.0;

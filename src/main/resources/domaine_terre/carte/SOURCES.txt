@@ -6,3 +6,8 @@ Données géographiques utilisées par le mod Domaine d'Aubin - Terre :
 - Couverture du sol (biomes) : Buchhorn, M., et al. Copernicus Global Land Service: Land Cover 100m:
   collection 3: epoch 2019: Globe (V3.0.1). Zenodo (2020). doi:10.5281/zenodo.3939050. Licence CC BY 4.0.
   Données réduites en classes IGBP à 3 minutes d'arc, puis converties en biomes Minecraft.
+- Trait de côte au bloc près et contours des lacs : GSHHG 2.3.7, Wessel, P., and W. H. F. Smith (1996), A Global
+  Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, 8741-8743. Licence LGPL.
+- Altitude de la surface des lacs : Copernicus DEM GLO-90, produced using Copernicus WorldDEM-90 © DLR e.V. 2010-2014
+  and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights
+  reserved. Lu sur AWS Open Data (Registry of Open Data on AWS).
