@@ -29,3 +29,4 @@ donnees
 lieux/libs
 *.jar
 !**/gradle/wrapper/gradle-wrapper.jar
+__pycache__/
