@@ -346,17 +346,21 @@ def etretat():
 # ---------------------------------------------------------------- Moher
 
 def moher():
-    """Falaises de Moher, en tuiles (26/10). 8 km en vrai (32 blocs) : allongées le long de la côte. La falaise naît
-    dans la baie de Liscannor, monte à Hag's Head (120 m), culmine près de la tour d'O'Brien (214 m), puis s'abaisse
-    vers Doolin et au-delà sur ~50 blocs : plus de pan posé à pleine hauteur qui s'arrête net."""
+    """Falaises de Moher, en tuiles (26/10). 8 km en vrai (32 blocs). La falaise naît dans la baie de Liscannor,
+    monte à Hag's Head (120 m), culmine près de la tour d'O'Brien (214 m), redescend vers Doolin puis continue,
+    plus basse, le long de la côte du Burren jusqu'à Fanore : plus de pan posé à pleine hauteur qui s'arrête net."""
     X, Z, x0, z0 = grille(-9.75, -9.05, 52.80, 53.22)
     h, sd = T.hauteur_base(X, Z)
     db = sd * BPD / 60.0
     cote = Cote(X, Z, db, (52.86, -9.50))                           # du sud (Spanish Point) vers le nord
     S = cote.s
     s_hag, s_tour, s_doolin = cote.s_de(52.95, -9.47), cote.s_de(52.9719, -9.4265), cote.s_de(53.017, -9.40)
+    s_fanore = cote.s_de(53.12, -9.29)
+    # au nord de Doolin (décidé avec Maxime le 26/10) : la côte rocheuse du Burren garde une falaise plus basse
+    # jusqu'à Fanore, qui s'abaisse peu à peu ; la côte elle-même ne bouge pas (exagération des distances)
     haut = courbe(S, [(s_hag - 45, 0), (s_hag - 22, 9), (s_hag, 20), (s_tour - 5, 25), (s_tour + 5, 30),
-                      (s_tour + 16, 28), (s_doolin - 6, 12), (s_doolin + 8, 0)])
+                      (s_tour + 16, 28), (s_doolin - 4, 17), (s_doolin + 14, 11), (s_doolin + 45, 10),
+                      (s_fanore - 8, 5), (s_fanore + 14, 0)])
     # seulement la côte principale (pas les îles d'Aran ni les îlots)
     d_cote = cote.arbre.query(np.c_[X.ravel(), Z.ravel()])[0].reshape(X.shape)
     haut = haut * (1 - lisse((d_cote - 18) / 10))
@@ -375,7 +379,7 @@ def moher():
     y, f = fin_de_lieu(y, h, typ, X, Z)
     typ = parois(y, typ)
     typ = finir_types(typ, ((typ & (TAILLEE | REMBLAI)) > 0) & (f > 0.2))
-    limite = (S > s_hag - 60) & (S < s_doolin + 50) & (d_cote < 175)
+    limite = (S > s_hag - 60) & (S < s_fanore + 35) & (d_cote < 175)
     en_tuiles("moher", X, Z, y, h, sommet, typ, sd, limite=limite)
 
 
