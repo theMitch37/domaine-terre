@@ -89,6 +89,15 @@ def retenir(y, eau, iterations=3):
             ev = np.roll(np.roll(np.where(w, eau, -np.inf), dj, 0), di, 1)
             besoin = np.maximum(besoin, ev - 0.5)
         y = np.where(~w & (y < besoin), besoin + 0.05, y)
+    # rapides : l'eau d'un bief qui coule sur le bief suivant (marche de 1 à 3 blocs) s'étale jusqu'à 7 blocs en aval,
+    # au niveau du bief d'amont ; les rives proches d'une marche sont donc tenues à ce niveau (sinon l'eau déborde)
+    from scipy import ndimage
+    E = np.where(w, eau, -np.inf)
+    amont = ndimage.maximum_filter(E, size=15)
+    propre = ndimage.maximum_filter(E, size=3)
+    rive = ~w & np.isfinite(propre) & (propre > -np.inf)
+    marche = rive & (amont > propre) & (amont - propre <= 3)
+    y = np.where(marche & (y < amont - 0.5), amont - 0.45, y)
     return y
 
 
