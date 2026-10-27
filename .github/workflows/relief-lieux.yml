@@ -28,12 +28,67 @@ jobs:
       - name: Outils Python
         run: pip install rasterio numpy
       - name: Verdon
+        if: false
         run: |
           mkdir -p /tmp/dem outils/donnees
           D=Copernicus_DSM_COG_10_N43_00_E006_00_DEM
           curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif \
             "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
           python outils/relief_lieu.py /tmp/dem/$D.tif verdon 6.05 6.60 43.60 43.95
+      - name: gavarnie
+        run: |
+          mkdir -p /tmp/dem outils/donnees
+          D=Copernicus_DSM_COG_10_N42_00_W001_00_DEM
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          D=Copernicus_DSM_COG_10_N42_00_E000_00_DEM
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N42_00_W001_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N42_00_E000_00_DEM.tif gavarnie -0.16 0.14 42.6 42.8
+      - name: gullfoss
+        run: |
+          mkdir -p /tmp/dem outils/donnees
+          D=Copernicus_DSM_COG_10_N64_00_W021_00_DEM
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          D=Copernicus_DSM_COG_10_N64_00_W020_00_DEM
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N64_00_W021_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N64_00_W020_00_DEM.tif gullfoss -20.3 -19.95 64.24 64.42
+      - name: skogafoss
+        run: |
+          mkdir -p /tmp/dem outils/donnees
+          D=Copernicus_DSM_COG_10_N63_00_W020_00_DEM
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N63_00_W020_00_DEM.tif skogafoss -19.7 -19.33 63.46 63.62
+      - name: plitvice
+        run: |
+          mkdir -p /tmp/dem outils/donnees
+          D=Copernicus_DSM_COG_10_N44_00_E015_00_DEM
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N44_00_E015_00_DEM.tif plitvice 15.5 15.72 44.8 44.96
+      - name: geiranger
+        run: |
+          mkdir -p /tmp/dem outils/donnees
+          D=Copernicus_DSM_COG_10_N62_00_E006_00_DEM
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          D=Copernicus_DSM_COG_10_N62_00_E007_00_DEM
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N62_00_E006_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N62_00_E007_00_DEM.tif geiranger 6.85 7.3 62.03 62.16
+      - name: preikestolen
+        run: |
+          mkdir -p /tmp/dem outils/donnees
+          D=Copernicus_DSM_COG_10_N58_00_E006_00_DEM
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N58_00_E006_00_DEM.tif preikestolen 6.02 6.4 58.92 59.06
+      - name: cervin
+        run: |
+          mkdir -p /tmp/dem outils/donnees
+          D=Copernicus_DSM_COG_10_N45_00_E007_00_DEM
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N45_00_E007_00_DEM.tif cervin 7.54 7.78 45.91 46.05
+      - name: tre_cime
+        run: |
+          mkdir -p /tmp/dem outils/donnees
+          D=Copernicus_DSM_COG_10_N46_00_E012_00_DEM
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N46_00_E012_00_DEM.tif tre_cime 12.22 12.39 46.57 46.67
       - name: Ajout à la branche
         run: |
           git config user.name "github-actions[bot]"
