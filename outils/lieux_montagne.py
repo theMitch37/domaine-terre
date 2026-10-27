@@ -94,8 +94,8 @@ def retenir(y, eau, iterations=3):
     from scipy import ndimage
     E = np.where(w, eau, -np.inf)
     amont = ndimage.maximum_filter(E, size=15)
-    propre = ndimage.maximum_filter(E, size=3)
-    rive = ~w & np.isfinite(propre) & (propre > -np.inf)
+    propre = ndimage.minimum_filter(np.where(w, eau, np.inf), size=3)     # bief le plus bas qui touche la rive
+    rive = ~w & np.isfinite(propre)
     marche = rive & (amont > propre) & (amont - propre <= 3)
     y = np.where(marche & (y < amont - 0.5), amont - 0.45, y)
     return y
