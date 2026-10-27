@@ -274,14 +274,15 @@ def tre_cime():
         m = nn < 1.0
         y = np.where(m, np.maximum(y, yt), y)
         dans |= m
-    typ = classes_montagne(X, Z, y, E, neige=2850, glace=None, eboulis=(2150, 2900), herbe_max=2250, roc=1.0)
+    typ = classes_montagne(X, Z, y, E, neige=2850, glace=None, eboulis=(2300, 2900), herbe_max=2450, roc=1.3,
+                           pente_herbe=1.1)
     typ[np.isfinite(eau)] = LIT | TAILLEE
     typ[(pied > 0.05) & ~dans] = EBOULIS | TAILLEE
     typ[dans] = ROC | TAILLEE
     typ[dans & (M.pente_locale(y) < 0.8)] = NEIGE | TAILLEE
     print(f"tre_cime : tours de y {min(base_t):.0f} à y {y.max():.0f}" +
           (f", rivière du mod reprise (eau {torrent[1]:.0f}, {torrent[2]} colonnes de lit)" if torrent else ""))
-    return finir_loupe("tre_cime", L, y, typ, eau, "DOLOMIE", garder_fleuves=False)
+    return finir_loupe("tre_cime", L, y, typ, eau, "DOLOMIE", roc=1.3, garder_fleuves=False)
 
 
 def gavarnie():
