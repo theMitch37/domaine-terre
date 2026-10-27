@@ -76,13 +76,17 @@ jobs:
           mkdir -p /tmp/dem outils/donnees
           D=Copernicus_DSM_COG_10_N58_00_E006_00_DEM
           curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
-          python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N58_00_E006_00_DEM.tif preikestolen 6.02 6.4 58.92 59.06
+          D=Copernicus_DSM_COG_10_N59_00_E006_00_DEM
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N58_00_E006_00_DEM.tif /tmp/dem/$D.tif preikestolen 6.02 6.4 58.92 59.06
       - name: cervin
         run: |
           mkdir -p /tmp/dem outils/donnees
           D=Copernicus_DSM_COG_10_N45_00_E007_00_DEM
           curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
-          python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N45_00_E007_00_DEM.tif cervin 7.54 7.78 45.91 46.05
+          D=Copernicus_DSM_COG_10_N46_00_E007_00_DEM
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N45_00_E007_00_DEM.tif /tmp/dem/$D.tif cervin 7.54 7.78 45.91 46.05
       - name: tre_cime
         run: |
           mkdir -p /tmp/dem outils/donnees
