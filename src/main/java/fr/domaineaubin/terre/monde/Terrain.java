@@ -135,6 +135,10 @@ public final class Terrain {
             eauRiv = SANS_LAC;
             bergeRiv = SANS_LAC;
             litRiv = SANS_LAC;
+            // les lacs du mod n'existent pas dans un lieu (son relief réel a ses propres lacs, ou n'en a pas)
+            niveauLac = SANS_LAC;
+            bergeLac = SANS_LAC;
+            eauLac = SANS_LAC;
             // lot 2 : eau propre au lieu (torrents, lacs, cascades en altitude), posée comme un lit par FleuveFeature
             int el = lieu.eau(x, z);
             if (el != SANS_LAC) {

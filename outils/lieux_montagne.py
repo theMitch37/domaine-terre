@@ -171,12 +171,12 @@ def gavarnie():
     vires (enneigées en haut), crête découpée de pics (Marboré, Casque, Taillon) et la Brèche de Roland ; la Grande
     Cascade (422 m) tombe du fond du cirque ; le gave de Pau en sort vers le village de Gavarnie.
     En vrai ~3,5 km de large (14 blocs), parois de 1 500 m : ici ~70 blocs de large, parois de ~60 blocs."""
-    X, Z, c = zone(42.697, -0.010, 185, 200)
+    X, Z, c = zone(42.697, -0.010, 215, 200)
     h, sd = T.hauteur_base(X, Z)
     dx, dz = X - c[0], Z - c[1]
-    r = np.hypot(dx, dz)
+    r = np.hypot(dx / 1.22, dz)                                  # plus large que profond (un fer à cheval)
     th = np.degrees(np.arctan2(dx, dz))                         # 0 = sud (fond du cirque), ±180 = nord (ouverture)
-    R0 = 34 + 3.0 * bruit(X, Z, 25, 101) + 1.2 * np.sin(np.radians(th) * 7)
+    R0 = 31 + 3.5 * bruit(X, Z, 25, 101) + 1.5 * np.sin(np.radians(th) * 7) + 2.5 * np.sin(np.radians(th) * 3 + 1)
     e = r - R0
     A = lisse(np.clip((160 - np.abs(th)) / 45, 0, 1))          # parois pleines au fond, nulles vers l'ouverture
     # gave de Pau : du pied de la Grande Cascade vers le nord, en méandres
@@ -206,7 +206,10 @@ def gavarnie():
     # sous le terrain du mod : le relief réel reprend)
     pics = 9.0 * crete(X, Z, 109, 13) + 4.0 * crete(X, Z, 110, 6)
     haut_crete = h3 + 2.0 + pics * lisse(np.clip((e - m3) / 5, 0, 1))
-    P = np.where(e >= m3 + 4, haut_crete - 0.75 * np.maximum(e - m3 - 9, 0) + 2.5 * bruit(X, Z, 11, 111), P)
+    # versants extérieurs rocheux : arêtes et couloirs (bruit de crêtes), pas un dôme lisse
+    aretes = 7.0 * crete(X, Z, 116, 15) + 3.0 * crete(X, Z, 117, 6) - 4.0
+    P = np.where(e >= m3 + 4, haut_crete - 0.75 * np.maximum(e - m3 - 9, 0)
+                 + (2.5 * bruit(X, Z, 11, 111) + aretes) * lisse(np.clip((e - m3 - 6) / 10, 0, 1)), P)
     # Brèche de Roland : entaille carrée dans la crête, à l'ouest-sud-ouest
     th_b = -42.0
     ab = np.array([np.sin(np.radians(th_b)), np.cos(np.radians(th_b))])
@@ -254,7 +257,7 @@ def gavarnie():
     typ[roc] = ROC | TAILLEE
     eb2 = ~roc & (pl > 0.55) & (y > 140) & (bruit(X, Z, 7, 114) > -0.2)
     typ[eb2] = EBOULIS | TAILLEE
-    typ[~roc & (pl <= 0.9) & (y > 158 + 3 * bruit(X, Z, 12, 115))] = NEIGE | TAILLEE
+    typ[~roc & (pl <= 0.7) & (y > 160 + 4 * bruit(X, Z, 12, 115))] = NEIGE | TAILLEE
     typ[ebo & ~roc] = EBOULIS | TAILLEE
     typ[np.isfinite(eau)] = LIT | TAILLEE
     typ = typ | BIOME
@@ -265,7 +268,7 @@ def gavarnie():
     return ecrire("gavarnie", X, Z, y, h, sommet, typ, sd, eau, "CALCAIRE")
 
 
-def creuser_riviere(X, Z, y, eau, trace, niv, larg, prof=2.0, pente=0.7, rive=0.4, masque=None):
+def creuser_riviere(X, Z, y, eau, trace, niv, larg, prof=2.0, pente=0.7, rive=0.4, masque=None, large=60):
     """Creuse un cours d'eau le long d'un tracé (points en blocs) : lit de largeur larg(s), eau au niveau niv(s)
     (entier, par marches : une marche = une chute en travers du lit), berges qui remontent en pente `pente` jusqu'au
     terrain. Rend y, eau, d (distance au tracé), s (abscisse), L (longueur)."""
@@ -276,7 +279,7 @@ def creuser_riviere(X, Z, y, eau, trace, niv, larg, prof=2.0, pente=0.7, rive=0.
     eau = np.where(lit, n, eau)
     fond = n - 1.15 - prof * lisse(np.clip(1 - d / np.maximum(lg, 0.5), 0, 1))
     y = np.where(lit, np.minimum(y, fond), y)
-    berge = ~lit & (d < lg + 60) & m
+    berge = ~lit & (d < lg + large) & m
     y = np.where(berge, np.minimum(y, np.maximum(n - 0.5 + rive, n + rive + pente * (d - lg))), y)
     return y, eau, d, s, Ltot
 
@@ -317,8 +320,19 @@ def gullfoss():
         aval = np.maximum(66.0 - np.floor(np.clip(s - s_c2, 0, None) / 45.0), 64.0)
         return np.where(s < s_c1, amont, np.where(s < s_c2, 79.0, aval))
     def larg(s):
-        return np.where(s < s_c1, 9.0, np.where(s < s_c2, 8.0, 4.2))
+        ondule = 1.6 * np.sin(s / 23.0) + 0.9 * np.sin(s / 9.0 + 1.3)          # rives irrégulières
+        return np.where(s < s_c1, 8.0 + ondule, np.where(s < s_c2, 8.0, 4.2))
+    # en amont de la chute, la Hvítá coule dans le plateau (pas sur une digue) : le plateau monte avec elle, ses rives
+    # s'élèvent doucement de part et d'autre
+    berges = niv(s0) + 1.4 + 0.08 * np.maximum(d0 - 9, 0) + 0.8 * bruit(X, Z, 8, 209)
+    f_b = lisse(np.clip((75 - d0) / 35, 0, 1)) * lisse(np.clip((s_c1 + 3 - s0) / 22, 0, 1))
+    y = np.maximum(y, y + (berges - y) * f_b)
     y, eau, d, s, L = creuser_riviere(X, Z, y, np.full(X.shape, np.nan), trace, niv, larg, prof=1.6, pente=0.55)
+    # rochers et îlots moussus dans les rapides de la Hvítá (en amont de la première chute)
+    ilot = (s < s_c1 - 6) & (d < larg(s) - 1.5) & (bruit(X, Z, 3.0, 207) > 0.55)
+    eau_il = np.where(ilot, eau, np.nan)
+    y = np.where(ilot, np.floor(np.nan_to_num(eau_il)) + 0.3 + 0.5 * (bruit(X, Z, 2.0, 208) > 0.3), y)
+    eau = np.where(ilot, np.nan, eau)
     # la gorge : parois verticales jusqu'au plateau (pas de berges en pente) tant que le plateau est haut
     gorge = (s > s_c2 - 1) & (d >= larg(s)) & (d < larg(s) + 1.5)
     y = np.where(gorge, np.maximum(y, bosse), y)
@@ -351,6 +365,7 @@ def gullfoss():
     typ[mousse] = MOUSSE | TAILLEE
     typ[pl > 1.2] = ROC | TAILLEE
     typ[np.isfinite(eau)] = LIT | TAILLEE
+    typ[ilot & (w > 0.97)] = MOUSSE | TAILLEE
     typ = typ | BIOME
     typ[w < 0.02] = 0
     sommet = y.copy()
@@ -772,7 +787,9 @@ def tre_cime():
     return ecrire("tre_cime", X, Z, y, h, sommet, typ, sd, np.full(X.shape, np.nan), "DOLOMIE")
 
 
-LIEUX = {"gavarnie": gavarnie, "gullfoss": gullfoss, "skogafoss": skogafoss, "plitvice": plitvice, "geiranger": geiranger, "preikestolen": preikestolen, "cervin": cervin, "tre_cime": tre_cime}
+# les autres lieux du lot 2 sont faits sur le relief réel (outils/lieux_reels.py) ; leurs anciennes versions dessinées
+# restent ici pour mémoire mais ne sont plus écrites
+LIEUX = {"gullfoss": gullfoss, "skogafoss": skogafoss}
 
 if __name__ == "__main__":
     noms = [a for a in sys.argv[1:] if not a.startswith("--")]

@@ -59,15 +59,15 @@ public final class CommandesDomaine {
         LIEUX.put("douvres", new double[]{51.1409, 1.3542});
         LIEUX.put("pilat", new double[]{44.589, -1.200});
         LIEUX.put("mont_saint_michel", new double[]{48.6121, -1.5114});
-        // lot 2 (montagne, cascades, fjords)
-        LIEUX.put("gavarnie", new double[]{42.715, -0.012});
+        // lot 2 (montagne, cascades, fjords) : relief réel agrandi (zoom) ; points de vue aux positions agrandies
+        LIEUX.put("gavarnie", new double[]{42.760, -0.010});
         LIEUX.put("gullfoss", new double[]{64.322, -20.112});
         LIEUX.put("skogafoss", new double[]{63.515, -19.511});
-        LIEUX.put("plitvice", new double[]{44.880, 15.618});
-        LIEUX.put("geiranger", new double[]{62.100, 7.094});
-        LIEUX.put("preikestolen", new double[]{58.990, 6.185});
-        LIEUX.put("cervin", new double[]{45.990, 7.670});
-        LIEUX.put("tre_cime", new double[]{46.610, 12.302});
+        LIEUX.put("plitvice", new double[]{45.021, 15.620});
+        LIEUX.put("geiranger", new double[]{62.076, 7.383});
+        LIEUX.put("preikestolen", new double[]{59.1515, 6.393});
+        LIEUX.put("cervin", new double[]{46.031, 7.707});
+        LIEUX.put("tre_cime", new double[]{46.665, 12.306});
         LIEUX.put("amazonie", new double[]{-3.465, -62.215});
         LIEUX.put("rio", new double[]{-22.907, -43.173});
         LIEUX.put("andes", new double[]{-13.163, -72.545});

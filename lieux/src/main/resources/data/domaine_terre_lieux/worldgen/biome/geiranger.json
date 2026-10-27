@@ -1,7 +1,7 @@
 {
  "has_precipitation": true,
- "temperature": 0.3,
- "downfall": 0.9,
+ "temperature": 0.25,
+ "downfall": 0.8,
  "effects": {
   "mood_sound": {
    "sound": "minecraft:ambient.cave",
@@ -9,7 +9,7 @@
    "block_search_extent": 8,
    "offset": 2.0
   },
-  "sky_color": 7907327,
+  "sky_color": 8233983,
   "fog_color": 12638463,
   "water_color": 4025999,
   "water_fog_color": 329011
@@ -22,11 +22,22 @@
    "domaine_terre_lieux:strates"
   ],
   [],
-  [],
+  [
+   "minecraft:amethyst_geode"
+  ],
   [],
   [],
   [],
   [
+   "minecraft:ore_dirt",
+   "minecraft:ore_gravel",
+   "minecraft:ore_granite_upper",
+   "minecraft:ore_granite_lower",
+   "minecraft:ore_diorite_upper",
+   "minecraft:ore_diorite_lower",
+   "minecraft:ore_andesite_upper",
+   "minecraft:ore_andesite_lower",
+   "minecraft:ore_tuff",
    "minecraft:ore_coal_upper",
    "minecraft:ore_coal_lower",
    "minecraft:ore_iron_upper",
@@ -43,15 +54,23 @@
    "minecraft:ore_lapis_buried",
    "minecraft:ore_copper",
    "minecraft:underwater_magma",
-   "minecraft:ore_gold_extra",
    "minecraft:disk_sand",
-   "minecraft:disk_clay"
+   "minecraft:disk_clay",
+   "minecraft:disk_gravel"
   ],
   [],
   [],
   [
-   "minecraft:patch_grass_plain",
-   "minecraft:flower_default"
+   "minecraft:glow_lichen",
+   "minecraft:patch_large_fern",
+   "minecraft:trees_taiga",
+   "minecraft:flower_default",
+   "minecraft:patch_grass_taiga_2",
+   "minecraft:brown_mushroom_taiga",
+   "minecraft:red_mushroom_taiga",
+   "minecraft:patch_sugar_cane",
+   "minecraft:patch_pumpkin",
+   "minecraft:patch_berry_common"
   ],
   [
    "minecraft:freeze_top_layer"
@@ -70,6 +89,42 @@
   "creature": [
    {
     "type": "minecraft:sheep",
+    "weight": 12,
+    "minCount": 4,
+    "maxCount": 4
+   },
+   {
+    "type": "minecraft:pig",
+    "weight": 10,
+    "minCount": 4,
+    "maxCount": 4
+   },
+   {
+    "type": "minecraft:chicken",
+    "weight": 10,
+    "minCount": 4,
+    "maxCount": 4
+   },
+   {
+    "type": "minecraft:cow",
+    "weight": 8,
+    "minCount": 4,
+    "maxCount": 4
+   },
+   {
+    "type": "minecraft:wolf",
+    "weight": 8,
+    "minCount": 4,
+    "maxCount": 4
+   },
+   {
+    "type": "minecraft:rabbit",
+    "weight": 4,
+    "minCount": 2,
+    "maxCount": 3
+   },
+   {
+    "type": "minecraft:fox",
     "weight": 8,
     "minCount": 2,
     "maxCount": 4
@@ -134,14 +189,7 @@
     "maxCount": 6
    }
   ],
-  "water_ambient": [
-   {
-    "type": "minecraft:cod",
-    "weight": 10,
-    "minCount": 3,
-    "maxCount": 6
-   }
-  ],
+  "water_ambient": [],
   "water_creature": []
  },
  "spawn_costs": {}
