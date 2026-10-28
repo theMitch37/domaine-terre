@@ -192,10 +192,14 @@ public final class Terrain {
     public static double blocsDepuisAltitude(double alt) {
         if (alt < 0) {
             // océans profonds (0.3.2) : y 0 à 6 000 m ; le y négatif est réservé aux fosses, jusqu'à y -61 au fond
-            // des Mariannes (≈ -10 300 m dans ETOPO à 3'), juste au-dessus de la bedrock
+            // des Mariannes (≈ -10 300 m dans ETOPO à 3'), juste au-dessus de la bedrock (faille : 28/10)
             if (alt > -200) return 62 + alt / 200.0 * 20;                       // plateau continental : y 42 à 62 (10 m/bloc)
             if (alt > -6000) return 42 + (alt + 200) / 5800.0 * 42;             // talus, glacis, plaines abyssales : y 0 à 42
-            return -Math.min((-alt - 6000) / 4300.0, 1.0) * 61;                 // fosses : y -61 à 0
+            // fosses : y 0 à -30 jusqu'à 9 800 m, puis une faille au fond des plus profondes (Mariannes, Tonga,
+            // Philippines, Kermadec) : parois presque verticales de 9 800 à 10 300 m, jusqu'à y -61
+            double t1 = Math.min((-alt - 6000) / 3800.0, 1.0);
+            double t2 = Mth.clamp((-alt - 9800) / 500.0, 0.0, 1.0);
+            return -30 * t1 - 31 * (1 - Math.pow(1 - t2, 2.5));
         }
         if (alt <= 500) return 64 + alt / 500.0 * 16;                            // plaines : y 64 à 80
         if (alt <= 2000) return 80 + (alt - 500) / 1500.0 * 60;                  // collines et plateaux : y 80 à 140
