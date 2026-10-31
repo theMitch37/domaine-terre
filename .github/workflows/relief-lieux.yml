@@ -173,6 +173,7 @@ jobs:
           python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N58_00_E005_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N58_00_E006_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N59_00_E005_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N59_00_E006_00_DEM.tif preikestolen_large 5.767 6.613 58.563 59.409 --pas=3
           rm -f /tmp/dem/*.tif
       - name: mer_de_glace
+        if: false
         run: |
           mkdir -p /tmp/dem outils/donnees
           D=Copernicus_DSM_COG_10_N45_00_E006_00_DEM
@@ -181,6 +182,7 @@ jobs:
           [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
           python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N45_00_E006_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N45_00_E007_00_DEM.tif mer_de_glace 6.70 7.15 45.75 46.02
       - name: mer_de_glace (large)
+        if: false
         run: |
           mkdir -p /tmp/dem outils/donnees
           D=Copernicus_DSM_COG_10_N45_00_E006_00_DEM
@@ -194,6 +196,7 @@ jobs:
           python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N45_00_E006_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N45_00_E007_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N46_00_E006_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N46_00_E007_00_DEM.tif mer_de_glace_large 6.40 7.50 45.50 46.30 --pas=3
           rm -f /tmp/dem/*.tif
       - name: jokulsarlon
+        if: false
         run: |
           mkdir -p /tmp/dem outils/donnees
           D=Copernicus_DSM_COG_10_N63_00_W017_00_DEM
@@ -206,6 +209,7 @@ jobs:
           [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif" || echo "pas de dalle $D (mer)"
           python outils/relief_lieu.py /tmp/dem/*.tif jokulsarlon -16.60 -15.80 63.93 64.22
       - name: jokulsarlon (large)
+        if: false
         run: |
           mkdir -p /tmp/dem outils/donnees
           D=Copernicus_DSM_COG_10_N63_00_W017_00_DEM
@@ -219,9 +223,75 @@ jobs:
           python outils/relief_lieu.py /tmp/dem/*.tif jokulsarlon_large -17.00 -15.40 63.80 64.50 --pas=3
           rm -f /tmp/dem/*.tif
       - name: couverture du sol (WorldCover)
+        if: false
         run: |
           python outils/couverture_lieu.py mer_de_glace 6.70 7.15 45.75 46.02 --pas=3
           python outils/couverture_lieu.py jokulsarlon -16.60 -15.80 63.93 64.22 --pas=3
+      - name: chaussee
+        run: |
+          mkdir -p /tmp/dem_chaussee outils/donnees
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_chaussee/Copernicus_DSM_COG_10_N55_00_W007_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N55_00_W007_00_DEM/Copernicus_DSM_COG_10_N55_00_W007_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N55_00_W007_00_DEM"
+          python outils/relief_lieu.py /tmp/dem_chaussee/*.tif chaussee -6.75 -6.25 55.15 55.32
+          rm -rf /tmp/dem_chaussee
+      - name: chaussee (large)
+        run: |
+          mkdir -p /tmp/dem_chaussee_large outils/donnees
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_chaussee_large/Copernicus_DSM_COG_10_N54_00_W007_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N54_00_W007_00_DEM/Copernicus_DSM_COG_10_N54_00_W007_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N54_00_W007_00_DEM"
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_chaussee_large/Copernicus_DSM_COG_10_N54_00_W006_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N54_00_W006_00_DEM/Copernicus_DSM_COG_10_N54_00_W006_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N54_00_W006_00_DEM"
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_chaussee_large/Copernicus_DSM_COG_10_N55_00_W007_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N55_00_W007_00_DEM/Copernicus_DSM_COG_10_N55_00_W007_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N55_00_W007_00_DEM"
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_chaussee_large/Copernicus_DSM_COG_10_N55_00_W006_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N55_00_W006_00_DEM/Copernicus_DSM_COG_10_N55_00_W006_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N55_00_W006_00_DEM"
+          python outils/relief_lieu.py /tmp/dem_chaussee_large/*.tif chaussee_large -7.20 -5.80 54.90 55.60 --pas=3
+          rm -rf /tmp/dem_chaussee_large
+      - name: meteores
+        run: |
+          mkdir -p /tmp/dem_meteores outils/donnees
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_meteores/Copernicus_DSM_COG_10_N39_00_E021_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N39_00_E021_00_DEM/Copernicus_DSM_COG_10_N39_00_E021_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N39_00_E021_00_DEM"
+          python outils/relief_lieu.py /tmp/dem_meteores/*.tif meteores 21.50 21.78 39.62 39.82
+          rm -rf /tmp/dem_meteores
+      - name: meteores (large)
+        run: |
+          mkdir -p /tmp/dem_meteores_large outils/donnees
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_meteores_large/Copernicus_DSM_COG_10_N39_00_E021_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N39_00_E021_00_DEM/Copernicus_DSM_COG_10_N39_00_E021_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N39_00_E021_00_DEM"
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_meteores_large/Copernicus_DSM_COG_10_N39_00_E022_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N39_00_E022_00_DEM/Copernicus_DSM_COG_10_N39_00_E022_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N39_00_E022_00_DEM"
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_meteores_large/Copernicus_DSM_COG_10_N40_00_E021_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N40_00_E021_00_DEM/Copernicus_DSM_COG_10_N40_00_E021_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N40_00_E021_00_DEM"
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_meteores_large/Copernicus_DSM_COG_10_N40_00_E022_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N40_00_E022_00_DEM/Copernicus_DSM_COG_10_N40_00_E022_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N40_00_E022_00_DEM"
+          python outils/relief_lieu.py /tmp/dem_meteores_large/*.tif meteores_large 21.20 22.10 39.30 40.10 --pas=3
+          rm -rf /tmp/dem_meteores_large
+      - name: etna
+        run: |
+          mkdir -p /tmp/dem_etna outils/donnees
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_etna/Copernicus_DSM_COG_10_N37_00_E014_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N37_00_E014_00_DEM/Copernicus_DSM_COG_10_N37_00_E014_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N37_00_E014_00_DEM"
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_etna/Copernicus_DSM_COG_10_N37_00_E015_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N37_00_E015_00_DEM/Copernicus_DSM_COG_10_N37_00_E015_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N37_00_E015_00_DEM"
+          python outils/relief_lieu.py /tmp/dem_etna/*.tif etna 14.80 15.20 37.60 37.92
+          rm -rf /tmp/dem_etna
+      - name: etna (large)
+        run: |
+          mkdir -p /tmp/dem_etna_large outils/donnees
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_etna_large/Copernicus_DSM_COG_10_N37_00_E014_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N37_00_E014_00_DEM/Copernicus_DSM_COG_10_N37_00_E014_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N37_00_E014_00_DEM"
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_etna_large/Copernicus_DSM_COG_10_N37_00_E015_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N37_00_E015_00_DEM/Copernicus_DSM_COG_10_N37_00_E015_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N37_00_E015_00_DEM"
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_etna_large/Copernicus_DSM_COG_10_N38_00_E014_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N38_00_E014_00_DEM/Copernicus_DSM_COG_10_N38_00_E014_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N38_00_E014_00_DEM"
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_etna_large/Copernicus_DSM_COG_10_N38_00_E015_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N38_00_E015_00_DEM/Copernicus_DSM_COG_10_N38_00_E015_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N38_00_E015_00_DEM"
+          python outils/relief_lieu.py /tmp/dem_etna_large/*.tif etna_large 14.50 15.50 37.30 38.20 --pas=3
+          rm -rf /tmp/dem_etna_large
+      - name: vesuve
+        run: |
+          mkdir -p /tmp/dem_vesuve outils/donnees
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_vesuve/Copernicus_DSM_COG_10_N40_00_E014_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N40_00_E014_00_DEM/Copernicus_DSM_COG_10_N40_00_E014_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N40_00_E014_00_DEM"
+          python outils/relief_lieu.py /tmp/dem_vesuve/*.tif vesuve 14.33 14.52 40.76 40.88
+          rm -rf /tmp/dem_vesuve
+      - name: vesuve (large)
+        run: |
+          mkdir -p /tmp/dem_vesuve_large outils/donnees
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_vesuve_large/Copernicus_DSM_COG_10_N40_00_E014_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N40_00_E014_00_DEM/Copernicus_DSM_COG_10_N40_00_E014_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N40_00_E014_00_DEM"
+          curl -fL --retry 5 --retry-delay 20 -o /tmp/dem_vesuve_large/Copernicus_DSM_COG_10_N41_00_E014_00_DEM.tif "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N41_00_E014_00_DEM/Copernicus_DSM_COG_10_N41_00_E014_00_DEM.tif" || echo "pas de dalle Copernicus_DSM_COG_10_N41_00_E014_00_DEM"
+          python outils/relief_lieu.py /tmp/dem_vesuve_large/*.tif vesuve_large 14.00 14.90 40.50 41.10 --pas=3
+          rm -rf /tmp/dem_vesuve_large
+      - name: couverture du sol, suite du lot 3 (WorldCover)
+        run: |
+          python outils/couverture_lieu.py chaussee -6.75 -6.25 55.15 55.32 --pas=3
+          python outils/couverture_lieu.py meteores 21.50 21.78 39.62 39.82 --pas=3
+          python outils/couverture_lieu.py etna 14.80 15.20 37.60 37.92 --pas=3
+          python outils/couverture_lieu.py vesuve 14.33 14.52 40.76 40.88 --pas=3
       - name: Ajout à la branche
         run: |
           git config user.name "github-actions[bot]"
