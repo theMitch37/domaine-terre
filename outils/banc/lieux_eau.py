@@ -52,7 +52,7 @@ def controle(dos, nom):
 
 if __name__ == "__main__":
     dos = sys.argv[1]
-    lieux = sys.argv[2:] or ["gavarnie", "gullfoss", "skogafoss", "plitvice", "geiranger", "preikestolen", "cervin",
+    lieux = sys.argv[2:] or ["mer_de_glace", "jokulsarlon", "gavarnie", "gullfoss", "skogafoss", "plitvice", "geiranger", "preikestolen", "cervin",
                              "tre_cime"]
     for n in lieux:
         controle(dos, n)

@@ -37,7 +37,10 @@ public final class LieuGrille implements LieuSculpte {
     public enum Palette { CRAIE, CRAIE_PURE, MOHER, DUNE, BAIE,
         /** Lot 2 : calcaire des Pyrénées (Gavarnie), basalte d'Islande, travertin (Plitvice), gneiss de Norvège,
          *  gneiss sombre du Cervin, dolomie claire (Tre Cime). */
-        CALCAIRE, BASALTE, TRAVERTIN, GNEISS, CERVIN, DOLOMIE }
+        CALCAIRE, BASALTE, TRAVERTIN, GNEISS, CERVIN, DOLOMIE,
+        /** Lot 3 : granite clair du Mont-Blanc (Mer de Glace, glace nue et névés), Islande glaciaire (Jökulsárlón :
+         *  sable noir, icebergs et glacier tout en glace). */
+        GRANITE, ISLANDE }
 
     private final String id;
     private final Palette palette;
@@ -296,6 +299,38 @@ public final class LieuGrille implements LieuSculpte {
                 if (r == 0) return Blocks.STONE;
                 if (r == 2) return Blocks.DIORITE;
                 return h2(Math.floorDiv(x, 3), Math.floorDiv(z, 3), Math.floorDiv(y, 4)) % 7 == 0 ? Blocks.TUFF : Blocks.CALCITE;
+            }
+            case GRANITE -> {
+                // protogine claire du Mont-Blanc ; glacier : glace nue (6 blocs) ; névé : neige sur 3 blocs de glace
+                if (cl == GLACE && dessus) return h2(x, z, 3) % 5 == 0 ? Blocks.BLUE_ICE : Blocks.PACKED_ICE;
+                if (cl == GLACE && y >= top - 6) return h2(x, z, y) % 7 == 0 ? Blocks.BLUE_ICE : Blocks.PACKED_ICE;
+                if (cl == NEIGE && dessus) return Blocks.SNOW_BLOCK;
+                if (cl == NEIGE && y >= top - 3) return Blocks.PACKED_ICE;
+                if (cl == EBOULIS) return h2(x, z, y) % 3 == 0 ? Blocks.ANDESITE : (h2(x, z, y) % 3 == 1 ? Blocks.COBBLESTONE : Blocks.GRAVEL);
+                if (cl == LIT) return h2(x, z, y) % 3 == 0 ? Blocks.COBBLESTONE : Blocks.GRAVEL;
+                if ((cl == PLATEAU || cl == PRE) && dessus) return Blocks.GRASS_BLOCK;
+                if ((cl == PLATEAU || cl == PRE) && y >= top - 2) return Blocks.DIRT;
+                int m = h2(Math.floorDiv(x, 2), Math.floorDiv(z, 2), Math.floorDiv(y, 3));
+                if (m % 11 == 0) return Blocks.GRANITE;                                           // feldspaths roses
+                if (Math.floorMod(y + vague(x, z) + Math.floorDiv(x - z, 7), 9) == 0) return Blocks.DIORITE;   // filons
+                return m % 4 == 0 ? Blocks.ANDESITE : Blocks.STONE;
+            }
+            case ISLANDE -> {
+                // icebergs et glacier : tout en glace ; sable noir ; mousse ; basalte et cendres
+                if (cl == GLACE) return h2(x, z, dessus ? 5 : y) % 4 == 0 ? Blocks.BLUE_ICE : Blocks.PACKED_ICE;
+                if (cl == PLAGE) {
+                    if (dessus || y >= top - 2) return h2(x, z, y) % 6 == 0 ? Blocks.GRAVEL : Blocks.BLACK_CONCRETE_POWDER;
+                    return Blocks.COBBLED_DEEPSLATE;
+                }
+                if (cl == FOND || cl == LIT) return h2(x, z, y) % 3 == 0 ? Blocks.GRAVEL : Blocks.COBBLED_DEEPSLATE;
+                if (cl == EBOULIS) return h2(x, z, y) % 3 == 0 ? Blocks.TUFF : (h2(x, z, y) % 3 == 1 ? Blocks.COBBLED_DEEPSLATE : Blocks.GRAVEL);
+                if (cl == MOUSSE && dessus) return h2(x, z, 0) % 5 == 0 ? Blocks.GRASS_BLOCK : Blocks.MOSS_BLOCK;
+                if ((cl == PLATEAU || cl == PRE) && dessus) return h2(x, z, 0) % 3 == 0 ? Blocks.MOSS_BLOCK : Blocks.GRASS_BLOCK;
+                if ((cl == PLATEAU || cl == PRE || cl == MOUSSE) && y >= top - 1) return Blocks.DIRT;
+                if (cl == NEIGE) return dessus ? Blocks.SNOW_BLOCK : Blocks.BASALT;
+                int r = Math.floorMod(y - 60 + vague(x, z), 7);
+                if (r == 0) return Blocks.TUFF;
+                return h2(x, z, Math.floorDiv(y, 5)) % 4 == 0 ? Blocks.SMOOTH_BASALT : Blocks.BASALT;
             }
             case BAIE -> {
                 if (cl == ROC) {

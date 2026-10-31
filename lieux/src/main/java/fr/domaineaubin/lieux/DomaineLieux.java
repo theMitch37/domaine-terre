@@ -44,6 +44,9 @@ public class DomaineLieux {
         LieuxTerre.inscrire(new LieuGrille("preikestolen", LieuGrille.Palette.GNEISS, true, 35));
         LieuxTerre.inscrire(new LieuGrille("cervin", LieuGrille.Palette.CERVIN, true, 115));
         LieuxTerre.inscrire(new LieuGrille("tre_cime", LieuGrille.Palette.DOLOMIE, true, 95));
+        // lot 3
+        LieuxTerre.inscrire(new LieuGrille("mer_de_glace", LieuGrille.Palette.GRANITE, true, 70));
+        LieuxTerre.inscrire(new LieuGrille("jokulsarlon", LieuGrille.Palette.ISLANDE, true, 35));
         LOGGER.info("Domaine d'Aubin - Lieux uniques : {} lieu(x) inscrit(s).", LieuxTerre.liste().size());
     }
 }

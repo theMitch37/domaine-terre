@@ -68,6 +68,9 @@ public final class CommandesDomaine {
         LIEUX.put("preikestolen", new double[]{59.1515, 6.393});
         LIEUX.put("cervin", new double[]{46.031, 7.707});
         LIEUX.put("tre_cime", new double[]{46.665, 12.306});
+        // lot 3
+        LIEUX.put("mer_de_glace", new double[]{46.049, 6.888});
+        LIEUX.put("jokulsarlon", new double[]{64.065, -16.209});
         LIEUX.put("amazonie", new double[]{-3.465, -62.215});
         LIEUX.put("rio", new double[]{-22.907, -43.173});
         LIEUX.put("andes", new double[]{-13.163, -72.545});

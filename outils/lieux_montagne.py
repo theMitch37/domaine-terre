@@ -110,7 +110,7 @@ def apercu(nom, X, Z, y, eau, typ, palette, haut=None):
     noms = ["minecraft:air", "minecraft:water", "minecraft:stone", "minecraft:grass_block", "minecraft:snow_block",
             "minecraft:packed_ice", "minecraft:gravel", "minecraft:moss_block", "minecraft:calcite", "minecraft:andesite",
             "minecraft:basalt", "minecraft:deepslate", "minecraft:diorite", "minecraft:tuff", "minecraft:dirt"]
-    corps = {"CALCAIRE": 9, "BASALTE": 10, "TRAVERTIN": 8, "GNEISS": 2, "CERVIN": 11, "DOLOMIE": 12}[palette]
+    corps = {"CALCAIRE": 9, "BASALTE": 10, "TRAVERTIN": 8, "GNEISS": 2, "CERVIN": 11, "DOLOMIE": 12, "GRANITE": 9, "ISLANDE": 10}[palette]
     D, W = y.shape
     H = y1 - y0
     B = np.zeros((D, H, W), np.uint8)

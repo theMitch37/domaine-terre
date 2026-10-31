@@ -72,6 +72,15 @@ class Relief:
     def indices(self, lon, lat):
         return self.fin.indices(lon, lat)
 
+    def fin_valide(self, lon, lat):
+        """Hors des dalles téléchargées, la grille fine vaut 0 (bandes vides) : on y prend la grande grille, sauf en
+        mer où les deux valent 0."""
+        if not hasattr(self, "_val"):
+            self._val = (self.fin.E != 0).astype(np.float64)
+        r, c = self.fin.indices(lon, lat)
+        v = ndimage.map_coordinates(self._val, [r, c], order=1, mode="nearest")
+        return (v > 0.99) | (self.large.ech(lon, lat) <= 0.5)
+
     def couvre(self, lon, lat):
         m = self.fin.dedans(lon, lat)
         return m | self.large.dedans(lon, lat) if self.large is not None else m
@@ -83,7 +92,7 @@ class Relief:
         v = self.fin.ech(lon, lat, sigma_m, ordre)
         if self.large is None:
             return v
-        m = self.fin.dedans(lon, lat)
+        m = self.fin.dedans(lon, lat) & self.fin_valide(lon, lat)
         if m.all():
             return v
         return np.where(m, v, self.large.ech(lon, lat, 0.0, ordre))
@@ -161,6 +170,16 @@ class Zoom:
         return lisse(np.clip((self.de - 13) / 10, 0, 1))
 
 
+def couverture(nom, lon, lat):
+    """Couverture du sol ESA WorldCover (outils/donnees/couverture_<nom>.npz) aux positions réelles : 70 = neige et
+    glace, 80 = eau, 10 = arbres, 60 = sol nu, 30 = herbe."""
+    d = np.load(DONNEES + f"couverture_{nom}.npz")
+    C = d["C"]
+    i = np.clip(((lon - float(d["lon0"])) / float(d["pas_lon"])).astype(int), 0, C.shape[1] - 1)
+    j = np.clip(((float(d["lat0"]) - lat) / float(d["pas_lat"])).astype(int), 0, C.shape[0] - 1)
+    return C[j, i]
+
+
 def relief_exagere(R, lo, la, v, sigma_m=1500.0, dy=0.0):
     E = R.ech(lo, la)
     Es = R.ech(lo, la, sigma_m)
@@ -201,6 +220,37 @@ def finir_loupe(nom, L, y, typ, eau, palette, roc=1.0, w_typ=None, garder_fleuve
     return M.ecrire(nom, X, Z, y, h, sommet, typ, sd, eau, palette, garder_fleuves=garder_fleuves)
 
 
+def reprendre_riviere(L, y, seuil=0.3):
+    """Une rivière du mod qui traverse le lieu agrandi n'y est pas à sa place (elle couperait le relief d'une
+    tranchée droite) : le lieu la reprend (écrire avec garder_fleuves=False). Il garde son lit et sa vallée sur la
+    bande du bord (là où le lieu redevient le terrain du mod) et la fait naître d'une vasque au pied des montagnes
+    agrandies. Rend y, eau, (niveau de la vasque, colonnes de lit) ou None sans rivière."""
+    X, Z = L.X, L.Z
+    eau = np.full(X.shape, np.nan)
+    pres, d_r, hw, _, _, w_r = T.rivieres(X, Z)
+    lit = pres & (d_r <= hw)
+    if not lit.any():
+        return y, eau, None
+    # le lit s'amincit en pointe vers l'amont (pas de bout coupé net)
+    effile = np.clip((L.t - seuil) / 0.25, 0, 1)
+    aval = pres & (d_r <= np.maximum(hw * effile, 0.6 * (effile > 0))) & (L.t > seuil)
+    eau_mod = np.where(aval, w_r.astype(float), np.nan)
+    d_l = ndimage.distance_transform_edt(~aval)
+    y = np.where(d_l < 40, np.minimum(y, L.h + (y - L.h) * lisse(np.clip((d_l - 2) / 30, 0, 1))), y)
+    garde = aval & (L.bord() > 0.02)
+    eau = np.where(garde, eau_mod, eau)
+    # vasques : au bout amont de chaque tronçon gardé
+    lab, n = ndimage.label(garde, structure=np.ones((3, 3)))
+    for k in range(1, n + 1):
+        ja, ia = np.nonzero(lab == k)
+        ka = int(np.argmin(L.t[ja, ia]))
+        niv = float(eau_mod[ja[ka], ia[ka]])
+        src = np.hypot(X - X[ja[ka], ia[ka]], Z - Z[ja[ka], ia[ka]]) < 1.8
+        eau = np.where(src, niv, eau)
+        y = np.where(src, np.minimum(y, niv - 2.0), y)
+    return y, eau, (float(np.nanmax(eau)), int(garde.sum()))
+
+
 def cervin():
     """Cervin (4 478 m) sur le relief réel, agrandi 4 fois au centre (loupe) : la vraie pyramide, ses arêtes (Hörnli,
     Zmutt, Lion, Furggen), ses faces et les glaciers autour ; relief local exagéré. Au bord, le relief du mod."""
@@ -212,6 +262,133 @@ def cervin():
                            herbe_max=2550, roc=1.1, pente_glace=1.0, pente_neige=1.3)
     print(f"cervin : sommet y {y.max():.0f} (relief réel {E.max():.0f} m)")
     return finir_loupe("cervin", L, y, typ, np.full(L.X.shape, np.nan), "CERVIN", roc=1.1)
+
+
+def glacier_vivant(X, Z, y, G, graine=0, profondeur=3.0, pas_crev=6.5):
+    """Surface d'un glacier : crevasses en travers de l'écoulement (sillons d'un bloc, 3 à 5 de profondeur) là où la
+    pente tire la glace, séracs en blocs dans les chutes de séracs (pente forte). G : masque du glacier."""
+    ys = ndimage.gaussian_filter(y, 8.0)
+    gz, gx = np.gradient(ys)
+    n = np.hypot(gx, gz) + 1e-9
+    ux, uz = -gx / n, -gz / n                                  # vers l'aval
+    pl = M.pente_locale(ndimage.gaussian_filter(y, 1.0))
+    interieur = ndimage.distance_transform_edt(G) > 2.5
+    phi = (X * ux + Z * uz) / pas_crev + 0.35 * bruit(X, Z, 9, graine + 1) + 0.15 * bruit(X, Z, 3, graine + 2)
+    sillon = (phi - np.floor(phi)) < 0.16
+    crev = G & interieur & sillon & (pl > 0.22) & (bruit(X, Z, 5, graine + 3) > -0.25)
+    prof = profondeur + 2.0 * (bruit(X, Z, 4, graine + 4) > 0.2)
+    y = np.where(crev, y - prof, y)
+    # séracs : la glace se casse en blocs de 3 x 3 décalés de 0 à 4 blocs
+    cel = (np.floor(X / 3) * 7919 + np.floor(Z / 3) * 104729 + graine) % 997 / 997.0
+    serac = G & interieur & (pl > 1.25) & (bruit(X, Z, 6, graine + 5) > -0.2)
+    y = np.where(serac, y + np.floor(cel * 5) - 2.0, y)
+    return y, crev, serac
+
+
+def mer_de_glace():
+    """Mer de Glace (massif du Mont-Blanc) sur le relief réel agrandi 4 fois : le glacier (masque glace d'ESA
+    WorldCover) descend des Grandes Jorasses et du col du Géant jusqu'au Montenvers, entre les Aiguilles de Chamonix et
+    les Drus ; crevasses en travers, séracs du Géant, langue couverte d'éboulis, moraines latérales du relief réel.
+    Les rivières du mod qui traversent la zone (Arve, Doire) sont reprises : elles naissent sur la bande du bord."""
+    R = Relief("mer_de_glace")
+    L = Zoom(45.885, 6.935, 4.0, -235, 125, -200, 200, fondu=45)    # à l est, le Cervin (x 3224)
+    X, Z = L.X, L.Z
+    v = 0.04
+    y_r, E, Es = relief_exagere(R, L.lo, L.la, v=v, sigma_m=1800.0)
+    C = couverture("mer_de_glace", L.lo, L.la)
+    # la surface d'un glacier est lisse et bombée : sur la glace, le relief local est pris lissé (plus de bosses du
+    # modèle exagérées)
+    Eg = R.ech(L.lo, L.la, 250.0)
+    glace0 = ndimage.gaussian_filter((C == 70).astype(float), 1.5)
+    y_r = y_r + (T.blocs(Es) + (Eg - Es) * v - y_r) * glace0
+    y, a = L.melange(y_r, L.couvert(R), recale=True)
+    G = (C == 70) & (a > 0.3)
+    G = ndimage.binary_opening(G, iterations=1)
+    lab, n = ndimage.label(G)
+    if n:
+        t_ = ndimage.sum(np.ones(G.shape), lab, range(1, n + 1))
+        G = np.isin(lab, np.flatnonzero(t_ >= 40) + 1)
+    y, crev, serac = glacier_vivant(X, Z, y, G, graine=1200)
+    y, eau, riv = reprendre_riviere(L, y, seuil=0.45)
+    Ea = np.where(a > 0.05, E, 0)
+    typ = classes_montagne(X, Z, y, Ea, neige=99999, glace=None, eboulis=(2300, 3500), herbe_max=2300, roc=1.25,
+                           pente_herbe=1.0)
+    pl = M.pente_locale(y)
+    # sous 2 100 m, les versants sont boisés (forêts de la vallée de Chamonix) : herbe sauf les vraies falaises
+    typ[(Ea > 0) & (Ea < 2100 + 100 * bruit(X, Z, 9, 1211)) & (pl < 1.6)] = PRE | TAILLEE
+    typ[G] = GLACE | TAILLEE                                            # glace nue (zone d'ablation)
+    typ[G & (Ea > 2800 + 120 * bruit(X, Z, 10, 1210)) & (pl < 1.3)] = NEIGE | TAILLEE   # névés (zone d'accumulation)
+    typ[G & (Ea < 1750) & ~crev] = EBOULIS | TAILLEE                    # langue noire de débris
+    typ[G & (pl > 1.7) & ~serac] = ROC | TAILLEE
+    typ[np.isfinite(eau)] = LIT | TAILLEE
+    print(f"mer_de_glace : glacier {int(G.sum())} colonnes, {int(crev.sum())} de crevasses, {int(serac.sum())} de séracs, "
+          f"sommets jusqu'à y {y.max():.0f}" + (f", rivière du mod reprise ({riv[1]} colonnes)" if riv else ""))
+    return finir_loupe("mer_de_glace", L, y, typ, eau, "GRANITE", roc=1.25, garder_fleuves=False)
+
+
+def jokulsarlon():
+    """Jökulsárlón (Islande) sur le relief réel agrandi 4 fois (zoom « carte » ancré sur l'embouchure, comme un
+    fjord) : la lagune glaciaire au niveau de la mer, reliée à l'océan par la Jökulsá ; le front du Breiðamerkurjökull
+    qui vêlera dans la lagune, ses moraines sombres ; des icebergs dans la lagune et échoués sur la plage de sable
+    noir (Diamond Beach) ; sandur noir et mousses autour."""
+    R = Relief("jokulsarlon")
+    C_ = lambda L_: couverture("jokulsarlon", L_.lo, L_.la)
+    L, E, y, eau, F = fjord_reel(R, 64.045, -16.177, 4.0, -235, 110, -205, 95, v=0.05, sigma_m=900.0,
+                                 eau_reelle=lambda L_: C_(L_) == 80)
+    X, Z = L.X, L.Z
+    C = C_(L)
+    a = L.bord()
+    # lagune / mer : la lagune est l'eau du lieu qui n'est pas la mer du mod au large
+    dIn = ndimage.distance_transform_edt(F)
+    lagune = F & (L.sd >= 0)
+    # glacier : glace (couverture) ; son front domine la lagune de 6 à 9 blocs
+    G = (C == 70) & ~F
+    G = ndimage.binary_opening(G, iterations=1)
+    dW = ndimage.distance_transform_edt(~F)
+    y = np.where(G, np.maximum(y, 69.0 + 1.5 * bruit(X, Z, 5, 1301) + 0.12 * np.maximum(dW - 1, 0)), y)
+    y, crev, serac = glacier_vivant(X, Z, y, G, graine=1300, profondeur=2.0, pas_crev=5.0)
+    # icebergs : blocs de glace dans la lagune (plus gros près du front), quelques-uns échoués sur la plage
+    rng = np.random.default_rng(1302)
+    ice = np.zeros(X.shape, bool)
+    dG = ndimage.distance_transform_edt(~G)
+    jj, ii = np.nonzero(lagune & (dIn > 1.5))
+    n_ib = 0
+    if len(jj):
+        for k in rng.choice(len(jj), size=min(len(jj), 140), replace=False):
+            j, i = jj[k], ii[k]
+            pres = np.clip(1 - dG[j, i] / 120, 0.15, 1)
+            if rng.random() > 0.35 + 0.65 * pres:
+                continue
+            r = 1.0 + rng.random() * (1.5 + 3.0 * pres)
+            hgt = 1.0 + rng.random() * (1.5 + 4.5 * pres)
+            nn = np.hypot((X - X[j, i]) / r, (Z - Z[j, i]) / (r * (0.6 + 0.8 * rng.random())))
+            m = (nn < 1) & F
+            y = np.where(m, np.maximum(y, 63.0 + hgt * (1 - 0.5 * nn ** 2) + 0.4 * bruit(X, Z, 1.5, 1303)), y)
+            ice |= m
+            n_ib += 1
+    # plage noire au bord de la mer, icebergs échoués (Diamond Beach)
+    plage = ~F & ~G & (dW <= 7) & (L.sd < 6) & (y < 66)
+    jp, ip = np.nonzero(plage & (dW <= 2))
+    for k in (rng.choice(len(jp), size=min(len(jp), 45), replace=False) if len(jp) else []):
+        r = 0.8 + rng.random() * 1.4
+        m = np.hypot(X - X[jp[k], ip[k]], Z - Z[jp[k], ip[k]]) < r
+        y = np.where(m, np.maximum(y, 64.0 + 0.5 + rng.random() * 1.8), y)
+        ice |= m
+    eau = np.where(ice, np.nan, eau)
+    pl = M.pente_locale(y)
+    typ = np.full(X.shape, PLAGE | TAILLEE, np.int32)                   # sandur : sable et graviers noirs
+    typ[(C == 100) | ((C == 30) & (bruit(X, Z, 6, 1304) > -0.3))] = MOUSSE | TAILLEE
+    typ[(C == 30) & (y > 75)] = PRE | TAILLEE
+    typ[(pl > 0.9) & ~G] = EBOULIS | TAILLEE
+    typ[(pl > 1.4) & ~G] = ROC | TAILLEE
+    typ[G] = GLACE | TAILLEE
+    typ[G & (C != 70)] = EBOULIS | TAILLEE                              # moraines médianes sombres
+    typ[plage] = PLAGE | TAILLEE
+    typ[F] = FOND | TAILLEE
+    typ[ice] = GLACE | TAILLEE
+    print(f"jokulsarlon : lagune {int(lagune.sum())} colonnes, glacier {int(G.sum())}, {n_ib} icebergs, "
+          f"plage {int(plage.sum())}, sommets y {y.max():.0f}")
+    return finir_loupe("jokulsarlon", L, y, typ, eau, "ISLANDE", roc=1.4)
 
 
 def tre_cime():
@@ -226,28 +403,8 @@ def tre_cime():
     y_r, E, Es = relief_exagere(R, L.lo, L.la, v=0.060, sigma_m=1200.0)
     y, a_ = L.melange(y_r, L.couvert(R), recale=True)
     E = np.where(a_ > 0.05, E, 0)
-    # la rivière du mod (qui naît, sur la carte du mod, au pied nord des tours) : le lieu la reprend ; il garde son lit
-    # près du bord (avec sa vallée) et la fait naître d'une vasque au pied des montagnes agrandies
-    eau = np.full(X.shape, np.nan)
-    eau_mod, _ = M.fleuve_du_mod(X, Z, L.h)
-    lit = np.isfinite(eau_mod)
-    torrent = None
-    if lit.any():
-        aval = lit & (L.t > 0.3)
-        jl, il = np.nonzero(lit)
-        kq = int(np.argmin(np.abs(L.t[jl, il] - 0.3)))
-        Q = np.array([X[jl[kq], il[kq]], Z[jl[kq], il[kq]]])
-        w_q = float(eau_mod[jl[kq], il[kq]])
-        d_l = ndimage.distance_transform_edt(~aval)
-        y = np.where(d_l < 40, np.minimum(y, L.h + (y - L.h) * lisse(np.clip((d_l - 2) / 30, 0, 1))), y)
-        eau = np.where(aval & (L.bord() > 0.02), eau_mod, eau)
-        # source : une vasque au bout amont du lit gardé (le torrent sort du pied des montagnes)
-        ja, ia = np.nonzero(aval & (L.bord() > 0.02))
-        ka = int(np.argmin(L.t[ja, ia]))
-        src = np.hypot(X - X[ja[ka], ia[ka]], Z - Z[ja[ka], ia[ka]]) < 3.2
-        eau = np.where(src, w_q, eau); y = np.where(src, np.minimum(y, w_q - 2.0), y)
-        n0, L_t = w_q, int(aval.sum())
-        torrent = (n0, w_q, L_t)
+    # la rivière du mod (qui naît, sur la carte du mod, au pied nord des tours) : le lieu la reprend
+    y, eau, torrent = reprendre_riviere(L, y)
     # socle des tours : on aplanit l'arête du modèle (elle sera remplacée par les tours) en pierriers
     tours = [(46.6184, 12.2967, 5.5, 4.2, 40.0, -0.20, 911), (46.6189, 12.3023, 6.5, 4.6, 44.0, -0.15, 912),
              (46.6197, 12.3068, 4.2, 3.4, 33.0, -0.25, 913)]
@@ -281,7 +438,7 @@ def tre_cime():
     typ[dans] = ROC | TAILLEE
     typ[dans & (M.pente_locale(y) < 0.8)] = NEIGE | TAILLEE
     print(f"tre_cime : tours de y {min(base_t):.0f} à y {y.max():.0f}" +
-          (f", rivière du mod reprise (eau {torrent[1]:.0f}, {torrent[2]} colonnes de lit)" if torrent else ""))
+          (f", rivière du mod reprise (eau {torrent[0]:.0f}, {torrent[1]} colonnes de lit)" if torrent else ""))
     return finir_loupe("tre_cime", L, y, typ, eau, "DOLOMIE", roc=1.3, garder_fleuves=False)
 
 
@@ -445,7 +602,7 @@ def plitvice():
     return finir_loupe("plitvice", L_, y, typ, eau, "TRAVERTIN", roc=1.2, w_typ=w)
 
 
-def fjord_reel(R, lat_a, lon_a, k, x0, x1, z0, z1, v=0.03, sigma_m=900.0, fondu=40):
+def fjord_reel(R, lat_a, lon_a, k, x0, x1, z0, z1, v=0.03, sigma_m=900.0, fondu=40, eau_reelle=None):
     """Fjord sur le relief réel agrandi k fois (zoom « carte », comme le mod) depuis A, sa jonction avec la mer du mod.
     Mer = altitude <= 0 du modèle ; hauteurs = courbe du mod sur le relief lissé + relief local exagéré, si bien que
     les montagnes du lieu rejoignent celles du mod. Sur la bande du bord, l'eau est la réunion de la mer du lieu et
@@ -454,6 +611,8 @@ def fjord_reel(R, lat_a, lon_a, k, x0, x1, z0, z1, v=0.03, sigma_m=900.0, fondu=
     E = R.ech(L.lo, L.la)
     cov = L.couvert(R)
     mer_r = (E <= 0.5) & cov
+    if eau_reelle is not None:                                  # lagunes au niveau de la mer (couverture du sol)
+        mer_r |= eau_reelle(L) & cov
     lab, n = ndimage.label(mer_r)
     if n:
         tailles = ndimage.sum(np.ones_like(E), lab, range(1, n + 1))
@@ -494,7 +653,31 @@ def fjord_reel(R, lat_a, lon_a, k, x0, x1, z0, z1, v=0.03, sigma_m=900.0, fondu=
             print(f"  détroit creusé vers la mer du mod au bord ({len(ch)} blocs)")
         lab, n = ndimage.label(mer)
     dehors = lab[(L.de < 2) & (L.sd < 0)]
-    mer = np.isin(lab, np.unique(dehors[dehors > 0]))
+    reliee = np.isin(lab, np.unique(dehors[dehors > 0]))
+    # une grande lagune réelle au niveau de la mer, coupée de la mer par un chenal trop fin pour la grille, est
+    # rouverte : chenal par le chemin le plus bas jusqu'à la mer reliée
+    if eau_reelle is not None and reliee.any():
+        cout = 1.0 + 0.5 * np.maximum(y - 62.0, 0) ** 1.5
+        jm, im = np.nonzero(reliee)
+        tl = ndimage.sum(np.ones(mer.shape), lab, range(1, n + 1))
+        for kk in (np.argsort(tl)[::-1] + 1):
+            comp = lab == kk
+            if comp.sum() < 1500 or (comp & reliee).any():
+                continue
+            jc, ic = np.argwhere(comp)[len(np.argwhere(comp)) // 2]
+            k_ = int(np.argmin(np.hypot(jm - jc, im - ic)))
+            ch, _ = route_through_array(cout, (jc, ic), (jm[k_], im[k_]), fully_connected=True, geometric=True)
+            trace = np.zeros(mer.shape, bool)
+            trace[tuple(np.array(ch).T)] = True
+            chenal = ndimage.distance_transform_edt(~trace) <= 2.0
+            y = np.where(chenal, np.minimum(y, 60.8), y)
+            reliee |= comp | chenal
+            mer = mer | chenal
+            print(f"  lagune de {int(comp.sum())} colonnes rouverte vers la mer ({len(ch)} blocs de chenal)")
+        lab, n = ndimage.label(mer)
+        dehors = lab[(L.de < 2) & (L.sd < 0)]
+        reliee = np.isin(lab, np.unique(dehors[dehors > 0]))
+    mer = reliee
     rive = lisse(np.clip(ndimage.distance_transform_edt(~mer) / 3, 0, 1))
     y = np.where(mer, np.minimum(y, 61.9), np.maximum(y, 63.6 + 1.2 * rive))
     eau = np.where(mer & (L.bord() > 0.02), 63.0, np.nan)
@@ -621,7 +804,7 @@ def preikestolen():
     return finir_loupe("preikestolen", L, y, typ, eau, "GNEISS", roc=1.15)
 
 
-LIEUX = {"gavarnie": gavarnie, "cervin": cervin, "tre_cime": tre_cime, "plitvice": plitvice, "geiranger": geiranger, "preikestolen": preikestolen}
+LIEUX = {"mer_de_glace": mer_de_glace, "jokulsarlon": jokulsarlon, "gavarnie": gavarnie, "cervin": cervin, "tre_cime": tre_cime, "plitvice": plitvice, "geiranger": geiranger, "preikestolen": preikestolen}
 
 if __name__ == "__main__":
     noms = [a for a in sys.argv[1:] if not a.startswith("--")]
