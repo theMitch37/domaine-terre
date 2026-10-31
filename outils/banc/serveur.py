@@ -77,11 +77,11 @@ for nom, (x0, x1, z0, z1) in zones.items():
 print(f"{len(voulus)} chunks demandés", flush=True)
 
 region = os.path.join(SERVEUR, "banc", "region")
-fin = time.time() + 1800
+fin = time.time() + 4200
 while True:
     time.sleep(20)
     cmd("save-all flush")
-    attendre("Saved the game", 600)
+    attendre("Saved the game", 2400)
     faits = 0
     for nom, (x0, x1, z0, z1) in zones.items():
         _, _, st = monde.extraire(region, x0, x1, z0, z1, 62, 63)
