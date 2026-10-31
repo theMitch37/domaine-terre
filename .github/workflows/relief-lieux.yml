@@ -8,6 +8,7 @@ on:
     branches-ignore: [jars]
     paths:
       - outils/relief_lieu.py
+      - outils/couverture_lieu.py
       - .github/workflows/relief-lieux.yml
   workflow_dispatch:
 
@@ -102,6 +103,7 @@ jobs:
           curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
           python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N46_00_E012_00_DEM.tif tre_cime 12.22 12.39 46.57 46.67
       - name: cervin (loupe)
+        if: false
         run: |
           mkdir -p /tmp/dem outils/donnees
           D=Copernicus_DSM_COG_10_N45_00_E007_00_DEM
@@ -115,6 +117,7 @@ jobs:
           python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N45_00_E007_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N45_00_E008_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N46_00_E007_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N46_00_E008_00_DEM.tif cervin_large 7.236 8.082 45.553 46.399 --pas=3
           rm -f /tmp/dem/*.tif
       - name: tre_cime (loupe)
+        if: false
         run: |
           mkdir -p /tmp/dem outils/donnees
           D=Copernicus_DSM_COG_10_N46_00_E011_00_DEM
@@ -128,6 +131,7 @@ jobs:
           python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N46_00_E011_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N46_00_E012_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N47_00_E011_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N47_00_E012_00_DEM.tif tre_cime_large 11.913 12.691 46.229 47.008 --pas=3
           rm -f /tmp/dem/*.tif
       - name: plitvice (loupe)
+        if: false
         run: |
           mkdir -p /tmp/dem outils/donnees
           D=Copernicus_DSM_COG_10_N44_00_E015_00_DEM
@@ -141,6 +145,7 @@ jobs:
           python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N44_00_E015_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N44_00_E016_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N45_00_E015_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N45_00_E016_00_DEM.tif plitvice_large 15.036 16.174 44.312 45.450 --pas=3
           rm -f /tmp/dem/*.tif
       - name: geiranger (loupe)
+        if: false
         run: |
           mkdir -p /tmp/dem outils/donnees
           D=Copernicus_DSM_COG_10_N61_00_E006_00_DEM
@@ -154,6 +159,7 @@ jobs:
           python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N61_00_E006_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N61_00_E007_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N62_00_E006_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N62_00_E007_00_DEM.tif geiranger_large 6.650 7.540 61.659 62.550 --pas=3
           rm -f /tmp/dem/*.tif
       - name: preikestolen (loupe)
+        if: false
         run: |
           mkdir -p /tmp/dem outils/donnees
           D=Copernicus_DSM_COG_10_N58_00_E005_00_DEM
@@ -166,11 +172,61 @@ jobs:
           [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
           python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N58_00_E005_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N58_00_E006_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N59_00_E005_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N59_00_E006_00_DEM.tif preikestolen_large 5.767 6.613 58.563 59.409 --pas=3
           rm -f /tmp/dem/*.tif
+      - name: mer_de_glace
+        run: |
+          mkdir -p /tmp/dem outils/donnees
+          D=Copernicus_DSM_COG_10_N45_00_E006_00_DEM
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          D=Copernicus_DSM_COG_10_N45_00_E007_00_DEM
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N45_00_E006_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N45_00_E007_00_DEM.tif mer_de_glace 6.70 7.15 45.75 46.02
+      - name: mer_de_glace (large)
+        run: |
+          mkdir -p /tmp/dem outils/donnees
+          D=Copernicus_DSM_COG_10_N45_00_E006_00_DEM
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          D=Copernicus_DSM_COG_10_N45_00_E007_00_DEM
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          D=Copernicus_DSM_COG_10_N46_00_E006_00_DEM
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          D=Copernicus_DSM_COG_10_N46_00_E007_00_DEM
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N45_00_E006_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N45_00_E007_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N46_00_E006_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N46_00_E007_00_DEM.tif mer_de_glace_large 6.40 7.50 45.50 46.30 --pas=3
+          rm -f /tmp/dem/*.tif
+      - name: jokulsarlon
+        run: |
+          mkdir -p /tmp/dem outils/donnees
+          D=Copernicus_DSM_COG_10_N63_00_W017_00_DEM
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          D=Copernicus_DSM_COG_10_N63_00_W016_00_DEM
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          D=Copernicus_DSM_COG_10_N64_00_W017_00_DEM
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          D=Copernicus_DSM_COG_10_N64_00_W016_00_DEM
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N63_00_W017_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N63_00_W016_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N64_00_W017_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N64_00_W016_00_DEM.tif jokulsarlon -16.60 -15.80 63.93 64.22
+      - name: jokulsarlon (large)
+        run: |
+          mkdir -p /tmp/dem outils/donnees
+          D=Copernicus_DSM_COG_10_N63_00_W017_00_DEM
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          D=Copernicus_DSM_COG_10_N63_00_W016_00_DEM
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          D=Copernicus_DSM_COG_10_N64_00_W017_00_DEM
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          D=Copernicus_DSM_COG_10_N64_00_W016_00_DEM
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N63_00_W017_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N63_00_W016_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N64_00_W017_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N64_00_W016_00_DEM.tif jokulsarlon_large -17.00 -15.40 63.80 64.50 --pas=3
+          rm -f /tmp/dem/*.tif
+      - name: couverture du sol (WorldCover)
+        run: |
+          python outils/couverture_lieu.py mer_de_glace 6.70 7.15 45.75 46.02 --pas=3
+          python outils/couverture_lieu.py jokulsarlon -16.60 -15.80 63.93 64.22 --pas=3
       - name: Ajout à la branche
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git add -f outils/donnees/relief_*.npz
+          git add -f outils/donnees/relief_*.npz outils/donnees/couverture_*.npz
           git commit -m "Relief Copernicus GLO-30 des lieux (automatique)" || exit 0
           for i in 1 2 3; do
             git fetch origin "${GITHUB_REF_NAME}" && git rebase "origin/${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
