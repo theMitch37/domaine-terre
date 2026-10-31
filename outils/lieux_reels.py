@@ -989,9 +989,9 @@ def fjord_reel(R, lat_a, lon_a, k, x0, x1, z0, z1, v=0.03, sigma_m=900.0, fondu=
         plancher = np.where(L.sd < 0, np.maximum(L.h, 40.0), 61.9 - 0.35 * dRive)
         plancher = ndimage.gaussian_filter(plancher, 2.0)
         y = np.where(mer, np.maximum(y, np.minimum(plancher, 61.9)), y)
-        # au moins deux blocs d'eau sur la mer du lieu (sur un seul bloc, là où le mod voit de la terre, le jeu
+        # au moins deux blocs d eau sur la mer du lieu (sur un seul bloc, près de la côte du mod, le jeu
         # laissait quelques colonnes à sec, couvertes d'herbe)
-        y = np.where(mer & (L.sd >= 0), np.minimum(y, 60.9), y)
+        y = np.where(mer, np.minimum(y, 60.9), y)
     eau = np.where(mer & (L.bord() > 0.02), 63.0, np.nan)
     print(f"  fjord : {int(mer_r.sum())} colonnes de mer du relief, {int(mer.sum())} en eau, ancrage {L.c.round(1)}")
     return L, E * (a > 0.05), y, eau, mer
