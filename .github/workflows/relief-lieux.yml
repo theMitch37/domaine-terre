@@ -197,26 +197,26 @@ jobs:
         run: |
           mkdir -p /tmp/dem outils/donnees
           D=Copernicus_DSM_COG_10_N63_00_W017_00_DEM
-          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif" || echo "pas de dalle $D (mer)"
           D=Copernicus_DSM_COG_10_N63_00_W016_00_DEM
-          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif" || echo "pas de dalle $D (mer)"
           D=Copernicus_DSM_COG_10_N64_00_W017_00_DEM
-          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif" || echo "pas de dalle $D (mer)"
           D=Copernicus_DSM_COG_10_N64_00_W016_00_DEM
-          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
-          python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N63_00_W017_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N63_00_W016_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N64_00_W017_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N64_00_W016_00_DEM.tif jokulsarlon -16.60 -15.80 63.93 64.22
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif" || echo "pas de dalle $D (mer)"
+          python outils/relief_lieu.py /tmp/dem/*.tif jokulsarlon -16.60 -15.80 63.93 64.22
       - name: jokulsarlon (large)
         run: |
           mkdir -p /tmp/dem outils/donnees
           D=Copernicus_DSM_COG_10_N63_00_W017_00_DEM
-          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif" || echo "pas de dalle $D (mer)"
           D=Copernicus_DSM_COG_10_N63_00_W016_00_DEM
-          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif" || echo "pas de dalle $D (mer)"
           D=Copernicus_DSM_COG_10_N64_00_W017_00_DEM
-          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif" || echo "pas de dalle $D (mer)"
           D=Copernicus_DSM_COG_10_N64_00_W016_00_DEM
-          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif"
-          python outils/relief_lieu.py /tmp/dem/Copernicus_DSM_COG_10_N63_00_W017_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N63_00_W016_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N64_00_W017_00_DEM.tif /tmp/dem/Copernicus_DSM_COG_10_N64_00_W016_00_DEM.tif jokulsarlon_large -17.00 -15.40 63.80 64.50 --pas=3
+          [ -f /tmp/dem/$D.tif ] || curl -fL --retry 5 --retry-delay 20 -o /tmp/dem/$D.tif "https://copernicus-dem-30m.s3.amazonaws.com/$D/$D.tif" || echo "pas de dalle $D (mer)"
+          python outils/relief_lieu.py /tmp/dem/*.tif jokulsarlon_large -17.00 -15.40 63.80 64.50 --pas=3
           rm -f /tmp/dem/*.tif
       - name: couverture du sol (WorldCover)
         run: |

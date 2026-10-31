@@ -15,7 +15,7 @@ pas = int(next((x[6:] for x in sys.argv[1:] if x.startswith("--pas=")), "1"))
 *dalles, nom, o, e, s, n = args
 o, e, s, n = map(float, (o, e, s, n))
 srcs = [rasterio.open(d) for d in dalles]
-a, tr = merge(srcs, bounds=(o, s, e, n))
+a, tr = merge(srcs, bounds=(o, s, e, n), nodata=0)          # hors dalles (pleine mer, pas de dalle) : 0 m
 a = a[0][::pas, ::pas]
 pas_lon, pas_lat = tr.a * pas, -tr.e * pas
 print(f"{nom} : {a.shape[1]} x {a.shape[0]} points, pas {pas_lon * 3600:.2f}\" x {pas_lat * 3600:.2f}\", "
