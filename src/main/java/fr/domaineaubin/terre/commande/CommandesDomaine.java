@@ -71,6 +71,11 @@ public final class CommandesDomaine {
         // lot 3
         LIEUX.put("mer_de_glace", new double[]{46.049, 6.888});
         LIEUX.put("jokulsarlon", new double[]{64.065, -16.209});
+        LIEUX.put("chaussee", new double[]{55.2293, -6.5116});
+        LIEUX.put("meteores", new double[]{39.6761, 21.6146});
+        LIEUX.put("etna", new double[]{37.7745, 14.760});
+        LIEUX.put("vesuve", new double[]{40.973, 14.5824});
+        LIEUX.put("geysir", new double[]{64.296, -20.3024});
         LIEUX.put("amazonie", new double[]{-3.465, -62.215});
         LIEUX.put("rio", new double[]{-22.907, -43.173});
         LIEUX.put("andes", new double[]{-13.163, -72.545});

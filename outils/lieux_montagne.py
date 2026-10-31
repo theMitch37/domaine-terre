@@ -110,7 +110,7 @@ def apercu(nom, X, Z, y, eau, typ, palette, haut=None):
     noms = ["minecraft:air", "minecraft:water", "minecraft:stone", "minecraft:grass_block", "minecraft:snow_block",
             "minecraft:packed_ice", "minecraft:gravel", "minecraft:moss_block", "minecraft:calcite", "minecraft:andesite",
             "minecraft:basalt", "minecraft:deepslate", "minecraft:diorite", "minecraft:tuff", "minecraft:dirt"]
-    corps = {"CALCAIRE": 9, "BASALTE": 10, "TRAVERTIN": 8, "GNEISS": 2, "CERVIN": 11, "DOLOMIE": 12, "GRANITE": 9, "ISLANDE": 10}[palette]
+    corps = {"CALCAIRE": 9, "BASALTE": 10, "TRAVERTIN": 8, "GNEISS": 2, "CERVIN": 11, "DOLOMIE": 12, "GRANITE": 9, "ISLANDE": 10, "CHAUSSEE": 10, "CONGLOMERAT": 13, "VOLCAN": 11}[palette]
     D, W = y.shape
     H = y1 - y0
     B = np.zeros((D, H, W), np.uint8)
@@ -146,12 +146,13 @@ def loin_des_fleuves(X, Z, w, marge=35.0):
     return w * lisse(np.clip((inf - 3.0) / marge, 0, 1))
 
 
-def ecrire(nom, X, Z, y, h, sommet, typ, sd, eau, palette, marge=10, garder_fleuves=True):
+def ecrire(nom, X, Z, y, h, sommet, typ, sd, eau, palette, marge=10, garder_fleuves=True, vox=None):
     """Contrôles d'eau, écriture dans les tuiles, aperçu éventuel."""
     y = np.where(np.isfinite(eau), np.minimum(y, eau - 1.05), y)          # au moins un bloc d'eau
     y = retenir(y, eau)
     verifier_eau(nom, y, eau)
-    typ, actif = en_tuiles(nom, X, Z, y, h, sommet, typ, sd, marge=marge, eau=eau, garder_fleuves=garder_fleuves)
+    typ, actif = en_tuiles(nom, X, Z, y, h, sommet, typ, sd, marge=marge, eau=eau, garder_fleuves=garder_fleuves,
+                           vox=vox)
     if APERCU:
         apercu(nom, X, Z, np.where(actif, y, h), np.where(actif, eau, np.nan), np.where(actif, typ, 0), palette)
     return y, typ, actif
@@ -375,11 +376,38 @@ def gullfoss():
     typ[pl > 1.2] = ROC | TAILLEE
     typ[np.isfinite(eau)] = LIT | TAILLEE
     typ[ilot & (w > 0.97)] = MOUSSE | TAILLEE
+    # Geysir (Haukadalur), à sa vraie place dans la zone, 80 blocs à l'ouest des chutes : Strokkur (vasque de 3 blocs
+    # de rayon, le geyser au fond, qui jaillit toutes les 45 s environ), le Grand Geysir (endormi) 12 blocs au
+    # nord-nord-ouest, des sources chaudes bleues et des fumerolles sur un tablier de geysérite (calcite)
+    vox = []
+    rng = np.random.default_rng(2101)
+    g0 = bloc_de(64.3104, -20.3024)
+    sources = [(g0, 3.0, True), (g0 + np.array([-5.0, -11.0]), 4.0, False)]
+    for k in range(7):
+        ang = rng.random() * 2 * np.pi; dist = 9 + rng.random() * 14
+        sources.append((g0 + dist * np.array([np.cos(ang), np.sin(ang)]), 1.0 + rng.random() * 1.2, False))
+    tablier = np.zeros(X.shape, bool)
+    for (cs, r, geyser) in sources:
+        rr = np.hypot(X - cs[0], Z - cs[1])
+        niv_g = float(np.floor(np.median(y[rr < r + 3]))) + 1.0
+        tablier |= rr < r + 3.5 + 1.5 * bruit(X, Z, 3, 2102)
+        y = np.where(rr < r + 3.5, np.maximum(np.minimum(y, niv_g - 0.4 + 0.1 * (rr - r)), niv_g - 0.4), y)
+        bassin = rr < r
+        eau = np.where(bassin, niv_g, eau)
+        y = np.where(bassin, niv_g - 1.2 - min(3.0, r) * lisse(np.clip(1 - rr / r, 0, 1)), y)
+        j, i = int(round(cs[1] - Z[0, 0])), int(round(cs[0] - X[0, 0]))
+        if geyser:
+            vox.append((int(cs[0]), int(np.floor(y[j, i])), int(cs[1]), 102))      # Strokkur
+        elif r < 2.5 and rng.random() < 0.7:
+            vox.append((int(cs[0]) + 1 + int(r), int(np.floor(y[j, i + 1 + int(r)])), int(cs[1]), 101))  # fumerolle
+    typ[tablier & ~np.isfinite(eau)] = PLAGE | TAILLEE                   # geysérite
+    typ[tablier & np.isfinite(eau)] = LIT | TAILLEE
+    print(f"  Geysir : {len(sources)} sources, Strokkur en {g0.round(0)}")
     typ = typ | BIOME
     typ[w < 0.02] = 0
     sommet = y.copy()
     print(f"gullfoss : chute 1 de {86 - 79} blocs puis chute 2 de {79 - 66} ; gorge {L - s_c2:.0f} blocs")
-    return ecrire("gullfoss", X, Z, y, h, sommet, typ, sd, eau, "BASALTE", garder_fleuves=False)
+    return ecrire("gullfoss", X, Z, y, h, sommet, typ, sd, eau, "BASALTE", garder_fleuves=False, vox=vox)
 
 
 def skogafoss():

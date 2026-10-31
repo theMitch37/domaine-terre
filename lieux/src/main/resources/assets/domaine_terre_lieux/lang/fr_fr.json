@@ -16,5 +16,11 @@
  "biome.domaine_terre_lieux.cervin": "Cervin",
  "biome.domaine_terre_lieux.tre_cime": "Tre Cime di Lavaredo",
  "biome.domaine_terre_lieux.mer_de_glace": "Mer de Glace",
- "biome.domaine_terre_lieux.jokulsarlon": "Jökulsárlón"
+ "biome.domaine_terre_lieux.jokulsarlon": "Jökulsárlón",
+ "biome.domaine_terre_lieux.chaussee": "Chaussée des Géants",
+ "biome.domaine_terre_lieux.meteores": "Météores",
+ "biome.domaine_terre_lieux.etna": "Etna",
+ "biome.domaine_terre_lieux.vesuve": "Vésuve",
+ "block.domaine_terre_lieux.fumerolle": "Fumerolle",
+ "block.domaine_terre_lieux.geyser": "Geyser"
 }

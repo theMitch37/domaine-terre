@@ -27,6 +27,7 @@ public class DomaineLieux {
     public DomaineLieux() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         FEATURES.register(bus);
+        fr.domaineaubin.lieux.bloc.BlocsLieux.inscrire(bus);
         LieuxTerre.inscrire(GrandCanyon.INSTANCE);
         LieuxTerre.inscrire(Verdon.INSTANCE);
         // lot 1 (Europe) : lieux en tuiles (26/10), calculés par outils/lieux_cotiers.py
@@ -47,6 +48,10 @@ public class DomaineLieux {
         // lot 3
         LieuxTerre.inscrire(new LieuGrille("mer_de_glace", LieuGrille.Palette.GRANITE, true, 70));
         LieuxTerre.inscrire(new LieuGrille("jokulsarlon", LieuGrille.Palette.ISLANDE, true, 35));
+        LieuxTerre.inscrire(new LieuGrille("chaussee", LieuGrille.Palette.CHAUSSEE, true, 35));
+        LieuxTerre.inscrire(new LieuGrille("meteores", LieuGrille.Palette.CONGLOMERAT, true, 60));
+        LieuxTerre.inscrire(new LieuGrille("etna", LieuGrille.Palette.VOLCAN, true, 35));
+        LieuxTerre.inscrire(new LieuGrille("vesuve", LieuGrille.Palette.VOLCAN, true, 35));
         LOGGER.info("Domaine d'Aubin - Lieux uniques : {} lieu(x) inscrit(s).", LieuxTerre.liste().size());
     }
 }

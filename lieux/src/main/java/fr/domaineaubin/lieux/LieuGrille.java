@@ -40,7 +40,13 @@ public final class LieuGrille implements LieuSculpte {
         CALCAIRE, BASALTE, TRAVERTIN, GNEISS, CERVIN, DOLOMIE,
         /** Lot 3 : granite clair du Mont-Blanc (Mer de Glace, glace nue et névés), Islande glaciaire (Jökulsárlón :
          *  sable noir, icebergs et glacier tout en glace). */
-        GRANITE, ISLANDE }
+        GRANITE, ISLANDE,
+        /** Lot 3 (suite) : basalte en colonnes (Chaussée des Géants), conglomérat (Météores), volcan (Etna, Vésuve :
+         *  coulées noires, cendres, soufre). */
+        CHAUSSEE, CONGLOMERAT, VOLCAN }
+
+    /** Blocs particuliers des fichiers .vox (classe >= 100) : lave, fumerolle, geyser, magma. */
+    static final int VOX_LAVE = 100, VOX_FUMEROLLE = 101, VOX_GEYSER = 102, VOX_MAGMA = 103;
 
     private final String id;
     private final Palette palette;
@@ -247,6 +253,7 @@ public final class LieuGrille implements LieuSculpte {
                 if ((cl == PLATEAU || cl == PRE) && dessus) return h2(x, z, 0) % 3 == 0 ? Blocks.MOSS_BLOCK : Blocks.GRASS_BLOCK;
                 if ((cl == PLATEAU || cl == PRE || cl == MOUSSE) && y >= top - 1) return Blocks.DIRT;
                 if (cl == EBOULIS) return Blocks.GRAVEL;
+                if (cl == PLAGE) return dessus ? (h2(x, z, 1) % 4 == 0 ? Blocks.DIORITE : Blocks.CALCITE) : Blocks.CALCITE;   // geysérite
                 int r = Math.floorMod(y - 60 + vague(x, z), 9);
                 if (r == 0) return Blocks.TUFF;                                                   // lits de cendres
                 return h2(x, z, Math.floorDiv(y, 5)) % 5 == 0 ? Blocks.SMOOTH_BASALT : Blocks.BASALT;
@@ -332,6 +339,44 @@ public final class LieuGrille implements LieuSculpte {
                 if (r == 0) return Blocks.TUFF;
                 return h2(x, z, Math.floorDiv(y, 5)) % 4 == 0 ? Blocks.SMOOTH_BASALT : Blocks.BASALT;
             }
+            case CHAUSSEE -> {
+                // basalte en colonnes (prismes verticaux), galets noirs, prés au-dessus des falaises
+                if (cl == PLAGE) return h2(x, z, y) % 3 == 0 ? Blocks.COBBLED_DEEPSLATE : Blocks.GRAVEL;
+                if (cl == FOND) return h2(x, z, y) % 3 == 0 ? Blocks.GRAVEL : Blocks.SMOOTH_BASALT;
+                if ((cl == PLATEAU || cl == PRE || cl == MOUSSE) && dessus) return Blocks.GRASS_BLOCK;
+                if ((cl == PLATEAU || cl == PRE || cl == MOUSSE) && y >= top - 2) return Blocks.DIRT;
+                if (cl == EBOULIS) return h2(x, z, y) % 2 == 0 ? Blocks.COBBLED_DEEPSLATE : Blocks.GRAVEL;
+                // colonnes : chaque colonne de 2 x 2 blocs a sa teinte ; lits de latérite rouge entre deux coulées
+                if (Math.floorMod(y - 60 + vague(x, z), 13) == 0) return Blocks.TERRACOTTA;
+                int c = h2(Math.floorDiv(x, 2), Math.floorDiv(z, 2), 7) % 4;
+                return c == 0 ? Blocks.POLISHED_BASALT : (c == 1 ? Blocks.SMOOTH_BASALT : Blocks.BASALT);
+            }
+            case CONGLOMERAT -> {
+                // conglomérat brun-gris en gros bancs (galets pris dans le grès), touffes d'herbe sur les dômes
+                if ((cl == PLATEAU || cl == PRE) && dessus) return Blocks.GRASS_BLOCK;
+                if ((cl == PLATEAU || cl == PRE) && y >= top - 2) return Blocks.DIRT;
+                if (cl == EBOULIS) return h2(x, z, y) % 3 == 0 ? Blocks.COBBLESTONE : Blocks.GRAVEL;
+                int r = Math.floorMod(y + vague(x, z), 9);
+                if (r == 0) return Blocks.PACKED_MUD;                                              // joints de grès
+                int m = h2(x, z, y) % 7;
+                if (m == 0) return Blocks.COBBLESTONE;                                            // galets
+                if (m == 1) return Blocks.ANDESITE;
+                return r < 4 ? Blocks.TUFF : Blocks.STONE;
+            }
+            case VOLCAN -> {
+                // coulées de lave noires, cendres et scories, soufre autour des fumerolles
+                if (cl == FOND) return h2(x, z, y) % 4 == 0 ? Blocks.BLACKSTONE : Blocks.BASALT;
+                if (cl == EBOULIS) {
+                    int m = h2(x, z, y) % 6;
+                    return m < 2 ? Blocks.TUFF : (m < 4 ? Blocks.GRAVEL : (m == 4 ? Blocks.BLACKSTONE : Blocks.COBBLED_DEEPSLATE));
+                }
+                if (cl == MOUSSE) return dessus ? (h2(x, z, 0) % 3 == 0 ? Blocks.TUFF : Blocks.YELLOW_TERRACOTTA) : Blocks.TUFF;
+                if ((cl == PLATEAU || cl == PRE) && dessus) return Blocks.GRASS_BLOCK;
+                if ((cl == PLATEAU || cl == PRE) && y >= top - 2) return Blocks.DIRT;
+                int r = Math.floorMod(y + vague(x, z), 7);
+                if (r == 0) return Blocks.TUFF;                                                   // lits de cendres
+                return h2(x, z, Math.floorDiv(y, 3)) % 3 == 0 ? Blocks.BLACKSTONE : Blocks.BASALT;
+            }
             case BAIE -> {
                 if (cl == ROC) {
                     if (dessus && h2(x, z, 0) % 3 == 0) return Blocks.GRASS_BLOCK;
@@ -363,7 +408,7 @@ public final class LieuGrille implements LieuSculpte {
                     ByteBuffer b = ByteBuffer.wrap(new GZIPInputStream(in).readAllBytes()).order(ByteOrder.LITTLE_ENDIAN);
                     int n = b.getInt();
                     for (int i = 0; i < n; i++) {
-                        int x = b.getInt(), y = b.getInt(), z = b.getInt(), c = b.get();
+                        int x = b.getInt(), y = b.getInt(), z = b.getInt(), c = b.get() & 0xFF;
                         s.computeIfAbsent(cle(x >> 4, z >> 4), k -> new ArrayList<>()).add(new int[]{x, y, z, c});
                     }
                 }
@@ -383,8 +428,16 @@ public final class LieuGrille implements LieuSculpte {
         if (l == null) return;
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
         for (int[] v : l) {
-            BlockState b = v[3] == CREUSE ? (v[1] <= 62 ? Blocks.WATER : Blocks.AIR).defaultBlockState()   // arches
-                    : bloc(v[3], v[0], v[1], v[2], 999, false).defaultBlockState();
+            // les blocs du .vox sont rangés par chunk : on ne pose que ceux du chunk en cours
+            if ((v[0] >> 4) != (x0 >> 4) || (v[2] >> 4) != (z0 >> 4)) continue;
+            BlockState b = switch (v[3]) {
+                case VOX_LAVE -> Blocks.LAVA.defaultBlockState();
+                case VOX_MAGMA -> Blocks.MAGMA_BLOCK.defaultBlockState();
+                case VOX_FUMEROLLE -> fr.domaineaubin.lieux.bloc.BlocsLieux.FUMEROLLE.get().defaultBlockState();
+                case VOX_GEYSER -> fr.domaineaubin.lieux.bloc.BlocsLieux.GEYSER.get().defaultBlockState();
+                case CREUSE -> (v[1] <= 62 ? Blocks.WATER : Blocks.AIR).defaultBlockState();          // arches
+                default -> bloc(v[3], v[0], v[1], v[2], 999, false).defaultBlockState();
+            };
             niveau.setBlock(pos.set(v[0], v[1], v[2]), b, 2);
         }
     }

@@ -154,7 +154,7 @@ class Zoom:
         a = np.where(cov, lisse(np.clip((self.den - 4) / (self.fondu - 4), 0, 1)), 0.0)
         a = ndimage.gaussian_filter(a, 2.0)
         if recale:
-            bande = cov & (a > 0.1) & (a < 0.9)
+            bande = cov & (a > 0.1) & (a < 0.9) & (self.h > 63.5) & (y_reel > 63.5)
             dy = float(np.median((self.h - y_reel)[bande]))
             y_reel = y_reel + dy
             print(f"  relief recalé de {dy:+.1f} blocs sur le mod")
@@ -203,7 +203,7 @@ def classes_montagne(X, Z, y, E, neige=3000.0, glace=None, eboulis=(2300.0, 3300
     return typ
 
 
-def finir_loupe(nom, L, y, typ, eau, palette, roc=1.0, w_typ=None, garder_fleuves=True):
+def finir_loupe(nom, L, y, typ, eau, palette, roc=1.0, w_typ=None, garder_fleuves=True, vox=None):
     """Écriture d'un lieu à la loupe : y est déjà raccordé (relief réel -> terrain du mod) ; dernier fondu au bord
     et loin des vallées des cours d'eau du mod ; le sol redevient celui du mod vers le bord."""
     X, Z, h, sd = L.X, L.Z, L.h, L.sd
@@ -217,7 +217,25 @@ def finir_loupe(nom, L, y, typ, eau, palette, roc=1.0, w_typ=None, garder_fleuve
     typ = typ | BIOME
     typ[(wy < 0.02) & ~np.isfinite(eau)] = 0
     sommet = y.copy()
-    return M.ecrire(nom, X, Z, y, h, sommet, typ, sd, eau, palette, garder_fleuves=garder_fleuves)
+    return M.ecrire(nom, X, Z, y, h, sommet, typ, sd, eau, palette, garder_fleuves=garder_fleuves, vox=vox)
+
+
+# blocs particuliers posés par le lieu (fichier .vox, classe >= 100 : voir LieuGrille.poser)
+VOX_LAVE, VOX_FUMEROLLE, VOX_GEYSER, VOX_MAGMA = 100, 101, 102, 103
+
+
+def cratere(X, Z, y, c, r, prof, rebord=3.0, graine=0, ovale=1.0):
+    """Cratère : rebord relevé, parois raides, fond plat ; rend y, masque intérieur, masque du fond, y du fond."""
+    dx, dz = X - c[0], (Z - c[1]) * ovale
+    rr = np.hypot(dx, dz) / (r * (1 + 0.08 * bruit(X, Z, 4, graine)))
+    yc = float(np.median(y[rr < 1.3]))
+    haut_rebord = yc + rebord
+    fond_y = np.floor(haut_rebord - prof) + 0.6
+    paroi = np.clip((1 - rr) / 0.45, 0, 1)
+    y_in = haut_rebord - (haut_rebord - fond_y) * lisse(paroi) + 0.6 * bruit(X, Z, 2, graine + 1)
+    anneau = np.clip(1 - np.abs(rr - 1.05) / 0.5, 0, 1)
+    y = np.where(rr < 1.0, y_in, np.maximum(y, y + (haut_rebord - y) * lisse(anneau)))
+    return y, rr < 1.0, rr < 0.55, fond_y
 
 
 def reprendre_riviere(L, y, seuil=0.3):
@@ -421,6 +439,217 @@ def jokulsarlon():
     print(f"jokulsarlon : lagune {int(lagune.sum())} colonnes, glacier {int(G.sum())}, {n_ib} icebergs, "
           f"plage {int(plage.sum())}, sommets y {y.max():.0f}")
     return finir_loupe("jokulsarlon", L, y, typ, eau, "ISLANDE", roc=1.4)
+
+
+def chaussee():
+    """Chaussée des Géants (Irlande du Nord) sur le relief réel de la côte d'Antrim agrandi 5 fois (zoom « carte »
+    ancré sur la Chaussée, comme un fjord) : falaises de basalte exagérées, et la Chaussée sculptée à sa place :
+    ~40 000 colonnes hexagonales en vrai, ici des prismes de 3 blocs qui descendent en gradins du pied de la falaise
+    jusque sous la mer (les dernières affleurent), fentes entre les colonnes."""
+    R = Relief("chaussee")
+    L, E, y, eau, F = fjord_reel(R, 55.2408, -6.5116, 5.0, -210, 210, -130, 115, v=0.16, sigma_m=600.0, fondu=45,
+                                 eau_reelle=lambda L_: couverture("chaussee", L_.lo, L_.la) == 80)
+    X, Z = L.X, L.Z
+    C = couverture("chaussee", L.lo, L.la)
+    # falaises : là où les terres sont hautes près de la mer, le rivage tombe à pic (orgues de basalte) au lieu de
+    # descendre en pente douce ; les baies basses gardent leurs plages
+    dF = ndimage.distance_transform_edt(~F)
+    terre = ~F
+    # la côte d'Antrim est un plateau de basalte de 60 à 100 m qui tombe dans la mer : hauteurs doublées près de la mer
+    amp = 1.0 + 1.0 * lisse(np.clip(1 - dF / 90, 0, 1)) * L.bord()
+    y = np.where(terre, 63.6 + (y - 63.6) * amp, y)
+    haut_int = ndimage.gaussian_filter(ndimage.maximum_filter(np.where(terre, y, 0), size=17), 3)
+    marge_f = np.clip((haut_int - 63.0 - 5.0) / 4.0, 0, 1)
+    y = np.where(terre, y + (np.maximum(haut_int - 1.5 + 1.0 * bruit(X, Z, 4, 1402), y) - y) * marge_f *
+                 lisse(np.clip(1 - (dF - 1) / 9, 0, 1)) * (L.bord() > 0.3), y)
+    # rivage le plus proche de la vraie Chaussée, et la direction du large
+    q = L.vers_blocs(55.2408, -6.5116)
+    jj, ii = np.nonzero(~F & (dF <= 1.0))
+    pts = np.c_[X[jj, ii], Z[jj, ii]]
+    p0 = pts[int(np.argmin(np.hypot(pts[:, 0] - q[0], pts[:, 1] - q[1])))]
+    gz, gx = np.gradient(ndimage.gaussian_filter(dF, 3))
+    j0, i0 = int(p0[1] - Z[0, 0]), int(p0[0] - X[0, 0])
+    n = -np.array([gx[j0, i0], gz[j0, i0]]); n /= np.linalg.norm(n) + 1e-9          # vers le large
+    t = np.array([-n[1], n[0]])
+    u = (X - p0[0]) * n[0] + (Z - p0[1]) * n[1]
+    v = (X - p0[0]) * t[0] + (Z - p0[1]) * t[1]
+    # la Chaussée : une langue de colonnes qui part du pied de la falaise vers le large
+    lg = 26.0
+    larg_l = 9.0 * np.clip(1.1 - (u + 3) / (lg + 8), 0.3, 1) + 3.0 * bruit(X, Z, 6, 1401) + 1.5 * bruit(X, Z, 2.5, 1403)
+    langue = (u > -3) & (u < lg + 3 * bruit(X, Z, 4, 1404)) & (np.abs(v - 4.0 * np.sin(u / 9.0)) < larg_l)
+    # réseau hexagonal (prismes d'environ 3 blocs) : centre de colonne le plus proche
+    sz = 1.65
+    qf = (2 / 3 * X) / sz
+    rf = (-1 / 3 * X + np.sqrt(3) / 3 * Z) / sz
+    xc, zc = qf, rf
+    yc = -xc - zc
+    rx, rz, ry = np.round(xc), np.round(zc), np.round(yc)
+    dx_, dz_, dy_ = np.abs(rx - xc), np.abs(rz - zc), np.abs(ry - yc)
+    fx = (dx_ > dz_) & (dx_ > dy_)
+    fz = ~fx & (dz_ > dy_)
+    rx = np.where(fx, -rz - ry, rx)
+    rz = np.where(fz, -rx - ry, rz)
+    cx = sz * 1.5 * rx
+    cz = sz * np.sqrt(3) * (rz + rx / 2)
+    dc = np.hypot(X - cx, Z - cz)
+    fente = dc > sz * 0.93                                     # bord du prisme : fente entre colonnes
+    graine = (rx * 7919 + rz * 104729) % 1009 / 1009.0
+    uc = (cx - p0[0]) * n[0] + (cz - p0[1]) * n[1]
+    haut = 63.0 + 8.0 * (1 - np.clip((uc + 3) / (lg + 2), 0, 1)) ** 1.4 - 2.4 + 2.6 * graine
+    haut = np.floor(haut) + 0.6
+    haut = np.where(fente, haut - 1.0, haut)
+    # au pied de la falaise, la Chaussée s'adosse à des colonnes plus hautes (les marches du départ)
+    pied = (u <= -3) & (u > -9) & (np.abs(v) < 11) & ~F
+    y = np.where(langue, haut, y)
+    y = np.where(pied, np.maximum(y, np.floor(70.0 + 3.0 * graine + 0.5 * (-u - 3))) + 0.6, y)
+    y = np.where(pied & fente, y - 1.0, y)
+    emerge = langue & (haut > 63.0)
+    sous = langue & ~emerge
+    F = (F | sous) & ~emerge
+    eau = np.where(sous & (L.bord() > 0.02), 63.0, np.where(emerge, np.nan, eau))
+    pl = M.pente_locale(y)
+    typ = np.full(X.shape, PRE | TAILLEE, np.int32)
+    typ[(C == 60) | (pl > 0.9)] = EBOULIS | TAILLEE
+    typ[pl > 1.3] = ROC | TAILLEE                                      # orgues des falaises
+    typ[~F & (dF <= 2.5) & (y < 66.5)] = PLAGE | TAILLEE                # galets noirs
+    typ[langue | pied] = ROC | TAILLEE
+    typ[F] = FOND | TAILLEE
+    print(f"chaussee : {int(emerge.sum())} colonnes émergées, {int(sous.sum())} sous l'eau, falaises jusqu'à y "
+          f"{y.max():.0f}, vers le large {n.round(2)}")
+    return finir_loupe("chaussee", L, y, typ, eau, "CHAUSSEE", roc=1.3)
+
+
+def meteores():
+    """Météores (Thessalie) sur le relief réel agrandi 8 fois : les pitons de conglomérat (repérés par le relief local
+    du modèle, > 25 m au-dessus des alentours lissés) ont des parois verticales et des sommets en dôme, 20 à 50 blocs
+    au-dessus de la plaine de Kalambaka ; vallées boisées autour. Aucun monastère (sites naturels seulement)."""
+    R = Relief("meteores")
+    L = Zoom(39.7217, 21.6306, 8.0, -170, 170, -140, 140, fondu=45)
+    X, Z = L.X, L.Z
+    E = R.ech(L.lo, L.la)
+    Es = R.ech(L.lo, L.la, 450.0)
+    Eb = R.ech(L.lo, L.la, 1800.0)
+    rel = E - Es
+    base = T.blocs(Eb) + (Es - Eb) * 0.05 + np.minimum(rel, 0) * 0.05
+    # pitons : relief local fort, parois verticales (saut franc au bord), dôme au sommet
+    coeur = np.hypot(X - L.c[0], Z - L.c[1]) < 125
+    P = coeur & (rel > 25.0)
+    P = ndimage.binary_opening(ndimage.binary_closing(P, iterations=1), iterations=1)
+    lab, n = ndimage.label(P)
+    if n:
+        t_ = ndimage.sum(np.ones(P.shape), lab, range(1, n + 1))
+        P = np.isin(lab, np.flatnonzero(t_ >= 14) + 1)
+    dP = ndimage.distance_transform_edt(P)
+    dome = np.minimum(dP, 4.0) / 4.0
+    piton = base + 7.0 + np.maximum(rel, 0) * 0.17 + 1.5 * dome + 0.8 * bruit(X, Z, 3, 1501)
+    y_r = np.where(P, piton, base + np.maximum(rel, 0) * 0.04)
+    # éboulis au pied des parois
+    dPo = ndimage.distance_transform_edt(~P)
+    y_r = np.where(~P & (dPo < 5), y_r + (5 - dPo) * 0.6, y_r)
+    y, a = L.melange(y_r, L.couvert(R), recale=True)
+    pl = M.pente_locale(y)
+    typ = np.full(X.shape, PRE | TAILLEE, np.int32)
+    typ[(pl > 1.0)] = EBOULIS | TAILLEE
+    typ[~P & (dPo < 4) & (dPo > 0)] = EBOULIS | TAILLEE
+    typ[P] = ROC | TAILLEE
+    typ[P & (pl < 0.6) & (dP > 2.5) & (bruit(X, Z, 3, 1502) > 0.1)] = PRE | TAILLEE      # touffes sur les dômes
+    print(f"meteores : {n} pitons, {int(P.sum())} colonnes de rocher, sommets jusqu'à y {y.max():.0f} "
+          f"(plaine ~y {np.median(y[~P]):.0f})")
+    return finir_loupe("meteores", L, y, typ, np.full(X.shape, np.nan), "CONGLOMERAT", roc=1.2)
+
+
+def fumerolles(X, Z, y, masque, n, rng, typ=None):
+    """n fumerolles (blocs qui fument) prises au hasard dans le masque, entourées de soufre (classe MOUSSE de la
+    palette VOLCAN)."""
+    vox = []
+    jj, ii = np.nonzero(masque)
+    if len(jj) == 0:
+        return vox, typ
+    for k in rng.choice(len(jj), size=min(n, len(jj)), replace=False):
+        j, i = jj[k], ii[k]
+        vox.append((int(X[j, i]), int(np.floor(y[j, i])), int(Z[j, i]), VOX_FUMEROLLE))
+        if typ is not None:
+            m = (np.hypot(X - X[j, i], Z - Z[j, i]) < 1.8 + rng.random()) & masque
+            typ[m] = MOUSSE | TAILLEE
+    return vox, typ
+
+
+def volcan_classes(X, Z, y, E, C, pl, nu_au_dessus, roc=1.4):
+    """Sol d'un volcan : coulées (sol nu des cartes) en basalte noir, cendres et scories sur le cône, forêts plus bas."""
+    typ = np.full(X.shape, PRE | TAILLEE, np.int32)
+    typ[(C == 60) | (E > nu_au_dessus + 150 * bruit(X, Z, 8, 1601))] = EBOULIS | TAILLEE
+    coulee = (C == 60) & (bruit(X, Z, 5, 1602) > -0.6)
+    typ[coulee & (E < nu_au_dessus + 300)] = FOND | TAILLEE
+    typ[pl > roc] = ROC | TAILLEE
+    return typ
+
+
+def etna():
+    """Etna sur le relief réel agrandi 2,5 fois : le grand cône, la Valle del Bove, les coulées de lave récentes en
+    basalte noir (sol nu d'ESA WorldCover), les cônes adventifs ; au sommet, les cratères (Voragine et Bocca Nuova
+    réunis, Nord-Est, Sud-Est) agrandis, un lac de lave au fond du cratère Sud-Est, des fumerolles et du soufre."""
+    R = Relief("etna")
+    # volcan au bord de la mer : traité comme une côte (la mer agrandie rejoint celle du mod), vraies proportions
+    # ancré sur la côte ionienne (Riposto) : la côte agrandie suit celle du mod ; le volcan est à ~180 blocs à l ouest ; au nord, la mer Tyrrhénienne du mod borne la zone
+    L, E, y, eau, F = fjord_reel(R, 37.735, 15.203, 2.5, -345, 50, -150, 175, v=0.03, sigma_m=2500.0, fondu=50,
+                                 iso=True)
+    X, Z = L.X, L.Z
+    a = L.bord()
+    C = couverture("etna", L.lo, L.la)
+    rng = np.random.default_rng(1600)
+    vox = []
+    # les cratères sommitaux sont à moins d'un kilomètre les uns des autres : agrandis, ils se chevaucheraient ; on
+    # garde leur disposition (Nord-Est au nord-nord-est, Sud-Est au sud-est du cratère central) en les écartant
+    c0 = L.vers_blocs(37.7508, 14.9928)
+    crateres = [(c0, 8.5, 15.0, 1610), (c0 + np.array([8.0, -15.5]), 6.0, 12.0, 1620),
+                (c0 + np.array([14.0, 13.0]), 7.0, 10.0, 1630)]
+    dedans = np.zeros(X.shape, bool); bords = np.zeros(X.shape, bool)
+    for c, r, prof, g in crateres:
+        y, inter, fond, fy = cratere(X, Z, y, c, r, prof, rebord=3.0, graine=g)
+        dedans |= inter
+        rr = np.hypot(X - c[0], Z - c[1]) / r
+        bords |= (rr > 0.75) & (rr < 1.35)
+        if g == 1630:                                  # cratère Sud-Est : lac de lave
+            lac = rr < 0.42
+            y = np.where(rr < 0.52, fy, y)                     # fond bien plat autour du lac (la lave n'en sort pas)
+            n0 = int(np.floor(fy))
+            for j, i in zip(*np.nonzero(lac)):
+                # la lave remplace le dessus du fond (à niveau : elle ne déborde pas), sur du magma
+                vox.append((int(X[j, i]), n0 - 1, int(Z[j, i]), VOX_MAGMA))
+                vox.append((int(X[j, i]), n0, int(Z[j, i]), VOX_LAVE))
+    pl = M.pente_locale(y)
+    typ = volcan_classes(X, Z, y, np.where(a > 0.05, E, 0), C, pl, nu_au_dessus=2300)
+    typ[dedans] = EBOULIS | TAILLEE
+    typ[F] = FOND | TAILLEE
+    v_, typ = fumerolles(X, Z, y, bords & (pl < 2.0), 28, rng, typ)
+    vox += v_
+    print(f"etna : sommet y {y.max():.0f}, 3 cratères, lac de lave de {sum(1 for v in vox if v[3] == VOX_LAVE)} "
+          f"blocs, {len(v_)} fumerolles")
+    return finir_loupe("etna", L, y, typ, eau, "VOLCAN", roc=1.4, vox=vox)
+
+
+def vesuve():
+    """Vésuve sur le relief réel agrandi 5 fois : le Gran Cono dans la caldeira du Somma (Valle del Gigante entre
+    les deux), le cratère agrandi (~18 blocs, parois raides), des fumerolles et du soufre sur ses parois ; cendres
+    et scories sur le cône, forêts sur le Somma. Pas de lave (le volcan dort depuis 1944)."""
+    R = Relief("vesuve")
+    # ancré sur la côte du golfe de Naples (Torre del Greco) : le volcan est à ~140 blocs au nord-est
+    L, E, y, eau, F = fjord_reel(R, 40.776, 14.370, 5.0, -90, 270, -280, 70, v=0.075, sigma_m=5000.0, fondu=45,
+                                 iso=True)
+    X, Z = L.X, L.Z
+    a = L.bord()
+    C = couverture("vesuve", L.lo, L.la)
+    rng = np.random.default_rng(1700)
+    c = L.vers_blocs(40.8213, 14.4261)
+    y, inter, fond, fy = cratere(X, Z, y, c, 9.5, 20.0, rebord=2.0, graine=1710)
+    rr = np.hypot(X - c[0], Z - c[1]) / 9.5
+    pl = M.pente_locale(y)
+    typ = volcan_classes(X, Z, y, np.where(a > 0.05, E, 0), C, pl, nu_au_dessus=700)
+    typ[inter] = EBOULIS | TAILLEE
+    typ[F] = FOND | TAILLEE
+    vox, typ = fumerolles(X, Z, y, (rr > 0.45) & (rr < 1.0) & (pl < 2.5), 16, rng, typ)
+    print(f"vesuve : sommet y {y.max():.0f}, cratère fond y {fy:.0f}, {len(vox)} fumerolles")
+    return finir_loupe("vesuve", L, y, typ, eau, "VOLCAN", roc=1.4, vox=vox)
 
 
 def tre_cime():
@@ -634,12 +863,12 @@ def plitvice():
     return finir_loupe("plitvice", L_, y, typ, eau, "TRAVERTIN", roc=1.2, w_typ=w)
 
 
-def fjord_reel(R, lat_a, lon_a, k, x0, x1, z0, z1, v=0.03, sigma_m=900.0, fondu=40, eau_reelle=None):
+def fjord_reel(R, lat_a, lon_a, k, x0, x1, z0, z1, v=0.03, sigma_m=900.0, fondu=40, eau_reelle=None, iso=False):
     """Fjord sur le relief réel agrandi k fois (zoom « carte », comme le mod) depuis A, sa jonction avec la mer du mod.
     Mer = altitude <= 0 du modèle ; hauteurs = courbe du mod sur le relief lissé + relief local exagéré, si bien que
     les montagnes du lieu rejoignent celles du mod. Sur la bande du bord, l'eau est la réunion de la mer du lieu et
     de celle du mod, gardée seulement si elle rejoint la mer du mod hors du lieu (pas de bassin isolé)."""
-    L = Zoom(lat_a, lon_a, k, x0, x1, z0, z1, fondu=fondu, iso=False)
+    L = Zoom(lat_a, lon_a, k, x0, x1, z0, z1, fondu=fondu, iso=iso)
     E = R.ech(L.lo, L.la)
     cov = L.couvert(R)
     mer_r = (E <= 0.5) & cov
@@ -839,7 +1068,7 @@ def preikestolen():
     return finir_loupe("preikestolen", L, y, typ, eau, "GNEISS", roc=1.15)
 
 
-LIEUX = {"mer_de_glace": mer_de_glace, "jokulsarlon": jokulsarlon, "gavarnie": gavarnie, "cervin": cervin, "tre_cime": tre_cime, "plitvice": plitvice, "geiranger": geiranger, "preikestolen": preikestolen}
+LIEUX = {"etna": etna, "vesuve": vesuve, "meteores": meteores, "chaussee": chaussee, "mer_de_glace": mer_de_glace, "jokulsarlon": jokulsarlon, "gavarnie": gavarnie, "cervin": cervin, "tre_cime": tre_cime, "plitvice": plitvice, "geiranger": geiranger, "preikestolen": preikestolen}
 
 if __name__ == "__main__":
     noms = [a for a in sys.argv[1:] if not a.startswith("--")]
