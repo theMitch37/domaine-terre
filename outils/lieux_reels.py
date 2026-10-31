@@ -309,7 +309,8 @@ def cervin():
     R = Relief("cervin")
     L = Zoom(45.9763, 7.6586, 4.0, -190, 190, -135, 85, fondu=45)
     y_r, E, Es = relief_exagere(R, L.lo, L.la, v=0.048, sigma_m=1800.0)
-    y, a = L.melange(y_r, L.couvert(R), recale=True)
+    y_r = L.raccord(y_r, L.couvert(R))
+    y, a = L.melange(y_r, L.couvert(R))
     typ = classes_montagne(L.X, L.Z, y, np.where(a > 0.05, E, 0), neige=3150, glace=2750, eboulis=(2400, 3300),
                            herbe_max=2550, roc=1.1, pente_glace=1.0, pente_neige=1.3)
     print(f"cervin : sommet y {y.max():.0f} (relief réel {E.max():.0f} m)")
@@ -353,7 +354,8 @@ def mer_de_glace():
     Eg = R.ech(L.lo, L.la, 250.0)
     glace0 = ndimage.gaussian_filter((C == 70).astype(float), 1.5)
     y_r = y_r + (T.blocs(Es) + (Eg - Es) * v - y_r) * glace0
-    y, a = L.melange(y_r, L.couvert(R), recale=True)
+    y_r = L.raccord(y_r, L.couvert(R))
+    y, a = L.melange(y_r, L.couvert(R))
     G = (C == 70) & (a > 0.3)
     G = ndimage.binary_opening(G, iterations=1)
     lab, n = ndimage.label(G)
@@ -681,7 +683,8 @@ def tre_cime():
     L = Zoom(lat_c, lon_c, k, -180, 180, -175, 175, fondu=45)
     X, Z, c = L.X, L.Z, L.c
     y_r, E, Es = relief_exagere(R, L.lo, L.la, v=0.060, sigma_m=1200.0)
-    y, a_ = L.melange(y_r, L.couvert(R), recale=True)
+    y_r = L.raccord(y_r, L.couvert(R))
+    y, a_ = L.melange(y_r, L.couvert(R))
     E = np.where(a_ > 0.05, E, 0)
     # la rivière du mod (qui naît, sur la carte du mod, au pied nord des tours) : le lieu la reprend
     y, eau, torrent = reprendre_riviere(L, y)
@@ -730,7 +733,8 @@ def gavarnie():
     L = Zoom(42.700, -0.010, 5.0, -180, 180, -180, 180, fondu=45)
     X, Z = L.X, L.Z
     y_r, E, Es = relief_exagere(R, L.lo, L.la, v=0.04, sigma_m=1800.0)
-    y, a = L.melange(y_r, L.couvert(R), recale=True)
+    y_r = L.raccord(y_r, L.couvert(R))
+    y, a = L.melange(y_r, L.couvert(R))
     T_ = L.vers_blocs(42.6855, -0.012)
     B_ = L.vers_blocs(42.6975, -0.012)
     N_ = L.vers_blocs(42.733, -0.008)
@@ -816,6 +820,14 @@ def plitvice():
     f = np.interp(E, anc_E, anc_y)
     f = np.where(E > anc_E[-1], anc_y[-1] + (E - anc_E[-1]) * 0.07, f)
     f = np.where(E < anc_E[0], anc_y[0] + (E - anc_E[0]) * 0.10, f)
+    # raccord au mod : la vallée des lacs (dont les niveaux sont fixés en marches) est décalée d'un seul bloc entier ;
+    # la correction variable ne s'applique qu'au-delà de 60 blocs du talweg
+    D = L_.raccord(f, cov) - f
+    Dm = float(np.round(np.mean(D[d0 < 60])))
+    Dm = max(Dm, 66.0 - y_l[-1])                       # le lac le plus bas reste au-dessus de la mer (aquifère)
+    D2 = Dm + (D - Dm) * lisse(np.clip((d0 - 60) / 60, 0, 1))
+    f = f + D2
+    y_l = [v + Dm for v in y_l]
     y, a_ = L_.melange(f, cov)
     # les lacs : du plus bas au plus haut, chaque lac prend les colonnes de la vallée sous son niveau, à partir de
     # son début le long du talweg (le barrage du lac d'aval reçoit ainsi l'eau du lac d'amont : cascades)
@@ -985,7 +997,7 @@ def geiranger():
     """Geirangerfjord sur le relief réel (agrandi 3 fois, comme la carte du mod), parois exagérées ; les Sept Sœurs
     (sept filets d'eau côte à côte) tombent de la paroi nord, le Prétendant de la paroi sud, à leur vraie place."""
     R = Relief("geiranger")
-    L, E, y, eau, F = fjord_reel(R, 62.112, 6.950, 3.0, -30, 380, -120, 110, v=0.042, sigma_m=1500.0)
+    L, E, y, eau, F = fjord_reel(R, 62.112, 6.950, 3.0, -30, 380, -120, 110, v=0.042, sigma_m=1500.0, raccord=True)
     X, Z, c, h, sd = L.X, L.Z, L.c, L.h, L.sd
     def chutes(cible, n, ecart, haut, larg=1.0, long_=9):
         """n filets d'eau côte à côte qui descendent la paroi en cascades jusqu'au fjord : ils partent d'un petit
@@ -1054,7 +1066,7 @@ def preikestolen():
     « chaire » (table de rocher de 25 x 25 m, 604 m au-dessus de l'eau, fendue à l'arrière) est sculptée à sa vraie
     place : ~9 x 8 blocs, trois faces à pic sur le fjord."""
     R = Relief("preikestolen")
-    L, E, y, eau, F = fjord_reel(R, 58.907, 6.089, 3.0, -30, 270, -250, 40, v=0.05, sigma_m=1500.0)
+    L, E, y, eau, F = fjord_reel(R, 58.907, 6.089, 3.0, -30, 270, -250, 40, v=0.05, sigma_m=1500.0, raccord=True)
     X, Z = L.X, L.Z
     dF = ndimage.distance_transform_edt(~F)
     q = L.vers_blocs(58.9864, 6.1903)

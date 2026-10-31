@@ -58,6 +58,8 @@ def image(sol, eau, typ, lieu, nom):
     rgb[(sol < 66) & (pente < 0.6)] = (205, 196, 150)                    # rivages bas
     cl = typ & 15
     for k, c in COULEURS.items():
+        if k in (1, 9):                                  # prés du lieu : même herbe que le mod (sinon un cadre clair)
+            continue
         rgb[(cl == k) & (lieu != "")] = c
     rgb = rgb * ombre
     w = np.isfinite(eau)
