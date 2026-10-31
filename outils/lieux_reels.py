@@ -523,6 +523,7 @@ def chaussee():
     y = np.where(pied & fente, y - 1.0, y)
     emerge = langue & (haut > 63.0)
     sous = langue & ~emerge
+    y = np.where(sous, np.minimum(y, 61.6), y)                # sous l'eau : au moins un bloc d'eau dessus
     F = (F | sous) & ~emerge
     eau = np.where(sous & (L.bord() > 0.02), 63.0, np.where(emerge, np.nan, eau))
     pl = M.pente_locale(y)
