@@ -147,6 +147,22 @@ class Zoom:
     def couvert(self, R, marge=3):
         return R.couvre(self.lo, self.la)
 
+    def raccord(self, y_reel, cov, terre=None, sigma=40.0):
+        """Correction douce du relief agrandi vers le terrain du mod : l'écart (mod - lieu) mesuré sur la bande du
+        bord est prolongé vers l'intérieur par une moyenne pondérée très lissée ; ajoutée au relief, elle le fait
+        rejoindre le mod sans marche ni fossé, et sans toucher au relief local (pentes, pitons). terre : où l'appliquer
+        (pas à la mer, dont le niveau ne bouge pas)."""
+        terre = np.ones(y_reel.shape, bool) if terre is None else terre
+        a = lisse(np.clip((self.den - 4) / (self.fondu - 4), 0, 1))
+        bande = cov & (a > 0.05) & (a < 0.95) & terre & (self.h > 63.5)
+        num = ndimage.gaussian_filter(np.where(bande, self.h - y_reel, 0.0), sigma)
+        den = ndimage.gaussian_filter(bande.astype(float), sigma)
+        moy = float(np.mean((self.h - y_reel)[bande])) if bande.any() else 0.0
+        D = np.where(den > 1e-3, num / np.maximum(den, 1e-3), moy)
+        D = D * np.clip(den / 0.02, 0, 1) + moy * (1 - np.clip(den / 0.02, 0, 1))
+        print(f"  raccord au mod : écart moyen {moy:+.1f} blocs (de {D[terre].min():+.1f} à {D[terre].max():+.1f})")
+        return np.where(terre, y_reel + D, y_reel)
+
     def melange(self, y_reel, cov, recale=False):
         """Relief réel agrandi à l'intérieur, terrain du mod sur la bande du bord. recale : le relief du lieu est
         décalé (en bloc) à la hauteur moyenne du mod sur la bande du bord, pour que le raccord ne fasse ni marche ni
@@ -447,7 +463,7 @@ def chaussee():
     ~40 000 colonnes hexagonales en vrai, ici des prismes de 3 blocs qui descendent en gradins du pied de la falaise
     jusque sous la mer (les dernières affleurent), fentes entre les colonnes."""
     R = Relief("chaussee")
-    L, E, y, eau, F = fjord_reel(R, 55.2408, -6.5116, 5.0, -210, 210, -130, 115, v=0.16, sigma_m=600.0, fondu=45,
+    L, E, y, eau, F = fjord_reel(R, 55.2408, -6.5116, 5.0, -210, 210, -130, 115, v=0.16, sigma_m=600.0, fondu=45, fond_mod=True, raccord=True,
                                  eau_reelle=lambda L_: couverture("chaussee", L_.lo, L_.la) == 80)
     X, Z = L.X, L.Z
     C = couverture("chaussee", L.lo, L.la)
@@ -456,7 +472,7 @@ def chaussee():
     dF = ndimage.distance_transform_edt(~F)
     terre = ~F
     # la côte d'Antrim est un plateau de basalte de 60 à 100 m qui tombe dans la mer : hauteurs doublées près de la mer
-    amp = 1.0 + 1.0 * lisse(np.clip(1 - dF / 90, 0, 1)) * L.bord()
+    amp = 1.0 + 1.0 * lisse(np.clip(1 - dF / 90, 0, 1)) * (1 - L.t)
     y = np.where(terre, 63.6 + (y - 63.6) * amp, y)
     haut_int = ndimage.gaussian_filter(ndimage.maximum_filter(np.where(terre, y, 0), size=17), 3)
     marge_f = np.clip((haut_int - 63.0 - 5.0) / 4.0, 0, 1)
@@ -546,7 +562,8 @@ def meteores():
     # éboulis au pied des parois
     dPo = ndimage.distance_transform_edt(~P)
     y_r = np.where(~P & (dPo < 5), y_r + (5 - dPo) * 0.6, y_r)
-    y, a = L.melange(y_r, L.couvert(R), recale=True)
+    y_r = L.raccord(y_r, L.couvert(R))
+    y, a = L.melange(y_r, L.couvert(R))
     pl = M.pente_locale(y)
     typ = np.full(X.shape, PRE | TAILLEE, np.int32)
     typ[(pl > 1.0)] = EBOULIS | TAILLEE
@@ -591,7 +608,8 @@ def etna():
     R = Relief("etna")
     # volcan au bord de la mer : traité comme une côte (la mer agrandie rejoint celle du mod), vraies proportions
     # ancré sur la côte ionienne (Riposto) : la côte agrandie suit celle du mod ; le volcan est à ~180 blocs à l ouest ; au nord, la mer Tyrrhénienne du mod borne la zone
-    L, E, y, eau, F = fjord_reel(R, 37.735, 15.203, 2.5, -345, 50, -150, 175, v=0.03, sigma_m=2500.0, fondu=50,
+    L, E, y, eau, F = fjord_reel(R, 37.735, 15.203, 2.5, -345, 50, -150, 175, v=0.03, sigma_m=2500.0, fondu=50, raccord=True,
+                                 fond_mod=True,
                                  iso=True)
     X, Z = L.X, L.Z
     a = L.bord()
@@ -634,7 +652,8 @@ def vesuve():
     et scories sur le cône, forêts sur le Somma. Pas de lave (le volcan dort depuis 1944)."""
     R = Relief("vesuve")
     # ancré sur la côte du golfe de Naples (Torre del Greco) : le volcan est à ~140 blocs au nord-est
-    L, E, y, eau, F = fjord_reel(R, 40.776, 14.370, 5.0, -90, 270, -280, 70, v=0.075, sigma_m=5000.0, fondu=45,
+    L, E, y, eau, F = fjord_reel(R, 40.776, 14.370, 5.0, -90, 270, -280, 70, v=0.075, sigma_m=5000.0, fondu=45, raccord=True,
+                                 fond_mod=True,
                                  iso=True)
     X, Z = L.X, L.Z
     a = L.bord()
@@ -863,7 +882,8 @@ def plitvice():
     return finir_loupe("plitvice", L_, y, typ, eau, "TRAVERTIN", roc=1.2, w_typ=w)
 
 
-def fjord_reel(R, lat_a, lon_a, k, x0, x1, z0, z1, v=0.03, sigma_m=900.0, fondu=40, eau_reelle=None, iso=False):
+def fjord_reel(R, lat_a, lon_a, k, x0, x1, z0, z1, v=0.03, sigma_m=900.0, fondu=40, eau_reelle=None, iso=False,
+               raccord=False, fond_mod=False):
     """Fjord sur le relief réel agrandi k fois (zoom « carte », comme le mod) depuis A, sa jonction avec la mer du mod.
     Mer = altitude <= 0 du modèle ; hauteurs = courbe du mod sur le relief lissé + relief local exagéré, si bien que
     les montagnes du lieu rejoignent celles du mod. Sur la bande du bord, l'eau est la réunion de la mer du lieu et
@@ -886,6 +906,11 @@ def fjord_reel(R, lat_a, lon_a, k, x0, x1, z0, z1, v=0.03, sigma_m=900.0, fondu=
     dIn = ndimage.distance_transform_edt(mer_r)
     fond_r = 61.6 - np.minimum(1.0 + 2.2 * dIn, 22.0) + 0.8 * bruit(L.X, L.Z, 7, 940)
     y_r = np.where(mer_r, fond_r, np.maximum(yt, 64.0))
+    if raccord:
+        # les terres rejoignent le mod sans marche ; la correction s'éteint vers la côte (qui reste au niveau de la mer)
+        dmer = ndimage.distance_transform_edt(~mer_r)
+        y_c = L.raccord(y_r, cov, terre=~mer_r)
+        y_r = np.where(mer_r, y_r, np.maximum(y_r + (y_c - y_r) * lisse(np.clip((dmer - 2) / 25, 0, 1)), 64.0))
     # mélange avec le terrain du mod vers le bord : la mer est ce qui reste sous le niveau de la mer, reliée à la mer
     # du mod hors du lieu (un bras du fjord agrandi qui sort du lieu loin de la mer du mod remonte en vallée)
     y, a = L.melange(y_r, cov)
@@ -944,6 +969,13 @@ def fjord_reel(R, lat_a, lon_a, k, x0, x1, z0, z1, v=0.03, sigma_m=900.0, fondu=
     mer = reliee
     rive = lisse(np.clip(ndimage.distance_transform_edt(~mer) / 3, 0, 1))
     y = np.where(mer, np.minimum(y, 61.9), np.maximum(y, 63.6 + 1.2 * rive))
+    if fond_mod:
+        # au large, le fond de la mer du mod (pas de cuvette plus profonde que lui, qui dessinerait le rectangle du
+        # lieu) ; près des côtes du lieu, le fond descend en pente depuis le rivage
+        dRive = ndimage.distance_transform_edt(mer)
+        plancher = np.where(L.sd < 0, np.maximum(L.h, 40.0), 61.9 - 0.35 * dRive)
+        plancher = ndimage.gaussian_filter(plancher, 2.0)
+        y = np.where(mer, np.maximum(y, np.minimum(plancher, 61.9)), y)
     eau = np.where(mer & (L.bord() > 0.02), 63.0, np.nan)
     print(f"  fjord : {int(mer_r.sum())} colonnes de mer du relief, {int(mer.sum())} en eau, ancrage {L.c.round(1)}")
     return L, E * (a > 0.05), y, eau, mer
