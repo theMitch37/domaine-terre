@@ -121,7 +121,7 @@ def ecrire(nom, X, Z, x0, z0, y, h, sommet, typ, creux=None):
         with gzip.open(chemin_vox, "wb", 9) as f:
             f.write(struct.pack("<i", len(vox)))
             for (x, yy, z, c) in vox:
-                f.write(struct.pack("<3ib", int(x), int(yy), int(z), int(c)))
+                f.write(struct.pack("<3iB", int(x), int(yy), int(z), int(c)))
     elif os.path.exists(chemin_vox):
         os.remove(chemin_vox)
     np.savez_compressed(f"/tmp/lieu_{nom}.npz", X=X, Z=Z, y=y, h=h, sommet=sommet, typ=typ, poids=poids,
@@ -178,7 +178,7 @@ def en_tuiles(nom, X, Z, y, h, sommet, typ, sd, vox=None, marge=10, limite=None,
         with gzip.GzipFile(chemin_vox, "wb", 9, mtime=0) as f:
             f.write(struct.pack("<i", len(vox)))
             for (x, yy, z, c) in vox:
-                f.write(struct.pack("<3ib", int(x), int(yy), int(z), int(c)))
+                f.write(struct.pack("<3iB", int(x), int(yy), int(z), int(c)))
     elif os.path.exists(chemin_vox):
         os.remove(chemin_vox)
     if os.path.exists(SORTIE + nom + ".bin"):

@@ -23,6 +23,8 @@ public class DomaineLieux {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, MOD_ID);
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> STRATES =
             FEATURES.register("strates", () -> new StratesFeature(NoneFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<NoneFeatureConfiguration>> GROTTES =
+            FEATURES.register("grottes", () -> new GrottesFeature(NoneFeatureConfiguration.CODEC));
 
     public DomaineLieux() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -52,6 +54,9 @@ public class DomaineLieux {
         LieuxTerre.inscrire(new LieuGrille("meteores", LieuGrille.Palette.CONGLOMERAT, true, 60));
         LieuxTerre.inscrire(new LieuGrille("etna", LieuGrille.Palette.VOLCAN, true, 35));
         LieuxTerre.inscrire(new LieuGrille("vesuve", LieuGrille.Palette.VOLCAN, true, 35));
+        // îles construites pour les grottes marines (Staffa : grotte de Fingal ; Capri : grotte bleue)
+        LieuxTerre.inscrire(new LieuGrille("fingal", LieuGrille.Palette.CHAUSSEE, true, 45));
+        LieuxTerre.inscrire(new LieuGrille("capri", LieuGrille.Palette.CALCAIRE, true, 40));
         LOGGER.info("Domaine d'Aubin - Lieux uniques : {} lieu(x) inscrit(s).", LieuxTerre.liste().size());
     }
 }

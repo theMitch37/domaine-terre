@@ -655,7 +655,7 @@ def vesuve():
     et scories sur le cône, forêts sur le Somma. Pas de lave (le volcan dort depuis 1944)."""
     R = Relief("vesuve")
     # ancré sur la côte du golfe de Naples (Torre del Greco) : le volcan est à ~140 blocs au nord-est
-    L, E, y, eau, F = fjord_reel(R, 40.776, 14.370, 5.0, -90, 270, -280, 70, v=0.075, sigma_m=5000.0, fondu=45, raccord=True,
+    L, E, y, eau, F = fjord_reel(R, 40.776, 14.370, 5.0, -90, 270, -280, 35, v=0.075, sigma_m=5000.0, fondu=45, raccord=True,
                                  fond_mod=True,
                                  iso=True)
     X, Z = L.X, L.Z
@@ -672,6 +672,82 @@ def vesuve():
     vox, typ = fumerolles(X, Z, y, (rr > 0.45) & (rr < 1.0) & (pl < 2.5), 16, rng, typ)
     print(f"vesuve : sommet y {y.max():.0f}, cratère fond y {fy:.0f}, {len(vox)} fumerolles")
     return finir_loupe("vesuve", L, y, typ, eau, "VOLCAN", roc=1.4, vox=vox)
+
+
+def fingal():
+    """Île de Staffa (Hébrides), trop petite pour le mod (moins d'un bloc à 1:250) : construite à taille de jeu
+    (70 x 34 blocs), plateau d'herbe à y ~78 sur des falaises d'orgues de basalte verticales ; au sud, l'entrée de la
+    grotte de Fingal (creusée par outils/grottes.py) et une plate-forme de colonnes au ras de l'eau."""
+    c = bloc_de(56.4335, -6.3395)
+    X, Z, _ = M.zone(56.4335, -6.3395, 85, 145)
+    h, sd = T.hauteur_base(X, Z)
+    a = np.radians(12)
+    u = (X - c[0]) * np.cos(a) + (Z - c[1]) * np.sin(a)          # est-ouest (petit axe)
+    v = -(X - c[0]) * np.sin(a) + (Z - c[1]) * np.cos(a)         # nord-sud (grand axe, sud = v > 0)
+    nn = np.hypot(u / 17.0, v / 35.0) + 0.06 * bruit(X, Z, 5, 1801)
+    ile = nn < 1.0
+    plateau = 77.6 + 2.0 * bruit(X, Z, 12, 1802) - 3.0 * np.clip(v / 35.0, 0, 1)
+    # autour de l'île, le fond descend de 58 au pied des falaises jusqu'au fond du mod (rejoint à nn = 3,5)
+    fond = 58.0 + (np.minimum(h, 58.0) - 58.0) * lisse(np.clip((nn - 1.0) / 2.5, 0, 1))
+    y = np.where(ile, plateau, np.minimum(fond, 61.4))
+    # plate-forme de colonnes au pied de la falaise sud et est (la « chaussée » de Staffa)
+    gradin = ~ile & (nn < 1.12) & (v > 5)
+    cel = (np.floor(X / 2) * 7919 + np.floor(Z / 2) * 104729) % 997 / 997.0
+    y = np.where(gradin, 63.0 + np.floor(cel * 2.0) + 0.6, y)
+    sous = ~ile & ~gradin & (nn < 3.6) & (sd < 0)
+    eau = np.where(sous, 63.0, np.nan)
+    # entrée de la grotte : le point le plus au sud de l'île, direction vers le nord (l'intérieur)
+    jj, ii = np.nonzero(ile)
+    k = int(np.argmax(v[jj, ii] - 3 * np.abs(u[jj, ii])))
+    e = np.array([X[jj[k], ii[k]], Z[jj[k], ii[k]]])
+    d = -np.array([-np.sin(a), np.cos(a)])                       # vers le nord (v décroissant)
+    typ = np.full(X.shape, FOND | TAILLEE, np.int32)
+    typ[ile] = PRE | TAILLEE
+    typ[ile & (ndimage.distance_transform_edt(ile) < 2.5)] = ROC | TAILLEE
+    typ[gradin] = ROC | TAILLEE
+    print(f"fingal : île de {int(ile.sum())} colonnes, plateau y {plateau[ile].mean():.0f}, entrée de la grotte en {e}")
+    w = np.where(sous | ile | gradin, 1.0, 0.0)
+    y = h + (y - h) * w
+    typ = np.where(w > 0, typ | BIOME, 0)
+    res = M.ecrire("fingal", X, Z, y, h, y.copy(), typ, sd, np.where(w > 0, eau, np.nan), "CHAUSSEE")
+    g = dict(np.load("/tmp/lieu_fingal.npz"))
+    g.update(entree_x=e[0], entree_z=e[1], dir_x=d[0], dir_z=d[1])
+    np.savez_compressed("/tmp/lieu_fingal.npz", **g)
+    return res
+
+
+def capri():
+    """Capri sur le relief réel agrandi 4 fois (l'île n'est qu'un point dans le mod) : falaises calcaires, le Monte
+    Solaro, les Faraglioni ; sur la côte nord-ouest, l'entrée de la grotte bleue (creusée par outils/grottes.py)."""
+    R = Relief("capri")
+    L, E, y, eau, F = fjord_reel(R, 40.548, 14.235, 4.0, -150, 150, -66, 90, v=0.07, sigma_m=800.0, fondu=30,
+                                 iso=True, fond_mod=True)
+    X, Z = L.X, L.Z
+    C = couverture("capri", L.lo, L.la)
+    terre = ~F
+    dF = ndimage.distance_transform_edt(terre)
+    # falaises : la côte tombe à pic dans la mer
+    haut_int = ndimage.gaussian_filter(ndimage.maximum_filter(np.where(terre, y, 0), size=9), 2)
+    y = np.where(terre, y + (np.maximum(haut_int - 1.0, y) - y) * lisse(np.clip(1 - (dF - 1) / 6, 0, 1)) *
+                 np.clip((haut_int - 70) / 6, 0, 1), y)
+    q = L.vers_blocs(40.5605, 14.2056)
+    jj, ii = np.nonzero(terre & (dF <= 1.0))
+    pts = np.c_[X[jj, ii], Z[jj, ii]]
+    e = pts[int(np.argmin(np.hypot(pts[:, 0] - q[0], pts[:, 1] - q[1])))]
+    gz, gx = np.gradient(ndimage.gaussian_filter(dF, 3))
+    j0, i0 = int(e[1] - Z[0, 0]), int(e[0] - X[0, 0])
+    d = np.array([gx[j0, i0], gz[j0, i0]]); d /= np.linalg.norm(d) + 1e-9      # vers l'intérieur de l'île
+    pl = M.pente_locale(y)
+    typ = np.full(X.shape, PRE | TAILLEE, np.int32)
+    typ[(C == 60) | (pl > 0.9)] = EBOULIS | TAILLEE
+    typ[pl > 1.3] = ROC | TAILLEE
+    typ[F] = FOND | TAILLEE
+    print(f"capri : île de {int(terre.sum())} colonnes, sommet y {y.max():.0f}, grotte bleue en {e}, vers {d.round(2)}")
+    res = finir_loupe("capri", L, y, typ, eau, "CALCAIRE", roc=1.3)
+    g = dict(np.load("/tmp/lieu_capri.npz"))
+    g.update(grotte_x=e[0], grotte_z=e[1], grotte_dx=d[0], grotte_dz=d[1])
+    np.savez_compressed("/tmp/lieu_capri.npz", **g)
+    return res
 
 
 def tre_cime():
@@ -1116,7 +1192,7 @@ def preikestolen():
     return finir_loupe("preikestolen", L, y, typ, eau, "GNEISS", roc=1.15)
 
 
-LIEUX = {"etna": etna, "vesuve": vesuve, "meteores": meteores, "chaussee": chaussee, "mer_de_glace": mer_de_glace, "jokulsarlon": jokulsarlon, "gavarnie": gavarnie, "cervin": cervin, "tre_cime": tre_cime, "plitvice": plitvice, "geiranger": geiranger, "preikestolen": preikestolen}
+LIEUX = {"fingal": fingal, "capri": capri, "etna": etna, "vesuve": vesuve, "meteores": meteores, "chaussee": chaussee, "mer_de_glace": mer_de_glace, "jokulsarlon": jokulsarlon, "gavarnie": gavarnie, "cervin": cervin, "tre_cime": tre_cime, "plitvice": plitvice, "geiranger": geiranger, "preikestolen": preikestolen}
 
 if __name__ == "__main__":
     noms = [a for a in sys.argv[1:] if not a.startswith("--")]

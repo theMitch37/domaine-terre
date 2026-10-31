@@ -76,6 +76,13 @@ public final class CommandesDomaine {
         LIEUX.put("etna", new double[]{37.7745, 14.760});
         LIEUX.put("vesuve", new double[]{40.973, 14.5824});
         LIEUX.put("geysir", new double[]{64.296, -20.3024});
+        // grottes (MAJ 1) : l'entrée réelle ; rien ne les signale en jeu, la commande ne sert qu'aux essais
+        LIEUX.put("padirac", new double[]{44.8583, 1.7819});
+        LIEUX.put("han", new double[]{50.1352, 5.2126});
+        LIEUX.put("postojna", new double[]{45.7826, 14.2040});
+        LIEUX.put("eisriesenwelt", new double[]{47.5530, 13.2458});
+        LIEUX.put("fingal", new double[]{56.3819, -6.3500});
+        LIEUX.put("capri", new double[]{40.6187, 14.1366});
         LIEUX.put("amazonie", new double[]{-3.465, -62.215});
         LIEUX.put("rio", new double[]{-22.907, -43.173});
         LIEUX.put("andes", new double[]{-13.163, -72.545});

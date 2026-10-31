@@ -1,0 +1,6 @@
+{
+ "type": "forge:add_features",
+ "biomes": "#minecraft:is_overworld",
+ "features": "domaine_terre_lieux:grottes",
+ "step": "underground_decoration"
+}
