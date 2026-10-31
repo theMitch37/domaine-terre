@@ -239,13 +239,31 @@ def reprendre_riviere(L, y, seuil=0.3):
     y = np.where(d_l < 40, np.minimum(y, L.h + (y - L.h) * lisse(np.clip((d_l - 2) / 30, 0, 1))), y)
     garde = aval                     # jusqu au bord : le lit du lieu continue celui du mod
     eau = np.where(garde, eau_mod, eau)
-    # vasques : au bout amont de chaque tronçon gardé
+    # tronçons gardés d'une même rivière du mod (reliés dans le mod à travers la zone) : la rivière qui entre dans
+    # le lieu en ressort ; on la fait couler de l'un à l'autre par le fond des vallées agrandies (sinon elle se
+    # perdrait dans la montagne). Un tronçon seul naît d'une vasque.
     lab, n = ndimage.label(garde, structure=np.ones((3, 3)))
+    riv_lab, _ = ndimage.label(lit | garde, structure=np.ones((3, 3)))
+    bouts = []                                                  # (rivière, niveau du bout intérieur, j, i)
     for k in range(1, n + 1):
         ja, ia = np.nonzero(lab == k)
         ka = int(np.argmin(L.t[ja, ia]))
-        niv = float(eau_mod[ja[ka], ia[ka]])
-        src = np.hypot(X - X[ja[ka], ia[ka]], Z - Z[ja[ka], ia[ka]]) < 1.8
+        bouts.append((int(riv_lab[ja[ka], ia[ka]]), float(eau_mod[ja[ka], ia[ka]]), ja[ka], ia[ka]))
+    relies = set()
+    for r in {b_[0] for b_ in bouts}:
+        br = sorted([b_ for b_ in bouts if b_[0] == r], key=lambda b_: -b_[1])
+        for amont, aval_ in zip(br[:-1], br[1:]):
+            p0 = np.array([X[amont[2], amont[3]], Z[amont[2], amont[3]]])
+            p1 = np.array([X[aval_[2], aval_[3]], Z[aval_[2], aval_[3]]])
+            tr = talweg(y, p0, p1, X, Z)
+            y, eau, tr, _, _, Lr, _ = riviere_sur_relief(X, Z, y, eau, tr, amont[1], lambda s_: np.full(np.shape(s_), 2.2),
+                                                         prof=1.2, niv_min=aval_[1], pente=0.8, large=30)
+            relies |= {(amont[2], amont[3]), (aval_[2], aval_[3])}
+            print(f"  rivière du mod reliée à travers le lieu : y {amont[1]:.0f} -> {aval_[1]:.0f} sur {Lr:.0f} blocs")
+    for (_, niv, j, i) in bouts:
+        if (j, i) in relies:
+            continue
+        src = np.hypot(X - X[j, i], Z - Z[j, i]) < 1.8
         eau = np.where(src, niv, eau)
         y = np.where(src, np.minimum(y, niv - 2.0), y)
     return y, eau, (float(np.nanmax(eau)), int(garde.sum()))
@@ -333,11 +351,25 @@ def jokulsarlon():
     noir (Diamond Beach) ; sandur noir et mousses autour."""
     R = Relief("jokulsarlon")
     C_ = lambda L_: couverture("jokulsarlon", L_.lo, L_.la)
-    L, E, y, eau, F = fjord_reel(R, 64.045, -16.177, 4.0, -235, 110, -205, 95, v=0.05, sigma_m=900.0,
+    L, E, y, eau, F = fjord_reel(R, 64.045, -16.177, 4.0, -250, 125, -220, 95, v=0.05, sigma_m=900.0, fondu=65,
                                  eau_reelle=lambda L_: C_(L_) == 80)
     X, Z = L.X, L.Z
     C = C_(L)
     a = L.bord()
+    # le mod (relief lissé à 3') monte vite de la côte au Vatnajökull : le lieu agrandi, resté bas, y ferait un trou
+    # bordé de murs. Les terres du lieu sont relevées vers le mod en s'éloignant de l'eau (la côte et la lagune restent
+    # au niveau de la mer) : le glacier monte vers l'intérieur, comme en vrai mais plus vite
+    dW0 = ndimage.distance_transform_edt(~F)
+    terre = ~F
+    ecart = np.where(terre, L.h - y, 0.0)
+    poids_ = ndimage.gaussian_filter(terre.astype(float), 25) + 1e-6
+    D = ndimage.gaussian_filter(ecart, 25) / poids_
+    y = np.where(terre, y + np.maximum(D, 0) * lisse(np.clip((dW0 - 3) / 45, 0, 1)), y)
+    # au large, le fond de la mer du mod (pas de cuvette rectangulaire plus profonde que lui)
+    au_large = F & (ndimage.distance_transform_edt(L.sd >= 0) <= 15)
+    dRive = ndimage.distance_transform_edt(F)
+    fond_cote = np.minimum(61.9 - 0.35 * dRive, np.where(L.sd < 0, np.maximum(L.h, 40.0), 61.9))
+    y = np.where(au_large, np.maximum(y, np.minimum(fond_cote, 61.9)), y)
     # lagune / mer : la lagune est l'eau du lieu qui n'est pas la mer du mod au large
     dIn = ndimage.distance_transform_edt(F)
     lagune = F & (L.sd >= 0)
@@ -612,7 +644,10 @@ def fjord_reel(R, lat_a, lon_a, k, x0, x1, z0, z1, v=0.03, sigma_m=900.0, fondu=
     cov = L.couvert(R)
     mer_r = (E <= 0.5) & cov
     if eau_reelle is not None:                                  # lagunes au niveau de la mer (couverture du sol)
-        mer_r |= eau_reelle(L) & cov
+        er = eau_reelle(L) & cov
+        # les chenaux réels de 1-2 blocs (embouchure sous un pont, diagonales) restent ouverts
+        mer_r |= ndimage.binary_dilation(er, structure=np.ones((3, 3))) & ndimage.binary_dilation(
+            er | mer_r, structure=np.ones((3, 3)), iterations=1) & (ndimage.uniform_filter(er.astype(float), 5) > 0.2)
     lab, n = ndimage.label(mer_r)
     if n:
         tailles = ndimage.sum(np.ones_like(E), lab, range(1, n + 1))
