@@ -1,0 +1,50 @@
+serveur prêt en 120 s
+lot 1/5 : verdon, etretat, moher, douvres, pilat, mont_saint_michel, mer_talus_gascogne, mer_fosse_mariannes, himalaya_everest, lac_leman, lac_annecy, riviere_doire, baie_de_somme — 2356 chunks
+  2356/2356 chunks complets (385 s)
+lot 2/5 : mer_wadden, bassin_arcachon, estuaire_seine, gavarnie, gullfoss, skogafoss, plitvice, geiranger — 2477 chunks
+  2477/2477 chunks complets (605 s)
+lot 3/5 : preikestolen, cervin, tre_cime, mer_de_glace, jokulsarlon, alpes_ecrins — 2344 chunks
+  2344/2344 chunks complets (811 s)
+lot 4/5 : chaussee, meteores, etna, vesuve, grotte_padirac — 2423 chunks
+  2423/2423 chunks complets (1049 s)
+lot 5/5 : grotte_han, grotte_postojna, grotte_eisriesenwelt, fingal, capri — 2485 chunks
+  2485/2485 chunks complets (1293 s)
+12085 chunks demandés en 5 lots
+verdon : (130, 384, 260), 60 sortes de blocs
+etretat : (209, 384, 296), 59 sortes de blocs
+moher : (180, 384, 222), 66 sortes de blocs
+douvres : (195, 384, 265), 59 sortes de blocs
+pilat : (400, 384, 260), 67 sortes de blocs
+mont_saint_michel : (181, 384, 306), 54 sortes de blocs
+mer_talus_gascogne : (75, 384, 400), 39 sortes de blocs
+mer_fosse_mariannes : (151, 384, 161), 25 sortes de blocs
+himalaya_everest : (160, 384, 160), 52 sortes de blocs
+lac_leman : (125, 384, 200), 56 sortes de blocs
+lac_annecy : (110, 384, 100), 50 sortes de blocs
+riviere_doire : (160, 384, 160), 63 sortes de blocs
+baie_de_somme : (200, 384, 200), 54 sortes de blocs
+mer_wadden : (200, 384, 200), 73 sortes de blocs
+bassin_arcachon : (200, 384, 200), 55 sortes de blocs
+estuaire_seine : (100, 384, 240), 52 sortes de blocs
+gavarnie : (351, 384, 351), 77 sortes de blocs
+gullfoss : (361, 384, 274), 68 sortes de blocs
+skogafoss : (159, 384, 296), 66 sortes de blocs
+plitvice : (376, 384, 281), 60 sortes de blocs
+geiranger : (222, 384, 402), 69 sortes de blocs
+preikestolen : (283, 384, 292), 70 sortes de blocs
+cervin : (208, 384, 371), 76 sortes de blocs
+tre_cime : (341, 384, 355), 68 sortes de blocs
+mer_de_glace : (395, 384, 359), 71 sortes de blocs
+jokulsarlon : (292, 384, 337), 72 sortes de blocs
+alpes_ecrins : (160, 384, 160), 53 sortes de blocs
+chaussee : (237, 384, 413), 60 sortes de blocs
+meteores : (271, 384, 331), 71 sortes de blocs
+etna : (318, 384, 388), 78 sortes de blocs
+vesuve : (307, 384, 352), 68 sortes de blocs
+grotte_padirac : (320, 384, 450), 60 sortes de blocs
+grotte_han : (460, 384, 460), 71 sortes de blocs
+grotte_postojna : (400, 384, 500), 63 sortes de blocs
+grotte_eisriesenwelt : (280, 384, 340), 73 sortes de blocs
+fingal : (268, 384, 152), 60 sortes de blocs
+capri : (149, 384, 293), 57 sortes de blocs
+terminé en 1372 s

@@ -1,0 +1,4 @@
+branche=lieux-0.1
+commit=902866b891d98e07cf88053fd128883a2600a480
+date=2026-10-31T16:10:02Z
+resultat=success

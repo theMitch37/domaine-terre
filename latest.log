@@ -1,0 +1,275 @@
+[31Oct2026 15:47:13.415] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserver, --fml.forgeVersion, 47.4.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, nogui]
+[31Oct2026 15:47:13.421] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.21 by Eclipse Adoptium; OS Linux arch amd64 version 7.0.0-1017-azure
+[31Oct2026 15:47:13.543] [main/WARN] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Configuration file /tmp/serveur/config/fml.toml is not correct. Correcting
+[31Oct2026 15:47:13.545] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowSkipGLVersions] was corrected from null to []
+[31Oct2026 15:47:13.546] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowLogHelpMessage] was corrected from null to true
+[31Oct2026 15:47:13.547] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowSquir] was corrected from null to false
+[31Oct2026 15:47:13.548] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowShowCPU] was corrected from null to false
+[31Oct2026 15:47:13.583] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserver
+[31Oct2026 15:47:13.674] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/tmp/serveur/libraries/org/spongepowered/mixin/0.8.5/mixin-0.8.5.jar%2365!/ Service=ModLauncher Env=SERVER
+[31Oct2026 15:47:14.007] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/fmlcore/1.20.1-47.4.10/fmlcore-1.20.1-47.4.10.jar is missing mods.toml file
+[31Oct2026 15:47:14.009] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/javafmllanguage/1.20.1-47.4.10/javafmllanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[31Oct2026 15:47:14.011] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/lowcodelanguage/1.20.1-47.4.10/lowcodelanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[31Oct2026 15:47:14.013] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/mclanguage/1.20.1-47.4.10/mclanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[31Oct2026 15:47:14.119] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[31Oct2026 15:47:16.336] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[31Oct2026 15:47:16.346] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserver' with arguments [nogui]
+[31Oct2026 15:47:25.172] [modloading-worker-0/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Domaine d'Aubin - Terre : mod chargé.
+[31Oct2026 15:47:25.185] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.10, for MC 1.20.1 with MCP 20230612.114412
+[31Oct2026 15:47:25.189] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.4.10 Initialized
+[31Oct2026 15:47:25.275] [modloading-worker-0/INFO] [fr.domaineaubin.lieux.DomaineLieux/]: Domaine d'Aubin - Lieux uniques : 23 lieu(x) inscrit(s).
+[31Oct2026 15:47:25.977] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[31Oct2026 15:47:26.627] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.4.10 Target: 47.4.28
+[31Oct2026 15:47:27.829] [main/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[31Oct2026 15:47:27.890] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/tmp/serveur/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23105!/assets/.mcassetsroot' uses unexpected schema
+[31Oct2026 15:47:27.891] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/tmp/serveur/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23105!/data/.mcassetsroot' uses unexpected schema
+[31Oct2026 15:47:31.174] [main/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 7 recipes
+[31Oct2026 15:47:31.368] [main/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 1271 advancements
+[31Oct2026 15:47:32.089] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting minecraft server version 1.20.1
+[31Oct2026 15:47:32.090] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Loading properties
+[31Oct2026 15:47:32.090] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Default game type: SURVIVAL
+[31Oct2026 15:47:32.090] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[31Oct2026 15:47:32.425] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting Minecraft server on *:25565
+[31Oct2026 15:47:32.455] [Server thread/INFO] [net.minecraft.server.network.ServerConnectionListener/]: Using epoll channel type
+[31Oct2026 15:47:32.563] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[31Oct2026 15:47:32.564] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: The server will make no attempt to authenticate usernames. Beware.
+[31Oct2026 15:47:32.565] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[31Oct2026 15:47:32.565] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: To change this, set "online-mode" to "true" in the server.properties file.
+[31Oct2026 15:47:32.607] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file ./banc/serverconfig/forge-server.toml is not correct. Correcting
+[31Oct2026 15:47:32.608] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server was corrected from null to its default, SimpleCommentedConfig:{}. 
+[31Oct2026 15:47:32.609] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringBlockEntities was corrected from null to its default, false. 
+[31Oct2026 15:47:32.609] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringEntities was corrected from null to its default, false. 
+[31Oct2026 15:47:32.609] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.fullBoundingBoxLadders was corrected from null to its default, false. 
+[31Oct2026 15:47:32.610] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.zombieBaseSummonChance was corrected from null to its default, 0.1. 
+[31Oct2026 15:47:32.612] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.zombieBabyChance was corrected from null to its default, 0.05. 
+[31Oct2026 15:47:32.613] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.permissionHandler was corrected from null to its default, forge:default_handler. 
+[31Oct2026 15:47:32.614] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.advertiseDedicatedServerToLan was corrected from null to its default, true. 
+[31Oct2026 15:47:32.614] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.useItemWithDurationZero was corrected from null to its default, false. 
+[31Oct2026 15:47:32.734] [Server thread/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Monde Terre à l'échelle 1:250
+[31Oct2026 15:47:32.761] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Preparing level "banc"
+[31Oct2026 15:47:38.738] [Worker-Main-1/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Cartes de la Terre chargées en 3493 ms
+[31Oct2026 15:47:38.789] [Worker-Main-1/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Côtes fines chargées : 14423 tuiles côtières en 5 ms
+[31Oct2026 15:47:38.814] [Worker-Main-1/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Lacs chargés : 6573 lacs sur 7199 tuiles en 5 ms
+[31Oct2026 15:48:25.391] [Worker-Main-1/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Fleuves chargés : 78247 segments en 46205 ms
+[31Oct2026 15:48:32.222] [Worker-Main-1/INFO] [fr.domaineaubin.lieux.DomaineLieux/]: Grottes : 531 chunks
+[31Oct2026 15:48:34.031] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[31Oct2026 15:48:35.555] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:35.556] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:35.558] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:35.559] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:36.130] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:36.617] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:37.066] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:37.532] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:38.032] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:38.541] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:39.033] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:39.582] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:40.041] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:40.544] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:41.032] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:41.541] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:42.038] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:42.555] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:43.063] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:43.537] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:44.041] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:44.541] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:45.057] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:45.532] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:46.037] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:46.557] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:47.061] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:47.532] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:48.054] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:48.555] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:49.125] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[31Oct2026 15:48:49.577] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 9%
+[31Oct2026 15:48:50.034] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 26%
+[31Oct2026 15:48:50.535] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 27%
+[31Oct2026 15:48:51.037] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 29%
+[31Oct2026 15:48:51.556] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 30%
+[31Oct2026 15:48:52.041] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 31%
+[31Oct2026 15:48:52.568] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 32%
+[31Oct2026 15:48:53.055] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:48:53.542] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:48:54.032] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:48:54.545] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:48:55.057] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:48:55.541] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:48:56.033] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:48:56.554] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:48:57.032] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:48:57.547] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:48:58.060] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:48:58.534] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:48:59.032] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:48:59.533] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:00.036] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:00.546] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:01.054] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:01.537] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:02.035] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:02.535] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:03.038] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:03.553] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:04.039] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:04.541] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:05.049] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:05.559] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:06.032] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:06.542] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:07.032] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:07.536] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:08.047] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:08.551] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:09.032] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:09.532] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[31Oct2026 15:49:10.065] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 75%
+[31Oct2026 15:49:10.499] [Server thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 36467 ms
+[31Oct2026 15:49:10.501] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Done (97.906s)! For help, type "help"
+[31Oct2026 15:49:10.539] [Server thread/INFO] [net.minecraftforge.server.permission.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[31Oct2026 15:49:30.526] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [167, -1223] chunks in minecraft:overworld from [167, -1223] to [182, -1215] to be force loaded
+[31Oct2026 15:49:30.812] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [183, -1223] chunks in minecraft:overworld from [183, -1223] to [183, -1215] to be force loaded
+[31Oct2026 15:49:51.128] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-3, -1389] chunks in minecraft:overworld from [-3, -1389] to [12, -1376] to be force loaded
+[31Oct2026 15:49:53.711] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [13, -1389] chunks in minecraft:overworld from [13, -1389] to [15, -1376] to be force loaded
+[31Oct2026 15:50:12.883] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-269, -1482] chunks in minecraft:overworld from [-269, -1482] to [-255, -1471] to be force loaded
+[31Oct2026 15:50:32.072] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [26, -1431] chunks in minecraft:overworld from [26, -1431] to [41, -1419] to be force loaded
+[31Oct2026 15:50:32.410] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [42, -1431] chunks in minecraft:overworld from [42, -1431] to [42, -1419] to be force loaded
+[31Oct2026 15:50:55.024] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-42, -1245] chunks in minecraft:overworld from [-42, -1245] to [-27, -1230] to be force loaded
+[31Oct2026 15:51:05.474] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-42, -1229] chunks in minecraft:overworld from [-42, -1229] to [-27, -1220] to be force loaded
+[31Oct2026 15:51:05.475] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-26, -1245] chunks in minecraft:overworld from [-26, -1245] to [-26, -1230] to be force loaded
+[31Oct2026 15:51:05.695] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-26, -1229] chunks in minecraft:overworld from [-26, -1229] to [-26, -1220] to be force loaded
+[31Oct2026 15:51:24.947] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-56, -1363] chunks in minecraft:overworld from [-56, -1363] to [-41, -1352] to be force loaded
+[31Oct2026 15:51:27.451] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-40, -1363] chunks in minecraft:overworld from [-40, -1363] to [-37, -1352] to be force loaded
+[31Oct2026 15:51:41.118] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-148, -1298] chunks in minecraft:overworld from [-148, -1298] to [-133, -1293] to be force loaded
+[31Oct2026 15:51:45.736] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-132, -1298] chunks in minecraft:overworld from [-132, -1298] to [-123, -1293] to be force loaded
+[31Oct2026 15:52:00.867] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [3957, -321] chunks in minecraft:overworld from [3957, -321] to [3967, -312] to be force loaded
+[31Oct2026 15:52:16.423] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [2414, -784] chunks in minecraft:overworld from [2414, -784] to [2424, -774] to be force loaded
+[31Oct2026 15:52:32.178] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [178, -1297] chunks in minecraft:overworld from [178, -1297] to [191, -1289] to be force loaded
+[31Oct2026 15:52:41.554] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [168, -1280] chunks in minecraft:overworld from [168, -1280] to [174, -1274] to be force loaded
+[31Oct2026 15:52:55.530] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [215, -1271] chunks in minecraft:overworld from [215, -1271] to [224, -1261] to be force loaded
+[31Oct2026 15:53:12.157] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [37, -1404] chunks in minecraft:overworld from [37, -1404] to [50, -1392] to be force loaded
+[31Oct2026 15:53:12.158] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving the game (this may take a moment!)
+[31Oct2026 15:53:22.422] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (banc): All chunks are saved
+[31Oct2026 15:53:22.422] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[31Oct2026 15:53:22.422] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[31Oct2026 15:53:22.422] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[31Oct2026 15:53:22.423] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saved the game
+[31Oct2026 15:53:22.477] [Server thread/WARN] [net.minecraft.server.MinecraftServer/]: Can't keep up! Is the server overloaded? Running 251888ms or 5037 ticks behind
+[31Oct2026 15:53:35.458] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Unmarked all force loaded chunks in minecraft:overworld
+[31Oct2026 15:53:54.692] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [160, -1493] chunks in minecraft:overworld from [160, -1493] to [173, -1481] to be force loaded
+[31Oct2026 15:53:59.327] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-39, -1250] chunks in minecraft:overworld from [-39, -1250] to [-26, -1238] to be force loaded
+[31Oct2026 15:54:01.220] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [3, -1380] chunks in minecraft:overworld from [3, -1380] to [18, -1374] to be force loaded
+[31Oct2026 15:54:26.947] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-12, -1200] chunks in minecraft:overworld from [-12, -1200] to [3, -1185] to be force loaded
+[31Oct2026 15:54:34.086] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-12, -1184] chunks in minecraft:overworld from [-12, -1184] to [3, -1178] to be force loaded
+[31Oct2026 15:54:40.063] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [4, -1200] chunks in minecraft:overworld from [4, -1200] to [10, -1185] to be force loaded
+[31Oct2026 15:54:43.146] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [4, -1184] chunks in minecraft:overworld from [4, -1184] to [10, -1178] to be force loaded
+[31Oct2026 15:55:06.538] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-569, -1801] chunks in minecraft:overworld from [-569, -1801] to [-554, -1786] to be force loaded
+[31Oct2026 15:55:14.530] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-569, -1785] chunks in minecraft:overworld from [-569, -1785] to [-554, -1778] to be force loaded
+[31Oct2026 15:55:14.531] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-553, -1801] chunks in minecraft:overworld from [-553, -1801] to [-552, -1786] to be force loaded
+[31Oct2026 15:55:17.330] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-553, -1785] chunks in minecraft:overworld from [-553, -1785] to [-552, -1778] to be force loaded
+[31Oct2026 15:55:31.938] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-553, -1776] chunks in minecraft:overworld from [-553, -1776] to [-538, -1766] to be force loaded
+[31Oct2026 15:55:34.627] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-537, -1776] chunks in minecraft:overworld from [-537, -1776] to [-534, -1766] to be force loaded
+[31Oct2026 15:55:59.494] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [423, -1263] chunks in minecraft:overworld from [423, -1263] to [438, -1248] to be force loaded
+[31Oct2026 15:56:07.998] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [423, -1247] chunks in minecraft:overworld from [423, -1247] to [438, -1240] to be force loaded
+[31Oct2026 15:56:11.050] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [439, -1263] chunks in minecraft:overworld from [439, -1263] to [441, -1248] to be force loaded
+[31Oct2026 15:56:11.764] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [439, -1247] chunks in minecraft:overworld from [439, -1247] to [441, -1240] to be force loaded
+[31Oct2026 15:56:33.365] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [191, -1736] chunks in minecraft:overworld from [191, -1736] to [206, -1723] to be force loaded
+[31Oct2026 15:56:44.040] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [207, -1736] chunks in minecraft:overworld from [207, -1736] to [216, -1723] to be force loaded
+[31Oct2026 15:56:44.040] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving the game (this may take a moment!)
+[31Oct2026 15:57:01.327] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (banc): All chunks are saved
+[31Oct2026 15:57:01.328] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[31Oct2026 15:57:01.328] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[31Oct2026 15:57:01.328] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[31Oct2026 15:57:01.328] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saved the game
+[31Oct2026 15:57:06.563] [Server thread/WARN] [net.minecraft.server.MinecraftServer/]: Can't keep up! Is the server overloaded? Running 209124ms or 4182 ticks behind
+[31Oct2026 15:57:15.302] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Unmarked all force loaded chunks in minecraft:overworld
+[31Oct2026 15:57:38.084] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [167, -1655] chunks in minecraft:overworld from [167, -1655] to [182, -1640] to be force loaded
+[31Oct2026 15:57:41.924] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [167, -1639] chunks in minecraft:overworld from [167, -1639] to [182, -1638] to be force loaded
+[31Oct2026 15:57:43.023] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [183, -1655] chunks in minecraft:overworld from [183, -1655] to [185, -1640] to be force loaded
+[31Oct2026 15:57:43.071] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [183, -1639] chunks in minecraft:overworld from [183, -1639] to [185, -1638] to be force loaded
+[31Oct2026 15:58:06.556] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [201, -1288] chunks in minecraft:overworld from [201, -1288] to [216, -1275] to be force loaded
+[31Oct2026 15:58:12.225] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [217, -1288] chunks in minecraft:overworld from [217, -1288] to [224, -1275] to be force loaded
+[31Oct2026 15:58:35.498] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [331, -1309] chunks in minecraft:overworld from [331, -1309] to [346, -1294] to be force loaded
+[31Oct2026 15:58:44.077] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [331, -1293] chunks in minecraft:overworld from [331, -1293] to [346, -1287] to be force loaded
+[31Oct2026 15:58:50.129] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [347, -1309] chunks in minecraft:overworld from [347, -1309] to [353, -1294] to be force loaded
+[31Oct2026 15:58:53.032] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [347, -1293] chunks in minecraft:overworld from [347, -1293] to [353, -1287] to be force loaded
+[31Oct2026 15:59:06.106] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [178, -1290] chunks in minecraft:overworld from [178, -1290] to [193, -1275] to be force loaded
+[31Oct2026 15:59:16.868] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [178, -1274] chunks in minecraft:overworld from [178, -1274] to [193, -1265] to be force loaded
+[31Oct2026 15:59:18.040] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [194, -1290] chunks in minecraft:overworld from [194, -1290] to [200, -1275] to be force loaded
+[31Oct2026 15:59:20.993] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [194, -1274] chunks in minecraft:overworld from [194, -1274] to [200, -1265] to be force loaded
+[31Oct2026 15:59:43.897] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-465, -1795] chunks in minecraft:overworld from [-465, -1795] to [-450, -1780] to be force loaded
+[31Oct2026 15:59:47.577] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-465, -1779] chunks in minecraft:overworld from [-465, -1779] to [-450, -1777] to be force loaded
+[31Oct2026 15:59:52.151] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-449, -1795] chunks in minecraft:overworld from [-449, -1795] to [-444, -1780] to be force loaded
+[31Oct2026 15:59:54.626] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-449, -1779] chunks in minecraft:overworld from [-449, -1779] to [-444, -1777] to be force loaded
+[31Oct2026 16:00:08.994] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [171, -1255] chunks in minecraft:overworld from [171, -1255] to [181, -1245] to be force loaded
+[31Oct2026 16:00:08.995] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving the game (this may take a moment!)
+[31Oct2026 16:00:26.492] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (banc): All chunks are saved
+[31Oct2026 16:00:26.493] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[31Oct2026 16:00:26.493] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[31Oct2026 16:00:26.493] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[31Oct2026 16:00:26.493] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saved the game
+[31Oct2026 16:00:31.334] [Server thread/WARN] [net.minecraft.server.MinecraftServer/]: Can't keep up! Is the server overloaded? Running 189794ms or 3795 ticks behind
+[31Oct2026 16:00:41.048] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Unmarked all force loaded chunks in minecraft:overworld
+[31Oct2026 16:01:04.474] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-195, -1546] chunks in minecraft:overworld from [-195, -1546] to [-180, -1531] to be force loaded
+[31Oct2026 16:01:15.945] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-179, -1546] chunks in minecraft:overworld from [-179, -1546] to [-169, -1531] to be force loaded
+[31Oct2026 16:01:44.297] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [591, -1114] chunks in minecraft:overworld from [591, -1114] to [606, -1099] to be force loaded
+[31Oct2026 16:01:44.343] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [591, -1098] chunks in minecraft:overworld from [591, -1098] to [606, -1098] to be force loaded
+[31Oct2026 16:01:51.800] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [607, -1114] chunks in minecraft:overworld from [607, -1114] to [612, -1099] to be force loaded
+[31Oct2026 16:01:51.836] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [607, -1098] chunks in minecraft:overworld from [607, -1098] to [612, -1098] to be force loaded
+[31Oct2026 16:02:17.406] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [401, -1060] chunks in minecraft:overworld from [401, -1060] to [416, -1045] to be force loaded
+[31Oct2026 16:02:22.911] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [401, -1044] chunks in minecraft:overworld from [401, -1044] to [416, -1040] to be force loaded
+[31Oct2026 16:02:31.199] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [417, -1060] chunks in minecraft:overworld from [417, -1060] to [425, -1045] to be force loaded
+[31Oct2026 16:02:33.761] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [417, -1044] chunks in minecraft:overworld from [417, -1044] to [425, -1040] to be force loaded
+[31Oct2026 16:02:59.571] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [394, -1153] chunks in minecraft:overworld from [394, -1153] to [409, -1138] to be force loaded
+[31Oct2026 16:03:10.400] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [394, -1137] chunks in minecraft:overworld from [394, -1137] to [409, -1133] to be force loaded
+[31Oct2026 16:03:19.097] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [410, -1153] chunks in minecraft:overworld from [410, -1153] to [416, -1138] to be force loaded
+[31Oct2026 16:03:22.563] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [410, -1137] chunks in minecraft:overworld from [410, -1137] to [416, -1133] to be force loaded
+[31Oct2026 16:03:46.655] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [44, -1259] chunks in minecraft:overworld from [44, -1259] to [59, -1244] to be force loaded
+[31Oct2026 16:03:52.188] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [44, -1243] chunks in minecraft:overworld from [44, -1243] to [59, -1239] to be force loaded
+[31Oct2026 16:04:05.573] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [60, -1259] chunks in minecraft:overworld from [60, -1259] to [72, -1244] to be force loaded
+[31Oct2026 16:04:07.894] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [60, -1243] chunks in minecraft:overworld from [60, -1243] to [72, -1239] to be force loaded
+[31Oct2026 16:04:07.897] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving the game (this may take a moment!)
+[31Oct2026 16:04:23.712] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (banc): All chunks are saved
+[31Oct2026 16:04:23.713] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[31Oct2026 16:04:23.713] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[31Oct2026 16:04:23.713] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[31Oct2026 16:04:23.714] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saved the game
+[31Oct2026 16:04:33.688] [Server thread/WARN] [net.minecraft.server.MinecraftServer/]: Can't keep up! Is the server overloaded? Running 227399ms or 4547 ticks behind
+[31Oct2026 16:04:38.826] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Unmarked all force loaded chunks in minecraft:overworld
+[31Oct2026 16:05:05.509] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [135, -1404] chunks in minecraft:overworld from [135, -1404] to [150, -1389] to be force loaded
+[31Oct2026 16:05:20.246] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [135, -1388] chunks in minecraft:overworld from [135, -1388] to [150, -1376] to be force loaded
+[31Oct2026 16:05:34.989] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [151, -1404] chunks in minecraft:overworld from [151, -1404] to [164, -1389] to be force loaded
+[31Oct2026 16:05:44.575] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [151, -1388] chunks in minecraft:overworld from [151, -1388] to [164, -1376] to be force loaded
+[31Oct2026 16:06:12.299] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [390, -1291] chunks in minecraft:overworld from [390, -1291] to [405, -1276] to be force loaded
+[31Oct2026 16:06:23.484] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [390, -1275] chunks in minecraft:overworld from [390, -1275] to [405, -1266] to be force loaded
+[31Oct2026 16:06:42.453] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [406, -1291] chunks in minecraft:overworld from [406, -1291] to [421, -1276] to be force loaded
+[31Oct2026 16:06:49.709] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [406, -1275] chunks in minecraft:overworld from [406, -1275] to [421, -1266] to be force loaded
+[31Oct2026 16:07:15.907] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [362, -1332] chunks in minecraft:overworld from [362, -1332] to [377, -1317] to be force loaded
+[31Oct2026 16:07:16.905] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [362, -1316] chunks in minecraft:overworld from [362, -1316] to [377, -1315] to be force loaded
+[31Oct2026 16:07:24.130] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [378, -1332] chunks in minecraft:overworld from [378, -1332] to [383, -1317] to be force loaded
+[31Oct2026 16:07:24.307] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [378, -1316] chunks in minecraft:overworld from [378, -1316] to [383, -1315] to be force loaded
+[31Oct2026 16:07:47.459] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-182, -1579] chunks in minecraft:overworld from [-182, -1579] to [-172, -1564] to be force loaded
+[31Oct2026 16:07:47.460] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-182, -1563] chunks in minecraft:overworld from [-182, -1563] to [-172, -1563] to be force loaded
+[31Oct2026 16:08:02.471] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [386, -1133] chunks in minecraft:overworld from [386, -1133] to [401, -1124] to be force loaded
+[31Oct2026 16:08:04.637] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [402, -1133] chunks in minecraft:overworld from [402, -1133] to [405, -1124] to be force loaded
+[31Oct2026 16:08:04.638] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving the game (this may take a moment!)
+[31Oct2026 16:08:22.818] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (banc): All chunks are saved
+[31Oct2026 16:08:22.820] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[31Oct2026 16:08:22.820] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[31Oct2026 16:08:22.820] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[31Oct2026 16:08:22.820] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saved the game
+[31Oct2026 16:08:34.259] [Server thread/WARN] [net.minecraft.server.MinecraftServer/]: Can't keep up! Is the server overloaded? Running 225619ms or 4512 ticks behind
+[31Oct2026 16:08:43.298] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Unmarked all force loaded chunks in minecraft:overworld
+[31Oct2026 16:08:43.341] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping the server
+[31Oct2026 16:08:43.494] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[31Oct2026 16:08:43.528] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[31Oct2026 16:08:43.529] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[31Oct2026 16:08:50.235] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[banc]'/minecraft:overworld
+[31Oct2026 16:08:51.130] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[banc]'/minecraft:the_nether
+[31Oct2026 16:08:51.131] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[banc]'/minecraft:the_end
+[31Oct2026 16:08:51.160] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (banc): All chunks are saved
+[31Oct2026 16:08:51.162] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[31Oct2026 16:08:51.162] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[31Oct2026 16:08:51.162] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
