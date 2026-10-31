@@ -26,7 +26,7 @@ with open(os.path.join(SERVEUR, "server.properties"), "w") as f:
         "spawn-animals=false", "spawn-npcs=false", "generate-structures=true", "sync-chunk-writes=false"]) + "\n")
 
 journal = open(os.path.join(SORTIE, "serveur.log"), "w")
-p = subprocess.Popen(["java", "-Xmx5G", f"@libraries/net/minecraftforge/forge/{FORGE}/unix_args.txt", "nogui"],
+p = subprocess.Popen(["java", "-Xmx12G", f"@libraries/net/minecraftforge/forge/{FORGE}/unix_args.txt", "nogui"],
                      cwd=SERVEUR, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                      text=True, bufsize=1)
 lignes = queue.Queue()
