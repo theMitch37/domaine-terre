@@ -237,7 +237,7 @@ def reprendre_riviere(L, y, seuil=0.3):
     eau_mod = np.where(aval, w_r.astype(float), np.nan)
     d_l = ndimage.distance_transform_edt(~aval)
     y = np.where(d_l < 40, np.minimum(y, L.h + (y - L.h) * lisse(np.clip((d_l - 2) / 30, 0, 1))), y)
-    garde = aval & (L.bord() > 0.02)
+    garde = aval                     # jusqu au bord : le lit du lieu continue celui du mod
     eau = np.where(garde, eau_mod, eau)
     # vasques : au bout amont de chaque tronçon gardé
     lab, n = ndimage.label(garde, structure=np.ones((3, 3)))
