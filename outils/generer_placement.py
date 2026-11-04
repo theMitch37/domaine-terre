@@ -162,7 +162,7 @@ for _r in _csv.DictReader(open("outils/faune/especes.csv", encoding="utf-8"), de
     if _r["statut"] in ("retirer", "souterrain"):
         UW.setdefault(_ent, {})[_sp] = None
         continue
-    if not _aire(_r["terroirs"]):
+    if not _aire(_r["terroirs"]) or re.search(r"\b(mer|large|abysses)\b", _r["milieu"]):
         continue                                 # espèces marines : biomes d'origine (tags d'océan, mers du mod)
     _toks = {x.strip() for x in _r["milieu"].replace("(", ",").replace(")", ",").split(",") if x.strip()}
     _types = set().union(*[TYPES_MILIEU.get(t, set()) for t in _toks]) if _toks else set()
@@ -186,16 +186,46 @@ def resources(terroirs):
 
 
 z = jar("untamedwilds*.jar")
+# océans vanilla (plus générés : remplacés par les mers du mod, 04/11/2026) -> biomes domaine_terre:mer/…
+_TEMP = {"warm_ocean": "chaude", "deep_warm_ocean": "chaude", "lukewarm_ocean": "tiede", "deep_lukewarm_ocean": "tiede",
+         "ocean": "temperee", "deep_ocean": "temperee", "cold_ocean": "froide", "deep_cold_ocean": "froide",
+         "frozen_ocean": "gelee", "deep_frozen_ocean": "gelee"}
+
+
+def mers(liste):
+    out = []
+    for groupe in liste:
+        g = []
+        for v in groupe:
+            n = v.split("|minecraft:", 1)[1] if v.startswith("resource|minecraft:") else None
+            if n in _TEMP:
+                bandes = ["large", "abysse"] if n.startswith("deep_") else ["cote", "plateau"]
+                if n == "warm_ocean":
+                    bandes = ["cote", "plateau", "large", "abysse"]
+                g += [f"resource|domaine_terre:mer/{_TEMP[n]}_{b}" for b in bandes]
+            else:
+                g.append(v)
+        out += [[x] for x in g] if len(g) > len(groupe) else [g]
+    return out
+
+
 if z:
-    for ent, especes in UW.items():
-        chemin = f"data/untamedwilds/entities/{ent}.json"
+    for chemin in sorted(n for n in z.namelist() if n.startswith("data/untamedwilds/entities/") and n.endswith(".json")):
+        ent = chemin.rsplit("/", 1)[1][:-5]
+        especes = UW.get(ent, {})
         d = json.loads(z.read(chemin).decode("utf-8-sig"))
+        change = False
         for sp in d.get("species", []):
             ts = especes.get(sp["name"], especes.get("*", "garder"))
             if ts == "garder":
+                nv = mers(sp.get("spawnBiomes", []))
+                if nv != sp.get("spawnBiomes", []):
+                    sp["spawnBiomes"], change = nv, True
                 continue
             sp["spawnBiomes"] = [["resource|minecraft:the_void"]] if ts is None else resources_milieu(*ts)
-        fichiers[chemin] = d
+            change = True
+        if change:
+            fichiers[chemin] = d
 
 # ---------------------------------------------------------------- écriture du datapack
 fichiers["pack.mcmeta"] = {"pack": {"pack_format": 15, "description": "Le Domaine d'Aubin : plantes et animaux par terroir"}}
