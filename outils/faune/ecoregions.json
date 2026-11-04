@@ -1,0 +1,5924 @@
+{
+ "1": {
+  "nom": "Albertine Rift montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 5021
+ },
+ "2": {
+  "nom": "Cameroon Highlands forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 1235
+ },
+ "3": {
+  "nom": "Central Congolian lowland forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 13422
+ },
+ "4": {
+  "nom": "Comoros forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 133
+ },
+ "5": {
+  "nom": "Congolian coastal forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 6239
+ },
+ "6": {
+  "nom": "Cross-Niger transition forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 676
+ },
+ "7": {
+  "nom": "Cross-Sanaga-Bioko coastal forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 1716
+ },
+ "8": {
+  "nom": "East African montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 1980
+ },
+ "9": {
+  "nom": "Eastern Arc forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 358
+ },
+ "10": {
+  "nom": "Eastern Congolian swamp forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 2997
+ },
+ "11": {
+  "nom": "Eastern Guinean forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 6224
+ },
+ "12": {
+  "nom": "Ethiopian montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 2223
+ },
+ "13": {
+  "nom": "Granitic Seychelles forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 74
+ },
+ "14": {
+  "nom": "Guinean montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 1028
+ },
+ "15": {
+  "nom": "Knysna-Amatole montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 101
+ },
+ "16": {
+  "nom": "Kwazulu Natal-Cape coastal forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 489
+ },
+ "17": {
+  "nom": "Madagascar humid forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 4046
+ },
+ "18": {
+  "nom": "Madagascar subhumid forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 6896
+ },
+ "19": {
+  "nom": "Maputaland coastal forests and woodlands",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 1148
+ },
+ "20": {
+  "nom": "Mascarene forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 222
+ },
+ "21": {
+  "nom": "Mount Cameroon and Bioko montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 37
+ },
+ "22": {
+  "nom": "Niger Delta swamp forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 470
+ },
+ "23": {
+  "nom": "Nigerian lowland forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 2194
+ },
+ "24": {
+  "nom": "Northeast Congolian lowland forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 16664
+ },
+ "25": {
+  "nom": "Northern Swahili coastal forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 4975
+ },
+ "26": {
+  "nom": "Northwest Congolian lowland forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 14068
+ },
+ "27": {
+  "nom": "São Tomé, Príncipe, and Annobón forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 65
+ },
+ "28": {
+  "nom": "Southern Swahili coastal forests and woodlands",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 5446
+ },
+ "29": {
+  "nom": "Western Congolian swamp forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 4161
+ },
+ "30": {
+  "nom": "Western Guinean lowland forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 6812
+ },
+ "31": {
+  "nom": "Cape Verde Islands dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 262
+ },
+ "32": {
+  "nom": "Madagascar dry deciduous forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 5381
+ },
+ "33": {
+  "nom": "Zambezian evergreen dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Afrotropic",
+  "pixels": 1053
+ },
+ "34": {
+  "nom": "Angolan mopane woodlands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 6562
+ },
+ "35": {
+  "nom": "Angolan scarp savanna and woodlands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 4581
+ },
+ "36": {
+  "nom": "Angolan wet miombo woodlands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 14839
+ },
+ "37": {
+  "nom": "Ascension scrub and grasslands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 8
+ },
+ "38": {
+  "nom": "Central bushveld",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 5532
+ },
+ "39": {
+  "nom": "Central Zambezian wet miombo woodlands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 33854
+ },
+ "40": {
+  "nom": "Drakensberg Escarpment savanna and thicket",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 1330
+ },
+ "41": {
+  "nom": "Drakensberg grasslands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 4295
+ },
+ "42": {
+  "nom": "Dry miombo woodlands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 39834
+ },
+ "43": {
+  "nom": "East Sudanian savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 34700
+ },
+ "44": {
+  "nom": "Guinean forest-savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 22255
+ },
+ "45": {
+  "nom": "Horn of Africa xeric bushlands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 7639
+ },
+ "46": {
+  "nom": "Itigi-Sumbu thicket",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 378
+ },
+ "47": {
+  "nom": "Kalahari Acacia woodlands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 3682
+ },
+ "48": {
+  "nom": "Limpopo lowveld",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 2931
+ },
+ "49": {
+  "nom": "Mandara Plateau woodlands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 245
+ },
+ "50": {
+  "nom": "Masai xeric grasslands and shrublands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 2512
+ },
+ "51": {
+  "nom": "Northern Acacia-Commiphora bushlands and thickets",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 11871
+ },
+ "52": {
+  "nom": "Northern Congolian Forest-Savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 22941
+ },
+ "53": {
+  "nom": "Sahelian Acacia savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 123662
+ },
+ "54": {
+  "nom": "Serengeti volcanic grasslands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 5
+ },
+ "55": {
+  "nom": "Somali Acacia-Commiphora bushlands and thickets",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 24528
+ },
+ "56": {
+  "nom": "South Arabian fog woodlands, shrublands, and dune",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 703
+ },
+ "57": {
+  "nom": "Southern Acacia-Commiphora bushlands and thickets",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 7703
+ },
+ "58": {
+  "nom": "Southern Congolian forest-savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 18489
+ },
+ "59": {
+  "nom": "Southwest Arabian montane woodlands and grasslands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 953
+ },
+ "60": {
+  "nom": "St. Helena scrub and woodlands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 11
+ },
+ "61": {
+  "nom": "Victoria Basin forest-savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 5759
+ },
+ "62": {
+  "nom": "West Sudanian savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 54281
+ },
+ "63": {
+  "nom": "Western Congolian forest-savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 12262
+ },
+ "64": {
+  "nom": "Zambezian Baikiaea woodlands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 12179
+ },
+ "65": {
+  "nom": "Zambezian mopane woodlands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 13352
+ },
+ "66": {
+  "nom": "Zambezian-Limpopo mixed woodlands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 6272
+ },
+ "67": {
+  "nom": "Amsterdam-Saint Paul Islands temperate grasslands",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 10
+ },
+ "68": {
+  "nom": "Tristan Da Cunha-Gough Islands shrub and grasslands",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 23
+ },
+ "69": {
+  "nom": "East African halophytics",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Afrotropic",
+  "pixels": 118
+ },
+ "70": {
+  "nom": "Etosha Pan halophytics",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Afrotropic",
+  "pixels": 265
+ },
+ "71": {
+  "nom": "Inner Niger Delta flooded savanna",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Afrotropic",
+  "pixels": 1542
+ },
+ "72": {
+  "nom": "Lake Chad flooded savanna",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Afrotropic",
+  "pixels": 1063
+ },
+ "73": {
+  "nom": "Makgadikgadi halophytics",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Afrotropic",
+  "pixels": 608
+ },
+ "74": {
+  "nom": "Sudd flooded grasslands",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Afrotropic",
+  "pixels": 6186
+ },
+ "75": {
+  "nom": "Zambezian coastal flooded savanna",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Afrotropic",
+  "pixels": 717
+ },
+ "76": {
+  "nom": "Zambezian flooded grasslands",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Afrotropic",
+  "pixels": 6783
+ },
+ "77": {
+  "nom": "Angolan montane forest-grassland",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 575
+ },
+ "78": {
+  "nom": "East African montane moorlands",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 107
+ },
+ "79": {
+  "nom": "Ethiopian montane grasslands and woodlands",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 7316
+ },
+ "80": {
+  "nom": "Ethiopian montane moorlands",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 519
+ },
+ "81": {
+  "nom": "Highveld grasslands",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 8862
+ },
+ "82": {
+  "nom": "Jos Plateau forest-grassland",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 441
+ },
+ "83": {
+  "nom": "Madagascar ericoid thickets",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 44
+ },
+ "84": {
+  "nom": "Mulanje Montane forest-grassland",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 36
+ },
+ "85": {
+  "nom": "Nyanga-Chimanimani Montane forest-grassland",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 268
+ },
+ "86": {
+  "nom": "Rwenzori-Virunga montane moorlands",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 19
+ },
+ "87": {
+  "nom": "Southern Rift Montane forest-grassland",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 730
+ },
+ "88": {
+  "nom": "Albany thickets",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Afrotropic",
+  "pixels": 1468
+ },
+ "89": {
+  "nom": "Fynbos shrubland",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Afrotropic",
+  "pixels": 2188
+ },
+ "90": {
+  "nom": "Renosterveld shrubland",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Afrotropic",
+  "pixels": 1102
+ },
+ "91": {
+  "nom": "Aldabra Island xeric scrub",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 24
+ },
+ "92": {
+  "nom": "Djibouti xeric shrublands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 8175
+ },
+ "93": {
+  "nom": "Eritrean coastal desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 199
+ },
+ "94": {
+  "nom": "Gariep Karoo",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 9221
+ },
+ "95": {
+  "nom": "Hobyo grasslands and shrublands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 526
+ },
+ "96": {
+  "nom": "Ile Europa and Bassas da India xeric scrub",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 4
+ },
+ "97": {
+  "nom": "Kalahari xeric savanna",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 24374
+ },
+ "98": {
+  "nom": "Kaokoveld desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 1206
+ },
+ "99": {
+  "nom": "Madagascar spiny thickets",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 1621
+ },
+ "100": {
+  "nom": "Madagascar succulent woodlands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 2820
+ },
+ "101": {
+  "nom": "Nama Karoo shrublands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 6128
+ },
+ "102": {
+  "nom": "Namaqualand-Richtersveld steppe",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 2045
+ },
+ "103": {
+  "nom": "Namib Desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 2911
+ },
+ "104": {
+  "nom": "Namibian savanna woodlands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 3599
+ },
+ "105": {
+  "nom": "Socotra Island xeric shrublands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 183
+ },
+ "106": {
+  "nom": "Somali montane xeric woodlands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 2217
+ },
+ "107": {
+  "nom": "Southwest Arabian coastal xeric shrublands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 1749
+ },
+ "108": {
+  "nom": "Southwest Arabian Escarpment shrublands and woodlands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 3440
+ },
+ "109": {
+  "nom": "Southwest Arabian highland xeric scrub",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 1108
+ },
+ "110": {
+  "nom": "Succulent Karoo xeric shrublands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Afrotropic",
+  "pixels": 2203
+ },
+ "111": {
+  "nom": "Central African mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Afrotropic",
+  "pixels": 1214
+ },
+ "112": {
+  "nom": "East African mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Afrotropic",
+  "pixels": 118
+ },
+ "113": {
+  "nom": "Guinean mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Afrotropic",
+  "pixels": 960
+ },
+ "114": {
+  "nom": "Madagascar mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Afrotropic",
+  "pixels": 231
+ },
+ "115": {
+  "nom": "Red Sea mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Afrotropic",
+  "pixels": 146
+ },
+ "116": {
+  "nom": "Southern Africa mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Afrotropic",
+  "pixels": 54
+ },
+ "117": {
+  "nom": "Adelie Land tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Antarctica",
+  "pixels": 175
+ },
+ "118": {
+  "nom": "Central South Antarctic Peninsula tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Antarctica",
+  "pixels": 4720
+ },
+ "119": {
+  "nom": "Dronning Maud Land tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Antarctica",
+  "pixels": 2770
+ },
+ "120": {
+  "nom": "East Antarctic tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Antarctica",
+  "pixels": 397
+ },
+ "121": {
+  "nom": "Ellsworth Land tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Antarctica",
+  "pixels": 273
+ },
+ "122": {
+  "nom": "Ellsworth Mountains tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Antarctica",
+  "pixels": 1868
+ },
+ "123": {
+  "nom": "Enderby Land tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Antarctica",
+  "pixels": 1490
+ },
+ "124": {
+  "nom": "Marie Byrd Land tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Antarctica",
+  "pixels": 1219
+ },
+ "125": {
+  "nom": "North Victoria Land tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Antarctica",
+  "pixels": 6392
+ },
+ "126": {
+  "nom": "Northeast Antarctic Peninsula tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Antarctica",
+  "pixels": 397
+ },
+ "127": {
+  "nom": "Northwest Antarctic Peninsula tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Antarctica",
+  "pixels": 3949
+ },
+ "128": {
+  "nom": "Prince Charles Mountains tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Antarctica",
+  "pixels": 2188
+ },
+ "129": {
+  "nom": "Scotia Sea Islands tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Antarctica",
+  "pixels": 871
+ },
+ "130": {
+  "nom": "South Antarctic Peninsula tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Antarctica",
+  "pixels": 2843
+ },
+ "131": {
+  "nom": "South Orkney Islands tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Antarctica",
+  "pixels": 63
+ },
+ "132": {
+  "nom": "South Victoria Land tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Antarctica",
+  "pixels": 4239
+ },
+ "133": {
+  "nom": "Southern Indian Ocean Islands tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Antarctica",
+  "pixels": 643
+ },
+ "134": {
+  "nom": "Transantarctic Mountains tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Antarctica",
+  "pixels": 22901
+ },
+ "135": {
+  "nom": "Admiralty Islands lowland rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 135
+ },
+ "136": {
+  "nom": "Banda Sea Islands moist deciduous forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 500
+ },
+ "137": {
+  "nom": "Biak-Numfoor rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 148
+ },
+ "138": {
+  "nom": "Buru rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 331
+ },
+ "139": {
+  "nom": "Central Range Papuan montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 5594
+ },
+ "140": {
+  "nom": "Halmahera rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 1248
+ },
+ "141": {
+  "nom": "Huon Peninsula montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 579
+ },
+ "142": {
+  "nom": "Lord Howe Island subtropical forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 4
+ },
+ "143": {
+  "nom": "Louisiade Archipelago rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 139
+ },
+ "144": {
+  "nom": "New Britain-New Ireland lowland rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 1596
+ },
+ "145": {
+  "nom": "New Britain-New Ireland montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 403
+ },
+ "146": {
+  "nom": "New Caledonia rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 662
+ },
+ "147": {
+  "nom": "Norfolk Island subtropical forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 5
+ },
+ "148": {
+  "nom": "Northern New Guinea lowland rain and freshwater swamp forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 4529
+ },
+ "149": {
+  "nom": "Northern New Guinea montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 765
+ },
+ "150": {
+  "nom": "Queensland tropical rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 1565
+ },
+ "151": {
+  "nom": "Seram rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 820
+ },
+ "152": {
+  "nom": "Solomon Islands rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 1712
+ },
+ "153": {
+  "nom": "Southeast Papuan rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 2712
+ },
+ "154": {
+  "nom": "Southern New Guinea freshwater swamp forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 3388
+ },
+ "155": {
+  "nom": "Southern New Guinea lowland rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 4005
+ },
+ "156": {
+  "nom": "Sulawesi lowland rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 4990
+ },
+ "157": {
+  "nom": "Sulawesi montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 2459
+ },
+ "158": {
+  "nom": "Trobriand Islands rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 269
+ },
+ "159": {
+  "nom": "Vanuatu rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 756
+ },
+ "160": {
+  "nom": "Vogelkop montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 750
+ },
+ "161": {
+  "nom": "Vogelkop-Aru lowland rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 3069
+ },
+ "162": {
+  "nom": "Yapen rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 139
+ },
+ "163": {
+  "nom": "Lesser Sundas deciduous forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 1769
+ },
+ "164": {
+  "nom": "New Caledonia dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 224
+ },
+ "165": {
+  "nom": "Sumba deciduous forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 419
+ },
+ "166": {
+  "nom": "Timor and Wetar deciduous forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Australasia",
+  "pixels": 1330
+ },
+ "167": {
+  "nom": "Chatham Island temperate forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Australasia",
+  "pixels": 77
+ },
+ "168": {
+  "nom": "Eastern Australian temperate forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Australasia",
+  "pixels": 11589
+ },
+ "169": {
+  "nom": "Fiordland temperate forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Australasia",
+  "pixels": 599
+ },
+ "170": {
+  "nom": "Nelson Coast temperate forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Australasia",
+  "pixels": 689
+ },
+ "171": {
+  "nom": "New Zealand North Island temperate forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Australasia",
+  "pixels": 3749
+ },
+ "172": {
+  "nom": "New Zealand South Island temperate forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Australasia",
+  "pixels": 599
+ },
+ "173": {
+  "nom": "Northland temperate kauri forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Australasia",
+  "pixels": 1546
+ },
+ "174": {
+  "nom": "Rakiura Island temperate forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Australasia",
+  "pixels": 133
+ },
+ "175": {
+  "nom": "Richmond temperate forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Australasia",
+  "pixels": 669
+ },
+ "176": {
+  "nom": "Southeast Australia temperate forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Australasia",
+  "pixels": 7799
+ },
+ "177": {
+  "nom": "Tasmanian Central Highland forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Australasia",
+  "pixels": 510
+ },
+ "178": {
+  "nom": "Tasmanian temperate forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Australasia",
+  "pixels": 1297
+ },
+ "179": {
+  "nom": "Tasmanian temperate rain forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Australasia",
+  "pixels": 1664
+ },
+ "180": {
+  "nom": "Westland temperate forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Australasia",
+  "pixels": 301
+ },
+ "181": {
+  "nom": "Arnhem Land tropical savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Australasia",
+  "pixels": 6006
+ },
+ "182": {
+  "nom": "Brigalow tropical savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Australasia",
+  "pixels": 14808
+ },
+ "183": {
+  "nom": "Cape York Peninsula tropical savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Australasia",
+  "pixels": 4600
+ },
+ "184": {
+  "nom": "Carpentaria tropical savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Australasia",
+  "pixels": 12718
+ },
+ "185": {
+  "nom": "Einasleigh upland savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Australasia",
+  "pixels": 3996
+ },
+ "186": {
+  "nom": "Kimberly tropical savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Australasia",
+  "pixels": 12206
+ },
+ "187": {
+  "nom": "Mitchell Grass Downs",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Australasia",
+  "pixels": 16417
+ },
+ "188": {
+  "nom": "Trans Fly savanna and grasslands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Australasia",
+  "pixels": 927
+ },
+ "189": {
+  "nom": "Victoria Plains tropical savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Australasia",
+  "pixels": 7605
+ },
+ "190": {
+  "nom": "Canterbury-Otago tussock grasslands",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Australasia",
+  "pixels": 2571
+ },
+ "191": {
+  "nom": "Eastern Australia mulga shrublands",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Australasia",
+  "pixels": 9259
+ },
+ "192": {
+  "nom": "Southeast Australia temperate savanna",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Australasia",
+  "pixels": 10636
+ },
+ "193": {
+  "nom": "Australian Alps montane grasslands",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Australasia",
+  "pixels": 487
+ },
+ "194": {
+  "nom": "New Zealand South Island montane grasslands",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Australasia",
+  "pixels": 1796
+ },
+ "195": {
+  "nom": "Papuan Central Range sub-alpine grasslands",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Australasia",
+  "pixels": 509
+ },
+ "196": {
+  "nom": "Antipodes Subantarctic Islands tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Australasia",
+  "pixels": 112
+ },
+ "197": {
+  "nom": "Coolgardie woodlands",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Australasia",
+  "pixels": 4885
+ },
+ "198": {
+  "nom": "Esperance mallee",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Australasia",
+  "pixels": 4247
+ },
+ "199": {
+  "nom": "Eyre and York mallee",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Australasia",
+  "pixels": 2747
+ },
+ "200": {
+  "nom": "Flinders-Lofty montane woodlands",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Australasia",
+  "pixels": 2534
+ },
+ "201": {
+  "nom": "Hampton mallee and woodlands",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Australasia",
+  "pixels": 459
+ },
+ "202": {
+  "nom": "Jarrah-Karri forest and shrublands",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Australasia",
+  "pixels": 403
+ },
+ "203": {
+  "nom": "Murray-Darling woodlands and mallee",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Australasia",
+  "pixels": 8261
+ },
+ "204": {
+  "nom": "Naracoorte woodlands",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Australasia",
+  "pixels": 1038
+ },
+ "205": {
+  "nom": "Southwest Australia savanna",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Australasia",
+  "pixels": 6794
+ },
+ "206": {
+  "nom": "Southwest Australia woodlands",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Australasia",
+  "pixels": 2410
+ },
+ "207": {
+  "nom": "Carnarvon xeric shrublands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Australasia",
+  "pixels": 3209
+ },
+ "208": {
+  "nom": "Central Ranges xeric scrub",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Australasia",
+  "pixels": 10258
+ },
+ "209": {
+  "nom": "Gibson desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Australasia",
+  "pixels": 5568
+ },
+ "210": {
+  "nom": "Great Sandy-Tanami desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Australasia",
+  "pixels": 28716
+ },
+ "211": {
+  "nom": "Great Victoria desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Australasia",
+  "pixels": 15575
+ },
+ "212": {
+  "nom": "Nullarbor Plains xeric shrublands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Australasia",
+  "pixels": 7448
+ },
+ "213": {
+  "nom": "Pilbara shrublands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Australasia",
+  "pixels": 6392
+ },
+ "214": {
+  "nom": "Simpson desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Australasia",
+  "pixels": 21136
+ },
+ "215": {
+  "nom": "Tirari-Sturt stony desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Australasia",
+  "pixels": 11551
+ },
+ "216": {
+  "nom": "Western Australian Mulga shrublands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Australasia",
+  "pixels": 16771
+ },
+ "217": {
+  "nom": "New Guinea mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Australasia",
+  "pixels": 1261
+ },
+ "218": {
+  "nom": "Andaman Islands rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 326
+ },
+ "219": {
+  "nom": "Borneo lowland rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 14225
+ },
+ "220": {
+  "nom": "Borneo montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 3858
+ },
+ "221": {
+  "nom": "Borneo peat swamp forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 2258
+ },
+ "222": {
+  "nom": "Brahmaputra Valley semi-evergreen forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 2059
+ },
+ "223": {
+  "nom": "Cardamom Mountains rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1534
+ },
+ "224": {
+  "nom": "Chao Phraya freshwater swamp forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1315
+ },
+ "225": {
+  "nom": "Chao Phraya lowland moist deciduous forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 734
+ },
+ "226": {
+  "nom": "Chin Hills-Arakan Yoma montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1028
+ },
+ "227": {
+  "nom": "Christmas and Cocos Islands tropical forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 20
+ },
+ "228": {
+  "nom": "East Deccan moist deciduous forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 11820
+ },
+ "229": {
+  "nom": "Eastern Java-Bali montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 526
+ },
+ "230": {
+  "nom": "Eastern Java-Bali rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 2109
+ },
+ "231": {
+  "nom": "Greater Negros-Panay rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1536
+ },
+ "232": {
+  "nom": "Hainan Island monsoon rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 537
+ },
+ "233": {
+  "nom": "Himalayan subtropical broadleaf forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1399
+ },
+ "234": {
+  "nom": "Irrawaddy freshwater swamp forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 516
+ },
+ "235": {
+  "nom": "Irrawaddy moist deciduous forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 4814
+ },
+ "236": {
+  "nom": "Jian Nan subtropical evergreen forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 24244
+ },
+ "237": {
+  "nom": "Kayah-Karen montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 4083
+ },
+ "238": {
+  "nom": "Lower Gangetic Plains moist deciduous forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 9128
+ },
+ "239": {
+  "nom": "Luang Prabang montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 2452
+ },
+ "240": {
+  "nom": "Luzon montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 282
+ },
+ "241": {
+  "nom": "Luzon rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 3796
+ },
+ "242": {
+  "nom": "Malabar Coast moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1384
+ },
+ "243": {
+  "nom": "Maldives-Lakshadweep-Chagos Archipelago tropical moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 267
+ },
+ "244": {
+  "nom": "Meghalaya subtropical forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1498
+ },
+ "245": {
+  "nom": "Mentawai Islands rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 324
+ },
+ "246": {
+  "nom": "Mindanao montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 591
+ },
+ "247": {
+  "nom": "Mindanao-Eastern Visayas rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 4211
+ },
+ "248": {
+  "nom": "Mindoro rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 411
+ },
+ "249": {
+  "nom": "Mizoram-Manipur-Kachin rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 4792
+ },
+ "250": {
+  "nom": "Myanmar coastal rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 2618
+ },
+ "251": {
+  "nom": "Nansei Islands subtropical evergreen forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 314
+ },
+ "252": {
+  "nom": "Nicobar Islands rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 120
+ },
+ "253": {
+  "nom": "North Western Ghats moist deciduous forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1655
+ },
+ "254": {
+  "nom": "North Western Ghats montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1030
+ },
+ "255": {
+  "nom": "Northern Annamites rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1602
+ },
+ "256": {
+  "nom": "Northern Indochina subtropical forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 15260
+ },
+ "257": {
+  "nom": "Northern Khorat Plateau moist deciduous forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 573
+ },
+ "258": {
+  "nom": "Northern Thailand-Laos moist deciduous forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1440
+ },
+ "259": {
+  "nom": "Northern Triangle subtropical forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1948
+ },
+ "260": {
+  "nom": "Northern Vietnam lowland rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 846
+ },
+ "261": {
+  "nom": "Orissa semi-evergreen forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 807
+ },
+ "262": {
+  "nom": "Palawan rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 752
+ },
+ "263": {
+  "nom": "Peninsular Malaysian montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 558
+ },
+ "264": {
+  "nom": "Peninsular Malaysian peat swamp forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 120
+ },
+ "265": {
+  "nom": "Peninsular Malaysian rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 4552
+ },
+ "266": {
+  "nom": "Red River freshwater swamp forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 380
+ },
+ "267": {
+  "nom": "South China Sea Islands",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 35
+ },
+ "268": {
+  "nom": "South China-Vietnam subtropical evergreen forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 8451
+ },
+ "269": {
+  "nom": "South Taiwan monsoon rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 111
+ },
+ "270": {
+  "nom": "South Western Ghats moist deciduous forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 786
+ },
+ "271": {
+  "nom": "South Western Ghats montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 739
+ },
+ "272": {
+  "nom": "Southern Annamites montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1570
+ },
+ "273": {
+  "nom": "Southwest Borneo freshwater swamp forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1178
+ },
+ "274": {
+  "nom": "Sri Lanka lowland rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 424
+ },
+ "275": {
+  "nom": "Sri Lanka montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 103
+ },
+ "276": {
+  "nom": "Sulu Archipelago rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 215
+ },
+ "277": {
+  "nom": "Sumatran freshwater swamp forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 626
+ },
+ "278": {
+  "nom": "Sumatran lowland rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 8973
+ },
+ "279": {
+  "nom": "Sumatran montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 2345
+ },
+ "280": {
+  "nom": "Sumatran peat swamp forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 2852
+ },
+ "281": {
+  "nom": "Sundaland heath forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 2596
+ },
+ "282": {
+  "nom": "Sundarbans freshwater swamp forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 517
+ },
+ "283": {
+  "nom": "Taiwan subtropical evergreen forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1281
+ },
+ "284": {
+  "nom": "Tenasserim-South Thailand semi-evergreen rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 3506
+ },
+ "285": {
+  "nom": "Tonle Sap freshwater swamp forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 863
+ },
+ "286": {
+  "nom": "Tonle Sap-Mekong peat swamp forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 990
+ },
+ "287": {
+  "nom": "Upper Gangetic Plains moist deciduous forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 9553
+ },
+ "288": {
+  "nom": "Western Java montane rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 856
+ },
+ "289": {
+  "nom": "Western Java rain forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1541
+ },
+ "290": {
+  "nom": "Central Deccan Plateau dry deciduous forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 8213
+ },
+ "291": {
+  "nom": "Central Indochina dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 10748
+ },
+ "292": {
+  "nom": "Chhota-Nagpur dry deciduous forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 4314
+ },
+ "293": {
+  "nom": "East Deccan dry-evergreen forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 893
+ },
+ "294": {
+  "nom": "Irrawaddy dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1210
+ },
+ "295": {
+  "nom": "Khathiar-Gir dry deciduous forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 9512
+ },
+ "296": {
+  "nom": "Narmada Valley dry deciduous forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 5966
+ },
+ "297": {
+  "nom": "North Deccan dry deciduous forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 2021
+ },
+ "298": {
+  "nom": "South Deccan Plateau dry deciduous forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 2717
+ },
+ "299": {
+  "nom": "Southeast Indochina dry evergreen forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 4116
+ },
+ "300": {
+  "nom": "Southern Vietnam lowland dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1326
+ },
+ "301": {
+  "nom": "Sri Lanka dry-zone dry evergreen forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1682
+ },
+ "302": {
+  "nom": "Himalayan subtropical pine forests",
+  "biome": 3,
+  "biome_nom": "Tropical & Subtropical Coniferous Forests",
+  "royaume": "Indomalayan",
+  "pixels": 2865
+ },
+ "303": {
+  "nom": "Luzon tropical pine forests",
+  "biome": 3,
+  "biome_nom": "Tropical & Subtropical Coniferous Forests",
+  "royaume": "Indomalayan",
+  "pixels": 239
+ },
+ "304": {
+  "nom": "Northeast India-Myanmar pine forests",
+  "biome": 3,
+  "biome_nom": "Tropical & Subtropical Coniferous Forests",
+  "royaume": "Indomalayan",
+  "pixels": 348
+ },
+ "305": {
+  "nom": "Sumatran tropical pine forests",
+  "biome": 3,
+  "biome_nom": "Tropical & Subtropical Coniferous Forests",
+  "royaume": "Indomalayan",
+  "pixels": 92
+ },
+ "306": {
+  "nom": "Eastern Himalayan broadleaf forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Indomalayan",
+  "pixels": 3029
+ },
+ "307": {
+  "nom": "Northern Triangle temperate forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Indomalayan",
+  "pixels": 387
+ },
+ "308": {
+  "nom": "Western Himalayan broadleaf forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Indomalayan",
+  "pixels": 2140
+ },
+ "309": {
+  "nom": "Eastern Himalayan subalpine conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1046
+ },
+ "310": {
+  "nom": "Western Himalayan subalpine conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Indomalayan",
+  "pixels": 1547
+ },
+ "311": {
+  "nom": "Terai-Duar savanna and grasslands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Indomalayan",
+  "pixels": 1264
+ },
+ "312": {
+  "nom": "Rann of Kutch seasonal salt marsh",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Indomalayan",
+  "pixels": 1032
+ },
+ "313": {
+  "nom": "Kinabalu montane alpine meadows",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Indomalayan",
+  "pixels": 18
+ },
+ "314": {
+  "nom": "Aravalli west thorn scrub forests",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Indomalayan",
+  "pixels": 17992
+ },
+ "315": {
+  "nom": "Deccan thorn scrub forests",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Indomalayan",
+  "pixels": 11565
+ },
+ "316": {
+  "nom": "Godavari-Krishna mangroves",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Indomalayan",
+  "pixels": 333
+ },
+ "317": {
+  "nom": "Indus Valley desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Indomalayan",
+  "pixels": 741
+ },
+ "318": {
+  "nom": "Thar desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Indomalayan",
+  "pixels": 8706
+ },
+ "319": {
+  "nom": "Indochina mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Indomalayan",
+  "pixels": 1155
+ },
+ "320": {
+  "nom": "Indus River Delta-Arabian Sea mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Indomalayan",
+  "pixels": 354
+ },
+ "321": {
+  "nom": "Myanmar Coast mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Indomalayan",
+  "pixels": 1008
+ },
+ "322": {
+  "nom": "Sunda Shelf mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Indomalayan",
+  "pixels": 2102
+ },
+ "323": {
+  "nom": "Sundarbans mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Indomalayan",
+  "pixels": 955
+ },
+ "324": {
+  "nom": "Sonoran-Sinaloan subtropical dry forest",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Nearctic",
+  "pixels": 1915
+ },
+ "325": {
+  "nom": "Bermuda subtropical conifer forests",
+  "biome": 3,
+  "biome_nom": "Tropical & Subtropical Coniferous Forests",
+  "royaume": "Nearctic",
+  "pixels": 12
+ },
+ "326": {
+  "nom": "Sierra Madre Occidental pine-oak forests",
+  "biome": 3,
+  "biome_nom": "Tropical & Subtropical Coniferous Forests",
+  "royaume": "Nearctic",
+  "pixels": 7834
+ },
+ "327": {
+  "nom": "Sierra Madre Oriental pine-oak forests",
+  "biome": 3,
+  "biome_nom": "Tropical & Subtropical Coniferous Forests",
+  "royaume": "Nearctic",
+  "pixels": 2327
+ },
+ "328": {
+  "nom": "Allegheny Highlands forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Nearctic",
+  "pixels": 3179
+ },
+ "329": {
+  "nom": "Appalachian mixed mesophytic forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Nearctic",
+  "pixels": 7477
+ },
+ "330": {
+  "nom": "Appalachian Piedmont forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Nearctic",
+  "pixels": 6571
+ },
+ "331": {
+  "nom": "Appalachian-Blue Ridge forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Nearctic",
+  "pixels": 6655
+ },
+ "332": {
+  "nom": "East Central Texas forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Nearctic",
+  "pixels": 2099
+ },
+ "333": {
+  "nom": "Eastern Canadian Forest-Boreal transition",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Nearctic",
+  "pixels": 15232
+ },
+ "334": {
+  "nom": "Eastern Great Lakes lowland forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Nearctic",
+  "pixels": 6306
+ },
+ "335": {
+  "nom": "Gulf of St. Lawrence lowland forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Nearctic",
+  "pixels": 1949
+ },
+ "336": {
+  "nom": "Interior Plateau US Hardwood Forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Nearctic",
+  "pixels": 4995
+ },
+ "337": {
+  "nom": "Mississippi lowland forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Nearctic",
+  "pixels": 4700
+ },
+ "338": {
+  "nom": "New England-Acadian forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Nearctic",
+  "pixels": 16149
+ },
+ "339": {
+  "nom": "Northeast US Coastal forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Nearctic",
+  "pixels": 3312
+ },
+ "340": {
+  "nom": "Ozark Highlands mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Nearctic",
+  "pixels": 4316
+ },
+ "341": {
+  "nom": "Ozark Mountain forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Nearctic",
+  "pixels": 2749
+ },
+ "342": {
+  "nom": "Southern Great Lakes forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Nearctic",
+  "pixels": 10064
+ },
+ "343": {
+  "nom": "Upper Midwest US forest-savanna transition",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Nearctic",
+  "pixels": 6301
+ },
+ "344": {
+  "nom": "Western Great Lakes forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Nearctic",
+  "pixels": 14235
+ },
+ "345": {
+  "nom": "Alberta-British Columbia foothills forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 6848
+ },
+ "346": {
+  "nom": "Arizona Mountains forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 4339
+ },
+ "347": {
+  "nom": "Atlantic coastal pine barrens",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 823
+ },
+ "348": {
+  "nom": "Blue Mountains forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 3219
+ },
+ "349": {
+  "nom": "British Columbia coastal conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 6163
+ },
+ "350": {
+  "nom": "Central British Columbia Mountain forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 7949
+ },
+ "351": {
+  "nom": "Central Pacific Northwest coastal forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 4483
+ },
+ "352": {
+  "nom": "Central-Southern Cascades Forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 2643
+ },
+ "353": {
+  "nom": "Colorado Rockies forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 6039
+ },
+ "354": {
+  "nom": "Eastern Cascades forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 2366
+ },
+ "355": {
+  "nom": "Fraser Plateau and Basin conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 5583
+ },
+ "356": {
+  "nom": "Great Basin montane forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 375
+ },
+ "357": {
+  "nom": "Klamath-Siskiyou forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 2076
+ },
+ "358": {
+  "nom": "North Cascades conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 1714
+ },
+ "359": {
+  "nom": "Northern California coastal forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 671
+ },
+ "360": {
+  "nom": "Northern Pacific Alaskan coastal forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 5571
+ },
+ "361": {
+  "nom": "Northern Rockies conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 14365
+ },
+ "362": {
+  "nom": "Okanogan dry forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 2662
+ },
+ "363": {
+  "nom": "Piney Woods",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 5820
+ },
+ "364": {
+  "nom": "Puget lowland forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 2154
+ },
+ "365": {
+  "nom": "Queen Charlotte Islands conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 728
+ },
+ "366": {
+  "nom": "Sierra Nevada forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 2183
+ },
+ "367": {
+  "nom": "South Central Rockies forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 8020
+ },
+ "368": {
+  "nom": "Wasatch and Uinta montane forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Nearctic",
+  "pixels": 1922
+ },
+ "369": {
+  "nom": "Alaska Peninsula montane taiga",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Nearctic",
+  "pixels": 3652
+ },
+ "370": {
+  "nom": "Central Canadian Shield forests",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Nearctic",
+  "pixels": 13603
+ },
+ "371": {
+  "nom": "Cook Inlet taiga",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Nearctic",
+  "pixels": 1992
+ },
+ "372": {
+  "nom": "Copper Plateau taiga",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Nearctic",
+  "pixels": 1193
+ },
+ "373": {
+  "nom": "Eastern Canadian forests",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Nearctic",
+  "pixels": 24817
+ },
+ "374": {
+  "nom": "Eastern Canadian Shield taiga",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Nearctic",
+  "pixels": 43455
+ },
+ "375": {
+  "nom": "Interior Alaska-Yukon lowland taiga",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Nearctic",
+  "pixels": 32170
+ },
+ "376": {
+  "nom": "Mid-Canada Boreal Plains forests",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Nearctic",
+  "pixels": 31814
+ },
+ "377": {
+  "nom": "Midwest Canadian Shield forests",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Nearctic",
+  "pixels": 41891
+ },
+ "378": {
+  "nom": "Muskwa-Slave Lake taiga",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Nearctic",
+  "pixels": 19167
+ },
+ "379": {
+  "nom": "Northern Canadian Shield taiga",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Nearctic",
+  "pixels": 42678
+ },
+ "380": {
+  "nom": "Northern Cordillera forests",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Nearctic",
+  "pixels": 10453
+ },
+ "381": {
+  "nom": "Northwest Territories taiga",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Nearctic",
+  "pixels": 25886
+ },
+ "382": {
+  "nom": "Southern Hudson Bay taiga",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Nearctic",
+  "pixels": 20845
+ },
+ "383": {
+  "nom": "Watson Highlands taiga",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Nearctic",
+  "pixels": 16124
+ },
+ "384": {
+  "nom": "Western Gulf coastal grasslands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 3646
+ },
+ "385": {
+  "nom": "California Central Valley grasslands",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 1904
+ },
+ "386": {
+  "nom": "Canadian Aspen forests and parklands",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 16270
+ },
+ "387": {
+  "nom": "Central US forest-grasslands transition",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 9730
+ },
+ "388": {
+  "nom": "Central Tallgrass prairie",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 14706
+ },
+ "389": {
+  "nom": "Central-Southern US mixed grasslands",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 11233
+ },
+ "390": {
+  "nom": "Cross-Timbers savanna-woodland",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 3423
+ },
+ "391": {
+  "nom": "Edwards Plateau savanna",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 2823
+ },
+ "392": {
+  "nom": "Flint Hills tallgrass prairie",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 1148
+ },
+ "393": {
+  "nom": "Mid-Atlantic US coastal savannas",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 3679
+ },
+ "394": {
+  "nom": "Montana Valley and Foothill grasslands",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 4733
+ },
+ "395": {
+  "nom": "Nebraska Sand Hills mixed grasslands",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 2561
+ },
+ "396": {
+  "nom": "Northern Shortgrass prairie",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 34472
+ },
+ "397": {
+  "nom": "Northern Tallgrass prairie",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 4053
+ },
+ "398": {
+  "nom": "Palouse prairie",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 3940
+ },
+ "399": {
+  "nom": "Southeast US conifer savannas",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 20508
+ },
+ "400": {
+  "nom": "Southeast US mixed woodlands and savannas",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 6
+ },
+ "401": {
+  "nom": "Texas blackland prairies",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 1658
+ },
+ "402": {
+  "nom": "Western shortgrass prairie",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 19721
+ },
+ "403": {
+  "nom": "Willamette Valley oak savanna",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 676
+ },
+ "404": {
+  "nom": "Ahklun and Kilbuck Upland Tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Nearctic",
+  "pixels": 3388
+ },
+ "405": {
+  "nom": "Alaska-St. Elias Range tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Nearctic",
+  "pixels": 11633
+ },
+ "406": {
+  "nom": "Aleutian Islands tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Nearctic",
+  "pixels": 1279
+ },
+ "407": {
+  "nom": "Arctic coastal tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Nearctic",
+  "pixels": 5210
+ },
+ "408": {
+  "nom": "Arctic foothills tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Nearctic",
+  "pixels": 11913
+ },
+ "409": {
+  "nom": "Beringia lowland tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Nearctic",
+  "pixels": 11085
+ },
+ "410": {
+  "nom": "Beringia upland tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Nearctic",
+  "pixels": 3854
+ },
+ "411": {
+  "nom": "Brooks-British Range tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Nearctic",
+  "pixels": 13909
+ },
+ "412": {
+  "nom": "Canadian High Arctic tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Nearctic",
+  "pixels": 100472
+ },
+ "413": {
+  "nom": "Canadian Low Arctic tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Nearctic",
+  "pixels": 66690
+ },
+ "414": {
+  "nom": "Canadian Middle Arctic Tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Nearctic",
+  "pixels": 94111
+ },
+ "415": {
+  "nom": "Davis Highlands tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Nearctic",
+  "pixels": 10276
+ },
+ "416": {
+  "nom": "Interior Yukon-Alaska alpine tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Nearctic",
+  "pixels": 11648
+ },
+ "417": {
+  "nom": "Kalaallit Nunaat Arctic steppe",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Nearctic",
+  "pixels": 39491
+ },
+ "418": {
+  "nom": "Kalaallit Nunaat High Arctic tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Nearctic",
+  "pixels": 36668
+ },
+ "419": {
+  "nom": "Ogilvie-MacKenzie alpine tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Nearctic",
+  "pixels": 22582
+ },
+ "420": {
+  "nom": "Pacific Coastal Mountain icefields and tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Nearctic",
+  "pixels": 7716
+ },
+ "421": {
+  "nom": "Torngat Mountain tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Nearctic",
+  "pixels": 2206
+ },
+ "422": {
+  "nom": "California coastal sage and chaparral",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Nearctic",
+  "pixels": 1424
+ },
+ "423": {
+  "nom": "California interior chaparral and woodlands",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Nearctic",
+  "pixels": 2986
+ },
+ "424": {
+  "nom": "California montane chaparral and woodlands",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Nearctic",
+  "pixels": 766
+ },
+ "425": {
+  "nom": "Santa Lucia Montane Chaparral & Woodlands",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Nearctic",
+  "pixels": 206
+ },
+ "426": {
+  "nom": "Baja California desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 3014
+ },
+ "427": {
+  "nom": "Central Mexican matorral",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 2053
+ },
+ "428": {
+  "nom": "Chihuahuan desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 18720
+ },
+ "429": {
+  "nom": "Colorado Plateau shrublands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 11497
+ },
+ "430": {
+  "nom": "Great Basin shrub steppe",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 12585
+ },
+ "431": {
+  "nom": "Gulf of California xeric scrub",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 1061
+ },
+ "432": {
+  "nom": "Meseta Central matorral",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 4432
+ },
+ "433": {
+  "nom": "Mojave desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 5090
+ },
+ "434": {
+  "nom": "Snake-Columbia shrub steppe",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 8493
+ },
+ "435": {
+  "nom": "Sonoran desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 8705
+ },
+ "436": {
+  "nom": "Tamaulipan matorral",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 588
+ },
+ "437": {
+  "nom": "Tamaulipan mezquital",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 4570
+ },
+ "438": {
+  "nom": "Wyoming Basin shrub steppe",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Nearctic",
+  "pixels": 5817
+ },
+ "439": {
+  "nom": "Alto Paraná Atlantic forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 17106
+ },
+ "440": {
+  "nom": "Araucaria moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 7820
+ },
+ "441": {
+  "nom": "Atlantic Coast restingas",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 403
+ },
+ "442": {
+  "nom": "Bahia coastal forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 3818
+ },
+ "443": {
+  "nom": "Bahia interior forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 7832
+ },
+ "444": {
+  "nom": "Bolivian Yungas",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 3045
+ },
+ "445": {
+  "nom": "Caatinga Enclaves moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 158
+ },
+ "446": {
+  "nom": "Caqueta moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 5966
+ },
+ "447": {
+  "nom": "Catatumbo moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 745
+ },
+ "448": {
+  "nom": "Cauca Valley montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 1035
+ },
+ "449": {
+  "nom": "Cayos Miskitos-San Andrés and Providencia moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 18
+ },
+ "450": {
+  "nom": "Central American Atlantic moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 3081
+ },
+ "451": {
+  "nom": "Central American montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 422
+ },
+ "452": {
+  "nom": "Chiapas montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 192
+ },
+ "453": {
+  "nom": "Chimalapas montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 67
+ },
+ "454": {
+  "nom": "Chocó-Darién moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 2499
+ },
+ "455": {
+  "nom": "Cocos Island moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 5
+ },
+ "456": {
+  "nom": "Cordillera La Costa montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 480
+ },
+ "457": {
+  "nom": "Cordillera Oriental montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 2205
+ },
+ "458": {
+  "nom": "Costa Rican seasonal moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 390
+ },
+ "459": {
+  "nom": "Cuban moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 831
+ },
+ "460": {
+  "nom": "Eastern Cordillera Real montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 3348
+ },
+ "461": {
+  "nom": "Eastern Panamanian montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 93
+ },
+ "462": {
+  "nom": "Fernando de Noronha-Atol das Rocas moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 5
+ },
+ "463": {
+  "nom": "Guianan freshwater swamp forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 252
+ },
+ "464": {
+  "nom": "Guianan Highlands moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 4753
+ },
+ "465": {
+  "nom": "Guianan lowland moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 15585
+ },
+ "466": {
+  "nom": "Guianan piedmont moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 7488
+ },
+ "467": {
+  "nom": "Gurupa várzea",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 317
+ },
+ "468": {
+  "nom": "Hispaniolan moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 1711
+ },
+ "469": {
+  "nom": "Iquitos várzea",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 3747
+ },
+ "470": {
+  "nom": "Isthmian-Atlantic moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 2030
+ },
+ "471": {
+  "nom": "Isthmian-Pacific moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 1040
+ },
+ "472": {
+  "nom": "Jamaican moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 304
+ },
+ "473": {
+  "nom": "Japurá-Solimões-Negro moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 8732
+ },
+ "474": {
+  "nom": "Juruá-Purus moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 7868
+ },
+ "475": {
+  "nom": "Leeward Islands moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 52
+ },
+ "476": {
+  "nom": "Madeira-Tapajós moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 23587
+ },
+ "477": {
+  "nom": "Magdalena Valley montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 3412
+ },
+ "478": {
+  "nom": "Magdalena-Urabá moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 2555
+ },
+ "479": {
+  "nom": "Marañón dry forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 373
+ },
+ "480": {
+  "nom": "Marajó várzea",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 3156
+ },
+ "481": {
+  "nom": "Mato Grosso tropical dry forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 13623
+ },
+ "482": {
+  "nom": "Monte Alegre várzea",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 2170
+ },
+ "483": {
+  "nom": "Napo moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 8139
+ },
+ "484": {
+  "nom": "Negro-Branco moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 6557
+ },
+ "485": {
+  "nom": "Northeast Brazil restingas",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 362
+ },
+ "486": {
+  "nom": "Northwest Andean montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 2623
+ },
+ "487": {
+  "nom": "Oaxacan montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 260
+ },
+ "488": {
+  "nom": "Orinoco Delta swamp forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 937
+ },
+ "489": {
+  "nom": "Pantanos de Centla",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 592
+ },
+ "490": {
+  "nom": "Pantepui forests & shrublands",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 1649
+ },
+ "491": {
+  "nom": "Pernambuco coastal forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 593
+ },
+ "492": {
+  "nom": "Pernambuco interior forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 760
+ },
+ "493": {
+  "nom": "Peruvian Yungas",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 6153
+ },
+ "494": {
+  "nom": "Petén-Veracruz moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 5088
+ },
+ "495": {
+  "nom": "Puerto Rican moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 286
+ },
+ "496": {
+  "nom": "Purus várzea",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 5777
+ },
+ "497": {
+  "nom": "Purus-Madeira moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 5666
+ },
+ "498": {
+  "nom": "Rio Negro campinarana",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 3113
+ },
+ "499": {
+  "nom": "Santa Marta montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 165
+ },
+ "500": {
+  "nom": "Serra do Mar coastal forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 3952
+ },
+ "501": {
+  "nom": "Sierra de los Tuxtlas",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 154
+ },
+ "502": {
+  "nom": "Sierra Madre de Chiapas moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 385
+ },
+ "503": {
+  "nom": "Solimões-Japurá moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 5431
+ },
+ "504": {
+  "nom": "Southern Andean Yungas",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 2663
+ },
+ "505": {
+  "nom": "Southwest Amazon moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 24603
+ },
+ "506": {
+  "nom": "Talamancan montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 530
+ },
+ "507": {
+  "nom": "Tapajós-Xingu moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 10971
+ },
+ "508": {
+  "nom": "Tocantins/Pindare moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 6321
+ },
+ "509": {
+  "nom": "Trindade-Martin Vaz Islands tropical forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 7
+ },
+ "510": {
+  "nom": "Trinidad and Tobago moist forest",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 193
+ },
+ "511": {
+  "nom": "Uatumã-Trombetas moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 15275
+ },
+ "512": {
+  "nom": "Ucayali moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 3757
+ },
+ "513": {
+  "nom": "Venezuelan Andes montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 962
+ },
+ "514": {
+  "nom": "Veracruz moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 2484
+ },
+ "515": {
+  "nom": "Veracruz montane forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 171
+ },
+ "516": {
+  "nom": "Western Ecuador moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 1122
+ },
+ "517": {
+  "nom": "Windward Islands moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 78
+ },
+ "518": {
+  "nom": "Xingu-Tocantins-Araguaia moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 8658
+ },
+ "519": {
+  "nom": "Yucatán moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 2438
+ },
+ "520": {
+  "nom": "Apure-Villavicencio dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 2254
+ },
+ "521": {
+  "nom": "Bajío dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 1296
+ },
+ "522": {
+  "nom": "Balsas dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 2126
+ },
+ "523": {
+  "nom": "Bolivian montane dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 2500
+ },
+ "524": {
+  "nom": "Brazilian Atlantic dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 3816
+ },
+ "525": {
+  "nom": "Caatinga",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 24155
+ },
+ "526": {
+  "nom": "Cauca Valley dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 242
+ },
+ "527": {
+  "nom": "Central American dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 2347
+ },
+ "528": {
+  "nom": "Chiapas Depression dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 480
+ },
+ "529": {
+  "nom": "Chiquitano dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 7778
+ },
+ "530": {
+  "nom": "Cuban dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 2414
+ },
+ "531": {
+  "nom": "Ecuadorian dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 740
+ },
+ "532": {
+  "nom": "Hispaniolan dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 654
+ },
+ "533": {
+  "nom": "Islas Revillagigedo dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 22
+ },
+ "534": {
+  "nom": "Jalisco dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 987
+ },
+ "535": {
+  "nom": "Jamaican dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 117
+ },
+ "536": {
+  "nom": "Lara-Falcón dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 574
+ },
+ "537": {
+  "nom": "Lesser Antillean dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 71
+ },
+ "538": {
+  "nom": "Magdalena Valley dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 632
+ },
+ "539": {
+  "nom": "Maracaibo dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 1015
+ },
+ "540": {
+  "nom": "Maranhão Babaçu forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 4624
+ },
+ "541": {
+  "nom": "Panamanian dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 181
+ },
+ "542": {
+  "nom": "Patía valley dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 78
+ },
+ "543": {
+  "nom": "Puerto Rican dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 73
+ },
+ "544": {
+  "nom": "Sierra de la Laguna dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 145
+ },
+ "545": {
+  "nom": "Sinaloan dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 2791
+ },
+ "546": {
+  "nom": "Sinú Valley dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 824
+ },
+ "547": {
+  "nom": "Southern Pacific dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 1550
+ },
+ "548": {
+  "nom": "Trinidad and Tobago dry forest",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 22
+ },
+ "549": {
+  "nom": "Tumbes-Piura dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 1361
+ },
+ "550": {
+  "nom": "Veracruz dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 236
+ },
+ "551": {
+  "nom": "Yucatán dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Neotropic",
+  "pixels": 1735
+ },
+ "552": {
+  "nom": "Bahamian pineyards",
+  "biome": 3,
+  "biome_nom": "Tropical & Subtropical Coniferous Forests",
+  "royaume": "Neotropic",
+  "pixels": 624
+ },
+ "553": {
+  "nom": "Central American pine-oak forests",
+  "biome": 3,
+  "biome_nom": "Tropical & Subtropical Coniferous Forests",
+  "royaume": "Neotropic",
+  "pixels": 3700
+ },
+ "554": {
+  "nom": "Cuban pine forests",
+  "biome": 3,
+  "biome_nom": "Tropical & Subtropical Coniferous Forests",
+  "royaume": "Neotropic",
+  "pixels": 251
+ },
+ "555": {
+  "nom": "Hispaniolan pine forests",
+  "biome": 3,
+  "biome_nom": "Tropical & Subtropical Coniferous Forests",
+  "royaume": "Neotropic",
+  "pixels": 400
+ },
+ "556": {
+  "nom": "Sierra de la Laguna pine-oak forests",
+  "biome": 3,
+  "biome_nom": "Tropical & Subtropical Coniferous Forests",
+  "royaume": "Neotropic",
+  "pixels": 39
+ },
+ "557": {
+  "nom": "Sierra Madre de Oaxaca pine-oak forests",
+  "biome": 3,
+  "biome_nom": "Tropical & Subtropical Coniferous Forests",
+  "royaume": "Neotropic",
+  "pixels": 480
+ },
+ "558": {
+  "nom": "Sierra Madre del Sur pine-oak forests",
+  "biome": 3,
+  "biome_nom": "Tropical & Subtropical Coniferous Forests",
+  "royaume": "Neotropic",
+  "pixels": 2083
+ },
+ "559": {
+  "nom": "Trans-Mexican Volcanic Belt pine-oak forests",
+  "biome": 3,
+  "biome_nom": "Tropical & Subtropical Coniferous Forests",
+  "royaume": "Neotropic",
+  "pixels": 3175
+ },
+ "560": {
+  "nom": "Juan Fernández Islands temperate forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Neotropic",
+  "pixels": 20
+ },
+ "561": {
+  "nom": "Magellanic subpolar forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Neotropic",
+  "pixels": 11256
+ },
+ "562": {
+  "nom": "San Félix-San Ambrosio Islands temperate forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Neotropic",
+  "pixels": 5
+ },
+ "563": {
+  "nom": "Valdivian temperate forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Neotropic",
+  "pixels": 11670
+ },
+ "564": {
+  "nom": "Belizian pine savannas",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 101
+ },
+ "565": {
+  "nom": "Beni savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 4218
+ },
+ "566": {
+  "nom": "Campos Rupestres montane savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 894
+ },
+ "567": {
+  "nom": "Cerrado",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 64365
+ },
+ "568": {
+  "nom": "Clipperton Island shrub and grasslands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 6
+ },
+ "569": {
+  "nom": "Dry Chaco",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 28256
+ },
+ "570": {
+  "nom": "Guianan savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 3420
+ },
+ "571": {
+  "nom": "Humid Chaco",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 10539
+ },
+ "572": {
+  "nom": "Llanos",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 12303
+ },
+ "573": {
+  "nom": "Miskito pine forests",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 658
+ },
+ "574": {
+  "nom": "Uruguayan savanna",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 13644
+ },
+ "575": {
+  "nom": "Espinal",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 11820
+ },
+ "576": {
+  "nom": "Humid Pampas",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 15969
+ },
+ "577": {
+  "nom": "Low Monte",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 14682
+ },
+ "578": {
+  "nom": "Patagonian steppe",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 27475
+ },
+ "579": {
+  "nom": "Cuban wetlands",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Neotropic",
+  "pixels": 232
+ },
+ "580": {
+  "nom": "Enriquillo wetlands",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Neotropic",
+  "pixels": 21
+ },
+ "581": {
+  "nom": "Everglades flooded grasslands",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Neotropic",
+  "pixels": 761
+ },
+ "582": {
+  "nom": "Guayaquil flooded grasslands",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Neotropic",
+  "pixels": 99
+ },
+ "583": {
+  "nom": "Orinoco wetlands",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Neotropic",
+  "pixels": 197
+ },
+ "584": {
+  "nom": "Pantanal",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Neotropic",
+  "pixels": 5827
+ },
+ "585": {
+  "nom": "Paraná flooded savanna",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Neotropic",
+  "pixels": 1421
+ },
+ "586": {
+  "nom": "Southern Cone Mesopotamian savanna",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Neotropic",
+  "pixels": 992
+ },
+ "587": {
+  "nom": "Central Andean dry puna",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 8889
+ },
+ "588": {
+  "nom": "Central Andean puna",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 7332
+ },
+ "589": {
+  "nom": "Central Andean wet puna",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 4004
+ },
+ "590": {
+  "nom": "Cordillera Central páramo",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 404
+ },
+ "591": {
+  "nom": "Cordillera de Merida páramo",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 91
+ },
+ "592": {
+  "nom": "High Monte",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 4338
+ },
+ "593": {
+  "nom": "Northern Andean páramo",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 958
+ },
+ "594": {
+  "nom": "Santa Marta páramo",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 39
+ },
+ "595": {
+  "nom": "Southern Andean steppe",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 4686
+ },
+ "596": {
+  "nom": "Chilean Matorral",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Neotropic",
+  "pixels": 5830
+ },
+ "597": {
+  "nom": "Araya and Paria xeric scrub",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 254
+ },
+ "598": {
+  "nom": "Atacama desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 3730
+ },
+ "599": {
+  "nom": "Caribbean shrublands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 260
+ },
+ "600": {
+  "nom": "Cuban cactus scrub",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 189
+ },
+ "601": {
+  "nom": "Galápagos Islands xeric scrub",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 404
+ },
+ "602": {
+  "nom": "Guajira-Barranquilla xeric scrub",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 1139
+ },
+ "603": {
+  "nom": "La Costa xeric shrublands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 2296
+ },
+ "604": {
+  "nom": "Malpelo Island xeric scrub",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 2
+ },
+ "605": {
+  "nom": "Motagua Valley thornscrub",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 79
+ },
+ "606": {
+  "nom": "Paraguaná xeric scrub",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 576
+ },
+ "607": {
+  "nom": "San Lucan xeric scrub",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 197
+ },
+ "608": {
+  "nom": "Sechura desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 6441
+ },
+ "609": {
+  "nom": "St. Peter and St. Paul Rocks",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 2
+ },
+ "610": {
+  "nom": "Tehuacán Valley matorral",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Neotropic",
+  "pixels": 340
+ },
+ "611": {
+  "nom": "Amazon-Orinoco-Southern Caribbean mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Neotropic",
+  "pixels": 1998
+ },
+ "612": {
+  "nom": "Bahamian-Antillean mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Neotropic",
+  "pixels": 1637
+ },
+ "613": {
+  "nom": "Mesoamerican Gulf-Caribbean mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Neotropic",
+  "pixels": 1350
+ },
+ "614": {
+  "nom": "Northern Mesoamerican Pacific mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Neotropic",
+  "pixels": 476
+ },
+ "615": {
+  "nom": "South American Pacific mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Neotropic",
+  "pixels": 694
+ },
+ "616": {
+  "nom": "Southern Atlantic Brazilian mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Neotropic",
+  "pixels": 495
+ },
+ "617": {
+  "nom": "Southern Mesoamerican Pacific mangroves",
+  "biome": 14,
+  "biome_nom": "Mangroves",
+  "royaume": "Neotropic",
+  "pixels": 509
+ },
+ "618": {
+  "nom": "Carolines tropical moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 103
+ },
+ "619": {
+  "nom": "Central Polynesian tropical moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 103
+ },
+ "620": {
+  "nom": "Cook Islands tropical moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 39
+ },
+ "621": {
+  "nom": "Eastern Micronesia tropical moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 404
+ },
+ "622": {
+  "nom": "Fiji tropical moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 765
+ },
+ "623": {
+  "nom": "Hawai'i tropical moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 281
+ },
+ "624": {
+  "nom": "Kermadec Islands subtropical moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 7
+ },
+ "625": {
+  "nom": "Marquesas tropical moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 100
+ },
+ "626": {
+  "nom": "Ogasawara subtropical moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 29
+ },
+ "627": {
+  "nom": "Palau tropical moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 56
+ },
+ "628": {
+  "nom": "Rapa Nui and Sala y Gómez subtropical forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 15
+ },
+ "629": {
+  "nom": "Samoan tropical moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 160
+ },
+ "630": {
+  "nom": "Society Islands tropical moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 130
+ },
+ "631": {
+  "nom": "Tongan tropical moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 158
+ },
+ "632": {
+  "nom": "Tuamotu tropical moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 485
+ },
+ "633": {
+  "nom": "Tubuai tropical moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 28
+ },
+ "634": {
+  "nom": "Western Polynesian tropical moist forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 51
+ },
+ "635": {
+  "nom": "Fiji tropical dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 284
+ },
+ "636": {
+  "nom": "Hawai'i tropical dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 262
+ },
+ "637": {
+  "nom": "Marianas tropical dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 110
+ },
+ "638": {
+  "nom": "Yap tropical dry forests",
+  "biome": 2,
+  "biome_nom": "Tropical & Subtropical Dry Broadleaf Forests",
+  "royaume": "Oceania",
+  "pixels": 14
+ },
+ "639": {
+  "nom": "Hawai'i tropical high shrublands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Oceania",
+  "pixels": 67
+ },
+ "640": {
+  "nom": "Hawai'i tropical low shrublands",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Oceania",
+  "pixels": 137
+ },
+ "641": {
+  "nom": "Northwest Hawai'i scrub",
+  "biome": 7,
+  "biome_nom": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+  "royaume": "Oceania",
+  "pixels": 11
+ },
+ "642": {
+  "nom": "Guizhou Plateau broadleaf and mixed forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Palearctic",
+  "pixels": 9909
+ },
+ "643": {
+  "nom": "Yunnan Plateau subtropical evergreen forests",
+  "biome": 1,
+  "biome_nom": "Tropical & Subtropical Moist Broadleaf Forests",
+  "royaume": "Palearctic",
+  "pixels": 8617
+ },
+ "644": {
+  "nom": "Appenine deciduous montane forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 712
+ },
+ "645": {
+  "nom": "Azores temperate mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 205
+ },
+ "646": {
+  "nom": "Balkan mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 9976
+ },
+ "647": {
+  "nom": "Baltic mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 7182
+ },
+ "648": {
+  "nom": "Cantabrian mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 4521
+ },
+ "649": {
+  "nom": "Caspian Hyrcanian mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 2334
+ },
+ "650": {
+  "nom": "Caucasus mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 7437
+ },
+ "651": {
+  "nom": "Celtic broadleaf forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 12394
+ },
+ "652": {
+  "nom": "Central Anatolian steppe and woodlands",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 4201
+ },
+ "653": {
+  "nom": "Central China Loess Plateau mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 14827
+ },
+ "654": {
+  "nom": "Central European mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 38065
+ },
+ "655": {
+  "nom": "Central Korean deciduous forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 4555
+ },
+ "656": {
+  "nom": "Changbai Mountains mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 4058
+ },
+ "657": {
+  "nom": "Changjiang Plain evergreen forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 16676
+ },
+ "658": {
+  "nom": "Crimean Submediterranean forest complex",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 1440
+ },
+ "659": {
+  "nom": "Daba Mountains evergreen forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 6384
+ },
+ "660": {
+  "nom": "Dinaric Mountains mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 2625
+ },
+ "661": {
+  "nom": "East European forest steppe",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 38973
+ },
+ "662": {
+  "nom": "Eastern Anatolian deciduous forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 3386
+ },
+ "663": {
+  "nom": "English Lowlands beech forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 2492
+ },
+ "664": {
+  "nom": "European Atlantic mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 20154
+ },
+ "665": {
+  "nom": "Euxine-Colchic broadleaf forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 3423
+ },
+ "666": {
+  "nom": "Hokkaido deciduous forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 2041
+ },
+ "667": {
+  "nom": "Huang He Plain mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 17502
+ },
+ "668": {
+  "nom": "Madeira evergreen forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 61
+ },
+ "669": {
+  "nom": "Manchurian mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 23790
+ },
+ "670": {
+  "nom": "Nihonkai evergreen forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 1076
+ },
+ "671": {
+  "nom": "Nihonkai montane deciduous forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 3558
+ },
+ "672": {
+  "nom": "North Atlantic moist mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 2951
+ },
+ "673": {
+  "nom": "Northeast China Plain deciduous forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 10598
+ },
+ "674": {
+  "nom": "Pannonian mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 14493
+ },
+ "675": {
+  "nom": "Po Basin mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 1990
+ },
+ "676": {
+  "nom": "Pyrenees conifer and mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 1139
+ },
+ "677": {
+  "nom": "Qin Ling Mountains deciduous forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 4791
+ },
+ "678": {
+  "nom": "Rodope montane mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 1391
+ },
+ "679": {
+  "nom": "Sarmatic mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 51179
+ },
+ "680": {
+  "nom": "Sichuan Basin evergreen broadleaf forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 3673
+ },
+ "681": {
+  "nom": "Southern Korea evergreen forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 773
+ },
+ "682": {
+  "nom": "Taiheiyo evergreen forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 6309
+ },
+ "683": {
+  "nom": "Taiheiyo montane deciduous forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 1706
+ },
+ "684": {
+  "nom": "Tarim Basin deciduous forests and steppe",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 2295
+ },
+ "685": {
+  "nom": "Ussuri broadleaf and mixed forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 9491
+ },
+ "686": {
+  "nom": "Western European broadleaf forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 23986
+ },
+ "687": {
+  "nom": "Western Siberian hemiboreal forests",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 12959
+ },
+ "688": {
+  "nom": "Zagros Mountains forest steppe",
+  "biome": 4,
+  "biome_nom": "Temperate Broadleaf & Mixed Forests",
+  "royaume": "Palearctic",
+  "pixels": 15388
+ },
+ "689": {
+  "nom": "Alps conifer and mixed forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 7032
+ },
+ "690": {
+  "nom": "Altai montane forest and forest steppe",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 6898
+ },
+ "691": {
+  "nom": "Caledon conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 1337
+ },
+ "692": {
+  "nom": "Carpathian montane forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 6043
+ },
+ "693": {
+  "nom": "Da Hinggan-Dzhagdy Mountains conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 13040
+ },
+ "694": {
+  "nom": "East Afghan montane conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 769
+ },
+ "695": {
+  "nom": "Elburz Range forest steppe",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 2545
+ },
+ "696": {
+  "nom": "Helanshan montane conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 1023
+ },
+ "697": {
+  "nom": "Hengduan Mountains subalpine conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 3693
+ },
+ "698": {
+  "nom": "Hokkaido montane conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 2150
+ },
+ "699": {
+  "nom": "Honshu alpine conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 484
+ },
+ "700": {
+  "nom": "Khangai Mountains conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 141
+ },
+ "701": {
+  "nom": "Mediterranean conifer and mixed forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 948
+ },
+ "702": {
+  "nom": "Northeast Himalayan subalpine conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 1747
+ },
+ "703": {
+  "nom": "Northern Anatolian conifer and deciduous forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 4296
+ },
+ "704": {
+  "nom": "Nujiang Langcang Gorge alpine conifer and mixed forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 3076
+ },
+ "705": {
+  "nom": "Qilian Mountains conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 662
+ },
+ "706": {
+  "nom": "Qionglai-Minshan conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 3024
+ },
+ "707": {
+  "nom": "Sayan montane conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 19019
+ },
+ "708": {
+  "nom": "Scandinavian coastal conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 2429
+ },
+ "709": {
+  "nom": "Tian Shan montane conifer forests",
+  "biome": 5,
+  "biome_nom": "Temperate Conifer Forests",
+  "royaume": "Palearctic",
+  "pixels": 1229
+ },
+ "710": {
+  "nom": "East Siberian taiga",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Palearctic",
+  "pixels": 266847
+ },
+ "711": {
+  "nom": "Iceland boreal birch forests and alpine tundra",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Palearctic",
+  "pixels": 7908
+ },
+ "712": {
+  "nom": "Kamchatka taiga",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Palearctic",
+  "pixels": 887
+ },
+ "713": {
+  "nom": "Kamchatka-Kurile meadows and sparse forests",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Palearctic",
+  "pixels": 9004
+ },
+ "714": {
+  "nom": "Northeast Siberian taiga",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Palearctic",
+  "pixels": 88209
+ },
+ "715": {
+  "nom": "Okhotsk-Manchurian taiga",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Palearctic",
+  "pixels": 21560
+ },
+ "716": {
+  "nom": "Sakhalin Island taiga",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Palearctic",
+  "pixels": 3850
+ },
+ "717": {
+  "nom": "Scandinavian and Russian taiga",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Palearctic",
+  "pixels": 155146
+ },
+ "718": {
+  "nom": "Trans-Baikal conifer forests",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Palearctic",
+  "pixels": 10344
+ },
+ "719": {
+  "nom": "Urals montane forest and taiga",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Palearctic",
+  "pixels": 11138
+ },
+ "720": {
+  "nom": "West Siberian taiga",
+  "biome": 6,
+  "biome_nom": "Boreal Forests/Taiga",
+  "royaume": "Palearctic",
+  "pixels": 112796
+ },
+ "721": {
+  "nom": "Alai-Western Tian Shan steppe",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 5474
+ },
+ "722": {
+  "nom": "Al-Hajar foothill xeric woodlands and shrublands",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 1660
+ },
+ "723": {
+  "nom": "Al-Hajar montane woodlands and shrublands",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 79
+ },
+ "724": {
+  "nom": "Altai steppe and semi-desert",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 4052
+ },
+ "725": {
+  "nom": "Central Anatolian steppe",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 1047
+ },
+ "726": {
+  "nom": "Daurian forest steppe",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 10494
+ },
+ "727": {
+  "nom": "Eastern Anatolian montane steppe",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 7056
+ },
+ "728": {
+  "nom": "Emin Valley steppe",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 3038
+ },
+ "729": {
+  "nom": "Faroe Islands boreal grasslands",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 191
+ },
+ "730": {
+  "nom": "Gissaro-Alai open woodlands",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 7126
+ },
+ "731": {
+  "nom": "Kazakh forest steppe",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 23195
+ },
+ "732": {
+  "nom": "Kazakh steppe",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 42087
+ },
+ "733": {
+  "nom": "Kazakh upland steppe",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 3652
+ },
+ "734": {
+  "nom": "Mongolian-Manchurian grassland",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 41251
+ },
+ "735": {
+  "nom": "Pontic steppe",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 49261
+ },
+ "736": {
+  "nom": "Sayan Intermontane steppe",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 1752
+ },
+ "737": {
+  "nom": "Selenge-Orkhon forest steppe",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 11248
+ },
+ "738": {
+  "nom": "South Siberian forest steppe",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 9122
+ },
+ "739": {
+  "nom": "Syrian xeric grasslands and shrublands",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 5470
+ },
+ "740": {
+  "nom": "Tian Shan foothill arid steppe",
+  "biome": 8,
+  "biome_nom": "Temperate Grasslands, Savannas & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 5813
+ },
+ "741": {
+  "nom": "Amur meadow steppe",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Palearctic",
+  "pixels": 6054
+ },
+ "742": {
+  "nom": "Bohai Sea saline meadow",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Palearctic",
+  "pixels": 540
+ },
+ "743": {
+  "nom": "Nenjiang River grassland",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Palearctic",
+  "pixels": 1091
+ },
+ "744": {
+  "nom": "Nile Delta flooded savanna",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Palearctic",
+  "pixels": 1946
+ },
+ "745": {
+  "nom": "Saharan halophytics",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Palearctic",
+  "pixels": 2024
+ },
+ "746": {
+  "nom": "Suiphun-Khanka meadows and forest meadows",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Palearctic",
+  "pixels": 1553
+ },
+ "747": {
+  "nom": "Tigris-Euphrates alluvial salt marsh",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Palearctic",
+  "pixels": 1348
+ },
+ "748": {
+  "nom": "Yellow Sea saline meadow",
+  "biome": 9,
+  "biome_nom": "Flooded Grasslands & Savannas",
+  "royaume": "Palearctic",
+  "pixels": 244
+ },
+ "749": {
+  "nom": "Altai alpine meadow and tundra",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 4412
+ },
+ "750": {
+  "nom": "Central Tibetan Plateau alpine steppe",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 24848
+ },
+ "751": {
+  "nom": "Eastern Himalayan alpine shrub and meadows",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 4787
+ },
+ "752": {
+  "nom": "Ghorat-Hazarajat alpine meadow",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 2602
+ },
+ "753": {
+  "nom": "Hindu Kush alpine meadow",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 1130
+ },
+ "754": {
+  "nom": "Karakoram-West Tibetan Plateau alpine steppe",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 6242
+ },
+ "755": {
+  "nom": "Khangai Mountains alpine meadow",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 1769
+ },
+ "756": {
+  "nom": "Kopet Dag woodlands and forest steppe",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 2387
+ },
+ "757": {
+  "nom": "Kuh Rud and Eastern Iran montane woodlands",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 4785
+ },
+ "758": {
+  "nom": "Mediterranean High Atlas juniper steppe",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 244
+ },
+ "759": {
+  "nom": "North Tibetan Plateau-Kunlun Mountains alpine desert",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 15252
+ },
+ "760": {
+  "nom": "Northwestern Himalayan alpine shrub and meadows",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 1994
+ },
+ "761": {
+  "nom": "Ordos Plateau steppe",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 8863
+ },
+ "762": {
+  "nom": "Pamir alpine desert and tundra",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 5127
+ },
+ "763": {
+  "nom": "Qilian Mountains subalpine meadows",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 3029
+ },
+ "764": {
+  "nom": "Sayan alpine meadows and tundra",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 4251
+ },
+ "765": {
+  "nom": "Southeast Tibet shrublands and meadows",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 17719
+ },
+ "766": {
+  "nom": "Sulaiman Range alpine meadows",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 879
+ },
+ "767": {
+  "nom": "Tian Shan montane steppe and meadows",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 12336
+ },
+ "768": {
+  "nom": "Tibetan Plateau alpine shrublands and meadows",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 10577
+ },
+ "769": {
+  "nom": "Western Himalayan alpine shrub and meadows",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 2800
+ },
+ "770": {
+  "nom": "Yarlung Zanbo arid steppe",
+  "biome": 10,
+  "biome_nom": "Montane Grasslands & Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 2226
+ },
+ "771": {
+  "nom": "Cherskii-Kolyma mountain tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Palearctic",
+  "pixels": 43905
+ },
+ "772": {
+  "nom": "Chukchi Peninsula tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Palearctic",
+  "pixels": 26145
+ },
+ "773": {
+  "nom": "Kamchatka tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Palearctic",
+  "pixels": 7169
+ },
+ "774": {
+  "nom": "Kola Peninsula tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Palearctic",
+  "pixels": 5496
+ },
+ "775": {
+  "nom": "Northeast Siberian coastal tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Palearctic",
+  "pixels": 22560
+ },
+ "776": {
+  "nom": "Northwest Russian-Novaya Zemlya tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Palearctic",
+  "pixels": 26008
+ },
+ "777": {
+  "nom": "Novosibirsk Islands Arctic desert",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Palearctic",
+  "pixels": 5337
+ },
+ "778": {
+  "nom": "Russian Arctic desert",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Palearctic",
+  "pixels": 30824
+ },
+ "779": {
+  "nom": "Russian Bering tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Palearctic",
+  "pixels": 35107
+ },
+ "780": {
+  "nom": "Scandinavian Montane Birch forest and grasslands",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Palearctic",
+  "pixels": 20993
+ },
+ "781": {
+  "nom": "Taimyr-Central Siberian tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Palearctic",
+  "pixels": 104062
+ },
+ "782": {
+  "nom": "Trans-Baikal Bald Mountain tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Palearctic",
+  "pixels": 12577
+ },
+ "783": {
+  "nom": "Wrangel Island Arctic desert",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Palearctic",
+  "pixels": 859
+ },
+ "784": {
+  "nom": "Yamal-Gydan tundra",
+  "biome": 11,
+  "biome_nom": "Tundra",
+  "royaume": "Palearctic",
+  "pixels": 38794
+ },
+ "785": {
+  "nom": "Aegean and Western Turkey sclerophyllous and mixed forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 6967
+ },
+ "786": {
+  "nom": "Anatolian conifer and deciduous mixed forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 3689
+ },
+ "787": {
+  "nom": "Canary Islands dry woodlands and forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 273
+ },
+ "788": {
+  "nom": "Corsican montane broadleaf and mixed forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 160
+ },
+ "789": {
+  "nom": "Crete Mediterranean forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 421
+ },
+ "790": {
+  "nom": "Cyprus Mediterranean forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 443
+ },
+ "791": {
+  "nom": "Eastern Mediterranean conifer-broadleaf forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 5840
+ },
+ "792": {
+  "nom": "Iberian conifer forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 1458
+ },
+ "793": {
+  "nom": "Iberian sclerophyllous and semi-deciduous forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 12559
+ },
+ "794": {
+  "nom": "Illyrian deciduous forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 1950
+ },
+ "795": {
+  "nom": "Italian sclerophyllous and semi-deciduous forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 4696
+ },
+ "796": {
+  "nom": "Mediterranean Acacia-Argania dry woodlands and succulent thickets",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 3908
+ },
+ "797": {
+  "nom": "Mediterranean dry woodlands and steppe",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 11482
+ },
+ "798": {
+  "nom": "Mediterranean woodlands and forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 14540
+ },
+ "799": {
+  "nom": "Northeast Spain and Southern France Mediterranean forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 4278
+ },
+ "800": {
+  "nom": "Northwest Iberian montane forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 2479
+ },
+ "801": {
+  "nom": "Pindus Mountains mixed forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 1682
+ },
+ "802": {
+  "nom": "South Apennine mixed montane forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 544
+ },
+ "803": {
+  "nom": "Southeast Iberian shrubs and woodlands",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 158
+ },
+ "804": {
+  "nom": "Southern Anatolian montane conifer and deciduous forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 3111
+ },
+ "805": {
+  "nom": "Southwest Iberian Mediterranean sclerophyllous and mixed forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 3091
+ },
+ "806": {
+  "nom": "Tyrrhenian-Adriatic sclerophyllous and mixed forests",
+  "biome": 12,
+  "biome_nom": "Mediterranean Forests, Woodlands & Scrub",
+  "royaume": "Palearctic",
+  "pixels": 4438
+ },
+ "807": {
+  "nom": "Afghan Mountains semi-desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 547
+ },
+ "808": {
+  "nom": "Alashan Plateau semi-desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 29098
+ },
+ "809": {
+  "nom": "Arabian desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 29131
+ },
+ "810": {
+  "nom": "Arabian sand desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 25024
+ },
+ "811": {
+  "nom": "Arabian-Persian Gulf coastal plain desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 4833
+ },
+ "812": {
+  "nom": "Azerbaijan shrub desert and steppe",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 2787
+ },
+ "813": {
+  "nom": "Badghyz and Karabil semi-desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 5381
+ },
+ "814": {
+  "nom": "Baluchistan xeric woodlands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 10844
+ },
+ "815": {
+  "nom": "Caspian lowland desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 12888
+ },
+ "816": {
+  "nom": "Central Afghan Mountains xeric woodlands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 5399
+ },
+ "817": {
+  "nom": "Central Asian northern desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 30635
+ },
+ "818": {
+  "nom": "Central Asian riparian woodlands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 3991
+ },
+ "819": {
+  "nom": "Central Asian southern desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 24177
+ },
+ "820": {
+  "nom": "Central Persian desert basins",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 22545
+ },
+ "821": {
+  "nom": "East Arabian fog shrublands and sand desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 630
+ },
+ "822": {
+  "nom": "East Sahara Desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 55011
+ },
+ "823": {
+  "nom": "East Saharan montane xeric woodlands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 936
+ },
+ "824": {
+  "nom": "Eastern Gobi desert steppe",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 12660
+ },
+ "825": {
+  "nom": "Gobi Lakes Valley desert steppe",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 6413
+ },
+ "826": {
+  "nom": "Great Lakes Basin desert steppe",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 7736
+ },
+ "827": {
+  "nom": "Junggar Basin semi-desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 14081
+ },
+ "828": {
+  "nom": "Kazakh semi-desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 32967
+ },
+ "829": {
+  "nom": "Kopet Dag semi-desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 1086
+ },
+ "830": {
+  "nom": "Mesopotamian shrub desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 7978
+ },
+ "831": {
+  "nom": "North Arabian desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 17595
+ },
+ "832": {
+  "nom": "North Arabian highland shrublands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 302
+ },
+ "833": {
+  "nom": "North Saharan Xeric Steppe and Woodland",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 59806
+ },
+ "834": {
+  "nom": "Paropamisus xeric woodlands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 3705
+ },
+ "835": {
+  "nom": "Qaidam Basin semi-desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 7855
+ },
+ "836": {
+  "nom": "Red Sea coastal desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 2370
+ },
+ "837": {
+  "nom": "Red Sea-Arabian Desert shrublands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 11326
+ },
+ "838": {
+  "nom": "Registan-North Pakistan sandy desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 10387
+ },
+ "839": {
+  "nom": "Saharan Atlantic coastal desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 1549
+ },
+ "840": {
+  "nom": "South Arabian plains and plateau desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 12834
+ },
+ "841": {
+  "nom": "South Iran Nubo-Sindian desert and semi-desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 13223
+ },
+ "842": {
+  "nom": "South Sahara desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 101568
+ },
+ "843": {
+  "nom": "Taklimakan desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 31345
+ },
+ "844": {
+  "nom": "Tibesti-Jebel Uweinat montane xeric woodlands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 2852
+ },
+ "845": {
+  "nom": "West Sahara desert",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 27411
+ },
+ "846": {
+  "nom": "West Saharan montane xeric woodlands",
+  "biome": 13,
+  "biome_nom": "Deserts & Xeric Shrublands",
+  "royaume": "Palearctic",
+  "pixels": 9116
+ }
+}
