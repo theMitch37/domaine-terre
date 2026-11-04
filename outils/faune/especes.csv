@@ -18,7 +18,7 @@ minecraft:turtle;Tortue marine;Chelonia mydas;sauvage;cote (plage);mediterranee,
 minecraft:dolphin;Dauphin;Delphinidae;sauvage;mer,large;mers_chaudes_tempérées;2-6;garder;
 minecraft:squid;Calmar;Teuthida;sauvage;mer,large;toutes_les_mers;2-4;garder;
 minecraft:glow_squid;Calmar luisant;—;fantastique;souterrain (eau);—;2-4;souterrain;grottes inondées seulement
-minecraft:cod;Morue (base);Gadus morhua;poisson;mer;—;3-7;doublon:aquaculture:atlantic_cod;
+minecraft:cod;Morue (base);Gadus morhua;poisson;mer;atlantique,nordique,boreale;3-7;garder;variante de aquaculture:atlantic_cod
 minecraft:salmon;Saumon;Salmo salar;poisson;mer,eau_douce;atlantique,nordique,boreale,siberie,japon_coree;3-5;garder;remonte les rivières
 minecraft:tropical_fish;Poisson tropical;Pomacentridae etc.;poisson;mer (récifs);mers_tropicales;4-8;garder;
 minecraft:pufferfish;Poisson-globe;Tetraodontidae;poisson;mer;mers_tropicales;1-3;garder;
@@ -29,8 +29,8 @@ minecraft:bat;Chauve-souris;Chiroptera;sauvage;souterrain;partout;2-8;garder;gro
 minecraft:mooshroom;Champimeuh;—;fantastique;—;—;—;retirer;pas d'îles champignons sur la vraie Terre
 untamedwilds:bear/brown;Ours brun;Ursus arctos;sauvage;foret,montagne;nordique,alpine,siberie,boreale,continentale;1;garder;"grizzli en Amérique ; prédateur"
 untamedwilds:bear/black;Ours noir;Ursus americanus;sauvage;foret;boreale,grandes_plaines;1;garder;
-untamedwilds:bear/polar;Ours polaire (UW);Ursus maritimus;sauvage;banquise;—;1;doublon:minecraft:polar_bear;
-untamedwilds:bear/panda;Panda (UW);Ailuropoda melanoleuca;sauvage;foret;—;1;doublon:minecraft:panda;
+untamedwilds:bear/polar;Ours polaire (UW);Ursus maritimus;sauvage;banquise;arctique;1;garder;variante de minecraft:polar_bear
+untamedwilds:bear/panda;Panda (UW);Ailuropoda melanoleuca;sauvage;foret;chine;1;garder;variante de minecraft:panda
 untamedwilds:bear/spectacled;Ours à lunettes;Tremarctos ornatus;sauvage;foret (montagne);andes;1;garder;
 untamedwilds:bear/sun;Ours malais;Helarctos malayanus;sauvage;foret_tropicale;asie_sud_est;1;garder;
 untamedwilds:bear/cave;Ours des cavernes;Ursus spelaeus;fantastique;—;—;—;retirer;espèce disparue
@@ -100,7 +100,7 @@ untamedwilds:tortoise/gopher;Gophère;Gopherus polyphemus;sauvage;prairie,foret;
 untamedwilds:tortoise/marginated;Tortue bordée;Testudo marginata;sauvage;mediterraneen;mediterranee;1;garder;
 untamedwilds:tortoise/leopard;Tortue léopard;Stigmochelys pardalis;sauvage;savane;afrique_est,afrique_australe;1;garder;
 untamedwilds:tortoise/sulcata;Tortue sillonnée;Centrochelys sulcata;sauvage;desert,savane;sahara_sahel;1;garder;
-untamedwilds:tortoise/star;Tortue étoilée (UW);Geochelone elegans;sauvage;savane;—;1;doublon:aquaculture:starshell_turtle;
+untamedwilds:tortoise/star;Tortue étoilée (UW);Geochelone elegans;sauvage;savane;inde;1;garder;variante de aquaculture:starshell_turtle
 untamedwilds:tortoise/asian_box;Tortue-boîte d'Asie;Cuora amboinensis;sauvage;marais,foret_tropicale;asie_sud_est;1;garder;
 untamedwilds:softshell_turtle/chinese;Trionyx de Chine;Pelodiscus sinensis;sauvage;eau_douce;chine,japon_coree;1;garder;
 untamedwilds:softshell_turtle/nile;Trionyx du Nil;Trionyx triunguis;sauvage;eau_douce;sahara_sahel,afrique_tropicale;1;garder;
@@ -118,7 +118,7 @@ untamedwilds:newt/eastern;Triton vert;Notophthalmus viridescens;sauvage;eau_douc
 untamedwilds:newt/coastal;Triton du Pacifique;Taricha torosa;sauvage;eau_douce,foret (humide);ouest_mexique;1-3;garder;
 untamedwilds:newt/tiger;Salamandre tigrée;Ambystoma tigrinum;sauvage;eau_douce,foret (humide);grandes_plaines;1-3;garder;
 untamedwilds:newt/fire_belly;Triton à ventre de feu;Cynops orientalis;sauvage;eau_douce,foret (humide);chine,japon_coree;1-3;garder;
-untamedwilds:newt/axolotl;Axolotl (UW);Ambystoma mexicanum;sauvage;eau_douce,foret (humide);—;1-3;doublon:minecraft:axolotl;
+untamedwilds:newt/axolotl;Axolotl (UW);Ambystoma mexicanum;sauvage;eau_douce,foret (humide);ouest_mexique;1-3;garder;variante de minecraft:axolotl
 untamedwilds:catfish/blue;Poisson-chat bleu;Ictalurus furcatus;poisson;eau_douce;grandes_plaines;1;garder;
 untamedwilds:catfish/channel;Barbue de rivière;Ictalurus punctatus;poisson;eau_douce;grandes_plaines,boreale;1;garder;
 untamedwilds:catfish/redtail;Poisson-chat à queue rouge;Phractocephalus hemioliopterus;poisson;eau_douce;amazonie;1;garder;
@@ -194,19 +194,19 @@ untamedwilds:tarantula/tiger;Mygale tigre;Psalmopoeus;insecte;foret,desert;ameri
 untamedwilds:terror_bird/*;Oiseaux-terreur;—;fantastique;—;—;—;retirer;espèces disparues
 untamedwilds:spitter/purple;Cracheur;—;fantastique;souterrain;—;1;souterrain;créature inventée : étage profondeurs
 naturalist:alligator;Alligator;Alligator mississippiensis;sauvage;marais,eau_douce;grandes_plaines;1-2;garder;"Floride, Louisiane ; prédateur"
-naturalist:bear;Grizzli (Nat.);Ursus arctos;sauvage;—;—;—;doublon:untamedwilds:bear/brown;
+naturalist:bear;Grizzli (Nat.);Ursus arctos;sauvage;foret,montagne;nordique,alpine,siberie,boreale,continentale;1;garder;variante de untamedwilds:bear/brown
 naturalist:bluejay;Geai bleu;Cyanocitta cristata;sauvage;foret;grandes_plaines,boreale;1-2;garder;
-naturalist:boar;Sanglier (Nat.);—;sauvage;—;—;—;doublon:untamedwilds:boar/eurasian;
-naturalist:butterfly;Papillon (Nat.);—;insecte;—;—;—;doublon:untamedwilds:butterfly;20 espèces réelles chez Untamed Wilds
+naturalist:boar;Sanglier (Nat.);Sus scrofa;sauvage;foret;atlantique,mediterranee,continentale,alpine,moyen_orient,inde,chine,japon_coree,siberie;3-6;garder;variante de untamedwilds:boar/eurasian
+naturalist:butterfly;Papillon (Nat.);Danaus plexippus;insecte;prairie;grandes_plaines,ouest_mexique,boreale,atlantique,mediterranee,continentale,nordique,alpine,siberie,maghreb,moyen_orient,amazonie,amerique_centrale,australie,melanesie,asie_sud_est,inde,chine,japon_coree;1-3;garder;"variante de untamedwilds:butterfly ; 20 espèces réelles chez Untamed Wilds"
 naturalist:caterpillar;Chenille;Lepidoptera;insecte;foret;partout_sauf:arctique,antarctique;1;garder;
 naturalist:moth;Papillon de nuit;Heterocera;insecte;foret (nuit);partout_sauf:arctique,antarctique;1-3;garder;
 naturalist:canary;Canari;Serinus canaria;sauvage;foret;mediterranee,maghreb;1-3;garder;Canaries, Madère, Açores
 naturalist:cardinal;Cardinal rouge;Cardinalis cardinalis;sauvage;foret;grandes_plaines,ouest_mexique;1-2;garder;
-naturalist:catfish;Poisson-chat (Nat.);—;poisson;—;—;—;doublon:untamedwilds:catfish;
-naturalist:bass;Bar (Nat.);—;poisson;—;—;—;doublon:aquaculture:smallmouth_bass;
-naturalist:coral_snake;Serpent corail (Nat.);—;sauvage;—;—;—;doublon:untamedwilds:snake/coral;
-naturalist:rattlesnake;Serpent à sonnettes (Nat.);—;sauvage;—;—;—;doublon:untamedwilds:snake/western_rattlesnake;
-naturalist:snake;Serpent (Nat.);—;sauvage;—;—;—;doublon:untamedwilds:snake/grass_snake;
+naturalist:catfish;Poisson-chat (Nat.);Ictalurus furcatus;poisson;eau_douce;grandes_plaines,boreale,amazonie;1;garder;variante de untamedwilds:catfish
+naturalist:bass;Bar (Nat.);Micropterus dolomieu;poisson;eau_douce;grandes_plaines,boreale;2-4;garder;variante de aquaculture:smallmouth_bass
+naturalist:coral_snake;Serpent corail (Nat.);Micrurus;sauvage;foret_tropicale;amerique_centrale,amazonie,ouest_mexique;1;garder;variante de untamedwilds:snake/coral
+naturalist:rattlesnake;Serpent à sonnettes (Nat.);Crotalus oreganus / atrox;sauvage;desert,steppe;ouest_mexique,grandes_plaines;1;garder;variante de untamedwilds:snake/western_rattlesnake
+naturalist:snake;Serpent (Nat.);Natrix natrix;sauvage;marais,prairie;atlantique,mediterranee,continentale,nordique,maghreb;1;garder;variante de untamedwilds:snake/grass_snake
 naturalist:deer;Chevreuil;Capreolus capreolus;sauvage;foret;atlantique,mediterranee,continentale,nordique,alpine,siberie,japon_coree;2-4;garder;cerf de Virginie en Amérique ?
 naturalist:dragonfly;Libellule;Anisoptera;insecte;eau_douce,marais;partout_sauf:arctique,antarctique;1-3;garder;
 naturalist:duck;Canard colvert;Anas platyrhynchos;sauvage;eau_douce,marais;partout_sauf:antarctique,sahara_sahel,amazonie;2-5;garder;
@@ -214,10 +214,10 @@ naturalist:elephant;Éléphant;Loxodonta / Elephas;sauvage;savane,foret_tropical
 naturalist:finch;Pinson des arbres;Fringilla coelebs;sauvage;foret;atlantique,mediterranee,continentale,nordique,alpine,maghreb;2-4;garder;
 naturalist:firefly;Luciole;Lampyridae;insecte;prairie,foret (nuit);atlantique,continentale,mediterranee,grandes_plaines,japon_coree,chine,asie_sud_est;3-8;garder;
 naturalist:giraffe;Girafe;Giraffa;sauvage;savane;afrique_est,afrique_australe;2-6;garder;
-naturalist:hippo;Hippopotame (Nat.);—;sauvage;—;—;—;doublon:untamedwilds:hippo/common;
-naturalist:hyena;Hyène (Nat.);—;sauvage;—;—;—;doublon:untamedwilds:hyena/spotted;
-naturalist:lion;Lion (Nat.);—;sauvage;—;—;—;doublon:untamedwilds:big_cat/lion;
-naturalist:rhino;Rhinocéros (Nat.);—;sauvage;—;—;—;doublon:untamedwilds:rhino;
+naturalist:hippo;Hippopotame (Nat.);Hippopotamus amphibius;sauvage;eau_douce;afrique_est,afrique_tropicale,afrique_australe;3-8;garder;variante de untamedwilds:hippo/common
+naturalist:hyena;Hyène (Nat.);Crocuta crocuta;sauvage;savane;afrique_est,afrique_australe,afrique_tropicale;3-6;garder;variante de untamedwilds:hyena/spotted
+naturalist:lion;Lion (Nat.);Panthera leo;sauvage;savane;afrique_est,afrique_australe,sahara_sahel,inde;2-5;garder;variante de untamedwilds:big_cat/lion
+naturalist:rhino;Rhinocéros (Nat.);Diceros bicornis;sauvage;savane;afrique_est,afrique_australe,inde,asie_sud_est;1;garder;variante de untamedwilds:rhino
 naturalist:tortoise;Tortue terrestre (Nat.);Testudo hermanni;sauvage;mediterraneen,steppe;mediterranee,maghreb,moyen_orient;1;garder;tortue d'Hermann / grecque
 naturalist:lizard;Lézard;Lacertidae / Agamidae;sauvage;desert,steppe,mediterraneen;mediterranee,maghreb,sahara_sahel,moyen_orient,australie,ouest_mexique;1-2;garder;
 naturalist:ostrich;Autruche;Struthio camelus;sauvage;savane,desert;afrique_est,afrique_australe,sahara_sahel;2-5;garder;
@@ -227,8 +227,8 @@ naturalist:sparrow;Moineau;Passer domesticus;sauvage;culture;partout_sauf:arctiq
 naturalist:termite;Termite;Isoptera;insecte;savane,foret_tropicale;afrique_est,afrique_tropicale,afrique_australe,australie,inde,amazonie,asie_sud_est;termitière;garder;
 naturalist:vulture;Vautour;Gyps;sauvage;ciel (savane, montagne);afrique_est,sahara_sahel,mediterranee,inde,moyen_orient,alpine;1-3;garder;vautour fauve dans les Alpes et les Pyrénées
 naturalist:zebra;Zèbre;Equus quagga;sauvage;savane;afrique_est,afrique_australe;4-10;garder;
-wildernature:bison;Bison (WN);—;sauvage;—;—;—;doublon:untamedwilds:bison/plains;
-wildernature:boar;Sanglier (WN);—;sauvage;—;—;—;doublon:untamedwilds:boar/eurasian;
+wildernature:bison;Bison (WN);Bison bison;sauvage;prairie;grandes_plaines,boreale;4-10;garder;variante de untamedwilds:bison/plains
+wildernature:boar;Sanglier (WN);Sus scrofa;sauvage;foret;atlantique,mediterranee,continentale,alpine,moyen_orient,inde,chine,japon_coree,siberie;3-6;garder;variante de untamedwilds:boar/eurasian
 wildernature:cassowary;Casoar;Casuarius;sauvage;foret_tropicale;melanesie,australie;1;garder;dangereux
 wildernature:deer;Cerf élaphe;Cervus elaphus;sauvage;foret,prairie;atlantique,mediterranee,continentale,nordique,alpine,boreale,grandes_plaines,siberie;3-6;garder;wapiti en Amérique
 wildernature:dog;Chien;Canis familiaris;ferme;—;—;—;a_confirmer;animal de compagnie : villages seulement ?
@@ -237,16 +237,16 @@ wildernature:hedgehog;Hérisson;Erinaceus europaeus;sauvage;foret,prairie;atlant
 wildernature:minisheep;Mouton nain;Ovis aries;ferme;montagne;alpine;2-4;a_confirmer;race domestique, utile ?
 wildernature:owl;Chouette;Strigiformes;sauvage;foret (nuit);partout_sauf:antarctique;1;garder;
 wildernature:pelican;Pélican;Pelecanus;sauvage;cote,eau_douce;afrique_est,afrique_tropicale,grandes_plaines,amerique_centrale,australie,inde,mediterranee;3-8;garder;
-wildernature:penguin;Manchot (WN);—;sauvage;—;—;—;doublon:ecologics:penguin;
+wildernature:penguin;Manchot (WN);Spheniscidae;sauvage;banquise,cote;antarctique,cone_sud,afrique_australe,nouvelle_zelande;4-10;garder;variante de ecologics:penguin
 wildernature:raccoon;Raton laveur;Procyon lotor;sauvage;foret;grandes_plaines,boreale,ouest_mexique;1-3;garder;
 wildernature:red_wolf;Loup roux;Canis rufus;sauvage;foret,marais;grandes_plaines;3-6;garder;
-wildernature:squirrel;Écureuil (WN);—;sauvage;—;—;—;doublon:ecologics:squirrel;
+wildernature:squirrel;Écureuil (WN);Sciurus vulgaris;sauvage;foret;atlantique,mediterranee,continentale,nordique,alpine,siberie,japon_coree;1-2;garder;variante de ecologics:squirrel
 wildernature:turkey;Dindon sauvage;Meleagris gallopavo;sauvage;foret,prairie;grandes_plaines,ouest_mexique;3-6;garder;
 meadow:wooly_sheep;Mouton laineux;Ovis aries;ferme;montagne,prairie;alpine;3-5;garder;
 meadow:horned_sheep;Mouton cornu;Ovis aries;ferme;montagne;mediterranee,moyen_orient,alpine;3-5;garder;
 meadow:wooly_cow;Vache laineuse (Highland);Bos taurus;ferme;montagne,prairie;alpine,atlantique,nordique;2-4;garder;
 meadow:water_buffalo;Buffle d'eau;Bubalus bubalis;ferme;marais,culture (rizières);inde,asie_sud_est,chine;3-6;garder;
-ecologics:camel;Dromadaire (Eco.);—;sauvage;—;—;—;doublon:untamedwilds:camel/dromedary;
+ecologics:camel;Dromadaire (Eco.);Camelus dromedarius;sauvage;desert;sahara_sahel,maghreb,moyen_orient,australie;2-6;garder;variante de untamedwilds:camel/dromedary
 ecologics:coconut_crab;Crabe de cocotier;Birgus latro;sauvage;cote (plage tropicale);melanesie,asie_sud_est;1;garder;
 ecologics:penguin;Manchot;Spheniscidae;sauvage;banquise,cote;antarctique,cone_sud,afrique_australe,nouvelle_zelande;4-10;garder;
 ecologics:squirrel;Écureuil roux;Sciurus vulgaris;sauvage;foret;atlantique,mediterranee,continentale,nordique,alpine,siberie,japon_coree;1-2;garder;
@@ -312,47 +312,47 @@ betteranimalsplus:bobbit_worm;Ver de Bobbit;Eunice aphroditois;sauvage;mer (réc
 betteranimalsplus:flying_fish;Poisson volant;Exocoetidae;poisson;large;mers_tropicales;3-6;garder;"mod à installer ; id à vérifier"
 betteranimalsplus:squid_giant;Calmar géant;Architeuthis dux;sauvage;abysses;mers_profondes;1;garder;"mod à installer ; id à vérifier"
 betteranimalsplus:squid_colossal;Calmar colossal;Mesonychoteuthis hamiltoni;sauvage;abysses;antarctique;1;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:feral_wolf;Loup féral;—;sauvage;—;—;—;doublon:minecraft:wolf;"mod à installer ; id à vérifier"
-betteranimalsplus:turkey;Dindon (BA+);—;sauvage;—;—;—;doublon:wildernature:turkey;"mod à installer ; id à vérifier"
-betteranimalsplus:boar;Sanglier (BA+);—;sauvage;—;—;—;doublon:untamedwilds:boar/eurasian;"mod à installer ; id à vérifier"
-betteranimalsplus:squirrel;Écureuil (BA+);—;sauvage;—;—;—;doublon:ecologics:squirrel;"mod à installer ; id à vérifier"
-betteranimalsplus:butterfly;Papillon (BA+);—;sauvage;—;—;—;doublon:untamedwilds:butterfly;"mod à installer ; id à vérifier"
-betteranimalsplus:dragonfly;Libellule (BA+);—;sauvage;—;—;—;doublon:naturalist:dragonfly;"mod à installer ; id à vérifier"
-betteranimalsplus:tarantula;Mygale (BA+);—;sauvage;—;—;—;doublon:untamedwilds:tarantula;"mod à installer ; id à vérifier"
-betteranimalsplus:piranha;Piranha (BA+);—;sauvage;—;—;—;doublon:aquaculture:piranha;"mod à installer ; id à vérifier"
-betteranimalsplus:shark;Requin (BA+);—;sauvage;—;—;—;doublon:untamedwilds:shark;"mod à installer ; id à vérifier"
-betteranimalsplus:whale;Baleine (BA+);—;sauvage;—;—;—;doublon:untamedwilds:baleen_whale;"mod à installer ; id à vérifier"
-betteranimalsplus:jellyfish;Méduse (BA+);—;sauvage;—;—;—;doublon:aquaculture:jellyfish;"mod à installer ; id à vérifier"
-betteranimalsplus:brownbear;Ours brun (BA+);—;sauvage;—;—;—;doublon:untamedwilds:bear/brown;"mod à installer ; id à vérifier"
-betteranimalsplus:blackbear;Ours noir (BA+);—;sauvage;—;—;—;doublon:untamedwilds:bear/black;"mod à installer ; id à vérifier"
-betteranimalsplus:hirschgeist;Hirschgeist;—;fantastique;souterrain;—;1;souterrain;esprit-cerf du folklore germanique : abîmes, ou endémique des forêts d'Europe centrale (à décider)
-betteranimalsplus:zotzpyre;Zotzpyre;—;fantastique;souterrain;—;2-4;souterrain;chauve-souris vampire du mythe maya : abîmes, ou endémique d'Amérique centrale (à décider)
+betteranimalsplus:feral_wolf;Loup féral;Canis lupus;sauvage;foret,toundra,steppe,montagne;continentale,nordique,alpine,siberie,boreale,steppes_tibet,arctique,moyen_orient,inde;4-8;garder;"variante de minecraft:wolf ; mod à installer ; id à vérifier"
+betteranimalsplus:turkey;Dindon (BA+);Meleagris gallopavo;sauvage;foret,prairie;grandes_plaines,ouest_mexique;3-6;garder;"variante de wildernature:turkey ; mod à installer ; id à vérifier"
+betteranimalsplus:boar;Sanglier (BA+);Sus scrofa;sauvage;foret;atlantique,mediterranee,continentale,alpine,moyen_orient,inde,chine,japon_coree,siberie;3-6;garder;"variante de untamedwilds:boar/eurasian ; mod à installer ; id à vérifier"
+betteranimalsplus:squirrel;Écureuil (BA+);Sciurus vulgaris;sauvage;foret;atlantique,mediterranee,continentale,nordique,alpine,siberie,japon_coree;1-2;garder;"variante de ecologics:squirrel ; mod à installer ; id à vérifier"
+betteranimalsplus:butterfly;Papillon (BA+);Danaus plexippus;sauvage;prairie;grandes_plaines,ouest_mexique,boreale,atlantique,mediterranee,continentale,nordique,alpine,siberie,maghreb,moyen_orient,amazonie,amerique_centrale,australie,melanesie,asie_sud_est,inde,chine,japon_coree;1-3;garder;"variante de untamedwilds:butterfly ; mod à installer ; id à vérifier"
+betteranimalsplus:dragonfly;Libellule (BA+);Anisoptera;sauvage;eau_douce,marais;partout_sauf:arctique,antarctique;1-3;garder;"variante de naturalist:dragonfly ; mod à installer ; id à vérifier"
+betteranimalsplus:tarantula;Mygale (BA+);Grammostola rosea;sauvage;foret,desert;cone_sud,andes,ouest_mexique,amazonie,asie_sud_est,afrique_est,inde,amerique_centrale;1;garder;"variante de untamedwilds:tarantula ; mod à installer ; id à vérifier"
+betteranimalsplus:piranha;Piranha (BA+);Pygocentrus nattereri;sauvage;eau_douce;amazonie;4-8;garder;"variante de aquaculture:piranha ; mod à installer ; id à vérifier"
+betteranimalsplus:shark;Requin (BA+);Carcharodon carcharias;sauvage;mer,large;afrique_australe,australie,nouvelle_zelande,ouest_mexique,mediterranee,mers_tropicales,amerique_centrale,mers_chaudes_tempérées,mers_profondes,abysses,arctique,nordique;1;garder;"variante de untamedwilds:shark ; mod à installer ; id à vérifier"
+betteranimalsplus:whale;Baleine (BA+);Balaenoptera musculus;sauvage;large;tous_les_océans,boreale,ouest_mexique,siberie,mers_froides;1-2;garder;"variante de untamedwilds:baleen_whale ; mod à installer ; id à vérifier"
+betteranimalsplus:jellyfish;Méduse (BA+);Scyphozoa;sauvage;mer;toutes_les_mers;2-5;garder;"variante de aquaculture:jellyfish ; mod à installer ; id à vérifier"
+betteranimalsplus:brownbear;Ours brun (BA+);Ursus arctos;sauvage;foret,montagne;nordique,alpine,siberie,boreale,continentale;1;garder;"variante de untamedwilds:bear/brown ; mod à installer ; id à vérifier"
+betteranimalsplus:blackbear;Ours noir (BA+);Ursus americanus;sauvage;foret;boreale,grandes_plaines;1;garder;"variante de untamedwilds:bear/black ; mod à installer ; id à vérifier"
+betteranimalsplus:hirschgeist;Hirschgeist;—;fantastique;foret (nuit);continentale,alpine;1;garder;"esprit-cerf du folklore germanique : endémique, spawn RARE ; mod à installer"
+betteranimalsplus:zotzpyre;Zotzpyre;—;fantastique;foret_tropicale (nuit);amerique_centrale;1-2;garder;"chauve-souris vampire du mythe maya : endémique, spawn RARE ; mod à installer"
 alexsmobs:alligator_snapping_turtle;Tortue alligator;Macrochelys temminckii;sauvage;eau_douce,marais;grandes_plaines;1;garder;mod à installer
-alexsmobs:anaconda;Anaconda;Eunectes murinus;sauvage;eau_douce,marais;—;1;doublon:untamedwilds:large_snake/anaconda;mod à installer
+alexsmobs:anaconda;Anaconda;Eunectes murinus;sauvage;eau_douce,marais;amazonie;1;garder;"variante de untamedwilds:large_snake/anaconda ; mod à installer"
 alexsmobs:anteater;Fourmilier;Myrmecophaga tridactyla;sauvage;savane,foret_tropicale;amazonie,cone_sud,amerique_centrale;1;garder;mod à installer
 alexsmobs:bald_eagle;Pygargue à tête blanche;Haliaeetus leucocephalus;sauvage;ciel (près de l'eau);boreale,grandes_plaines;1;garder;mod à installer
 alexsmobs:banana_slug;Limace banane;Ariolimax;insecte;foret (humide);boreale;1-2;garder;"forêts côtières du Pacifique nord ; mod à installer"
-alexsmobs:bison;Bison;Bison bison;sauvage;prairie;—;4-8;doublon:untamedwilds:bison/plains;mod à installer
+alexsmobs:bison;Bison;Bison bison;sauvage;prairie;grandes_plaines,boreale;4-8;garder;"variante de untamedwilds:bison/plains ; mod à installer"
 alexsmobs:blobfish;Blobfish;Psychrolutes marcidus;poisson;abysses;australie,nouvelle_zelande;1;garder;"fonds profonds ; mod à installer"
-alexsmobs:blue_jay;Geai bleu;Cyanocitta cristata;sauvage;foret;—;1-2;doublon:naturalist:bluejay;mod à installer
+alexsmobs:blue_jay;Geai bleu;Cyanocitta cristata;sauvage;foret;grandes_plaines,boreale;1-2;garder;"variante de naturalist:bluejay ; mod à installer"
 alexsmobs:cachalot_whale;Grand cachalot;Physeter macrocephalus;sauvage;large;tous_les_océans_profonds;1-2;garder;mod à installer
 alexsmobs:caiman;Caïman;Caiman crocodilus;sauvage;eau_douce,marais;amazonie,amerique_centrale;1-3;garder;mod à installer
 alexsmobs:capuchin_monkey;Capucin;Cebus;sauvage;foret_tropicale;amazonie,amerique_centrale;3-6;garder;mod à installer
-alexsmobs:catfish;Poisson-chat (AM);Silurus;poisson;eau_douce;—;1;doublon:untamedwilds:catfish;mod à installer
+alexsmobs:catfish;Poisson-chat (AM);Silurus;poisson;eau_douce;grandes_plaines,boreale,amazonie;1;garder;"variante de untamedwilds:catfish ; mod à installer"
 alexsmobs:cockroach;Cafard;Blattodea;insecte;sol,souterrain;partout_chaud;2-4;garder;mod à installer
 alexsmobs:comb_jelly;Cténophore;Ctenophora;sauvage;mer,large;toutes_les_mers;1-3;garder;mod à installer
 alexsmobs:crocodile;Crocodile;Crocodylus niloticus / porosus;sauvage;eau_douce,cote;afrique_tropicale,afrique_est,inde,asie_sud_est,australie,melanesie;1-2;garder;"prédateur ; mod à installer"
 alexsmobs:crow;Corbeau;Corvus;sauvage;culture,foret;partout_sauf:antarctique,amazonie;2-5;garder;mod à installer
 alexsmobs:devils_hole_pupfish;Cyprinodon du trou du Diable;Cyprinodon diabolis;poisson;eau_douce;ouest_mexique;2-4;garder;"très rare (une seule source au Nevada) ; mod à installer"
-alexsmobs:elephant;Éléphant;Loxodonta / Elephas;sauvage;savane,foret_tropicale;—;3-8;doublon:naturalist:elephant;mod à installer
+alexsmobs:elephant;Éléphant;Loxodonta / Elephas;sauvage;savane,foret_tropicale;afrique_est,afrique_australe,afrique_tropicale,inde,asie_sud_est;3-8;garder;"variante de naturalist:elephant ; mod à installer"
 alexsmobs:emu;Émeu;Dromaius novaehollandiae;sauvage;savane,steppe;australie;2-5;garder;mod à installer
-alexsmobs:flying_fish;Poisson volant;Exocoetidae;poisson;large;—;3-6;doublon:betteranimalsplus:flying_fish;mod à installer
+alexsmobs:flying_fish;Poisson volant;Exocoetidae;poisson;large;mers_tropicales;3-6;garder;"variante de betteranimalsplus:flying_fish ; mod à installer"
 alexsmobs:frilled_shark;Requin lézard;Chlamydoselachus anguineus;poisson;abysses;japon_coree,toutes_les_mers_profondes;1;garder;mod à installer
 alexsmobs:gazelle;Gazelle;Gazella;sauvage;savane,desert;afrique_est,sahara_sahel,maghreb,moyen_orient;4-8;garder;mod à installer
 alexsmobs:gelada_monkey;Gélada;Theropithecus gelada;sauvage;montagne,prairie;afrique_est;4-10;garder;"hauts plateaux d'Éthiopie ; mod à installer"
-alexsmobs:giant_squid;Calmar géant;Architeuthis dux;sauvage;abysses;—;1;doublon:betteranimalsplus:squid_giant;mod à installer
+alexsmobs:giant_squid;Calmar géant;Architeuthis dux;sauvage;abysses;mers_profondes;1;garder;"variante de betteranimalsplus:squid_giant ; mod à installer"
 alexsmobs:gorilla;Gorille;Gorilla;sauvage;foret_tropicale;afrique_tropicale;3-8;garder;mod à installer
-alexsmobs:grizzly_bear;Grizzli;Ursus arctos horribilis;sauvage;foret,montagne;—;1;doublon:untamedwilds:bear/brown;mod à installer
+alexsmobs:grizzly_bear;Grizzli;Ursus arctos horribilis;sauvage;foret,montagne;nordique,alpine,siberie,boreale,continentale;1;garder;"variante de untamedwilds:bear/brown ; mod à installer"
 alexsmobs:hammerhead_shark;Requin-marteau;Sphyrna;poisson;mer,large;mers_tropicales;1-3;garder;"prédateur ; mod à installer"
 alexsmobs:hummingbird;Colibri;Trochilidae;sauvage;foret_tropicale,prairie;amerique_centrale,amazonie,andes,ouest_mexique;1-2;garder;mod à installer
 alexsmobs:jerboa;Gerboise;Jaculus;sauvage;desert;sahara_sahel,maghreb,moyen_orient,steppes_tibet;1-2;garder;mod à installer
@@ -363,26 +363,26 @@ alexsmobs:lobster;Homard;Homarus;sauvage;cote,mer;atlantique,nordique,boreale;1-
 alexsmobs:maned_wolf;Loup à crinière;Chrysocyon brachyurus;sauvage;savane;cone_sud,amazonie;1;garder;mod à installer
 alexsmobs:mantis_shrimp;Crevette-mante;Stomatopoda;sauvage;mer (récifs);mers_tropicales;1;garder;mod à installer
 alexsmobs:mimic_octopus;Poulpe mimétique;Thaumoctopus mimicus;sauvage;mer (récifs);asie_sud_est,melanesie;1;garder;mod à installer
-alexsmobs:moose;Élan;Alces alces;sauvage;foret,marais;—;1-2;doublon:betteranimalsplus:moose;mod à installer
+alexsmobs:moose;Élan;Alces alces;sauvage;foret,marais;boreale,nordique,siberie;1-2;garder;"variante de betteranimalsplus:moose ; mod à installer"
 alexsmobs:mudskipper;Périophthalme;Periophthalmus;poisson;cote (mangrove);asie_sud_est,afrique_tropicale,inde,australie;2-4;garder;mod à installer
 alexsmobs:orca;Orque;Orcinus orca;sauvage;mer,large;toutes_les_mers_froides;3-6;garder;"prédateur ; mod à installer"
 alexsmobs:platypus;Ornithorynque;Ornithorhynchus anatinus;sauvage;eau_douce;australie;1;garder;mod à installer
 alexsmobs:potoo;Ibijau;Nyctibius;sauvage;foret_tropicale;amazonie,amerique_centrale;1;garder;mod à installer
-alexsmobs:raccoon;Raton laveur;Procyon lotor;sauvage;foret;—;1-3;doublon:wildernature:raccoon;mod à installer
+alexsmobs:raccoon;Raton laveur;Procyon lotor;sauvage;foret;grandes_plaines,boreale,ouest_mexique;1-3;garder;"variante de wildernature:raccoon ; mod à installer"
 alexsmobs:rain_frog;Grenouille de pluie;Breviceps;sauvage;desert (côtier);afrique_australe;1-2;garder;mod à installer
-alexsmobs:rattlesnake;Crotale;Crotalus;sauvage;desert,steppe;—;1;doublon:untamedwilds:snake/western_rattlesnake;mod à installer
-alexsmobs:rhinoceros;Rhinocéros (AM);Rhinocerotidae;sauvage;savane;—;1-2;doublon:untamedwilds:rhino;mod à installer
+alexsmobs:rattlesnake;Crotale;Crotalus;sauvage;desert,steppe;ouest_mexique,grandes_plaines;1;garder;"variante de untamedwilds:snake/western_rattlesnake ; mod à installer"
+alexsmobs:rhinoceros;Rhinocéros (AM);Rhinocerotidae;sauvage;savane;afrique_est,afrique_australe,inde,asie_sud_est;1-2;garder;"variante de untamedwilds:rhino ; mod à installer"
 alexsmobs:roadrunner;Géocoucou;Geococcyx;sauvage;desert;ouest_mexique;1;garder;mod à installer
 alexsmobs:seagull;Mouette;Laridae;sauvage;cote;toutes_les_côtes_sauf_tropicales;3-6;garder;mod à installer
 alexsmobs:seal;Phoque;Phocidae;sauvage;cote,banquise;arctique,nordique,boreale,siberie,antarctique,atlantique,cone_sud,nouvelle_zelande;3-6;garder;"côtes froides seulement (règle le bug du Mexique) ; mod à installer"
 alexsmobs:shoebill;Bec-en-sabot;Balaeniceps rex;sauvage;marais;afrique_est,afrique_tropicale;1;garder;mod à installer
 alexsmobs:skunk;Moufette;Mephitis mephitis;sauvage;foret,prairie;grandes_plaines,boreale,ouest_mexique;1-2;garder;mod à installer
-alexsmobs:snow_leopard;Léopard des neiges;Panthera uncia;sauvage;montagne;—;1;doublon:untamedwilds:big_cat/snow_leopard;mod à installer
+alexsmobs:snow_leopard;Léopard des neiges;Panthera uncia;sauvage;montagne;steppes_tibet;1;garder;"variante de untamedwilds:big_cat/snow_leopard ; mod à installer"
 alexsmobs:sugar_glider;Phalanger volant;Petaurus breviceps;sauvage;foret;australie,melanesie;1-3;garder;mod à installer
 alexsmobs:tarantula_hawk;Guêpe-tarentule;Pepsis;insecte;desert;ouest_mexique,grandes_plaines,amerique_centrale;1;garder;mod à installer
 alexsmobs:tasmanian_devil;Diable de Tasmanie;Sarcophilus harrisii;sauvage;foret;australie;1;garder;"Tasmanie seulement ; mod à installer"
 alexsmobs:terrapin;Tortue de rivière;Malaclemys / Trachemys;sauvage;eau_douce,marais;grandes_plaines;1-3;garder;mod à installer
-alexsmobs:tiger;Tigre (AM);Panthera tigris;sauvage;foret;—;1;doublon:untamedwilds:big_cat/tiger;mod à installer
+alexsmobs:tiger;Tigre (AM);Panthera tigris;sauvage;foret;inde,chine,siberie,asie_sud_est;1;garder;"variante de untamedwilds:big_cat/tiger ; mod à installer"
 alexsmobs:toucan;Toucan;Ramphastidae;sauvage;foret_tropicale;amazonie,amerique_centrale;1-3;garder;mod à installer
 alexsmobs:triops;Triops;Triops cancriformis;sauvage;eau_douce (mares);desert,steppe;3-6;garder;"mares temporaires ; mod à installer"
 alexsmobs:fly;Mouche;Musca domestica;insecte;partout;partout_sauf:antarctique;1;garder;mod à installer
