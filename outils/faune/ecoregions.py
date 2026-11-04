@@ -45,7 +45,7 @@ ids, n = np.unique(carte, return_counts=True)
 for i, c in zip(ids, n):
     if int(i) in table:
         table[int(i)]["pixels"] = int(c)
-Image.fromarray(carte, mode="I;16").save(os.path.join(OUT, "ecoregions_3min.png"))
+Image.fromarray(carte).save(os.path.join(OUT, "ecoregions_3min.png"))
 json.dump({str(k): v for k, v in sorted(table.items())}, open(os.path.join(OUT, "ecoregions.json"), "w", encoding="utf-8"),
           ensure_ascii=False, indent=1)
 print("pixels terrestres :", int((carte > 0).sum()))
