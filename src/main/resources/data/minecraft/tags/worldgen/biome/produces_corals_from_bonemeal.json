@@ -1,0 +1,9 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:mer/chaude_cote",
+  "domaine_terre:mer/chaude_plateau",
+  "domaine_terre:mer/chaude_large",
+  "domaine_terre:mer/chaude_abysse"
+ ]
+}

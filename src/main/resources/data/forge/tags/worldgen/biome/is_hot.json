@@ -141,6 +141,10 @@
   "domaine_terre:melanesie/desert",
   "domaine_terre:melanesie/savanna",
   "domaine_terre:melanesie/savanna_plateau",
-  "domaine_terre:melanesie/windswept_savanna"
+  "domaine_terre:melanesie/windswept_savanna",
+  "domaine_terre:mer/chaude_cote",
+  "domaine_terre:mer/chaude_plateau",
+  "domaine_terre:mer/chaude_large",
+  "domaine_terre:mer/chaude_abysse"
  ]
 }

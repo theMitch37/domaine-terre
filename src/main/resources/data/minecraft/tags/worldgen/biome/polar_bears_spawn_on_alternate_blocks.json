@@ -1,0 +1,9 @@
+{
+ "replace": false,
+ "values": [
+  "domaine_terre:mer/gelee_cote",
+  "domaine_terre:mer/gelee_plateau",
+  "domaine_terre:mer/gelee_large",
+  "domaine_terre:mer/gelee_abysse"
+ ]
+}

@@ -61,8 +61,15 @@ public class TerroirBiomeSource extends BiomeSource {
 
     private record Tables(List<Climate.ParameterList<Holder<Biome>>> parTerroir, Climate.ParameterList<Holder<Biome>> mer,
                           Set<Holder<Biome>> tous, List<String> cles, List<Holder<Biome>> lieux,
-                          List<Holder<Biome>[]> fixes) {
+                          List<Holder<Biome>[]> fixes, java.util.Map<String, Holder<Biome>[]> mers) {
     }
+
+    /** Océan vanilla -> température des biomes domaine_terre:mer/<température>_<bande> (couleurs des eaux, 04/11/2026). */
+    private static final java.util.Map<String, String> TEMP_MER = java.util.Map.of(
+            "warm_ocean", "chaude", "lukewarm_ocean", "tiede", "deep_lukewarm_ocean", "tiede",
+            "ocean", "temperee", "deep_ocean", "temperee", "cold_ocean", "froide", "deep_cold_ocean", "froide",
+            "frozen_ocean", "gelee", "deep_frozen_ocean", "gelee");
+    private static final String[] BANDES_MER = {"cote", "plateau", "large", "abysse"};
 
     private final int echelle;
 
@@ -162,7 +169,21 @@ public class TerroirBiomeSource extends BiomeSource {
                 }
                 fixes.add(tab);
             }
-            tables = new Tables(parTerroir, new Climate.ParameterList<>(mer), tous, cles, lieux, fixes);
+            // océans recolorés selon la profondeur du fond (outils/couleurs_eau.py)
+            java.util.Map<String, Holder<Biome>[]> mers = new java.util.HashMap<>();
+            if (TerroirBiomeSource.class.getResource("/data/domaine_terre/worldgen/biome/mer/temperee_cote.json") != null) {
+                for (String temp : new LinkedHashSet<>(TEMP_MER.values())) {
+                    @SuppressWarnings("unchecked")
+                    Holder<Biome>[] tab = new Holder[BANDES_MER.length];
+                    for (int i = 0; i < BANDES_MER.length; i++) {
+                        tab[i] = biomes.getOrThrow(ResourceKey.create(Registries.BIOME,
+                                new ResourceLocation(DomaineTerre.MOD_ID, "mer/" + temp + "_" + BANDES_MER[i])));
+                        tous.add(tab[i]);
+                    }
+                    mers.put(temp, tab);
+                }
+            }
+            tables = new Tables(parTerroir, new Climate.ParameterList<>(mer), tous, cles, lieux, fixes, mers);
             return tables;
         }
     }
@@ -265,7 +286,24 @@ public class TerroirBiomeSource extends BiomeSource {
                 if (b > 0 && b < tab.length && tab[b] != null) return tab[b];
             }
         }
-        return choix;
+        return merSelonFond(t, choix, bx, bz);
+    }
+
+    /**
+     * Océan : la couleur de l'eau suit la vraie profondeur du fond. Côte (fond à moins de 6 blocs sous la surface),
+     * plateau (6 à 20), large (jusqu'à y 0), abysse (fosses, fond sous y 0). La température reste celle choisie
+     * par la latitude.
+     */
+    private static Holder<Biome> merSelonFond(Tables t, Holder<Biome> choix, int bx, int bz) {
+        String chemin = choix.unwrapKey().map(c -> c.location().getPath()).orElse("");
+        String temp = TEMP_MER.get(chemin);
+        if (temp == null) return choix;
+        Holder<Biome>[] tab = t.mers().get(temp);
+        if (tab == null) return choix;
+        double fond = Terrain.get().hauteur(bx, bz);
+        double prof = Terrain.NIVEAU_MER - fond;
+        int i = fond <= 0.0 ? 3 : prof < 6.0 ? 0 : prof < 20.0 ? 1 : 2;
+        return tab[i];
     }
 
     /**

@@ -86,6 +86,8 @@
   "domaine_terre:cone_sud/frozen_peaks",
   "domaine_terre:australie/snowy_plains",
   "domaine_terre:nouvelle_zelande/snowy_plains",
-  "domaine_terre:melanesie/snowy_plains"
+  "domaine_terre:melanesie/snowy_plains",
+  "domaine_terre:mer/gelee_cote",
+  "domaine_terre:mer/gelee_plateau"
  ]
 }
