@@ -61,7 +61,8 @@ public class TerroirBiomeSource extends BiomeSource {
 
     private record Tables(List<Climate.ParameterList<Holder<Biome>>> parTerroir, Climate.ParameterList<Holder<Biome>> mer,
                           Set<Holder<Biome>> tous, List<String> cles, List<Holder<Biome>> lieux,
-                          List<Holder<Biome>[]> fixes, java.util.Map<String, Holder<Biome>[]> mers) {
+                          List<Holder<Biome>[]> fixes, java.util.Map<String, Holder<Biome>[]> mers,
+                          List<Holder<Biome>> lacs) {
     }
 
     /** Océan vanilla -> température des biomes domaine_terre:mer/<température>_<bande> (couleurs des eaux, 04/11/2026). */
@@ -183,7 +184,19 @@ public class TerroirBiomeSource extends BiomeSource {
                     mers.put(temp, tab);
                 }
             }
-            tables = new Tables(parTerroir, new Climate.ParameterList<>(mer), tous, cles, lieux, fixes, mers);
+            // un biome « lac » par terroir (eau plus claire que celle des fleuves), s'il existe
+            List<Holder<Biome>> lacs = new ArrayList<>();
+            lacs.add(null);
+            for (int i = 1; i < cles.size(); i++) {
+                Holder<Biome> h = null;
+                if (TerroirBiomeSource.class.getResource("/data/domaine_terre/worldgen/biome/" + cles.get(i) + "/lac.json") != null) {
+                    h = biomes.getOrThrow(ResourceKey.create(Registries.BIOME,
+                            new ResourceLocation(DomaineTerre.MOD_ID, cles.get(i) + "/lac")));
+                    tous.add(h);
+                }
+                lacs.add(h);
+            }
+            tables = new Tables(parTerroir, new Climate.ParameterList<>(mer), tous, cles, lieux, fixes, mers, lacs);
             return tables;
         }
     }
@@ -274,6 +287,10 @@ public class TerroirBiomeSource extends BiomeSource {
         // carte des biomes fixe : à la surface des terres, le vrai biome remplace le choix climatique.
         // Océans, plages, côtes rocheuses et grottes gardent le choix vanilla.
         if (terroir > 0 && terroir < t.fixes().size()) {
+            // sous l'eau d'un lac : biome « lac » du terroir (couleur d'eau propre aux lacs)
+            if (terroir < t.lacs().size() && t.lacs().get(terroir) != null && Terrain.get().eauDeLac(bx, bz)) {
+                return t.lacs().get(terroir);
+            }
             String chemin = choix.unwrapKey().map(c -> c.location().getPath()).orElse("");
             int fin = chemin.lastIndexOf('/');
             String type = fin >= 0 ? chemin.substring(fin + 1) : chemin;

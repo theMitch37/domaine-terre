@@ -301,6 +301,12 @@ public final class Terrain {
         return colonne(x, z).h();
     }
 
+    /** Colonne sous l'eau d'un lac du mod (le fond est sous le niveau du lac) : biome « lac » du terroir. */
+    public boolean eauDeLac(int x, int z) {
+        Colonne c = colonne(x, z);
+        return c.lac() && c.h() < c.niveauLac();
+    }
+
     private double calculerHauteur(int x, int z, double sd, double alt, double pente, Riviere r) {
         double h = hauteurBase(x, z, sd, alt, pente);
         if (r == null) return h;
