@@ -1,0 +1,44 @@
+# Télécharge les écorégions RESOLVE 2017 (CC BY 4.0) et les réduit à la grille 3' du mod
+# (outils/faune/ecoregions_3min.png + ecoregions.json, ajoutés à la branche).
+name: Écorégions
+
+on:
+  push:
+    branches-ignore: [jars]
+    paths:
+      - outils/faune/ecoregions.py
+      - .github/workflows/ecoregions.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reduire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Outils Python
+        run: pip install rasterio fiona numpy pillow
+      - name: Téléchargement
+        run: |
+          mkdir -p /tmp/eco
+          curl -L --retry 5 --retry-delay 20 -o /tmp/eco/eco.zip https://storage.googleapis.com/teow2016/Ecoregions2017.zip
+          cd /tmp/eco && unzip -o -q eco.zip && ls -la
+      - name: Réduction à la grille 3'
+        run: python outils/faune/ecoregions.py "$(ls /tmp/eco/*.shp | head -1)" outils/faune
+      - name: Ajout à la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add -f outils/faune/ecoregions_3min.png outils/faune/ecoregions.json
+          git commit -m "Écorégions RESOLVE 2017 réduites à 3' (automatique) [skip ci]" || exit 0
+          for i in 1 2 3; do
+            git fetch origin "${GITHUB_REF_NAME}" && git rebase "origin/${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep 10
+          done
+          exit 1
