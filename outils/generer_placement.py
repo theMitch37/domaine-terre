@@ -120,25 +120,65 @@ modifier("ecologics*.jar", E + "spawn_camel.json", "biomes", "moyen_orient", "sa
 modifier("ecologics*.jar", E + "spawn_penguin.json", "biomes", "antarctique")
 modifier("ecologics*.jar", E + "spawn_squirrel.json", "biomes", "continentale")
 
-# Untamed Wilds : espèce -> terroirs ; None = espèce préhistorique désactivée
-UW = {"bear": {"black": ["boreale", "grandes_plaines"], "brown": ["nordique", "siberie", "boreale"], "panda": ["chine"],
-               "polar": ["arctique"], "spectacled": ["andes"], "sun": ["asie_sud_est"], "cave": None, "blind": None},
-      "big_cat": {"lion": ["afrique_est"], "leopard": ["afrique_tropicale", "inde"], "tiger": ["inde", "chine", "siberie"],
-                  "snow_leopard": ["steppes_tibet"], "jaguar": ["amazonie"], "puma": ["ouest_mexique", "andes"],
-                  "cave_lion": None, "sabertooth": None, "marsupial_lion": None},
-      "bison": {"plains": ["grandes_plaines"], "wisent": ["continentale"]},
-      "boar": {"eurasian": ["continentale", "mediterranee"], "peccary": ["amazonie"], "red_river": ["afrique_tropicale"],
-               "warthog": ["afrique_est"]},
-      "camel": {"dromedary": ["moyen_orient", "sahara_sahel"], "bactrian": ["steppes_tibet"], "wild_bactrian": ["steppes_tibet"]},
-      "rhino": {"black": ["afrique_est", "afrique_australe"], "white": ["afrique_est", "afrique_australe"], "indian": ["inde"],
-                "javan": ["asie_sud_est"], "sumatran": ["asie_sud_est"], "wooly": None},
-      "hyena": {"spotted": ["afrique_est"], "striped": ["moyen_orient", "sahara_sahel"], "brown": ["afrique_australe"],
-                "aardwolf": ["afrique_australe"], "shortface": None},
-      "wildebeest": {"*": ["afrique_est", "afrique_australe"]}, "aardvark": {"*": ["afrique_est", "afrique_australe"]},
-      "hippo": {"*": ["afrique_est", "afrique_tropicale"]}, "opossum": {"*": ["grandes_plaines"]},
-      "terror_bird": {"*": None},
-      "large_snake": {"anaconda": ["amazonie"], "reticulated_python": ["asie_sud_est"]},
-      "giant_salamander": {"chinese": ["chine"], "japanese": ["japon_coree"], "hellbender": ["grandes_plaines"]}}
+# Untamed Wilds : espèce -> terroirs, repris de outils/faune/especes.csv (04/11/2026 : races régionales et milieux).
+# Untamed Wilds fait naître ses animaux par ses propres features : on règle les biomes de chaque espèce.
+# None = espèce retirée (préhistorique ou inventée). Les biomes gardés suivent le milieu de l'espèce.
+import csv as _csv
+TYPES_MILIEU = {
+    "foret_tropicale": {"jungle", "sparse_jungle", "bamboo_jungle", "mangrove_swamp"},
+    "foret": {"forest", "birch_forest", "old_growth_birch_forest", "dark_forest", "flower_forest", "taiga",
+              "old_growth_pine_taiga", "old_growth_spruce_taiga", "snowy_taiga", "windswept_forest", "jungle",
+              "sparse_jungle", "bamboo_jungle", "cherry_grove", "grove"},
+    "savane": {"savanna", "savanna_plateau", "windswept_savanna", "sparse_jungle"},
+    "prairie": {"plains", "sunflower_plains", "meadow", "savanna", "cherry_grove"},
+    "culture": {"plains", "sunflower_plains", "meadow"},
+    "steppe": {"plains", "savanna", "savanna_plateau", "desert", "windswept_hills", "snowy_plains"},
+    "desert": {"desert", "badlands", "wooded_badlands", "eroded_badlands", "savanna_plateau"},
+    "montagne": {"windswept_hills", "windswept_gravelly_hills", "windswept_forest", "stony_peaks", "jagged_peaks",
+                 "frozen_peaks", "snowy_slopes", "meadow", "grove"},
+    "toundra": {"snowy_plains", "snowy_taiga", "ice_spikes", "grove", "snowy_slopes"},
+    "banquise": {"snowy_plains", "ice_spikes", "snowy_beach"},
+    "marais": {"swamp", "mangrove_swamp"},
+    "mediterraneen": {"plains", "forest", "flower_forest", "savanna", "sunflower_plains"},
+    "cote": {"beach", "stony_shore", "snowy_beach", "mangrove_swamp"},
+}
+EAU_UW = {"eau_douce", "marais"}
+VRAIS_T = list(LISTES)
+
+
+def _aire(ts):
+    if ts.startswith("partout_sauf:"):
+        return [t for t in VRAIS_T if t not in ts[13:].split(",")]
+    if ts.startswith("partout"):
+        return list(VRAIS_T)
+    return [t for t in ts.split(",") if t in LISTES]
+
+
+UW = {}
+for _r in _csv.DictReader(open("outils/faune/especes.csv", encoding="utf-8"), delimiter=";"):
+    if not _r["id"].startswith("untamedwilds:") or "/" not in _r["id"]:
+        continue
+    _ent, _sp = _r["id"][13:].split("/", 1)
+    if _r["statut"] in ("retirer", "souterrain"):
+        UW.setdefault(_ent, {})[_sp] = None
+        continue
+    if not _aire(_r["terroirs"]):
+        continue                                 # espèces marines : biomes d'origine (tags d'océan, mers du mod)
+    _toks = {x.strip() for x in _r["milieu"].replace("(", ",").replace(")", ",").split(",") if x.strip()}
+    _types = set().union(*[TYPES_MILIEU.get(t, set()) for t in _toks]) if _toks else set()
+    UW.setdefault(_ent, {})[_sp] = (_aire(_r["terroirs"]), _types, bool(_toks & EAU_UW))
+
+
+def resources_milieu(terroirs, types, eau):
+    out = []
+    for t in terroirs:
+        bs = [b for b in LISTES[t] if not types or b in types]
+        if not bs:
+            bs = LISTES[t]                       # aucun biome du milieu dans ce terroir : tout le terroir
+        out += [[f"resource|domaine_terre:{t}/{b}"] for b in bs]
+        if eau:
+            out.append([f"resource|domaine_terre:{t}/lac"])
+    return out
 
 
 def resources(terroirs):
@@ -154,7 +194,7 @@ if z:
             ts = especes.get(sp["name"], especes.get("*", "garder"))
             if ts == "garder":
                 continue
-            sp["spawnBiomes"] = [["resource|minecraft:the_void"]] if ts is None else resources(ts)
+            sp["spawnBiomes"] = [["resource|minecraft:the_void"]] if ts is None else resources_milieu(*ts)
         fichiers[chemin] = d
 
 # ---------------------------------------------------------------- écriture du datapack
@@ -180,6 +220,9 @@ AM = {"kangaroo": ["australie"], "emu": ["australie"], "platypus": ["australie"]
       "rhinoceros": ["afrique_est"], "tiger": ["inde", "chine", "siberie"], "snow_leopard": ["steppes_tibet"]}
 cfg = os.path.join(INST, "config/alexsmobs")
 sauv = os.path.join(INST, "config/alexsmobs_avant_domaine")
+if not os.path.isdir(cfg):
+    print("Alex's Mobs absent : configs non touchées (la faune du mod Terre place ses animaux)")
+    sys.exit(0)
 if not os.path.exists(sauv):
     shutil.copytree(cfg, sauv)
 n = 0
