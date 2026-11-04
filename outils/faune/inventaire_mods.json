@@ -1,0 +1,1401 @@
+{
+ "Alex's Mobs": {
+  "entites": {
+   "alexsmobs:alligator_snapping_turtle": {
+    "en_us": "Alligator Snapping Turtle",
+    "fr_fr": "Tortue alligator",
+    "oeuf": false
+   },
+   "alexsmobs:anaconda": {
+    "en_us": "Anaconda",
+    "fr_fr": "Anaconda",
+    "oeuf": false
+   },
+   "alexsmobs:anaconda_part": {
+    "en_us": "Anaconda",
+    "fr_fr": "Anaconda",
+    "oeuf": false
+   },
+   "alexsmobs:anteater": {
+    "en_us": "Anteater",
+    "fr_fr": "Fourmilier",
+    "oeuf": false
+   },
+   "alexsmobs:bald_eagle": {
+    "en_us": "Bald Eagle",
+    "fr_fr": "Pygargue à tête blanche",
+    "oeuf": false
+   },
+   "alexsmobs:banana_slug": {
+    "en_us": "Banana Slug",
+    "fr_fr": "Limace banane",
+    "oeuf": false
+   },
+   "alexsmobs:bison": {
+    "en_us": "Bison",
+    "fr_fr": "Bison",
+    "oeuf": false
+   },
+   "alexsmobs:blobfish": {
+    "en_us": "Blobfish",
+    "fr_fr": "Blobfish",
+    "oeuf": false
+   },
+   "alexsmobs:blue_jay": {
+    "en_us": "Blue Jay",
+    "fr_fr": "Geai bleu",
+    "oeuf": false
+   },
+   "alexsmobs:bone_serpent": {
+    "en_us": "Bone Serpent",
+    "fr_fr": "Serpent d'os",
+    "oeuf": false
+   },
+   "alexsmobs:bone_serpent_part": {
+    "en_us": "Bone Serpent Bones",
+    "fr_fr": "Os de serpent d'os",
+    "oeuf": false
+   },
+   "alexsmobs:bunfungus": {
+    "en_us": "Bunfungus",
+    "fr_fr": "Champilièvre",
+    "oeuf": false
+   },
+   "alexsmobs:cachalot_echo": {
+    "en_us": "Whale Echo",
+    "fr_fr": "Echo de la baleine",
+    "oeuf": false
+   },
+   "alexsmobs:cachalot_part": {
+    "en_us": "Cachalot Whale",
+    "fr_fr": "Grand cachalot",
+    "oeuf": false
+   },
+   "alexsmobs:cachalot_whale": {
+    "en_us": "Cachalot Whale",
+    "fr_fr": "Grand cachalot",
+    "oeuf": false
+   },
+   "alexsmobs:caiman": {
+    "en_us": "Caiman",
+    "fr_fr": "Caïman",
+    "oeuf": false
+   },
+   "alexsmobs:capuchin_monkey": {
+    "en_us": "Capuchin Monkey",
+    "fr_fr": "Capucin",
+    "oeuf": false
+   },
+   "alexsmobs:catfish": {
+    "en_us": "Catfish",
+    "fr_fr": "Poisson-chat",
+    "oeuf": false
+   },
+   "alexsmobs:centipede_body": {
+    "en_us": "Cave Centipede Body",
+    "fr_fr": "Corps de mille-pattes des cavernes",
+    "oeuf": false
+   },
+   "alexsmobs:centipede_head": {
+    "en_us": "Cave Centipede",
+    "fr_fr": "Tête de mille-pattes des cavernes",
+    "oeuf": false
+   },
+   "alexsmobs:centipede_tail": {
+    "en_us": "Cave Centipede Tail",
+    "fr_fr": "Queue de mille-pattes des cavernes",
+    "oeuf": false
+   },
+   "alexsmobs:cockroach": {
+    "en_us": "Cockroach",
+    "fr_fr": "Cafard",
+    "oeuf": false
+   },
+   "alexsmobs:cockroach_egg": {
+    "en_us": "Cockroach Ootheca",
+    "fr_fr": "Oothèque de cafard",
+    "oeuf": false
+   },
+   "alexsmobs:comb_jelly": {
+    "en_us": "Comb Jelly",
+    "fr_fr": "Méduse de peigne",
+    "oeuf": false
+   },
+   "alexsmobs:cosmaw": {
+    "en_us": "Cosmaw",
+    "fr_fr": "Cosmaw",
+    "oeuf": false
+   },
+   "alexsmobs:cosmic_cod": {
+    "en_us": "Cosmic Cod",
+    "fr_fr": "Morue cosmique",
+    "oeuf": false
+   },
+   "alexsmobs:crimson_mosquito": {
+    "en_us": "Crimson Mosquito",
+    "fr_fr": "Moustique cramoisi",
+    "oeuf": false
+   },
+   "alexsmobs:crocodile": {
+    "en_us": "Crocodile",
+    "fr_fr": "Crocodile",
+    "oeuf": false
+   },
+   "alexsmobs:crocodile_egg": {
+    "en_us": "Crocodile Egg",
+    "fr_fr": "Œuf de crocodile",
+    "oeuf": false
+   },
+   "alexsmobs:crow": {
+    "en_us": "Crow",
+    "fr_fr": "Corbeau",
+    "oeuf": false
+   },
+   "alexsmobs:devils_hole_pupfish": {
+    "en_us": "Devil's Hole Pupfish",
+    "fr_fr": "Devil's Hole Pupfish",
+    "oeuf": false
+   },
+   "alexsmobs:dropbear": {
+    "en_us": "Dropbear",
+    "fr_fr": "Dropbear",
+    "oeuf": false
+   },
+   "alexsmobs:elephant": {
+    "en_us": "Elephant",
+    "fr_fr": "Éléphant",
+    "oeuf": false
+   },
+   "alexsmobs:emu": {
+    "en_us": "Emu",
+    "fr_fr": "Émeu",
+    "oeuf": false
+   },
+   "alexsmobs:endergrade": {
+    "en_us": "Endergrade",
+    "fr_fr": "Endergrade",
+    "oeuf": false
+   },
+   "alexsmobs:enderiophage": {
+    "en_us": "Enderiophage",
+    "fr_fr": "Enderiophage",
+    "oeuf": false
+   },
+   "alexsmobs:enderiophage_rocket": {
+    "en_us": "Enderiophage Rocket",
+    "fr_fr": "Fusée d'enderiophage",
+    "oeuf": false
+   },
+   "alexsmobs:farseer": {
+    "en_us": "Farseer",
+    "fr_fr": "Voyant éloigné",
+    "oeuf": false
+   },
+   "alexsmobs:fart": {
+    "en_us": "Fart Cloud",
+    "fr_fr": "Nuage de pets",
+    "oeuf": false
+   },
+   "alexsmobs:flutter": {
+    "en_us": "Flutter",
+    "fr_fr": "Papilloneur",
+    "oeuf": false
+   },
+   "alexsmobs:fly": {
+    "en_us": "Fly",
+    "fr_fr": "Mouche",
+    "oeuf": false
+   },
+   "alexsmobs:flying_fish": {
+    "en_us": "Flying Fish",
+    "fr_fr": "Poisson volant",
+    "oeuf": false
+   },
+   "alexsmobs:frilled_shark": {
+    "en_us": "Frilled Shark",
+    "fr_fr": "Requin frangé",
+    "oeuf": false
+   },
+   "alexsmobs:froststalker": {
+    "en_us": "Froststalker",
+    "fr_fr": "Traqueur givrant",
+    "oeuf": false
+   },
+   "alexsmobs:gazelle": {
+    "en_us": "Gazelle",
+    "fr_fr": "Gazelle",
+    "oeuf": false
+   },
+   "alexsmobs:gelada_monkey": {
+    "en_us": "Gelada Monkey",
+    "fr_fr": "Singe-gélada",
+    "oeuf": false
+   },
+   "alexsmobs:giant_squid": {
+    "en_us": "Giant Squid",
+    "fr_fr": "Calmar géant",
+    "oeuf": false
+   },
+   "alexsmobs:giant_squid_part": {
+    "en_us": "Giant Squid",
+    "fr_fr": "Calmar géant",
+    "oeuf": false
+   },
+   "alexsmobs:gorilla": {
+    "en_us": "Gorilla",
+    "fr_fr": "Gorille",
+    "oeuf": false
+   },
+   "alexsmobs:grizzly_bear": {
+    "en_us": "Grizzly Bear",
+    "fr_fr": "Grizzli",
+    "oeuf": false
+   },
+   "alexsmobs:gust": {
+    "en_us": "Gust",
+    "fr_fr": "Rafalle",
+    "oeuf": false
+   },
+   "alexsmobs:guster": {
+    "en_us": "Guster",
+    "fr_fr": "Rafalleur",
+    "oeuf": false
+   },
+   "alexsmobs:hammerhead_shark": {
+    "en_us": "Hammerhead Shark",
+    "fr_fr": "Requin-marteau",
+    "oeuf": false
+   },
+   "alexsmobs:hemolymph": {
+    "en_us": "Hemolymph",
+    "fr_fr": "Hémolymphe",
+    "oeuf": false
+   },
+   "alexsmobs:hummingbird": {
+    "en_us": "Hummingbird",
+    "fr_fr": "Colibri",
+    "oeuf": false
+   },
+   "alexsmobs:jerboa": {
+    "en_us": "Jerboa",
+    "fr_fr": "Gerboise",
+    "oeuf": false
+   },
+   "alexsmobs:kangaroo": {
+    "en_us": "Kangaroo",
+    "fr_fr": "Kangourou",
+    "oeuf": false
+   },
+   "alexsmobs:komodo_dragon": {
+    "en_us": "Komodo Dragon",
+    "fr_fr": "Dragon de Komodo",
+    "oeuf": false
+   },
+   "alexsmobs:laviathan": {
+    "en_us": "Laviathan",
+    "fr_fr": "Laviethan",
+    "oeuf": false
+   },
+   "alexsmobs:leafcutter_ant": {
+    "en_us": "Leafcutter Ant",
+    "fr_fr": "Fourmi coupe-feuilles",
+    "oeuf": false
+   },
+   "alexsmobs:lobster": {
+    "en_us": "Lobster",
+    "fr_fr": "Homard",
+    "oeuf": false
+   },
+   "alexsmobs:maned_wolf": {
+    "en_us": "Maned Wolf",
+    "fr_fr": "Loup à crinière",
+    "oeuf": false
+   },
+   "alexsmobs:mantis_shrimp": {
+    "en_us": "Mantis Shrimp",
+    "fr_fr": "Crevette mante",
+    "oeuf": false
+   },
+   "alexsmobs:mimic_octopus": {
+    "en_us": "Mimic Octopus",
+    "fr_fr": "Poulpe imitant",
+    "oeuf": false
+   },
+   "alexsmobs:mimicube": {
+    "en_us": "Mimicube",
+    "fr_fr": "Imicube",
+    "oeuf": false
+   },
+   "alexsmobs:moose": {
+    "en_us": "Moose",
+    "fr_fr": "Élan",
+    "oeuf": false
+   },
+   "alexsmobs:mosquito_spit": {
+    "en_us": "Mosquito Blood",
+    "fr_fr": "Sang de moustique",
+    "oeuf": false
+   },
+   "alexsmobs:mud_ball": {
+    "en_us": "Mud Ball",
+    "fr_fr": "Boule de boue",
+    "oeuf": false
+   },
+   "alexsmobs:mudskipper": {
+    "en_us": "Mudskipper",
+    "fr_fr": "Gobie",
+    "oeuf": false
+   },
+   "alexsmobs:mungus": {
+    "en_us": "Mungus",
+    "fr_fr": "Mongus",
+    "oeuf": false
+   },
+   "alexsmobs:murmur": {
+    "en_us": "Murmur",
+    "fr_fr": "Murmure",
+    "oeuf": false
+   },
+   "alexsmobs:murmur_head": {
+    "en_us": "Murmur",
+    "fr_fr": "Murmure",
+    "oeuf": false
+   },
+   "alexsmobs:orca": {
+    "en_us": "Orca",
+    "fr_fr": "Orque",
+    "oeuf": false
+   },
+   "alexsmobs:platypus": {
+    "en_us": "Platypus",
+    "fr_fr": "Ornithorynque",
+    "oeuf": false
+   },
+   "alexsmobs:pollen_ball": {
+    "en_us": "Pollen Ball",
+    "fr_fr": "Boule de pollen",
+    "oeuf": false
+   },
+   "alexsmobs:potoo": {
+    "en_us": "Potoo",
+    "fr_fr": "Ibijau",
+    "oeuf": false
+   },
+   "alexsmobs:raccoon": {
+    "en_us": "Raccoon",
+    "fr_fr": "Raton laveur",
+    "oeuf": false
+   },
+   "alexsmobs:rain_frog": {
+    "en_us": "Rain Frog",
+    "fr_fr": "Grenouille de pluie",
+    "oeuf": false
+   },
+   "alexsmobs:rattlesnake": {
+    "en_us": "Rattlesnake",
+    "fr_fr": "Crotale",
+    "oeuf": false
+   },
+   "alexsmobs:rhinoceros": {
+    "en_us": "Rhinoceros",
+    "fr_fr": "Rhinocéros",
+    "oeuf": false
+   },
+   "alexsmobs:roadrunner": {
+    "en_us": "Roadrunner",
+    "fr_fr": "Géocoucou",
+    "oeuf": false
+   },
+   "alexsmobs:rocky_roller": {
+    "en_us": "Rocky Roller",
+    "fr_fr": "Rouleau rocheux",
+    "oeuf": false
+   },
+   "alexsmobs:sand_shot": {
+    "en_us": "Thrown Sand",
+    "fr_fr": "Sable jeté",
+    "oeuf": false
+   },
+   "alexsmobs:sea_bear": {
+    "en_us": "Sea Bear",
+    "fr_fr": "Tardigrade",
+    "oeuf": false
+   },
+   "alexsmobs:seagull": {
+    "en_us": "Seagull",
+    "fr_fr": "Mouette",
+    "oeuf": false
+   },
+   "alexsmobs:seal": {
+    "en_us": "Seal",
+    "fr_fr": "Phoque",
+    "oeuf": false
+   },
+   "alexsmobs:shark_tooth_arrow": {
+    "en_us": "Shark Tooth Arrow",
+    "fr_fr": "Flèche en dent de requin",
+    "oeuf": false
+   },
+   "alexsmobs:shoebill": {
+    "en_us": "Shoebill",
+    "fr_fr": "Bec-en-sabot du Nil",
+    "oeuf": false
+   },
+   "alexsmobs:skelewag": {
+    "en_us": "Skelewag",
+    "fr_fr": "Squeladon",
+    "oeuf": false
+   },
+   "alexsmobs:skreecher": {
+    "en_us": "Skreecher",
+    "fr_fr": "Skreecher",
+    "oeuf": false
+   },
+   "alexsmobs:skunk": {
+    "en_us": "Skunk",
+    "fr_fr": "Moufette",
+    "oeuf": false
+   },
+   "alexsmobs:snow_leopard": {
+    "en_us": "Snow Leopard",
+    "fr_fr": "Léopard de neige",
+    "oeuf": false
+   },
+   "alexsmobs:soul_vulture": {
+    "en_us": "Soul Vulture",
+    "fr_fr": "Vautour des âmes",
+    "oeuf": false
+   },
+   "alexsmobs:spectre": {
+    "en_us": "Spectre",
+    "fr_fr": "Spectre",
+    "oeuf": false
+   },
+   "alexsmobs:squid_grapple": {
+    "en_us": "Tentacle",
+    "fr_fr": "Tentacule",
+    "oeuf": false
+   },
+   "alexsmobs:straddleboard": {
+    "en_us": "Straddleboard",
+    "fr_fr": "Straddleplanche",
+    "oeuf": false
+   },
+   "alexsmobs:straddler": {
+    "en_us": "Straddler",
+    "fr_fr": "Straddler",
+    "oeuf": false
+   },
+   "alexsmobs:stradpole": {
+    "en_us": "Stradpole",
+    "fr_fr": "Stradpole",
+    "oeuf": false
+   },
+   "alexsmobs:sugar_glider": {
+    "en_us": "Sugar Glider",
+    "fr_fr": "Phalanger volant",
+    "oeuf": false
+   },
+   "alexsmobs:sunbird": {
+    "en_us": "Sunbird",
+    "fr_fr": "Oiseau de soleil",
+    "oeuf": false
+   },
+   "alexsmobs:tarantula_hawk": {
+    "en_us": "Tarantula Hawk",
+    "fr_fr": "Faucon tarentule",
+    "oeuf": false
+   },
+   "alexsmobs:tasmanian_devil": {
+    "en_us": "Tasmanian Devil",
+    "fr_fr": "Diable de Tasmanie",
+    "oeuf": false
+   },
+   "alexsmobs:tendon_segment": {
+    "en_us": "Tendon",
+    "fr_fr": "Tendon",
+    "oeuf": false
+   },
+   "alexsmobs:terrapin": {
+    "en_us": "Terrapin",
+    "fr_fr": "Tortue de rivière",
+    "oeuf": false
+   },
+   "alexsmobs:tiger": {
+    "en_us": "Tiger",
+    "fr_fr": "Tigre",
+    "oeuf": false
+   },
+   "alexsmobs:tossed_item": {
+    "en_us": "Tossed Item",
+    "fr_fr": "Article jété",
+    "oeuf": false
+   },
+   "alexsmobs:toucan": {
+    "en_us": "Toucan",
+    "fr_fr": "Toucan",
+    "oeuf": false
+   },
+   "alexsmobs:triops": {
+    "en_us": "Triops",
+    "fr_fr": "Triops",
+    "oeuf": false
+   },
+   "alexsmobs:tusklin": {
+    "en_us": "Tusklin",
+    "fr_fr": "Tusklin",
+    "oeuf": false
+   },
+   "alexsmobs:underminer": {
+    "en_us": "Underminer",
+    "fr_fr": "Sous-mineur",
+    "oeuf": false
+   },
+   "alexsmobs:vine_lasso": {
+    "en_us": "Vine Lasso",
+    "fr_fr": "Lasso en liane",
+    "oeuf": false
+   },
+   "alexsmobs:void_portal": {
+    "en_us": "Void Portal",
+    "fr_fr": "Portail du vide",
+    "oeuf": false
+   },
+   "alexsmobs:void_worm": {
+    "en_us": "Void Worm",
+    "fr_fr": "Ver du vide",
+    "oeuf": false
+   },
+   "alexsmobs:void_worm_part": {
+    "en_us": "Void Worm",
+    "fr_fr": "Ver du vide",
+    "oeuf": false
+   },
+   "alexsmobs:void_worm_shot": {
+    "en_us": "Void Crystal",
+    "fr_fr": "Cristal du vide",
+    "oeuf": false
+   },
+   "alexsmobs:warped_mosco": {
+    "en_us": "Warped Mosco",
+    "fr_fr": "Mosco biscornu",
+    "oeuf": false
+   },
+   "alexsmobs:warped_toad": {
+    "en_us": "Warped Toad",
+    "fr_fr": "Crapaud biscornu",
+    "oeuf": false
+   }
+  },
+  "especes_untamedwilds": {},
+  "source": "Alex's Mobs",
+  "spawns": [],
+  "url": "https://cdn.modrinth.com/data/2cMuAZAp/versions/XoIASRVU/alexsmobs-1.22.9.jar",
+  "version": "1.22.9"
+ },
+ "Aquaculture 2": {
+  "entites": {
+   "aquaculture:acacia_fish_mount": {
+    "en_us": "Acacia Fish Mount",
+    "fr_fr": "Poisson naturalisé en acacia",
+    "oeuf": false
+   },
+   "aquaculture:arapaima": {
+    "en_us": "Arapaima",
+    "fr_fr": "Arapaïma",
+    "oeuf": false
+   },
+   "aquaculture:arrau_turtle": {
+    "en_us": "Arrau Turtle",
+    "fr_fr": "Tortue tartaruga",
+    "oeuf": true
+   },
+   "aquaculture:atlantic_cod": {
+    "en_us": "Atlantic Cod",
+    "fr_fr": "Morue",
+    "oeuf": false
+   },
+   "aquaculture:atlantic_halibut": {
+    "en_us": "Atlantic Halibut",
+    "fr_fr": "Flétan de l'Atlantique",
+    "oeuf": false
+   },
+   "aquaculture:atlantic_herring": {
+    "en_us": "Atlantic Herring",
+    "fr_fr": "Hareng",
+    "oeuf": false
+   },
+   "aquaculture:bayad": {
+    "en_us": "Bayad",
+    "fr_fr": "Carangue",
+    "oeuf": false
+   },
+   "aquaculture:birch_fish_mount": {
+    "en_us": "Birch Fish Mount",
+    "fr_fr": "Poisson naturalisé en bouleau",
+    "oeuf": false
+   },
+   "aquaculture:blackfish": {
+    "en_us": "Blackfish",
+    "fr_fr": "Tautogue",
+    "oeuf": false
+   },
+   "aquaculture:bluegill": {
+    "en_us": "Bluegill",
+    "fr_fr": "Crapet arlequin",
+    "oeuf": false
+   },
+   "aquaculture:bobber": {
+    "en_us": "Aquaculture Bobber",
+    "fr_fr": "Bouchon",
+    "oeuf": false
+   },
+   "aquaculture:boulti": {
+    "en_us": "Boulti",
+    "fr_fr": "Tilapia",
+    "oeuf": false
+   },
+   "aquaculture:box_turtle": {
+    "en_us": "Box Turtle",
+    "fr_fr": "Tortue terrapène",
+    "oeuf": true
+   },
+   "aquaculture:brown_shrooma": {
+    "en_us": "Brown Shrooma",
+    "fr_fr": "Shrooma brun",
+    "oeuf": false
+   },
+   "aquaculture:brown_trout": {
+    "en_us": "Brown Trout",
+    "fr_fr": "Truite brune",
+    "oeuf": false
+   },
+   "aquaculture:capitaine": {
+    "en_us": "Capitaine",
+    "fr_fr": "Capitaine",
+    "oeuf": false
+   },
+   "aquaculture:carp": {
+    "en_us": "Carp",
+    "fr_fr": "Carpe",
+    "oeuf": false
+   },
+   "aquaculture:catfish": {
+    "en_us": "Catfish",
+    "fr_fr": "Poisson-chat",
+    "oeuf": false
+   },
+   "aquaculture:dark_oak_fish_mount": {
+    "en_us": "Dark Oak Fish Mount",
+    "fr_fr": "Poisson naturalisé en chêne noir",
+    "oeuf": false
+   },
+   "aquaculture:gar": {
+    "en_us": "Gar",
+    "fr_fr": "Lépisosté",
+    "oeuf": false
+   },
+   "aquaculture:jellyfish": {
+    "en_us": "Jellyfish",
+    "fr_fr": "Méduse",
+    "oeuf": false
+   },
+   "aquaculture:jungle_fish_mount": {
+    "en_us": "Jungle Fish Mount",
+    "fr_fr": "Poisson naturalisé en acajou",
+    "oeuf": false
+   },
+   "aquaculture:minnow": {
+    "en_us": "Minnow",
+    "fr_fr": "Méné",
+    "oeuf": false
+   },
+   "aquaculture:muskellunge": {
+    "en_us": "Muskellunge",
+    "fr_fr": "Brochet",
+    "oeuf": false
+   },
+   "aquaculture:oak_fish_mount": {
+    "en_us": "Oak Fish Mount",
+    "fr_fr": "Poisson naturalisé en chêne",
+    "oeuf": false
+   },
+   "aquaculture:pacific_halibut": {
+    "en_us": "Pacific Halibut",
+    "fr_fr": "Flétan du Pacifique",
+    "oeuf": false
+   },
+   "aquaculture:perch": {
+    "en_us": "Perch",
+    "fr_fr": "Perche",
+    "oeuf": false
+   },
+   "aquaculture:pink_salmon": {
+    "en_us": "Pink Salmon",
+    "fr_fr": "Saumon rose",
+    "oeuf": false
+   },
+   "aquaculture:piranha": {
+    "en_us": "Piranha",
+    "fr_fr": "Piranha",
+    "oeuf": false
+   },
+   "aquaculture:pollock": {
+    "en_us": "Pollock",
+    "fr_fr": "Lieu",
+    "oeuf": false
+   },
+   "aquaculture:rainbow_trout": {
+    "en_us": "Rainbow Trout",
+    "fr_fr": "Truite arc-en-ciel",
+    "oeuf": false
+   },
+   "aquaculture:red_grouper": {
+    "en_us": "Red Grouper",
+    "fr_fr": "Mérou",
+    "oeuf": false
+   },
+   "aquaculture:red_shrooma": {
+    "en_us": "Red Shrooma",
+    "fr_fr": "Shrooma rouge",
+    "oeuf": false
+   },
+   "aquaculture:smallmouth_bass": {
+    "en_us": "Smallmouth Bass",
+    "fr_fr": "Achigan à petite bouche",
+    "oeuf": false
+   },
+   "aquaculture:spruce_fish_mount": {
+    "en_us": "Spruce Fish Mount",
+    "fr_fr": "Poisson naturalisé en sapin",
+    "oeuf": false
+   },
+   "aquaculture:starshell_turtle": {
+    "en_us": "Starshell Turtle",
+    "fr_fr": "Tortue à carapace étoilée",
+    "oeuf": true
+   },
+   "aquaculture:synodontis": {
+    "en_us": "Synodontis",
+    "fr_fr": "Synodontis",
+    "oeuf": false
+   },
+   "aquaculture:tambaqui": {
+    "en_us": "Tambaqui",
+    "fr_fr": "Tambaqui",
+    "oeuf": false
+   },
+   "aquaculture:tuna": {
+    "en_us": "Tuna",
+    "fr_fr": "Thon",
+    "oeuf": false
+   },
+   "aquaculture:water_arrow": {
+    "en_us": "Arrow",
+    "fr_fr": "Flèche",
+    "oeuf": false
+   }
+  },
+  "especes_untamedwilds": {},
+  "source": "Aquaculture 2",
+  "spawns": [],
+  "url": "https://cdn.modrinth.com/data/Vl1uNAuy/versions/wNiFoROs/Aquaculture-1.20.1-2.5.7.jar",
+  "version": "2.5.7"
+ },
+ "Critters and Companions": {
+  "entites": {
+   "crittersandcompanions:dragonfly": {
+    "en_us": "Dragonfly",
+    "fr_fr": "Libellule",
+    "oeuf": true
+   },
+   "crittersandcompanions:dumbo_octopus": {
+    "en_us": "Dumbo Octopus",
+    "fr_fr": "Poulpe Dumbo",
+    "oeuf": true
+   },
+   "crittersandcompanions:ferret": {
+    "en_us": "Ferret",
+    "fr_fr": "Furet",
+    "oeuf": true
+   },
+   "crittersandcompanions:grappling_hook": {
+    "en_us": "Grappling Hook",
+    "oeuf": false
+   },
+   "crittersandcompanions:jumping_spider": {
+    "en_us": "Jumping Spider",
+    "fr_fr": "Araignée sauteuse",
+    "oeuf": true
+   },
+   "crittersandcompanions:koi_fish": {
+    "en_us": "Koi Fish",
+    "fr_fr": "Poisson koï",
+    "oeuf": true
+   },
+   "crittersandcompanions:ladybug": {
+    "en_us": "Ladybug",
+    "oeuf": true
+   },
+   "crittersandcompanions:leaf_insect": {
+    "en_us": "Leaf Insect",
+    "fr_fr": "Phasme feuille",
+    "oeuf": true
+   },
+   "crittersandcompanions:otter": {
+    "en_us": "Otter",
+    "fr_fr": "Loutre",
+    "oeuf": true
+   },
+   "crittersandcompanions:red_panda": {
+    "en_us": "Red Panda",
+    "fr_fr": "Panda roux",
+    "oeuf": true
+   },
+   "crittersandcompanions:roly_poly": {
+    "en_us": "Roly-Poly",
+    "oeuf": true
+   },
+   "crittersandcompanions:sea_bunny": {
+    "en_us": "Sea Bunny",
+    "fr_fr": "Lapin de mer",
+    "oeuf": true
+   },
+   "crittersandcompanions:shima_enaga": {
+    "en_us": "Shima Enaga",
+    "fr_fr": "Shima enaga",
+    "oeuf": true
+   },
+   "crittersandcompanions:snail": {
+    "en_us": "Snail",
+    "oeuf": true
+   },
+   "crittersandcompanions:stag_beetle": {
+    "en_us": "Stag Beetle",
+    "oeuf": true
+   },
+   "crittersandcompanions:stick_bug": {
+    "en_us": "Stick Bug",
+    "oeuf": true
+   },
+   "crittersandcompanions:weevil": {
+    "en_us": "Acorn Weevil",
+    "oeuf": true
+   }
+  },
+  "especes_untamedwilds": {},
+  "source": "Critters and Companions",
+  "spawns": [],
+  "url": "https://cdn.modrinth.com/data/Yd4wb5wZ/versions/HurxN6RE/crittersandcompanions-forge-1.20.1-2.7.1.jar",
+  "version": "2.7.1"
+ },
+ "Ecologics": {
+  "entites": {
+   "ecologics:boat": {
+    "en_us": "Boat",
+    "fr_fr": "Bateau",
+    "oeuf": false
+   },
+   "ecologics:camel": {
+    "en_us": "Camel",
+    "fr_fr": "Dromadaire",
+    "oeuf": true
+   },
+   "ecologics:chest_boat": {
+    "en_us": "Boat with Chest",
+    "fr_fr": "Bateau de stockage",
+    "oeuf": false
+   },
+   "ecologics:coconut_crab": {
+    "en_us": "Coconut Crab",
+    "fr_fr": "Crabe de cocotier",
+    "oeuf": true
+   },
+   "ecologics:penguin": {
+    "en_us": "Penguin",
+    "fr_fr": "Manchot",
+    "oeuf": true
+   },
+   "ecologics:squirrel": {
+    "en_us": "Squirrel",
+    "fr_fr": "Écureuil",
+    "oeuf": true
+   }
+  },
+  "especes_untamedwilds": {},
+  "source": "Ecologics",
+  "spawns": [
+   {
+    "biomes": "minecraft:desert",
+    "entite": "ecologics:camel",
+    "fichier": "data/ecologics/forge/biome_modifier/spawn_camel.json",
+    "max": 1,
+    "min": 1,
+    "poids": 1,
+    "type": "forge:add_spawns"
+   },
+   {
+    "biomes": [
+     "minecraft:frozen_ocean",
+     "minecraft:frozen_river",
+     "minecraft:snowy_plains"
+    ],
+    "entite": "ecologics:penguin",
+    "fichier": "data/ecologics/forge/biome_modifier/spawn_penguin.json",
+    "max": 5,
+    "min": 4,
+    "poids": 2,
+    "type": "forge:add_spawns"
+   },
+   {
+    "biomes": "minecraft:plains",
+    "entite": "ecologics:squirrel",
+    "fichier": "data/ecologics/forge/biome_modifier/spawn_squirrel.json",
+    "max": 3,
+    "min": 2,
+    "poids": 10,
+    "type": "forge:add_spawns"
+   }
+  ],
+  "url": "https://cdn.modrinth.com/data/NCKpPR0Z/versions/jB0V9NeZ/ecologics-forge-1.20.1-2.2.7.jar",
+  "version": "2.2.7-Forge"
+ },
+ "Let's Do Meadow": {
+  "entites": {
+   "meadow:flecked_sheep": {
+    "en_us": "Flecked Sheep",
+    "oeuf": false
+   },
+   "meadow:fuzzy_sheep": {
+    "en_us": "Fuzzy Sheep",
+    "oeuf": false
+   },
+   "meadow:highland_cattle": {
+    "en_us": "Highland Cattle",
+    "oeuf": false
+   },
+   "meadow:horned_sheep": {
+    "en_us": "Horned Sheep",
+    "oeuf": true
+   },
+   "meadow:inky_sheep": {
+    "en_us": "Inky Sheep",
+    "oeuf": false
+   },
+   "meadow:long_nosed_sheep": {
+    "en_us": "Long Nosed Sheep",
+    "oeuf": false
+   },
+   "meadow:patched_sheep": {
+    "en_us": "Patched Sheep",
+    "oeuf": false
+   },
+   "meadow:pine_boat": {
+    "en_us": "Pine Boat",
+    "oeuf": false
+   },
+   "meadow:pine_chest_boat": {
+    "en_us": "Pine Chest Boat",
+    "oeuf": false
+   },
+   "meadow:rocky_sheep": {
+    "en_us": "Rocky Sheep",
+    "oeuf": false
+   },
+   "meadow:umbra_cow": {
+    "en_us": "Umbra Cattle",
+    "oeuf": false
+   },
+   "meadow:warped_cow": {
+    "en_us": "Warped Cow",
+    "oeuf": false
+   },
+   "meadow:water_buffalo": {
+    "en_us": "Water Buffalo",
+    "oeuf": true
+   },
+   "meadow:wooly_cow": {
+    "en_us": "Wooly Cow",
+    "oeuf": true
+   },
+   "meadow:wooly_sheep": {
+    "en_us": "Wooly Sheep",
+    "oeuf": true
+   }
+  },
+  "especes_untamedwilds": {},
+  "source": "[Let's Do] Meadow",
+  "spawns": [
+   {
+    "biomes": "#meadow:spawns_meadow_sheeps",
+    "entite": "meadow:wooly_sheep",
+    "fichier": "data/meadow/forge/biome_modifier/add_sheep_spawns.json",
+    "max": 3,
+    "min": 2,
+    "poids": 6,
+    "type": "forge:add_spawns"
+   },
+   {
+    "biomes": "#meadow:spawns_meadow_wooly_cows",
+    "entite": "meadow:wooly_cow",
+    "fichier": "data/meadow/forge/biome_modifier/add_wooly_cow_spawns.json",
+    "max": 3,
+    "min": 2,
+    "poids": 6,
+    "type": "forge:add_spawns"
+   },
+   {
+    "biomes": [
+     "minecraft:savanna",
+     "minecraft:savanna_plateau",
+     "minecraft:windswept_savanna"
+    ],
+    "entite": "meadow:water_buffalo",
+    "fichier": "data/meadow/forge/biome_modifier/spawn_buffalo.json",
+    "max": 6,
+    "min": 4,
+    "poids": 4,
+    "type": "forge:add_spawns"
+   }
+  ],
+  "url": "https://cdn.modrinth.com/data/ra7o6Sl7/versions/phZQOZzG/letsdo-meadow-forge-1.3.25.jar",
+  "version": "1.3.25"
+ },
+ "Let's Do WilderNature": {
+  "entites": {
+   "wildernature:bison": {
+    "en_us": "Bison",
+    "oeuf": true
+   },
+   "wildernature:boar": {
+    "en_us": "Boar",
+    "oeuf": true
+   },
+   "wildernature:cassowary": {
+    "en_us": "Cassowary",
+    "oeuf": true
+   },
+   "wildernature:deer": {
+    "en_us": "Deer",
+    "oeuf": true
+   },
+   "wildernature:dog": {
+    "en_us": "Dog",
+    "oeuf": true
+   },
+   "wildernature:flamingo": {
+    "en_us": "Flamingo",
+    "oeuf": true
+   },
+   "wildernature:hedgehog": {
+    "en_us": "Hedgehog",
+    "oeuf": true
+   },
+   "wildernature:minisheep": {
+    "en_us": "Minisheep",
+    "oeuf": true
+   },
+   "wildernature:owl": {
+    "en_us": "Owl",
+    "oeuf": true
+   },
+   "wildernature:pelican": {
+    "en_us": "Pelican",
+    "oeuf": true
+   },
+   "wildernature:penguin": {
+    "en_us": "Penguin",
+    "oeuf": true
+   },
+   "wildernature:raccoon": {
+    "en_us": "Raccoon",
+    "oeuf": true
+   },
+   "wildernature:red_wolf": {
+    "en_us": "Red Wolf",
+    "oeuf": true
+   },
+   "wildernature:squirrel": {
+    "en_us": "Squirrel",
+    "oeuf": true
+   },
+   "wildernature:turkey": {
+    "en_us": "Turkey",
+    "oeuf": true
+   }
+  },
+  "especes_untamedwilds": {},
+  "source": "[Let's Do] WilderNature",
+  "spawns": [],
+  "url": "https://cdn.modrinth.com/data/AAiRU4aQ/versions/MOt4yaRr/letsdo-wildernature-forge-1.0.6.jar",
+  "version": "1.0.6"
+ },
+ "Naturalist": {
+  "entites": {
+   "naturalist:alligator": {
+    "en_us": "Alligator",
+    "fr_fr": "Alligator",
+    "oeuf": true
+   },
+   "naturalist:anglerfish": {
+    "en_us": "Anglerfish",
+    "oeuf": true
+   },
+   "naturalist:ant": {
+    "en_us": "Ant",
+    "oeuf": true
+   },
+   "naturalist:bass": {
+    "en_us": "Bass",
+    "fr_fr": "Bar",
+    "oeuf": true
+   },
+   "naturalist:bear": {
+    "en_us": "Bear",
+    "fr_fr": "Ours",
+    "oeuf": true
+   },
+   "naturalist:bird": {
+    "en_us": "Bird",
+    "oeuf": true
+   },
+   "naturalist:black_bear": {
+    "en_us": "Black Bear",
+    "oeuf": true
+   },
+   "naturalist:blobfish": {
+    "en_us": "Blobfish",
+    "oeuf": true
+   },
+   "naturalist:bluejay": {
+    "fr_fr": "Geai bleu",
+    "oeuf": false
+   },
+   "naturalist:boar": {
+    "en_us": "Boar",
+    "fr_fr": "Sanglier",
+    "oeuf": true
+   },
+   "naturalist:butterfly": {
+    "en_us": "Butterfly",
+    "fr_fr": "Papillon",
+    "oeuf": true
+   },
+   "naturalist:canary": {
+    "fr_fr": "Canari",
+    "oeuf": false
+   },
+   "naturalist:capybara": {
+    "en_us": "Capybara",
+    "oeuf": true
+   },
+   "naturalist:cardinal": {
+    "fr_fr": "Cardinal",
+    "oeuf": false
+   },
+   "naturalist:carried_food": {
+    "en_us": "Carried Food",
+    "oeuf": false
+   },
+   "naturalist:caterpillar": {
+    "en_us": "Caterpillar",
+    "fr_fr": "Chenille",
+    "oeuf": true
+   },
+   "naturalist:catfish": {
+    "en_us": "Catfish",
+    "fr_fr": "Poisson-chat",
+    "oeuf": true
+   },
+   "naturalist:clam": {
+    "en_us": "Clam",
+    "oeuf": true
+   },
+   "naturalist:coral_snake": {
+    "fr_fr": "Serpent corail",
+    "oeuf": false
+   },
+   "naturalist:crab": {
+    "en_us": "Crab",
+    "oeuf": true
+   },
+   "naturalist:deer": {
+    "en_us": "Deer",
+    "fr_fr": "Chevreuil",
+    "oeuf": true
+   },
+   "naturalist:desert_scorpion": {
+    "en_us": "Desert Scorpion",
+    "oeuf": true
+   },
+   "naturalist:dirt_trail": {
+    "en_us": "Dirt Trail",
+    "oeuf": false
+   },
+   "naturalist:dragonfly": {
+    "en_us": "Dragonfly",
+    "fr_fr": "Libellule",
+    "oeuf": true
+   },
+   "naturalist:duck": {
+    "en_us": "Duck",
+    "fr_fr": "Canard",
+    "oeuf": true
+   },
+   "naturalist:elephant": {
+    "en_us": "Elephant",
+    "fr_fr": "Éléphant",
+    "oeuf": true
+   },
+   "naturalist:finch": {
+    "fr_fr": "Pinson des arbres",
+    "oeuf": false
+   },
+   "naturalist:firefly": {
+    "en_us": "Firefly",
+    "fr_fr": "Luciole",
+    "oeuf": true
+   },
+   "naturalist:giant_isopod": {
+    "en_us": "Giant Isopod",
+    "oeuf": true
+   },
+   "naturalist:giraffe": {
+    "en_us": "Giraffe",
+    "fr_fr": "Girafe",
+    "oeuf": true
+   },
+   "naturalist:great_white_shark": {
+    "en_us": "Great White Shark",
+    "oeuf": true
+   },
+   "naturalist:hedgehog": {
+    "en_us": "Hedgehog",
+    "oeuf": true
+   },
+   "naturalist:hippo": {
+    "en_us": "Hippo",
+    "fr_fr": "Hippopotame",
+    "oeuf": true
+   },
+   "naturalist:jellyfish": {
+    "en_us": "Jellyfish",
+    "oeuf": true
+   },
+   "naturalist:jungle_scorpion": {
+    "en_us": "Jungle Scorpion",
+    "oeuf": true
+   },
+   "naturalist:komodo_dragon": {
+    "en_us": "Komodo Dragon",
+    "oeuf": true
+   },
+   "naturalist:lion": {
+    "en_us": "Lion",
+    "fr_fr": "Lion",
+    "oeuf": true
+   },
+   "naturalist:lizard": {
+    "en_us": "Lizard",
+    "fr_fr": "Lézard",
+    "oeuf": true
+   },
+   "naturalist:lizard_tail": {
+    "en_us": "Lizard Tail",
+    "fr_fr": "Queue de lézard",
+    "oeuf": false
+   },
+   "naturalist:mammoth": {
+    "en_us": "Mammoth",
+    "oeuf": true
+   },
+   "naturalist:mole": {
+    "en_us": "Mole",
+    "oeuf": true
+   },
+   "naturalist:ostrich": {
+    "en_us": "Ostrich",
+    "fr_fr": "Autruche",
+    "oeuf": true
+   },
+   "naturalist:piranha": {
+    "en_us": "Piranha",
+    "oeuf": true
+   },
+   "naturalist:rat": {
+    "en_us": "Rat",
+    "oeuf": true
+   },
+   "naturalist:rattlesnake": {
+    "fr_fr": "Serpent à sonnettes",
+    "oeuf": false
+   },
+   "naturalist:ray": {
+    "en_us": "Ray",
+    "oeuf": true
+   },
+   "naturalist:rhino": {
+    "en_us": "Rhino",
+    "fr_fr": "Rhinocéros",
+    "oeuf": true
+   },
+   "naturalist:robin": {
+    "fr_fr": "Rouge-gorge",
+    "oeuf": false
+   },
+   "naturalist:snail": {
+    "en_us": "Snail",
+    "fr_fr": "Escargot",
+    "oeuf": true
+   },
+   "naturalist:snake": {
+    "en_us": "Snake",
+    "fr_fr": "Serpent",
+    "oeuf": true
+   },
+   "naturalist:sparrow": {
+    "fr_fr": "Moineau",
+    "oeuf": false
+   },
+   "naturalist:starfish": {
+    "en_us": "Starfish",
+    "oeuf": true
+   },
+   "naturalist:tiger": {
+    "en_us": "Tiger",
+    "oeuf": true
+   },
+   "naturalist:tortoise": {
+    "en_us": "Tortoise",
+    "fr_fr": "Tortue terrestre",
+    "oeuf": true
+   },
+   "naturalist:turkey": {
+    "en_us": "Turkey",
+    "oeuf": true
+   },
+   "naturalist:vulture": {
+    "en_us": "Vulture",
+    "fr_fr": "Vautour",
+    "oeuf": true
+   },
+   "naturalist:whale": {
+    "en_us": "Whale",
+    "oeuf": true
+   },
+   "naturalist:zebra": {
+    "en_us": "Zebra",
+    "fr_fr": "Zèbre",
+    "oeuf": true
+   }
+  },
+  "especes_untamedwilds": {},
+  "source": "Naturalist",
+  "spawns": [],
+  "url": "https://cdn.modrinth.com/data/F8BQNPWX/versions/b9qy62Lr/naturalist-2.0.9-forge-1.20.1.jar",
+  "version": "2.0.9+1.20.1-forge"
+ },
+ "Untamed Wilds": {
+  "erreur": "introuvable"
+ }
+}
