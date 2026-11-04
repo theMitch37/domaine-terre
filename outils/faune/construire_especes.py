@@ -189,7 +189,7 @@ for sp,nom,lat,mil,ts in [("monarch","Monarque","Danaus plexippus","prairie","gr
     uw("butterfly",sp,nom,lat,"insecte",mil,ts,"1-3")
 for sp,nom,lat,ts in [("rose","Mygale rose du Chili","Grammostola rosea","cone_sud,andes"),("red_knee","Mygale à genoux rouges","Brachypelma hamorii","ouest_mexique"),
   ("black","Mygale noire","Grammostola pulchra","cone_sud"),("black_and_white","Mygale zébrée","Acanthoscurria geniculata","amazonie"),
-  ("cobalt","Mygale bleu cobalt","Cyriopagopus lividus","asie_sud_est"),("king","Mygale roi","Pelinobius muticus","afrique_est"),
+  ("cobalt","Mygale bleu cobalt","Cyriopagopus lividus","asie_sud_est,australie,melanesie"),("king","Mygale roi","Pelinobius muticus","afrique_est"),
   ("regalis","Mygale royale","Poecilotheria regalis","inde"),("tiger","Mygale tigre","Psalmopoeus","amerique_centrale")]:
     uw("tarantula",sp,nom,lat,"insecte","foret,desert",ts,"1")
 uw("terror_bird","*","Oiseaux-terreur","—","fantastique","—","—","—","retirer","espèces disparues")
