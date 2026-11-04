@@ -35,6 +35,33 @@ MILIEUX = {
     "marais (lagunes salées)": [9, 14], "toundra,foret": [6, 11], "mangrove": [14],
     "partout": list(range(1, 15)), "sol": list(range(1, 15)),
 }
+# Espèces emblématiques à aire réduite : dans les terroirs nommés, seulement ces écorégions (noms RESOLVE exacts).
+# Les autres terroirs de l'espèce gardent la règle générale. Vaut aussi pour l'eau (ornithorynque).
+PRECIS = {
+    "untamedwilds:big_cat/tiger": {"siberie": ["Ussuri broadleaf and mixed forests", "Manchurian mixed forests",
+                                               "Okhotsk-Manchurian taiga", "Amur meadow steppe"]},
+    "alexsmobs:tiger": {"chine": ["Manchurian mixed forests", "Changbai Mountains mixed forests"]},
+    "minecraft:panda": {"chine": ["Qionglai-Minshan conifer forests", "Qin Ling Mountains deciduous forests",
+                                  "Hengduan Mountains subalpine conifer forests"]},
+    "untamedwilds:bear/panda": {"chine": ["Qionglai-Minshan conifer forests", "Qin Ling Mountains deciduous forests",
+                                          "Hengduan Mountains subalpine conifer forests"]},
+    "alexsmobs:komodo_dragon": {"asie_sud_est": ["Lesser Sundas deciduous forests"]},
+    "naturalist:lion": {"inde": ["Khathiar-Gir dry deciduous forests"]},
+    "alexsmobs:tasmanian_devil": {"australie": ["Tasmanian Central Highland forests", "Tasmanian temperate forests",
+                                                "Tasmanian temperate rain forests"]},
+    "naturalist:canary": {"mediterranee": ["Canary Islands dry woodlands and forests", "Madeira evergreen forests",
+                                           "Azores temperate mixed forests"],
+                          "maghreb": ["Canary Islands dry woodlands and forests"]},
+    "alexsmobs:gelada_monkey": {"afrique_est": ["Ethiopian montane grasslands and woodlands", "Ethiopian montane moorlands"]},
+    "untamedwilds:rhino/javan": {"asie_sud_est": ["Western Java rain forests", "Western Java montane rain forests"]},
+    "untamedwilds:rhino/sumatran": {"asie_sud_est": ["Sumatran lowland rain forests", "Sumatran montane rain forests",
+                                                     "Borneo lowland rain forests"]},
+    "untamedwilds:rhino/indian": {"inde": ["Terai-Duar savanna and grasslands", "Brahmaputra Valley semi-evergreen forests"]},
+    "untamedwilds:bison/wisent": {"continentale": ["Central European mixed forests", "Carpathian montane forests"]},
+    "alexsmobs:platypus": {"australie": ["Eastern Australian temperate forests", "Southeast Australia temperate forests",
+                                         "Queensland tropical rain forests", "Tasmanian temperate forests",
+                                         "Tasmanian temperate rain forests", "Tasmanian Central Highland forests"]},
+}
 EAU = {"eau_douce", "marais", "près de l'eau"}
 COTE = {"cote", "plage", "plage tropicale"}
 
@@ -98,6 +125,10 @@ for r in rows:
         else:
             inconnus.add(t)
     masque_t = np.isin(ter, [INDEX[t] for t in ts])
+    for t_, noms_ in PRECIS.get(r["id"], {}).items():
+        if t_ in INDEX:
+            ok = [k for k, v in table.items() if v["nom"] in noms_]
+            masque_t &= ~((ter == INDEX[t_]) & ~np.isin(eco, ok))
     total = float(poids[masque_t].sum())
     if biomes:
         m = masque_t & np.isin(grand, list(biomes))
@@ -111,6 +142,7 @@ for r in rows:
                   "part_terroirs": "" if part is None else f"{part:.0%}", "ecoregions_principales": " / ".join(top)})
 
 json.dump(MILIEUX, open(os.path.join(ICI, "milieux.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+json.dump(PRECIS, open(os.path.join(ICI, "ecoregions_precises.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 with open(os.path.join(ICI, "zones_bilan.csv"), "w", encoding="utf-8", newline="") as f:
     w = csv.DictWriter(f, fieldnames=list(bilan[0]), delimiter=";")
     w.writeheader()

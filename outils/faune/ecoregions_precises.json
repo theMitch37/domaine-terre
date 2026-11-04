@@ -1,0 +1,98 @@
+{
+ "untamedwilds:big_cat/tiger": {
+  "siberie": [
+   "Ussuri broadleaf and mixed forests",
+   "Manchurian mixed forests",
+   "Okhotsk-Manchurian taiga",
+   "Amur meadow steppe"
+  ]
+ },
+ "alexsmobs:tiger": {
+  "chine": [
+   "Manchurian mixed forests",
+   "Changbai Mountains mixed forests"
+  ]
+ },
+ "minecraft:panda": {
+  "chine": [
+   "Qionglai-Minshan conifer forests",
+   "Qin Ling Mountains deciduous forests",
+   "Hengduan Mountains subalpine conifer forests"
+  ]
+ },
+ "untamedwilds:bear/panda": {
+  "chine": [
+   "Qionglai-Minshan conifer forests",
+   "Qin Ling Mountains deciduous forests",
+   "Hengduan Mountains subalpine conifer forests"
+  ]
+ },
+ "alexsmobs:komodo_dragon": {
+  "asie_sud_est": [
+   "Lesser Sundas deciduous forests"
+  ]
+ },
+ "naturalist:lion": {
+  "inde": [
+   "Khathiar-Gir dry deciduous forests"
+  ]
+ },
+ "alexsmobs:tasmanian_devil": {
+  "australie": [
+   "Tasmanian Central Highland forests",
+   "Tasmanian temperate forests",
+   "Tasmanian temperate rain forests"
+  ]
+ },
+ "naturalist:canary": {
+  "mediterranee": [
+   "Canary Islands dry woodlands and forests",
+   "Madeira evergreen forests",
+   "Azores temperate mixed forests"
+  ],
+  "maghreb": [
+   "Canary Islands dry woodlands and forests"
+  ]
+ },
+ "alexsmobs:gelada_monkey": {
+  "afrique_est": [
+   "Ethiopian montane grasslands and woodlands",
+   "Ethiopian montane moorlands"
+  ]
+ },
+ "untamedwilds:rhino/javan": {
+  "asie_sud_est": [
+   "Western Java rain forests",
+   "Western Java montane rain forests"
+  ]
+ },
+ "untamedwilds:rhino/sumatran": {
+  "asie_sud_est": [
+   "Sumatran lowland rain forests",
+   "Sumatran montane rain forests",
+   "Borneo lowland rain forests"
+  ]
+ },
+ "untamedwilds:rhino/indian": {
+  "inde": [
+   "Terai-Duar savanna and grasslands",
+   "Brahmaputra Valley semi-evergreen forests"
+  ]
+ },
+ "untamedwilds:bison/wisent": {
+  "continentale": [
+   "Central European mixed forests",
+   "Carpathian montane forests"
+  ]
+ },
+ "alexsmobs:platypus": {
+  "australie": [
+   "Eastern Australian temperate forests",
+   "Southeast Australia temperate forests",
+   "Queensland tropical rain forests",
+   "Tasmanian temperate forests",
+   "Tasmanian temperate rain forests",
+   "Tasmanian Central Highland forests"
+  ]
+ }
+}
