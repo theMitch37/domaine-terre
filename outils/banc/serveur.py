@@ -23,7 +23,7 @@ with open(os.path.join(SERVEUR, "server.properties"), "w") as f:
     f.write("\n".join([
         "online-mode=false", "level-seed=20261025", "level-name=banc", "view-distance=3",
         "simulation-distance=3", "spawn-protection=0", "max-tick-time=-1", "spawn-monsters=false",
-        "spawn-animals=false", "spawn-npcs=false", "generate-structures=true", "sync-chunk-writes=false"]) + "\n")
+        "spawn-animals=true", "spawn-npcs=false", "generate-structures=true", "sync-chunk-writes=false"]) + "\n")
 
 journal = open(os.path.join(SORTIE, "serveur.log"), "w")
 p = subprocess.Popen(["java", "-Xmx8G", f"@libraries/net/minecraftforge/forge/{FORGE}/unix_args.txt", "nogui"],
