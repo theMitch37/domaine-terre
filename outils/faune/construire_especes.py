@@ -416,6 +416,11 @@ for i, r in enumerate(L):
         L[i] = r[:4] + ("souterrain (eau), fosses océaniques", "—", r[6], "souterrain",
                         "grottes inondées des profondeurs et fond des fosses (Mariannes, sous y 0) ; mod à installer")
 
+# Corrections d'aire (pas de cafards, mouches ni chauves-souris aux pôles)
+_fix = {"minecraft:bat": "partout_sauf:arctique,antarctique", "alexsmobs:cockroach": "partout_sauf:arctique,antarctique,boreale,siberie,nordique",
+        "alexsmobs:fly": "partout_sauf:arctique,antarctique"}
+L = [r[:5] + (_fix[r[0]],) + r[6:] if r[0] in _fix else r for r in L]
+
 with open(os.path.join(ICI, "especes.csv"), "w", encoding="utf-8", newline="") as f:
     w = csv.writer(f, delimiter=";")
     w.writerow(["id","nom","espece_reelle","categorie","milieu","terroirs","groupe","statut","note"])
