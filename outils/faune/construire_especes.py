@@ -419,7 +419,10 @@ for i, r in enumerate(L):
 # Corrections d'aire (pas de cafards, mouches ni chauves-souris aux pôles)
 _fix = {"minecraft:bat": "partout_sauf:arctique,antarctique", "alexsmobs:cockroach": "partout_sauf:arctique,antarctique,boreale,siberie,nordique",
         "alexsmobs:fly": "partout_sauf:arctique,antarctique",
-        "alexsmobs:triops": "sahara_sahel,maghreb,moyen_orient,steppes_tibet,australie,ouest_mexique"}
+        "alexsmobs:triops": "sahara_sahel,maghreb,moyen_orient,steppes_tibet,australie,ouest_mexique",
+        # 04/11 (test en jeu) : l'Amour et l'Oussouri sont dans le terroir « chine » de la carte ; le tigre d'Untamed
+        # Wilds (installé) y va, celui d'Alex's Mobs devient la race de l'Asie du Sud-Est
+        "untamedwilds:big_cat/tiger": "siberie,chine,inde", "alexsmobs:tiger": "asie_sud_est"}
 L = [r[:5] + (_fix[r[0]],) + r[6:] if r[0] in _fix else r for r in L]
 
 # Ajouts du 04/11 : crocodile du Nil jusqu'en Égypte (le long du fleuve), mygales d'Australie (Selenocosmia)

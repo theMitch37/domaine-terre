@@ -5,12 +5,12 @@
    "Manchurian mixed forests",
    "Okhotsk-Manchurian taiga",
    "Amur meadow steppe"
-  ]
- },
- "alexsmobs:tiger": {
+  ],
   "chine": [
+   "Ussuri broadleaf and mixed forests",
    "Manchurian mixed forests",
-   "Changbai Mountains mixed forests"
+   "Changbai Mountains mixed forests",
+   "Northeast China Plain deciduous forests"
   ]
  },
  "minecraft:panda": {

@@ -39,8 +39,9 @@ MILIEUX = {
 # Les autres terroirs de l'espèce gardent la règle générale. Vaut aussi pour l'eau (ornithorynque).
 PRECIS = {
     "untamedwilds:big_cat/tiger": {"siberie": ["Ussuri broadleaf and mixed forests", "Manchurian mixed forests",
-                                               "Okhotsk-Manchurian taiga", "Amur meadow steppe"]},
-    "alexsmobs:tiger": {"chine": ["Manchurian mixed forests", "Changbai Mountains mixed forests"]},
+                                               "Okhotsk-Manchurian taiga", "Amur meadow steppe"],
+                                   "chine": ["Ussuri broadleaf and mixed forests", "Manchurian mixed forests",
+                                             "Changbai Mountains mixed forests", "Northeast China Plain deciduous forests"]},
     "minecraft:panda": {"chine": ["Qionglai-Minshan conifer forests", "Qin Ling Mountains deciduous forests",
                                   "Hengduan Mountains subalpine conifer forests"]},
     "untamedwilds:bear/panda": {"chine": ["Qionglai-Minshan conifer forests", "Qin Ling Mountains deciduous forests",

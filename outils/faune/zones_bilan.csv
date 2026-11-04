@@ -29,7 +29,7 @@ untamedwilds:bear/spectacled;Ours à lunettes;foret (montagne);3 4 5 10;;;63%;Ce
 untamedwilds:bear/sun;Ours malais;foret_tropicale;1 3 14;;;82%;Borneo lowland rain forests / Sumatran lowland rain forests / Northern Indochina subtropical forests
 untamedwilds:big_cat/lion;Lion;savane;2 7 9;;;53%;Sahelian Acacia savanna / Dry miombo woodlands / Central Zambezian wet miombo woodlands
 untamedwilds:big_cat/leopard;Léopard;savane,foret;1 2 3 4 5 6 7 9 12;;;65%;Dry miombo woodlands / Central Zambezian wet miombo woodlands / East Sudanian savanna
-untamedwilds:big_cat/tiger;Tigre;foret;1 2 3 4 5 6 12;;;64%;Okhotsk-Manchurian taiga / East Deccan moist deciduous forests / Khathiar-Gir dry deciduous forests
+untamedwilds:big_cat/tiger;Tigre;foret;1 2 3 4 5 6 12;;;70%;Manchurian mixed forests / Okhotsk-Manchurian taiga / East Deccan moist deciduous forests
 untamedwilds:big_cat/snow_leopard;Léopard des neiges;montagne;3 4 5 6 10 12;;;40%;Central Tibetan Plateau alpine steppe / Southeast Tibet shrublands and meadows / North Tibetan Plateau-Kunlun Mountains alpine desert
 untamedwilds:big_cat/jaguar;Jaguar;foret_tropicale,marais;1 3 14;oui;;62%;Southwest Amazon moist forests / Madeira-Tapajós moist forests / Guianan lowland moist forests
 untamedwilds:big_cat/puma;Puma;montagne,foret;1 2 3 4 5 6 10 12;;;51%;Northern Canadian Shield taiga / Eastern Canadian Shield taiga / Midwest Canadian Shield forests
@@ -313,7 +313,7 @@ alexsmobs:sugar_glider;Phalanger volant;foret;1 2 3 4 5 6 12;;;27%;Eastern Austr
 alexsmobs:tarantula_hawk;Guêpe-tarentule;desert;13;;;17%;Chihuahuan desert / Great Basin shrub steppe / Colorado Plateau shrublands
 alexsmobs:tasmanian_devil;Diable de Tasmanie;foret;1 2 3 4 5 6 12;;;100%;Tasmanian temperate rain forests / Tasmanian temperate forests / Tasmanian Central Highland forests
 alexsmobs:terrapin;Tortue de rivière;eau_douce,marais;;oui;;;
-alexsmobs:tiger;Tigre (AM);foret;1 2 3 4 5 6 12;;;94%;Manchurian mixed forests / Borneo lowland rain forests / Central Indochina dry forests
+alexsmobs:tiger;Tigre (AM);foret;1 2 3 4 5 6 12;;;94%;Borneo lowland rain forests / Central Indochina dry forests / Sumatran lowland rain forests
 alexsmobs:toucan;Toucan;foret_tropicale;1 3 14;;;62%;Southwest Amazon moist forests / Madeira-Tapajós moist forests / Guianan lowland moist forests
 alexsmobs:triops;Triops;eau_douce (mares);;oui;;;
 alexsmobs:fly;Mouche;partout;1 2 3 4 5 6 7 8 9 10 11 12 13 14;;;99%;East Siberian taiga / Scandinavian and Russian taiga / Sahelian Acacia savanna
