@@ -1,0 +1,318 @@
+id;nom;milieu;biomes;eau;cote;part_terroirs;ecoregions_principales
+minecraft:cow;Vache;prairie,culture;1 2 4 5 7 8 9 10 12;;;68%;Sarmatic mixed forests / Pontic steppe / Dry miombo woodlands
+minecraft:pig;Cochon;culture,foret;1 2 3 4 5 6 7 8 9 12;;;92%;Scandinavian and Russian taiga / Sarmatic mixed forests / Pontic steppe
+minecraft:sheep;Mouton;prairie,steppe,montagne;3 4 5 6 7 8 9 10 12 13;;;91%;Scandinavian and Russian taiga / Sahelian Acacia savanna / South Sahara desert
+minecraft:chicken;Poule;culture;1 2 4 5 7 8 9 12;;;67%;Sahelian Acacia savanna / Cerrado / West Sudanian savanna
+minecraft:horse;Cheval;prairie,steppe;4 7 8 9 10 12 13;;;70%;Pontic steppe / Kazakh steppe / East European forest steppe
+minecraft:donkey;Âne;steppe,desert;8 10 13;;;53%;South Sahara desert / North Saharan Xeric Steppe and Woodland / East Sahara Desert
+minecraft:llama;Lama;montagne,prairie;3 4 5 6 7 8 9 10 12;;;66%;Central Andean dry puna / Central Andean puna / Southern Andean steppe
+minecraft:goat;Chèvre de montagne;montagne;3 4 5 6 10 12;;;40%;Northern Canadian Shield taiga / Eastern Canadian Shield taiga / Midwest Canadian Shield forests
+minecraft:rabbit;Lapin;prairie,steppe,desert,toundra;4 6 7 8 9 10 11 12 13;;;77%;East Siberian taiga / Scandinavian and Russian taiga / Sahelian Acacia savanna
+minecraft:wolf;Loup;foret,toundra,steppe,montagne;1 2 3 4 5 6 8 10 11 12 13;;;94%;East Siberian taiga / West Siberian taiga / Taimyr-Central Siberian tundra
+minecraft:fox;Renard;foret,prairie,toundra;1 2 3 4 5 6 7 8 9 10 11 12;;;79%;East Siberian taiga / Scandinavian and Russian taiga / West Siberian taiga
+minecraft:polar_bear;Ours polaire;banquise,toundra;6 11;;;56%;Canadian High Arctic tundra / Canadian Middle Arctic Tundra / Kalaallit Nunaat Arctic steppe
+minecraft:panda;Panda géant;foret (bambou);4 5 10;;;52%;Manchurian mixed forests / Huang He Plain mixed forests / Changjiang Plain evergreen forests
+minecraft:ocelot;Ocelot;foret_tropicale;1 3 14;;;46%;Southwest Amazon moist forests / Madeira-Tapajós moist forests / Guianan lowland moist forests
+minecraft:parrot;Perroquet;foret_tropicale;1 3 14;;;45%;Southwest Amazon moist forests / Madeira-Tapajós moist forests / Northeast Congolian lowland forests
+minecraft:turtle;Tortue marine;cote (plage);;;oui;;
+minecraft:cod;Morue (base);mer;;;;;
+minecraft:salmon;Saumon;mer,eau_douce;;oui;;;
+minecraft:axolotl;Axolotl;eau_douce;;oui;;;
+minecraft:frog;Grenouille;marais,eau_douce;;oui;;;
+minecraft:bee;Abeille;prairie,foret;1 2 3 4 5 6 7 8 9 10 12;;;74%;East Siberian taiga / Scandinavian and Russian taiga / Sahelian Acacia savanna
+minecraft:bat;Chauve-souris;souterrain;;;;;
+untamedwilds:bear/brown;Ours brun;foret,montagne;1 2 3 4 5 6 10 12;;;75%;East European forest steppe / Central European mixed forests / Sarmatic mixed forests
+untamedwilds:bear/black;Ours noir;foret;1 2 3 4 5 6 12;;;65%;Northern Canadian Shield taiga / Eastern Canadian Shield taiga / Midwest Canadian Shield forests
+untamedwilds:bear/polar;Ours polaire (UW);banquise;11;;;56%;Canadian High Arctic tundra / Canadian Middle Arctic Tundra / Kalaallit Nunaat Arctic steppe
+untamedwilds:bear/panda;Panda (UW);foret;1 2 3 4 5 6 12;;;84%;Jian Nan subtropical evergreen forests / Manchurian mixed forests / Huang He Plain mixed forests
+untamedwilds:bear/spectacled;Ours à lunettes;foret (montagne);3 4 5 10;;;63%;Central Andean dry puna / Central Andean puna / Southern Andean steppe
+untamedwilds:bear/sun;Ours malais;foret_tropicale;1 3 14;;;82%;Borneo lowland rain forests / Sumatran lowland rain forests / Northern Indochina subtropical forests
+untamedwilds:big_cat/lion;Lion;savane;2 7 9;;;53%;Sahelian Acacia savanna / Dry miombo woodlands / Central Zambezian wet miombo woodlands
+untamedwilds:big_cat/leopard;Léopard;savane,foret;1 2 3 4 5 6 7 9 12;;;65%;Dry miombo woodlands / Central Zambezian wet miombo woodlands / East Sudanian savanna
+untamedwilds:big_cat/tiger;Tigre;foret;1 2 3 4 5 6 12;;;64%;East Siberian taiga / West Siberian taiga / Northeast Siberian taiga
+untamedwilds:big_cat/snow_leopard;Léopard des neiges;montagne;3 4 5 6 10 12;;;40%;Central Tibetan Plateau alpine steppe / Southeast Tibet shrublands and meadows / North Tibetan Plateau-Kunlun Mountains alpine desert
+untamedwilds:big_cat/jaguar;Jaguar;foret_tropicale,marais;1 3 14;oui;;62%;Southwest Amazon moist forests / Madeira-Tapajós moist forests / Guianan lowland moist forests
+untamedwilds:big_cat/puma;Puma;montagne,foret;1 2 3 4 5 6 10 12;;;51%;Northern Canadian Shield taiga / Eastern Canadian Shield taiga / Midwest Canadian Shield forests
+untamedwilds:bison/plains;Bison d'Amérique;prairie;4 7 8 9 10 12;;;77%;Southeast US conifer savannas / New England-Acadian forests / Eastern Canadian Forest-Boreal transition
+untamedwilds:bison/wisent;Bison d'Europe;foret;1 2 3 4 5 6 12;;;75%;East European forest steppe / Central European mixed forests / Sarmatic mixed forests
+untamedwilds:boar/eurasian;Sanglier;foret;1 2 3 4 5 6 12;;;91%;European Atlantic mixed forests / Iberian sclerophyllous and semi-deciduous forests / Celtic broadleaf forests
+untamedwilds:boar/peccary;Pécari;foret_tropicale,desert;1 3 13 14;;;58%;Southwest Amazon moist forests / Madeira-Tapajós moist forests / Chihuahuan desert
+untamedwilds:boar/red_river;Potamochère roux;foret_tropicale;1 3 14;;;32%;Northeast Congolian lowland forests / Northwest Congolian lowland forests / Central Congolian lowland forests
+untamedwilds:boar/warthog;Phacochère;savane;2 7 9;;;53%;Sahelian Acacia savanna / Dry miombo woodlands / Central Zambezian wet miombo woodlands
+untamedwilds:camel/dromedary;Dromadaire;desert;13;;;60%;South Sahara desert / North Saharan Xeric Steppe and Woodland / East Sahara Desert
+untamedwilds:camel/bactrian;Chameau de Bactriane;steppe,desert;8 10 13;;;87%;Mongolian-Manchurian grassland / Taklimakan desert / Kazakh semi-desert
+untamedwilds:camel/wild_bactrian;Chameau sauvage;desert;13;;;37%;Taklimakan desert / Kazakh semi-desert / Central Asian northern desert
+untamedwilds:rhino/black;Rhinocéros noir;savane;2 7 9;;;65%;Dry miombo woodlands / Central Zambezian wet miombo woodlands / Somali Acacia-Commiphora bushlands and thickets
+untamedwilds:rhino/white;Rhinocéros blanc;savane;2 7 9;;;65%;Dry miombo woodlands / Central Zambezian wet miombo woodlands / Somali Acacia-Commiphora bushlands and thickets
+untamedwilds:rhino/indian;Rhinocéros indien;prairie,marais;4 7 8 9 10 12;oui;;4%;Terai-Duar savanna and grasslands / Rann of Kutch seasonal salt marsh / Western Himalayan broadleaf forests
+untamedwilds:rhino/javan;Rhinocéros de Java;foret_tropicale;1 3 14;;;82%;Borneo lowland rain forests / Sumatran lowland rain forests / Northern Indochina subtropical forests
+untamedwilds:rhino/sumatran;Rhinocéros de Sumatra;foret_tropicale;1 3 14;;;82%;Borneo lowland rain forests / Sumatran lowland rain forests / Northern Indochina subtropical forests
+untamedwilds:hyena/spotted;Hyène tachetée;savane;2 7 9;;;67%;West Sudanian savanna / East Sudanian savanna / Northern Congolian Forest-Savanna
+untamedwilds:hyena/striped;Hyène rayée;desert,steppe;8 10 13;;;63%;South Sahara desert / North Saharan Xeric Steppe and Woodland / East Sahara Desert
+untamedwilds:hyena/brown;Hyène brune;desert,savane;2 7 9 13;;;85%;Dry miombo woodlands / Kalahari xeric savanna / Central Zambezian wet miombo woodlands
+untamedwilds:hyena/aardwolf;Protèle;savane;2 7 9;;;65%;Dry miombo woodlands / Central Zambezian wet miombo woodlands / Somali Acacia-Commiphora bushlands and thickets
+untamedwilds:wildebeest/blue;Gnou bleu;savane;2 7 9;;;65%;Dry miombo woodlands / Central Zambezian wet miombo woodlands / Somali Acacia-Commiphora bushlands and thickets
+untamedwilds:wildebeest/black;Gnou à queue blanche;prairie;4 7 8 9 10 12;;;62%;Dry miombo woodlands / Central Zambezian wet miombo woodlands / Zambezian mopane woodlands
+untamedwilds:aardvark/common;Oryctérope;savane;2 7 9;;;66%;Dry miombo woodlands / Central Zambezian wet miombo woodlands / East Sudanian savanna
+untamedwilds:hippo/common;Hippopotame;eau_douce;;oui;;;
+untamedwilds:opossum/virginia;Opossum;foret;1 2 3 4 5 6 12;;;52%;New England-Acadian forests / Eastern Canadian Forest-Boreal transition / Western Great Lakes forests
+untamedwilds:large_snake/anaconda;Anaconda;eau_douce,marais;;oui;;;
+untamedwilds:large_snake/reticulated_python;Python réticulé;foret_tropicale;1 3 14;;;82%;Borneo lowland rain forests / Sumatran lowland rain forests / Northern Indochina subtropical forests
+untamedwilds:giant_salamander/chinese;Salamandre géante de Chine;eau_douce;;oui;;;
+untamedwilds:giant_salamander/japanese;Salamandre géante du Japon;eau_douce;;oui;;;
+untamedwilds:giant_salamander/hellbender;Ménopome;eau_douce;;oui;;;
+untamedwilds:monitor/nile;Varan du Nil;eau_douce,savane;2 7 9;oui;;57%;Sahelian Acacia savanna / West Sudanian savanna / Dry miombo woodlands
+untamedwilds:monitor/desert;Varan du désert;desert;13;;;65%;South Sahara desert / North Saharan Xeric Steppe and Woodland / East Sahara Desert
+untamedwilds:monitor/bengal;Varan du Bengale;foret,culture;1 2 3 4 5 6 7 8 9 12;;;62%;East Deccan moist deciduous forests / Khathiar-Gir dry deciduous forests / Lower Gangetic Plains moist deciduous forests
+untamedwilds:monitor/water;Varan malais;eau_douce,cote;;oui;oui;;
+untamedwilds:monitor/rock;Varan des rochers;savane;2 7 9;;;65%;Dry miombo woodlands / Central Zambezian wet miombo woodlands / Somali Acacia-Commiphora bushlands and thickets
+untamedwilds:snake/adder;Vipère péliade;prairie,foret;1 2 3 4 5 6 7 8 9 10 12;;;80%;East Siberian taiga / Scandinavian and Russian taiga / West Siberian taiga
+untamedwilds:snake/grass_snake;Couleuvre à collier;marais,prairie;4 7 8 9 10 12;oui;;65%;Sarmatic mixed forests / Pontic steppe / East European forest steppe
+untamedwilds:snake/rattlesnake;Crotale diamantin;foret,prairie;1 2 3 4 5 6 7 8 9 10 12;;;94%;Southeast US conifer savannas / New England-Acadian forests / Eastern Canadian Forest-Boreal transition
+untamedwilds:snake/western_rattlesnake;Crotale de l'Ouest;desert,steppe;8 10 13;;;57%;Northern Shortgrass prairie / Western shortgrass prairie / Chihuahuan desert
+untamedwilds:snake/corn;Serpent des blés;foret,culture;1 2 3 4 5 6 7 8 9 12;;;94%;Southeast US conifer savannas / New England-Acadian forests / Eastern Canadian Forest-Boreal transition
+untamedwilds:snake/gray_kingsnake;Serpent-roi gris;desert;13;;;34%;Chihuahuan desert / Great Basin shrub steppe / Colorado Plateau shrublands
+untamedwilds:snake/swamp_moccasin;Mocassin d'eau;marais;;oui;;;
+untamedwilds:snake/coral;Serpent corail;foret_tropicale;1 3 14;;;10%;Sierra Madre Occidental pine-oak forests / Trans-Mexican Volcanic Belt pine-oak forests / Veracruz moist forests
+untamedwilds:snake/coral_blue;Serpent corail bleu;foret_tropicale;1 3 14;;;82%;Borneo lowland rain forests / Sumatran lowland rain forests / Northern Indochina subtropical forests
+untamedwilds:snake/emerald;Boa émeraude;foret_tropicale;1 3 14;;;61%;Southwest Amazon moist forests / Madeira-Tapajós moist forests / Guianan lowland moist forests
+untamedwilds:snake/ball_python;Python royal;savane;2 7 9;;;67%;West Sudanian savanna / East Sudanian savanna / Northern Congolian Forest-Savanna
+untamedwilds:snake/black_mamba;Mamba noir;savane;2 7 9;;;65%;Dry miombo woodlands / Central Zambezian wet miombo woodlands / Somali Acacia-Commiphora bushlands and thickets
+untamedwilds:snake/green_mamba;Mamba vert;foret_tropicale;1 3 14;;;24%;Northeast Congolian lowland forests / Northwest Congolian lowland forests / Central Congolian lowland forests
+untamedwilds:snake/rice_paddy;Serpent des rizières;marais,culture (rizières);1 2 9;oui;;60%;Jian Nan subtropical evergreen forests / Northern Indochina subtropical forests / Borneo lowland rain forests
+untamedwilds:snake/carpet_python;Python tapis;foret;1 2 3 4 5 6 12;;;27%;Eastern Australian temperate forests / Murray-Darling woodlands and mallee / Southeast Australia temperate forests
+untamedwilds:snake/taipan;Taïpan;savane,desert;2 7 9 13;;;65%;Great Sandy-Tanami desert / Simpson desert / Western Australian Mulga shrublands
+untamedwilds:tortoise/gopher;Gophère;prairie,foret;1 2 3 4 5 6 7 8 9 10 12;;;94%;Southeast US conifer savannas / New England-Acadian forests / Eastern Canadian Forest-Boreal transition
+untamedwilds:tortoise/marginated;Tortue bordée;mediterraneen;12;;;60%;Iberian sclerophyllous and semi-deciduous forests / Aegean and Western Turkey sclerophyllous and mixed forests / Italian sclerophyllous and semi-deciduous forests
+untamedwilds:tortoise/leopard;Tortue léopard;savane;2 7 9;;;65%;Dry miombo woodlands / Central Zambezian wet miombo woodlands / Somali Acacia-Commiphora bushlands and thickets
+untamedwilds:tortoise/sulcata;Tortue sillonnée;desert,savane;2 7 9 13;;;100%;South Sahara desert / Sahelian Acacia savanna / East Sahara Desert
+untamedwilds:tortoise/star;Tortue étoilée (UW);savane;2 7 9;;;29%;Khathiar-Gir dry deciduous forests / Central Deccan Plateau dry deciduous forests / Narmada Valley dry deciduous forests
+untamedwilds:tortoise/asian_box;Tortue-boîte d'Asie;marais,foret_tropicale;1 3 14;oui;;82%;Borneo lowland rain forests / Sumatran lowland rain forests / Northern Indochina subtropical forests
+untamedwilds:softshell_turtle/chinese;Trionyx de Chine;eau_douce;;oui;;;
+untamedwilds:softshell_turtle/nile;Trionyx du Nil;eau_douce;;oui;;;
+untamedwilds:softshell_turtle/spiny;Trionyx épineux;eau_douce;;oui;;;
+untamedwilds:softshell_turtle/black;Trionyx noir;eau_douce;;oui;;;
+untamedwilds:softshell_turtle/peacock;Trionyx paon;eau_douce;;oui;;;
+untamedwilds:softshell_turtle/flapshell;Trionyx à clapets;eau_douce;;oui;;;
+untamedwilds:softshell_turtle/pig_nose;Tortue à nez de cochon;eau_douce;;oui;;;
+untamedwilds:newt/fire_salamander;Salamandre tachetée;eau_douce,foret (humide);1 4 5;oui;;62%;East European forest steppe / Central European mixed forests / Sarmatic mixed forests
+untamedwilds:newt/crested;Triton crêté;eau_douce,foret (humide);1 4 5;oui;;52%;Sarmatic mixed forests / East European forest steppe / Central European mixed forests
+untamedwilds:newt/alpine;Triton alpestre;eau_douce,foret (humide);1 4 5;oui;;68%;East European forest steppe / Central European mixed forests / Sarmatic mixed forests
+untamedwilds:newt/marbled;Triton marbré;eau_douce,foret (humide);1 4 5;oui;;52%;European Atlantic mixed forests / Celtic broadleaf forests / Balkan mixed forests
+untamedwilds:newt/ribbed;Pleurodèle;eau_douce,foret (humide);1 4 5;oui;;11%;Balkan mixed forests / Cantabrian mixed forests / Rodope montane mixed forests
+untamedwilds:newt/eastern;Triton vert;eau_douce,foret (humide);1 4 5;oui;;25%;New England-Acadian forests / Eastern Canadian Forest-Boreal transition / Western Great Lakes forests
+untamedwilds:newt/coastal;Triton du Pacifique;eau_douce,foret (humide);1 4 5;oui;;23%;South Central Rockies forests / Colorado Rockies forests / Northern Rockies conifer forests
+untamedwilds:newt/tiger;Salamandre tigrée;eau_douce,foret (humide);1 4 5;oui;;46%;New England-Acadian forests / Eastern Canadian Forest-Boreal transition / Western Great Lakes forests
+untamedwilds:newt/fire_belly;Triton à ventre de feu;eau_douce,foret (humide);1 4 5;oui;;83%;Jian Nan subtropical evergreen forests / Manchurian mixed forests / Huang He Plain mixed forests
+untamedwilds:newt/axolotl;Axolotl (UW);eau_douce,foret (humide);1 4 5;oui;;23%;South Central Rockies forests / Colorado Rockies forests / Northern Rockies conifer forests
+untamedwilds:catfish/blue;Poisson-chat bleu;eau_douce;;oui;;;
+untamedwilds:catfish/channel;Barbue de rivière;eau_douce;;oui;;;
+untamedwilds:catfish/redtail;Poisson-chat à queue rouge;eau_douce;;oui;;;
+untamedwilds:arowana/silver;Arowana argenté;eau_douce;;oui;;;
+untamedwilds:arowana/black;Arowana noir;eau_douce;;oui;;;
+untamedwilds:arowana/green;Arowana d'Asie;eau_douce;;oui;;;
+untamedwilds:arowana/jardini;Arowana perlé;eau_douce;;oui;;;
+untamedwilds:manatee/west;Lamantin des Caraïbes;eau_douce,cote;;oui;oui;;
+untamedwilds:manatee/amazon;Lamantin d'Amazonie;eau_douce,cote;;oui;oui;;
+untamedwilds:manatee/african;Lamantin d'Afrique;eau_douce,cote;;oui;oui;;
+untamedwilds:manatee/dugong;Dugong;eau_douce,cote;;oui;oui;;
+untamedwilds:baleen_whale/gray;Baleine grise;large;;;;;
+untamedwilds:shark/great_white;Grand requin blanc;mer,large;;;;;
+untamedwilds:shark/lemon;Requin-citron;mer,large;;;;;
+untamedwilds:shark/greenland;Requin du Groenland;mer,large;;;;;
+untamedwilds:sunfish/southern;Poisson-lune du Sud;large;;;;;
+untamedwilds:king_crab/red;Crabe royal;mer (fond froid);;;;;
+untamedwilds:king_crab/centolla;Centolla;mer (fond froid);;;;;
+untamedwilds:king_crab/spiny;Crabe royal épineux;mer (fond froid);;;;;
+untamedwilds:butterfly/monarch;Monarque;prairie;4 7 8 9 10 12;;;33%;Northern Shortgrass prairie / Southeast US conifer savannas / Western shortgrass prairie
+untamedwilds:butterfly/tiger_swallowtail;Grand porte-queue tigré;foret;1 2 3 4 5 6 12;;;59%;New England-Acadian forests / Eastern Canadian Forest-Boreal transition / Western Great Lakes forests
+untamedwilds:butterfly/mourning_cloak;Morio;foret;1 2 3 4 5 6 12;;;70%;Scandinavian and Russian taiga / Sarmatic mixed forests / Eastern Canadian Shield taiga
+untamedwilds:butterfly/red_admiral;Vulcain;prairie;4 7 8 9 10 12;;;70%;Sarmatic mixed forests / Pontic steppe / East European forest steppe
+untamedwilds:butterfly/peacock;Paon-du-jour;prairie;4 7 8 9 10 12;;;35%;Sarmatic mixed forests / Pontic steppe / East European forest steppe
+untamedwilds:butterfly/brimstone;Citron;foret;1 2 3 4 5 6 12;;;81%;Scandinavian and Russian taiga / Sarmatic mixed forests / East European forest steppe
+untamedwilds:butterfly/cabbage;Piéride du chou;culture;1 2 4 5 7 8 9 12;;;48%;Sarmatic mixed forests / Pontic steppe / East European forest steppe
+untamedwilds:butterfly/comma;Robert-le-diable;foret;1 2 3 4 5 6 12;;;81%;Scandinavian and Russian taiga / Sarmatic mixed forests / East European forest steppe
+untamedwilds:butterfly/orange_tip;Aurore;prairie;4 7 8 9 10 12;;;65%;Sarmatic mixed forests / Pontic steppe / East European forest steppe
+untamedwilds:butterfly/speckled_wood;Tircis;foret;1 2 3 4 5 6 12;;;73%;Scandinavian and Russian taiga / Sarmatic mixed forests / East European forest steppe
+untamedwilds:butterfly/emperor;Grand mars changeant;foret;1 2 3 4 5 6 12;;;78%;East European forest steppe / Central European mixed forests / Sarmatic mixed forests
+untamedwilds:butterfly/morpho;Morpho bleu;foret_tropicale;1 3 14;;;62%;Southwest Amazon moist forests / Madeira-Tapajós moist forests / Guianan lowland moist forests
+untamedwilds:butterfly/glasswing;Papillon de verre;foret_tropicale;1 3 14;;;70%;Central American pine-oak forests / Petén-Veracruz moist forests / Central American Atlantic moist forests
+untamedwilds:butterfly/blue_swallowtail;Porte-queue bleu;foret_tropicale;1 3 14;;;12%;Central Range Papuan montane rain forests / Northern New Guinea lowland rain and freshwater swamp forests / Southern New Guinea lowland rain forests
+untamedwilds:butterfly/birdwing;Ornithoptère;foret_tropicale;1 3 14;;;83%;Borneo lowland rain forests / Sumatran lowland rain forests / Central Range Papuan montane rain forests
+untamedwilds:butterfly/kite;Voilier;foret_tropicale;1 3 14;;;58%;Borneo lowland rain forests / East Deccan moist deciduous forests / Lower Gangetic Plains moist deciduous forests
+untamedwilds:butterfly/leaf;Papillon-feuille;foret_tropicale;1 3 14;;;49%;Jian Nan subtropical evergreen forests / Northern Indochina subtropical forests / Borneo lowland rain forests
+untamedwilds:butterfly/malachite;Malachite;foret_tropicale;1 3 14;;;62%;Southwest Amazon moist forests / Madeira-Tapajós moist forests / Guianan lowland moist forests
+untamedwilds:butterfly/narcissus;Narcisse;foret;1 2 3 4 5 6 12;;;92%;Taiheiyo evergreen forests / Central Korean deciduous forests / Nihonkai montane deciduous forests
+untamedwilds:butterfly/triangle;Voilier triangle;foret;1 2 3 4 5 6 12;;;59%;Jian Nan subtropical evergreen forests / Manchurian mixed forests / Huang He Plain mixed forests
+untamedwilds:tarantula/rose;Mygale rose du Chili;foret,desert;1 2 3 4 5 6 12 13;;;29%;Valdivian temperate forests / Magellanic subpolar forests / Alto Paraná Atlantic forests
+untamedwilds:tarantula/red_knee;Mygale à genoux rouges;foret,desert;1 2 3 4 5 6 12 13;;;74%;Chihuahuan desert / Great Basin shrub steppe / Colorado Plateau shrublands
+untamedwilds:tarantula/black;Mygale noire;foret,desert;1 2 3 4 5 6 12 13;;;26%;Valdivian temperate forests / Magellanic subpolar forests / Alto Paraná Atlantic forests
+untamedwilds:tarantula/black_and_white;Mygale zébrée;foret,desert;1 2 3 4 5 6 12 13;;;74%;Southwest Amazon moist forests / Caatinga / Madeira-Tapajós moist forests
+untamedwilds:tarantula/cobalt;Mygale bleu cobalt;foret,desert;1 2 3 4 5 6 12 13;;;75%;Great Sandy-Tanami desert / Simpson desert / Western Australian Mulga shrublands
+untamedwilds:tarantula/king;Mygale roi;foret,desert;1 2 3 4 5 6 12 13;;;18%;Djibouti xeric shrublands / Northern Swahili coastal forests / Albertine Rift montane forests
+untamedwilds:tarantula/regalis;Mygale royale;foret,desert;1 2 3 4 5 6 12 13;;;96%;Aravalli west thorn scrub forests / East Deccan moist deciduous forests / Deccan thorn scrub forests
+untamedwilds:tarantula/tiger;Mygale tigre;foret,desert;1 2 3 4 5 6 12 13;;;87%;Central American pine-oak forests / Petén-Veracruz moist forests / Central American Atlantic moist forests
+naturalist:alligator;Alligator;marais,eau_douce;;oui;;;
+naturalist:bear;Grizzli (Nat.);foret,montagne;1 2 3 4 5 6 10 12;;;83%;Scandinavian and Russian taiga / Sarmatic mixed forests / Iceland boreal birch forests and alpine tundra
+naturalist:bluejay;Geai bleu;foret;1 2 3 4 5 6 12;;;65%;Northern Canadian Shield taiga / Eastern Canadian Shield taiga / Midwest Canadian Shield forests
+naturalist:boar;Sanglier (Nat.);foret;1 2 3 4 5 6 12;;;75%;East European forest steppe / Central European mixed forests / Sarmatic mixed forests
+naturalist:butterfly;Papillon (Nat.);prairie;4 7 8 9 10 12;;;32%;Cerrado / Sarmatic mixed forests / Pontic steppe
+naturalist:caterpillar;Chenille;foret;1 2 3 4 5 6 12;;;45%;East Siberian taiga / Scandinavian and Russian taiga / West Siberian taiga
+naturalist:moth;Papillon de nuit;foret (nuit);1 2 3 4 5 6 12;;;45%;East Siberian taiga / Scandinavian and Russian taiga / West Siberian taiga
+naturalist:canary;Canari;foret;1 2 3 4 5 6 12;;;57%;Mediterranean woodlands and forests / Iberian sclerophyllous and semi-deciduous forests / Mediterranean dry woodlands and steppe
+naturalist:cardinal;Cardinal rouge;foret;1 2 3 4 5 6 12;;;50%;New England-Acadian forests / Eastern Canadian Forest-Boreal transition / Western Great Lakes forests
+naturalist:catfish;Poisson-chat (Nat.);eau_douce;;oui;;;
+naturalist:bass;Bar (Nat.);eau_douce;;oui;;;
+naturalist:coral_snake;Serpent corail (Nat.);foret_tropicale;1 3 14;;;62%;Southwest Amazon moist forests / Madeira-Tapajós moist forests / Guianan lowland moist forests
+naturalist:rattlesnake;Serpent à sonnettes (Nat.);desert,steppe;8 10 13;;;36%;Southeast US conifer savannas / Central Tallgrass prairie / Northern Shortgrass prairie
+naturalist:snake;Serpent (Nat.);marais,prairie;4 7 8 9 10 12;oui;;37%;Mediterranean woodlands and forests / Mediterranean dry woodlands and steppe / Mediterranean Acacia-Argania dry woodlands and succulent thickets
+naturalist:deer;Chevreuil;foret;1 2 3 4 5 6 12;;;73%;East Siberian taiga / Scandinavian and Russian taiga / West Siberian taiga
+naturalist:dragonfly;Libellule;eau_douce,marais;;oui;;;
+naturalist:duck;Canard colvert;eau_douce,marais;;oui;;;
+naturalist:elephant;Éléphant;savane,foret_tropicale;1 2 3 7 9 14;;;85%;Dry miombo woodlands / Central Zambezian wet miombo woodlands / East Sudanian savanna
+naturalist:finch;Pinson des arbres;foret;1 2 3 4 5 6 12;;;73%;Scandinavian and Russian taiga / Sarmatic mixed forests / East European forest steppe
+naturalist:firefly;Luciole;prairie,foret (nuit);1 2 3 4 5 6 7 8 9 10 12;;;94%;Pontic steppe / East European forest steppe / Central European mixed forests
+naturalist:giraffe;Girafe;savane;2 7 9;;;65%;Dry miombo woodlands / Central Zambezian wet miombo woodlands / Somali Acacia-Commiphora bushlands and thickets
+naturalist:hippo;Hippopotame (Nat.);eau_douce;;oui;;;
+naturalist:hyena;Hyène (Nat.);savane;2 7 9;;;65%;Dry miombo woodlands / Central Zambezian wet miombo woodlands / Somali Acacia-Commiphora bushlands and thickets
+naturalist:lion;Lion (Nat.);savane;2 7 9;;;29%;Khathiar-Gir dry deciduous forests / Central Deccan Plateau dry deciduous forests / Narmada Valley dry deciduous forests
+naturalist:rhino;Rhinocéros (Nat.);savane;2 7 9;;;46%;Dry miombo woodlands / Central Zambezian wet miombo woodlands / Somali Acacia-Commiphora bushlands and thickets
+naturalist:tortoise;Tortue terrestre (Nat.);mediterraneen,steppe;8 10 12 13;;;87%;North Saharan Xeric Steppe and Woodland / Arabian desert / Arabian sand desert
+naturalist:lizard;Lézard;desert,steppe,mediterraneen;8 10 12 13;;;69%;South Sahara desert / North Saharan Xeric Steppe and Woodland / East Sahara Desert
+naturalist:ostrich;Autruche;savane,desert;2 7 9 13;;;91%;Sahelian Acacia savanna / South Sahara desert / East Sahara Desert
+naturalist:robin;Rouge-gorge;foret;1 2 3 4 5 6 12;;;81%;Scandinavian and Russian taiga / Sarmatic mixed forests / East European forest steppe
+naturalist:snail;Escargot;foret,prairie (pluie);1 2 3 4 5 6 7 8 12;;;95%;Pontic steppe / East European forest steppe / Central European mixed forests
+naturalist:sparrow;Moineau;culture;1 2 4 5 7 8 9 12;;;54%;Sahelian Acacia savanna / West Sudanian savanna / Sarmatic mixed forests
+naturalist:termite;Termite;savane,foret_tropicale;1 2 3 7 9 14;;;78%;Cerrado / Dry miombo woodlands / Central Zambezian wet miombo woodlands
+naturalist:vulture;Vautour;ciel (savane, montagne);2 3 4 5 6 7 9 10 12;;;43%;Sahelian Acacia savanna / Somali Acacia-Commiphora bushlands and thickets / West Sudanian savanna
+naturalist:zebra;Zèbre;savane;2 7 9;;;65%;Dry miombo woodlands / Central Zambezian wet miombo woodlands / Somali Acacia-Commiphora bushlands and thickets
+wildernature:bison;Bison (WN);prairie;4 7 8 9 10 12;;;2%;Montana Valley and Foothill grasslands / Canadian Aspen forests and parklands / Northern Shortgrass prairie
+wildernature:boar;Sanglier (WN);foret;1 2 3 4 5 6 12;;;47%;East Siberian taiga / West Siberian taiga / Northeast Siberian taiga
+wildernature:cassowary;Casoar;foret_tropicale;1 3 14;;;12%;Central Range Papuan montane rain forests / Northern New Guinea lowland rain and freshwater swamp forests / Southern New Guinea lowland rain forests
+wildernature:deer;Cerf élaphe;foret,prairie;1 2 3 4 5 6 7 8 9 10 12;;;80%;East Siberian taiga / Scandinavian and Russian taiga / West Siberian taiga
+wildernature:flamingo;Flamant rose;cote,marais (lagunes salées);9 14;;oui;2%;Zambezian flooded grasslands / Rann of Kutch seasonal salt marsh / Mesoamerican Gulf-Caribbean mangroves
+wildernature:hedgehog;Hérisson;foret,prairie;1 2 3 4 5 6 7 8 9 10 12;;;92%;Scandinavian and Russian taiga / Sarmatic mixed forests / Pontic steppe
+wildernature:minisheep;Mouton nain;montagne;3 4 5 6 10 12;;;99%;Caucasus mixed forests / Alps conifer and mixed forests / Northeast Spain and Southern France Mediterranean forests
+wildernature:owl;Chouette;foret (nuit);1 2 3 4 5 6 12;;;44%;East Siberian taiga / Scandinavian and Russian taiga / West Siberian taiga
+wildernature:pelican;Pélican;cote,eau_douce;;oui;oui;;
+wildernature:penguin;Manchot (WN);banquise,cote;11;;oui;2%;Transantarctic Mountains tundra / North Victoria Land tundra / Central South Antarctic Peninsula tundra
+wildernature:raccoon;Raton laveur;foret;1 2 3 4 5 6 12;;;65%;Northern Canadian Shield taiga / Eastern Canadian Shield taiga / Midwest Canadian Shield forests
+wildernature:red_wolf;Loup roux;foret,marais;1 2 3 4 5 6 12;oui;;59%;New England-Acadian forests / Eastern Canadian Forest-Boreal transition / Western Great Lakes forests
+wildernature:squirrel;Écureuil (WN);foret;1 2 3 4 5 6 12;;;78%;Scandinavian and Russian taiga / Sarmatic mixed forests / East European forest steppe
+wildernature:turkey;Dindon sauvage;foret,prairie;1 2 3 4 5 6 7 8 9 10 12;;;94%;Southeast US conifer savannas / New England-Acadian forests / Eastern Canadian Forest-Boreal transition
+meadow:wooly_sheep;Mouton laineux;montagne,prairie;3 4 5 6 7 8 9 10 12;;;100%;Caucasus mixed forests / Alps conifer and mixed forests / Pontic steppe
+meadow:horned_sheep;Mouton cornu;montagne;3 4 5 6 10 12;;;31%;Zagros Mountains forest steppe / Iberian sclerophyllous and semi-deciduous forests / Balkan mixed forests
+meadow:wooly_cow;Vache laineuse (Highland);montagne,prairie;3 4 5 6 7 8 9 10 12;;;87%;Scandinavian and Russian taiga / Sarmatic mixed forests / European Atlantic mixed forests
+meadow:water_buffalo;Buffle d'eau;marais,culture (rizières);1 2 9;oui;;60%;Jian Nan subtropical evergreen forests / Northern Indochina subtropical forests / Borneo lowland rain forests
+ecologics:camel;Dromadaire (Eco.);desert;13;;;58%;Arabian desert / Great Sandy-Tanami desert / Arabian sand desert
+ecologics:coconut_crab;Crabe de cocotier;cote (plage tropicale);;;oui;;
+ecologics:penguin;Manchot;banquise,cote;11;;oui;0%;Antipodes Subantarctic Islands tundra
+ecologics:squirrel;Écureuil roux;foret;1 2 3 4 5 6 12;;;91%;European Atlantic mixed forests / Iberian sclerophyllous and semi-deciduous forests / Celtic broadleaf forests
+aquaculture:atlantic_cod;Morue;mer;;;;;
+aquaculture:atlantic_halibut;Flétan de l'Atlantique;mer;;;;;
+aquaculture:atlantic_herring;Hareng;mer;;;;;
+aquaculture:pacific_halibut;Flétan du Pacifique;mer;;;;;
+aquaculture:pollock;Lieu;mer;;;;;
+aquaculture:blackfish;Tautogue;cote;;;oui;;
+aquaculture:red_grouper;Mérou rouge;mer;;;;;
+aquaculture:pink_salmon;Saumon rose;mer,eau_douce;;oui;;;
+aquaculture:brown_trout;Truite brune;eau_douce;;oui;;;
+aquaculture:carp;Carpe;eau_douce;;oui;;;
+aquaculture:perch;Perche;eau_douce;;oui;;;
+aquaculture:muskellunge;Maskinongé;eau_douce;;oui;;;
+aquaculture:minnow;Vairon;eau_douce;;oui;;;
+aquaculture:bluegill;Crapet arlequin;eau_douce;;oui;;;
+aquaculture:smallmouth_bass;Achigan à petite bouche;eau_douce;;oui;;;
+aquaculture:rainbow_trout;Truite arc-en-ciel;eau_douce;;oui;;;
+aquaculture:gar;Lépisosté;eau_douce;;oui;;;
+aquaculture:arapaima;Arapaïma;eau_douce;;oui;;;
+aquaculture:piranha;Piranha;eau_douce;;oui;;;
+aquaculture:tambaqui;Tambaqui;eau_douce;;oui;;;
+aquaculture:bayad;Bayad;eau_douce;;oui;;;
+aquaculture:boulti;Tilapia du Nil;eau_douce;;oui;;;
+aquaculture:capitaine;Perche du Nil;eau_douce;;oui;;;
+aquaculture:synodontis;Synodontis;eau_douce;;oui;;;
+aquaculture:catfish;Poisson-chat (Aq.);eau_douce;;oui;;;
+aquaculture:arrau_turtle;Tortue de l'Arrau;eau_douce;;oui;;;
+aquaculture:box_turtle;Tortue-boîte;foret;1 2 3 4 5 6 12;;;59%;New England-Acadian forests / Eastern Canadian Forest-Boreal transition / Western Great Lakes forests
+aquaculture:starshell_turtle;Tortue étoilée de l'Inde;savane;2 7 9;;;29%;Khathiar-Gir dry deciduous forests / Central Deccan Plateau dry deciduous forests / Narmada Valley dry deciduous forests
+betteranimalsplus:reindeer;Renne / caribou;toundra,foret;6 11;;;83%;East Siberian taiga / Scandinavian and Russian taiga / West Siberian taiga
+betteranimalsplus:moose;Élan;foret,marais;1 2 3 4 5 6 12;oui;;70%;Scandinavian and Russian taiga / Northern Canadian Shield taiga / Eastern Canadian Shield taiga
+betteranimalsplus:walrus;Morse;banquise,cote;11;;oui;56%;Canadian High Arctic tundra / Canadian Middle Arctic Tundra / Kalaallit Nunaat Arctic steppe
+betteranimalsplus:deer;Cerf de Virginie;foret,prairie;1 2 3 4 5 6 7 8 9 10 12;;;75%;Eastern Canadian Shield taiga / Northern Canadian Shield taiga / Midwest Canadian Shield forests
+betteranimalsplus:coyote;Coyote;prairie,desert,foret;1 2 3 4 5 6 7 8 9 10 12 13;;;85%;Eastern Canadian Shield taiga / Northern Canadian Shield taiga / Midwest Canadian Shield forests
+betteranimalsplus:lammergeier;Gypaète barbu;ciel (montagne);3 4 5 6 10 12;;;27%;Central Tibetan Plateau alpine steppe / Southeast Tibet shrublands and meadows / Zagros Mountains forest steppe
+betteranimalsplus:badger;Blaireau;foret,prairie;1 2 3 4 5 6 7 8 9 10 12;;;85%;Scandinavian and Russian taiga / Sarmatic mixed forests / Pontic steppe
+betteranimalsplus:pheasant;Faisan de Colchide;culture,prairie;1 2 4 5 7 8 9 10 12;;;77%;Pontic steppe / Mongolian-Manchurian grassland / East European forest steppe
+betteranimalsplus:goose;Oie cendrée / bernache;eau_douce,marais;;oui;;;
+betteranimalsplus:songbird;Passereaux;foret;1 2 3 4 5 6 12;;;45%;East Siberian taiga / Scandinavian and Russian taiga / West Siberian taiga
+betteranimalsplus:horseshoe_crab;Limule;cote (plage);;;oui;;
+betteranimalsplus:eel_freshwater;Anguille d'Europe;eau_douce;;oui;;;
+betteranimalsplus:lamprey;Lamproie;eau_douce,mer;;oui;;;
+betteranimalsplus:nautilus;Nautile;mer profonde;;;;;
+betteranimalsplus:bobbit_worm;Ver de Bobbit;mer (récifs);;;;;
+betteranimalsplus:squid_colossal;Calmar colossal;abysses;;;;;
+betteranimalsplus:feral_wolf;Loup féral;foret,toundra,steppe,montagne;1 2 3 4 5 6 8 10 11 12 13;;;99%;Scandinavian and Russian taiga / Canadian Low Arctic tundra / Sarmatic mixed forests
+betteranimalsplus:turkey;Dindon (BA+);foret,prairie;1 2 3 4 5 6 7 8 9 10 12;;;65%;Northern Shortgrass prairie / Western shortgrass prairie / Mid-Canada Boreal Plains forests
+betteranimalsplus:boar;Sanglier (BA+);foret;1 2 3 4 5 6 12;;;75%;Jian Nan subtropical evergreen forests / Manchurian mixed forests / Huang He Plain mixed forests
+betteranimalsplus:squirrel;Écureuil (BA+);foret;1 2 3 4 5 6 12;;;67%;East Siberian taiga / West Siberian taiga / Northeast Siberian taiga
+betteranimalsplus:butterfly;Papillon (BA+);prairie;4 7 8 9 10 12;;;32%;Cerrado / Sarmatic mixed forests / Pontic steppe
+betteranimalsplus:dragonfly;Libellule (BA+);eau_douce,marais;;oui;;;
+betteranimalsplus:tarantula;Mygale (BA+);foret,desert;1 2 3 4 5 6 12 13;;;66%;Great Sandy-Tanami desert / Southwest Amazon moist forests / Caatinga
+betteranimalsplus:piranha;Piranha (BA+);eau_douce;;oui;;;
+betteranimalsplus:shark;Requin (BA+);mer,large;;;;;
+betteranimalsplus:whale;Baleine (BA+);large;;;;;
+betteranimalsplus:brownbear;Ours brun (BA+);foret,montagne;1 2 3 4 5 6 10 12;;;99%;Caucasus mixed forests / Alps conifer and mixed forests / Northeast Spain and Southern France Mediterranean forests
+betteranimalsplus:blackbear;Ours noir (BA+);foret;1 2 3 4 5 6 12;;;59%;New England-Acadian forests / Eastern Canadian Forest-Boreal transition / Western Great Lakes forests
+betteranimalsplus:hirschgeist;Hirschgeist;foret (nuit);1 2 3 4 5 6 12;;;75%;East European forest steppe / Central European mixed forests / Sarmatic mixed forests
+betteranimalsplus:zotzpyre;Zotzpyre;foret_tropicale (nuit);1 3;;;64%;Central American pine-oak forests / Petén-Veracruz moist forests / Central American Atlantic moist forests
+alexsmobs:alligator_snapping_turtle;Tortue alligator;eau_douce,marais;;oui;;;
+alexsmobs:anaconda;Anaconda;eau_douce,marais;;oui;;;
+alexsmobs:anteater;Fourmilier;savane,foret_tropicale;1 2 3 7 9 14;;;85%;Cerrado / Dry Chaco / Southwest Amazon moist forests
+alexsmobs:bald_eagle;Pygargue à tête blanche;ciel (près de l'eau);;oui;;;
+alexsmobs:banana_slug;Limace banane;foret (humide);1 4 5;;;9%;Northern Rockies conifer forests / Alberta-British Columbia foothills forests / Central British Columbia Mountain forests
+alexsmobs:bison;Bison;prairie;4 7 8 9 10 12;;;77%;Southeast US conifer savannas / New England-Acadian forests / Eastern Canadian Forest-Boreal transition
+alexsmobs:blobfish;Blobfish;abysses;;;;;
+alexsmobs:blue_jay;Geai bleu;foret;1 2 3 4 5 6 12;;;59%;New England-Acadian forests / Eastern Canadian Forest-Boreal transition / Western Great Lakes forests
+alexsmobs:caiman;Caïman;eau_douce,marais;;oui;;;
+alexsmobs:capuchin_monkey;Capucin;foret_tropicale;1 3 14;;;62%;Southwest Amazon moist forests / Madeira-Tapajós moist forests / Guianan lowland moist forests
+alexsmobs:catfish;Poisson-chat (AM);eau_douce;;oui;;;
+alexsmobs:cockroach;Cafard;sol,souterrain;1 2 3 4 5 6 7 8 9 10 11 12 13 14;;;99%;Sahelian Acacia savanna / South Sahara desert / Cerrado
+alexsmobs:crocodile;Crocodile;eau_douce,cote;;oui;oui;;
+alexsmobs:crow;Corbeau;culture,foret;1 2 3 4 5 6 7 8 9 12;;;65%;East Siberian taiga / Scandinavian and Russian taiga / Sahelian Acacia savanna
+alexsmobs:devils_hole_pupfish;Cyprinodon du trou du Diable;eau_douce;;oui;;;
+alexsmobs:elephant;Éléphant;savane,foret_tropicale;1 2 3 7 9 14;;;79%;Borneo lowland rain forests / East Deccan moist deciduous forests / Central Indochina dry forests
+alexsmobs:emu;Émeu;savane,steppe;2 7 8 9 10 13;;;81%;Great Sandy-Tanami desert / Simpson desert / Western Australian Mulga shrublands
+alexsmobs:frilled_shark;Requin lézard;abysses;;;;;
+alexsmobs:gazelle;Gazelle;savane,desert;2 7 9 13;;;85%;Sahelian Acacia savanna / South Sahara desert / North Saharan Xeric Steppe and Woodland
+alexsmobs:gelada_monkey;Gélada;montagne,prairie;3 4 5 6 7 8 9 10 12;;;79%;Somali Acacia-Commiphora bushlands and thickets / Dry miombo woodlands / Central Zambezian wet miombo woodlands
+alexsmobs:gorilla;Gorille;foret_tropicale;1 3 14;;;32%;Northeast Congolian lowland forests / Northwest Congolian lowland forests / Central Congolian lowland forests
+alexsmobs:grizzly_bear;Grizzli;foret,montagne;1 2 3 4 5 6 10 12;;;65%;East Siberian taiga / West Siberian taiga / Northeast Siberian taiga
+alexsmobs:hummingbird;Colibri;foret_tropicale,prairie;1 3 4 7 8 9 10 12 14;;;72%;Cerrado / Southwest Amazon moist forests / Madeira-Tapajós moist forests
+alexsmobs:jerboa;Gerboise;desert;13;;;55%;South Sahara desert / North Saharan Xeric Steppe and Woodland / East Sahara Desert
+alexsmobs:kangaroo;Kangourou;savane,steppe;2 7 8 9 10 13;;;81%;Great Sandy-Tanami desert / Simpson desert / Western Australian Mulga shrublands
+alexsmobs:komodo_dragon;Dragon de Komodo;savane,foret;1 2 3 4 5 6 7 9 12;;;94%;Borneo lowland rain forests / Central Indochina dry forests / Sumatran lowland rain forests
+alexsmobs:leafcutter_ant;Fourmi coupe-feuille;foret_tropicale;1 3 14;;;62%;Southwest Amazon moist forests / Madeira-Tapajós moist forests / Guianan lowland moist forests
+alexsmobs:lobster;Homard;cote,mer;;;oui;;
+alexsmobs:maned_wolf;Loup à crinière;savane;2 7 9;;;34%;Cerrado / Dry Chaco / Caatinga
+alexsmobs:mimic_octopus;Poulpe mimétique;mer (récifs);;;;;
+alexsmobs:moose;Élan;foret,marais;1 2 3 4 5 6 12;oui;;65%;East Siberian taiga / West Siberian taiga / Northeast Siberian taiga
+alexsmobs:mudskipper;Périophthalme;cote (mangrove);14;;oui;1%;Sunda Shelf mangroves / Central African mangroves / Indochina mangroves
+alexsmobs:platypus;Ornithorynque;eau_douce;;oui;;;
+alexsmobs:potoo;Ibijau;foret_tropicale;1 3 14;;;62%;Southwest Amazon moist forests / Madeira-Tapajós moist forests / Guianan lowland moist forests
+alexsmobs:raccoon;Raton laveur;foret;1 2 3 4 5 6 12;;;50%;New England-Acadian forests / Eastern Canadian Forest-Boreal transition / Western Great Lakes forests
+alexsmobs:rain_frog;Grenouille de pluie;desert (côtier);13;;;27%;Kalahari xeric savanna / Gariep Karoo / Nama Karoo shrublands
+alexsmobs:rattlesnake;Crotale;desert,steppe;8 10 13;;;57%;Northern Shortgrass prairie / Western shortgrass prairie / Chihuahuan desert
+alexsmobs:rhinoceros;Rhinocéros (AM);savane;2 7 9;;;46%;Dry miombo woodlands / Central Zambezian wet miombo woodlands / Somali Acacia-Commiphora bushlands and thickets
+alexsmobs:roadrunner;Géocoucou;desert;13;;;34%;Chihuahuan desert / Great Basin shrub steppe / Colorado Plateau shrublands
+alexsmobs:seal;Phoque;cote,banquise;11;;oui;20%;Taimyr-Central Siberian tundra / Canadian High Arctic tundra / Canadian Middle Arctic Tundra
+alexsmobs:shoebill;Bec-en-sabot;marais;;oui;;;
+alexsmobs:skunk;Moufette;foret,prairie;1 2 3 4 5 6 7 8 9 10 12;;;74%;Eastern Canadian Shield taiga / Northern Canadian Shield taiga / Midwest Canadian Shield forests
+alexsmobs:snow_leopard;Léopard des neiges;montagne;3 4 5 6 10 12;;;40%;Central Tibetan Plateau alpine steppe / Southeast Tibet shrublands and meadows / North Tibetan Plateau-Kunlun Mountains alpine desert
+alexsmobs:sugar_glider;Phalanger volant;foret;1 2 3 4 5 6 12;;;27%;Eastern Australian temperate forests / Murray-Darling woodlands and mallee / Southeast Australia temperate forests
+alexsmobs:tarantula_hawk;Guêpe-tarentule;desert;13;;;17%;Chihuahuan desert / Great Basin shrub steppe / Colorado Plateau shrublands
+alexsmobs:tasmanian_devil;Diable de Tasmanie;foret;1 2 3 4 5 6 12;;;19%;Eastern Australian temperate forests / Murray-Darling woodlands and mallee / Southeast Australia temperate forests
+alexsmobs:terrapin;Tortue de rivière;eau_douce,marais;;oui;;;
+alexsmobs:tiger;Tigre (AM);foret;1 2 3 4 5 6 12;;;88%;Jian Nan subtropical evergreen forests / Manchurian mixed forests / Huang He Plain mixed forests
+alexsmobs:toucan;Toucan;foret_tropicale;1 3 14;;;62%;Southwest Amazon moist forests / Madeira-Tapajós moist forests / Guianan lowland moist forests
+alexsmobs:fly;Mouche;partout;1 2 3 4 5 6 7 8 9 10 11 12 13 14;;;99%;East Siberian taiga / Scandinavian and Russian taiga / Sahelian Acacia savanna
