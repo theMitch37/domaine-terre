@@ -465,6 +465,23 @@ public final class Terrain {
         return colonne(x, z).sd() < 0;
     }
 
+    /** Profondeur sous le sol où les grottes peuvent commencer (sous l'eau : plus bas, pour ne jamais percer un fond). */
+    static final double GROTTES_SOUS_SOL = 18.0, GROTTES_SOUS_EAU = 32.0;
+
+    /**
+     * Masque des grottes (04/11/2026, décision de Maxime : « grottes fermées ») : max avec la densité des grottes
+     * vanilla. Négatif (-1, sans effet) là où elles peuvent creuser ; positif (bouche la grotte) dans les lieux et à
+     * moins de 18 blocs sous le sol (32 sous la mer, les lacs et les cours d'eau). La pente de 8 blocs arrondit les
+     * voûtes : pas de plafond plat à la limite.
+     */
+    public double grottes(int x, int y, int z) {
+        Colonne c = colonne(x, z);
+        if (c.lieu() || (!LieuxTerre.liste().isEmpty() && LieuxTerre.a(x, z) != null)) return 1.0;
+        boolean eau = c.sd() < 0 || c.eauLac() != SANS_LAC || c.eauRiv() != SANS_LAC;
+        double limite = c.h() - (eau ? GROTTES_SOUS_EAU : GROTTES_SOUS_SOL);
+        return Mth.clamp((y - limite) / 8.0, -1.0, 1.0);
+    }
+
     /** Haut du fond marin : jamais au-dessus de y 61 (l'eau à 62), pour qu'aucune île inventée ne sorte de l'eau. */
     public static final int PLAFOND_MER = NIVEAU_MER - 2;
 
