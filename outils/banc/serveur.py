@@ -119,7 +119,10 @@ for f in glob.glob(os.path.join(SERVEUR, "banc", "entities", "*.mca")):
     for _, _, c in monde.chunks_region(f):
         for e in c.get("Entities", []):
             pos = e.get("Pos", [0, 0, 0])
-            ents.append((e.get("id", "?"), float(pos[0]), float(pos[1]), float(pos[2])))
+            nom = e.get("id", "?")
+            if nom == "minecraft:item":
+                nom = "item:" + str(e.get("Item", {}).get("id", "?"))
+            ents.append((nom, float(pos[0]), float(pos[1]), float(pos[2])))
 for nom, (x0, x1, z0, z1) in zones.items():
     ici = [e for e in ents if x0 <= e[1] <= x1 and z0 <= e[3] <= z1]
     json.dump({"total": len(ici), "especes": collections.Counter(e[0] for e in ici).most_common(),
