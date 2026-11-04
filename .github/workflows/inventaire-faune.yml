@@ -1,0 +1,38 @@
+# Inventaire des créatures des mods d'animaux (Alex's Mobs, Untamed Wilds, Naturalist, Let's Do, Ecologics,
+# Aquaculture 2, Critters and Companions) : télécharge les jars Forge 1.20.1 et range la liste des entités et de
+# leurs règles de spawn dans outils/faune/inventaire_mods.json (ajouté à la branche).
+name: Inventaire faune
+
+on:
+  push:
+    branches-ignore: [jars]
+    paths:
+      - outils/faune/inventaire_mods.py
+      - .github/workflows/inventaire-faune.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  inventaire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Inventaire
+        run: python outils/faune/inventaire_mods.py /tmp/jars
+      - name: Ajout à la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add -f outils/faune/inventaire_mods.json
+          git commit -m "Inventaire des créatures des mods (automatique) [skip ci]" || exit 0
+          for i in 1 2 3; do
+            git fetch origin "${GITHUB_REF_NAME}" && git rebase "origin/${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep 10
+          done
+          exit 1
