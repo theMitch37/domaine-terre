@@ -346,6 +346,12 @@ def gullfoss():
     # la gorge : parois verticales jusqu'au plateau (pas de berges en pente) tant que le plateau est haut
     gorge = (s > s_c2 - 1) & (d >= larg(s)) & (d < larg(s) + 1.5)
     y = np.where(gorge, np.maximum(y, bosse), y)
+    # 04/11 (test en jeu : parois plates) : parois en orgues, avancées et retraits d'un à deux blocs, quelques
+    # colonnes tombées au pied ; jamais dans l'eau
+    paroi = (s > s_c2 - 1) & (d >= larg(s) - 0.2) & (d < larg(s) + 3.0) & ~np.isfinite(eau)
+    relief_p = bruit(X, Z, 2.2, 211) + 0.6 * bruit(X, Z, 6.0, 212)
+    y = np.where(paroi & (relief_p > 0.35) & (d >= larg(s)), np.maximum(y, bosse), y)
+    y = np.where(paroi & (relief_p < -0.55) & (d >= larg(s) + 1.0), y - 2.0 - (relief_p < -0.9), y)
     # lac de départ
     src = trace[int(np.searchsorted(np.linspace(0, L, len(trace)), s_src))]
     rl = np.hypot(X - src[0], Z - src[1]) / (13 + 2 * bruit(X, Z, 7, 202))

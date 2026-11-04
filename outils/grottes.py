@@ -41,7 +41,8 @@ class Grotte:
         self.entree = np.zeros((self.H, self.D, self.W), bool)       # là où la grotte peut percer la surface
         self.rng = np.random.default_rng(graine)
         r = self.rng.standard_normal((self.H, self.D, self.W)).astype(np.float32)
-        b = ndimage.gaussian_filter(r, 2.2) + 0.5 * ndimage.gaussian_filter(r, 0.9)
+        # 04/11 (test en jeu) : moins de petit bruit, il hérissait les parois de pointes et de blocs isolés
+        b = ndimage.gaussian_filter(r, 2.2) + 0.2 * ndimage.gaussian_filter(r, 0.9)
         self.bruit = (b / (b.std() + 1e-9)).astype(np.float32)
         self.rugosite, self.niveau_eau = rugosite, eau
 
@@ -112,6 +113,12 @@ class Grotte:
         if n > 1:
             t = ndimage.sum(np.ones(vide.shape), lab, range(1, n + 1))
             vide = np.isin(lab, np.flatnonzero(t >= 30) + 1)
+        # 04/11 : pas de rochers qui flottent dans le vide (morceaux de roche détachés par la rugosité)
+        lab, n = ndimage.label(~vide)
+        if n > 1:
+            t = ndimage.sum(np.ones(vide.shape), lab, range(1, n + 1))
+            garde = np.zeros(n + 1, bool); garde[1:] = t >= 400
+            vide |= ~garde[lab] & (lab > 0)
         self.vide = vide
         W = self.niveau_eau
         self.eau = vide & (Y < W) if W is not None else np.zeros(vide.shape, bool)
@@ -204,7 +211,10 @@ class Grotte:
             if (j, k, i) in self.deco:
                 continue
             out.append((i + self.x0, j + self.y0, k + self.z0, EAU if self.eau[j, k, i] else AIR))
+        # 04/11 : aucun décor au-dessus du sol (calcite, dripstone et glace qui flottaient autour des entrées)
         for (j, k, i), c in self.deco.items():
+            if j + self.y0 >= self.sol[k, i] - 1 and not self.vide[j, k, i]:
+                continue
             out.append((i + self.x0, j + self.y0, k + self.z0, c))
         return out
 
@@ -456,7 +466,8 @@ def capri():
             fond[(k, i)] = j - 1
     for (k, i), j in fond.items():
         X_, Z_ = i + g.x0, k + g.z0
-        g.deco[(j, k, i)] = LANTERNE if (X_ % 3 == 0 and Z_ % 3 == 0) else SABLE
+        # 04/11 : lanternes semées au hasard (la grille régulière se voyait), une sur quinze
+        g.deco[(j, k, i)] = LANTERNE if g.rng.random() < 0.065 else SABLE
     return g
 
 

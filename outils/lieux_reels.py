@@ -589,7 +589,7 @@ def fumerolles(X, Z, y, masque, n, rng, typ=None):
         j, i = jj[k], ii[k]
         vox.append((int(X[j, i]), int(np.floor(y[j, i])), int(Z[j, i]), VOX_FUMEROLLE))
         if typ is not None:
-            m = (np.hypot(X - X[j, i], Z - Z[j, i]) < 1.8 + rng.random()) & masque
+            m = (np.hypot(X - X[j, i], Z - Z[j, i]) < 1.0 + 0.6 * rng.random()) & masque   # 04/11 : taches plus petites
             typ[m] = MOUSSE | TAILLEE
     return vox, typ
 
@@ -616,6 +616,8 @@ def etna():
                                  iso=True)
     X, Z = L.X, L.Z
     a = L.bord()
+    # 04/11 (test en jeu) : cône trop bruité (marches d'un bloc partout) : relief adouci sur l'emprise du lieu
+    y = y + (ndimage.gaussian_filter(y, 1.6) - y) * a
     C = couverture("etna", L.lo, L.la)
     rng = np.random.default_rng(1600)
     vox = []
@@ -660,6 +662,8 @@ def vesuve():
                                  iso=True)
     X, Z = L.X, L.Z
     a = L.bord()
+    # 04/11 (test en jeu) : cône trop bruité (marches d'un bloc partout) : relief adouci sur l'emprise du lieu
+    y = y + (ndimage.gaussian_filter(y, 1.6) - y) * a
     C = couverture("vesuve", L.lo, L.la)
     rng = np.random.default_rng(1700)
     c = L.vers_blocs(40.8213, 14.4261)
@@ -958,6 +962,11 @@ def plitvice():
     rl = np.hypot(X - tr[-12][0], Z - tr[-12][1]) / 7.0
     et = rl < 1
     eau = np.where(et, nk, eau); y = np.where(et, np.minimum(y, nk - 1.8 - lisse(1 - rl)), y)
+    # 04/11 (test en jeu : pics de pierre) : le modèle de surface (arbres compris) agrandi 7 fois hérissait les
+    # versants ; adoucis loin de l'eau (les rives qui retiennent les lacs ne bougent pas)
+    loin = ndimage.distance_transform_edt(~(np.isfinite(eau) | ile)) > 3
+    ylisse = ndimage.gaussian_filter(y, 2.2)
+    y = np.where(loin, ylisse, y)
     w = np.maximum(L_.emprise(), np.where(np.isfinite(eau) | ile, 1.0, 0.0))
     pl = M.pente_locale(y)
     typ = np.full(X.shape, PLATEAU | TAILLEE, np.int32)

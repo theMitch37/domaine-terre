@@ -256,7 +256,10 @@ public final class LieuGrille implements LieuSculpte {
                 if (cl == PLAGE) return dessus ? (h2(x, z, 1) % 4 == 0 ? Blocks.DIORITE : Blocks.CALCITE) : Blocks.CALCITE;   // geysérite
                 int r = Math.floorMod(y - 60 + vague(x, z), 9);
                 if (r == 0) return Blocks.TUFF;                                                   // lits de cendres
-                return h2(x, z, Math.floorDiv(y, 5)) % 5 == 0 ? Blocks.SMOOTH_BASALT : Blocks.BASALT;
+                // 04/11 (test en jeu : parois plates) : orgues verticales, une colonne de basalte poli sur trois,
+                // coulées de basalte lisse par bancs de 6 blocs
+                if (h2(x, z, 7) % 3 == 0) return Blocks.POLISHED_BASALT;
+                return h2(x, z, Math.floorDiv(y, 6)) % 4 == 0 ? Blocks.SMOOTH_BASALT : Blocks.BASALT;
             }
             case TRAVERTIN -> {
                 // barrages de travertin moussus, lacs au fond clair, canyon calcaire (Plitvice)
@@ -367,10 +370,11 @@ public final class LieuGrille implements LieuSculpte {
                 // coulées de lave noires, cendres et scories, soufre autour des fumerolles
                 if (cl == FOND) return h2(x, z, y) % 4 == 0 ? Blocks.BLACKSTONE : Blocks.BASALT;
                 if (cl == EBOULIS) {
-                    int m = h2(x, z, y) % 6;
-                    return m < 2 ? Blocks.TUFF : (m < 4 ? Blocks.GRAVEL : (m == 4 ? Blocks.BLACKSTONE : Blocks.COBBLED_DEEPSLATE));
+                    // 04/11 : par plaques de 4 blocs (bloc à bloc, le cône faisait du bruit) ; cendres et scories sombres
+                    int m = h2(Math.floorDiv(x, 4), Math.floorDiv(z, 4), Math.floorDiv(y, 4)) % 5;
+                    return m < 2 ? Blocks.TUFF : (m < 4 ? Blocks.BLACKSTONE : Blocks.GRAVEL);
                 }
-                if (cl == MOUSSE) return dessus ? (h2(x, z, 0) % 3 == 0 ? Blocks.TUFF : Blocks.YELLOW_TERRACOTTA) : Blocks.TUFF;
+                if (cl == MOUSSE) return dessus ? (h2(x, z, 0) % 3 == 0 ? Blocks.YELLOW_TERRACOTTA : Blocks.TUFF) : Blocks.TUFF;
                 if ((cl == PLATEAU || cl == PRE) && dessus) return Blocks.GRASS_BLOCK;
                 if ((cl == PLATEAU || cl == PRE) && y >= top - 2) return Blocks.DIRT;
                 int r = Math.floorMod(y + vague(x, z), 7);

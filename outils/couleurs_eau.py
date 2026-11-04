@@ -50,14 +50,25 @@ TERROIRS = {
     "arctique": ("3D57D6", "050533"), "antarctique": ("3938C9", "050533"),
 }
 BOUEUX = ["amazonie", "afrique_tropicale", "asie_sud_est", "chine", "inde", "sahara_sahel"]
+# 04/11 (test en jeu) : l'eau boueuse ne va plus qu'aux cours d'eau (biome « fleuve » par terroir, section 4) ; les
+# autres eaux des terres (fontaines de village, mares) prennent la couleur des lacs. Boueux un peu plus sombre et
+# plus vert : la teinte sable se confondait avec le sol.
+FLEUVES = {"amazonie": ("7F6F45", "3A2812"), "afrique_tropicale": ("6E5A3A", "2A1E10"), "asie_sud_est": ("7C6C46", "342616"),
+           "chine": ("8C7E4C", "463818"), "inde": ("727248", "2E2C1A"), "sahara_sahel": ("6A7458", "2A2C1C")}
 
 n = 0
+LACS = {"amazonie": ("6E8A5A", "22301C"), "afrique_tropicale": ("5A7A5A", "1C281C"), "asie_sud_est": ("5E8A6E", "1E2E22"),
+        "chine": ("4A8AB0", "0E2C3A"), "inde": ("5A8A8A", "1C2E2E"), "sahara_sahel": ("4A9AAE", "0E3440"),
+        "afrique_est": ("4E8A86", "102C2A"), "afrique_australe": ("4A8A9E", "0E2C34"), "grandes_plaines": ("4A7EA8", "0E2836"),
+        "australie": ("4E8EA0", "102E36"), "siberie": ("2F6FB0", "082440"), "boreale": ("34505A", "0E181C")}
+CLAIRES = {t: LACS[t] for t in BOUEUX if t in LACS}
 for t, (eau, brume) in TERROIRS.items():
     for p in glob.glob(f"{BIO}/{t}/*.json"):
-        if os.path.basename(p)[:-5] in TROUBLES or p.endswith("/lac.json"):
+        if os.path.basename(p)[:-5] in TROUBLES or p.endswith(("/lac.json", "/fleuve.json")):
             continue
         d = charger(p)
-        d["effects"]["water_color"], d["effects"]["water_fog_color"] = rgb(eau), rgb(brume)
+        e_, b_ = CLAIRES.get(t, (eau, brume))
+        d["effects"]["water_color"], d["effects"]["water_fog_color"] = rgb(e_), rgb(b_)
         ecrire(p, d)
         n += 1
 print("biomes de terre recolorés :", n)
@@ -131,13 +142,14 @@ for temp, (peu, prof, couleurs) in MERS.items():
         langs["fr_fr"][f"biome.domaine_terre.mer.{temp}_{b}"] = fr
         langs["en_us"][f"biome.domaine_terre.mer.{temp}_{b}"] = en
 
-# eaux boueuses : visibilité réduite sous l'eau (comme les marais)
+# eaux boueuses : visibilité réduite sous l'eau (comme les marais), seulement dans les cours d'eau (04/11)
+_BR = f"{RES}/data/minecraft/tags/worldgen/biome/has_closer_water_fog.json"
+if os.path.exists(_BR):
+    _d = charger(_BR)
+    _d["values"] = [v for v in _d["values"] if not (isinstance(v, str) and v.startswith("domaine_terre:"))]
+    ecrire(_BR, _d)
 for t in BOUEUX:
-    for p in glob.glob(f"{BIO}/{t}/*.json"):
-        if p.endswith("/lac.json"):
-            continue
-        ajouts.setdefault(f"{RES}/data/minecraft/tags/worldgen/biome/has_closer_water_fog.json", []).append(
-            f"domaine_terre:{t}/{os.path.basename(p)[:-5]}")
+    ajouts.setdefault(_BR, []).append(f"domaine_terre:{t}/fleuve")
 
 for p, vals in ajouts.items():
     d = charger(p) if os.path.exists(p) else {"replace": False, "values": []}
@@ -152,10 +164,6 @@ print("biomes de mer :", len(MERS) * len(BANDES), "; fichiers de tags touchés :
 # ---------------------------------------------------------------- 3. lacs : un biome « lac » par terroir, eau plus claire
 # (décision du 04/11 : les lacs ne prennent plus l'eau boueuse des fleuves ; les cénotes et lacs célèbres auront
 # leur propre biome de lieu). Le mod le pose sur les colonnes sous l'eau d'un lac (TerroirBiomeSource).
-LACS = {"amazonie": ("6E8A5A", "22301C"), "afrique_tropicale": ("5A7A5A", "1C281C"), "asie_sud_est": ("5E8A6E", "1E2E22"),
-        "chine": ("4A8AB0", "0E2C3A"), "inde": ("5A8A8A", "1C2E2E"), "sahara_sahel": ("4A9AAE", "0E3440"),
-        "afrique_est": ("4E8A86", "102C2A"), "afrique_australe": ("4A8A9E", "0E2C34"), "grandes_plaines": ("4A7EA8", "0E2836"),
-        "australie": ("4E8EA0", "102E36"), "siberie": ("2F6FB0", "082440"), "boreale": ("34505A", "0E181C")}
 SOURCES_LAC = ["plains", "forest", "taiga", "savanna", "jungle", "desert", "snowy_plains", "meadow"]
 NS_P = f"{RES}/data/minecraft/worldgen/noise_settings/overworld.json"
 ns = charger(NS_P)
@@ -194,7 +202,30 @@ for t in TERROIRS:
     completer_biome_is(ns["surface_rule"], ancien, nouveau)
     langs["fr_fr"][f"biome.domaine_terre.{t}.lac"] = f"Lac ({noms_t[t]})"
     langs["en_us"][f"biome.domaine_terre.{t}.lac"] = f"Lake ({noms_t[t]})"
+print("lacs : un biome par terroir")
+
+# ---------------------------------------------------------------- 4. cours d'eau : un biome « fleuve » par terroir
+# (04/11) posé par le mod sur les colonnes sous l'eau d'un fleuve ou d'une rivière (TerroirBiomeSource) : seule eau
+# boueuse des terroirs aux grands fleuves troubles ; ailleurs la couleur de rivière du terroir.
+for t in TERROIRS:
+    src = next((b for b in SOURCES_LAC if os.path.exists(f"{BIO}/{t}/{b}.json")), None)
+    if src is None:
+        continue
+    d = charger(f"{BIO}/{t}/{src}.json")
+    eau, brume = FLEUVES.get(t, TERROIRS[t])
+    d["effects"]["water_color"], d["effects"]["water_fog_color"] = rgb(eau), rgb(brume)
+    ecrire(f"{BIO}/{t}/fleuve.json", d)
+    ancien, nouveau = f"domaine_terre:{t}/{src}", f"domaine_terre:{t}/fleuve"
+    for p, tg in tags_mod.items():
+        if p.endswith("has_closer_water_fog.json"):
+            continue
+        if ancien in tg["values"] and nouveau not in tg["values"]:
+            tg["values"].append(nouveau)
+            ecrire(p, tg)
+    completer_biome_is(ns["surface_rule"], ancien, nouveau)
+    langs["fr_fr"][f"biome.domaine_terre.{t}.fleuve"] = f"Fleuve ({noms_t[t]})"
+    langs["en_us"][f"biome.domaine_terre.{t}.fleuve"] = f"River ({noms_t[t]})"
 ecrire(NS_P, ns)
 for l, d in langs.items():
     ecrire(f"{RES}/assets/domaine_terre/lang/{l}.json", d)
-print("lacs : un biome par terroir")
+print("fleuves : un biome par terroir")

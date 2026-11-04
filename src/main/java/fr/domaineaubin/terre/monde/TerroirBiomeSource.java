@@ -62,7 +62,7 @@ public class TerroirBiomeSource extends BiomeSource {
     private record Tables(List<Climate.ParameterList<Holder<Biome>>> parTerroir, Climate.ParameterList<Holder<Biome>> mer,
                           Set<Holder<Biome>> tous, List<String> cles, List<Holder<Biome>> lieux,
                           List<Holder<Biome>[]> fixes, java.util.Map<String, Holder<Biome>[]> mers,
-                          List<Holder<Biome>> lacs) {
+                          List<Holder<Biome>> lacs, List<Holder<Biome>> fleuves) {
     }
 
     /** Océan vanilla -> température des biomes domaine_terre:mer/<température>_<bande> (couleurs des eaux, 04/11/2026). */
@@ -196,7 +196,18 @@ public class TerroirBiomeSource extends BiomeSource {
                 }
                 lacs.add(h);
             }
-            tables = new Tables(parTerroir, new Climate.ParameterList<>(mer), tous, cles, lieux, fixes, mers, lacs);
+            List<Holder<Biome>> fleuves = new ArrayList<>();
+            fleuves.add(null);
+            for (int i = 1; i < cles.size(); i++) {
+                Holder<Biome> h = null;
+                if (TerroirBiomeSource.class.getResource("/data/domaine_terre/worldgen/biome/" + cles.get(i) + "/fleuve.json") != null) {
+                    h = biomes.getOrThrow(ResourceKey.create(Registries.BIOME,
+                            new ResourceLocation(DomaineTerre.MOD_ID, cles.get(i) + "/fleuve")));
+                    tous.add(h);
+                }
+                fleuves.add(h);
+            }
+            tables = new Tables(parTerroir, new Climate.ParameterList<>(mer), tous, cles, lieux, fixes, mers, lacs, fleuves);
             return tables;
         }
     }
@@ -240,7 +251,11 @@ public class TerroirBiomeSource extends BiomeSource {
             List<Lieu> lieux = LieuxTerre.liste();
             for (int i = 0; i < lieux.size() && i < t.lieux().size(); i++) {
                 Lieu l = lieux.get(i);
-                if (l.dansBiome(bx, bz) && (y << 2) > l.basBiome(bx, bz, Terrain.get().hauteur(bx, bz))) {
+                double h = Terrain.get().hauteur(bx, bz);
+                // 04/11 : la mer autour d'un lieu côtier (Capri, Staffa) garde les biomes de mer : sinon rectangle de
+                // couleur d'eau et coutures de sable droites sur le fond, aux bords des données du lieu
+                if (h < Terrain.NIVEAU_MER - 1 && Terrain.get().enMer(bx, bz)) continue;
+                if (l.dansBiome(bx, bz) && (y << 2) > l.basBiome(bx, bz, h)) {
                     return t.lieux().get(i);
                 }
             }
@@ -287,6 +302,11 @@ public class TerroirBiomeSource extends BiomeSource {
         // carte des biomes fixe : à la surface des terres, le vrai biome remplace le choix climatique.
         // Océans, plages, côtes rocheuses et grottes gardent le choix vanilla.
         if (terroir > 0 && terroir < t.fixes().size()) {
+            // 04/11 : sous l'eau d'un cours d'eau, biome « fleuve » du terroir (seule eau boueuse des grands fleuves
+            // troubles) ; passe avant le lac : les lacs traversés par un fleuve faisaient des taches bleues dans le lit
+            if (terroir < t.fleuves().size() && t.fleuves().get(terroir) != null && Terrain.get().eauDeFleuve(bx, bz)) {
+                return t.fleuves().get(terroir);
+            }
             // sous l'eau d'un lac : biome « lac » du terroir (couleur d'eau propre aux lacs)
             if (terroir < t.lacs().size() && t.lacs().get(terroir) != null && Terrain.get().eauDeLac(bx, bz)) {
                 return t.lacs().get(terroir);
@@ -297,7 +317,10 @@ public class TerroirBiomeSource extends BiomeSource {
             // plages et côtes rocheuses : seulement au bord de la vraie mer (moins de 3' de la côte, hors lac).
             // Ailleurs (lac Mead, plateaux), le bruit vanilla inventait des côtes rocheuses grises et enneigées.
             boolean vraieCote = COTES.contains(type) && !lac && Terrain.get().distanceCote(bx, bz) < 3.0;
-            if (!OCEANS.contains(type) && !CAVERNES.contains(type) && !vraieCote) {
+            // 04/11 (Skógafoss) : un océan choisi par le bruit vanilla sur la terre ferme (près de la côte) n'est pas
+            // de la mer : la terre garde son vrai biome
+            boolean vraieMer = OCEANS.contains(type) && Terrain.get().hauteur(bx, bz) < Terrain.NIVEAU_MER - 1;
+            if (!vraieMer && !CAVERNES.contains(type) && !vraieCote) {
                 int b = Terrain.get().carte().biome(lonF, latF);
                 Holder<Biome>[] tab = t.fixes().get(terroir);
                 if (b > 0 && b < tab.length && tab[b] != null) return tab[b];

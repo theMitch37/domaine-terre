@@ -15,6 +15,7 @@
   "domaine_terre:sahara_sahel/sparse_jungle",
   "domaine_terre:sahara_sahel/swamp",
   "domaine_terre:sahara_sahel/mangrove_swamp",
-  "domaine_terre:sahara_sahel/lac"
+  "domaine_terre:sahara_sahel/lac",
+  "domaine_terre:sahara_sahel/fleuve"
  ]
 }

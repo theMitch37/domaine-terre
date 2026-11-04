@@ -20,6 +20,7 @@
   "domaine_terre:moyen_orient/sparse_jungle",
   "domaine_terre:moyen_orient/swamp",
   "domaine_terre:moyen_orient/mangrove_swamp",
-  "domaine_terre:moyen_orient/lac"
+  "domaine_terre:moyen_orient/lac",
+  "domaine_terre:moyen_orient/fleuve"
  ]
 }

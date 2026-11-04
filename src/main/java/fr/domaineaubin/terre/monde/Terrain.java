@@ -301,6 +301,12 @@ public final class Terrain {
         return colonne(x, z).h();
     }
 
+    /** Colonne sous l'eau du lit d'un fleuve ou d'une rivière (biome « fleuve » du terroir). */
+    public boolean eauDeFleuve(int x, int z) {
+        Colonne c = colonne(x, z);
+        return c.litRiv() != SANS_LAC && c.h() < c.litRiv();
+    }
+
     /** Colonne sous l'eau d'un lac du mod (le fond est sous le niveau du lac) : biome « lac » du terroir. */
     public boolean eauDeLac(int x, int z) {
         Colonne c = colonne(x, z);

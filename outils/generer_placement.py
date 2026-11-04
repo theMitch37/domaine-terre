@@ -178,6 +178,7 @@ def resources_milieu(terroirs, types, eau):
         out += [[f"resource|domaine_terre:{t}/{b}"] for b in bs]
         if eau:
             out.append([f"resource|domaine_terre:{t}/lac"])
+            out.append([f"resource|domaine_terre:{t}/fleuve"])
     return out
 
 

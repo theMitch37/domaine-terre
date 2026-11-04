@@ -73,6 +73,18 @@ public class GrottesFeature extends Feature<NoneFeatureConfiguration> {
         }
     }
 
+    /** Colonne dans l'emprise d'une grotte célèbre (son chunk ou un chunk voisin) ? */
+    public static boolean dansGrotte(int x, int z) {
+        Long2ObjectOpenHashMap<int[]> b = blocs();
+        int cx = x >> 4, cz = z >> 4;
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dz = -1; dz <= 1; dz++) {
+                if (b.containsKey(cle(cx + dx, cz + dz))) return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> ctx) {
         WorldGenLevel niveau = ctx.level();

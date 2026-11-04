@@ -12,6 +12,7 @@
   "domaine_terre:arctique/plains",
   "domaine_terre:arctique/taiga",
   "domaine_terre:arctique/meadow",
-  "domaine_terre:arctique/lac"
+  "domaine_terre:arctique/lac",
+  "domaine_terre:arctique/fleuve"
  ]
 }
