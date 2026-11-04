@@ -112,4 +112,17 @@ for nom, (x0, x1, z0, z1) in zones.items():
     np.savez_compressed(os.path.join(SORTIE, f"{nom}.npz"), noms=np.array(noms), blocs=blocs,
                         x0=x0, y0=Y0, z0=z0, statuts=np.array([f"{k[0]},{k[1]}={v}" for k, v in st.items()]))
     print(f"{nom} : {blocs.shape}, {len(noms)} sortes de blocs", flush=True)
+# faune : animaux nés à la génération des chunks (fichiers entities/*.mca), par zone
+import collections, glob
+ents = []
+for f in glob.glob(os.path.join(SERVEUR, "banc", "entities", "*.mca")):
+    for _, _, c in monde.chunks_region(f):
+        for e in c.get("Entities", []):
+            pos = e.get("Pos", [0, 0, 0])
+            ents.append((e.get("id", "?"), float(pos[0]), float(pos[1]), float(pos[2])))
+for nom, (x0, x1, z0, z1) in zones.items():
+    ici = [e for e in ents if x0 <= e[1] <= x1 and z0 <= e[3] <= z1]
+    json.dump({"total": len(ici), "especes": collections.Counter(e[0] for e in ici).most_common(),
+               "positions": ici}, open(os.path.join(SORTIE, f"{nom}_faune.json"), "w"), indent=1)
+    print(f"{nom} : {len(ici)} animaux", flush=True)
 print(f"terminé en {time.time() - t0:.0f} s", flush=True)
