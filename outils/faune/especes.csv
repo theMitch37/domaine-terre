@@ -384,7 +384,7 @@ alexsmobs:tasmanian_devil;Diable de Tasmanie;Sarcophilus harrisii;sauvage;foret;
 alexsmobs:terrapin;Tortue de rivière;Malaclemys / Trachemys;sauvage;eau_douce,marais;grandes_plaines;1-3;garder;mod à installer
 alexsmobs:tiger;Tigre (AM);Panthera tigris;sauvage;foret;chine,asie_sud_est;1;garder;"mod à installer ; race régionale (Asie) de untamedwilds:big_cat/tiger"
 alexsmobs:toucan;Toucan;Ramphastidae;sauvage;foret_tropicale;amazonie,amerique_centrale;1-3;garder;mod à installer
-alexsmobs:triops;Triops;Triops cancriformis;sauvage;eau_douce (mares);desert,steppe;3-6;garder;"mares temporaires ; mod à installer"
+alexsmobs:triops;Triops;Triops cancriformis;sauvage;eau_douce (mares);sahara_sahel,maghreb,moyen_orient,steppes_tibet,australie,ouest_mexique;3-6;garder;"mares temporaires ; mod à installer"
 alexsmobs:fly;Mouche;Musca domestica;insecte;partout;partout_sauf:arctique,antarctique;1;garder;mod à installer
 alexsmobs:centipede_head;Mille-pattes des cavernes;—;fantastique;souterrain;—;1;souterrain;"profondeurs ; mod à installer"
 alexsmobs:rocky_roller;Rouleau rocheux;—;fantastique;souterrain;—;1;souterrain;"profondeurs ; mod à installer"

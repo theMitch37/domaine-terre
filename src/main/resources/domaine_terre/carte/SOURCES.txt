@@ -12,3 +12,5 @@ Données géographiques utilisées par le mod Domaine d'Aubin - Terre :
 - Altitude de la surface des lacs : Copernicus DEM GLO-90, produced using Copernicus WorldDEM-90 © DLR e.V. 2010-2014
   and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights
   reserved. Lu sur AWS Open Data (Registry of Open Data on AWS).
+- Faune (écorégions) : Dinerstein, E., et al. An Ecoregion-Based Approach to Protecting Half the Terrestrial Realm.
+  BioScience 67(6), 534-545 (2017). RESOLVE Ecoregions 2017, licence CC BY 4.0. Réduites à 3 minutes d'arc (faune/zones.png).

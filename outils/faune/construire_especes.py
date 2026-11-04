@@ -418,7 +418,8 @@ for i, r in enumerate(L):
 
 # Corrections d'aire (pas de cafards, mouches ni chauves-souris aux pôles)
 _fix = {"minecraft:bat": "partout_sauf:arctique,antarctique", "alexsmobs:cockroach": "partout_sauf:arctique,antarctique,boreale,siberie,nordique",
-        "alexsmobs:fly": "partout_sauf:arctique,antarctique"}
+        "alexsmobs:fly": "partout_sauf:arctique,antarctique",
+        "alexsmobs:triops": "sahara_sahel,maghreb,moyen_orient,steppes_tibet,australie,ouest_mexique"}
 L = [r[:5] + (_fix[r[0]],) + r[6:] if r[0] in _fix else r for r in L]
 
 # Ajouts du 04/11 : crocodile du Nil jusqu'en Égypte (le long du fleuve), mygales d'Australie (Selenocosmia)
