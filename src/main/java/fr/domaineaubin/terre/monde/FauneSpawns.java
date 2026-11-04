@@ -52,6 +52,8 @@ public final class FauneSpawns {
     private static final UUID ATTAQUE = UUID.fromString("6f0d1c1e-3a52-4f8e-9d0a-1b2c3d4e5f62");
     private static final UUID ARMURE = UUID.fromString("6f0d1c1e-3a52-4f8e-9d0a-1b2c3d4e5f63");
 
+    private static final java.util.concurrent.atomic.AtomicInteger JOURNAL = new java.util.concurrent.atomic.AtomicInteger();
+
     private FauneSpawns() {
     }
 
@@ -180,7 +182,12 @@ public final class FauneSpawns {
         FauneTerre faune = FauneTerre.get();
         if (!faune.active()) return base;
         BlockPos centre = new BlockPos(chunk.getMiddleBlockX(), 64, chunk.getMiddleBlockZ());
-        return net.minecraft.util.random.WeightedRandomList.create(
-                faune.liste(niveau, cat, centre, biome, false, false, false, true));
+        List<MobSpawnSettings.SpawnerData> l = faune.liste(niveau, cat, centre, biome, false, false, false, true);
+        if (JOURNAL.getAndIncrement() < 12) {
+            DomaineTerre.LOGGER.info("Faune (génération) {} {} : biome {}, {} espèces {}", chunk, cat,
+                    biome.unwrapKey().map(k -> k.location().toString()).orElse("?"), l.size(),
+                    l.stream().map(d -> EntityType.getKey(d.type).getPath()).toList());
+        }
+        return net.minecraft.util.random.WeightedRandomList.create(l);
     }
 }
