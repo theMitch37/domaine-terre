@@ -305,6 +305,43 @@ for e,n in [("iceologer","Iceologer"),("griefer","Griefer"),("executioner","Bour
 a("guardvillagers:illusioner","Illusionniste","—","monstre","—","—","—","a_confirmer","illageois : patrouilles et structures")
 a("guardvillagers:guard","Garde","—","ferme","villages","—","—","garder","villages seulement, inchangé")
 
+# ------------------------------------------------------------------ BEST REVIVED ANIMALS (portage 1.20.1 de Better Animals Plus, à installer)
+# liste reprise de la page de Better Animals Plus ; identifiants (betteranimalsplus:) à vérifier dans le jar du portage
+B="betteranimalsplus:"
+note_b="mod à installer ; id à vérifier"
+for e,n,lat,cat,mil,ts,g in [
+  ("reindeer","Renne / caribou","Rangifer tarandus","sauvage","toundra,foret","arctique,siberie,nordique,boreale","4-10"),
+  ("moose","Élan","Alces alces","sauvage","foret,marais","boreale,nordique,siberie","1-2"),
+  ("walrus","Morse","Odobenus rosmarus","sauvage","banquise,cote","arctique","3-8"),
+  ("deer","Cerf de Virginie","Odocoileus virginianus","sauvage","foret,prairie","grandes_plaines,boreale,ouest_mexique,amerique_centrale","2-4"),
+  ("coyote","Coyote","Canis latrans","sauvage","prairie,desert,foret","grandes_plaines,ouest_mexique,boreale","1-3"),
+  ("lammergeier","Gypaète barbu","Gypaetus barbatus","sauvage","ciel (montagne)","alpine,steppes_tibet,afrique_est,moyen_orient,maghreb","1"),
+  ("badger","Blaireau","Meles meles / Taxidea taxus","sauvage","foret,prairie","atlantique,continentale,mediterranee,nordique,grandes_plaines,ouest_mexique","1-2"),
+  ("pheasant","Faisan de Colchide","Phasianus colchicus","sauvage","culture,prairie","chine,steppes_tibet,japon_coree,continentale,atlantique","1-3"),
+  ("goose","Oie cendrée / bernache","Anser anser / Branta canadensis","sauvage","eau_douce,marais","atlantique,continentale,nordique,siberie,boreale,grandes_plaines","4-10"),
+  ("songbird","Passereaux","Passeriformes","sauvage","foret","partout_sauf:arctique,antarctique","2-4"),
+  ("crab","Crabe","Brachyura","sauvage","cote","toutes_les_côtes","2-4"),
+  ("horseshoe_crab","Limule","Limulus / Tachypleus","sauvage","cote (plage)","grandes_plaines,asie_sud_est,chine,japon_coree","1-3"),
+  ("eel_freshwater","Anguille d'Europe","Anguilla anguilla","poisson","eau_douce","atlantique,continentale,mediterranee,nordique,maghreb","1-2"),
+  ("eel_saltwater","Murène","Muraenidae","poisson","mer (récifs)","mers_chaudes_tempérées","1"),
+  ("lamprey","Lamproie","Petromyzon marinus","poisson","eau_douce,mer","atlantique,nordique,grandes_plaines","1-2"),
+  ("octopus","Pieuvre","Octopus vulgaris","sauvage","mer","toutes_les_mers","1"),
+  ("nautilus","Nautile","Nautilus pompilius","sauvage","mer profonde","melanesie,asie_sud_est,australie","1"),
+  ("barracuda","Barracuda","Sphyraena barracuda","poisson","mer (récifs)","mers_tropicales","1-4"),
+  ("bobbit_worm","Ver de Bobbit","Eunice aphroditois","sauvage","mer (récifs)","asie_sud_est,australie,melanesie,japon_coree","1"),
+  ("flying_fish","Poisson volant","Exocoetidae","poisson","large","mers_tropicales","3-6"),
+  ("squid_giant","Calmar géant","Architeuthis dux","sauvage","abysses","mers_profondes","1"),
+  ("squid_colossal","Calmar colossal","Mesonychoteuthis hamiltoni","sauvage","abysses","antarctique","1")]:
+    a(B+e,n,lat,cat,mil,ts,g,"garder",note_b)
+for e,n,cible in [("feral_wolf","Loup féral","minecraft:wolf"),("turkey","Dindon (BA+)","wildernature:turkey"),("boar","Sanglier (BA+)","untamedwilds:boar/eurasian"),
+  ("squirrel","Écureuil (BA+)","ecologics:squirrel"),("butterfly","Papillon (BA+)","untamedwilds:butterfly"),("dragonfly","Libellule (BA+)","naturalist:dragonfly"),
+  ("tarantula","Mygale (BA+)","untamedwilds:tarantula"),("piranha","Piranha (BA+)","aquaculture:piranha"),("shark","Requin (BA+)","untamedwilds:shark"),
+  ("whale","Baleine (BA+)","untamedwilds:baleen_whale"),("jellyfish","Méduse (BA+)","aquaculture:jellyfish"),
+  ("brownbear","Ours brun (BA+)","untamedwilds:bear/brown"),("blackbear","Ours noir (BA+)","untamedwilds:bear/black")]:
+    a(B+e,n,"—","sauvage","—","—","—","doublon:"+cible,note_b)
+a(B+"hirschgeist","Hirschgeist","—","fantastique","souterrain","—","1","souterrain","esprit-cerf du folklore germanique : abîmes, ou endémique des forêts d'Europe centrale (à décider)")
+a(B+"zotzpyre","Zotzpyre","—","fantastique","souterrain","—","2-4","souterrain","chauve-souris vampire du mythe maya : abîmes, ou endémique d'Amérique centrale (à décider)")
+
 with open(os.path.join(ICI, "especes.csv"), "w", encoding="utf-8", newline="") as f:
     w = csv.writer(f, delimiter=";")
     w.writerow(["id","nom","espece_reelle","categorie","milieu","terroirs","groupe","statut","note"])
