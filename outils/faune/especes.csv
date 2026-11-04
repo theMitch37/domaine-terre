@@ -197,12 +197,12 @@ naturalist:alligator;Alligator;Alligator mississippiensis;sauvage;marais,eau_dou
 naturalist:bear;Grizzli (Nat.);Ursus arctos;sauvage;foret,montagne;nordique;1;garder;race régionale (Europe) de untamedwilds:bear/brown
 naturalist:bluejay;Geai bleu;Cyanocitta cristata;sauvage;foret;boreale;1-2;garder;race régionale (Amériques)
 naturalist:boar;Sanglier (Nat.);Sus scrofa;sauvage;foret;continentale,alpine;3-6;garder;race régionale (Europe) de untamedwilds:boar/eurasian
-naturalist:butterfly;Papillon (Nat.);Danaus plexippus;insecte;prairie;grandes_plaines,ouest_mexique,boreale,atlantique,mediterranee,continentale,nordique,alpine,siberie,maghreb,moyen_orient,amazonie,amerique_centrale,australie,melanesie,asie_sud_est,inde,chine,japon_coree;1-3;garder;"race / variante de la famille untamedwilds:butterfly ; 20 espèces réelles chez Untamed Wilds"
+naturalist:butterfly;Papillon (Nat.);plusieurs espèces;insecte;prairie;grandes_plaines,ouest_mexique,boreale,atlantique,mediterranee,continentale,nordique,alpine,siberie,maghreb,moyen_orient,amazonie,amerique_centrale,australie,melanesie,asie_sud_est,inde,chine,japon_coree;1-3;garder;"race / variante de la famille untamedwilds:butterfly ; 20 espèces réelles chez Untamed Wilds"
 naturalist:caterpillar;Chenille;Lepidoptera;insecte;foret;partout_sauf:arctique,antarctique;1;garder;
 naturalist:moth;Papillon de nuit;Heterocera;insecte;foret (nuit);partout_sauf:arctique,antarctique;1-3;garder;
 naturalist:canary;Canari;Serinus canaria;sauvage;foret;mediterranee,maghreb;1-3;garder;Canaries, Madère, Açores
 naturalist:cardinal;Cardinal rouge;Cardinalis cardinalis;sauvage;foret;grandes_plaines,ouest_mexique;1-2;garder;
-naturalist:catfish;Poisson-chat (Nat.);Ictalurus furcatus;poisson;eau_douce;grandes_plaines,boreale,amazonie;1;garder;race / variante de la famille untamedwilds:catfish
+naturalist:catfish;Poisson-chat (Nat.);plusieurs espèces;poisson;eau_douce;grandes_plaines,boreale,amazonie;1;garder;race / variante de la famille untamedwilds:catfish
 naturalist:bass;Bar (Nat.);Micropterus dolomieu;poisson;eau_douce;grandes_plaines;2-4;garder;race régionale (Amériques) de aquaculture:smallmouth_bass
 naturalist:coral_snake;Serpent corail (Nat.);Micrurus;sauvage;foret_tropicale;amerique_centrale,amazonie;1;garder;race régionale (Amériques) de untamedwilds:snake/coral
 naturalist:rattlesnake;Serpent à sonnettes (Nat.);Crotalus oreganus / atrox;sauvage;desert,steppe;grandes_plaines;1;garder;race régionale (Amériques) de untamedwilds:snake/western_rattlesnake
@@ -217,7 +217,7 @@ naturalist:giraffe;Girafe;Giraffa;sauvage;savane;afrique_est,afrique_australe;2-
 naturalist:hippo;Hippopotame (Nat.);Hippopotamus amphibius;sauvage;eau_douce;afrique_est,afrique_australe;3-8;garder;race régionale (Afrique) de untamedwilds:hippo/common
 naturalist:hyena;Hyène (Nat.);Crocuta crocuta;sauvage;savane;afrique_est,afrique_australe;3-6;garder;race régionale (Afrique) de untamedwilds:hyena/spotted
 naturalist:lion;Lion (Nat.);Panthera leo;sauvage;savane;inde;2-5;garder;race régionale (Asie) de untamedwilds:big_cat/lion
-naturalist:rhino;Rhinocéros (Nat.);Diceros bicornis;sauvage;savane;afrique_est,afrique_australe,inde,asie_sud_est;1;garder;race / variante de la famille untamedwilds:rhino
+naturalist:rhino;Rhinocéros (Nat.);plusieurs espèces;sauvage;savane;afrique_est,afrique_australe,inde,asie_sud_est;1;garder;race / variante de la famille untamedwilds:rhino
 naturalist:tortoise;Tortue terrestre (Nat.);Testudo hermanni;sauvage;mediterraneen,steppe;mediterranee,maghreb,moyen_orient;1;garder;tortue d'Hermann / grecque
 naturalist:lizard;Lézard;Lacertidae / Agamidae;sauvage;desert,steppe,mediterraneen;mediterranee,maghreb,sahara_sahel,moyen_orient,australie,ouest_mexique;1-2;garder;
 naturalist:ostrich;Autruche;Struthio camelus;sauvage;savane,desert;afrique_est,afrique_australe,sahara_sahel;2-5;garder;
@@ -316,12 +316,12 @@ betteranimalsplus:feral_wolf;Loup féral;Canis lupus;sauvage;foret,toundra,stepp
 betteranimalsplus:turkey;Dindon (BA+);Meleagris gallopavo;sauvage;foret,prairie;ouest_mexique;3-6;garder;"mod à installer ; id à vérifier ; race régionale (Amériques) de wildernature:turkey"
 betteranimalsplus:boar;Sanglier (BA+);Sus scrofa;sauvage;foret;inde,chine,japon_coree;3-6;garder;"mod à installer ; id à vérifier ; race régionale (Asie) de untamedwilds:boar/eurasian"
 betteranimalsplus:squirrel;Écureuil (BA+);Sciurus vulgaris;sauvage;foret;alpine,siberie,japon_coree;1-2;garder;"mod à installer ; id à vérifier ; race régionale (Europe/Asie) de ecologics:squirrel"
-betteranimalsplus:butterfly;Papillon (BA+);Danaus plexippus;sauvage;prairie;grandes_plaines,ouest_mexique,boreale,atlantique,mediterranee,continentale,nordique,alpine,siberie,maghreb,moyen_orient,amazonie,amerique_centrale,australie,melanesie,asie_sud_est,inde,chine,japon_coree;1-3;garder;"race / variante de la famille untamedwilds:butterfly ; mod à installer ; id à vérifier"
-betteranimalsplus:dragonfly;Libellule (BA+);Anisoptera;sauvage;eau_douce,marais;maghreb,sahara_sahel,afrique_tropicale,afrique_est,afrique_australe,boreale,grandes_plaines,ouest_mexique,amerique_centrale,amazonie,andes,cone_sud;1-3;garder;"mod à installer ; id à vérifier ; race régionale (Afrique/Amériques) de naturalist:dragonfly"
-betteranimalsplus:tarantula;Mygale (BA+);Grammostola rosea;sauvage;foret,desert;cone_sud,andes,ouest_mexique,amazonie,asie_sud_est,afrique_est,inde,amerique_centrale;1;garder;"race / variante de la famille untamedwilds:tarantula ; mod à installer ; id à vérifier"
-betteranimalsplus:piranha;Piranha (BA+);Pygocentrus nattereri;sauvage;eau_douce;amazonie;4-8;garder;"mod à installer ; id à vérifier ; race régionale (Amériques) de aquaculture:piranha"
-betteranimalsplus:shark;Requin (BA+);Carcharodon carcharias;sauvage;mer,large;afrique_australe,australie,nouvelle_zelande,ouest_mexique,mediterranee,amerique_centrale,arctique,nordique;1;garder;"race / variante de la famille untamedwilds:shark ; mod à installer ; id à vérifier"
-betteranimalsplus:whale;Baleine (BA+);Balaenoptera musculus;sauvage;large;boreale,ouest_mexique,siberie;1-2;garder;"race / variante de la famille untamedwilds:baleen_whale ; mod à installer ; id à vérifier"
+betteranimalsplus:butterfly;Papillon (BA+);plusieurs espèces;insecte;prairie;grandes_plaines,ouest_mexique,boreale,atlantique,mediterranee,continentale,nordique,alpine,siberie,maghreb,moyen_orient,amazonie,amerique_centrale,australie,melanesie,asie_sud_est,inde,chine,japon_coree;1-3;garder;"race / variante de la famille untamedwilds:butterfly ; mod à installer ; id à vérifier"
+betteranimalsplus:dragonfly;Libellule (BA+);Anisoptera;insecte;eau_douce,marais;maghreb,sahara_sahel,afrique_tropicale,afrique_est,afrique_australe,boreale,grandes_plaines,ouest_mexique,amerique_centrale,amazonie,andes,cone_sud;1-3;garder;"mod à installer ; id à vérifier ; race régionale (Afrique/Amériques) de naturalist:dragonfly"
+betteranimalsplus:tarantula;Mygale (BA+);plusieurs espèces;insecte;foret,desert;cone_sud,andes,ouest_mexique,amazonie,asie_sud_est,afrique_est,inde,amerique_centrale;1;garder;"race / variante de la famille untamedwilds:tarantula ; mod à installer ; id à vérifier"
+betteranimalsplus:piranha;Piranha (BA+);Pygocentrus nattereri;poisson;eau_douce;amazonie;4-8;garder;"mod à installer ; id à vérifier ; race régionale (Amériques) de aquaculture:piranha"
+betteranimalsplus:shark;Requin (BA+);plusieurs espèces;poisson;mer,large;afrique_australe,australie,nouvelle_zelande,ouest_mexique,mediterranee,amerique_centrale,arctique,nordique;1;garder;"race / variante de la famille untamedwilds:shark ; mod à installer ; id à vérifier"
+betteranimalsplus:whale;Baleine (BA+);plusieurs espèces;sauvage;large;boreale,ouest_mexique,siberie;1-2;garder;"race / variante de la famille untamedwilds:baleen_whale ; mod à installer ; id à vérifier"
 betteranimalsplus:jellyfish;Méduse (BA+);Scyphozoa;sauvage;mer;toutes_les_mers;2-5;garder;"mod à installer ; id à vérifier ; race régionale (mers) de aquaculture:jellyfish"
 betteranimalsplus:brownbear;Ours brun (BA+);Ursus arctos;sauvage;foret,montagne;alpine;1;garder;"mod à installer ; id à vérifier ; race régionale (Europe) de untamedwilds:bear/brown"
 betteranimalsplus:blackbear;Ours noir (BA+);Ursus americanus;sauvage;foret;grandes_plaines;1;garder;"mod à installer ; id à vérifier ; race régionale (Amériques) de untamedwilds:bear/black"

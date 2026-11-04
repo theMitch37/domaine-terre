@@ -372,7 +372,7 @@ for cible, variantes in groupes.items():
                     vus.append(v)
         for k in variantes:
             r = L[k]
-            L[k] = (r[0], r[1], garde(r[2], L[ref[0]][2]), r[3], garde(r[4], L[ref[0]][4]), garde(r[5], ",".join(vus) or L[ref[0]][5]),
+            L[k] = (r[0], r[1], garde(r[2], "plusieurs espèces"), L[ref[0]][3], garde(r[4], L[ref[0]][4]), garde(r[5], ",".join(vus) or L[ref[0]][5]),
                     garde(r[6], L[ref[0]][6]), "garder", "race / variante de la famille " + cible + (" ; " + r[8] if r[8] else ""))
         continue
     t = ref[0]
@@ -407,7 +407,7 @@ for cible, variantes in groupes.items():
         r = L[k]
         base = L[t]
         note = (r[8] + " ; " if r[8] and not r[7].startswith("doublon") else (r[8] + " ; " if r[8] else ""))
-        L[k] = (r[0], r[1], garde(r[2], base[2]), r[3], garde(r[4], base[4]), parts[q], garde(r[6], base[6]), "garder",
+        L[k] = (r[0], r[1], garde(r[2], base[2]), base[3], garde(r[4], base[4]), parts[q], garde(r[6], base[6]), "garder",
                 note + ("race régionale (" + ou(parts[q]) + ")" + ("" if q == 0 else " de " + cible)))
 
 # Créatures aquatiques inventées (décision 04/11) : grottes inondées des profondeurs et fond des fosses océaniques
