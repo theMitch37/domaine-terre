@@ -27,7 +27,7 @@ CARTE = os.path.join(ICI, "../../src/main/resources/domaine_terre/carte")
 # 11 toundra, 12 forêts et maquis méditerranéens, 13 déserts et broussailles xériques, 14 mangroves
 MILIEUX = {
     "foret_tropicale": [1, 3, 14], "foret": [1, 2, 3, 4, 5, 6, 12], "prairie": [4, 7, 8, 9, 10, 12],
-    "culture": [1, 2, 4, 5, 7, 8, 9, 12], "steppe": [8, 10, 13], "montagne": [3, 4, 5, 6, 10, 12],
+    "culture": [2, 4, 5, 7, 8, 9, 12], "steppe": [8, 10, 13], "montagne": [3, 4, 5, 6, 10, 12],
     "desert": [13], "toundra": [6, 11], "banquise": [11], "savane": [2, 7, 9], "mediterraneen": [12],
     "foret (humide)": [1, 4, 5], "foret (nuit)": [1, 2, 3, 4, 5, 6, 12], "foret (bambou)": [4, 5, 10],
     "foret (montagne)": [3, 4, 5, 10], "foret_tropicale (nuit)": [1, 3], "prairie (pluie)": [4, 7, 8, 12],

@@ -147,24 +147,9 @@ public final class FauneSpawns {
     }
 
     /** Monstres plus forts en descendant : +50 % de vie, +2 dégâts, +2 armure par étage sous les couches hautes. */
-    private static final java.util.concurrent.atomic.AtomicInteger NES = new java.util.concurrent.atomic.AtomicInteger();
-    private static final java.util.concurrent.atomic.AtomicInteger REFUS = new java.util.concurrent.atomic.AtomicInteger();
-
-    @SubscribeEvent
-    public static void diagnosticPosition(MobSpawnEvent.PositionCheck event) {
-        if (event.getSpawnType() == net.minecraft.world.entity.MobSpawnType.CHUNK_GENERATION && event.getResult() == Event.Result.DENY) {
-            REFUS.incrementAndGet();
-        }
-    }
-
     @SubscribeEvent
     public static void force(MobSpawnEvent.FinalizeSpawn event) {
         Mob m = event.getEntity();
-        if (event.getSpawnType() == net.minecraft.world.entity.MobSpawnType.CHUNK_GENERATION) {
-            int n = NES.incrementAndGet();
-            if (n % 20 == 1) DomaineTerre.LOGGER.info("Faune : {} animaux nés à la génération ({} {})", n,
-                    EntityType.getKey(m.getType()), m.blockPosition());
-        }
         if (!(m instanceof Enemy) || !terre(event.getLevel())) return;
         int e = etage(m.getBlockX(), m.getBlockY(), m.getBlockZ());
         if (e < 1) return;
@@ -198,8 +183,7 @@ public final class FauneSpawns {
         if (!faune.active()) return base;
         BlockPos centre = new BlockPos(chunk.getMiddleBlockX(), 64, chunk.getMiddleBlockZ());
         List<MobSpawnSettings.SpawnerData> l = faune.liste(niveau, cat, centre, biome, false, false, false, true);
-        int nj = JOURNAL.getAndIncrement();
-        if (nj < 12 || nj % 500 == 0) {
+        if (JOURNAL.getAndIncrement() < 3) {
             DomaineTerre.LOGGER.info("Faune (génération) {} {} : biome {}, {} espèces {}", chunk, cat,
                     biome.unwrapKey().map(k -> k.location().toString()).orElse("?"), l.size(),
                     l.stream().map(d -> EntityType.getKey(d.type).getPath()).toList());

@@ -1,8 +1,8 @@
 id;nom;milieu;biomes;eau;cote;part_terroirs;ecoregions_principales
-minecraft:cow;Vache;prairie,culture;1 2 4 5 7 8 9 10 12;;;68%;Sarmatic mixed forests / Pontic steppe / Dry miombo woodlands
+minecraft:cow;Vache;prairie,culture;2 4 5 7 8 9 10 12;;;60%;Sarmatic mixed forests / Pontic steppe / Dry miombo woodlands
 minecraft:pig;Cochon;culture,foret;1 2 3 4 5 6 7 8 9 12;;;92%;Scandinavian and Russian taiga / Sarmatic mixed forests / Pontic steppe
 minecraft:sheep;Mouton;prairie,steppe,montagne;3 4 5 6 7 8 9 10 12 13;;;91%;Scandinavian and Russian taiga / Sahelian Acacia savanna / South Sahara desert
-minecraft:chicken;Poule;culture;1 2 4 5 7 8 9 12;;;67%;Sahelian Acacia savanna / Cerrado / West Sudanian savanna
+minecraft:chicken;Poule;culture;2 4 5 7 8 9 12;;;49%;Sahelian Acacia savanna / Cerrado / West Sudanian savanna
 minecraft:horse;Cheval;prairie,steppe;4 7 8 9 10 12 13;;;70%;Pontic steppe / Kazakh steppe / East European forest steppe
 minecraft:donkey;Âne;steppe,desert;8 10 13;;;53%;South Sahara desert / North Saharan Xeric Steppe and Woodland / East Sahara Desert
 minecraft:llama;Lama;montagne,prairie;3 4 5 6 7 8 9 10 12;;;66%;Central Andean dry puna / Central Andean puna / Southern Andean steppe
@@ -130,7 +130,7 @@ untamedwilds:butterfly/mourning_cloak;Morio;foret;1 2 3 4 5 6 12;;;70%;Scandinav
 untamedwilds:butterfly/red_admiral;Vulcain;prairie;4 7 8 9 10 12;;;70%;Sarmatic mixed forests / Pontic steppe / East European forest steppe
 untamedwilds:butterfly/peacock;Paon-du-jour;prairie;4 7 8 9 10 12;;;35%;Sarmatic mixed forests / Pontic steppe / East European forest steppe
 untamedwilds:butterfly/brimstone;Citron;foret;1 2 3 4 5 6 12;;;81%;Scandinavian and Russian taiga / Sarmatic mixed forests / East European forest steppe
-untamedwilds:butterfly/cabbage;Piéride du chou;culture;1 2 4 5 7 8 9 12;;;48%;Sarmatic mixed forests / Pontic steppe / East European forest steppe
+untamedwilds:butterfly/cabbage;Piéride du chou;culture;2 4 5 7 8 9 12;;;48%;Sarmatic mixed forests / Pontic steppe / East European forest steppe
 untamedwilds:butterfly/comma;Robert-le-diable;foret;1 2 3 4 5 6 12;;;81%;Scandinavian and Russian taiga / Sarmatic mixed forests / East European forest steppe
 untamedwilds:butterfly/orange_tip;Aurore;prairie;4 7 8 9 10 12;;;65%;Sarmatic mixed forests / Pontic steppe / East European forest steppe
 untamedwilds:butterfly/speckled_wood;Tircis;foret;1 2 3 4 5 6 12;;;73%;Scandinavian and Russian taiga / Sarmatic mixed forests / East European forest steppe
@@ -182,7 +182,7 @@ naturalist:lizard;Lézard;desert,steppe,mediterraneen;8 10 12 13;;;69%;South Sah
 naturalist:ostrich;Autruche;savane,desert;2 7 9 13;;;91%;Sahelian Acacia savanna / South Sahara desert / East Sahara Desert
 naturalist:robin;Rouge-gorge;foret;1 2 3 4 5 6 12;;;81%;Scandinavian and Russian taiga / Sarmatic mixed forests / East European forest steppe
 naturalist:snail;Escargot;foret,prairie (pluie);1 2 3 4 5 6 7 8 12;;;95%;Pontic steppe / East European forest steppe / Central European mixed forests
-naturalist:sparrow;Moineau;culture;1 2 4 5 7 8 9 12;;;54%;Sahelian Acacia savanna / West Sudanian savanna / Sarmatic mixed forests
+naturalist:sparrow;Moineau;culture;2 4 5 7 8 9 12;;;44%;Sahelian Acacia savanna / West Sudanian savanna / Sarmatic mixed forests
 naturalist:termite;Termite;savane,foret_tropicale;1 2 3 7 9 14;;;78%;Cerrado / Dry miombo woodlands / Central Zambezian wet miombo woodlands
 naturalist:vulture;Vautour;ciel (savane, montagne);2 3 4 5 6 7 9 10 12;;;43%;Sahelian Acacia savanna / Somali Acacia-Commiphora bushlands and thickets / West Sudanian savanna
 naturalist:zebra;Zèbre;savane;2 7 9;;;65%;Dry miombo woodlands / Central Zambezian wet miombo woodlands / Somali Acacia-Commiphora bushlands and thickets
@@ -243,7 +243,7 @@ betteranimalsplus:deer;Cerf de Virginie;foret,prairie;1 2 3 4 5 6 7 8 9 10 12;;;
 betteranimalsplus:coyote;Coyote;prairie,desert,foret;1 2 3 4 5 6 7 8 9 10 12 13;;;85%;Eastern Canadian Shield taiga / Northern Canadian Shield taiga / Midwest Canadian Shield forests
 betteranimalsplus:lammergeier;Gypaète barbu;ciel (montagne);3 4 5 6 10 12;;;27%;Central Tibetan Plateau alpine steppe / Southeast Tibet shrublands and meadows / Zagros Mountains forest steppe
 betteranimalsplus:badger;Blaireau;foret,prairie;1 2 3 4 5 6 7 8 9 10 12;;;85%;Scandinavian and Russian taiga / Sarmatic mixed forests / Pontic steppe
-betteranimalsplus:pheasant;Faisan de Colchide;culture,prairie;1 2 4 5 7 8 9 10 12;;;77%;Pontic steppe / Mongolian-Manchurian grassland / East European forest steppe
+betteranimalsplus:pheasant;Faisan de Colchide;culture,prairie;2 4 5 7 8 9 10 12;;;68%;Pontic steppe / Mongolian-Manchurian grassland / East European forest steppe
 betteranimalsplus:goose;Oie cendrée / bernache;eau_douce,marais;;oui;;;
 betteranimalsplus:songbird;Passereaux;foret;1 2 3 4 5 6 12;;;45%;East Siberian taiga / Scandinavian and Russian taiga / West Siberian taiga
 betteranimalsplus:horseshoe_crab;Limule;cote (plage);;;oui;;
