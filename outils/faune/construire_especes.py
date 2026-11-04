@@ -370,6 +370,12 @@ for i, r in enumerate(L):
     L[i] = (r[0], r[1], garde(r[2], ref[0][2]), r[3], garde(r[4], ref[0][4]), garde(r[5], terroirs), garde(r[6], ref[0][6]),
             "garder", ("variante de " + cible + (" ; " + r[8] if r[8] else "")))
 
+# Créatures aquatiques inventées (décision 04/11) : grottes inondées des profondeurs et fond des fosses océaniques
+for i, r in enumerate(L):
+    if r[0] in ("alexsmobs:sea_bear", "alexsmobs:skelewag"):
+        L[i] = r[:4] + ("souterrain (eau), fosses océaniques", "—", r[6], "souterrain",
+                        "grottes inondées des profondeurs et fond des fosses (Mariannes, sous y 0) ; mod à installer")
+
 with open(os.path.join(ICI, "especes.csv"), "w", encoding="utf-8", newline="") as f:
     w = csv.writer(f, delimiter=";")
     w.writerow(["id","nom","espece_reelle","categorie","milieu","terroirs","groupe","statut","note"])
