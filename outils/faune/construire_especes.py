@@ -421,6 +421,13 @@ _fix = {"minecraft:bat": "partout_sauf:arctique,antarctique", "alexsmobs:cockroa
         "alexsmobs:fly": "partout_sauf:arctique,antarctique"}
 L = [r[:5] + (_fix[r[0]],) + r[6:] if r[0] in _fix else r for r in L]
 
+# Ajouts du 04/11 : crocodile du Nil jusqu'en Égypte (le long du fleuve), mygales d'Australie (Selenocosmia)
+for i, r in enumerate(L):
+    if r[0] == "alexsmobs:crocodile":
+        L[i] = r[:5] + ("sahara_sahel," + r[5],) + r[6:8] + (r[8] + " ; Nil jusqu'en Égypte (eau douce seulement)",)
+    if r[0] == "betteranimalsplus:tarantula":
+        L[i] = r[:5] + (r[5] + ",australie",) + r[6:8] + (r[8] + " ; mygales siffleuses en Australie",)
+
 with open(os.path.join(ICI, "especes.csv"), "w", encoding="utf-8", newline="") as f:
     w = csv.writer(f, delimiter=";")
     w.writerow(["id","nom","espece_reelle","categorie","milieu","terroirs","groupe","statut","note"])
