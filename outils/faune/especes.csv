@@ -10,7 +10,7 @@ minecraft:goat;Chèvre de montagne;Capra ibex / Oreamnos americanus;sauvage;mont
 minecraft:rabbit;Lapin;Oryctolagus / Lepus;sauvage;prairie,steppe,desert,toundra;partout_sauf:antarctique,melanesie;2-3;garder;variantes blanc (neige) et doré (désert)
 minecraft:wolf;Loup;Canis lupus;sauvage;foret,toundra,steppe,montagne;moyen_orient,steppes_tibet,siberie,inde,arctique;4-8;garder;"prédateur ; race régionale (Asie/Pôles)"
 minecraft:fox;Renard;Vulpes vulpes / lagopus;sauvage;foret,prairie,toundra;atlantique,mediterranee,continentale,nordique,alpine,siberie,boreale,grandes_plaines,maghreb,moyen_orient,japon_coree,chine,australie,arctique;1-2;garder;renard polaire (variante neige) en Arctique
-minecraft:polar_bear;Ours polaire;Ursus maritimus;sauvage;banquise,toundra;arctique;1-2;garder;race régionale (Pôles)
+minecraft:polar_bear;Ours polaire;Ursus maritimus;sauvage;banquise,toundra;arctique;1-2;garder;"race régionale (Pôles) ; version calme, spawn RARE"
 minecraft:panda;Panda géant;Ailuropoda melanoleuca;sauvage;foret (bambou);chine;1-2;garder;race régionale (Asie)
 minecraft:ocelot;Ocelot;Leopardus pardalis;sauvage;foret_tropicale;amerique_centrale,amazonie,ouest_mexique;1;garder;
 minecraft:parrot;Perroquet;Psittacidae;sauvage;foret_tropicale;amazonie,amerique_centrale,afrique_tropicale,asie_sud_est,melanesie,australie;1-2;garder;
@@ -27,9 +27,9 @@ minecraft:frog;Grenouille;Anura;sauvage;marais,eau_douce;partout_sauf:arctique,a
 minecraft:bee;Abeille;Apis mellifera;insecte;prairie,foret;partout_sauf:arctique,antarctique;nid;garder;
 minecraft:bat;Chauve-souris;Chiroptera;sauvage;souterrain;partout_sauf:arctique,antarctique;2-8;garder;grottes
 minecraft:mooshroom;Champimeuh;—;fantastique;—;—;—;retirer;pas d'îles champignons sur la vraie Terre
-untamedwilds:bear/brown;Ours brun;Ursus arctos;sauvage;foret,montagne;continentale;1;garder;"grizzli en Amérique ; prédateur ; race régionale (Europe)"
+untamedwilds:bear/brown;Ours brun;Ursus arctos;sauvage;foret,montagne;siberie;1;garder;"race régionale (Sibérie, Kamtchatka) ; chasse les joueurs blessés"
 untamedwilds:bear/black;Ours noir;Ursus americanus;sauvage;foret;boreale;1;garder;race régionale (Amériques)
-untamedwilds:bear/polar;Ours polaire (UW);Ursus maritimus;sauvage;banquise;arctique;1;garder;race régionale (Pôles) de minecraft:polar_bear
+untamedwilds:bear/polar;Ours polaire (UW);Ursus maritimus;sauvage;banquise;arctique;1;garder;"race régionale (Pôles) de minecraft:polar_bear ; version courante, prédateur"
 untamedwilds:bear/panda;Panda (UW);Ailuropoda melanoleuca;sauvage;foret;chine;1;garder;race régionale (Asie) de minecraft:panda
 untamedwilds:bear/spectacled;Ours à lunettes;Tremarctos ornatus;sauvage;foret (montagne);andes;1;garder;
 untamedwilds:bear/sun;Ours malais;Helarctos malayanus;sauvage;foret_tropicale;asie_sud_est;1;garder;
@@ -37,8 +37,8 @@ untamedwilds:bear/cave;Ours des cavernes;Ursus spelaeus;fantastique;—;—;—;
 untamedwilds:bear/blind;Ours aveugle;—;fantastique;—;—;—;retirer;inventé
 untamedwilds:big_cat/lion;Lion;Panthera leo;sauvage;savane;sahara_sahel,afrique_est,afrique_australe;2-5;garder;"troupe ; lion d'Asie au Gujarat ; race régionale (Afrique)"
 untamedwilds:big_cat/leopard;Léopard;Panthera pardus;sauvage;savane,foret;afrique_tropicale,afrique_est,afrique_australe,inde,moyen_orient;1;garder;
-untamedwilds:big_cat/tiger;Tigre;Panthera tigris;sauvage;foret;siberie,chine,inde;1;garder;"tigre de Sibérie à l'Amour ; race régionale (Asie)"
-untamedwilds:big_cat/snow_leopard;Léopard des neiges;Panthera uncia;sauvage;montagne;steppes_tibet;1;garder;race régionale (Asie)
+untamedwilds:big_cat/tiger;Tigre;Panthera tigris;sauvage;foret;siberie,chine,asie_sud_est;1;garder;"tigre de Sibérie à l'Amour ; race régionale (Asie) ; chasse les joueurs blessés"
+untamedwilds:big_cat/snow_leopard;Léopard des neiges;Panthera uncia;sauvage;haute_montagne;steppes_tibet;1;garder;"race régionale (Asie) ; version rare (sommets seulement), chasse les blessés"
 untamedwilds:big_cat/jaguar;Jaguar;Panthera onca;sauvage;foret_tropicale,marais;amazonie,amerique_centrale;1;garder;
 untamedwilds:big_cat/puma;Puma;Puma concolor;sauvage;montagne,foret;ouest_mexique,andes,boreale,cone_sud;1;garder;
 untamedwilds:big_cat/cave_lion;cave lion;—;fantastique;—;—;—;retirer;espèce disparue
@@ -194,7 +194,7 @@ untamedwilds:tarantula/tiger;Mygale tigre;Psalmopoeus;insecte;foret,desert;ameri
 untamedwilds:terror_bird/*;Oiseaux-terreur;—;fantastique;—;—;—;retirer;espèces disparues
 untamedwilds:spitter/purple;Cracheur;—;fantastique;souterrain;—;1;souterrain;créature inventée : étage profondeurs
 naturalist:alligator;Alligator;Alligator mississippiensis;sauvage;marais,eau_douce;grandes_plaines;1-2;garder;"Floride, Louisiane ; prédateur"
-naturalist:bear;Grizzli (Nat.);Ursus arctos;sauvage;foret,montagne;nordique;1;garder;race régionale (Europe) de untamedwilds:bear/brown
+naturalist:bear;Grizzli (Nat.);Ursus arctos;sauvage;foret,montagne;nordique,continentale;1;garder;"race régionale (Europe) de untamedwilds:bear/brown ; neutre, défend ses petits"
 naturalist:bluejay;Geai bleu;Cyanocitta cristata;sauvage;foret;boreale;1-2;garder;race régionale (Amériques)
 naturalist:boar;Sanglier (Nat.);Sus scrofa;sauvage;foret;continentale,alpine;3-6;garder;race régionale (Europe) de untamedwilds:boar/eurasian
 naturalist:butterfly;Papillon (Nat.);plusieurs espèces;insecte;prairie;grandes_plaines,ouest_mexique,boreale,atlantique,mediterranee,continentale,nordique,alpine,siberie,maghreb,moyen_orient,amazonie,amerique_centrale,australie,melanesie,asie_sud_est,inde,chine,japon_coree;1-3;garder;"race / variante de la famille untamedwilds:butterfly ; 20 espèces réelles chez Untamed Wilds"
@@ -217,7 +217,7 @@ naturalist:giraffe;Girafe;Giraffa;sauvage;savane;afrique_est,afrique_australe;2-
 naturalist:hippo;Hippopotame (Nat.);Hippopotamus amphibius;sauvage;eau_douce;afrique_est,afrique_australe;3-8;garder;race régionale (Afrique) de untamedwilds:hippo/common
 naturalist:hyena;Hyène (Nat.);Crocuta crocuta;sauvage;savane;afrique_est,afrique_australe;3-6;garder;race régionale (Afrique) de untamedwilds:hyena/spotted
 naturalist:lion;Lion (Nat.);Panthera leo;sauvage;savane;inde;2-5;garder;race régionale (Asie) de untamedwilds:big_cat/lion
-naturalist:rhino;Rhinocéros (Nat.);plusieurs espèces;sauvage;savane;afrique_est,afrique_australe,inde,asie_sud_est;1;garder;race / variante de la famille untamedwilds:rhino
+naturalist:rhino;Rhinocéros (Nat.);plusieurs espèces;sauvage;savane;afrique_australe;1;garder;"race / variante de la famille untamedwilds:rhino ; rhinocéros blanc : défend ses petits"
 naturalist:tortoise;Tortue terrestre (Nat.);Testudo hermanni;sauvage;mediterraneen,steppe;mediterranee,maghreb,moyen_orient;1;garder;tortue d'Hermann / grecque
 naturalist:lizard;Lézard;Lacertidae / Agamidae;sauvage;desert,steppe,mediterraneen;mediterranee,maghreb,sahara_sahel,moyen_orient,australie,ouest_mexique;1-2;garder;
 naturalist:ostrich;Autruche;Struthio camelus;sauvage;savane,desert;afrique_est,afrique_australe,sahara_sahel;2-5;garder;
@@ -328,7 +328,7 @@ betteranimalsplus:blackbear;Ours noir (BA+);Ursus americanus;sauvage;foret;grand
 betteranimalsplus:hirschgeist;Hirschgeist;—;fantastique;foret (nuit);continentale,alpine;1;garder;"esprit-cerf du folklore germanique : endémique, spawn RARE ; mod à installer"
 betteranimalsplus:zotzpyre;Zotzpyre;—;fantastique;foret_tropicale (nuit);amerique_centrale;1-2;garder;"chauve-souris vampire du mythe maya : endémique, spawn RARE ; mod à installer"
 alexsmobs:alligator_snapping_turtle;Tortue alligator;Macrochelys temminckii;sauvage;eau_douce,marais;grandes_plaines;1;garder;mod à installer
-alexsmobs:anaconda;Anaconda;Eunectes murinus;sauvage;eau_douce,marais;amazonie;1;garder;"mod à installer ; race régionale (Amériques) de untamedwilds:large_snake/anaconda"
+alexsmobs:anaconda;Anaconda;Eunectes murinus;sauvage;foret_tropicale,eau_douce,marais;asie_sud_est;1;garder;"joue le python réticulé chasseur d'hommes ; spawn RARE"
 alexsmobs:anteater;Fourmilier;Myrmecophaga tridactyla;sauvage;savane,foret_tropicale;amazonie,cone_sud,amerique_centrale;1;garder;mod à installer
 alexsmobs:bald_eagle;Pygargue à tête blanche;Haliaeetus leucocephalus;sauvage;ciel (près de l'eau);boreale,grandes_plaines;1;garder;mod à installer
 alexsmobs:banana_slug;Limace banane;Ariolimax;insecte;foret (humide);boreale;1-2;garder;"forêts côtières du Pacifique nord ; mod à installer"
@@ -352,7 +352,7 @@ alexsmobs:gazelle;Gazelle;Gazella;sauvage;savane,desert;afrique_est,sahara_sahel
 alexsmobs:gelada_monkey;Gélada;Theropithecus gelada;sauvage;montagne,prairie;afrique_est;4-10;garder;"hauts plateaux d'Éthiopie ; mod à installer"
 alexsmobs:giant_squid;Calmar géant;Architeuthis dux;sauvage;abysses;mers_profondes;1;garder;"mod à installer ; race régionale (mers) de betteranimalsplus:squid_giant"
 alexsmobs:gorilla;Gorille;Gorilla;sauvage;foret_tropicale;afrique_tropicale;3-8;garder;mod à installer
-alexsmobs:grizzly_bear;Grizzli;Ursus arctos horribilis;sauvage;foret,montagne;siberie,boreale;1;garder;"mod à installer ; race régionale (Asie/Amériques) de untamedwilds:bear/brown"
+alexsmobs:grizzly_bear;Grizzli;Ursus arctos horribilis;sauvage;foret,montagne;boreale,grandes_plaines;1;garder;"race régionale (Amérique du Nord) de untamedwilds:bear/brown ; attaque si on approche"
 alexsmobs:hammerhead_shark;Requin-marteau;Sphyrna;poisson;mer,large;mers_tropicales;1-3;garder;"prédateur ; mod à installer"
 alexsmobs:hummingbird;Colibri;Trochilidae;sauvage;foret_tropicale,prairie;amerique_centrale,amazonie,andes,ouest_mexique;1-2;garder;mod à installer
 alexsmobs:jerboa;Gerboise;Jaculus;sauvage;desert;sahara_sahel,maghreb,moyen_orient,steppes_tibet;1-2;garder;mod à installer
@@ -371,18 +371,18 @@ alexsmobs:potoo;Ibijau;Nyctibius;sauvage;foret_tropicale;amazonie,amerique_centr
 alexsmobs:raccoon;Raton laveur;Procyon lotor;sauvage;foret;grandes_plaines,ouest_mexique;1-3;garder;"mod à installer ; race régionale (Amériques) de wildernature:raccoon"
 alexsmobs:rain_frog;Grenouille de pluie;Breviceps;sauvage;desert (côtier);afrique_australe;1-2;garder;mod à installer
 alexsmobs:rattlesnake;Crotale;Crotalus;sauvage;desert,steppe;ouest_mexique;1;garder;"mod à installer ; race régionale (Amériques) de untamedwilds:snake/western_rattlesnake"
-alexsmobs:rhinoceros;Rhinocéros (AM);Rhinocerotidae;sauvage;savane;afrique_est,afrique_australe,inde,asie_sud_est;1-2;garder;"race / variante de la famille untamedwilds:rhino ; mod à installer"
+alexsmobs:rhinoceros;Rhinocéros (AM);Rhinocerotidae;sauvage;savane;afrique_est,inde;1-2;garder;"race / variante de la famille untamedwilds:rhino ; rhinocéros noir et indien : charge si on approche"
 alexsmobs:roadrunner;Géocoucou;Geococcyx;sauvage;desert;ouest_mexique;1;garder;mod à installer
 alexsmobs:seagull;Mouette;Laridae;sauvage;cote;toutes_les_côtes_sauf_tropicales;3-6;garder;mod à installer
 alexsmobs:seal;Phoque;Phocidae;sauvage;cote,banquise;arctique,nordique,boreale,siberie,antarctique,atlantique,cone_sud,nouvelle_zelande;3-6;garder;"côtes froides seulement (règle le bug du Mexique) ; mod à installer"
 alexsmobs:shoebill;Bec-en-sabot;Balaeniceps rex;sauvage;marais;afrique_est,afrique_tropicale;1;garder;mod à installer
 alexsmobs:skunk;Moufette;Mephitis mephitis;sauvage;foret,prairie;grandes_plaines,boreale,ouest_mexique;1-2;garder;mod à installer
-alexsmobs:snow_leopard;Léopard des neiges;Panthera uncia;sauvage;montagne;steppes_tibet;1;garder;"mod à installer ; race régionale (Asie) de untamedwilds:big_cat/snow_leopard"
+alexsmobs:snow_leopard;Léopard des neiges;Panthera uncia;sauvage;montagne;steppes_tibet;1;garder;"race régionale (Asie) de untamedwilds:big_cat/snow_leopard ; version courante, craintive"
 alexsmobs:sugar_glider;Phalanger volant;Petaurus breviceps;sauvage;foret;australie,melanesie;1-3;garder;mod à installer
 alexsmobs:tarantula_hawk;Guêpe-tarentule;Pepsis;insecte;desert;ouest_mexique,grandes_plaines,amerique_centrale;1;garder;mod à installer
 alexsmobs:tasmanian_devil;Diable de Tasmanie;Sarcophilus harrisii;sauvage;foret;australie;1;garder;"Tasmanie seulement ; mod à installer"
 alexsmobs:terrapin;Tortue de rivière;Malaclemys / Trachemys;sauvage;eau_douce,marais;grandes_plaines;1-3;garder;mod à installer
-alexsmobs:tiger;Tigre (AM);Panthera tigris;sauvage;foret;asie_sud_est;1;garder;"mod à installer ; race régionale (Asie) de untamedwilds:big_cat/tiger"
+alexsmobs:tiger;Tigre (AM);Panthera tigris;sauvage;foret;inde;1;garder;"race régionale (Asie) de untamedwilds:big_cat/tiger ; Inde : attaque si on approche (Sundarbans)"
 alexsmobs:toucan;Toucan;Ramphastidae;sauvage;foret_tropicale;amazonie,amerique_centrale;1-3;garder;mod à installer
 alexsmobs:triops;Triops;Triops cancriformis;sauvage;eau_douce (mares);sahara_sahel,maghreb,moyen_orient,steppes_tibet,australie,ouest_mexique;3-6;garder;"mares temporaires ; mod à installer"
 alexsmobs:fly;Mouche;Musca domestica;insecte;partout;partout_sauf:arctique,antarctique;1;garder;mod à installer

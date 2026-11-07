@@ -136,6 +136,7 @@ TYPES_MILIEU = {
     "desert": {"desert", "badlands", "wooded_badlands", "eroded_badlands", "savanna_plateau"},
     "montagne": {"windswept_hills", "windswept_gravelly_hills", "windswept_forest", "stony_peaks", "jagged_peaks",
                  "frozen_peaks", "snowy_slopes", "meadow", "grove"},
+    "haute_montagne": {"stony_peaks", "jagged_peaks", "frozen_peaks"},
     "toundra": {"snowy_plains", "snowy_taiga", "ice_spikes", "grove", "snowy_slopes"},
     "banquise": {"snowy_plains", "ice_spikes", "snowy_beach"},
     "marais": {"swamp", "mangrove_swamp"},
@@ -241,14 +242,14 @@ AM = {"kangaroo": ["australie"], "emu": ["australie"], "platypus": ["australie"]
       "sugar_glider": ["australie", "melanesie"], "gorilla": ["afrique_tropicale"], "gelada_monkey": ["afrique_est"],
       "shoebill": ["afrique_est"], "gazelle": ["afrique_est", "sahara_sahel"], "jerboa": ["sahara_sahel", "moyen_orient"],
       "rain_frog": ["afrique_australe"], "crocodile": ["afrique_tropicale", "inde"], "komodo_dragon": ["asie_sud_est"],
-      "mudskipper": ["asie_sud_est"], "moose": ["boreale"], "bald_eagle": ["boreale"], "grizzly_bear": ["boreale"],
+      "mudskipper": ["asie_sud_est"], "moose": ["boreale"], "bald_eagle": ["boreale"], "grizzly_bear": ["boreale", "grandes_plaines"],
       "banana_slug": ["boreale"], "skunk": ["grandes_plaines"], "alligator_snapping_turtle": ["grandes_plaines"],
       "raccoon": ["grandes_plaines"], "blue_jay": ["grandes_plaines"], "bison": ["grandes_plaines"], "terrapin": ["grandes_plaines"],
       "roadrunner": ["ouest_mexique"], "rattlesnake": ["ouest_mexique"], "devils_hole_pupfish": ["ouest_mexique"],
-      "hummingbird": ["amerique_centrale", "amazonie"], "caiman": ["amazonie"], "anaconda": ["amazonie"],
+      "hummingbird": ["amerique_centrale", "amazonie"], "caiman": ["amazonie"], "anaconda": ["asie_sud_est"],
       "capuchin_monkey": ["amazonie"], "toucan": ["amazonie"], "potoo": ["amazonie"], "anteater": ["amazonie"],
       "leafcutter_anthill": ["amazonie"], "maned_wolf": ["cone_sud"], "elephant": ["afrique_est"],
-      "rhinoceros": ["afrique_est"], "tiger": ["inde", "chine", "siberie"], "snow_leopard": ["steppes_tibet"]}
+      "rhinoceros": ["afrique_est", "inde"], "tiger": ["inde"], "snow_leopard": ["steppes_tibet"]}
 cfg = os.path.join(INST, "config/alexsmobs")
 sauv = os.path.join(INST, "config/alexsmobs_avant_domaine")
 if not os.path.isdir(cfg):
