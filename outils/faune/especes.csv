@@ -1,404 +1,417 @@
-id;nom;espece_reelle;categorie;milieu;terroirs;groupe;statut;note
-minecraft:cow;Vache;Bos taurus;ferme;prairie,culture;atlantique,mediterranee,continentale,nordique,alpine,maghreb,afrique_est,afrique_australe,moyen_orient,inde,chine,grandes_plaines,cone_sud,australie,nouvelle_zelande;2-4;garder;zones agricoles et prairies seulement
-minecraft:pig;Cochon;Sus domesticus;ferme;culture,foret;atlantique,mediterranee,continentale,nordique,alpine,chine,japon_coree,asie_sud_est,grandes_plaines,amerique_centrale,melanesie;2-4;garder;rare là où l'élevage porcin l'est
-minecraft:sheep;Mouton;Ovis aries;ferme;prairie,steppe,montagne;atlantique,mediterranee,continentale,nordique,alpine,maghreb,sahara_sahel,afrique_est,afrique_australe,moyen_orient,steppes_tibet,inde,chine,cone_sud,australie,nouvelle_zelande;3-6;garder;
-minecraft:chicken;Poule;Gallus gallus domesticus;ferme;culture;partout_sauf:arctique,antarctique,boreale,siberie;2-4;garder;
-minecraft:horse;Cheval;Equus caballus;ferme;prairie,steppe;atlantique,continentale,mediterranee,steppes_tibet,siberie,grandes_plaines,cone_sud,maghreb,moyen_orient;2-6;garder;steppes : chevaux semi-sauvages
-minecraft:donkey;Âne;Equus asinus;ferme;steppe,desert;mediterranee,maghreb,sahara_sahel,afrique_est,moyen_orient,inde;1-3;garder;
-minecraft:llama;Lama;Lama glama;ferme;montagne,prairie;andes;3-6;garder;seul camélidé des Andes du pack
-minecraft:goat;Chèvre de montagne;Capra ibex / Oreamnos americanus;sauvage;montagne;alpine,steppes_tibet,boreale,ouest_mexique,moyen_orient,maghreb;2-4;garder;bouquetin en Europe et Asie, chèvre des Rocheuses en Amérique
-minecraft:rabbit;Lapin;Oryctolagus / Lepus;sauvage;prairie,steppe,desert,toundra;partout_sauf:antarctique,melanesie;2-3;garder;variantes blanc (neige) et doré (désert)
-minecraft:wolf;Loup;Canis lupus;sauvage;foret,toundra,steppe,montagne;moyen_orient,steppes_tibet,siberie,inde,arctique;4-8;garder;"prédateur ; race régionale (Asie/Pôles)"
-minecraft:fox;Renard;Vulpes vulpes / lagopus;sauvage;foret,prairie,toundra;atlantique,mediterranee,continentale,nordique,alpine,siberie,boreale,grandes_plaines,maghreb,moyen_orient,japon_coree,chine,australie,arctique;1-2;garder;renard polaire (variante neige) en Arctique
-minecraft:polar_bear;Ours polaire;Ursus maritimus;sauvage;banquise,toundra;arctique;1-2;garder;"race régionale (Pôles) ; version calme, spawn RARE"
-minecraft:panda;Panda géant;Ailuropoda melanoleuca;sauvage;foret (bambou);chine;1-2;garder;race régionale (Asie)
-minecraft:ocelot;Ocelot;Leopardus pardalis;sauvage;foret_tropicale;amerique_centrale,amazonie,ouest_mexique;1;garder;
-minecraft:parrot;Perroquet;Psittacidae;sauvage;foret_tropicale;amazonie,amerique_centrale,afrique_tropicale,asie_sud_est,melanesie,australie;1-2;garder;
-minecraft:turtle;Tortue marine;Chelonia mydas;sauvage;cote (plage);mediterranee,amerique_centrale,asie_sud_est,melanesie,australie,inde,afrique_est;2-5;garder;plages chaudes
-minecraft:dolphin;Dauphin;Delphinidae;sauvage;mer,large;mers_chaudes_tempérées;2-6;garder;
-minecraft:squid;Calmar;Teuthida;sauvage;mer,large;toutes_les_mers;2-4;garder;
-minecraft:glow_squid;Calmar luisant;—;fantastique;souterrain (eau);—;2-4;souterrain;grottes inondées seulement
-minecraft:cod;Morue (base);Gadus morhua;poisson;mer;boreale;3-7;garder;race régionale (Amériques) de aquaculture:atlantic_cod
-minecraft:salmon;Saumon;Salmo salar;poisson;mer,eau_douce;atlantique,nordique,boreale,siberie,japon_coree;3-5;garder;remonte les rivières
-minecraft:tropical_fish;Poisson tropical;Pomacentridae etc.;poisson;mer (récifs);mers_tropicales;4-8;garder;
-minecraft:pufferfish;Poisson-globe;Tetraodontidae;poisson;mer;mers_tropicales;1-3;garder;
-minecraft:axolotl;Axolotl;Ambystoma mexicanum;sauvage;eau_douce;ouest_mexique;1-2;garder;"lac de Xochimilco, remis en surface ; race régionale (Amériques)"
-minecraft:frog;Grenouille;Anura;sauvage;marais,eau_douce;partout_sauf:arctique,antarctique,sahara_sahel;2-5;garder;variantes froide, tempérée, chaude
-minecraft:bee;Abeille;Apis mellifera;insecte;prairie,foret;partout_sauf:arctique,antarctique;nid;garder;
-minecraft:bat;Chauve-souris;Chiroptera;sauvage;souterrain;partout_sauf:arctique,antarctique;2-8;garder;grottes
-minecraft:mooshroom;Champimeuh;—;fantastique;—;—;—;retirer;pas d'îles champignons sur la vraie Terre
-untamedwilds:bear/brown;Ours brun;Ursus arctos;sauvage;foret,montagne;siberie;1;garder;"race régionale (Sibérie, Kamtchatka) ; chasse les joueurs blessés"
-untamedwilds:bear/black;Ours noir;Ursus americanus;sauvage;foret;boreale;1;garder;race régionale (Amériques)
-untamedwilds:bear/polar;Ours polaire (UW);Ursus maritimus;sauvage;banquise;arctique;1;garder;"race régionale (Pôles) de minecraft:polar_bear ; version courante, prédateur"
-untamedwilds:bear/panda;Panda (UW);Ailuropoda melanoleuca;sauvage;foret;chine;1;garder;race régionale (Asie) de minecraft:panda
-untamedwilds:bear/spectacled;Ours à lunettes;Tremarctos ornatus;sauvage;foret (montagne);andes;1;garder;
-untamedwilds:bear/sun;Ours malais;Helarctos malayanus;sauvage;foret_tropicale;asie_sud_est;1;garder;
-untamedwilds:bear/cave;Ours des cavernes;Ursus spelaeus;fantastique;—;—;—;retirer;espèce disparue
-untamedwilds:bear/blind;Ours aveugle;—;fantastique;—;—;—;retirer;inventé
-untamedwilds:big_cat/lion;Lion;Panthera leo;sauvage;savane;sahara_sahel,afrique_est,afrique_australe;2-5;garder;"troupe ; lion d'Asie au Gujarat ; race régionale (Afrique)"
-untamedwilds:big_cat/leopard;Léopard;Panthera pardus;sauvage;savane,foret;afrique_tropicale,afrique_est,afrique_australe,inde,moyen_orient;1;garder;
-untamedwilds:big_cat/tiger;Tigre;Panthera tigris;sauvage;foret;siberie,chine,asie_sud_est;1;garder;"tigre de Sibérie à l'Amour ; race régionale (Asie) ; chasse les joueurs blessés"
-untamedwilds:big_cat/snow_leopard;Léopard des neiges;Panthera uncia;sauvage;haute_montagne;steppes_tibet;1;garder;"race régionale (Asie) ; version rare (sommets seulement), chasse les blessés"
-untamedwilds:big_cat/jaguar;Jaguar;Panthera onca;sauvage;foret_tropicale,marais;amazonie,amerique_centrale;1;garder;
-untamedwilds:big_cat/puma;Puma;Puma concolor;sauvage;montagne,foret;ouest_mexique,andes,boreale,cone_sud;1;garder;
-untamedwilds:big_cat/cave_lion;cave lion;—;fantastique;—;—;—;retirer;espèce disparue
-untamedwilds:big_cat/sabertooth;sabertooth;—;fantastique;—;—;—;retirer;espèce disparue
-untamedwilds:big_cat/marsupial_lion;marsupial lion;—;fantastique;—;—;—;retirer;espèce disparue
-untamedwilds:bison/plains;Bison d'Amérique;Bison bison;sauvage;prairie;grandes_plaines;4-10;garder;race régionale (Amériques)
-untamedwilds:bison/wisent;Bison d'Europe;Bison bonasus;sauvage;foret;continentale;3-6;garder;Białowieża, Carpates
-untamedwilds:boar/eurasian;Sanglier;Sus scrofa;sauvage;foret;atlantique,mediterranee;3-6;garder;race régionale (Europe)
-untamedwilds:boar/peccary;Pécari;Pecari tajacu;sauvage;foret_tropicale,desert;amazonie,amerique_centrale,ouest_mexique;3-6;garder;
-untamedwilds:boar/red_river;Potamochère roux;Potamochoerus porcus;sauvage;foret_tropicale;afrique_tropicale;3-6;garder;
-untamedwilds:boar/warthog;Phacochère;Phacochoerus africanus;sauvage;savane;afrique_est,afrique_australe,sahara_sahel;2-5;garder;
-untamedwilds:camel/dromedary;Dromadaire;Camelus dromedarius;sauvage;desert;maghreb,sahara_sahel;2-6;garder;"féral en Australie ; race régionale (Afrique)"
-untamedwilds:camel/bactrian;Chameau de Bactriane;Camelus bactrianus;ferme;steppe,desert;steppes_tibet;2-4;garder;
-untamedwilds:camel/wild_bactrian;Chameau sauvage;Camelus ferus;sauvage;desert;steppes_tibet;2-4;garder;désert de Gobi
-untamedwilds:rhino/black;Rhinocéros noir;Diceros bicornis;sauvage;savane;afrique_est,afrique_australe;1;garder;
-untamedwilds:rhino/white;Rhinocéros blanc;Ceratotherium simum;sauvage;savane;afrique_australe,afrique_est;1-3;garder;
-untamedwilds:rhino/indian;Rhinocéros indien;Rhinoceros unicornis;sauvage;prairie,marais;inde;1;garder;
-untamedwilds:rhino/javan;Rhinocéros de Java;Rhinoceros sondaicus;sauvage;foret_tropicale;asie_sud_est;1;garder;très rare
-untamedwilds:rhino/sumatran;Rhinocéros de Sumatra;Dicerorhinus sumatrensis;sauvage;foret_tropicale;asie_sud_est;1;garder;très rare
-untamedwilds:rhino/wooly;Rhinocéros laineux;—;fantastique;—;—;—;retirer;espèce disparue
-untamedwilds:hyena/spotted;Hyène tachetée;Crocuta crocuta;sauvage;savane;afrique_tropicale;3-6;garder;"prédateur ; race régionale (Afrique)"
-untamedwilds:hyena/striped;Hyène rayée;Hyaena hyaena;sauvage;desert,steppe;sahara_sahel,maghreb,moyen_orient,inde;1-2;garder;
-untamedwilds:hyena/brown;Hyène brune;Parahyaena brunnea;sauvage;desert,savane;afrique_australe;1-2;garder;
-untamedwilds:hyena/aardwolf;Protèle;Proteles cristata;sauvage;savane;afrique_est,afrique_australe;1;garder;
-untamedwilds:hyena/shortface;Hyène géante;—;fantastique;—;—;—;retirer;espèce disparue
-untamedwilds:wildebeest/blue;Gnou bleu;Connochaetes taurinus;sauvage;savane;afrique_est,afrique_australe;6-12;garder;grande migration
-untamedwilds:wildebeest/black;Gnou à queue blanche;Connochaetes gnou;sauvage;prairie;afrique_australe;4-8;garder;
-untamedwilds:aardvark/common;Oryctérope;Orycteropus afer;sauvage;savane;afrique_est,afrique_australe,afrique_tropicale;1;garder;
-untamedwilds:hippo/common;Hippopotame;Hippopotamus amphibius;sauvage;eau_douce;afrique_tropicale;3-8;garder;"dangereux ; race régionale (Afrique)"
-untamedwilds:opossum/virginia;Opossum;Didelphis virginiana;sauvage;foret;grandes_plaines,ouest_mexique,amerique_centrale;1;garder;
-untamedwilds:large_snake/anaconda;Anaconda;Eunectes murinus;sauvage;eau_douce,marais;amazonie;1;garder;"prédateur ; race régionale (Amériques)"
-untamedwilds:large_snake/reticulated_python;Python réticulé;Malayopython reticulatus;sauvage;foret_tropicale;asie_sud_est;1;garder;prédateur
-untamedwilds:giant_salamander/chinese;Salamandre géante de Chine;Andrias davidianus;sauvage;eau_douce;chine;1;garder;
-untamedwilds:giant_salamander/japanese;Salamandre géante du Japon;Andrias japonicus;sauvage;eau_douce;japon_coree;1;garder;
-untamedwilds:giant_salamander/hellbender;Ménopome;Cryptobranchus alleganiensis;sauvage;eau_douce;grandes_plaines;1;garder;Appalaches
-untamedwilds:monitor/nile;Varan du Nil;Varanus niloticus;sauvage;eau_douce,savane;afrique_tropicale,afrique_est,afrique_australe,sahara_sahel;1;garder;
-untamedwilds:monitor/desert;Varan du désert;Varanus griseus;sauvage;desert;sahara_sahel,maghreb,moyen_orient;1;garder;
-untamedwilds:monitor/bengal;Varan du Bengale;Varanus bengalensis;sauvage;foret,culture;inde;1;garder;
-untamedwilds:monitor/water;Varan malais;Varanus salvator;sauvage;eau_douce,cote;asie_sud_est,inde;1;garder;
-untamedwilds:monitor/rock;Varan des rochers;Varanus albigularis;sauvage;savane;afrique_australe,afrique_est;1;garder;
-untamedwilds:snake/adder;Vipère péliade;Vipera berus;sauvage;prairie,foret;atlantique,continentale,nordique,alpine,siberie;1;garder;venimeux
-untamedwilds:snake/grass_snake;Couleuvre à collier;Natrix natrix;sauvage;marais,prairie;atlantique,mediterranee,continentale,nordique;1;garder;race régionale (Europe)
-untamedwilds:snake/rattlesnake;Crotale diamantin;Crotalus adamanteus;sauvage;foret,prairie;grandes_plaines;1;garder;venimeux
-untamedwilds:snake/western_rattlesnake;Crotale de l'Ouest;Crotalus oreganus / atrox;sauvage;desert,steppe;ouest_mexique;1;garder;"venimeux ; race régionale (Amériques)"
-untamedwilds:snake/corn;Serpent des blés;Pantherophis guttatus;sauvage;foret,culture;grandes_plaines;1;garder;
-untamedwilds:snake/gray_kingsnake;Serpent-roi gris;Lampropeltis alterna;sauvage;desert;ouest_mexique;1;garder;
-untamedwilds:snake/swamp_moccasin;Mocassin d'eau;Agkistrodon piscivorus;sauvage;marais;grandes_plaines;1;garder;venimeux
-untamedwilds:snake/coral;Serpent corail;Micrurus;sauvage;foret_tropicale;ouest_mexique;1;garder;"venimeux ; race régionale (Amériques)"
-untamedwilds:snake/coral_blue;Serpent corail bleu;Calliophis bivirgatus;sauvage;foret_tropicale;asie_sud_est;1;garder;venimeux
-untamedwilds:snake/emerald;Boa émeraude;Corallus caninus;sauvage;foret_tropicale;amazonie;1;garder;
-untamedwilds:snake/ball_python;Python royal;Python regius;sauvage;savane;afrique_tropicale;1;garder;
-untamedwilds:snake/black_mamba;Mamba noir;Dendroaspis polylepis;sauvage;savane;afrique_est,afrique_australe;1;garder;venimeux
-untamedwilds:snake/green_mamba;Mamba vert;Dendroaspis viridis;sauvage;foret_tropicale;afrique_tropicale,afrique_est;1;garder;venimeux
-untamedwilds:snake/rice_paddy;Serpent des rizières;Hypsiscopus plumbea;sauvage;marais,culture (rizières);asie_sud_est,chine,inde;1;garder;
-untamedwilds:snake/carpet_python;Python tapis;Morelia spilota;sauvage;foret;australie,melanesie;1;garder;
-untamedwilds:snake/taipan;Taïpan;Oxyuranus;sauvage;savane,desert;australie,melanesie;1;garder;venimeux
-untamedwilds:snake/cave_racer;Couleuvre des cavernes;—;fantastique;souterrain;—;1;souterrain;étage couches hautes
-untamedwilds:tortoise/gopher;Gophère;Gopherus polyphemus;sauvage;prairie,foret;grandes_plaines;1;garder;
-untamedwilds:tortoise/marginated;Tortue bordée;Testudo marginata;sauvage;mediterraneen;mediterranee;1;garder;
-untamedwilds:tortoise/leopard;Tortue léopard;Stigmochelys pardalis;sauvage;savane;afrique_est,afrique_australe;1;garder;
-untamedwilds:tortoise/sulcata;Tortue sillonnée;Centrochelys sulcata;sauvage;desert,savane;sahara_sahel;1;garder;
-untamedwilds:tortoise/star;Tortue étoilée (UW);Geochelone elegans;sauvage;savane;inde;1;garder;race régionale (Asie) de aquaculture:starshell_turtle
-untamedwilds:tortoise/asian_box;Tortue-boîte d'Asie;Cuora amboinensis;sauvage;marais,foret_tropicale;asie_sud_est;1;garder;
-untamedwilds:softshell_turtle/chinese;Trionyx de Chine;Pelodiscus sinensis;sauvage;eau_douce;chine,japon_coree;1;garder;
-untamedwilds:softshell_turtle/nile;Trionyx du Nil;Trionyx triunguis;sauvage;eau_douce;sahara_sahel,afrique_tropicale;1;garder;
-untamedwilds:softshell_turtle/spiny;Trionyx épineux;Apalone spinifera;sauvage;eau_douce;grandes_plaines;1;garder;
-untamedwilds:softshell_turtle/black;Trionyx noir;Nilssonia nigricans;sauvage;eau_douce;inde;1;garder;
-untamedwilds:softshell_turtle/peacock;Trionyx paon;Nilssonia hurum;sauvage;eau_douce;inde;1;garder;
-untamedwilds:softshell_turtle/flapshell;Trionyx à clapets;Lissemys punctata;sauvage;eau_douce;inde;1;garder;
-untamedwilds:softshell_turtle/pig_nose;Tortue à nez de cochon;Carettochelys insculpta;sauvage;eau_douce;melanesie,australie;1;garder;
-untamedwilds:newt/fire_salamander;Salamandre tachetée;Salamandra salamandra;sauvage;eau_douce,foret (humide);atlantique,continentale,mediterranee,alpine;1-3;garder;
-untamedwilds:newt/crested;Triton crêté;Triturus cristatus;sauvage;eau_douce,foret (humide);atlantique,continentale,nordique;1-3;garder;
-untamedwilds:newt/alpine;Triton alpestre;Ichthyosaura alpestris;sauvage;eau_douce,foret (humide);alpine,continentale;1-3;garder;
-untamedwilds:newt/marbled;Triton marbré;Triturus marmoratus;sauvage;eau_douce,foret (humide);atlantique,mediterranee;1-3;garder;
-untamedwilds:newt/ribbed;Pleurodèle;Pleurodeles waltl;sauvage;eau_douce,foret (humide);mediterranee,maghreb;1-3;garder;
-untamedwilds:newt/eastern;Triton vert;Notophthalmus viridescens;sauvage;eau_douce,foret (humide);grandes_plaines,boreale;1-3;garder;
-untamedwilds:newt/coastal;Triton du Pacifique;Taricha torosa;sauvage;eau_douce,foret (humide);ouest_mexique;1-3;garder;
-untamedwilds:newt/tiger;Salamandre tigrée;Ambystoma tigrinum;sauvage;eau_douce,foret (humide);grandes_plaines;1-3;garder;
-untamedwilds:newt/fire_belly;Triton à ventre de feu;Cynops orientalis;sauvage;eau_douce,foret (humide);chine,japon_coree;1-3;garder;
-untamedwilds:newt/axolotl;Axolotl (UW);Ambystoma mexicanum;sauvage;eau_douce,foret (humide);ouest_mexique;1-3;garder;race régionale (Amériques) de minecraft:axolotl
-untamedwilds:catfish/blue;Poisson-chat bleu;Ictalurus furcatus;poisson;eau_douce;grandes_plaines;1;garder;
-untamedwilds:catfish/channel;Barbue de rivière;Ictalurus punctatus;poisson;eau_douce;grandes_plaines,boreale;1;garder;
-untamedwilds:catfish/redtail;Poisson-chat à queue rouge;Phractocephalus hemioliopterus;poisson;eau_douce;amazonie;1;garder;
-untamedwilds:arowana/silver;Arowana argenté;Osteoglossum bicirrhosum;poisson;eau_douce;amazonie;1;garder;
-untamedwilds:arowana/black;Arowana noir;Osteoglossum ferreirai;poisson;eau_douce;amazonie;1;garder;
-untamedwilds:arowana/green;Arowana d'Asie;Scleropages formosus;poisson;eau_douce;asie_sud_est;1;garder;
-untamedwilds:arowana/jardini;Arowana perlé;Scleropages jardinii;poisson;eau_douce;australie,melanesie;1;garder;
-untamedwilds:manatee/west;Lamantin des Caraïbes;Trichechus manatus;sauvage;eau_douce,cote;amerique_centrale,grandes_plaines;1-2;garder;
-untamedwilds:manatee/amazon;Lamantin d'Amazonie;Trichechus inunguis;sauvage;eau_douce,cote;amazonie;1-2;garder;
-untamedwilds:manatee/african;Lamantin d'Afrique;Trichechus senegalensis;sauvage;eau_douce,cote;afrique_tropicale;1-2;garder;"fleuves d'Afrique de l'Ouest et centrale (Niger, Congo) ; pas dans le Nil"
-untamedwilds:manatee/dugong;Dugong;Dugong dugon;sauvage;eau_douce,cote;asie_sud_est,australie,melanesie,inde,afrique_est;1-2;garder;
-untamedwilds:manatee/steller;Rhytine de Steller;—;fantastique;—;—;—;retirer;espèce disparue
-untamedwilds:baleen_whale/blue;Baleine bleue;Balaenoptera musculus;sauvage;large;tous_les_océans;1-2;garder;
-untamedwilds:baleen_whale/fin;Rorqual commun;Balaenoptera physalus;sauvage;large;tous_les_océans;1-2;garder;
-untamedwilds:baleen_whale/gray;Baleine grise;Eschrichtius robustus;sauvage;large;boreale,ouest_mexique,siberie;1-2;garder;
-untamedwilds:baleen_whale/humpback;Baleine à bosse;Megaptera novaeangliae;sauvage;large;tous_les_océans;1-2;garder;
-untamedwilds:baleen_whale/minke;Petit rorqual;Balaenoptera acutorostrata;sauvage;large;mers_froides;1-2;garder;
-untamedwilds:baleen_whale/sei;Rorqual boréal;Balaenoptera borealis;sauvage;large;tous_les_océans;1-2;garder;
-untamedwilds:shark/great_white;Grand requin blanc;Carcharodon carcharias;poisson;mer,large;afrique_australe,australie,nouvelle_zelande,ouest_mexique,mediterranee;1;garder;prédateur
-untamedwilds:shark/hammerhead;Requin-marteau;Sphyrna;poisson;mer,large;mers_tropicales;1;garder;
-untamedwilds:shark/tiger;Requin-tigre;Galeocerdo cuvier;poisson;mer,large;mers_tropicales;1;garder;prédateur
-untamedwilds:shark/bull;Requin-bouledogue;Carcharhinus leucas;poisson;mer,large;mers_tropicales;1;garder;remonte les fleuves
-untamedwilds:shark/lemon;Requin-citron;Negaprion brevirostris;poisson;mer,large;amerique_centrale;1;garder;mangroves
-untamedwilds:shark/mako;Requin mako;Isurus oxyrinchus;poisson;mer,large;mers_chaudes_tempérées;1;garder;
-untamedwilds:shark/bigeye;Requin-renard à gros yeux;Alopias superciliosus;poisson;mer,large;mers_chaudes_tempérées;1;garder;
-untamedwilds:shark/bluntnose;Requin griset;Hexanchus griseus;poisson;mer,large;mers_profondes;1;garder;
-untamedwilds:shark/goblin;Requin-lutin;Mitsukurina owstoni;poisson;mer,large;abysses;1;garder;japon : fosses
-untamedwilds:shark/greenland;Requin du Groenland;Somniosus microcephalus;poisson;mer,large;arctique,nordique;1;garder;
-untamedwilds:whale_shark/whale_shark;Requin-baleine;Rhincodon typus;poisson;large;mers_tropicales;1;garder;
-untamedwilds:sawfish/large_tooth;Poisson-scie commun;Pristidae;poisson;cote,eau_douce;mers_tropicales;1;garder;
-untamedwilds:sawfish/small_tooth;Poisson-scie tident;Pristidae;poisson;cote,eau_douce;mers_tropicales;1;garder;
-untamedwilds:sawfish/green;Poisson-scie vert;Pristidae;poisson;cote,eau_douce;mers_tropicales;1;garder;
-untamedwilds:sawfish/narrow;Poisson-scie à rostre étroit;Pristidae;poisson;cote,eau_douce;mers_tropicales;1;garder;
-untamedwilds:sawfish/dwarf;Poisson-scie nain;Pristidae;poisson;cote,eau_douce;mers_tropicales;1;garder;
-untamedwilds:sunfish/sunfish;Poisson-lune;Mola mola;poisson;large;mers_chaudes_tempérées;1;garder;
-untamedwilds:sunfish/southern;Poisson-lune du Sud;Mola alexandrini;poisson;large;australie,nouvelle_zelande,cone_sud;1;garder;
-untamedwilds:football_fish/atlantic;Baudroie abyssale;Himantolophus groenlandicus;poisson;abysses;mers_profondes;1;garder;
-untamedwilds:giant_clam/*;Bénitier géant;Tridacna;sauvage;mer (récifs);mers_tropicales;1-4;garder;plusieurs espèces
-untamedwilds:trevally/*;Carangue;Carangidae;poisson;mer (récifs);mers_tropicales;1-4;garder;plusieurs espèces
-untamedwilds:triggerfish/*;Baliste;Balistidae;poisson;mer (récifs);mers_tropicales;1-4;garder;plusieurs espèces
-untamedwilds:spadefish/*;Platax;Ephippidae;poisson;mer (récifs);mers_tropicales;1-4;garder;plusieurs espèces
-untamedwilds:king_crab/red;Crabe royal;Paralithodes camtschaticus;sauvage;mer (fond froid);siberie,boreale,nordique;1-2;garder;
-untamedwilds:king_crab/centolla;Centolla;Lithodes santolla;sauvage;mer (fond froid);cone_sud;1-2;garder;
-untamedwilds:king_crab/spiny;Crabe royal épineux;Paralithodes brevipes;sauvage;mer (fond froid);japon_coree,siberie;1-2;garder;
-untamedwilds:butterfly/monarch;Monarque;Danaus plexippus;insecte;prairie;grandes_plaines,ouest_mexique,boreale;1-3;garder;
-untamedwilds:butterfly/tiger_swallowtail;Grand porte-queue tigré;Papilio glaucus;insecte;foret;grandes_plaines;1-3;garder;
-untamedwilds:butterfly/mourning_cloak;Morio;Nymphalis antiopa;insecte;foret;atlantique,mediterranee,continentale,nordique,alpine,boreale,grandes_plaines;1-3;garder;
-untamedwilds:butterfly/red_admiral;Vulcain;Vanessa atalanta;insecte;prairie;atlantique,mediterranee,continentale,nordique,alpine,grandes_plaines;1-3;garder;
-untamedwilds:butterfly/peacock;Paon-du-jour;Aglais io;insecte;prairie;atlantique,mediterranee,continentale,nordique,alpine,siberie;1-3;garder;
-untamedwilds:butterfly/brimstone;Citron;Gonepteryx rhamni;insecte;foret;atlantique,mediterranee,continentale,nordique,alpine;1-3;garder;
-untamedwilds:butterfly/cabbage;Piéride du chou;Pieris brassicae;insecte;culture;atlantique,mediterranee,continentale,nordique,alpine,maghreb,moyen_orient;1-3;garder;
-untamedwilds:butterfly/comma;Robert-le-diable;Polygonia c-album;insecte;foret;atlantique,mediterranee,continentale,nordique,alpine;1-3;garder;
-untamedwilds:butterfly/orange_tip;Aurore;Anthocharis cardamines;insecte;prairie;atlantique,mediterranee,continentale,nordique,alpine;1-3;garder;
-untamedwilds:butterfly/speckled_wood;Tircis;Pararge aegeria;insecte;foret;atlantique,mediterranee,continentale,nordique,alpine,maghreb;1-3;garder;
-untamedwilds:butterfly/emperor;Grand mars changeant;Apatura iris;insecte;foret;continentale,atlantique;1-3;garder;
-untamedwilds:butterfly/morpho;Morpho bleu;Morpho;insecte;foret_tropicale;amazonie,amerique_centrale;1-3;garder;
-untamedwilds:butterfly/glasswing;Papillon de verre;Greta oto;insecte;foret_tropicale;amerique_centrale;1-3;garder;
-untamedwilds:butterfly/blue_swallowtail;Porte-queue bleu;Papilio ulysses;insecte;foret_tropicale;australie,melanesie;1-3;garder;
-untamedwilds:butterfly/birdwing;Ornithoptère;Ornithoptera;insecte;foret_tropicale;melanesie,asie_sud_est;1-3;garder;
-untamedwilds:butterfly/kite;Voilier;Graphium;insecte;foret_tropicale;asie_sud_est,inde;1-3;garder;
-untamedwilds:butterfly/leaf;Papillon-feuille;Kallima inachus;insecte;foret_tropicale;inde,asie_sud_est,chine;1-3;garder;
-untamedwilds:butterfly/malachite;Malachite;Siproeta stelenes;insecte;foret_tropicale;amerique_centrale,amazonie;1-3;garder;
-untamedwilds:butterfly/narcissus;Narcisse;Ornithoptera / Papilio;insecte;foret;japon_coree;1-3;garder;
-untamedwilds:butterfly/triangle;Voilier triangle;Graphium sarpedon;insecte;foret;asie_sud_est,chine,japon_coree,australie;1-3;garder;
-untamedwilds:tarantula/rose;Mygale rose du Chili;Grammostola rosea;insecte;foret,desert;cone_sud,andes;1;garder;
-untamedwilds:tarantula/red_knee;Mygale à genoux rouges;Brachypelma hamorii;insecte;foret,desert;ouest_mexique;1;garder;
-untamedwilds:tarantula/black;Mygale noire;Grammostola pulchra;insecte;foret,desert;cone_sud;1;garder;
-untamedwilds:tarantula/black_and_white;Mygale zébrée;Acanthoscurria geniculata;insecte;foret,desert;amazonie;1;garder;
-untamedwilds:tarantula/cobalt;Mygale bleu cobalt;Cyriopagopus lividus;insecte;foret,desert;asie_sud_est,australie,melanesie;1;garder;
-untamedwilds:tarantula/king;Mygale roi;Pelinobius muticus;insecte;foret,desert;afrique_est;1;garder;
-untamedwilds:tarantula/regalis;Mygale royale;Poecilotheria regalis;insecte;foret,desert;inde;1;garder;
-untamedwilds:tarantula/tiger;Mygale tigre;Psalmopoeus;insecte;foret,desert;amerique_centrale;1;garder;
-untamedwilds:terror_bird/*;Oiseaux-terreur;—;fantastique;—;—;—;retirer;espèces disparues
-untamedwilds:spitter/purple;Cracheur;—;fantastique;souterrain;—;1;souterrain;créature inventée : étage profondeurs
-naturalist:alligator;Alligator;Alligator mississippiensis;sauvage;marais,eau_douce;grandes_plaines;1-2;garder;"Floride, Louisiane ; prédateur"
-naturalist:bear;Grizzli (Nat.);Ursus arctos;sauvage;foret,montagne;nordique,continentale;1;garder;"race régionale (Europe) de untamedwilds:bear/brown ; neutre, défend ses petits"
-naturalist:bluejay;Geai bleu;Cyanocitta cristata;sauvage;foret;boreale;1-2;garder;race régionale (Amériques)
-naturalist:boar;Sanglier (Nat.);Sus scrofa;sauvage;foret;continentale,alpine;3-6;garder;race régionale (Europe) de untamedwilds:boar/eurasian
-naturalist:butterfly;Papillon (Nat.);plusieurs espèces;insecte;prairie;grandes_plaines,ouest_mexique,boreale,atlantique,mediterranee,continentale,nordique,alpine,siberie,maghreb,moyen_orient,amazonie,amerique_centrale,australie,melanesie,asie_sud_est,inde,chine,japon_coree;1-3;garder;"race / variante de la famille untamedwilds:butterfly ; 20 espèces réelles chez Untamed Wilds"
-naturalist:caterpillar;Chenille;Lepidoptera;insecte;foret;partout_sauf:arctique,antarctique;1;garder;
-naturalist:moth;Papillon de nuit;Heterocera;insecte;foret (nuit);partout_sauf:arctique,antarctique;1-3;garder;
-naturalist:canary;Canari;Serinus canaria;sauvage;foret;mediterranee,maghreb;1-3;garder;Canaries, Madère, Açores
-naturalist:cardinal;Cardinal rouge;Cardinalis cardinalis;sauvage;foret;grandes_plaines,ouest_mexique;1-2;garder;
-naturalist:catfish;Poisson-chat (Nat.);plusieurs espèces;poisson;eau_douce;grandes_plaines,boreale,amazonie;1;garder;race / variante de la famille untamedwilds:catfish
-naturalist:bass;Bar (Nat.);Micropterus dolomieu;poisson;eau_douce;grandes_plaines;2-4;garder;race régionale (Amériques) de aquaculture:smallmouth_bass
-naturalist:coral_snake;Serpent corail (Nat.);Micrurus;sauvage;foret_tropicale;amerique_centrale,amazonie;1;garder;race régionale (Amériques) de untamedwilds:snake/coral
-naturalist:rattlesnake;Serpent à sonnettes (Nat.);Crotalus oreganus / atrox;sauvage;desert,steppe;grandes_plaines;1;garder;race régionale (Amériques) de untamedwilds:snake/western_rattlesnake
-naturalist:snake;Serpent (Nat.);Natrix natrix;sauvage;marais,prairie;maghreb;1;garder;race régionale (Afrique) de untamedwilds:snake/grass_snake
-naturalist:deer;Chevreuil;Capreolus capreolus;sauvage;foret;atlantique,mediterranee,continentale,nordique,alpine,siberie,japon_coree;2-4;garder;cerf de Virginie en Amérique ?
-naturalist:dragonfly;Libellule;Anisoptera;insecte;eau_douce,marais;atlantique,mediterranee,continentale,nordique,alpine,moyen_orient,steppes_tibet,siberie,inde,chine,japon_coree,asie_sud_est,australie,nouvelle_zelande,melanesie;1-3;garder;race régionale (Europe/Asie/Océanie)
-naturalist:duck;Canard colvert;Anas platyrhynchos;sauvage;eau_douce,marais;partout_sauf:antarctique,sahara_sahel,amazonie;2-5;garder;
-naturalist:elephant;Éléphant;Loxodonta / Elephas;sauvage;savane,foret_tropicale;afrique_tropicale,afrique_est,afrique_australe;3-8;garder;"seul éléphant du pack ; race régionale (Afrique)"
-naturalist:finch;Pinson des arbres;Fringilla coelebs;sauvage;foret;atlantique,mediterranee,continentale,nordique,alpine,maghreb;2-4;garder;
-naturalist:firefly;Luciole;Lampyridae;insecte;prairie,foret (nuit);atlantique,continentale,mediterranee,grandes_plaines,japon_coree,chine,asie_sud_est;3-8;garder;
-naturalist:giraffe;Girafe;Giraffa;sauvage;savane;afrique_est,afrique_australe;2-6;garder;
-naturalist:hippo;Hippopotame (Nat.);Hippopotamus amphibius;sauvage;eau_douce;afrique_est,afrique_australe;3-8;garder;race régionale (Afrique) de untamedwilds:hippo/common
-naturalist:hyena;Hyène (Nat.);Crocuta crocuta;sauvage;savane;afrique_est,afrique_australe;3-6;garder;race régionale (Afrique) de untamedwilds:hyena/spotted
-naturalist:lion;Lion (Nat.);Panthera leo;sauvage;savane;inde;2-5;garder;race régionale (Asie) de untamedwilds:big_cat/lion
-naturalist:rhino;Rhinocéros (Nat.);plusieurs espèces;sauvage;savane;afrique_australe;1;garder;"race / variante de la famille untamedwilds:rhino ; rhinocéros blanc : défend ses petits"
-naturalist:tortoise;Tortue terrestre (Nat.);Testudo hermanni;sauvage;mediterraneen,steppe;mediterranee,maghreb,moyen_orient;1;garder;tortue d'Hermann / grecque
-naturalist:lizard;Lézard;Lacertidae / Agamidae;sauvage;desert,steppe,mediterraneen;mediterranee,maghreb,sahara_sahel,moyen_orient,australie,ouest_mexique;1-2;garder;
-naturalist:ostrich;Autruche;Struthio camelus;sauvage;savane,desert;afrique_est,afrique_australe,sahara_sahel;2-5;garder;
-naturalist:robin;Rouge-gorge;Erithacus rubecula;sauvage;foret;atlantique,mediterranee,continentale,nordique,alpine;1-2;garder;
-naturalist:snail;Escargot;Helix;insecte;foret,prairie (pluie);atlantique,continentale,mediterranee,alpine;1-3;garder;
-naturalist:sparrow;Moineau;Passer domesticus;sauvage;culture;partout_sauf:arctique,antarctique,amazonie;3-6;garder;
-naturalist:termite;Termite;Isoptera;insecte;savane,foret_tropicale;afrique_est,afrique_tropicale,afrique_australe,australie,inde,amazonie,asie_sud_est;termitière;garder;
-naturalist:vulture;Vautour;Gyps;sauvage;ciel (savane, montagne);afrique_est,sahara_sahel,mediterranee,inde,moyen_orient,alpine;1-3;garder;vautour fauve dans les Alpes et les Pyrénées
-naturalist:zebra;Zèbre;Equus quagga;sauvage;savane;afrique_est,afrique_australe;4-10;garder;
-wildernature:bison;Bison (WN);Bison bison;sauvage;prairie;boreale;4-10;garder;race régionale (Amériques) de untamedwilds:bison/plains
-wildernature:boar;Sanglier (WN);Sus scrofa;sauvage;foret;moyen_orient,siberie;3-6;garder;race régionale (Asie) de untamedwilds:boar/eurasian
-wildernature:cassowary;Casoar;Casuarius;sauvage;foret_tropicale;melanesie,australie;1;garder;dangereux
-wildernature:deer;Cerf élaphe;Cervus elaphus;sauvage;foret,prairie;atlantique,mediterranee,continentale,nordique,alpine,boreale,grandes_plaines,siberie;3-6;garder;wapiti en Amérique
-wildernature:dog;Chien;Canis familiaris;ferme;—;—;—;a_confirmer;animal de compagnie : villages seulement ?
-wildernature:flamingo;Flamant rose;Phoenicopterus;sauvage;cote,marais (lagunes salées);mediterranee,afrique_est,afrique_australe,amerique_centrale,andes,inde;6-15;garder;Camargue
-wildernature:hedgehog;Hérisson;Erinaceus europaeus;sauvage;foret,prairie;atlantique,mediterranee,continentale,nordique,alpine;1;garder;
-wildernature:minisheep;Mouton nain;Ovis aries;ferme;montagne;alpine;2-4;a_confirmer;race domestique, utile ?
-wildernature:owl;Chouette;Strigiformes;sauvage;foret (nuit);partout_sauf:antarctique;1;garder;
-wildernature:pelican;Pélican;Pelecanus;sauvage;cote,eau_douce;afrique_est,afrique_tropicale,grandes_plaines,amerique_centrale,australie,inde,mediterranee;3-8;garder;
-wildernature:penguin;Manchot (WN);Spheniscidae;sauvage;banquise,cote;cone_sud,antarctique;4-10;garder;race régionale (Amériques/Pôles) de ecologics:penguin
-wildernature:raccoon;Raton laveur;Procyon lotor;sauvage;foret;boreale;1-3;garder;race régionale (Amériques)
-wildernature:red_wolf;Loup roux;Canis rufus;sauvage;foret,marais;grandes_plaines;3-6;garder;
-wildernature:squirrel;Écureuil (WN);Sciurus vulgaris;sauvage;foret;continentale,nordique;1-2;garder;race régionale (Europe) de ecologics:squirrel
-wildernature:turkey;Dindon sauvage;Meleagris gallopavo;sauvage;foret,prairie;grandes_plaines;3-6;garder;race régionale (Amériques)
-meadow:wooly_sheep;Mouton laineux;Ovis aries;ferme;montagne,prairie;alpine;3-5;garder;
-meadow:horned_sheep;Mouton cornu;Ovis aries;ferme;montagne;mediterranee,moyen_orient,alpine;3-5;garder;
-meadow:wooly_cow;Vache laineuse (Highland);Bos taurus;ferme;montagne,prairie;alpine,atlantique,nordique;2-4;garder;
-meadow:water_buffalo;Buffle d'eau;Bubalus bubalis;ferme;marais,culture (rizières);inde,asie_sud_est,chine;3-6;garder;
-ecologics:camel;Dromadaire (Eco.);Camelus dromedarius;sauvage;desert;moyen_orient,australie;2-6;garder;race régionale (Asie/Océanie) de untamedwilds:camel/dromedary
-ecologics:coconut_crab;Crabe de cocotier;Birgus latro;sauvage;cote (plage tropicale);melanesie,asie_sud_est;1;garder;
-ecologics:penguin;Manchot;Spheniscidae;sauvage;banquise,cote;afrique_australe,nouvelle_zelande;4-10;garder;race régionale (Afrique/Océanie)
-ecologics:squirrel;Écureuil roux;Sciurus vulgaris;sauvage;foret;atlantique,mediterranee;1-2;garder;race régionale (Europe)
-aquaculture:atlantic_cod;Morue;Gadus morhua;poisson;mer;atlantique,nordique;3-7;garder;race régionale (Europe)
-aquaculture:atlantic_halibut;Flétan de l'Atlantique;Hippoglossus hippoglossus;poisson;mer;atlantique,nordique;1;garder;
-aquaculture:atlantic_herring;Hareng;Clupea harengus;poisson;mer;atlantique,nordique;5-10;garder;
-aquaculture:pacific_halibut;Flétan du Pacifique;Hippoglossus stenolepis;poisson;mer;boreale,japon_coree,siberie;1;garder;
-aquaculture:pollock;Lieu;Pollachius;poisson;mer;atlantique,nordique,boreale;3-6;garder;
-aquaculture:blackfish;Tautogue;Tautoga onitis;poisson;cote;grandes_plaines;1-3;garder;
-aquaculture:red_grouper;Mérou rouge;Epinephelus morio;poisson;mer;amerique_centrale,grandes_plaines;1;garder;
-aquaculture:tuna;Thon;Thunnus;poisson;large;mers_chaudes_tempérées;3-6;garder;
-aquaculture:pink_salmon;Saumon rose;Oncorhynchus gorbuscha;poisson;mer,eau_douce;boreale,siberie,japon_coree;3-6;garder;
-aquaculture:brown_trout;Truite brune;Salmo trutta;poisson;eau_douce;atlantique,mediterranee,continentale,nordique,alpine;2-4;garder;
-aquaculture:carp;Carpe;Cyprinus carpio;poisson;eau_douce;continentale,chine,japon_coree,steppes_tibet;2-4;garder;
-aquaculture:perch;Perche;Perca fluviatilis;poisson;eau_douce;atlantique,continentale,nordique,siberie;3-6;garder;
-aquaculture:muskellunge;Maskinongé;Esox masquinongy;poisson;eau_douce;boreale,grandes_plaines;1;garder;
-aquaculture:minnow;Vairon;Phoxinus / Pimephales;poisson;eau_douce;atlantique,mediterranee,continentale,nordique,alpine,boreale,grandes_plaines,siberie;5-10;garder;
-aquaculture:bluegill;Crapet arlequin;Lepomis macrochirus;poisson;eau_douce;grandes_plaines;3-6;garder;
-aquaculture:smallmouth_bass;Achigan à petite bouche;Micropterus dolomieu;poisson;eau_douce;boreale;2-4;garder;race régionale (Amériques)
-aquaculture:rainbow_trout;Truite arc-en-ciel;Oncorhynchus mykiss;poisson;eau_douce;boreale,grandes_plaines,ouest_mexique;2-4;garder;
-aquaculture:gar;Lépisosté;Lepisosteus;poisson;eau_douce;grandes_plaines,amerique_centrale;1-2;garder;
-aquaculture:arapaima;Arapaïma;Arapaima gigas;poisson;eau_douce;amazonie;1;garder;
-aquaculture:piranha;Piranha;Pygocentrus nattereri;poisson;eau_douce;amazonie;4-8;garder;race régionale (Amériques)
-aquaculture:tambaqui;Tambaqui;Colossoma macropomum;poisson;eau_douce;amazonie;1-3;garder;
-aquaculture:bayad;Bayad;Bagrus bajad;poisson;eau_douce;sahara_sahel,afrique_tropicale;1-2;garder;
-aquaculture:boulti;Tilapia du Nil;Oreochromis niloticus;poisson;eau_douce;sahara_sahel,afrique_tropicale,afrique_est;3-6;garder;
-aquaculture:capitaine;Perche du Nil;Lates niloticus;poisson;eau_douce;sahara_sahel,afrique_tropicale,afrique_est;1;garder;
-aquaculture:synodontis;Synodontis;Synodontis;poisson;eau_douce;sahara_sahel,afrique_tropicale;2-4;garder;
-aquaculture:catfish;Poisson-chat (Aq.);Silurus glanis;poisson;eau_douce;continentale;1;garder;silure d'Europe (les espèces d'Amérique viennent d'Untamed Wilds)
-aquaculture:jellyfish;Méduse;Scyphozoa;sauvage;mer;toutes_les_mers;2-5;garder;race régionale (mers)
-aquaculture:arrau_turtle;Tortue de l'Arrau;Podocnemis expansa;sauvage;eau_douce;amazonie;1-3;garder;
-aquaculture:box_turtle;Tortue-boîte;Terrapene carolina;sauvage;foret;grandes_plaines;1;garder;
-aquaculture:starshell_turtle;Tortue étoilée de l'Inde;Geochelone elegans;sauvage;savane;inde;1;garder;race régionale (Asie)
-aquaculture:red_shrooma;Shrooma rouge;—;fantastique;—;—;—;retirer;
-aquaculture:brown_shrooma;Shrooma brun;—;fantastique;—;—;—;retirer;
-savage_and_ravage:creepie;Creepie;—;monstre;souterrain;—;1-3;souterrain;petit creeper : couches hautes
-savage_and_ravage:skeleton_villager;Villageois squelette;—;monstre;souterrain;—;1;souterrain;couches hautes
-savage_and_ravage:iceologer;Iceologer;—;monstre;—;—;—;a_confirmer;illageois : laissés aux patrouilles et structures (MAJ structures) ?
-savage_and_ravage:griefer;Griefer;—;monstre;—;—;—;a_confirmer;illageois : laissés aux patrouilles et structures (MAJ structures) ?
-savage_and_ravage:executioner;Bourreau;—;monstre;—;—;—;a_confirmer;illageois : laissés aux patrouilles et structures (MAJ structures) ?
-savage_and_ravage:trickster;Trickster;—;monstre;—;—;—;a_confirmer;illageois : laissés aux patrouilles et structures (MAJ structures) ?
-guardvillagers:illusioner;Illusionniste;—;monstre;—;—;—;a_confirmer;illageois : patrouilles et structures
-guardvillagers:guard;Garde;—;ferme;villages;—;—;garder;villages seulement, inchangé
-betteranimalsplus:reindeer;Renne / caribou;Rangifer tarandus;sauvage;toundra,foret;arctique,siberie,nordique,boreale;4-10;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:moose;Élan;Alces alces;sauvage;foret,marais;nordique,boreale;1-2;garder;"mod à installer ; id à vérifier ; race régionale (Europe/Amériques)"
-betteranimalsplus:walrus;Morse;Odobenus rosmarus;sauvage;banquise,cote;arctique;3-8;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:deer;Cerf de Virginie;Odocoileus virginianus;sauvage;foret,prairie;grandes_plaines,boreale,ouest_mexique,amerique_centrale;2-4;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:coyote;Coyote;Canis latrans;sauvage;prairie,desert,foret;grandes_plaines,ouest_mexique,boreale;1-3;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:lammergeier;Gypaète barbu;Gypaetus barbatus;sauvage;ciel (montagne);alpine,steppes_tibet,afrique_est,moyen_orient,maghreb;1;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:badger;Blaireau;Meles meles / Taxidea taxus;sauvage;foret,prairie;atlantique,continentale,mediterranee,nordique,grandes_plaines,ouest_mexique;1-2;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:pheasant;Faisan de Colchide;Phasianus colchicus;sauvage;culture,prairie;chine,steppes_tibet,japon_coree,continentale,atlantique;1-3;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:goose;Oie cendrée / bernache;Anser anser / Branta canadensis;sauvage;eau_douce,marais;atlantique,continentale,nordique,siberie,boreale,grandes_plaines;4-10;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:songbird;Passereaux;Passeriformes;sauvage;foret;partout_sauf:arctique,antarctique;2-4;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:crab;Crabe;Brachyura;sauvage;cote;toutes_les_côtes;2-4;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:horseshoe_crab;Limule;Limulus / Tachypleus;sauvage;cote (plage);grandes_plaines,asie_sud_est,chine,japon_coree;1-3;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:eel_freshwater;Anguille d'Europe;Anguilla anguilla;poisson;eau_douce;atlantique,continentale,mediterranee,nordique,maghreb;1-2;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:eel_saltwater;Murène;Muraenidae;poisson;mer (récifs);mers_chaudes_tempérées;1;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:lamprey;Lamproie;Petromyzon marinus;poisson;eau_douce,mer;atlantique,nordique,grandes_plaines;1-2;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:octopus;Pieuvre;Octopus vulgaris;sauvage;mer;toutes_les_mers;1;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:nautilus;Nautile;Nautilus pompilius;sauvage;mer profonde;melanesie,asie_sud_est,australie;1;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:barracuda;Barracuda;Sphyraena barracuda;poisson;mer (récifs);mers_tropicales;1-4;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:bobbit_worm;Ver de Bobbit;Eunice aphroditois;sauvage;mer (récifs);asie_sud_est,australie,melanesie,japon_coree;1;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:flying_fish;Poisson volant;Exocoetidae;poisson;large;mers_tropicales;3-6;garder;"mod à installer ; id à vérifier ; race régionale (mers)"
-betteranimalsplus:squid_giant;Calmar géant;Architeuthis dux;sauvage;abysses;mers_profondes;1;garder;"mod à installer ; id à vérifier ; race régionale (mers)"
-betteranimalsplus:squid_colossal;Calmar colossal;Mesonychoteuthis hamiltoni;sauvage;abysses;antarctique;1;garder;"mod à installer ; id à vérifier"
-betteranimalsplus:feral_wolf;Loup féral;Canis lupus;sauvage;foret,toundra,steppe,montagne;continentale,nordique,alpine,boreale;4-8;garder;"mod à installer ; id à vérifier ; race régionale (Europe/Amériques) de minecraft:wolf"
-betteranimalsplus:turkey;Dindon (BA+);Meleagris gallopavo;sauvage;foret,prairie;ouest_mexique;3-6;garder;"mod à installer ; id à vérifier ; race régionale (Amériques) de wildernature:turkey"
-betteranimalsplus:boar;Sanglier (BA+);Sus scrofa;sauvage;foret;inde,chine,japon_coree;3-6;garder;"mod à installer ; id à vérifier ; race régionale (Asie) de untamedwilds:boar/eurasian"
-betteranimalsplus:squirrel;Écureuil (BA+);Sciurus vulgaris;sauvage;foret;alpine,siberie,japon_coree;1-2;garder;"mod à installer ; id à vérifier ; race régionale (Europe/Asie) de ecologics:squirrel"
-betteranimalsplus:butterfly;Papillon (BA+);plusieurs espèces;insecte;prairie;grandes_plaines,ouest_mexique,boreale,atlantique,mediterranee,continentale,nordique,alpine,siberie,maghreb,moyen_orient,amazonie,amerique_centrale,australie,melanesie,asie_sud_est,inde,chine,japon_coree;1-3;garder;"race / variante de la famille untamedwilds:butterfly ; mod à installer ; id à vérifier"
-betteranimalsplus:dragonfly;Libellule (BA+);Anisoptera;insecte;eau_douce,marais;maghreb,sahara_sahel,afrique_tropicale,afrique_est,afrique_australe,boreale,grandes_plaines,ouest_mexique,amerique_centrale,amazonie,andes,cone_sud;1-3;garder;"mod à installer ; id à vérifier ; race régionale (Afrique/Amériques) de naturalist:dragonfly"
-betteranimalsplus:tarantula;Mygale (BA+);plusieurs espèces;insecte;foret,desert;cone_sud,andes,ouest_mexique,amazonie,asie_sud_est,australie,melanesie,afrique_est,inde,amerique_centrale,australie;1;garder;"race / variante de la famille untamedwilds:tarantula ; mod à installer ; id à vérifier ; mygales siffleuses en Australie"
-betteranimalsplus:piranha;Piranha (BA+);Pygocentrus nattereri;poisson;eau_douce;amazonie;4-8;garder;"mod à installer ; id à vérifier ; race régionale (Amériques) de aquaculture:piranha"
-betteranimalsplus:shark;Requin (BA+);plusieurs espèces;poisson;mer,large;afrique_australe,australie,nouvelle_zelande,ouest_mexique,mediterranee,amerique_centrale,arctique,nordique;1;garder;"race / variante de la famille untamedwilds:shark ; mod à installer ; id à vérifier"
-betteranimalsplus:whale;Baleine (BA+);plusieurs espèces;sauvage;large;boreale,ouest_mexique,siberie;1-2;garder;"race / variante de la famille untamedwilds:baleen_whale ; mod à installer ; id à vérifier"
-betteranimalsplus:jellyfish;Méduse (BA+);Scyphozoa;sauvage;mer;toutes_les_mers;2-5;garder;"mod à installer ; id à vérifier ; race régionale (mers) de aquaculture:jellyfish"
-betteranimalsplus:brownbear;Ours brun (BA+);Ursus arctos;sauvage;foret,montagne;alpine;1;garder;"mod à installer ; id à vérifier ; race régionale (Europe) de untamedwilds:bear/brown"
-betteranimalsplus:blackbear;Ours noir (BA+);Ursus americanus;sauvage;foret;grandes_plaines;1;garder;"mod à installer ; id à vérifier ; race régionale (Amériques) de untamedwilds:bear/black"
-betteranimalsplus:hirschgeist;Hirschgeist;—;fantastique;foret (nuit);continentale,alpine;1;garder;"esprit-cerf du folklore germanique : endémique, spawn RARE ; mod à installer"
-betteranimalsplus:zotzpyre;Zotzpyre;—;fantastique;foret_tropicale (nuit);amerique_centrale;1-2;garder;"chauve-souris vampire du mythe maya : endémique, spawn RARE ; mod à installer"
-alexsmobs:alligator_snapping_turtle;Tortue alligator;Macrochelys temminckii;sauvage;eau_douce,marais;grandes_plaines;1;garder;mod à installer
-alexsmobs:anaconda;Anaconda;Eunectes murinus;sauvage;foret_tropicale,eau_douce,marais;asie_sud_est;1;garder;"joue le python réticulé chasseur d'hommes ; spawn RARE"
-alexsmobs:anteater;Fourmilier;Myrmecophaga tridactyla;sauvage;savane,foret_tropicale;amazonie,cone_sud,amerique_centrale;1;garder;mod à installer
-alexsmobs:bald_eagle;Pygargue à tête blanche;Haliaeetus leucocephalus;sauvage;ciel (près de l'eau);boreale,grandes_plaines;1;garder;mod à installer
-alexsmobs:banana_slug;Limace banane;Ariolimax;insecte;foret (humide);boreale;1-2;garder;"forêts côtières du Pacifique nord ; mod à installer"
-alexsmobs:bison;Bison;Bison bison;sauvage;prairie;grandes_plaines;4-8;garder;"mod à installer ; race régionale (Amériques) de untamedwilds:bison/plains"
-alexsmobs:blobfish;Blobfish;Psychrolutes marcidus;poisson;abysses;australie,nouvelle_zelande;1;garder;"fonds profonds ; mod à installer"
-alexsmobs:blue_jay;Geai bleu;Cyanocitta cristata;sauvage;foret;grandes_plaines;1-2;garder;"mod à installer ; race régionale (Amériques) de naturalist:bluejay"
-alexsmobs:cachalot_whale;Grand cachalot;Physeter macrocephalus;sauvage;large;tous_les_océans_profonds;1-2;garder;mod à installer
-alexsmobs:caiman;Caïman;Caiman crocodilus;sauvage;eau_douce,marais;amazonie,amerique_centrale;1-3;garder;mod à installer
-alexsmobs:capuchin_monkey;Capucin;Cebus;sauvage;foret_tropicale;amazonie,amerique_centrale;3-6;garder;mod à installer
-alexsmobs:catfish;Poisson-chat (AM);Silurus;poisson;eau_douce;grandes_plaines,boreale,amazonie;1;garder;"race / variante de la famille untamedwilds:catfish ; mod à installer"
-alexsmobs:cockroach;Cafard;Blattodea;insecte;sol,souterrain;partout_sauf:arctique,antarctique,boreale,siberie,nordique;2-4;garder;mod à installer
-alexsmobs:comb_jelly;Cténophore;Ctenophora;sauvage;mer,large;toutes_les_mers;1-3;garder;mod à installer
-alexsmobs:crocodile;Crocodile;Crocodylus niloticus / porosus;sauvage;eau_douce,cote;sahara_sahel,afrique_tropicale,afrique_est,inde,asie_sud_est,australie,melanesie;1-2;garder;"prédateur ; mod à installer ; Nil jusqu'en Égypte (eau douce seulement)"
-alexsmobs:crow;Corbeau;Corvus;sauvage;culture,foret;partout_sauf:antarctique,amazonie;2-5;garder;mod à installer
-alexsmobs:devils_hole_pupfish;Cyprinodon du trou du Diable;Cyprinodon diabolis;poisson;eau_douce;ouest_mexique;2-4;garder;"très rare (une seule source au Nevada) ; mod à installer"
-alexsmobs:elephant;Éléphant;Loxodonta / Elephas;sauvage;savane,foret_tropicale;inde,asie_sud_est;3-8;garder;"mod à installer ; race régionale (Asie) de naturalist:elephant"
-alexsmobs:emu;Émeu;Dromaius novaehollandiae;sauvage;savane,steppe;australie;2-5;garder;mod à installer
-alexsmobs:flying_fish;Poisson volant;Exocoetidae;poisson;large;mers_tropicales;3-6;garder;"mod à installer ; race régionale (mers) de betteranimalsplus:flying_fish"
-alexsmobs:frilled_shark;Requin lézard;Chlamydoselachus anguineus;poisson;abysses;japon_coree,toutes_les_mers_profondes;1;garder;mod à installer
-alexsmobs:gazelle;Gazelle;Gazella;sauvage;savane,desert;afrique_est,sahara_sahel,maghreb,moyen_orient;4-8;garder;mod à installer
-alexsmobs:gelada_monkey;Gélada;Theropithecus gelada;sauvage;montagne,prairie;afrique_est;4-10;garder;"hauts plateaux d'Éthiopie ; mod à installer"
-alexsmobs:giant_squid;Calmar géant;Architeuthis dux;sauvage;abysses;mers_profondes;1;garder;"mod à installer ; race régionale (mers) de betteranimalsplus:squid_giant"
-alexsmobs:gorilla;Gorille;Gorilla;sauvage;foret_tropicale;afrique_tropicale;3-8;garder;mod à installer
-alexsmobs:grizzly_bear;Grizzli;Ursus arctos horribilis;sauvage;foret,montagne;boreale,grandes_plaines;1;garder;"race régionale (Amérique du Nord) de untamedwilds:bear/brown ; attaque si on approche"
-alexsmobs:hammerhead_shark;Requin-marteau;Sphyrna;poisson;mer,large;mers_tropicales;1-3;garder;"prédateur ; mod à installer"
-alexsmobs:hummingbird;Colibri;Trochilidae;sauvage;foret_tropicale,prairie;amerique_centrale,amazonie,andes,ouest_mexique;1-2;garder;mod à installer
-alexsmobs:jerboa;Gerboise;Jaculus;sauvage;desert;sahara_sahel,maghreb,moyen_orient,steppes_tibet;1-2;garder;mod à installer
-alexsmobs:kangaroo;Kangourou;Macropus;sauvage;savane,steppe;australie;3-6;garder;mod à installer
-alexsmobs:komodo_dragon;Dragon de Komodo;Varanus komodoensis;sauvage;savane,foret;asie_sud_est;1;garder;"îles de la Sonde  ; mod à installer"; prédateur
-alexsmobs:leafcutter_ant;Fourmi coupe-feuille;Atta;insecte;foret_tropicale;amazonie,amerique_centrale;fourmilière;garder;mod à installer
-alexsmobs:lobster;Homard;Homarus;sauvage;cote,mer;atlantique,nordique,boreale;1-3;garder;mod à installer
-alexsmobs:maned_wolf;Loup à crinière;Chrysocyon brachyurus;sauvage;savane;cone_sud,amazonie;1;garder;mod à installer
-alexsmobs:mantis_shrimp;Crevette-mante;Stomatopoda;sauvage;mer (récifs);mers_tropicales;1;garder;mod à installer
-alexsmobs:mimic_octopus;Poulpe mimétique;Thaumoctopus mimicus;sauvage;mer (récifs);asie_sud_est,melanesie;1;garder;mod à installer
-alexsmobs:moose;Élan;Alces alces;sauvage;foret,marais;siberie;1-2;garder;"mod à installer ; race régionale (Asie) de betteranimalsplus:moose"
-alexsmobs:mudskipper;Périophthalme;Periophthalmus;poisson;cote (mangrove);asie_sud_est,afrique_tropicale,inde,australie;2-4;garder;mod à installer
-alexsmobs:orca;Orque;Orcinus orca;sauvage;mer,large;toutes_les_mers_froides;3-6;garder;"prédateur ; mod à installer"
-alexsmobs:platypus;Ornithorynque;Ornithorhynchus anatinus;sauvage;eau_douce;australie;1;garder;mod à installer
-alexsmobs:potoo;Ibijau;Nyctibius;sauvage;foret_tropicale;amazonie,amerique_centrale;1;garder;mod à installer
-alexsmobs:raccoon;Raton laveur;Procyon lotor;sauvage;foret;grandes_plaines,ouest_mexique;1-3;garder;"mod à installer ; race régionale (Amériques) de wildernature:raccoon"
-alexsmobs:rain_frog;Grenouille de pluie;Breviceps;sauvage;desert (côtier);afrique_australe;1-2;garder;mod à installer
-alexsmobs:rattlesnake;Crotale;Crotalus;sauvage;desert,steppe;ouest_mexique;1;garder;"mod à installer ; race régionale (Amériques) de untamedwilds:snake/western_rattlesnake"
-alexsmobs:rhinoceros;Rhinocéros (AM);Rhinocerotidae;sauvage;savane;afrique_est,inde;1-2;garder;"race / variante de la famille untamedwilds:rhino ; rhinocéros noir et indien : charge si on approche"
-alexsmobs:roadrunner;Géocoucou;Geococcyx;sauvage;desert;ouest_mexique;1;garder;mod à installer
-alexsmobs:seagull;Mouette;Laridae;sauvage;cote;toutes_les_côtes_sauf_tropicales;3-6;garder;mod à installer
-alexsmobs:seal;Phoque;Phocidae;sauvage;cote,banquise;arctique,nordique,boreale,siberie,antarctique,atlantique,cone_sud,nouvelle_zelande;3-6;garder;"côtes froides seulement (règle le bug du Mexique) ; mod à installer"
-alexsmobs:shoebill;Bec-en-sabot;Balaeniceps rex;sauvage;marais;afrique_est,afrique_tropicale;1;garder;mod à installer
-alexsmobs:skunk;Moufette;Mephitis mephitis;sauvage;foret,prairie;grandes_plaines,boreale,ouest_mexique;1-2;garder;mod à installer
-alexsmobs:snow_leopard;Léopard des neiges;Panthera uncia;sauvage;montagne;steppes_tibet;1;garder;"race régionale (Asie) de untamedwilds:big_cat/snow_leopard ; version courante, craintive"
-alexsmobs:sugar_glider;Phalanger volant;Petaurus breviceps;sauvage;foret;australie,melanesie;1-3;garder;mod à installer
-alexsmobs:tarantula_hawk;Guêpe-tarentule;Pepsis;insecte;desert;ouest_mexique,grandes_plaines,amerique_centrale;1;garder;mod à installer
-alexsmobs:tasmanian_devil;Diable de Tasmanie;Sarcophilus harrisii;sauvage;foret;australie;1;garder;"Tasmanie seulement ; mod à installer"
-alexsmobs:terrapin;Tortue de rivière;Malaclemys / Trachemys;sauvage;eau_douce,marais;grandes_plaines;1-3;garder;mod à installer
-alexsmobs:tiger;Tigre (AM);Panthera tigris;sauvage;foret;inde;1;garder;"race régionale (Asie) de untamedwilds:big_cat/tiger ; Inde : attaque si on approche (Sundarbans)"
-alexsmobs:toucan;Toucan;Ramphastidae;sauvage;foret_tropicale;amazonie,amerique_centrale;1-3;garder;mod à installer
-alexsmobs:triops;Triops;Triops cancriformis;sauvage;eau_douce (mares);sahara_sahel,maghreb,moyen_orient,steppes_tibet,australie,ouest_mexique;3-6;garder;"mares temporaires ; mod à installer"
-alexsmobs:fly;Mouche;Musca domestica;insecte;partout;partout_sauf:arctique,antarctique;1;garder;mod à installer
-alexsmobs:centipede_head;Mille-pattes des cavernes;—;fantastique;souterrain;—;1;souterrain;"profondeurs ; mod à installer"
-alexsmobs:rocky_roller;Rouleau rocheux;—;fantastique;souterrain;—;1;souterrain;"profondeurs ; mod à installer"
-alexsmobs:underminer;Sous-mineur;—;fantastique;souterrain;—;1;souterrain;"abîmes ; mod à installer"
-alexsmobs:murmur;Murmure;—;fantastique;souterrain;—;1;souterrain;"abîmes ; mod à installer"
-alexsmobs:skreecher;Skreecher;—;fantastique;souterrain;—;1;souterrain;"abîmes ; mod à installer"
-alexsmobs:farseer;Voyant éloigné;—;fantastique;souterrain;—;1;souterrain;"abîmes ; mod à installer"
-alexsmobs:froststalker;Traqueur givrant;—;fantastique;souterrain;—;—;souterrain;"profondeurs ; mod à installer"
-alexsmobs:tusklin;Tusklin;—;fantastique;souterrain;—;—;souterrain;"profondeurs ; mod à installer"
-alexsmobs:guster;Rafalleur;—;fantastique;—;—;—;a_confirmer;"créature inventée : abîmes ou retirée ? ; mod à installer"
-alexsmobs:flutter;Papilloneur;—;fantastique;—;—;—;a_confirmer;"créature inventée : abîmes ou retirée ? ; mod à installer"
-alexsmobs:sunbird;Oiseau de soleil;—;fantastique;—;—;—;a_confirmer;"créature inventée : abîmes ou retirée ? ; mod à installer"
-alexsmobs:sea_bear;Tardigrade géant;—;fantastique;souterrain (eau), fosses océaniques;—;—;souterrain;"grottes inondées des profondeurs et fond des fosses (Mariannes, sous y 0) ; mod à installer"
-alexsmobs:skelewag;Squeladon;—;fantastique;souterrain (eau), fosses océaniques;—;—;souterrain;"grottes inondées des profondeurs et fond des fosses (Mariannes, sous y 0) ; mod à installer"
-alexsmobs:mungus;Mongus;—;fantastique;—;—;—;a_confirmer;"vit sur les îles champignons ; créature inventée : abîmes ou retirée ? ; mod à installer"
-alexsmobs:bunfungus;Champilièvre;—;fantastique;—;—;—;a_confirmer;"créature inventée : abîmes ou retirée ? ; mod à installer"
-alexsmobs:mimicube;Imicube;—;fantastique;End;—;—;garder;"End : on n'y touche pas ; mod à installer"
+id;nom;espece_reelle;categorie;milieu;terroirs;groupe;statut;note;abondance
+minecraft:cow;Vache;Bos taurus;ferme;prairie,culture;atlantique,mediterranee,continentale,nordique,alpine,maghreb,afrique_est,afrique_australe,moyen_orient,inde,chine,grandes_plaines,cone_sud,australie,nouvelle_zelande;2-4;garder;zones agricoles et prairies seulement;R
+minecraft:pig;Cochon;Sus domesticus;ferme;culture,foret;atlantique,mediterranee,continentale,nordique,alpine,chine,japon_coree,asie_sud_est,grandes_plaines,amerique_centrale,melanesie;2-4;garder;rare là où l'élevage porcin l'est;R
+minecraft:sheep;Mouton;Ovis aries;ferme;prairie,steppe,montagne;atlantique,mediterranee,continentale,nordique,alpine,maghreb,sahara_sahel,afrique_est,afrique_australe,moyen_orient,steppes_tibet,inde,chine,cone_sud,australie,nouvelle_zelande;3-6;garder;;R
+minecraft:chicken;Poule;Gallus gallus domesticus;ferme;culture;partout_sauf:arctique,antarctique,boreale,siberie;2-4;garder;;R
+minecraft:horse;Cheval;Equus caballus;ferme;prairie,steppe;atlantique,continentale,mediterranee,steppes_tibet,siberie,grandes_plaines,cone_sud,maghreb,moyen_orient;2-6;garder;steppes : chevaux semi-sauvages;R
+minecraft:donkey;Âne;Equus asinus;ferme;steppe,desert;mediterranee,maghreb,sahara_sahel,afrique_est,moyen_orient,inde;1-3;garder;;R
+minecraft:llama;Lama;Lama glama;ferme;montagne,prairie;andes;3-6;garder;seul camélidé des Andes du pack;R
+minecraft:goat;Chèvre de montagne;Capra ibex / Oreamnos americanus;sauvage;montagne;alpine,steppes_tibet,boreale,ouest_mexique,moyen_orient,maghreb;2-4;garder;bouquetin en Europe et Asie, chèvre des Rocheuses en Amérique;C
+minecraft:rabbit;Lapin;Oryctolagus / Lepus;sauvage;prairie,steppe,desert,toundra;partout_sauf:antarctique,melanesie,australie,nouvelle_zelande;2-3;garder;variantes blanc (neige) et doré (désert);TC
+minecraft:wolf;Loup;Canis lupus;sauvage;foret,toundra,steppe,montagne;moyen_orient,steppes_tibet,siberie,inde,arctique;4-8;garder;"prédateur ; race régionale (Asie/Pôles)";PC
+minecraft:fox;Renard;Vulpes vulpes / lagopus;sauvage;foret,prairie,toundra;atlantique,mediterranee,continentale,nordique,alpine,siberie,boreale,grandes_plaines,maghreb,moyen_orient,japon_coree,chine,australie,arctique;1-2;garder;renard polaire (variante neige) en Arctique;C
+minecraft:polar_bear;Ours polaire;Ursus maritimus;sauvage;banquise,toundra;arctique;1-2;garder;"race régionale (Pôles) ; version calme, spawn RARE";R
+minecraft:panda;Panda géant;Ailuropoda melanoleuca;sauvage;foret (bambou);chine;1-2;garder;race régionale (Asie);R
+minecraft:ocelot;Ocelot;Leopardus pardalis;sauvage;foret_tropicale;amerique_centrale,amazonie,ouest_mexique;1;garder;;PC
+minecraft:parrot;Perroquet;Psittacidae;sauvage;foret_tropicale;amazonie,amerique_centrale,afrique_tropicale,asie_sud_est,melanesie,australie;1-2;garder;;C
+minecraft:turtle;Tortue marine;Chelonia mydas;sauvage;cote (plage);mediterranee,amerique_centrale,asie_sud_est,melanesie,australie,inde,afrique_est;2-5;garder;plages chaudes;PC
+minecraft:dolphin;Dauphin;Delphinidae;sauvage;mer,large;mers_chaudes_tempérées;2-6;garder;;C
+minecraft:squid;Calmar;Teuthida;sauvage;mer,large;toutes_les_mers;2-4;garder;;C
+minecraft:glow_squid;Calmar luisant;—;fantastique;souterrain (eau);—;2-4;souterrain;grottes inondées seulement;
+minecraft:cod;Morue (base);Gadus morhua;poisson;mer;boreale;3-7;garder;race régionale (Amériques) de aquaculture:atlantic_cod;C
+minecraft:salmon;Saumon;Salmo salar;poisson;mer,eau_douce;atlantique,nordique,boreale,siberie,japon_coree;3-5;garder;remonte les rivières;C
+minecraft:tropical_fish;Poisson tropical;Pomacentridae etc.;poisson;mer (récifs);mers_tropicales;4-8;garder;;TC
+minecraft:pufferfish;Poisson-globe;Tetraodontidae;poisson;mer;mers_tropicales;1-3;garder;;C
+minecraft:axolotl;Axolotl;Ambystoma mexicanum;sauvage;eau_douce;ouest_mexique;1-2;garder;"lac de Xochimilco, remis en surface ; race régionale (Amériques)";R
+minecraft:frog;Grenouille;Anura;sauvage;marais,eau_douce;partout_sauf:arctique,antarctique,sahara_sahel;2-5;garder;variantes froide, tempérée, chaude;C
+minecraft:bee;Abeille;Apis mellifera;insecte;prairie,foret;partout_sauf:arctique,antarctique;nid;garder;;C
+minecraft:bat;Chauve-souris;Chiroptera;sauvage;souterrain;partout_sauf:arctique,antarctique;2-8;garder;grottes;C
+minecraft:mooshroom;Champimeuh;—;fantastique;—;—;—;retirer;pas d'îles champignons sur la vraie Terre;
+untamedwilds:bear/brown;Ours brun;Ursus arctos;sauvage;foret,montagne;siberie;1;garder;"race régionale (Sibérie, Kamtchatka) ; chasse les joueurs blessés";PC
+untamedwilds:bear/black;Ours noir;Ursus americanus;sauvage;foret;boreale;1;garder;race régionale (Amériques);C
+untamedwilds:bear/polar;Ours polaire (UW);Ursus maritimus;sauvage;banquise;arctique;1;garder;"race régionale (Pôles) de minecraft:polar_bear ; version courante, prédateur";PC
+untamedwilds:bear/panda;Panda (UW);Ailuropoda melanoleuca;sauvage;foret;chine;1;garder;race régionale (Asie) de minecraft:panda;R
+untamedwilds:bear/spectacled;Ours à lunettes;Tremarctos ornatus;sauvage;foret (montagne);andes;1;garder;;R
+untamedwilds:bear/sun;Ours malais;Helarctos malayanus;sauvage;foret_tropicale;asie_sud_est;1;garder;;PC
+untamedwilds:bear/cave;Ours des cavernes;Ursus spelaeus;fantastique;—;—;—;retirer;espèce disparue;
+untamedwilds:bear/blind;Ours aveugle;—;fantastique;—;—;—;retirer;inventé;
+untamedwilds:big_cat/lion;Lion;Panthera leo;sauvage;savane;sahara_sahel,afrique_est,afrique_australe;2-5;garder;"troupe ; lion d'Asie au Gujarat ; race régionale (Afrique)";PC
+untamedwilds:big_cat/leopard;Léopard;Panthera pardus;sauvage;savane,foret;afrique_tropicale,afrique_est,afrique_australe,inde,moyen_orient;1;garder;;PC
+untamedwilds:big_cat/tiger;Tigre;Panthera tigris;sauvage;foret;siberie,chine,asie_sud_est;1;garder;"tigre de Sibérie à l'Amour ; race régionale (Asie) ; chasse les joueurs blessés";R
+untamedwilds:big_cat/snow_leopard;Léopard des neiges;Panthera uncia;sauvage;haute_montagne;steppes_tibet;1;garder;"race régionale (Asie) ; version rare (sommets seulement), chasse les blessés";R
+untamedwilds:big_cat/jaguar;Jaguar;Panthera onca;sauvage;foret_tropicale,marais;amazonie,amerique_centrale;1;garder;;PC
+untamedwilds:big_cat/puma;Puma;Puma concolor;sauvage;montagne,foret;ouest_mexique,andes,boreale,cone_sud;1;garder;;PC
+untamedwilds:big_cat/cave_lion;cave lion;—;fantastique;—;—;—;retirer;espèce disparue;
+untamedwilds:big_cat/sabertooth;sabertooth;—;fantastique;—;—;—;retirer;espèce disparue;
+untamedwilds:big_cat/marsupial_lion;marsupial lion;—;fantastique;—;—;—;retirer;espèce disparue;
+untamedwilds:bison/plains;Bison d'Amérique;Bison bison;sauvage;prairie;grandes_plaines;4-10;garder;race régionale (Amériques);TC
+untamedwilds:bison/wisent;Bison d'Europe;Bison bonasus;sauvage;foret;continentale;3-6;garder;Białowieża, Carpates;PC
+untamedwilds:boar/eurasian;Sanglier;Sus scrofa;sauvage;foret;atlantique,mediterranee;3-6;garder;race régionale (Europe);C
+untamedwilds:boar/peccary;Pécari;Pecari tajacu;sauvage;foret_tropicale,desert;amazonie,amerique_centrale,ouest_mexique;3-6;garder;;C
+untamedwilds:boar/red_river;Potamochère roux;Potamochoerus porcus;sauvage;foret_tropicale;afrique_tropicale;3-6;garder;;C
+untamedwilds:boar/warthog;Phacochère;Phacochoerus africanus;sauvage;savane;afrique_est,afrique_australe,sahara_sahel;2-5;garder;;C
+untamedwilds:camel/dromedary;Dromadaire;Camelus dromedarius;sauvage;desert;maghreb,sahara_sahel;2-6;garder;"féral en Australie ; race régionale (Afrique)";R
+untamedwilds:camel/bactrian;Chameau de Bactriane;Camelus bactrianus;ferme;steppe,desert;steppes_tibet;2-4;garder;;R
+untamedwilds:camel/wild_bactrian;Chameau sauvage;Camelus ferus;sauvage;desert;steppes_tibet;2-4;garder;désert de Gobi;R
+untamedwilds:rhino/black;Rhinocéros noir;Diceros bicornis;sauvage;savane;afrique_est,afrique_australe;1;garder;;PC
+untamedwilds:rhino/white;Rhinocéros blanc;Ceratotherium simum;sauvage;savane;afrique_australe,afrique_est;1-3;garder;;PC
+untamedwilds:rhino/indian;Rhinocéros indien;Rhinoceros unicornis;sauvage;prairie,marais;inde;1;garder;;PC
+untamedwilds:rhino/javan;Rhinocéros de Java;Rhinoceros sondaicus;sauvage;foret_tropicale;asie_sud_est;1;garder;très rare;R
+untamedwilds:rhino/sumatran;Rhinocéros de Sumatra;Dicerorhinus sumatrensis;sauvage;foret_tropicale;asie_sud_est;1;garder;très rare;R
+untamedwilds:rhino/wooly;Rhinocéros laineux;—;fantastique;—;—;—;retirer;espèce disparue;
+untamedwilds:hyena/spotted;Hyène tachetée;Crocuta crocuta;sauvage;savane;afrique_tropicale;3-6;garder;"prédateur ; race régionale (Afrique)";C
+untamedwilds:hyena/striped;Hyène rayée;Hyaena hyaena;sauvage;desert,steppe;sahara_sahel,maghreb,moyen_orient,inde;1-2;garder;;PC
+untamedwilds:hyena/brown;Hyène brune;Parahyaena brunnea;sauvage;desert,savane;afrique_australe;1-2;garder;;PC
+untamedwilds:hyena/aardwolf;Protèle;Proteles cristata;sauvage;savane;afrique_est,afrique_australe;1;garder;;PC
+untamedwilds:hyena/shortface;Hyène géante;—;fantastique;—;—;—;retirer;espèce disparue;
+untamedwilds:wildebeest/blue;Gnou bleu;Connochaetes taurinus;sauvage;savane;afrique_est,afrique_australe;6-12;garder;grande migration;C
+untamedwilds:wildebeest/black;Gnou à queue blanche;Connochaetes gnou;sauvage;prairie;afrique_australe;4-8;garder;;C
+untamedwilds:aardvark/common;Oryctérope;Orycteropus afer;sauvage;savane;afrique_est,afrique_australe,afrique_tropicale;1;garder;;PC
+untamedwilds:hippo/common;Hippopotame;Hippopotamus amphibius;sauvage;eau_douce;afrique_tropicale;3-8;garder;"dangereux ; race régionale (Afrique)";C
+untamedwilds:opossum/virginia;Opossum;Didelphis virginiana;sauvage;foret;grandes_plaines,ouest_mexique,amerique_centrale;1;garder;;C
+untamedwilds:large_snake/anaconda;Anaconda;Eunectes murinus;sauvage;eau_douce,marais;amazonie;1;garder;"prédateur ; race régionale (Amériques)";PC
+untamedwilds:large_snake/reticulated_python;Python réticulé;Malayopython reticulatus;sauvage;foret_tropicale;asie_sud_est;1;garder;prédateur;PC
+untamedwilds:giant_salamander/chinese;Salamandre géante de Chine;Andrias davidianus;sauvage;eau_douce;chine;1;garder;;R
+untamedwilds:giant_salamander/japanese;Salamandre géante du Japon;Andrias japonicus;sauvage;eau_douce;japon_coree;1;garder;;PC
+untamedwilds:giant_salamander/hellbender;Ménopome;Cryptobranchus alleganiensis;sauvage;eau_douce;grandes_plaines;1;garder;Appalaches;PC
+untamedwilds:monitor/nile;Varan du Nil;Varanus niloticus;sauvage;eau_douce,savane;afrique_tropicale,afrique_est,afrique_australe,sahara_sahel;1;garder;;C
+untamedwilds:monitor/desert;Varan du désert;Varanus griseus;sauvage;desert;sahara_sahel,maghreb,moyen_orient;1;garder;;PC
+untamedwilds:monitor/bengal;Varan du Bengale;Varanus bengalensis;sauvage;foret,culture;inde;1;garder;;PC
+untamedwilds:monitor/water;Varan malais;Varanus salvator;sauvage;eau_douce,cote;asie_sud_est,inde;1;garder;;PC
+untamedwilds:monitor/rock;Varan des rochers;Varanus albigularis;sauvage;savane;afrique_australe,afrique_est;1;garder;;PC
+untamedwilds:snake/adder;Vipère péliade;Vipera berus / Acanthophis;sauvage;prairie,foret,savane;atlantique,continentale,nordique,alpine,siberie,australie,melanesie;1;garder;"venimeux ; en Australie joue l'acanthophis (death adder)";C
+untamedwilds:snake/grass_snake;Couleuvre à collier;Natrix natrix;sauvage;marais,prairie;atlantique,mediterranee,continentale,nordique;1;garder;race régionale (Europe);C
+untamedwilds:snake/rattlesnake;Crotale diamantin;Crotalus adamanteus;sauvage;foret,prairie;grandes_plaines;1;garder;venimeux;C
+untamedwilds:snake/western_rattlesnake;Crotale de l'Ouest;Crotalus oreganus / atrox;sauvage;desert,steppe;ouest_mexique;1;garder;"venimeux ; race régionale (Amériques)";C
+untamedwilds:snake/corn;Serpent des blés;Pantherophis guttatus;sauvage;foret,culture;grandes_plaines;1;garder;;C
+untamedwilds:snake/gray_kingsnake;Serpent-roi gris;Lampropeltis alterna;sauvage;desert;ouest_mexique;1;garder;;PC
+untamedwilds:snake/swamp_moccasin;Mocassin d'eau;Agkistrodon piscivorus;sauvage;marais;grandes_plaines;1;garder;venimeux;C
+untamedwilds:snake/coral;Serpent corail;Micrurus;sauvage;foret_tropicale;ouest_mexique;1;garder;"venimeux ; race régionale (Amériques)";PC
+untamedwilds:snake/coral_blue;Serpent corail bleu;Calliophis bivirgatus;sauvage;foret_tropicale;asie_sud_est;1;garder;venimeux;PC
+untamedwilds:snake/emerald;Boa émeraude;Corallus caninus;sauvage;foret_tropicale;amazonie;1;garder;;PC
+untamedwilds:snake/ball_python;Python royal;Python regius;sauvage;savane;afrique_tropicale;1;garder;;C
+untamedwilds:snake/black_mamba;Mamba noir;Dendroaspis polylepis;sauvage;savane;afrique_est,afrique_australe;1;garder;venimeux;PC
+untamedwilds:snake/green_mamba;Mamba vert;Dendroaspis viridis;sauvage;foret_tropicale;afrique_tropicale,afrique_est;1;garder;venimeux;PC
+untamedwilds:snake/rice_paddy;Serpent des rizières;Hypsiscopus plumbea;sauvage;marais,culture (rizières);asie_sud_est,chine,inde;1;garder;;C
+untamedwilds:snake/carpet_python;Python tapis;Morelia spilota;sauvage;foret;australie,melanesie;1;garder;;TC
+untamedwilds:snake/taipan;Taïpan;Oxyuranus;sauvage;savane,desert;australie,melanesie;1;garder;venimeux;TC
+untamedwilds:snake/cave_racer;Couleuvre des cavernes;—;fantastique;souterrain;—;1;souterrain;étage couches hautes;
+untamedwilds:tortoise/gopher;Gophère;Gopherus polyphemus;sauvage;prairie,foret;grandes_plaines;1;garder;;PC
+untamedwilds:tortoise/marginated;Tortue bordée;Testudo marginata;sauvage;mediterraneen;mediterranee;1;garder;;PC
+untamedwilds:tortoise/leopard;Tortue léopard;Stigmochelys pardalis;sauvage;savane;afrique_est,afrique_australe;1;garder;;PC
+untamedwilds:tortoise/sulcata;Tortue sillonnée;Centrochelys sulcata;sauvage;desert,savane;sahara_sahel;1;garder;;PC
+untamedwilds:tortoise/star;Tortue étoilée (UW);Geochelone elegans;sauvage;savane;inde;1;garder;race régionale (Asie) de aquaculture:starshell_turtle;PC
+untamedwilds:tortoise/asian_box;Tortue-boîte d'Asie;Cuora amboinensis;sauvage;marais,foret_tropicale;asie_sud_est;1;garder;;PC
+untamedwilds:softshell_turtle/chinese;Trionyx de Chine;Pelodiscus sinensis;sauvage;eau_douce;chine,japon_coree;1;garder;;PC
+untamedwilds:softshell_turtle/nile;Trionyx du Nil;Trionyx triunguis;sauvage;eau_douce;sahara_sahel,afrique_tropicale;1;garder;;PC
+untamedwilds:softshell_turtle/spiny;Trionyx épineux;Apalone spinifera;sauvage;eau_douce;grandes_plaines;1;garder;;PC
+untamedwilds:softshell_turtle/black;Trionyx noir;Nilssonia nigricans;sauvage;eau_douce;inde;1;garder;;PC
+untamedwilds:softshell_turtle/peacock;Trionyx paon;Nilssonia hurum;sauvage;eau_douce;inde;1;garder;;PC
+untamedwilds:softshell_turtle/flapshell;Trionyx à clapets;Lissemys punctata;sauvage;eau_douce;inde;1;garder;;PC
+untamedwilds:softshell_turtle/pig_nose;Tortue à nez de cochon;Carettochelys insculpta;sauvage;eau_douce;melanesie,australie;1;garder;;PC
+untamedwilds:newt/fire_salamander;Salamandre tachetée;Salamandra salamandra;sauvage;eau_douce,foret (humide);atlantique,continentale,mediterranee,alpine;1-3;garder;;C
+untamedwilds:newt/crested;Triton crêté;Triturus cristatus;sauvage;eau_douce,foret (humide);atlantique,continentale,nordique;1-3;garder;;C
+untamedwilds:newt/alpine;Triton alpestre;Ichthyosaura alpestris;sauvage;eau_douce,foret (humide);alpine,continentale;1-3;garder;;C
+untamedwilds:newt/marbled;Triton marbré;Triturus marmoratus;sauvage;eau_douce,foret (humide);atlantique,mediterranee;1-3;garder;;C
+untamedwilds:newt/ribbed;Pleurodèle;Pleurodeles waltl;sauvage;eau_douce,foret (humide);mediterranee,maghreb;1-3;garder;;C
+untamedwilds:newt/eastern;Triton vert;Notophthalmus viridescens;sauvage;eau_douce,foret (humide);grandes_plaines,boreale;1-3;garder;;C
+untamedwilds:newt/coastal;Triton du Pacifique;Taricha torosa;sauvage;eau_douce,foret (humide);ouest_mexique;1-3;garder;;C
+untamedwilds:newt/tiger;Salamandre tigrée;Ambystoma tigrinum;sauvage;eau_douce,foret (humide);grandes_plaines;1-3;garder;;C
+untamedwilds:newt/fire_belly;Triton à ventre de feu;Cynops orientalis;sauvage;eau_douce,foret (humide);chine,japon_coree;1-3;garder;;C
+untamedwilds:newt/axolotl;Axolotl (UW);Ambystoma mexicanum;sauvage;eau_douce,foret (humide);ouest_mexique;1-3;garder;race régionale (Amériques) de minecraft:axolotl;R
+untamedwilds:catfish/blue;Poisson-chat bleu;Ictalurus furcatus;poisson;eau_douce;grandes_plaines;1;garder;;C
+untamedwilds:catfish/channel;Barbue de rivière;Ictalurus punctatus;poisson;eau_douce;grandes_plaines,boreale;1;garder;;C
+untamedwilds:catfish/redtail;Poisson-chat à queue rouge;Phractocephalus hemioliopterus;poisson;eau_douce;amazonie;1;garder;;PC
+untamedwilds:arowana/silver;Arowana argenté;Osteoglossum bicirrhosum;poisson;eau_douce;amazonie;1;garder;;PC
+untamedwilds:arowana/black;Arowana noir;Osteoglossum ferreirai;poisson;eau_douce;amazonie;1;garder;;PC
+untamedwilds:arowana/green;Arowana d'Asie;Scleropages formosus;poisson;eau_douce;asie_sud_est;1;garder;;PC
+untamedwilds:arowana/jardini;Arowana perlé;Scleropages jardinii;poisson;eau_douce;australie,melanesie;1;garder;;PC
+untamedwilds:manatee/west;Lamantin des Caraïbes;Trichechus manatus;sauvage;eau_douce,cote;amerique_centrale,grandes_plaines;1-2;garder;;PC
+untamedwilds:manatee/amazon;Lamantin d'Amazonie;Trichechus inunguis;sauvage;eau_douce,cote;amazonie;1-2;garder;;PC
+untamedwilds:manatee/african;Lamantin d'Afrique;Trichechus senegalensis;sauvage;eau_douce,cote;afrique_tropicale;1-2;garder;"fleuves d'Afrique de l'Ouest et centrale (Niger, Congo) ; pas dans le Nil";PC
+untamedwilds:manatee/dugong;Dugong;Dugong dugon;sauvage;eau_douce,cote;asie_sud_est,australie,melanesie,inde,afrique_est;1-2;garder;;PC
+untamedwilds:manatee/steller;Rhytine de Steller;—;fantastique;—;—;—;retirer;espèce disparue;
+untamedwilds:baleen_whale/blue;Baleine bleue;Balaenoptera musculus;sauvage;large;tous_les_océans;1-2;garder;;R
+untamedwilds:baleen_whale/fin;Rorqual commun;Balaenoptera physalus;sauvage;large;tous_les_océans;1-2;garder;;PC
+untamedwilds:baleen_whale/gray;Baleine grise;Eschrichtius robustus;sauvage;large;boreale,ouest_mexique,siberie;1-2;garder;;PC
+untamedwilds:baleen_whale/humpback;Baleine à bosse;Megaptera novaeangliae;sauvage;large;tous_les_océans;1-2;garder;;PC
+untamedwilds:baleen_whale/minke;Petit rorqual;Balaenoptera acutorostrata;sauvage;large;mers_froides;1-2;garder;;C
+untamedwilds:baleen_whale/sei;Rorqual boréal;Balaenoptera borealis;sauvage;large;tous_les_océans;1-2;garder;;PC
+untamedwilds:shark/great_white;Grand requin blanc;Carcharodon carcharias;poisson;mer,large;afrique_australe,australie,nouvelle_zelande,ouest_mexique,mediterranee;1;garder;prédateur;R
+untamedwilds:shark/hammerhead;Requin-marteau;Sphyrna;poisson;mer,large;mers_tropicales;1;garder;;PC
+untamedwilds:shark/tiger;Requin-tigre;Galeocerdo cuvier;poisson;mer,large;mers_tropicales;1;garder;prédateur;PC
+untamedwilds:shark/bull;Requin-bouledogue;Carcharhinus leucas;poisson;mer,large;mers_tropicales;1;garder;remonte les fleuves;PC
+untamedwilds:shark/lemon;Requin-citron;Negaprion brevirostris;poisson;mer,large;amerique_centrale;1;garder;mangroves;PC
+untamedwilds:shark/mako;Requin mako;Isurus oxyrinchus;poisson;mer,large;mers_chaudes_tempérées;1;garder;;PC
+untamedwilds:shark/bigeye;Requin-renard à gros yeux;Alopias superciliosus;poisson;mer,large;mers_chaudes_tempérées;1;garder;;PC
+untamedwilds:shark/bluntnose;Requin griset;Hexanchus griseus;poisson;mer,large;mers_profondes;1;garder;;PC
+untamedwilds:shark/goblin;Requin-lutin;Mitsukurina owstoni;poisson;mer,large;abysses;1;garder;japon : fosses;R
+untamedwilds:shark/greenland;Requin du Groenland;Somniosus microcephalus;poisson;mer,large;arctique,nordique;1;garder;;PC
+untamedwilds:whale_shark/whale_shark;Requin-baleine;Rhincodon typus;poisson;large;mers_tropicales;1;garder;;R
+untamedwilds:sawfish/large_tooth;Poisson-scie commun;Pristidae;poisson;cote,eau_douce;mers_tropicales;1;garder;;R
+untamedwilds:sawfish/small_tooth;Poisson-scie tident;Pristidae;poisson;cote,eau_douce;mers_tropicales;1;garder;;R
+untamedwilds:sawfish/green;Poisson-scie vert;Pristidae;poisson;cote,eau_douce;mers_tropicales;1;garder;;R
+untamedwilds:sawfish/narrow;Poisson-scie à rostre étroit;Pristidae;poisson;cote,eau_douce;mers_tropicales;1;garder;;R
+untamedwilds:sawfish/dwarf;Poisson-scie nain;Pristidae;poisson;cote,eau_douce;mers_tropicales;1;garder;;R
+untamedwilds:sunfish/sunfish;Poisson-lune;Mola mola;poisson;large;mers_chaudes_tempérées;1;garder;;R
+untamedwilds:sunfish/southern;Poisson-lune du Sud;Mola alexandrini;poisson;large;australie,nouvelle_zelande,cone_sud;1;garder;;R
+untamedwilds:football_fish/atlantic;Baudroie abyssale;Himantolophus groenlandicus;poisson;abysses;mers_profondes;1;garder;;R
+untamedwilds:giant_clam/*;Bénitier géant;Tridacna;sauvage;mer (récifs);mers_tropicales;1-4;garder;plusieurs espèces;C
+untamedwilds:trevally/*;Carangue;Carangidae;poisson;mer (récifs);mers_tropicales;1-4;garder;plusieurs espèces;C
+untamedwilds:triggerfish/*;Baliste;Balistidae;poisson;mer (récifs);mers_tropicales;1-4;garder;plusieurs espèces;C
+untamedwilds:spadefish/*;Platax;Ephippidae;poisson;mer (récifs);mers_tropicales;1-4;garder;plusieurs espèces;C
+untamedwilds:king_crab/red;Crabe royal;Paralithodes camtschaticus;sauvage;mer (fond froid);siberie,boreale,nordique;1-2;garder;;C
+untamedwilds:king_crab/centolla;Centolla;Lithodes santolla;sauvage;mer (fond froid);cone_sud;1-2;garder;;C
+untamedwilds:king_crab/spiny;Crabe royal épineux;Paralithodes brevipes;sauvage;mer (fond froid);japon_coree,siberie;1-2;garder;;C
+untamedwilds:butterfly/monarch;Monarque;Danaus plexippus;insecte;prairie;grandes_plaines,ouest_mexique,boreale;1-3;garder;;C
+untamedwilds:butterfly/tiger_swallowtail;Grand porte-queue tigré;Papilio glaucus;insecte;foret;grandes_plaines;1-3;garder;;C
+untamedwilds:butterfly/mourning_cloak;Morio;Nymphalis antiopa;insecte;foret;atlantique,mediterranee,continentale,nordique,alpine,boreale,grandes_plaines;1-3;garder;;C
+untamedwilds:butterfly/red_admiral;Vulcain;Vanessa atalanta;insecte;prairie;atlantique,mediterranee,continentale,nordique,alpine,grandes_plaines;1-3;garder;;C
+untamedwilds:butterfly/peacock;Paon-du-jour;Aglais io;insecte;prairie;atlantique,mediterranee,continentale,nordique,alpine,siberie;1-3;garder;;C
+untamedwilds:butterfly/brimstone;Citron;Gonepteryx rhamni;insecte;foret;atlantique,mediterranee,continentale,nordique,alpine;1-3;garder;;C
+untamedwilds:butterfly/cabbage;Piéride du chou;Pieris brassicae;insecte;culture;atlantique,mediterranee,continentale,nordique,alpine,maghreb,moyen_orient;1-3;garder;;C
+untamedwilds:butterfly/comma;Robert-le-diable;Polygonia c-album;insecte;foret;atlantique,mediterranee,continentale,nordique,alpine;1-3;garder;;C
+untamedwilds:butterfly/orange_tip;Aurore;Anthocharis cardamines;insecte;prairie;atlantique,mediterranee,continentale,nordique,alpine;1-3;garder;;C
+untamedwilds:butterfly/speckled_wood;Tircis;Pararge aegeria;insecte;foret;atlantique,mediterranee,continentale,nordique,alpine,maghreb;1-3;garder;;C
+untamedwilds:butterfly/emperor;Grand mars changeant;Apatura iris;insecte;foret;continentale,atlantique;1-3;garder;;C
+untamedwilds:butterfly/morpho;Morpho bleu;Morpho;insecte;foret_tropicale;amazonie,amerique_centrale;1-3;garder;;C
+untamedwilds:butterfly/glasswing;Papillon de verre;Greta oto;insecte;foret_tropicale;amerique_centrale;1-3;garder;;C
+untamedwilds:butterfly/blue_swallowtail;Porte-queue bleu;Papilio ulysses;insecte;foret_tropicale;australie,melanesie;1-3;garder;;C
+untamedwilds:butterfly/birdwing;Ornithoptère;Ornithoptera;insecte;foret_tropicale;melanesie,asie_sud_est;1-3;garder;;C
+untamedwilds:butterfly/kite;Voilier;Graphium;insecte;foret_tropicale;asie_sud_est,inde;1-3;garder;;C
+untamedwilds:butterfly/leaf;Papillon-feuille;Kallima inachus;insecte;foret_tropicale;inde,asie_sud_est,chine;1-3;garder;;C
+untamedwilds:butterfly/malachite;Malachite;Siproeta stelenes;insecte;foret_tropicale;amerique_centrale,amazonie;1-3;garder;;C
+untamedwilds:butterfly/narcissus;Narcisse;Ornithoptera / Papilio;insecte;foret;japon_coree;1-3;garder;;C
+untamedwilds:butterfly/triangle;Voilier triangle;Graphium sarpedon;insecte;foret;asie_sud_est,chine,japon_coree,australie;1-3;garder;;C
+untamedwilds:tarantula/rose;Mygale rose du Chili;Grammostola rosea;insecte;foret,desert;cone_sud,andes;1;garder;;C
+untamedwilds:tarantula/red_knee;Mygale à genoux rouges;Brachypelma hamorii;insecte;foret,desert;ouest_mexique;1;garder;;C
+untamedwilds:tarantula/black;Mygale noire;Grammostola pulchra;insecte;foret,desert;cone_sud;1;garder;;C
+untamedwilds:tarantula/black_and_white;Mygale zébrée;Acanthoscurria geniculata;insecte;foret,desert;amazonie;1;garder;;C
+untamedwilds:tarantula/cobalt;Mygale bleu cobalt;Cyriopagopus lividus;insecte;foret,desert;asie_sud_est,australie,melanesie;1;garder;;R
+untamedwilds:tarantula/king;Mygale roi;Pelinobius muticus;insecte;foret,desert;afrique_est;1;garder;;PC
+untamedwilds:tarantula/regalis;Mygale royale;Poecilotheria regalis;insecte;foret,desert;inde;1;garder;;R
+untamedwilds:tarantula/tiger;Mygale tigre;Psalmopoeus;insecte;foret,desert;amerique_centrale;1;garder;;C
+untamedwilds:terror_bird/*;Oiseaux-terreur;—;fantastique;—;—;—;retirer;espèces disparues;
+untamedwilds:spitter/purple;Cracheur;—;fantastique;souterrain;—;1;souterrain;créature inventée : étage profondeurs;
+naturalist:alligator;Alligator;Alligator mississippiensis;sauvage;marais,eau_douce;grandes_plaines;1-2;garder;"Floride, Louisiane ; prédateur";C
+naturalist:bear;Grizzli (Nat.);Ursus arctos;sauvage;foret,montagne;nordique,continentale;1;garder;"race régionale (Europe) de untamedwilds:bear/brown ; neutre, défend ses petits";PC
+naturalist:bluejay;Geai bleu;Cyanocitta cristata;sauvage;foret;boreale;1-2;garder;race régionale (Amériques);C
+naturalist:boar;Sanglier (Nat.);Sus scrofa;sauvage;foret;continentale,alpine;3-6;garder;race régionale (Europe) de untamedwilds:boar/eurasian;C
+naturalist:butterfly;Papillon (Nat.);plusieurs espèces;insecte;prairie;grandes_plaines,ouest_mexique,boreale,atlantique,mediterranee,continentale,nordique,alpine,siberie,maghreb,moyen_orient,amazonie,amerique_centrale,australie,melanesie,asie_sud_est,inde,chine,japon_coree;1-3;garder;"race / variante de la famille untamedwilds:butterfly ; 20 espèces réelles chez Untamed Wilds";C
+naturalist:caterpillar;Chenille;Lepidoptera;insecte;foret;partout_sauf:arctique,antarctique;1;garder;;C
+naturalist:moth;Papillon de nuit;Heterocera;insecte;foret (nuit);partout_sauf:arctique,antarctique;1-3;garder;;C
+naturalist:canary;Canari;Serinus canaria;sauvage;foret;mediterranee,maghreb;1-3;garder;Canaries, Madère, Açores;C
+naturalist:cardinal;Cardinal rouge;Cardinalis cardinalis;sauvage;foret;grandes_plaines,ouest_mexique;1-2;garder;;C
+naturalist:catfish;Poisson-chat (Nat.);plusieurs espèces;poisson;eau_douce;grandes_plaines,boreale,amazonie;1;garder;race / variante de la famille untamedwilds:catfish;C
+naturalist:bass;Bar (Nat.);Micropterus dolomieu;poisson;eau_douce;grandes_plaines;2-4;garder;race régionale (Amériques) de aquaculture:smallmouth_bass;C
+naturalist:coral_snake;Serpent corail (Nat.);Micrurus;sauvage;foret_tropicale;amerique_centrale,amazonie;1;garder;race régionale (Amériques) de untamedwilds:snake/coral;PC
+naturalist:rattlesnake;Serpent à sonnettes (Nat.);Crotalus oreganus / atrox;sauvage;desert,steppe;grandes_plaines;1;garder;race régionale (Amériques) de untamedwilds:snake/western_rattlesnake;C
+naturalist:snake;Serpent (Nat.);Natrix natrix / Pseudonaja textilis;sauvage;marais,prairie,savane;maghreb,australie;1;garder;"race régionale (Afrique) de untamedwilds:snake/grass_snake ; en Australie joue le serpent brun de l'Est";TC
+naturalist:deer;Chevreuil;Capreolus capreolus;sauvage;foret;atlantique,mediterranee,continentale,nordique,alpine,siberie,japon_coree;2-4;garder;cerf de Virginie en Amérique ?;C
+naturalist:dragonfly;Libellule;Anisoptera;insecte;eau_douce,marais;atlantique,mediterranee,continentale,nordique,alpine,moyen_orient,steppes_tibet,siberie,inde,chine,japon_coree,asie_sud_est,australie,nouvelle_zelande,melanesie;1-3;garder;race régionale (Europe/Asie/Océanie);C
+naturalist:duck;Canard colvert;Anas platyrhynchos;sauvage;eau_douce,marais;partout_sauf:antarctique,sahara_sahel,amazonie;2-5;garder;;C
+naturalist:elephant;Éléphant;Loxodonta / Elephas;sauvage;savane,foret_tropicale;afrique_tropicale,afrique_est,afrique_australe;3-8;garder;"seul éléphant du pack ; race régionale (Afrique)";PC
+naturalist:finch;Pinson des arbres;Fringilla coelebs;sauvage;foret;atlantique,mediterranee,continentale,nordique,alpine,maghreb;2-4;garder;;C
+naturalist:firefly;Luciole;Lampyridae;insecte;prairie,foret (nuit);atlantique,continentale,mediterranee,grandes_plaines,japon_coree,chine,asie_sud_est;3-8;garder;;PC
+naturalist:giraffe;Girafe;Giraffa;sauvage;savane;afrique_est,afrique_australe;2-6;garder;;PC
+naturalist:hippo;Hippopotame (Nat.);Hippopotamus amphibius;sauvage;eau_douce;afrique_est,afrique_australe;3-8;garder;race régionale (Afrique) de untamedwilds:hippo/common;C
+naturalist:hyena;Hyène (Nat.);Crocuta crocuta;sauvage;savane;afrique_est,afrique_australe;3-6;garder;race régionale (Afrique) de untamedwilds:hyena/spotted;PC
+naturalist:lion;Lion (Nat.);Panthera leo;sauvage;savane;inde;2-5;garder;race régionale (Asie) de untamedwilds:big_cat/lion;PC
+naturalist:rhino;Rhinocéros (Nat.);plusieurs espèces;sauvage;savane;afrique_australe;1;garder;"race / variante de la famille untamedwilds:rhino ; rhinocéros blanc : défend ses petits";PC
+naturalist:tortoise;Tortue terrestre (Nat.);Testudo hermanni;sauvage;mediterraneen,steppe;mediterranee,maghreb,moyen_orient;1;garder;tortue d'Hermann / grecque;PC
+naturalist:lizard;Lézard;Lacertidae / Agamidae;sauvage;desert,steppe,mediterraneen;mediterranee,maghreb,sahara_sahel,moyen_orient,australie,ouest_mexique;1-2;garder;;C
+naturalist:ostrich;Autruche;Struthio camelus;sauvage;savane,desert;afrique_est,afrique_australe,sahara_sahel;2-5;garder;;PC
+naturalist:robin;Rouge-gorge;Erithacus rubecula;sauvage;foret;atlantique,mediterranee,continentale,nordique,alpine;1-2;garder;;C
+naturalist:snail;Escargot;Helix;insecte;foret,prairie (pluie);atlantique,continentale,mediterranee,alpine;1-3;garder;;C
+naturalist:sparrow;Moineau;Passer domesticus;sauvage;culture;partout_sauf:arctique,antarctique,amazonie,grandes_plaines,boreale,ouest_mexique,amerique_centrale,andes,cone_sud,australie,nouvelle_zelande,melanesie;3-6;garder;"moineau domestique : lié à l'homme, rare sans lui ; absent des Amériques et d'Océanie (introduit)";PC
+naturalist:termite;Termite;Isoptera;insecte;savane,foret_tropicale;afrique_est,afrique_tropicale,afrique_australe,australie,inde,amazonie,asie_sud_est;termitière;garder;;C
+naturalist:vulture;Vautour;Gyps;sauvage;ciel (savane, montagne);afrique_est,sahara_sahel,mediterranee,inde,moyen_orient,alpine;1-3;garder;vautour fauve dans les Alpes et les Pyrénées;PC
+naturalist:zebra;Zèbre;Equus quagga;sauvage;savane;afrique_est,afrique_australe;4-10;garder;;TC
+wildernature:bison;Bison (WN);Bison bison;sauvage;prairie;boreale;4-10;garder;race régionale (Amériques) de untamedwilds:bison/plains;PC
+wildernature:boar;Sanglier (WN);Sus scrofa;sauvage;foret;moyen_orient,siberie;3-6;garder;race régionale (Asie) de untamedwilds:boar/eurasian;C
+wildernature:cassowary;Casoar;Casuarius;sauvage;foret_tropicale;melanesie,australie;1;garder;dangereux;PC
+wildernature:deer;Cerf élaphe;Cervus elaphus;sauvage;foret,prairie;atlantique,mediterranee,continentale,nordique,alpine,boreale,grandes_plaines,siberie;3-6;garder;wapiti en Amérique;C
+wildernature:dog;Chien;Canis familiaris;ferme;—;—;—;a_confirmer;animal de compagnie : villages seulement ?;R
+wildernature:flamingo;Flamant rose;Phoenicopterus;sauvage;cote,marais (lagunes salées);mediterranee,afrique_est,afrique_australe,amerique_centrale,andes,inde;6-15;garder;Camargue;C
+wildernature:hedgehog;Hérisson;Erinaceus europaeus;sauvage;foret,prairie;atlantique,mediterranee,continentale,nordique,alpine;1;garder;;C
+wildernature:minisheep;Mouton nain;Ovis aries;ferme;montagne;alpine;2-4;a_confirmer;race domestique, utile ?;R
+wildernature:owl;Chouette;Strigiformes;sauvage;foret (nuit);partout_sauf:antarctique;1;garder;;PC
+wildernature:pelican;Pélican;Pelecanus;sauvage;cote,eau_douce;afrique_est,afrique_tropicale,grandes_plaines,amerique_centrale,australie,inde,mediterranee;3-8;garder;;C
+wildernature:penguin;Manchot (WN);Spheniscidae;sauvage;banquise,cote;cone_sud,antarctique;4-10;garder;race régionale (Amériques/Pôles) de ecologics:penguin;TC
+wildernature:raccoon;Raton laveur;Procyon lotor;sauvage;foret;boreale;1-3;garder;race régionale (Amériques);C
+wildernature:red_wolf;Loup roux;Canis rufus;sauvage;foret,marais;grandes_plaines;3-6;garder;;PC
+wildernature:squirrel;Écureuil (WN);Sciurus vulgaris;sauvage;foret;continentale,nordique;1-2;garder;race régionale (Europe) de ecologics:squirrel;C
+wildernature:turkey;Dindon sauvage;Meleagris gallopavo;sauvage;foret,prairie;grandes_plaines;3-6;garder;race régionale (Amériques);C
+meadow:wooly_sheep;Mouton laineux;Ovis aries;ferme;montagne,prairie;alpine;3-5;garder;;R
+meadow:horned_sheep;Mouton cornu;Ovis aries;ferme;montagne;mediterranee,moyen_orient,alpine;3-5;garder;;R
+meadow:wooly_cow;Vache laineuse (Highland);Bos taurus;ferme;montagne,prairie;alpine,atlantique,nordique;2-4;garder;;R
+meadow:water_buffalo;Buffle d'eau;Bubalus bubalis;ferme;marais,culture (rizières);inde,asie_sud_est,chine;3-6;garder;;R
+ecologics:camel;Dromadaire (Eco.);Camelus dromedarius;sauvage;desert;moyen_orient,australie;2-6;garder;race régionale (Asie/Océanie) de untamedwilds:camel/dromedary;R
+ecologics:coconut_crab;Crabe de cocotier;Birgus latro;sauvage;cote (plage tropicale);melanesie,asie_sud_est;1;garder;;PC
+ecologics:penguin;Manchot;Spheniscidae;sauvage;banquise,cote;afrique_australe,nouvelle_zelande;4-10;garder;race régionale (Afrique/Océanie);TC
+ecologics:squirrel;Écureuil roux;Sciurus vulgaris;sauvage;foret;atlantique,mediterranee;1-2;garder;race régionale (Europe);C
+aquaculture:atlantic_cod;Morue;Gadus morhua;poisson;mer;atlantique,nordique;3-7;garder;race régionale (Europe);C
+aquaculture:atlantic_halibut;Flétan de l'Atlantique;Hippoglossus hippoglossus;poisson;mer;atlantique,nordique;1;garder;;PC
+aquaculture:atlantic_herring;Hareng;Clupea harengus;poisson;mer;atlantique,nordique;5-10;garder;;TC
+aquaculture:pacific_halibut;Flétan du Pacifique;Hippoglossus stenolepis;poisson;mer;boreale,japon_coree,siberie;1;garder;;PC
+aquaculture:pollock;Lieu;Pollachius;poisson;mer;atlantique,nordique,boreale;3-6;garder;;C
+aquaculture:blackfish;Tautogue;Tautoga onitis;poisson;cote;grandes_plaines;1-3;garder;;C
+aquaculture:red_grouper;Mérou rouge;Epinephelus morio;poisson;mer;amerique_centrale,grandes_plaines;1;garder;;PC
+aquaculture:tuna;Thon;Thunnus;poisson;large;mers_chaudes_tempérées;3-6;garder;;C
+aquaculture:pink_salmon;Saumon rose;Oncorhynchus gorbuscha;poisson;mer,eau_douce;boreale,siberie,japon_coree;3-6;garder;;C
+aquaculture:brown_trout;Truite brune;Salmo trutta;poisson;eau_douce;atlantique,mediterranee,continentale,nordique,alpine;2-4;garder;;C
+aquaculture:carp;Carpe;Cyprinus carpio;poisson;eau_douce;continentale,chine,japon_coree,steppes_tibet;2-4;garder;;C
+aquaculture:perch;Perche;Perca fluviatilis;poisson;eau_douce;atlantique,continentale,nordique,siberie;3-6;garder;;C
+aquaculture:muskellunge;Maskinongé;Esox masquinongy;poisson;eau_douce;boreale,grandes_plaines;1;garder;;PC
+aquaculture:minnow;Vairon;Phoxinus / Pimephales;poisson;eau_douce;atlantique,mediterranee,continentale,nordique,alpine,boreale,grandes_plaines,siberie;5-10;garder;;TC
+aquaculture:bluegill;Crapet arlequin;Lepomis macrochirus;poisson;eau_douce;grandes_plaines;3-6;garder;;C
+aquaculture:smallmouth_bass;Achigan à petite bouche;Micropterus dolomieu;poisson;eau_douce;boreale;2-4;garder;race régionale (Amériques);C
+aquaculture:rainbow_trout;Truite arc-en-ciel;Oncorhynchus mykiss;poisson;eau_douce;boreale,grandes_plaines,ouest_mexique;2-4;garder;;C
+aquaculture:gar;Lépisosté;Lepisosteus;poisson;eau_douce;grandes_plaines,amerique_centrale;1-2;garder;;PC
+aquaculture:arapaima;Arapaïma;Arapaima gigas;poisson;eau_douce;amazonie;1;garder;;PC
+aquaculture:piranha;Piranha;Pygocentrus nattereri;poisson;eau_douce;amazonie;4-8;garder;race régionale (Amériques);C
+aquaculture:tambaqui;Tambaqui;Colossoma macropomum;poisson;eau_douce;amazonie;1-3;garder;;C
+aquaculture:bayad;Bayad;Bagrus bajad;poisson;eau_douce;sahara_sahel,afrique_tropicale;1-2;garder;;C
+aquaculture:boulti;Tilapia du Nil;Oreochromis niloticus;poisson;eau_douce;sahara_sahel,afrique_tropicale,afrique_est;3-6;garder;;C
+aquaculture:capitaine;Perche du Nil;Lates niloticus;poisson;eau_douce;sahara_sahel,afrique_tropicale,afrique_est;1;garder;;PC
+aquaculture:synodontis;Synodontis;Synodontis;poisson;eau_douce;sahara_sahel,afrique_tropicale;2-4;garder;;C
+aquaculture:catfish;Poisson-chat (Aq.);Silurus glanis;poisson;eau_douce;continentale;1;garder;silure d'Europe (les espèces d'Amérique viennent d'Untamed Wilds);C
+aquaculture:jellyfish;Méduse;Scyphozoa;sauvage;mer;toutes_les_mers;2-5;garder;race régionale (mers);C
+aquaculture:arrau_turtle;Tortue de l'Arrau;Podocnemis expansa;sauvage;eau_douce;amazonie;1-3;garder;;PC
+aquaculture:box_turtle;Tortue-boîte;Terrapene carolina;sauvage;foret;grandes_plaines;1;garder;;PC
+aquaculture:starshell_turtle;Tortue étoilée de l'Inde;Geochelone elegans;sauvage;savane;inde;1;garder;race régionale (Asie);PC
+aquaculture:red_shrooma;Shrooma rouge;—;fantastique;—;—;—;retirer;;
+aquaculture:brown_shrooma;Shrooma brun;—;fantastique;—;—;—;retirer;;
+savage_and_ravage:creepie;Creepie;—;monstre;souterrain;—;1-3;souterrain;petit creeper : couches hautes;
+savage_and_ravage:skeleton_villager;Villageois squelette;—;monstre;souterrain;—;1;souterrain;couches hautes;
+savage_and_ravage:iceologer;Iceologer;—;monstre;—;—;—;a_confirmer;illageois : laissés aux patrouilles et structures (MAJ structures) ?;PC
+savage_and_ravage:griefer;Griefer;—;monstre;—;—;—;a_confirmer;illageois : laissés aux patrouilles et structures (MAJ structures) ?;PC
+savage_and_ravage:executioner;Bourreau;—;monstre;—;—;—;a_confirmer;illageois : laissés aux patrouilles et structures (MAJ structures) ?;PC
+savage_and_ravage:trickster;Trickster;—;monstre;—;—;—;a_confirmer;illageois : laissés aux patrouilles et structures (MAJ structures) ?;PC
+guardvillagers:illusioner;Illusionniste;—;monstre;—;—;—;a_confirmer;illageois : patrouilles et structures;PC
+guardvillagers:guard;Garde;—;ferme;villages;—;—;garder;villages seulement, inchangé;R
+betteranimalsplus:reindeer;Renne / caribou;Rangifer tarandus;sauvage;toundra,foret;arctique,siberie,nordique,boreale;4-10;garder;"mod à installer ; id à vérifier";TC
+betteranimalsplus:moose;Élan;Alces alces;sauvage;foret,marais;nordique,boreale;1-2;garder;"mod à installer ; id à vérifier ; race régionale (Europe/Amériques)";PC
+betteranimalsplus:walrus;Morse;Odobenus rosmarus;sauvage;banquise,cote;arctique;3-8;garder;"mod à installer ; id à vérifier";C
+betteranimalsplus:deer;Cerf de Virginie;Odocoileus virginianus;sauvage;foret,prairie;grandes_plaines,boreale,ouest_mexique,amerique_centrale;2-4;garder;"mod à installer ; id à vérifier";TC
+betteranimalsplus:coyote;Coyote;Canis latrans;sauvage;prairie,desert,foret;grandes_plaines,ouest_mexique,boreale;1-3;garder;"mod à installer ; id à vérifier";C
+betteranimalsplus:lammergeier;Gypaète barbu;Gypaetus barbatus;sauvage;ciel (montagne);alpine,steppes_tibet,afrique_est,moyen_orient,maghreb;1;garder;"mod à installer ; id à vérifier";PC
+betteranimalsplus:badger;Blaireau;Meles meles / Taxidea taxus;sauvage;foret,prairie;atlantique,continentale,mediterranee,nordique,grandes_plaines,ouest_mexique;1-2;garder;"mod à installer ; id à vérifier";PC
+betteranimalsplus:pheasant;Faisan de Colchide;Phasianus colchicus;sauvage;culture,prairie;chine,steppes_tibet,japon_coree,continentale,atlantique;1-3;garder;"mod à installer ; id à vérifier";C
+betteranimalsplus:goose;Oie cendrée / bernache;Anser anser / Branta canadensis;sauvage;eau_douce,marais;atlantique,continentale,nordique,siberie,boreale,grandes_plaines;4-10;garder;"mod à installer ; id à vérifier";C
+betteranimalsplus:songbird;Passereaux;Passeriformes;sauvage;foret;partout_sauf:arctique,antarctique;2-4;garder;"mod à installer ; id à vérifier";TC
+betteranimalsplus:crab;Crabe;Brachyura;sauvage;cote;toutes_les_côtes;2-4;garder;"mod à installer ; id à vérifier";C
+betteranimalsplus:horseshoe_crab;Limule;Limulus / Tachypleus;sauvage;cote (plage);grandes_plaines,asie_sud_est,chine,japon_coree;1-3;garder;"mod à installer ; id à vérifier";C
+betteranimalsplus:eel_freshwater;Anguille d'Europe;Anguilla anguilla;poisson;eau_douce;atlantique,continentale,mediterranee,nordique,maghreb;1-2;garder;"mod à installer ; id à vérifier";PC
+betteranimalsplus:eel_saltwater;Murène;Muraenidae;poisson;mer (récifs);mers_chaudes_tempérées;1;garder;"mod à installer ; id à vérifier";PC
+betteranimalsplus:lamprey;Lamproie;Petromyzon marinus;poisson;eau_douce,mer;atlantique,nordique,grandes_plaines;1-2;garder;"mod à installer ; id à vérifier";PC
+betteranimalsplus:octopus;Pieuvre;Octopus vulgaris;sauvage;mer;toutes_les_mers;1;garder;"mod à installer ; id à vérifier";PC
+betteranimalsplus:nautilus;Nautile;Nautilus pompilius;sauvage;mer profonde;melanesie,asie_sud_est,australie;1;garder;"mod à installer ; id à vérifier";R
+betteranimalsplus:barracuda;Barracuda;Sphyraena barracuda;poisson;mer (récifs);mers_tropicales;1-4;garder;"mod à installer ; id à vérifier";C
+betteranimalsplus:bobbit_worm;Ver de Bobbit;Eunice aphroditois;sauvage;mer (récifs);asie_sud_est,australie,melanesie,japon_coree;1;garder;"mod à installer ; id à vérifier";R
+betteranimalsplus:flying_fish;Poisson volant;Exocoetidae;poisson;large;mers_tropicales;3-6;garder;"mod à installer ; id à vérifier ; race régionale (mers)";C
+betteranimalsplus:squid_giant;Calmar géant;Architeuthis dux;sauvage;abysses;mers_profondes;1;garder;"mod à installer ; id à vérifier ; race régionale (mers)";R
+betteranimalsplus:squid_colossal;Calmar colossal;Mesonychoteuthis hamiltoni;sauvage;abysses;antarctique;1;garder;"mod à installer ; id à vérifier";R
+betteranimalsplus:feral_wolf;Loup féral;Canis lupus;sauvage;foret,toundra,steppe,montagne;continentale,nordique,alpine,boreale;4-8;garder;"mod à installer ; id à vérifier ; race régionale (Europe/Amériques) de minecraft:wolf";PC
+betteranimalsplus:turkey;Dindon (BA+);Meleagris gallopavo;sauvage;foret,prairie;ouest_mexique;3-6;garder;"mod à installer ; id à vérifier ; race régionale (Amériques) de wildernature:turkey";C
+betteranimalsplus:boar;Sanglier (BA+);Sus scrofa;sauvage;foret;inde,chine,japon_coree;3-6;garder;"mod à installer ; id à vérifier ; race régionale (Asie) de untamedwilds:boar/eurasian";C
+betteranimalsplus:squirrel;Écureuil (BA+);Sciurus vulgaris;sauvage;foret;alpine,siberie,japon_coree;1-2;garder;"mod à installer ; id à vérifier ; race régionale (Europe/Asie) de ecologics:squirrel";C
+betteranimalsplus:butterfly;Papillon (BA+);plusieurs espèces;insecte;prairie;grandes_plaines,ouest_mexique,boreale,atlantique,mediterranee,continentale,nordique,alpine,siberie,maghreb,moyen_orient,amazonie,amerique_centrale,australie,melanesie,asie_sud_est,inde,chine,japon_coree;1-3;garder;"race / variante de la famille untamedwilds:butterfly ; mod à installer ; id à vérifier";C
+betteranimalsplus:dragonfly;Libellule (BA+);Anisoptera;insecte;eau_douce,marais;maghreb,sahara_sahel,afrique_tropicale,afrique_est,afrique_australe,boreale,grandes_plaines,ouest_mexique,amerique_centrale,amazonie,andes,cone_sud;1-3;garder;"mod à installer ; id à vérifier ; race régionale (Afrique/Amériques) de naturalist:dragonfly";C
+betteranimalsplus:tarantula;Mygale (BA+);plusieurs espèces;insecte;foret,desert;cone_sud,andes,ouest_mexique,amazonie,asie_sud_est,australie,melanesie,afrique_est,inde,amerique_centrale,australie;1;garder;"race / variante de la famille untamedwilds:tarantula ; mod à installer ; id à vérifier ; mygales siffleuses en Australie";C
+betteranimalsplus:piranha;Piranha (BA+);Pygocentrus nattereri;poisson;eau_douce;amazonie;4-8;garder;"mod à installer ; id à vérifier ; race régionale (Amériques) de aquaculture:piranha";C
+betteranimalsplus:shark;Requin (BA+);plusieurs espèces;poisson;mer,large;afrique_australe,australie,nouvelle_zelande,ouest_mexique,mediterranee,amerique_centrale,arctique,nordique;1;garder;"race / variante de la famille untamedwilds:shark ; mod à installer ; id à vérifier";PC
+betteranimalsplus:whale;Baleine (BA+);plusieurs espèces;sauvage;large;boreale,ouest_mexique,siberie;1-2;garder;"race / variante de la famille untamedwilds:baleen_whale ; mod à installer ; id à vérifier";R
+betteranimalsplus:jellyfish;Méduse (BA+);Scyphozoa;sauvage;mer;toutes_les_mers;2-5;garder;"mod à installer ; id à vérifier ; race régionale (mers) de aquaculture:jellyfish";C
+betteranimalsplus:brownbear;Ours brun (BA+);Ursus arctos;sauvage;foret,montagne;alpine;1;garder;"mod à installer ; id à vérifier ; race régionale (Europe) de untamedwilds:bear/brown";PC
+betteranimalsplus:blackbear;Ours noir (BA+);Ursus americanus;sauvage;foret;grandes_plaines;1;garder;"mod à installer ; id à vérifier ; race régionale (Amériques) de untamedwilds:bear/black";PC
+betteranimalsplus:hirschgeist;Hirschgeist;—;fantastique;foret (nuit);continentale,alpine;1;garder;"esprit-cerf du folklore germanique : endémique, spawn RARE ; mod à installer";R
+betteranimalsplus:zotzpyre;Zotzpyre;—;fantastique;foret_tropicale (nuit);amerique_centrale;1-2;garder;"chauve-souris vampire du mythe maya : endémique, spawn RARE ; mod à installer";R
+alexsmobs:alligator_snapping_turtle;Tortue alligator;Macrochelys temminckii;sauvage;eau_douce,marais;grandes_plaines;1;garder;mod à installer;PC
+alexsmobs:anaconda;Anaconda;Eunectes murinus;sauvage;foret_tropicale,eau_douce,marais;asie_sud_est;1;garder;"joue le python réticulé chasseur d'hommes ; spawn RARE";R
+alexsmobs:anteater;Fourmilier;Myrmecophaga tridactyla;sauvage;savane,foret_tropicale;amazonie,cone_sud,amerique_centrale;1;garder;mod à installer;C
+alexsmobs:bald_eagle;Pygargue à tête blanche;Haliaeetus leucocephalus;sauvage;ciel (près de l'eau);boreale,grandes_plaines;1;garder;mod à installer;PC
+alexsmobs:banana_slug;Limace banane;Ariolimax;insecte;foret (humide);boreale;1-2;garder;"forêts côtières du Pacifique nord ; mod à installer";C
+alexsmobs:bison;Bison;Bison bison;sauvage;prairie;grandes_plaines;4-8;garder;"mod à installer ; race régionale (Amériques) de untamedwilds:bison/plains";TC
+alexsmobs:blobfish;Blobfish;Psychrolutes marcidus;poisson;abysses;australie,nouvelle_zelande;1;garder;"fonds profonds ; mod à installer";R
+alexsmobs:blue_jay;Geai bleu;Cyanocitta cristata;sauvage;foret;grandes_plaines;1-2;garder;"mod à installer ; race régionale (Amériques) de naturalist:bluejay";C
+alexsmobs:cachalot_whale;Grand cachalot;Physeter macrocephalus;sauvage;large;tous_les_océans_profonds;1-2;garder;mod à installer;PC
+alexsmobs:caiman;Caïman;Caiman crocodilus;sauvage;eau_douce,marais;amazonie,amerique_centrale;1-3;garder;mod à installer;C
+alexsmobs:capuchin_monkey;Capucin;Cebus;sauvage;foret_tropicale;amazonie,amerique_centrale;3-6;garder;mod à installer;C
+alexsmobs:catfish;Poisson-chat (AM);Silurus;poisson;eau_douce;grandes_plaines,boreale,amazonie;1;garder;"race / variante de la famille untamedwilds:catfish ; mod à installer";C
+alexsmobs:cockroach;Cafard;Blattodea;insecte;sol,souterrain;partout_sauf:arctique,antarctique,boreale,siberie,nordique;2-4;garder;mod à installer;PC
+alexsmobs:comb_jelly;Cténophore;Ctenophora;sauvage;mer,large;toutes_les_mers;1-3;garder;mod à installer;C
+alexsmobs:crocodile;Crocodile;Crocodylus niloticus / porosus;sauvage;eau_douce,cote;sahara_sahel,afrique_tropicale,afrique_est,inde,asie_sud_est,australie,melanesie;1-2;garder;"prédateur ; mod à installer ; Nil jusqu'en Égypte (eau douce seulement)";C
+alexsmobs:crow;Corbeau;Corvus;sauvage;culture,foret;partout_sauf:antarctique,amazonie;2-5;garder;mod à installer;C
+alexsmobs:devils_hole_pupfish;Cyprinodon du trou du Diable;Cyprinodon diabolis;poisson;eau_douce;ouest_mexique;2-4;garder;"très rare (une seule source au Nevada) ; mod à installer";R
+alexsmobs:elephant;Éléphant;Loxodonta / Elephas;sauvage;savane,foret_tropicale;inde,asie_sud_est;3-8;garder;"mod à installer ; race régionale (Asie) de naturalist:elephant";PC
+alexsmobs:emu;Émeu;Dromaius novaehollandiae;sauvage;savane,steppe;australie;2-5;garder;mod à installer;C
+alexsmobs:flying_fish;Poisson volant;Exocoetidae;poisson;large;mers_tropicales;3-6;garder;"mod à installer ; race régionale (mers) de betteranimalsplus:flying_fish";C
+alexsmobs:frilled_shark;Requin lézard;Chlamydoselachus anguineus;poisson;abysses;japon_coree,toutes_les_mers_profondes;1;garder;mod à installer;R
+alexsmobs:gazelle;Gazelle;Gazella;sauvage;savane,desert;afrique_est,sahara_sahel,maghreb,moyen_orient;4-8;garder;mod à installer;TC
+alexsmobs:gelada_monkey;Gélada;Theropithecus gelada;sauvage;montagne,prairie;afrique_est;4-10;garder;"hauts plateaux d'Éthiopie ; mod à installer";C
+alexsmobs:giant_squid;Calmar géant;Architeuthis dux;sauvage;abysses;mers_profondes;1;garder;"mod à installer ; race régionale (mers) de betteranimalsplus:squid_giant";R
+alexsmobs:gorilla;Gorille;Gorilla;sauvage;foret_tropicale;afrique_tropicale;3-8;garder;mod à installer;PC
+alexsmobs:grizzly_bear;Grizzli;Ursus arctos horribilis;sauvage;foret,montagne;boreale,grandes_plaines;1;garder;"race régionale (Amérique du Nord) de untamedwilds:bear/brown ; attaque si on approche";PC
+alexsmobs:hammerhead_shark;Requin-marteau;Sphyrna;poisson;mer,large;mers_tropicales;1-3;garder;"prédateur ; mod à installer";PC
+alexsmobs:hummingbird;Colibri;Trochilidae;sauvage;foret_tropicale,prairie;amerique_centrale,amazonie,andes,ouest_mexique;1-2;garder;mod à installer;C
+alexsmobs:jerboa;Gerboise;Jaculus;sauvage;desert;sahara_sahel,maghreb,moyen_orient,steppes_tibet;1-2;garder;mod à installer;C
+alexsmobs:kangaroo;Kangourou;Macropus;sauvage;savane,steppe;australie;3-6;garder;mod à installer;TC
+alexsmobs:komodo_dragon;Dragon de Komodo;Varanus komodoensis;sauvage;savane,foret;asie_sud_est;1;garder;"îles de la Sonde ; prédateur";PC
+alexsmobs:leafcutter_ant;Fourmi coupe-feuille;Atta;insecte;foret_tropicale;amazonie,amerique_centrale;fourmilière;garder;mod à installer;C
+alexsmobs:lobster;Homard;Homarus;sauvage;cote,mer;atlantique,nordique,boreale;1-3;garder;mod à installer;C
+alexsmobs:maned_wolf;Loup à crinière;Chrysocyon brachyurus;sauvage;savane;cone_sud,amazonie;1;garder;mod à installer;R
+alexsmobs:mantis_shrimp;Crevette-mante;Stomatopoda;sauvage;mer (récifs);mers_tropicales;1;garder;mod à installer;PC
+alexsmobs:mimic_octopus;Poulpe mimétique;Thaumoctopus mimicus;sauvage;mer (récifs);asie_sud_est,melanesie;1;garder;mod à installer;R
+alexsmobs:moose;Élan;Alces alces;sauvage;foret,marais;siberie;1-2;garder;"mod à installer ; race régionale (Asie) de betteranimalsplus:moose";PC
+alexsmobs:mudskipper;Périophthalme;Periophthalmus;poisson;cote (mangrove);asie_sud_est,afrique_tropicale,inde,australie;2-4;garder;mod à installer;C
+alexsmobs:orca;Orque;Orcinus orca;sauvage;mer,large;toutes_les_mers_froides;3-6;garder;"prédateur ; mod à installer";PC
+alexsmobs:platypus;Ornithorynque;Ornithorhynchus anatinus;sauvage;eau_douce;australie;1;garder;mod à installer;PC
+alexsmobs:potoo;Ibijau;Nyctibius;sauvage;foret_tropicale;amazonie,amerique_centrale;1;garder;mod à installer;PC
+alexsmobs:raccoon;Raton laveur;Procyon lotor;sauvage;foret;grandes_plaines,ouest_mexique;1-3;garder;"mod à installer ; race régionale (Amériques) de wildernature:raccoon";C
+alexsmobs:rain_frog;Grenouille de pluie;Breviceps;sauvage;desert (côtier);afrique_australe;1-2;garder;mod à installer;PC
+alexsmobs:rattlesnake;Crotale;Crotalus;sauvage;desert,steppe;ouest_mexique;1;garder;"mod à installer ; race régionale (Amériques) de untamedwilds:snake/western_rattlesnake";C
+alexsmobs:rhinoceros;Rhinocéros (AM);Rhinocerotidae;sauvage;savane;afrique_est,inde;1-2;garder;"race / variante de la famille untamedwilds:rhino ; rhinocéros noir et indien : charge si on approche";PC
+alexsmobs:roadrunner;Géocoucou;Geococcyx;sauvage;desert;ouest_mexique;1;garder;mod à installer;PC
+alexsmobs:seagull;Mouette;Laridae;sauvage;cote;toutes_les_côtes_sauf_tropicales;3-6;garder;mod à installer;TC
+alexsmobs:seal;Phoque;Phocidae;sauvage;cote,banquise;arctique,nordique,boreale,siberie,antarctique,atlantique,cone_sud,nouvelle_zelande;3-6;garder;"côtes froides seulement (règle le bug du Mexique) ; mod à installer";C
+alexsmobs:shoebill;Bec-en-sabot;Balaeniceps rex;sauvage;marais;afrique_est,afrique_tropicale;1;garder;mod à installer;R
+alexsmobs:skunk;Moufette;Mephitis mephitis;sauvage;foret,prairie;grandes_plaines,boreale,ouest_mexique;1-2;garder;mod à installer;PC
+alexsmobs:snow_leopard;Léopard des neiges;Panthera uncia;sauvage;montagne;steppes_tibet;1;garder;"race régionale (Asie) de untamedwilds:big_cat/snow_leopard ; version courante, craintive";R
+alexsmobs:sugar_glider;Phalanger volant;Petaurus breviceps;sauvage;foret;australie,melanesie;1-3;garder;mod à installer;C
+alexsmobs:tarantula_hawk;Guêpe-tarentule;Pepsis;insecte;desert;ouest_mexique,grandes_plaines,amerique_centrale;1;garder;mod à installer;PC
+alexsmobs:tasmanian_devil;Diable de Tasmanie;Sarcophilus harrisii;sauvage;foret;australie;1;garder;"Tasmanie seulement ; mod à installer";PC
+alexsmobs:terrapin;Tortue de rivière;Malaclemys / Trachemys;sauvage;eau_douce,marais;grandes_plaines;1-3;garder;mod à installer;PC
+alexsmobs:tiger;Tigre (AM);Panthera tigris;sauvage;foret;inde;1;garder;"race régionale (Asie) de untamedwilds:big_cat/tiger ; Inde : attaque si on approche (Sundarbans)";R
+alexsmobs:toucan;Toucan;Ramphastidae;sauvage;foret_tropicale;amazonie,amerique_centrale;1-3;garder;mod à installer;C
+alexsmobs:triops;Triops;Triops cancriformis;sauvage;eau_douce (mares);sahara_sahel,maghreb,moyen_orient,steppes_tibet,australie,ouest_mexique;3-6;garder;"mares temporaires ; mod à installer";C
+alexsmobs:fly;Mouche;Musca domestica;insecte;partout;partout_sauf:arctique,antarctique;1;garder;mod à installer;PC
+alexsmobs:centipede_head;Mille-pattes des cavernes;—;fantastique;souterrain;—;1;souterrain;"profondeurs ; mod à installer";
+alexsmobs:rocky_roller;Rouleau rocheux;—;fantastique;souterrain;—;1;souterrain;"profondeurs ; mod à installer";
+alexsmobs:underminer;Sous-mineur;—;fantastique;souterrain;—;1;souterrain;"abîmes ; mod à installer";
+alexsmobs:murmur;Murmure;—;fantastique;souterrain;—;1;souterrain;"abîmes ; mod à installer";
+alexsmobs:skreecher;Skreecher;—;fantastique;souterrain;—;1;souterrain;"abîmes ; mod à installer";
+alexsmobs:farseer;Voyant éloigné;—;fantastique;souterrain;—;1;souterrain;"abîmes ; mod à installer";
+alexsmobs:froststalker;Traqueur givrant;—;fantastique;souterrain;—;—;souterrain;"profondeurs ; mod à installer";
+alexsmobs:tusklin;Tusklin;—;fantastique;souterrain;—;—;souterrain;"profondeurs ; mod à installer";
+alexsmobs:guster;Rafalleur;—;fantastique;—;—;—;a_confirmer;"créature inventée : abîmes ou retirée ? ; mod à installer";R
+alexsmobs:flutter;Papilloneur;—;fantastique;—;—;—;a_confirmer;"créature inventée : abîmes ou retirée ? ; mod à installer";R
+alexsmobs:sunbird;Oiseau de soleil;—;fantastique;—;—;—;a_confirmer;"créature inventée : abîmes ou retirée ? ; mod à installer";R
+alexsmobs:sea_bear;Tardigrade géant;—;fantastique;souterrain (eau), fosses océaniques;—;—;souterrain;"grottes inondées des profondeurs et fond des fosses (Mariannes, sous y 0) ; mod à installer";
+alexsmobs:skelewag;Squeladon;—;fantastique;souterrain (eau), fosses océaniques;—;—;souterrain;"grottes inondées des profondeurs et fond des fosses (Mariannes, sous y 0) ; mod à installer";
+alexsmobs:mungus;Mongus;—;fantastique;—;—;—;a_confirmer;"vit sur les îles champignons ; créature inventée : abîmes ou retirée ? ; mod à installer";R
+alexsmobs:bunfungus;Champilièvre;—;fantastique;—;—;—;a_confirmer;"créature inventée : abîmes ou retirée ? ; mod à installer";R
+alexsmobs:mimicube;Imicube;—;fantastique;End;—;—;garder;"End : on n'y touche pas ; mod à installer";R
+crittersandcompanions:jumping_spider;Araignée sauteuse;Salticidae (araignée-paon en Australie);insecte;foret,prairie,savane;partout_sauf:arctique,antarctique;1-2;garder;"araignées-paons (Maratus) en Australie";C
+crittersandcompanions:otter;Loutre d'Europe;Lutra lutra;sauvage;eau_douce;atlantique,mediterranee,continentale,nordique,alpine,siberie,chine,japon_coree,inde,maghreb;1-2;garder;;PC
+crittersandcompanions:red_panda;Panda roux;Ailurus fulgens;sauvage;foret (bambou);chine;1;garder;"Himalaya, Sichuan";R
+crittersandcompanions:ferret;Putois;Mustela putorius;sauvage;foret,prairie;atlantique,continentale,mediterranee,nordique;1;garder;"le furet est le putois domestiqué";PC
+crittersandcompanions:dragonfly;Libellule (C&C);Anisoptera;insecte;eau_douce,marais;partout_sauf:arctique,antarctique;1-3;garder;;C
+crittersandcompanions:ladybug;Coccinelle;Coccinellidae;insecte;prairie,foret;partout_sauf:arctique,antarctique;1-3;garder;;C
+crittersandcompanions:leaf_insect;Phyllie;Phylliidae;insecte;foret_tropicale;asie_sud_est,melanesie,australie,inde;1;garder;;PC
+crittersandcompanions:stag_beetle;Lucane cerf-volant;Lucanus cervus;insecte;foret;atlantique,continentale,mediterranee,alpine;1;garder;;PC
+crittersandcompanions:roly_poly;Cloporte;Oniscidea;insecte;foret,prairie;partout_sauf:arctique,antarctique;1-3;garder;;C
+crittersandcompanions:shima_enaga;Mésange à longue queue;Aegithalos caudatus;sauvage;foret;japon_coree,siberie,chine,continentale,nordique,atlantique;2-4;garder;;C
+crittersandcompanions:koi_fish;Carpe koï;Cyprinus rubrofuscus;poisson;eau_douce;japon_coree,chine;1-3;garder;"forme ornementale : rare à l'état sauvage";R
+crittersandcompanions:dumbo_octopus;Poulpe Dumbo;Grimpoteuthis;sauvage;abysses;mers_profondes;1;garder;;R
+crittersandcompanions:sea_bunny;Lapin de mer;Jorunna parva;sauvage;mer (récifs);japon_coree,asie_sud_est,melanesie;1;garder;;PC

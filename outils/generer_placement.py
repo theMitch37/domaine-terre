@@ -156,10 +156,14 @@ def _aire(ts):
 
 
 UW = {}
+RARETE = {}            # (entité, espèce) -> poids de l'abondance réelle (07/11/2026), « rarity » d'Untamed Wilds
+_ABONDANCE = {"TC": 16, "C": 8, "PC": 3, "R": 1}
 for _r in _csv.DictReader(open("outils/faune/especes.csv", encoding="utf-8"), delimiter=";"):
     if not _r["id"].startswith("untamedwilds:") or "/" not in _r["id"]:
         continue
     _ent, _sp = _r["id"][13:].split("/", 1)
+    if _r.get("abondance") in _ABONDANCE:
+        RARETE[(_ent, _sp)] = _ABONDANCE[_r["abondance"]]
     if _r["statut"] in ("retirer", "souterrain"):
         UW.setdefault(_ent, {})[_sp] = None
         continue
@@ -218,6 +222,10 @@ if z:
         d = json.loads(z.read(chemin).decode("utf-8-sig"))
         change = False
         for sp in d.get("species", []):
+            # rareté entre les espèces d'une même créature (Untamed Wilds tire l'espèce au sort, pondérée par « rarity »)
+            rar = RARETE.get((ent, sp["name"]), RARETE.get((ent, "*")))
+            if rar is not None and sp.get("rarity") != rar:
+                sp["rarity"], change = rar, True
             ts = especes.get(sp["name"], especes.get("*", "garder"))
             if ts == "garder":
                 nv = mers(sp.get("spawnBiomes", []))
@@ -236,6 +244,19 @@ with zipfile.ZipFile(dst, "w", zipfile.ZIP_DEFLATED) as zout:
     for p, d in fichiers.items():
         zout.writestr(p, json.dumps(d, indent=1, ensure_ascii=False))
 print("datapack :", len(fichiers), "fichiers ->", dst)
+
+# ---------------------------------------------------------------- Untamed Wilds (fichier de config)
+# 07/11/2026 : ses bêtes de terre naissent par la table du mod Terre (abondance réelle, comme les autres mods) ; son
+# propre système ne garde que la mer, les poissons d'eau douce et les fonds (sinon elles naîtraient deux fois).
+UW_CFG = os.path.join(INST, "config/untamedwilds-common.toml")
+if os.path.exists(UW_CFG):
+    t = open(UW_CFG, encoding="utf-8").read()
+    for cle in ("freqapex", "freqherbivore", "freqcritter"):
+        t = re.sub(r"(?m)^(\s*" + cle + r"\s*=\s*)\d+", r"\g<1>0", t)
+    open(UW_CFG, "w", encoding="utf-8").write(t)
+    print("Untamed Wilds : prédateurs, herbivores et petites bêtes confiés au mod Terre")
+else:
+    print("Untamed Wilds : config absente (lancer le jeu une fois), à relancer ensuite")
 
 # ---------------------------------------------------------------- Alex's Mobs (fichiers de config)
 AM = {"kangaroo": ["australie"], "emu": ["australie"], "platypus": ["australie"], "tasmanian_devil": ["australie"],

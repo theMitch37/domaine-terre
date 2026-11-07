@@ -96,6 +96,11 @@ def groupe(g):
     return a, int(m[2] or a)
 
 
+# abondance réelle (outils/faune/abondance.py) : très commun, commun, peu commun, rare
+ABONDANCE = {"TC": 16, "C": 8, "PC": 3, "R": 1}
+UW_TERRE = {"bear", "big_cat", "hyena", "large_snake", "monitor", "boar", "bison", "camel", "hippo", "rhino",
+            "wildebeest", "aardvark", "newt", "snake", "softshell_turtle", "tortoise", "tarantula", "opossum", "butterfly"}
+
 rows = list(csv.DictReader(open(os.path.join(ICI, "especes.csv"), encoding="utf-8"), delimiter=";"))
 especes, vus = [], set()
 for r in rows:
@@ -103,7 +108,12 @@ for r in rows:
     if st not in ("garder", "souterrain"):
         continue
     ent = r["id"].split("/")[0]
-    if ent.startswith("untamedwilds:") or ent in ("guardvillagers:guard", "alexsmobs:mimicube"):
+    # Untamed Wilds (07/11/2026) : ses bêtes de terre naissent par cette table (abondance cohérente avec le reste) ;
+    # ses bêtes de mer et ses poissons d'eau douce gardent son propre système (le jeu ne fait naître à la génération
+    # que la catégorie des animaux de terre)
+    if ent.startswith("untamedwilds:") and ent.split(":")[1] not in UW_TERRE:
+        continue
+    if ent in ("guardvillagers:guard", "alexsmobs:mimicube"):
         continue
     toks = [j for m in r["milieu"].split(",") for j in jetons(m)] if r["milieu"] not in MILIEUX else [r["milieu"]]
     biomes = sorted({b for t in toks if t in MILIEUX for b in MILIEUX[t]})
@@ -136,7 +146,7 @@ for r in rows:
     especes.append({
         "id": r["id"], "entite": ent, "cat": r["categorie"], "terroirs": [INDEX[t] for t in ts], "biomes": biomes,
         "precis": precis, "eau": eau, "cote": cote, "mer": mer, "min": mn, "max": mx,
-        "poids": 1 if "RARE" in r["note"] else POIDS.get(r["categorie"], 6),
+        "poids": ABONDANCE.get(r.get("abondance", ""), 1 if "RARE" in r["note"] else POIDS.get(r["categorie"], 6)),
         "nuit": "nuit" in r["milieu"], "etage": etage})
 json.dump({"precises": precises, "especes": especes}, open(os.path.join(OUT, "especes.json"), "w", encoding="utf-8"),
           ensure_ascii=False, separators=(",", ":"))

@@ -181,5 +181,6 @@
   "water_ambient": [],
   "water_creature": []
  },
- "spawn_costs": {}
+ "spawn_costs": {},
+ "creature_spawn_probability": 0.126
 }

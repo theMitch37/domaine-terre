@@ -45,7 +45,7 @@ public final class FauneTerre {
     /** Une ligne de la table, résolue. */
     public record Entree(String id, EntityType<?> type, MobCategory categorie, long terroirs, boolean tousTerroirs,
                          int biomes, int[][] precis, boolean eau, boolean cote, int temps, int bandes, boolean mer,
-                         boolean nuit, Etage etage, MobSpawnSettings.SpawnerData donnees) {
+                         boolean nuit, Etage etage, MobSpawnSettings.SpawnerData donnees, boolean generationSeule) {
         boolean dansTerroir(int t) {
             return t > 0 && t < 64 && (terroirs & (1L << t)) != 0;
         }
@@ -147,9 +147,15 @@ public final class FauneTerre {
             }
             int min = Math.max(1, o.get("min").getAsInt()), max = Math.max(min, o.get("max").getAsInt());
             MobSpawnSettings.SpawnerData d = new MobSpawnSettings.SpawnerData(type, Math.max(1, o.get("poids").getAsInt()), min, max);
-            Entree en = new Entree(o.get("id").getAsString(), type, type.getCategory(), ts, nb >= 29, bio, precis,
+            // Untamed Wilds range ses bêtes en MISC (le jeu ne les fait jamais naître lui-même) : la table les fait naître
+            // avec les animaux (CREATURE), mais seulement à la génération des chunks (07/11/2026). Les apparitions
+            // naturelles ne comptent pas les MISC dans le plafond d'animaux : elles en feraient naître sans fin.
+            MobCategory cat = type.getCategory();
+            boolean generationSeule = cat == MobCategory.MISC;
+            if (generationSeule) cat = MobCategory.CREATURE;
+            Entree en = new Entree(o.get("id").getAsString(), type, cat, ts, nb >= 29, bio, precis,
                     o.get("eau").getAsBoolean(), o.get("cote").getAsBoolean(), temps, bandes, mer,
-                    o.get("nuit").getAsBoolean(), etage, d);
+                    o.get("nuit").getAsBoolean(), etage, d, generationSeule);
             (etage == null ? surface : souterrain).add(en);
         }
         DomaineTerre.LOGGER.info("Faune de la Terre : {} espèces en surface, {} sous terre ({} absentes du pack), {} ms",
@@ -224,6 +230,7 @@ public final class FauneTerre {
         List<MobSpawnSettings.SpawnerData> out = new ArrayList<>();
         for (Entree e : surface) {
             if (e.categorie() != cat) continue;
+            if (e.generationSeule() && !generation) continue;
             if (e.nuit() && !nuit) continue;
             if (merBiome) {
                 if (!e.mer() || (e.temps() & (1 << temp)) == 0 || (e.bandes() & (1 << bande)) == 0) continue;
