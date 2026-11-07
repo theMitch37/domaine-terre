@@ -128,7 +128,7 @@ untamedwilds:arowana/green;Arowana d'Asie;Scleropages formosus;poisson;eau_douce
 untamedwilds:arowana/jardini;Arowana perlé;Scleropages jardinii;poisson;eau_douce;australie,melanesie;1;garder;
 untamedwilds:manatee/west;Lamantin des Caraïbes;Trichechus manatus;sauvage;eau_douce,cote;amerique_centrale,grandes_plaines;1-2;garder;
 untamedwilds:manatee/amazon;Lamantin d'Amazonie;Trichechus inunguis;sauvage;eau_douce,cote;amazonie;1-2;garder;
-untamedwilds:manatee/african;Lamantin d'Afrique;Trichechus senegalensis;sauvage;eau_douce,cote;afrique_tropicale,sahara_sahel;1-2;garder;
+untamedwilds:manatee/african;Lamantin d'Afrique;Trichechus senegalensis;sauvage;eau_douce,cote;afrique_tropicale;1-2;garder;"fleuves d'Afrique de l'Ouest et centrale (Niger, Congo) ; pas dans le Nil"
 untamedwilds:manatee/dugong;Dugong;Dugong dugon;sauvage;eau_douce,cote;asie_sud_est,australie,melanesie,inde,afrique_est;1-2;garder;
 untamedwilds:manatee/steller;Rhytine de Steller;—;fantastique;—;—;—;retirer;espèce disparue
 untamedwilds:baleen_whale/blue;Baleine bleue;Balaenoptera musculus;sauvage;large;tous_les_océans;1-2;garder;

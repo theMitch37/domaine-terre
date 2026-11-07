@@ -234,8 +234,10 @@ public final class FauneTerre {
             if (!e.dansTerroir(terroir)) continue;
             if (e.precis() != null && e.precis()[terroir] != null && !contient(e.precis()[terroir], precis)) continue;
             boolean terre = (e.biomes() & (1 << grand)) != 0 && grand > 0;
-            boolean eau = e.eau() && eauProche && !generation;
-            boolean cote = e.cote() && coteProche && !generation;
+            // à la génération, eauProche / coteProche disent si le chunk a un cours d'eau, un lac ou la côte (07/11/2026 :
+            // sinon crocodiles, hippopotames… ne naissaient jamais, les apparitions naturelles étant trop rares)
+            boolean eau = e.eau() && eauProche;
+            boolean cote = e.cote() && coteProche;
             if (terre || eau || cote) out.add(e.donnees());
         }
         return List.copyOf(out);
@@ -258,6 +260,22 @@ public final class FauneTerre {
             }
         }
         return false;
+    }
+
+    /** Génération d'un chunk : un cours d'eau ou un lac du mod passe-t-il dans le chunk (5 points testés) ? */
+    public static boolean eauDansChunk(int x0, int z0) {
+        Terrain t = Terrain.get();
+        int[][] pts = {{8, 8}, {3, 3}, {12, 3}, {3, 12}, {12, 12}};
+        for (int[] p : pts) {
+            int x = x0 + p[0], z = z0 + p[1];
+            if (t.eauDeFleuve(x, z) || t.eauDeLac(x, z)) return true;
+        }
+        return false;
+    }
+
+    /** Génération d'un chunk : le trait de côte passe-t-il près du chunk (environ 15 blocs du centre) ? */
+    public static boolean coteDansChunk(int x0, int z0) {
+        return Math.abs(Terrain.get().distanceCote(x0 + 8, z0 + 8)) < 2.0;
     }
 
     /** Rivage de la vraie mer (moins d'environ 5 blocs du trait de côte). */

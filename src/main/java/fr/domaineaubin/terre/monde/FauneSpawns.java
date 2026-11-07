@@ -174,7 +174,7 @@ public final class FauneSpawns {
         if (!roumanie) event.setResult(Event.Result.DENY);
     }
 
-    /** Génération des chunks (appelé par le mixin) : animaux terrestres de la table, sans eau ni côte. */
+    /** Génération des chunks (appelé par le mixin) : animaux de la table, ceux de l'eau et de la côte si le chunk en a. */
     public static net.minecraft.util.random.WeightedRandomList<MobSpawnSettings.SpawnerData> generation(
             net.minecraft.world.level.ServerLevelAccessor niveau, Holder<Biome> biome, net.minecraft.world.level.ChunkPos chunk,
             MobCategory cat, net.minecraft.util.random.WeightedRandomList<MobSpawnSettings.SpawnerData> base) {
@@ -182,7 +182,9 @@ public final class FauneSpawns {
         FauneTerre faune = FauneTerre.get();
         if (!faune.active()) return base;
         BlockPos centre = new BlockPos(chunk.getMiddleBlockX(), 64, chunk.getMiddleBlockZ());
-        List<MobSpawnSettings.SpawnerData> l = faune.liste(niveau, cat, centre, biome, false, false, false, true);
+        int x0 = chunk.getMinBlockX(), z0 = chunk.getMinBlockZ();
+        List<MobSpawnSettings.SpawnerData> l = faune.liste(niveau, cat, centre, biome,
+                FauneTerre.eauDansChunk(x0, z0), FauneTerre.coteDansChunk(x0, z0), false, true);
         if (JOURNAL.getAndIncrement() < 3) {
             DomaineTerre.LOGGER.info("Faune (génération) {} {} : biome {}, {} espèces {}", chunk, cat,
                     biome.unwrapKey().map(k -> k.location().toString()).orElse("?"), l.size(),

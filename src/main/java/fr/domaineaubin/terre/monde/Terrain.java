@@ -473,19 +473,62 @@ public final class Terrain {
 
     /** Profondeur sous le sol où les grottes peuvent commencer (sous l'eau : plus bas, pour ne jamais percer un fond). */
     static final double GROTTES_SOUS_SOL = 18.0, GROTTES_SOUS_EAU = 32.0;
+    /**
+     * Autour des lieux (07/11/2026) : sur cette distance, la limite des grottes descend progressivement, jusqu'à
+     * GROTTES_LIEU blocs de plus sous le sol au bord et sous le lieu (aucune grotte à portée de vue). Avant, la limite tombait d'un
+     * coup au bord de l'emprise et laissait un grand mur plat dans les grottes voisines (Vésuve).
+     */
+    static final int GROTTES_APPROCHE = 64;
+    static final double GROTTES_LIEU = 140.0;
+    private static final int[] RAYONS = {6, 12, 20, 32, 48, 64};
+    private final ThreadLocal<long[]> cacheLieux = ThreadLocal.withInitial(() -> new long[512]);
 
     /**
      * Masque des grottes (04/11/2026, décision de Maxime : « grottes fermées ») : max avec la densité des grottes
-     * vanilla. Négatif (-1, sans effet) là où elles peuvent creuser ; positif (bouche la grotte) dans les lieux et à
-     * moins de 18 blocs sous le sol (32 sous la mer, les lacs et les cours d'eau). La pente de 8 blocs arrondit les
-     * voûtes : pas de plafond plat à la limite.
+     * vanilla. Négatif (-1, sans effet) là où elles peuvent creuser ; positif (bouche la grotte) à moins de 18 blocs
+     * sous le sol (32 sous la mer, les lacs et les cours d'eau), bien plus bas sous les lieux et en approchant d'un lieu.
+     * La pente de 8 blocs arrondit les voûtes : pas de plafond plat à la limite.
      */
     public double grottes(int x, int y, int z) {
         Colonne c = colonne(x, z);
-        if (c.lieu() || (!LieuxTerre.liste().isEmpty() && LieuxTerre.a(x, z) != null)) return 1.0;
         boolean eau = c.sd() < 0 || c.eauLac() != SANS_LAC || c.eauRiv() != SANS_LAC;
-        double limite = c.h() - (eau ? GROTTES_SOUS_EAU : GROTTES_SOUS_SOL);
+        double marge = eau ? GROTTES_SOUS_EAU : GROTTES_SOUS_SOL;
+        if (!LieuxTerre.liste().isEmpty()) {
+            // sous un lieu, les grottes restent très profondes (GROTTES_LIEU blocs sous son sol) : invisibles depuis le
+            // lieu, et la limite continue de part et d'autre de son bord (plus de mur)
+            double p = c.lieu() ? 1.0 : procheLieu(x, z);
+            marge += p * GROTTES_LIEU;
+        }
+        double limite = c.h() - marge;
         return Mth.clamp((y - limite) / 8.0, -1.0, 1.0);
+    }
+
+    /** 1 dans un lieu, puis de 1 à 0 en s'en éloignant (0 à GROTTES_APPROCHE blocs et au-delà). Mis en cache par colonne. */
+    private double procheLieu(int x, int z) {
+        long[] tab = cacheLieux.get();
+        int i = ((x * 31 + z * 17) & 255) * 2;
+        long cle = ((((long) x << 32) ^ (z & 0xFFFFFFFFL)) * 31L) + generation;   // une autre échelle invalide le cache
+        if (tab[i] == cle && tab[i + 1] != 0) return Double.longBitsToDouble(tab[i + 1] - 1);
+        double p;
+        if (LieuxTerre.a(x, z) != null) {
+            p = 1.0;
+        } else {
+            p = 0.0;
+            boucle:
+            for (int r : RAYONS) {
+                for (int k = 0; k < 16; k++) {
+                    double a = k * Math.PI / 8.0;
+                    if (LieuxTerre.a(x + (int) Math.round(r * Math.cos(a)), z + (int) Math.round(r * Math.sin(a))) != null) {
+                        double v = 1.0 - (r - RAYONS[0] / 2.0) / GROTTES_APPROCHE;
+                        p = Mth.clamp(v, 0.0, 1.0);
+                        break boucle;
+                    }
+                }
+            }
+        }
+        tab[i] = cle;
+        tab[i + 1] = Double.doubleToRawLongBits(p) + 1;
+        return p;
     }
 
     /** Haut du fond marin : jamais au-dessus de y 61 (l'eau à 62), pour qu'aucune île inventée ne sorte de l'eau. */

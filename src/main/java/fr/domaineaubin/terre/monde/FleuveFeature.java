@@ -37,14 +37,23 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
                 if (w == Terrain.SANS_LAC) continue;
                 // de la surface de l'eau vers le bas, tant qu'il y a de l'air (la carte de hauteur du moteur n'est pas
                 // fiable ici : un lieu vient peut-être de creuser son lit dans ce chunk, StratesFeature)
-                boolean eauEnHaut = false;
+                boolean eauEnHaut = false, mouille = false;
                 for (int y = w - 1; y >= w - 64; y--) {
                     BlockState b = niveau.getBlockState(pos.set(x, y, z));
                     if (b.isAir()) {
                         niveau.setBlock(pos, eau, 2);
                         modifie = true;
+                        mouille = true;
                     } else if (b.getFluidState().isEmpty()) {
+                        // fond du lit : les règles de surface l'ont vu à sec (pas d'aquifère dans les lits) et y ont
+                        // mis de l'herbe ; sous l'eau, de la terre comme dans le jeu de base (07/11/2026)
+                        if (mouille && herbe(b)) {
+                            niveau.setBlock(pos, Blocks.DIRT.defaultBlockState(), 2);
+                            modifie = true;
+                        }
                         break;
+                    } else {
+                        mouille = true;
                     }
                     if (y == w - 1) eauEnHaut = true;
                 }
@@ -57,6 +66,11 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
             }
         }
         return modifie;
+    }
+
+    /** Sol d'herbe que les règles de surface posent à l'air libre. */
+    private static boolean herbe(BlockState b) {
+        return b.is(Blocks.GRASS_BLOCK) || b.is(Blocks.PODZOL) || b.is(Blocks.MYCELIUM) || b.is(Blocks.DIRT_PATH);
     }
 
     private static boolean plusBas(Terrain t, int x, int z, int w) {
