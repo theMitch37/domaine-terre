@@ -110,11 +110,19 @@ public final class FauneTerre {
         for (JsonElement el : racine.getAsJsonArray("especes")) {
             JsonObject o = el.getAsJsonObject();
             ResourceLocation rl = new ResourceLocation(o.get("entite").getAsString());
-            if (!ForgeRegistries.ENTITY_TYPES.containsKey(rl)) {
-                absents++;
+            // registre du jeu (celui qui sert à enregistrer les entités dans les chunks) et vérification du nom : le
+            // registre « par défaut » rend un cochon pour un nom inconnu, et une entité dont le type n'y est pas sous son
+            // nom est enregistrée comme cochon (07/11/2026 : cochons partout à la place d'Untamed Wilds)
+            EntityType<?> type = net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getOptional(rl).orElse(null);
+            if (type == null || !rl.equals(EntityType.getKey(type))) {
+                if (absents++ < 40) {
+                    EntityType<?> forge = ForgeRegistries.ENTITY_TYPES.getValue(rl);
+                    DomaineTerre.LOGGER.warn("Faune : {} introuvable sous son nom (registre du jeu : {}, Forge : {})", rl,
+                            type == null ? "absent" : EntityType.getKey(type),
+                            forge == null ? "absent" : EntityType.getKey(forge));
+                }
                 continue;
             }
-            EntityType<?> type = ForgeRegistries.ENTITY_TYPES.getValue(rl);
             long ts = 0;
             int nb = 0;
             for (JsonElement t : o.getAsJsonArray("terroirs")) {
@@ -269,13 +277,17 @@ public final class FauneTerre {
         return false;
     }
 
-    /** Génération d'un chunk : un cours d'eau ou un lac du mod passe-t-il dans le chunk (5 points testés) ? */
+    /**
+     * Génération d'un chunk : un cours d'eau (lit) ou un lac du mod passe-t-il dans le chunk ? Grille de 4 x 4 points
+     * (tous les 4 blocs) : un fleuve étroit (le Nil fait quelques blocs de large en 1:250) passait entre 5 points.
+     */
     public static boolean eauDansChunk(int x0, int z0) {
         Terrain t = Terrain.get();
-        int[][] pts = {{8, 8}, {3, 3}, {12, 3}, {3, 12}, {12, 12}};
-        for (int[] p : pts) {
-            int x = x0 + p[0], z = z0 + p[1];
-            if (t.eauDeFleuve(x, z) || t.eauDeLac(x, z)) return true;
+        for (int dx = 1; dx < 16; dx += 4) {
+            for (int dz = 1; dz < 16; dz += 4) {
+                int x = x0 + dx, z = z0 + dz;
+                if (t.eauLit(x, z) != Terrain.SANS_LAC || t.eauDeLac(x, z)) return true;
+            }
         }
         return false;
     }
