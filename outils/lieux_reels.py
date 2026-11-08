@@ -411,6 +411,9 @@ def jokulsarlon():
     lagune = F & (L.sd >= 0)
     # glacier : glace (couverture) ; son front domine la lagune de 6 à 9 blocs
     G = (C == 70) & ~F
+    # 08/11/2026 : le glacier s'arrêtait net au bord du lieu (mur de glace face au terrain du mod) ; il finit
+    # maintenant en bordure irrégulière, 30 à 55 blocs avant le bord de la zone, sur sa moraine
+    G &= L.de > 42.0 + 12.0 * bruit(X, Z, 9, 1305)
     G = ndimage.binary_opening(G, iterations=1)
     dW = ndimage.distance_transform_edt(~F)
     y = np.where(G, np.maximum(y, 69.0 + 1.5 * bruit(X, Z, 5, 1301) + 0.12 * np.maximum(dW - 1, 0)), y)
