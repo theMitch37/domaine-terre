@@ -142,6 +142,7 @@ def poser(nom, x0, z0, y, sommet, typ, actif, eau=None):
                 v = np.broadcast_to(val, y.shape)[j0:j1, i0:i1]
                 grille[sj, si] = np.where(a, v, grille[sj, si])
         if a.any() or avant:
+            nettoyer_bandes(t)
             t.ecrire(); ecrites.append((tx, tz))
     ecrire_index()
     return ecrites
@@ -166,3 +167,28 @@ def lire_zone(x0, z0, W, D):
             eau[j0:j1, i0:i1] = t.eau[sj, si]
     lire_zone.eau = eau                                         # niveau d'eau du lieu (VIDE = aucun), à part : compatibilité
     return haut, sommet, typ, lieu
+
+INONDE = 128
+
+
+def nettoyer_bandes(t):
+    """Bandes d'une colonne dans la mer d'un lieu (08/11/2026 : Chaussée, Capri, Vésuve, Etna, Fingal, Jökulsárlón) :
+    au bord de la partie sculptée, une colonne « inondée » montait jusqu'au niveau de la mer entre deux fonds à
+    45-50 : une ligne droite d'herbe ou de sable sous la surface, sur des dizaines de blocs. Une colonne seulement
+    inondée (ou sans rôle) qui dépasse de 3 blocs la médiane de ses 8 voisines prend cette médiane. Les aiguilles et
+    pitons taillés des lieux ne sont pas touchés. Rend le nombre de colonnes corrigées."""
+    from scipy import ndimage
+    n = 0
+    for _ in range(3):
+        v = t.haut != VIDE
+        h = np.where(v, t.haut / 16.0, np.nan)
+        voisins = ndimage.generic_filter(np.where(v, h, np.nan), lambda a: np.nanmedian(np.delete(a, 4))
+                                         if np.isfinite(np.delete(a, 4)).sum() >= 3 else np.nan,
+                                         size=3, mode="constant", cval=np.nan)
+        role = t.type & 0x70                                     # taillée, remblai, biome
+        cible = v & (role == 0) & np.isfinite(voisins) & (h - voisins >= 3)
+        if not cible.any():
+            break
+        t.haut = np.where(cible, np.round(voisins * 16), t.haut).astype(np.int16)
+        n += int(cible.sum())
+    return n
