@@ -43,7 +43,7 @@ public class FosseFeature extends Feature<NoneFeatureConfiguration> {
                 for (int y = sol; y >= Math.max(bas, plusBas - 1); y--) {
                     p.set(x, y, z);
                     BlockState b = niveau.getBlockState(p);
-                    if (!b.isSolid() || b.is(Blocks.BEDROCK)) continue;
+                    if (!b.isSolid() || (b.is(Blocks.BEDROCK) && y < -62)) continue;   // bedrock à nu au fond : recouverte
                     boolean dessus = niveau.getBlockState(v.set(x, y + 1, z)).is(Blocks.WATER);
                     boolean cote = !dessus && (eau(niveau, v, x + 1, y, z) || eau(niveau, v, x - 1, y, z)
                             || eau(niveau, v, x, y, z + 1) || eau(niveau, v, x, y, z - 1));
@@ -52,6 +52,9 @@ public class FosseFeature extends Feature<NoneFeatureConfiguration> {
                     BlockState neuf;
                     if (cote) {                                  // paroi
                         neuf = (n < 0.45 ? Blocks.BASALT : n < 0.8 ? Blocks.DEEPSLATE : Blocks.TUFF).defaultBlockState();
+                    } else if (sol > -24) {                      // pente au-dessus de la faille : sédiments
+                        double m = valeur(x / 9.0, 3.0, z / 9.0);
+                        neuf = (m < 0.7 ? Blocks.MUD : m < 0.9 ? Blocks.CLAY : Blocks.DEEPSLATE).defaultBlockState();
                     } else if (sol > -50) {                      // dessus d'une corniche
                         neuf = (n < 0.6 ? Blocks.DEEPSLATE : Blocks.BASALT).defaultBlockState();
                     } else {                                     // fond
