@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LightBlock;
 import net.minecraft.world.level.block.PointedDripstoneBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -105,6 +106,16 @@ public class GrottesFeature extends Feature<NoneFeatureConfiguration> {
             BlockState b = etat(c, x, y, z);
             if (b != null) niveau.setBlock(pos, b, 2);
         }
+        // Lumière du fond (grotte bleue de Capri) : sable blanc partout, et une source de lumière invisible dans l'eau
+        // juste au-dessus. Avant (08/11/2026) : des lanternes marines visibles au sol, pas naturelles du tout.
+        for (int v : l) {
+            if (((v >> 17) & 255) != LANTERNE) continue;
+            pos.set(x0 + (v & 15), ((v >> 8) & 511) - 64 + 1, z0 + ((v >> 4) & 15));
+            if (niveau.getBlockState(pos).is(Blocks.WATER)) {
+                niveau.setBlock(pos, Blocks.LIGHT.defaultBlockState().setValue(LightBlock.LEVEL, 11)
+                        .setValue(LightBlock.WATERLOGGED, true), 2);
+            }
+        }
         return true;
     }
 
@@ -126,7 +137,7 @@ public class GrottesFeature extends Feature<NoneFeatureConfiguration> {
             case GLACE_BLEUE -> Blocks.BLUE_ICE.defaultBlockState();
             case GLACE -> Blocks.ICE.defaultBlockState();
             case NEIGE -> Blocks.SNOW_BLOCK.defaultBlockState();
-            case LANTERNE -> Blocks.SEA_LANTERN.defaultBlockState();
+            case LANTERNE -> Blocks.SAND.defaultBlockState();
             case BASALTE -> Blocks.BASALT.defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.Y);
             case BASALTE_POLI -> Blocks.POLISHED_BASALT.defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.Y);
             case BASALTE_LISSE -> Blocks.SMOOTH_BASALT.defaultBlockState();
