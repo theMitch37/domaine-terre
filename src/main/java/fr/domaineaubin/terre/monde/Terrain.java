@@ -129,7 +129,21 @@ public final class Terrain {
         Lieu lieu = LieuxTerre.liste().isEmpty() ? null : LieuxTerre.a(x, z);
         double poids = 0.0;
         if (lieu != null) {
-            h = lieu.hauteur(x, z, h);
+            // relief fin (09/11/2026) : les lieux ont été sculptés et raccordés sur le terrain d'avant (carte 3') ; ils
+            // reçoivent ce terrain-là, et l'écart avec le relief fin est ajouté à leurs colonnes sculptées, en entier au
+            // bord de la zone du lieu et plus du tout à RACCORD_FIN blocs à l'intérieur : plus de marche au bord
+            double hAvant = calculerHauteur(x, z, sd, alt, pente, r, false);
+            if (lp != null) {
+                if (lp.distance() > 0) hAvant = fondLac(nivLac, lp.distance(), lacs.superficie(lp.lac()));
+                else if (!(r != null && r.distance() <= r.demiLargeur() + BERGE_RIVIERE)) hAvant = bergeLac(hAvant, nivLac, -lp.distance());
+            }
+            double hl = lieu.hauteur(x, z, hAvant);
+            if (Math.abs(hl - hAvant) < 1e-9) {
+                hl = lieu.hauteur(x, z, h);                    // colonne non sculptée : le terrain du mod (relief fin)
+            } else if (h != hAvant) {
+                hl += (h - hAvant) * (1.0 - Mth.clamp(interieurLieu(x, z) / RACCORD_FIN, 0.0, 1.0));
+            }
+            h = hl;
             poids = Mth.clamp(lieu.poids(x, z), 0.0, 1.0);
             // un lieu sculpté (Grand Canyon, Verdon) gère l'eau de son cours d'eau lui-même (niveau de la mer)
             eauRiv = SANS_LAC;
@@ -315,7 +329,11 @@ public final class Terrain {
     }
 
     private double calculerHauteur(int x, int z, double sd, double alt, double pente, Riviere r) {
-        double h = hauteurBase(x, z, sd, alt, pente);
+        return calculerHauteur(x, z, sd, alt, pente, r, true);
+    }
+
+    private double calculerHauteur(int x, int z, double sd, double alt, double pente, Riviere r, boolean fin) {
+        double h = hauteurBase(x, z, sd, alt, pente, fin);
         if (r == null) return h;
         // étape C2 : chaque cours d'eau a son niveau (r.eau(), qui descend vers l'aval), en altitude comme en plaine
         int w = r.eau();
@@ -417,7 +435,7 @@ public final class Terrain {
     }
 
     /** Hauteur visée du sol sans les fleuves. */
-    private double hauteurBase(int x, int z, double sd, double alt, double pente) {
+    private double hauteurBase(int x, int z, double sd, double alt, double pente, boolean fin) {
         if (sd >= 0) {
             double p = Mth.clamp(pente / 80.0, 0.0, 1.0);
             double detail = bruitDetail.noise(x / 48.0, 0, z / 48.0) * (1.2 + 6.0 * p)
@@ -425,10 +443,10 @@ public final class Terrain {
             double hTerre = blocsDepuisAltitude(Math.max(alt, 1.0)) + detail;
             // relief fin (08/11/2026) : le vrai relief à 250 m remplace le bruit de détail ; la carte 3' garde le niveau
             // moyen, seule une part du détail fin est gardée (les hauteurs sont exagérées ×6 à ×10)
-            double fin = ReliefFin.altitude(x, z);
-            if (!Double.isNaN(fin)) {
+            double af = fin ? ReliefFin.altitude(x, z) : Double.NaN;
+            if (!Double.isNaN(af)) {
                 double base = blocsDepuisAltitude(Math.max(alt, 1.0));
-                hTerre = base + (blocsDepuisAltitude(Math.max(fin, 1.0)) - base) * ReliefFin.detail();
+                hTerre = base + (blocsDepuisAltitude(Math.max(af, 1.0)) - base) * ReliefFin.detail();
             }
             return Mth.lerp(lisse(Mth.clamp(sd / 2.0, 0.0, 1.0)), NIVEAU_MER + 0.6, Math.max(hTerre, NIVEAU_MER + 0.6));
         }
@@ -529,6 +547,22 @@ public final class Terrain {
         }
         double limite = c.h() - marge;
         return Mth.clamp((y - limite) / 8.0, -1.0, 1.0);
+    }
+
+    /** Distance (blocs) sur laquelle l'écart relief fin / terrain d'avant s'efface à l'intérieur d'un lieu. */
+    static final double RACCORD_FIN = 56.0;
+    private static final int[] RAYONS_IN = {6, 12, 20, 28, 36, 44, 52, 60};
+
+    /** Distance approchée au bord de la zone du lieu, depuis l'intérieur (au-delà de 60 : 64). */
+    private double interieurLieu(int x, int z) {
+        for (int r : RAYONS_IN) {
+            for (int k = 0; k < 16; k++) {
+                double a = k * Math.PI / 8.0;
+                if (LieuxTerre.a(x + (int) Math.round(r * Math.cos(a)), z + (int) Math.round(r * Math.sin(a))) == null)
+                    return r - 3.0;
+            }
+        }
+        return 64.0;
     }
 
     /** 1 dans un lieu, puis de 1 à 0 en s'en éloignant (0 à GROTTES_APPROCHE blocs et au-delà). Mis en cache par colonne. */
