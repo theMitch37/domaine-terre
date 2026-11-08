@@ -25,6 +25,9 @@ public final class ModMonde {
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> FLEUVES =
             FEATURES.register("fleuves", () -> new FleuveFeature(NoneFeatureConfiguration.CODEC));
 
+    public static final RegistryObject<Feature<NoneFeatureConfiguration>> FOSSES =
+            FEATURES.register("fosses", () -> new FosseFeature(NoneFeatureConfiguration.CODEC));
+
     public static final DeferredRegister<Codec<? extends BiomeSource>> SOURCES_BIOMES =
             DeferredRegister.create(Registries.BIOME_SOURCE, DomaineTerre.MOD_ID);
 

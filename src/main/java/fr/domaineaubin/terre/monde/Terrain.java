@@ -195,11 +195,12 @@ public final class Terrain {
             // des Mariannes (≈ -10 300 m dans ETOPO à 3'), juste au-dessus de la bedrock (faille : 28/10)
             if (alt > -200) return 62 + alt / 200.0 * 20;                       // plateau continental : y 42 à 62 (10 m/bloc)
             if (alt > -6000) return 42 + (alt + 200) / 5800.0 * 42;             // talus, glacis, plaines abyssales : y 0 à 42
-            // fosses : y 0 à -30 jusqu'à 9 800 m, puis une faille au fond des plus profondes (Mariannes, Tonga,
+            // fosses : y 0 à -20 jusqu'à 9 800 m, puis une faille au fond des plus profondes (Mariannes, Tonga,
             // Philippines, Kermadec) : parois presque verticales de 9 800 à 10 300 m, jusqu'à y -61
+            // (08/11/2026 : faille de 41 blocs au lieu de 31, la fosse ne paraissait pas assez profonde)
             double t1 = Math.min((-alt - 6000) / 3800.0, 1.0);
             double t2 = Mth.clamp((-alt - 9800) / 500.0, 0.0, 1.0);
-            return -30 * t1 - 31 * (1 - Math.pow(1 - t2, 2.5));
+            return -20 * t1 - 41 * (1 - Math.pow(1 - t2, 2.5));
         }
         if (alt <= 500) return 64 + alt / 500.0 * 16;                            // plaines : y 64 à 80
         if (alt <= 2000) return 80 + (alt - 500) / 1500.0 * 60;                  // collines et plateaux : y 80 à 140
@@ -424,8 +425,28 @@ public final class Terrain {
             double hTerre = blocsDepuisAltitude(Math.max(alt, 1.0)) + detail;
             return Mth.lerp(lisse(Mth.clamp(sd / 2.0, 0.0, 1.0)), NIVEAU_MER + 0.6, Math.max(hTerre, NIVEAU_MER + 0.6));
         }
-        double hMer = blocsDepuisAltitude(Math.min(alt, -1.0));
+        double hMer = alt < -9300 ? fosse(x, z, alt) : blocsDepuisAltitude(Math.min(alt, -1.0));
         return Mth.lerp(lisse(Mth.clamp(-sd / 2.0, 0.0, 1.0)), NIVEAU_MER - 1.0, Math.min(hMer, NIVEAU_MER - 1.0));
+    }
+
+    /**
+     * Faille des grandes fosses (08/11/2026 : tranchée droite aux parois lisses et au fond plat). Les parois serpentent
+     * (la profondeur réelle décalée par un bruit fixe, ±350 m), forment des corniches tous les 6 blocs, et le fond se
+     * creuse en cuvettes séparées par des buttes. Bruit à graine fixe : la même fosse dans tous les mondes.
+     */
+    private double fosse(int x, int z, double alt) {
+        double w = Mth.clamp((-alt - 9300) / 600.0, 0.0, 1.0);
+        double a = alt + w * (bruitDetail.noise(x / 56.0, 40, z / 56.0) * 260 + bruitDetail.noise(x / 17.0, 41, z / 17.0) * 90);
+        double h = blocsDepuisAltitude(Math.min(a, -1.0));
+        if (h < -22 && h > -56) {                                // corniches : paliers de 6 blocs, contremarches raides
+            double q = 6.0, b = Math.floor(h / q) * q, f = (h - b) / q;
+            h = Mth.lerp(0.55, h, b + q * f * f * f);
+        }
+        if (h < -54) {                                           // fond : cuvettes et buttes (jusqu'à 9 blocs)
+            double m = bruitDetail.noise(x / 38.0, 42, z / 38.0) + 0.35 * bruitDetail.noise(x / 11.0, 43, z / 11.0);
+            h += Math.max(0.0, m) * 9.0 * Mth.clamp((-54.0 - h) / 7.0, 0.0, 1.0);
+        }
+        return Math.max(h, -61.0);
     }
 
     // ---------------------------------------------------------------- sorties pour le routeur de bruit vanilla
