@@ -95,9 +95,25 @@ T = {
     "wildernature:turkey": (1.0, "h", 1.0),
 }
 
+# 08/11/2026 (Maxime) : les petits animaux un peu agrandis, pour ne pas avoir la taille d'un insecte
+def affichee(reelle):
+    """Taille affichée d'un animal (hors insectes) : réelle à partir de 0,6 m, un peu agrandie en dessous, 0,3 minimum."""
+    return reelle if reelle >= 0.6 else max(0.3, 0.6 * (reelle / 0.6) ** 0.45)
+
+
+def facteur(reelle, mesure, f):
+    return f if mesure == "i" else f * affichee(reelle) / reelle
+
+
+# créatures en plusieurs morceaux ou à modèle propre, réglées à l'œil (le rendu suit, pas la collision des morceaux)
+T.update({
+    "alexsmobs:cachalot_whale": (16.0, "l", 1.6),
+    "alexsmobs:giant_squid": (10.0, "l", 2.0),
+})
+
 if __name__ == "__main__":
     sortie = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../src/main/resources/domaine_terre/faune/tailles.json")
     d = {"_": "facteur de taille par créature (1 = inchangé), outils/faune/tailles.py ; remplaçable par config/domaine_terre_tailles.json",
-         "facteurs": {k: v[2] for k, v in sorted(T.items()) if abs(v[2] - 1.0) > 0.01}}
+         "facteurs": {k: round(facteur(*v), 3) for k, v in sorted(T.items()) if abs(facteur(*v) - 1.0) > 0.01}}
     json.dump(d, open(sortie, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
     print(len(d["facteurs"]), "facteurs ->", os.path.normpath(sortie))
