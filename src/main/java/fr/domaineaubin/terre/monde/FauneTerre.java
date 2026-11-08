@@ -234,6 +234,39 @@ public final class FauneTerre {
         return l;
     }
 
+    private final Map<Integer, List<MobSpawnSettings.SpawnerData>> cacheRives = new ConcurrentHashMap<>();
+
+    /**
+     * Bêtes des rives (08/11/2026) : animaux de terre liés à l'eau douce (crocodiles, loutres, tortues…), placés sur
+     * les berges par RivesFeature. À la génération, le jeu tire leur position au hasard dans le chunk : sur un grand
+     * fleuve comme le Nil, presque toujours dans l'eau, où ils ne peuvent pas naître (les hippopotames d'Untamed Wilds,
+     * eux, y naissent).
+     */
+    public List<MobSpawnSettings.SpawnerData> rives(int x, int z) {
+        int pix = pixel(x, z);
+        List<MobSpawnSettings.SpawnerData> l = cacheRives.get(pix);
+        if (l != null) return l;
+        int zz = zones[pix] & 0xFF;
+        List<MobSpawnSettings.SpawnerData> out = new ArrayList<>();
+        if (zz < 128) {
+            double lon = -180.0 + (pix % W + 0.5) * 0.05, lat = 90.0 - (pix / W + 0.5) * 0.05;
+            int terroir = Terrain.get().carte().terroir(lon, lat);
+            int precis = zz >= 16 && zz - 16 < biomePrecis.length ? zz - 16 : -1;
+            for (Entree e : surface) {
+                if (e.categorie() != MobCategory.CREATURE || !e.eau() || e.mer() || e.generationSeule()) continue;
+                if (!e.dansTerroir(terroir)) continue;
+                if (e.precis() != null && e.precis()[terroir] != null && !contient(e.precis()[terroir], precis)) continue;
+                if (net.minecraft.world.entity.SpawnPlacements.getPlacementType(e.type())
+                        == net.minecraft.world.entity.SpawnPlacements.Type.IN_WATER) continue;
+                out.add(e.donnees());
+            }
+        }
+        l = List.copyOf(out);
+        if (cacheRives.size() > 200_000) cacheRives.clear();
+        cacheRives.put(pix, l);
+        return l;
+    }
+
     private List<MobSpawnSettings.SpawnerData> calculer(int pix, MobCategory cat, int temp, int bande, boolean eauProche,
                                                         boolean coteProche, boolean nuit, boolean generation) {
         int z = zones[pix] & 0xFF;

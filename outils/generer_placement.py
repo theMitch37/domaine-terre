@@ -430,6 +430,8 @@ if os.path.exists(UW_CFG):
     t = open(UW_CFG, encoding="utf-8").read()
     for cle in ("freqapex", "freqherbivore", "freqcritter"):
         t = re.sub(r"(?m)^(\s*" + cle + r"\s*=\s*)\d+", r"\g<1>0", t)
+    # 08/11/2026 : bancs de poissons et baleines trop nombreux ; la table du mod Terre peuple déjà les mers
+    t = re.sub(r"(?m)^(\s*freqocean\s*=\s*)\d+", r"\g<1>96", t)
     open(UW_CFG, "w", encoding="utf-8").write(t)
     print("Untamed Wilds : prédateurs, herbivores et petites bêtes confiés au mod Terre")
 else:
