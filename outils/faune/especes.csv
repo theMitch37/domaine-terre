@@ -50,7 +50,7 @@ untamedwilds:boar/eurasian;Sanglier;Sus scrofa;sauvage;foret;atlantique,mediterr
 untamedwilds:boar/peccary;Pécari;Pecari tajacu;sauvage;foret_tropicale,desert;amazonie,amerique_centrale,ouest_mexique;3-6;garder;;C
 untamedwilds:boar/red_river;Potamochère roux;Potamochoerus porcus;sauvage;foret_tropicale;afrique_tropicale;3-6;garder;;C
 untamedwilds:boar/warthog;Phacochère;Phacochoerus africanus;sauvage;savane;afrique_est,afrique_australe,sahara_sahel;2-5;garder;;C
-untamedwilds:camel/dromedary;Dromadaire;Camelus dromedarius;sauvage;desert;maghreb,sahara_sahel;2-6;garder;"féral en Australie ; race régionale (Afrique)";R
+untamedwilds:camel/dromedary;Dromadaire;Camelus dromedarius;sauvage;desert;maghreb,sahara_sahel;1-3;garder;"féral en Australie ; race régionale (Afrique) ; rare : plus de dromadaires sauvages (08/11/2026)";R
 untamedwilds:camel/bactrian;Chameau de Bactriane;Camelus bactrianus;ferme;steppe,desert;steppes_tibet;2-4;garder;;R
 untamedwilds:camel/wild_bactrian;Chameau sauvage;Camelus ferus;sauvage;desert;steppes_tibet;2-4;garder;désert de Gobi;R
 untamedwilds:rhino/black;Rhinocéros noir;Diceros bicornis;sauvage;savane;afrique_est,afrique_australe;1;garder;;PC
@@ -74,7 +74,7 @@ untamedwilds:large_snake/reticulated_python;Python réticulé;Malayopython retic
 untamedwilds:giant_salamander/chinese;Salamandre géante de Chine;Andrias davidianus;sauvage;eau_douce;chine;1;garder;;R
 untamedwilds:giant_salamander/japanese;Salamandre géante du Japon;Andrias japonicus;sauvage;eau_douce;japon_coree;1;garder;;PC
 untamedwilds:giant_salamander/hellbender;Ménopome;Cryptobranchus alleganiensis;sauvage;eau_douce;grandes_plaines;1;garder;Appalaches;PC
-untamedwilds:monitor/nile;Varan du Nil;Varanus niloticus;sauvage;eau_douce,savane;afrique_tropicale,afrique_est,afrique_australe,sahara_sahel;1;garder;;C
+untamedwilds:monitor/nile;Varan du Nil;Varanus niloticus;sauvage;eau_douce,savane;afrique_tropicale,afrique_est,afrique_australe,sahara_sahel;1;garder;;PC
 untamedwilds:monitor/desert;Varan du désert;Varanus griseus;sauvage;desert;sahara_sahel,maghreb,moyen_orient;1;garder;;PC
 untamedwilds:monitor/bengal;Varan du Bengale;Varanus bengalensis;sauvage;foret,culture;inde;1;garder;;PC
 untamedwilds:monitor/water;Varan malais;Varanus salvator;sauvage;eau_douce,cote;asie_sud_est,inde;1;garder;;PC
@@ -341,7 +341,7 @@ alexsmobs:capuchin_monkey;Capucin;Cebus;sauvage;foret_tropicale;amazonie,ameriqu
 alexsmobs:catfish;Poisson-chat (AM);Silurus;poisson;eau_douce;grandes_plaines,boreale,amazonie;1;garder;"race / variante de la famille untamedwilds:catfish ; mod à installer";C
 alexsmobs:cockroach;Cafard;Blattodea;insecte;sol,souterrain;partout_sauf:arctique,antarctique,boreale,siberie,nordique;2-4;garder;mod à installer;PC
 alexsmobs:comb_jelly;Cténophore;Ctenophora;sauvage;mer,large;toutes_les_mers;1-3;garder;mod à installer;C
-alexsmobs:crocodile;Crocodile;Crocodylus niloticus / porosus;sauvage;eau_douce,cote;sahara_sahel,afrique_tropicale,afrique_est,inde,asie_sud_est,australie,melanesie;1-2;garder;"prédateur ; mod à installer ; Nil jusqu'en Égypte (eau douce seulement)";C
+alexsmobs:crocodile;Crocodile;Crocodylus niloticus / porosus;sauvage;eau_douce,cote;sahara_sahel,afrique_tropicale,afrique_est,inde,asie_sud_est,australie,melanesie;1-3;garder;"prédateur ; mod à installer ; Nil jusqu'en Égypte (eau douce seulement)";TC
 alexsmobs:crow;Corbeau;Corvus;sauvage;culture,foret;partout_sauf:antarctique,amazonie;2-5;garder;mod à installer;C
 alexsmobs:devils_hole_pupfish;Cyprinodon du trou du Diable;Cyprinodon diabolis;poisson;eau_douce;ouest_mexique;2-4;garder;"très rare (une seule source au Nevada) ; mod à installer";R
 alexsmobs:elephant;Éléphant;Loxodonta / Elephas;sauvage;savane,foret_tropicale;inde,asie_sud_est;3-8;garder;"mod à installer ; race régionale (Asie) de naturalist:elephant";PC

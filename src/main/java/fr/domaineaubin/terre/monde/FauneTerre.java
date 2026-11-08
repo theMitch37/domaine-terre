@@ -78,6 +78,16 @@ public final class FauneTerre {
         this.biomePrecis = biomePrecis;
         this.surface = surface;
         this.souterrain = souterrain;
+        java.util.Set<EntityType<?>> t = new java.util.HashSet<>();
+        for (Entree e : surface) t.add(e.donnees().type);
+        this.types = java.util.Set.copyOf(t);
+    }
+
+    private final java.util.Set<EntityType<?>> types;
+
+    /** Bête de la table de surface (animaux, poissons, insectes) : c'est la table qui décide où et combien. */
+    public boolean dansLaTable(EntityType<?> type) {
+        return types.contains(type);
     }
 
     private static FauneTerre charger() {

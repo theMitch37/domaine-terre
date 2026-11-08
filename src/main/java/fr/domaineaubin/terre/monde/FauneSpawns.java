@@ -146,23 +146,23 @@ public final class FauneSpawns {
         remplacer(event, garder);
     }
 
-    /** Bloc où le crocodile d'Alex's Mobs peut naître (son tag). */
-    private static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> SOL_CROCODILE =
-            net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK,
-                    new net.minecraft.resources.ResourceLocation("alexsmobs", "crocodile_spawns"));
-
     /**
-     * Crocodile : Alex's Mobs le refuse au-dessus du niveau de la mer + 4 (y 67). Le Nil, le Gange… coulent bien plus haut
-     * dans le monde Terre : aucun crocodile (test du 08/11/2026). On garde sa règle de sol (son tag), sans l'altitude ;
-     * la table de la faune décide déjà où il vit (eau douce et côtes de ses terroirs).
+     * Règles d'apparition des mods (08/11/2026). Untamed Wilds n'en a aucune et passe toujours ; Alex's Mobs, Naturalist…
+     * refusent souvent sur la Terre (crocodile : jamais au-dessus de y 67, gazelle, jerboa… : tirages, lumière, blocs
+     * précis). Résultat : dromadaires et varans partout, crocodiles du Nil presque absents. Pour les bêtes de la table,
+     * c'est la table qui décide où et combien : on ne garde que la vérification physique du jeu (sol porteur, place libre,
+     * eau pour les bêtes d'eau).
      */
     @SubscribeEvent
     public static void placement(MobSpawnEvent.SpawnPlacementCheck event) {
         if (event.getDefaultResult() || !terre(event.getLevel())) return;
-        var cle = EntityType.getKey(event.getEntityType());
-        if (!cle.getNamespace().equals("alexsmobs") || !cle.getPath().equals("crocodile")) return;
-        BlockPos p = event.getPos();
-        if (event.getLevel().getBlockState(p.below()).is(SOL_CROCODILE)) event.setResult(Event.Result.ALLOW);
+        EntityType<?> type = event.getEntityType();
+        if (type.getCategory() == MobCategory.MONSTER || !FauneTerre.get().dansLaTable(type)) return;
+        if (event.getLevel() instanceof net.minecraft.world.level.LevelReader lecture
+                && net.minecraft.world.level.NaturalSpawner.isSpawnPositionOk(
+                        net.minecraft.world.entity.SpawnPlacements.getPlacementType(type), lecture, event.getPos(), type)) {
+            event.setResult(Event.Result.ALLOW);
+        }
     }
 
     /** Monstres plus forts en descendant : +50 % de vie, +2 dégâts, +2 armure par étage sous les couches hautes. */
