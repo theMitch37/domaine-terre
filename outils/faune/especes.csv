@@ -67,7 +67,7 @@ untamedwilds:hyena/shortface;Hyène géante;—;fantastique;—;—;—;retirer;
 untamedwilds:wildebeest/blue;Gnou bleu;Connochaetes taurinus;sauvage;savane;afrique_est,afrique_australe;6-12;garder;grande migration;C
 untamedwilds:wildebeest/black;Gnou à queue blanche;Connochaetes gnou;sauvage;prairie;afrique_australe;4-8;garder;;C
 untamedwilds:aardvark/common;Oryctérope;Orycteropus afer;sauvage;savane;afrique_est,afrique_australe,afrique_tropicale;1;garder;;PC
-untamedwilds:hippo/common;Hippopotame;Hippopotamus amphibius;sauvage;eau_douce;afrique_tropicale;3-8;garder;"dangereux ; race régionale (Afrique)";C
+untamedwilds:hippo/common;Hippopotame;Hippopotamus amphibius;sauvage;eau_douce;afrique_tropicale,sahara_sahel;3-8;garder;"dangereux ; race régionale (Afrique) ; Nil égyptien (nature sans l'homme, 08/11/2026)";C
 untamedwilds:opossum/virginia;Opossum;Didelphis virginiana;sauvage;foret;grandes_plaines,ouest_mexique,amerique_centrale;1;garder;;C
 untamedwilds:large_snake/anaconda;Anaconda;Eunectes murinus;sauvage;eau_douce,marais;amazonie;1;garder;"prédateur ; race régionale (Amériques)";PC
 untamedwilds:large_snake/reticulated_python;Python réticulé;Malayopython reticulatus;sauvage;foret_tropicale;asie_sud_est;1;garder;prédateur;PC
