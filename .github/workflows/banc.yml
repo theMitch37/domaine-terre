@@ -81,6 +81,13 @@ jobs:
           mkdir -p config/openloader/data
           (cd $GITHUB_WORKSPACE && python outils/generer_placement.py /tmp/serveur) || echo "::warning::réglages du pack non appliqués"
           ls mods
+          # relief fin (08/11/2026) : paquets déjà préparés (branche relief-fin), posés comme un pack hors ligne
+          rm -rf domaine_terre/relief && mkdir -p domaine_terre/relief
+          if git -C $GITHUB_WORKSPACE fetch -q --depth 1 origin relief-fin 2>/dev/null; then
+            git -C $GITHUB_WORKSPACE archive FETCH_HEAD zones | tar -x -C /tmp
+            find /tmp/zones -name '*.bin' -exec cp {} domaine_terre/relief/ \;
+          fi
+          ls domaine_terre/relief | head
 
       - name: Génération des lieux
         run: |

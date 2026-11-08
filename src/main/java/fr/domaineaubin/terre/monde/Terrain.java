@@ -426,6 +426,13 @@ public final class Terrain {
             double detail = bruitDetail.noise(x / 48.0, 0, z / 48.0) * (1.2 + 6.0 * p)
                     + bruitDetail.noise(x / 13.0, 5, z / 13.0) * 0.6;
             double hTerre = blocsDepuisAltitude(Math.max(alt, 1.0)) + detail;
+            // relief fin (08/11/2026) : le vrai relief à 250 m remplace le bruit de détail ; la carte 3' garde le niveau
+            // moyen, seule une part du détail fin est gardée (les hauteurs sont exagérées ×6 à ×10)
+            double fin = ReliefFin.altitude(x, z);
+            if (!Double.isNaN(fin)) {
+                double base = blocsDepuisAltitude(Math.max(alt, 1.0));
+                hTerre = base + (blocsDepuisAltitude(Math.max(fin, 1.0)) - base) * ReliefFin.detail();
+            }
             return Mth.lerp(lisse(Mth.clamp(sd / 2.0, 0.0, 1.0)), NIVEAU_MER + 0.6, Math.max(hTerre, NIVEAU_MER + 0.6));
         }
         double hMer = alt < -9300 ? fosse(x, z, alt) : blocsDepuisAltitude(Math.min(alt, -1.0));
