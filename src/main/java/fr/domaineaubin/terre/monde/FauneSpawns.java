@@ -158,9 +158,8 @@ public final class FauneSpawns {
         if (event.getDefaultResult() || !terre(event.getLevel())) return;
         EntityType<?> type = event.getEntityType();
         if (type.getCategory() == MobCategory.MONSTER || !FauneTerre.get().dansLaTable(type)) return;
-        if (event.getLevel() instanceof net.minecraft.world.level.LevelReader lecture
-                && net.minecraft.world.level.NaturalSpawner.isSpawnPositionOk(
-                        net.minecraft.world.entity.SpawnPlacements.getPlacementType(type), lecture, event.getPos(), type)) {
+        if (net.minecraft.world.level.NaturalSpawner.isSpawnPositionOk(
+                net.minecraft.world.entity.SpawnPlacements.getPlacementType(type), event.getLevel(), event.getPos(), type)) {
             event.setResult(Event.Result.ALLOW);
         }
     }
