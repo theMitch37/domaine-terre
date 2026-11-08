@@ -29,7 +29,7 @@ public class FosseFeature extends Feature<NoneFeatureConfiguration> {
         if (niveau.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x0 + 8, z0 + 8) > HAUT + 2) return false;
         BlockPos.MutableBlockPos p = new BlockPos.MutableBlockPos(), v = new BlockPos.MutableBlockPos();
         boolean modifie = false;
-        int bas = niveau.getMinBuildHeight() + 3;
+        int bas = niveau.getMinBuildHeight() + 2;
         for (int dx = 0; dx < 16; dx++) {
             for (int dz = 0; dz < 16; dz++) {
                 int x = x0 + dx, z = z0 + dz;
