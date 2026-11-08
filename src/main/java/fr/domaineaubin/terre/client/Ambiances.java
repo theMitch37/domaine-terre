@@ -38,14 +38,25 @@ public final class Ambiances {
         return Mth.clamp((63.0 - camera.getPosition().y) / 124.0, 0.0, 1.0);
     }
 
-    /** Au-dessus d'une fosse, hors de l'eau, près de la surface : 1 au ras de l'eau, 0 à partir de y 120 ; -1 ailleurs. */
+    private static boolean merProfonde(Minecraft mc, BlockPos p) {
+        ResourceKey<Biome> b = mc.level.getBiome(p).unwrapKey().orElse(null);
+        if (b == null || !b.location().getNamespace().equals(DomaineTerre.MOD_ID)) return false;
+        String n = b.location().getPath();
+        return n.startsWith("mer/") && (n.endsWith("_abysse") || n.endsWith("_large"));
+    }
+
+    /**
+     * Au-dessus de la mer profonde (large et fosses), hors de l'eau : brume qui commence à la surface et cache le fond
+     * (08/11/2026 : depuis un bateau ou en vol, l'eau du jeu laisse voir le fond à 50 blocs). Portée = hauteur
+     * au-dessus de l'eau + 30 blocs (48 au moins) ; rien à partir de y 200. NaN ailleurs.
+     */
     private static double surplomb(Camera camera) {
-        if (camera.getFluidInCamera() != FogType.NONE) return -1;
+        if (camera.getFluidInCamera() != FogType.NONE) return Double.NaN;
         Minecraft mc = Minecraft.getInstance();
-        if (mc.level == null) return -1;
+        if (mc.level == null) return Double.NaN;
         double y = camera.getPosition().y;
-        if (y > 120 || !abysse(mc, camera.getBlockPosition())) return -1;
-        return Mth.clamp((120.0 - y) / 50.0, 0.0, 1.0);
+        if (y > 200 || !merProfonde(mc, camera.getBlockPosition())) return Double.NaN;
+        return Math.max(48.0, (y - 63.0) + 30.0);
     }
 
     @SubscribeEvent
@@ -60,11 +71,11 @@ public final class Ambiances {
             return;
         }
         double s = surplomb(event.getCamera());
-        if (s > 0 && event.getMode() == net.minecraft.client.renderer.FogRenderer.FogMode.FOG_TERRAIN) {
-            // brume du grand large au-dessus d'une fosse : le fond (53 blocs sous la surface au bord) reste invisible depuis un bateau
-            float loin = (float) Mth.lerp(s, event.getFarPlaneDistance(), 40.0);
-            event.setFarPlaneDistance(Math.min(event.getFarPlaneDistance(), loin));
-            event.setNearPlaneDistance(Math.min(event.getNearPlaneDistance(), loin * 0.25f));
+        if (!Double.isNaN(s) && event.getMode() == net.minecraft.client.renderer.FogRenderer.FogMode.FOG_TERRAIN
+                && s < event.getFarPlaneDistance()) {
+            float loin = (float) s;
+            event.setFarPlaneDistance(loin);
+            event.setNearPlaneDistance(Math.min(event.getNearPlaneDistance(), loin * 0.3f));
             event.setCanceled(true);
         }
     }

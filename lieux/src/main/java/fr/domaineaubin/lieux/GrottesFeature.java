@@ -107,6 +107,9 @@ public class GrottesFeature extends Feature<NoneFeatureConfiguration> {
                     niveau.setBlock(pos, (y < 0 ? Blocks.DEEPSLATE : Blocks.STONE).defaultBlockState(), 2);
                 continue;
             }
+            // pas de vide sous la mer ouverte (08/11/2026 : poche d'air dans l'eau sous Capri)
+            if (c == AIR && y < 63 && niveau.getBlockState(pos).is(Blocks.WATER)
+                    && y >= niveau.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.OCEAN_FLOOR_WG, x, z)) continue;
             BlockState b = etat(c, x, y, z);
             if (b != null) niveau.setBlock(pos, b, 2);
         }
