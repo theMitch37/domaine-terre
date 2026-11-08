@@ -99,7 +99,11 @@ public class GrottesFeature extends Feature<NoneFeatureConfiguration> {
             pos.set(x, y, z);
             if (c == PLEIN) {
                 BlockState b = niveau.getBlockState(pos);
-                if (b.isAir() || !b.getFluidState().isEmpty())
+                // la coque rebouche les vides souterrains, jamais la pleine mer au-dessus du fond (08/11/2026 : murs
+                // et cadres de pierre dans la mer autour de la grotte bleue de Capri)
+                boolean merOuverte = !b.getFluidState().isEmpty()
+                        && y >= niveau.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.OCEAN_FLOOR_WG, x, z);
+                if ((b.isAir() || !b.getFluidState().isEmpty()) && !merOuverte)
                     niveau.setBlock(pos, (y < 0 ? Blocks.DEEPSLATE : Blocks.STONE).defaultBlockState(), 2);
                 continue;
             }
