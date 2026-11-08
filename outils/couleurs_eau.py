@@ -1,3 +1,4 @@
+import re
 """Couleurs des eaux du mod Terre (décision de Maxime, 04/11/2026).
 
 1. Eaux douces et côtes des terres : une couleur par terroir (fleuves boueux d'Amazonie, du Huang He, du Mékong,
@@ -21,6 +22,9 @@ BIO = f"{RES}/data/domaine_terre/worldgen/biome"
 TROUBLES = {"swamp", "mangrove_swamp"}
 RETIRES = {"minecraft:lake_lava_surface", "minecraft:lake_lava_underground", "minecraft:spring_water",
            "minecraft:spring_lava", "minecraft:spring_lava_frozen", "minecraft:monster_room", "minecraft:monster_room_deep"}
+
+
+SANS_LUMIERE = re.compile(r"minecraft:(warm_ocean_vegetation|seagrass_.*|sea_pickle|kelp_.*)$")
 
 
 def rgb(h):
@@ -125,6 +129,8 @@ for temp, (peu, prof, couleurs) in MERS.items():
         d["effects"]["water_color"], d["effects"]["water_fog_color"] = rgb(couleurs[i][0]), rgb(couleurs[i][1])
         # hasard vanilla retiré comme dans les copies de terroir (Terre 0.3.2) : sources, salles à monstres, grottes
         d["features"] = [[f for f in etape if f not in RETIRES] for etape in d["features"]]
+        if b == "abysse":                                       # 08/11/2026 : ni coraux ni herbiers dans les fosses
+            d["features"] = [[f for f in etape if not SANS_LUMIERE.match(f)] for etape in d["features"]]
         d["carvers"] = {}
         cle = f"mer/{temp}_{b}"
         ecrire(f"{BIO}/{cle}.json", d)

@@ -61,8 +61,8 @@ public final class Ambiances {
         }
         double s = surplomb(event.getCamera());
         if (s > 0 && event.getMode() == net.minecraft.client.renderer.FogRenderer.FogMode.FOG_TERRAIN) {
-            // brume du grand large au-dessus d'une fosse : le fond, à plus de 70 blocs, reste invisible depuis un bateau
-            float loin = (float) Mth.lerp(s, event.getFarPlaneDistance(), 64.0);
+            // brume du grand large au-dessus d'une fosse : le fond (53 blocs sous la surface au bord) reste invisible depuis un bateau
+            float loin = (float) Mth.lerp(s, event.getFarPlaneDistance(), 40.0);
             event.setFarPlaneDistance(Math.min(event.getFarPlaneDistance(), loin));
             event.setNearPlaneDistance(Math.min(event.getNearPlaneDistance(), loin * 0.25f));
             event.setCanceled(true);

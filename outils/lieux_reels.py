@@ -452,6 +452,9 @@ def jokulsarlon():
     typ[(C == 30) & (y > 75)] = PRE | TAILLEE
     typ[(pl > 0.9) & ~G] = EBOULIS | TAILLEE
     typ[(pl > 1.4) & ~G] = ROC | TAILLEE
+    # 08/11/2026 : en montant vers le Vatnajökull, la neige comme sur le terrain du mod autour (le lieu restait vert
+    # jusqu'à son bord, face aux plaines enneigées : un carré vert visible de loin)
+    typ[~G & (y > 95.0 + 10.0 * bruit(X, Z, 12, 1306)) & (pl < 1.4)] = NEIGE | TAILLEE
     typ[G] = GLACE | TAILLEE
     typ[G & (C != 70)] = EBOULIS | TAILLEE                              # moraines médianes sombres
     typ[plage] = PLAGE | TAILLEE
