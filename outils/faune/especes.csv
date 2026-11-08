@@ -159,7 +159,7 @@ untamedwilds:football_fish/atlantic;Baudroie abyssale;Himantolophus groenlandicu
 untamedwilds:giant_clam/*;Bénitier géant;Tridacna;sauvage;mer (récifs);mers_tropicales;1-4;garder;plusieurs espèces;C
 untamedwilds:trevally/*;Carangue;Carangidae;poisson;mer (récifs);mers_tropicales;1-4;garder;plusieurs espèces;C
 untamedwilds:triggerfish/*;Baliste;Balistidae;poisson;mer (récifs);mers_tropicales;1-4;garder;plusieurs espèces;C
-untamedwilds:spadefish/*;Platax;Ephippidae;poisson;mer (récifs);mers_tropicales;1-4;garder;plusieurs espèces;C
+untamedwilds:spadefish/*;Platax;Ephippidae;poisson;mer (récifs);mers_tropicales;1-4;garder;"plusieurs espèces ; peu commun (08/11/2026 : ses bancs envahissaient les mers chaudes)";PC
 untamedwilds:king_crab/red;Crabe royal;Paralithodes camtschaticus;sauvage;mer (fond froid);siberie,boreale,nordique;1-2;garder;;C
 untamedwilds:king_crab/centolla;Centolla;Lithodes santolla;sauvage;mer (fond froid);cone_sud;1-2;garder;;C
 untamedwilds:king_crab/spiny;Crabe royal épineux;Paralithodes brevipes;sauvage;mer (fond froid);japon_coree,siberie;1-2;garder;;C
