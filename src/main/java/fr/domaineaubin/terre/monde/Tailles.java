@@ -1,0 +1,105 @@
+package fr.domaineaubin.terre.monde;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import fr.domaineaubin.terre.DomaineTerre;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Taille des créatures (08/11/2026) : facteur par espèce, pour la taille réelle (1 bloc = 1 m), insectes réduits mais
+ * visibles. Table dans le mod (domaine_terre/faune/tailles.json), remplaçable ligne à ligne par
+ * config/domaine_terre_tailles.json. Côté serveur : la boîte de collision (EntityEvent.Size) ; côté client :
+ * le modèle affiché (TaillesRendu). Untamed Wilds règle ses espèces lui-même (« scale », outils/generer_placement.py).
+ * Au démarrage d'un serveur, la taille d'origine de toutes les créatures est écrite dans domaine_tailles.csv.
+ */
+@Mod.EventBusSubscriber(modid = DomaineTerre.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+public final class Tailles {
+    private static volatile Map<EntityType<?>, Float> facteurs;
+
+    private Tailles() {
+    }
+
+    public static float facteur(EntityType<?> type) {
+        Map<EntityType<?>, Float> f = facteurs;
+        if (f == null) f = charger();
+        Float v = f.get(type);
+        return v == null ? 1.0f : v;
+    }
+
+    private static synchronized Map<EntityType<?>, Float> charger() {
+        if (facteurs != null) return facteurs;
+        Map<String, Float> brut = new HashMap<>();
+        try (InputStream in = Tailles.class.getResourceAsStream("/domaine_terre/faune/tailles.json")) {
+            if (in != null) lire(new InputStreamReader(in, StandardCharsets.UTF_8), brut);
+        } catch (Exception e) {
+            DomaineTerre.LOGGER.error("Tailles : table du mod illisible", e);
+        }
+        Path cfg = FMLPaths.CONFIGDIR.get().resolve("domaine_terre_tailles.json");
+        if (Files.exists(cfg)) {
+            try (Reader r = Files.newBufferedReader(cfg, StandardCharsets.UTF_8)) {
+                lire(r, brut);
+            } catch (Exception e) {
+                DomaineTerre.LOGGER.error("Tailles : {} illisible", cfg, e);
+            }
+        }
+        Map<EntityType<?>, Float> m = new HashMap<>();
+        for (var e : brut.entrySet()) {
+            ResourceLocation rl = ResourceLocation.tryParse(e.getKey());
+            if (rl == null || !ForgeRegistries.ENTITY_TYPES.containsKey(rl)) continue;
+            float f = e.getValue();
+            if (f > 0.01f && Math.abs(f - 1.0f) > 0.01f) m.put(ForgeRegistries.ENTITY_TYPES.getValue(rl), f);
+        }
+        DomaineTerre.LOGGER.info("Tailles : {} créatures redimensionnées", m.size());
+        facteurs = m;
+        return m;
+    }
+
+    private static void lire(Reader r, Map<String, Float> dans) {
+        JsonObject o = JsonParser.parseReader(r).getAsJsonObject();
+        JsonObject t = o.has("facteurs") ? o.getAsJsonObject("facteurs") : o;
+        for (var e : t.entrySet()) {
+            if (e.getValue().isJsonPrimitive() && e.getValue().getAsJsonPrimitive().isNumber()) {
+                dans.put(e.getKey(), e.getValue().getAsFloat());
+            }
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOW)
+    public static void taille(EntityEvent.Size event) {
+        float f = facteur(event.getEntity().getType());
+        if (f != 1.0f) event.setNewSize(event.getNewSize().scale(f), true);
+    }
+
+    /** Tailles d'origine (boîte de collision) de toutes les créatures, pour régler la table. */
+    @SubscribeEvent
+    public static void export(ServerStartedEvent event) {
+        StringBuilder sb = new StringBuilder("id;categorie;largeur;hauteur;facteur\n");
+        for (var e : ForgeRegistries.ENTITY_TYPES.getEntries()) {
+            EntityType<?> t = e.getValue();
+            sb.append(e.getKey().location()).append(';').append(t.getCategory().getName()).append(';')
+                    .append(t.getWidth()).append(';').append(t.getHeight()).append(';').append(facteur(t)).append('\n');
+        }
+        try {
+            Files.writeString(FMLPaths.GAMEDIR.get().resolve("domaine_tailles.csv"), sb.toString(), StandardCharsets.UTF_8);
+        } catch (Exception ex) {
+            DomaineTerre.LOGGER.warn("Tailles : export impossible", ex);
+        }
+    }
+}
