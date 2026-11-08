@@ -53,7 +53,7 @@ T = {
     "betteranimalsplus:nautilus": (0.2, "l", 0.27), "betteranimalsplus:octopus": (0.9, "l", 0.9), "betteranimalsplus:pheasant": (0.8, "l", 0.8),
     "betteranimalsplus:piranha": (0.25, "l", 0.5), "betteranimalsplus:reindeer": (1.5, "h", 0.85), "betteranimalsplus:shark": (3.0, "l", 1.2),
     "betteranimalsplus:songbird": (0.15, "l", 0.3), "betteranimalsplus:squid_colossal": (10.0, "l", 1.5), "betteranimalsplus:squid_giant": (10.0, "l", 1.5),
-    "betteranimalsplus:squirrel": (0.4, "l", 0.8), "betteranimalsplus:tarantula": (0.25, "i", 0.25), "betteranimalsplus:turkey": (1.0, "h", 1.0),
+    "betteranimalsplus:squirrel": (0.4, "l", 0.8), "betteranimalsplus:tarantula": (0.25, "i", 0.36), "betteranimalsplus:turkey": (1.0, "h", 1.0),
     "betteranimalsplus:walrus": (3.2, "l", 1.05), "betteranimalsplus:whale": (15.0, "l", 1.8),
     # Critters and Companions
     "crittersandcompanions:dragonfly": (0.08, "i", 0.4), "crittersandcompanions:dumbo_octopus": (0.3, "l", 0.75),
@@ -95,6 +95,7 @@ T = {
     "wildernature:turkey": (1.0, "h", 1.0),
 }
 
+# 08/11/2026 (Maxime) : mygales à 0,5 bloc, bien visibles (Australie hostile)
 # 08/11/2026 (Maxime) : les petits animaux un peu agrandis, pour ne pas avoir la taille d'un insecte
 def affichee(reelle):
     """Taille affichée d'un animal (hors insectes) : réelle à partir de 0,6 m, un peu agrandie en dessous, 0,3 minimum."""
