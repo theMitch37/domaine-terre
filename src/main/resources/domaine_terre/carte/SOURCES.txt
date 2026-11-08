@@ -14,3 +14,7 @@ Données géographiques utilisées par le mod Domaine d'Aubin - Terre :
   reserved. Lu sur AWS Open Data (Registry of Open Data on AWS).
 - Faune (écorégions) : Dinerstein, E., et al. An Ecoregion-Based Approach to Protecting Half the Terrestrial Realm.
   BioScience 67(6), 534-545 (2017). RESOLVE Ecoregions 2017, licence CC BY 4.0. Réduites à 3 minutes d'arc (faune/zones.png).
+
+Relief fin (téléchargé pendant la génération, dépôt theMitch37/domaine-terre-relief) : Copernicus DEM GLO-90,
+© DLR e.V. 2010-2014 et © Airbus Defence and Space GmbH 2014-2018, fourni dans le cadre du programme Copernicus
+de l'Union européenne ; ramené à un point par bloc (250 m).

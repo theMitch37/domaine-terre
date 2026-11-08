@@ -93,6 +93,21 @@ def decoder(b):
     return np.where(q == VIDE, np.nan, q * Q)
 
 
+def paquet(bx, bz, rs):
+    """Paquet de 4 x 4 régions : rs = {index (tx & 3) + 4 * (tz & 3): région encodée}."""
+    tete = bytearray(b"RELB" + struct.pack("<iii", 1, bx, bz))
+    corps = bytearray()
+    dec = 4 + 12 + 16 * 8
+    table = []
+    for k in range(16):
+        b = rs.get(k, b"")
+        table.append((dec + len(corps) if b else 0, len(b)))
+        corps += b
+    for t in table:
+        tete += struct.pack("<ii", *t)
+    return bytes(tete + corps)
+
+
 def main():
     o, e, s, n = map(int, sys.argv[1:5])
     dalles = dalles_de(sys.argv[5])
@@ -112,17 +127,7 @@ def main():
             total += len(b); nb += 1
             print(f"région {tx} {tz} : {len(b) / 1024:.0f} Ko, {np.nanmin(a):.0f} à {np.nanmax(a):.0f} m", flush=True)
     for (bx, bz), rs in paquets.items():
-        tete = bytearray(b"RELB" + struct.pack("<iii", 1, bx, bz))
-        corps = bytearray()
-        dec = 4 + 12 + 16 * 8
-        table = []
-        for k in range(16):
-            b = rs.get(k, b"")
-            table.append((dec + len(corps) if b else 0, len(b)))
-            corps += b
-        for t in table:
-            tete += struct.pack("<ii", *t)
-        open(os.path.join(sortie, f"relief_{bx}_{bz}.bin"), "wb").write(bytes(tete + corps))
+        open(os.path.join(sortie, f"relief_{bx}_{bz}.bin"), "wb").write(paquet(bx, bz, rs))
     print(f"{nb} régions, {len(paquets)} paquets, {total / 1e6:.1f} Mo, {total / max(nb, 1) / 1024:.0f} Ko par région")
 
 
