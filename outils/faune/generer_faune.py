@@ -126,6 +126,9 @@ for r in rows:
     elif zone.startswith("toutes_les_côtes"):
         cote = True
     ts = aire(r["terroirs"])
+    # récifs (08/11/2026 : vers de Bobbit partout en mer) : eaux chaudes et tièdes, près des côtes et sur le plateau
+    if "récifs" in toks and ts and (mer is None or zone in MERS):
+        mer = {"temperatures": ["chaude", "tiede"], "bandes": ["cote", "plateau"]}
     if mer is None and ts and ("abysses" in toks or "mer profonde" in toks):
         mer = {"temperatures": TEMPS, "bandes": ["large", "abysse"]}
     if "mer" in toks or "large" in toks:

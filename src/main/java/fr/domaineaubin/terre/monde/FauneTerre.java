@@ -155,6 +155,12 @@ public final class FauneTerre {
             }
             int min = Math.max(1, o.get("min").getAsInt()), max = Math.max(min, o.get("max").getAsInt());
             MobSpawnSettings.SpawnerData d = new MobSpawnSettings.SpawnerData(type, Math.max(1, o.get("poids").getAsInt()), min, max);
+            // le constructeur du jeu met un cochon à la place de tout type MISC (Untamed Wilds) : on remet le bon type
+            if (d.type != type) ((fr.domaineaubin.terre.mixin.SpawnerDataAcces) (Object) d).domaineTerre$type(type);
+            if (d.type != type) {
+                DomaineTerre.LOGGER.error("Faune : {} reste {} dans la table, ligne ignorée", rl, EntityType.getKey(d.type));
+                continue;
+            }
             // Untamed Wilds range ses bêtes en MISC (le jeu ne les fait jamais naître lui-même) : la table les fait naître
             // avec les animaux (CREATURE), mais seulement à la génération des chunks (07/11/2026). Les apparitions
             // naturelles ne comptent pas les MISC dans le plafond d'animaux : elles en feraient naître sans fin.

@@ -47,9 +47,12 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
                     } else if (b.getFluidState().isEmpty()) {
                         // fond du lit : les règles de surface l'ont vu à sec (pas d'aquifère dans les lits) et y ont
                         // mis de l'herbe ; sous l'eau, de la terre comme dans le jeu de base (07/11/2026)
-                        if (mouille && herbe(b)) {
-                            niveau.setBlock(pos, Blocks.DIRT.defaultBlockState(), 2);
-                            modifie = true;
+                        if (mouille && meuble(b)) {
+                            BlockState fond = fond(t, x, z);
+                            if (!b.is(fond.getBlock())) {
+                                niveau.setBlock(pos, fond, 2);
+                                modifie = true;
+                            }
                         }
                         break;
                     } else {
@@ -68,9 +71,47 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
         return modifie;
     }
 
-    /** Sol d'herbe que les règles de surface posent à l'air libre. */
-    private static boolean herbe(BlockState b) {
-        return b.is(Blocks.GRASS_BLOCK) || b.is(Blocks.PODZOL) || b.is(Blocks.MYCELIUM) || b.is(Blocks.DIRT_PATH);
+    /** Sol meuble posé par les règles de surface (herbe, terre, sable…) ; la roche des lits de montagne reste. */
+    private static boolean meuble(BlockState b) {
+        return b.is(Blocks.GRASS_BLOCK) || b.is(Blocks.PODZOL) || b.is(Blocks.MYCELIUM) || b.is(Blocks.DIRT_PATH)
+                || b.is(Blocks.DIRT) || b.is(Blocks.COARSE_DIRT) || b.is(Blocks.ROOTED_DIRT) || b.is(Blocks.SAND)
+                || b.is(Blocks.RED_SAND) || b.is(Blocks.MUD) || b.is(Blocks.GRAVEL) || b.is(Blocks.CLAY)
+                || b.is(Blocks.SNOW_BLOCK) || b.is(Blocks.MOSS_BLOCK);
+    }
+
+    /** Terroirs aux grands fleuves boueux (mêmes que l'eau boueuse, outils/couleurs_eau.py). */
+    private static final java.util.Set<String> BOUEUX = java.util.Set.of("amazonie", "afrique_tropicale", "asie_sud_est",
+            "chine", "inde", "sahara_sahel");
+
+    /**
+     * Fond du lit (test du 08/11/2026 : mosaïque d'herbe, de terre et de sable sous l'eau du Nil). Plaques de 5 à 6 blocs :
+     * fleuves boueux = vase surtout, argile et sable ; autres = gravier et sable, un peu d'argile.
+     */
+    private static BlockState fond(Terrain t, int x, int z) {
+        double v = bruit(x / 5.5, z / 5.5);
+        String terroir = t.carte().nomTerroir(t.carte().terroir(Terrain.lon(x + 0.5), Terrain.lat(z + 0.5)));
+        if (BOUEUX.contains(terroir)) {
+            return (v < 0.55 ? Blocks.MUD : v < 0.8 ? Blocks.CLAY : Blocks.SAND).defaultBlockState();
+        }
+        return (v < 0.5 ? Blocks.GRAVEL : v < 0.88 ? Blocks.SAND : Blocks.CLAY).defaultBlockState();
+    }
+
+    /** Bruit de valeur lissé, entre 0 et 1, fixe pour une position (indépendant de la graine : carte fixe). */
+    private static double bruit(double x, double z) {
+        int ix = net.minecraft.util.Mth.floor(x), iz = net.minecraft.util.Mth.floor(z);
+        double fx = x - ix, fz = z - iz;
+        fx = fx * fx * (3 - 2 * fx);
+        fz = fz * fz * (3 - 2 * fz);
+        double a = hache(ix, iz), b = hache(ix + 1, iz), c = hache(ix, iz + 1), d = hache(ix + 1, iz + 1);
+        return net.minecraft.util.Mth.lerp(fz, net.minecraft.util.Mth.lerp(fx, a, b), net.minecraft.util.Mth.lerp(fx, c, d));
+    }
+
+    private static double hache(int x, int z) {
+        long h = x * 0x9E3779B97F4A7C15L ^ z * 0xC2B2AE3D27D4EB4FL;
+        h ^= h >>> 31;
+        h *= 0xBF58476D1CE4E5B9L;
+        h ^= h >>> 29;
+        return (h >>> 11) * 0x1.0p-53;
     }
 
     private static boolean plusBas(Terrain t, int x, int z, int w) {
