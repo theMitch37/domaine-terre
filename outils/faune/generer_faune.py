@@ -126,6 +126,10 @@ for r in rows:
     elif zone.startswith("toutes_les_côtes"):
         cote = True
     ts = aire(r["terroirs"])
+    if not ts and zone in MERS:
+        # espèces de mer sans terroir (« mers_tropicales », « toutes_les_mers »…) : toutes les mers de leur température.
+        # Avant (08/11/2026), liste de terroirs vide -> jamais nées : dauphins, calmars, poissons tropicaux, thons…
+        ts = list(VRAIS)
     # récifs (08/11/2026 : vers de Bobbit partout en mer) : eaux chaudes et tièdes, près des côtes et sur le plateau
     if "récifs" in toks and ts and (mer is None or zone in MERS):
         mer = {"temperatures": ["chaude", "tiede"], "bandes": ["cote", "plateau"]}
