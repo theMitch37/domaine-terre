@@ -19,6 +19,8 @@ import numpy as np
 import rasterio
 from rasterio.merge import merge
 from rasterio.enums import Resampling
+from rasterio.warp import reproject
+from rasterio.transform import from_origin
 
 BPD = 445.28
 T = 512
@@ -50,14 +52,16 @@ def region(tx, tz, dalles):
             if la < n and la + 1 > s and lo < e and lo + 1 > o]
     if not srcs:
         return None
-    a, _ = merge(srcs, bounds=(o, s, e, n), res=(1 / BPD, 1 / BPD), resampling=Resampling.average,
-                 nodata=np.nan, dtype="float32")
+    # mosaïque à la résolution d'origine (avec une marge), puis moyenne sur la grille des blocs : une moyenne faite
+    # dalle par dalle laisse une ligne vide le long de chaque degré entier (08/11/2026)
+    m = 4 / BPD
+    mos, tr = merge(srcs, bounds=(o - m, s - m, e + m, n + m), nodata=np.nan, dtype="float32")
     for r in srcs:
         r.close()
-    a = a[0]
     out = np.full((T, T), np.nan, np.float32)
-    h, w = min(T, a.shape[0]), min(T, a.shape[1])
-    out[:h, :w] = a[:h, :w]
+    reproject(mos[0], out, src_transform=tr, src_crs="EPSG:4326", src_nodata=np.nan,
+              dst_transform=from_origin(o, n, 1 / BPD, 1 / BPD), dst_crs="EPSG:4326", dst_nodata=np.nan,
+              resampling=Resampling.average)
     if not np.isfinite(out).any() or np.nanmax(out) <= 0:
         return None
     return out
