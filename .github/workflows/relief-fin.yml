@@ -1,0 +1,70 @@
+# Relief fin (chantier du 08/11/2026) : Copernicus DEM GLO-90 ramené à un point par bloc, en paquets de 4 x 4 régions
+# (outils/relief_fin.py). Lancé à la main sur une zone ; le résultat est rangé sur la branche « relief-fin ».
+name: Relief fin
+
+on:
+  push:
+    branches-ignore: [jars, relief-fin]
+    paths:
+      - outils/relief_fin.py
+      - .github/workflows/relief-fin.yml
+  workflow_dispatch:
+    inputs:
+      zone:
+        description: "nom de la zone"
+        default: "test"
+      ouest: {default: "5"}
+      est: {default: "12"}
+      sud: {default: "44"}
+      nord: {default: "48"}
+
+permissions:
+  contents: write
+
+jobs:
+  relief:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Outils Python
+        run: pip install rasterio numpy
+      - name: Dalles GLO-90
+        run: |
+          mkdir -p /tmp/dem
+          python - <<'E'
+          import subprocess, sys
+          sys.path.insert(0, "outils")
+          o, e, s, n = int("${{ inputs.ouest || '5' }}"), int("${{ inputs.est || '12' }}"), int("${{ inputs.sud || '44' }}"), int("${{ inputs.nord || '48' }}")
+          def nom(lat, lon):
+              ns = f"N{lat:02d}" if lat >= 0 else f"S{-lat:02d}"
+              ew = f"E{lon:03d}" if lon >= 0 else f"W{-lon:03d}"
+              return f"Copernicus_DSM_COG_30_{ns}_00_{ew}_00_DEM"
+          for lat in range(s - 1, n + 1):
+              for lon in range(o - 1, e + 1):
+                  d = nom(lat, lon)
+                  r = subprocess.run(["curl", "-sfL", "--retry", "4", "-o", f"/tmp/dem/{d}.tif",
+                                      f"https://copernicus-dem-90m.s3.amazonaws.com/{d}/{d}.tif"])
+                  print(d, "ok" if r.returncode == 0 else "absente (mer)", flush=True)
+          E
+          ls /tmp/dem | wc -l; du -sh /tmp/dem
+      - name: Régions
+        run: python outils/relief_fin.py ${{ inputs.ouest || '5' }} ${{ inputs.est || '12' }} ${{ inputs.sud || '44' }} ${{ inputs.nord || '48' }} /tmp/dem /tmp/relief_fin/${{ inputs.zone || 'test' }}
+      - name: Rangement sur la branche relief-fin
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git fetch origin relief-fin || true
+          if git rev-parse --verify origin/relief-fin >/dev/null 2>&1; then
+            git checkout -B relief-fin origin/relief-fin
+          else
+            git checkout --orphan relief-fin && git rm -rf . -q
+          fi
+          mkdir -p zones/${{ inputs.zone || 'test' }}
+          cp /tmp/relief_fin/${{ inputs.zone || 'test' }}/*.bin zones/${{ inputs.zone || 'test' }}/
+          git add zones
+          git commit -m "Relief fin : zone ${{ inputs.zone || 'test' }}" || echo "rien de neuf"
+          git push origin relief-fin
