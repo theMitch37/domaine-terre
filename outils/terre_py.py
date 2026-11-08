@@ -191,8 +191,8 @@ def relief(lon, lat):
 
 def blocs(a):
     a = np.asarray(a, float)
-    mer = np.select([a > -200, a > -6000], [62 + a / 200 * 20, 42 + (a + 200) / 5800 * 42],
-                    -20 * np.minimum((-a - 6000) / 3800, 1) - 41 * (1 - (1 - np.clip((-a - 9800) / 500, 0, 1)) ** 2.5))
+    mer = np.select([a > -200, a > -6000], [62 + a / 200 * 20, 42 + (a + 200) / 5800 * 32],
+                    10 - 20 * np.minimum((-a - 6000) / 3800, 1) - 51 * (1 - (1 - np.clip((-a - 9800) / 500, 0, 1)) ** 2.5))
     return np.where(a < 0, mer,
                     np.where(a <= 500, 64 + a / 500 * 16, np.where(a <= 2000, 80 + (a - 500) / 1500 * 60,
                                                                     140 + np.minimum((a - 2000) / 6800, 1) * 160)))

@@ -191,16 +191,16 @@ public final class Terrain {
     /** Correspondance altitude réelle (m) -> hauteur Minecraft (y), voir le plan v1. */
     public static double blocsDepuisAltitude(double alt) {
         if (alt < 0) {
-            // océans profonds (0.3.2) : y 0 à 6 000 m ; le y négatif est réservé aux fosses, jusqu'à y -61 au fond
+            // océans profonds : y 10 à 6 000 m (relevés le 08/11/2026) ; plus bas, les fosses, jusqu'à y -61 au fond
             // des Mariannes (≈ -10 300 m dans ETOPO à 3'), juste au-dessus de la bedrock (faille : 28/10)
             if (alt > -200) return 62 + alt / 200.0 * 20;                       // plateau continental : y 42 à 62 (10 m/bloc)
-            if (alt > -6000) return 42 + (alt + 200) / 5800.0 * 42;             // talus, glacis, plaines abyssales : y 0 à 42
-            // fosses : y 0 à -20 jusqu'à 9 800 m, puis une faille au fond des plus profondes (Mariannes, Tonga,
-            // Philippines, Kermadec) : parois presque verticales de 9 800 à 10 300 m, jusqu'à y -61
-            // (08/11/2026 : faille de 41 blocs au lieu de 31, la fosse ne paraissait pas assez profonde)
+            // 08/11/2026 : océans relevés, les plaines abyssales s'arrêtent à y 10 ; tout ce qui est plus bas est aux fosses
+            if (alt > -6000) return 42 + (alt + 200) / 5800.0 * 32;             // talus, glacis, plaines abyssales : y 10 à 42
+            // fosses : y 10 à -10 jusqu'à 9 800 m, puis une faille au fond des plus profondes (Mariannes, Tonga,
+            // Philippines, Kermadec) : parois presque verticales de 9 800 à 10 300 m, jusqu'à y -61 (51 blocs)
             double t1 = Math.min((-alt - 6000) / 3800.0, 1.0);
             double t2 = Mth.clamp((-alt - 9800) / 500.0, 0.0, 1.0);
-            return -20 * t1 - 41 * (1 - Math.pow(1 - t2, 2.5));
+            return 10 - 20 * t1 - 51 * (1 - Math.pow(1 - t2, 2.5));
         }
         if (alt <= 500) return 64 + alt / 500.0 * 16;                            // plaines : y 64 à 80
         if (alt <= 2000) return 80 + (alt - 500) / 1500.0 * 60;                  // collines et plateaux : y 80 à 140
@@ -438,7 +438,7 @@ public final class Terrain {
         double w = Mth.clamp((-alt - 9300) / 600.0, 0.0, 1.0);
         double a = alt + w * (bruitDetail.noise(x / 56.0, 40, z / 56.0) * 260 + bruitDetail.noise(x / 17.0, 41, z / 17.0) * 90);
         double h = blocsDepuisAltitude(Math.min(a, -1.0));
-        if (h < -22 && h > -56) {                                // corniches : paliers de 6 blocs, contremarches raides
+        if (h < -12 && h > -56) {                                // corniches : paliers de 6 blocs, contremarches raides
             double q = 6.0, b = Math.floor(h / q) * q, f = (h - b) / q;
             h = Mth.lerp(0.55, h, b + q * f * f * f);
         }

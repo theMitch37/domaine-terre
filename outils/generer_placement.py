@@ -191,6 +191,9 @@ def resources(terroirs):
     return [[f"resource|domaine_terre:{t}/{b}"] for t in terroirs for b in LISTES[t]]
 
 
+# Untamed Wilds : « scale » de certaines espèces, pour leur taille réelle (1 bloc = 1 m)
+ECHELLE = {("shark", "great_white"): 3.6}
+
 z = jar("untamedwilds*.jar")
 # océans vanilla (plus générés : remplacés par les mers du mod, 04/11/2026) -> biomes domaine_terre:mer/…
 _TEMP = {"warm_ocean": "chaude", "deep_warm_ocean": "chaude", "lukewarm_ocean": "tiede", "deep_lukewarm_ocean": "tiede",
@@ -223,6 +226,10 @@ if z:
         change = False
         for sp in d.get("species", []):
             # rareté entre les espèces d'une même créature (Untamed Wilds tire l'espèce au sort, pondérée par « rarity »)
+            # taille réelle (08/11/2026 : grand requin blanc deux fois trop petit, 3,5 blocs au lieu de 6-7)
+            ech = ECHELLE.get((ent, sp["name"]))
+            if ech is not None and sp.get("scale") != ech:
+                sp["scale"], change = ech, True
             rar = RARETE.get((ent, sp["name"]), RARETE.get((ent, "*")))
             if rar is not None and sp.get("rarity") != rar:
                 sp["rarity"], change = rar, True

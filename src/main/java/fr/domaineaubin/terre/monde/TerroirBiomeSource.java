@@ -331,7 +331,7 @@ public class TerroirBiomeSource extends BiomeSource {
 
     /**
      * Océan : la couleur de l'eau suit la vraie profondeur du fond. Côte (fond à moins de 6 blocs sous la surface),
-     * plateau (6 à 20), large (jusqu'à y 0), abysse (fosses, fond sous y 0). La température reste celle choisie
+     * plateau (6 à 20), large (jusqu'à y 10), abysse (fosses, fond sous y 10 depuis le 08/11/2026). La température reste celle choisie
      * par la latitude.
      */
     private static Holder<Biome> merSelonFond(Tables t, Holder<Biome> choix, int bx, int bz) {
@@ -342,7 +342,7 @@ public class TerroirBiomeSource extends BiomeSource {
         if (tab == null) return choix;
         double fond = Terrain.get().hauteur(bx, bz);
         double prof = Terrain.NIVEAU_MER - fond;
-        int i = fond <= 0.0 ? 3 : prof < 6.0 ? 0 : prof < 20.0 ? 1 : 2;
+        int i = fond <= 10.0 ? 3 : prof < 6.0 ? 0 : prof < 20.0 ? 1 : 2;
         return tab[i];
     }
 

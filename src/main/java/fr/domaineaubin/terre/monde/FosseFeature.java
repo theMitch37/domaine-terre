@@ -12,11 +12,11 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 /**
- * Habillage des grandes fosses (08/11/2026), sous y -12 seulement : parois de basalte, de deepslate et de tuf par
+ * Habillage des grandes fosses (08/11/2026), sous y 2 seulement : parois de basalte, de deepslate et de tuf par
  * plaques, fond de vase et d'argile, quelques éboulis de basalte. Ne touche qu'aux blocs pleins au contact de l'eau.
  */
 public class FosseFeature extends Feature<NoneFeatureConfiguration> {
-    private static final int HAUT = -12;
+    private static final int HAUT = 2;
 
     public FosseFeature(Codec<NoneFeatureConfiguration> codec) {
         super(codec);
@@ -52,7 +52,7 @@ public class FosseFeature extends Feature<NoneFeatureConfiguration> {
                     BlockState neuf;
                     if (cote) {                                  // paroi
                         neuf = (n < 0.45 ? Blocks.BASALT : n < 0.8 ? Blocks.DEEPSLATE : Blocks.TUFF).defaultBlockState();
-                    } else if (sol > -24) {                      // pente au-dessus de la faille : sédiments
+                    } else if (sol > -14) {                      // pente au-dessus de la faille : sédiments
                         double m = valeur(x / 9.0, 3.0, z / 9.0);
                         neuf = (m < 0.7 ? Blocks.MUD : m < 0.9 ? Blocks.CLAY : Blocks.DEEPSLATE).defaultBlockState();
                     } else if (sol > -50) {                      // dessus d'une corniche
