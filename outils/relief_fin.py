@@ -37,8 +37,8 @@ def dalles_de(dossier):
     for f in os.listdir(dossier):
         if f.endswith(".tif"):
             p = f.split("_")
-            lat = int(p[3][1:]) * (1 if p[3][0] == "N" else -1)
-            lon = int(p[5][1:]) * (1 if p[5][0] == "E" else -1)
+            lat = int(p[4][1:]) * (1 if p[4][0] == "N" else -1)
+            lon = int(p[6][1:]) * (1 if p[6][0] == "E" else -1)
             d[(lat, lon)] = os.path.join(dossier, f)
     return d
 
