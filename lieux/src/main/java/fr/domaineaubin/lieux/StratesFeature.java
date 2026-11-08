@@ -38,6 +38,18 @@ public class StratesFeature extends Feature<NoneFeatureConfiguration> {
                 int x = x0 + dx, z = z0 + dz;
                 Lieu l = LieuxTerre.a(x, z);
                 if (!(l instanceof LieuSculpte lieu)) continue;
+                // mer d'un lieu : rien ne flotte au-dessus du fond voulu (08/11/2026 : bancs de sable et de gravier
+                // suspendus 15 blocs au-dessus du fond autour de Capri, sur un tiers de la zone)
+                double fondVoulu = Terrain.get().hauteur(x, z);
+                if (fondVoulu < 60 && lieu.inonde(x, z, fondVoulu) && !GrottesFeature.dansGrotte(x, z)) {
+                    for (int y = (int) Math.floor(fondVoulu) + 2; y <= 62; y++) {
+                        BlockState b = niveau.getBlockState(pos.set(x, y, z));
+                        if (!b.isAir() && !b.is(Blocks.WATER)) {
+                            niveau.setBlock(pos, Blocks.WATER.defaultBlockState(), 2);
+                            modifie = true;
+                        }
+                    }
+                }
                 double rebord = lieu.rebordSiParoi(x, z);
                 boolean protege = lieu.protege(x, z);
                 if (Double.isNaN(rebord) && !protege) continue;
