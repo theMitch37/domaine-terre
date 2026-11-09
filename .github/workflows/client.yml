@@ -56,7 +56,7 @@ jobs:
         run: |
           echo "onboardAccessibility:false" > run/options.txt
           echo "skipMultiplayerWarning:true" >> run/options.txt
-          echo "renderDistance:8" >> run/options.txt
+          echo "renderDistance:10" >> run/options.txt
           Xvfb :99 -screen 0 1280x720x24 &
           export DISPLAY=:99
           (./gradlew runClient -Pessai_client -Pessai_monde --no-daemon > /tmp/client.log 2>&1 &)
@@ -80,18 +80,23 @@ jobs:
           xdotool windowactivate --sync $W || true
           sleep 3
           xdotool key F1 || true
-          vue() {   # nom x y z lacet tangage attente
-            xdotool key slash; sleep 1
-            xdotool type --delay 30 "tp @s $2 $3 $4 $5 $6"; sleep 0.5
-            xdotool key Return
+          cmd() { xdotool key slash; sleep 1; xdotool type --delay 30 "$1"; sleep 0.5; xdotool key Return; sleep 2; }
+          # premier passage (la première commande se perd parfois), plein jour fixe, beau temps
+          cmd "time set noon"; cmd "time set noon"; cmd "gamerule doDaylightCycle false"; cmd "gamerule doWeatherCycle false"; cmd "weather clear"
+          vue() {   # nom x z hauteur_au_dessus_du_sol lacet tangage attente
+            cmd "spreadplayers $2 $3 0 1 false @s"
+            sleep 20
+            cmd "tp @s ~ ~$4 ~ $5 $6"
             sleep $7
             import -window root /tmp/essai/$1.png || true
           }
-          vue leman 24601 110 -172622 0 12 150
-          vue chamonix_mont_blanc 25492 150 -170393 0 -8 180
-          vue grand_canyon -415989 185 -133812 180 25 220
-          vue etretat_mer 557 72 -184606 0 55 180
-          vue seine_paris 8727 80 -181290 90 20 150
+          vue leman 24601 -172622 35 0 12 180
+          vue chamonix_mont_blanc 25489 -170403 25 0 -12 200
+          vue grand_canyon -415989 -133812 12 180 22 220
+          vue seine_paris 8727 -181295 30 90 25 160
+          cmd "tp @s 557 85 -184606 0 50"
+          sleep 160
+          import -window root /tmp/essai/etretat_mer.png || true
           cp /tmp/client.log /tmp/serveur.log /tmp/essai/
           cp -r run/crash-reports /tmp/essai/ 2>/dev/null || true
           grep -nE "Eau opaque|domaine_terre|Mixin|ERROR|Exception|atlas/blocks|embeddium|Relief fin" /tmp/client.log | head -200 > /tmp/essai/extrait.txt || true
