@@ -101,7 +101,13 @@ public class RocheFeature extends Feature<NoneFeatureConfiguration> {
                 double b = BRUIT.noise(x / 9.0, y / 7.0, z / 9.0);
                 // berges des cours d'eau (couche d'eau 1:30) : rives meubles, pas de roche à nu le long des ruisseaux
                 int e = ReliefFin.eau(x, z);
-                if (e >= 0 && (e & 15) >= 8 && (e & 15) <= 11 && cov != 60) continue;
+                if (e >= 0 && (e & 15) >= 8 && (e & 15) <= 11 && cov != 60) {
+                    // en haute montagne (glacier, toundra, au-dessus des éboulis) : rives de gravier, pas d'herbe
+                    if (cov == 70 || cov == 100 || y >= Y_EBOULIS)
+                        pose |= remplacer(n, p, x, y, z, b > 0.2 ? Blocks.COBBLESTONE.defaultBlockState()
+                                : Blocks.GRAVEL.defaultBlockState());
+                    continue;
+                }
                 boolean paroi = pente >= PAROI + 0.15 * b;
                 if (paroi || cov == 60 || (cov == 70 && pente > 0.8)) {
                     // roche à nu (ou sol nu) : la vraie roche ; sur le plat, les roches meubles donnent sable et gravier
