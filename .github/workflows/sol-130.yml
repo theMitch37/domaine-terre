@@ -10,7 +10,7 @@ on:
     inputs:
       zones:
         description: "zones de outils/banc/zones30.json"
-        default: "cervin_30,grand_canyon_30,gullfoss_30"
+        default: "cervin_30,grand_canyon_30,gullfoss_30,leman_30,paris_30"
 
 permissions:
   contents: write
@@ -23,11 +23,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install rasterio numpy mapbox-vector-tile pillow
+      - run: pip install rasterio numpy scipy mapbox-vector-tile pillow
       - name: Sol
         run: |
           Z="${{ inputs.zones }}"
-          [ -n "$Z" ] || Z="cervin_30,grand_canyon_30,gullfoss_30"
+          [ -n "$Z" ] || Z="cervin_30,grand_canyon_30,gullfoss_30,leman_30,paris_30"
           python outils/sol30.py outils/banc/zones30.json "$Z" /tmp/sol
           ls -la /tmp/sol
       - name: Rangement

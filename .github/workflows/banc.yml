@@ -78,9 +78,10 @@ jobs:
           rm -rf domaine_terre/sol30 && mkdir -p domaine_terre/sol30
           if git -C $GITHUB_WORKSPACE fetch -q --depth 1 origin sol-130 2>/dev/null; then
             mkdir -p /tmp/sol && git -C $GITHUB_WORKSPACE archive FETCH_HEAD | tar -x -C /tmp/sol
-            cp /tmp/sol/*.bin domaine_terre/sol30/ 2>/dev/null || true
+            cp /tmp/sol/sol30_*.bin domaine_terre/sol30/ 2>/dev/null || true
+            mkdir -p domaine_terre/eau30 && cp /tmp/sol/eau30_*.bin domaine_terre/eau30/ 2>/dev/null || true
           fi
-          ls domaine_terre/sol30
+          ls domaine_terre/sol30 domaine_terre/eau30 || true
 
       - name: Génération des lieux
         run: |

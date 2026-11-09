@@ -76,6 +76,21 @@ public final class ReliefFin {
     private static final Jeu SOL30 = new Jeu("sol30", "sol30_", 30, 16,
             "https://github.com/theMitch37/domaine-terre-relief/releases/download/s30-z{bz}/sol30_{bx}_{bz}.bin", 128, 300, 90);
 
+    /** Eau intérieure à 30 m (09/11/2026, outils/sol30.py) : niveau et distance signée à la berge. */
+    private static final Jeu EAU30 = new Jeu("eau30", "eau30_", 30, 16,
+            "https://github.com/theMitch37/domaine-terre-relief/releases/download/e30-z{bz}/eau30_{bx}_{bz}.bin", 128, 300, 90);
+
+    /**
+     * Eau intérieure du bloc (x, z) d'un monde 1:30 : round((niveau en m + 500) / 5) × 32 + (d + 15), d de 1 à 16 dans
+     * l'eau (blocs jusqu'à la berge), de -1 à -15 sur la terre proche ; -1 sans eau à moins de 15 blocs ou sans donnée.
+     */
+    public static int eau(int x, int z) {
+        reglages();
+        if (!actif || Terrain.echelle() != EAU30.echelle) return -1;
+        int v = EAU30.brut(x, z);
+        return v == VIDE ? -1 : v & 0xFFFF;
+    }
+
     /**
      * Sol du bloc (x, z) d'un monde 1:30 : roche × 256 + couverture (classes WorldCover : 10 arbres, 20 broussailles,
      * 30 prairie, 40 cultures, 50 bâti, 60 sol nu, 70 neige et glace, 80 eau, 90 zone humide, 95 mangrove,
@@ -414,6 +429,7 @@ public final class ReliefFin {
         if (e == V30.echelle) {
             prevoir(s, V30);
             prevoir(s, SOL30);
+            prevoir(s, EAU30);
         } else if (e == V1.echelle) {
             prevoir(s, V1);
         }

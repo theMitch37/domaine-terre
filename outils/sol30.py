@@ -194,6 +194,114 @@ def roche(tx, tz, journal):
     return out
 
 
+# ---------------------------------------------------------------- eau (09/11/2026)
+
+DEM = "https://copernicus-dem-30m.s3.amazonaws.com/{n}/{n}.tif"
+M = 48                                                   # marge autour de la région (continuité des niveaux)
+
+
+def grille(tx, tz, marge, srcs, nodata, moyenne=True):
+    """Valeurs des sources sur la grille des blocs d'une région agrandie de `marge` blocs (moyenne par case)."""
+    from rasterio.merge import merge
+    from rasterio.warp import reproject
+    from rasterio.enums import Resampling
+    from rasterio.transform import from_origin
+    W = T + 2 * marge
+    o, n = (tx * T - marge) / BPD, -(tz * T - marge) / BPD
+    e, s = o + W / BPD, n - W / BPD
+    out = np.full((W, W), np.nan, np.float32)
+    if not srcs:
+        return out
+    m = 2 / BPD
+    mos, tr = merge(srcs, bounds=(o - m, s - m, e + m, n + m), nodata=nodata, dtype="float32")
+    reproject(mos[0], out, src_transform=tr, src_crs="EPSG:4326", src_nodata=nodata,
+              dst_transform=from_origin(o, n, 1 / BPD, 1 / BPD), dst_crs="EPSG:4326", dst_nodata=np.nan,
+              resampling=Resampling.average if moyenne else Resampling.nearest)
+    return out
+
+
+def ouvrir(urls_noms, dossier):
+    import rasterio
+    srcs = []
+    for url, nom in urls_noms:
+        p = os.path.join(dossier, nom)
+        if not os.path.exists(p):
+            b = get(url, binaire=True)
+            if b is None:
+                continue
+            open(p, "wb").write(b)
+        srcs.append(rasterio.open(p))
+    return srcs
+
+
+def eau(tx, tz, wc_dir, dem_dir):
+    """Eau intérieure d'une région : niveau (altitude réelle de la surface) et distance signée à la berge.
+
+    Valeur = round((niveau + 500) / 5) * 32 + (d + 15) : d de 1 à 16 dans l'eau (blocs jusqu'à la berge), de -1 à -15
+    sur la terre proche (blocs jusqu'à l'eau, niveau de l'eau la plus proche) ; VIDE ailleurs. La mer (relief <= 0,5 m)
+    est laissée aux côtes du mod.
+    """
+    import rasterio
+    from scipy import ndimage
+    W = T + 2 * M
+    o, n = (tx * T - M) / BPD, -(tz * T - M) / BPD
+    e, s = o + W / BPD, n - W / BPD
+    # WorldCover : part d'eau (classe 80) dans chaque case
+    wc = []
+    for la in range(math.floor(s / 3) * 3, math.floor(n / 3) * 3 + 1, 3):
+        for lo in range(math.floor(o / 3) * 3, math.floor(e / 3) * 3 + 1, 3):
+            nom = (f"N{la:02d}" if la >= 0 else f"S{-la:02d}") + (f"E{lo:03d}" if lo >= 0 else f"W{-lo:03d}")
+            wc.append((WC.format(nom), nom + ".tif"))
+    srcs = ouvrir(wc, wc_dir)
+    part = np.zeros((W, W), np.float32)
+    if srcs:
+        from rasterio.io import MemoryFile
+        from rasterio.merge import merge
+        m = 2 / BPD
+        mos, tr = merge(srcs, bounds=(o - m, s - m, e + m, n + m), nodata=0)
+        masque = (mos[0] == 80).astype(np.float32)
+        with MemoryFile() as mf:
+            with mf.open(driver="GTiff", width=masque.shape[1], height=masque.shape[0], count=1, dtype="float32",
+                         crs="EPSG:4326", transform=tr) as ds:
+                ds.write(masque, 1)
+            with mf.open() as ds:
+                part = np.nan_to_num(grille(tx, tz, M, [ds], None))
+    # relief 30 m
+    noms = []
+    for la in range(math.floor(s), math.floor(n) + 1):
+        for lo in range(math.floor(o), math.floor(e) + 1):
+            nn = (f"Copernicus_DSM_COG_10_{'N' if la >= 0 else 'S'}{abs(la):02d}_00_"
+                  f"{'E' if lo >= 0 else 'W'}{abs(lo):03d}_00_DEM")
+            noms.append((DEM.format(n=nn), nn + ".tif"))
+    dem = grille(tx, tz, M, ouvrir(noms, dem_dir), np.nan)
+    eau = (part >= 0.34) & np.isfinite(dem) & (dem > 0.5)
+    niveau = np.full((W, W), np.nan, np.float32)
+    lab, nb = ndimage.label(eau, structure=np.ones((3, 3)))
+    if nb:
+        # rivières : moyenne locale du relief sur l'eau (9 x 9), sans les valeurs aberrantes des berges
+        d = np.where(eau, dem, 0.0)
+        som = ndimage.uniform_filter(d, 9) * 81
+        cnt = ndimage.uniform_filter(eau.astype(np.float32), 9) * 81
+        niveau = np.where(eau, som / np.maximum(cnt, 1e-6), np.nan)
+        # lacs : grandes nappes presque plates -> un seul niveau (médiane)
+        for k in range(1, nb + 1):
+            sel = lab == k
+            v = dem[sel]
+            if v.size >= 150 and np.percentile(v, 90) - np.percentile(v, 10) < 4.0:
+                niveau[sel] = np.median(v)
+    dans = np.minimum(np.round(ndimage.distance_transform_edt(eau)), 16).astype(np.int32)
+    dist, (iz, ix) = ndimage.distance_transform_edt(~eau, return_indices=True)
+    proche = (~eau) & (dist <= 15) & eau.any()
+    niv_proche = niveau[iz, ix]
+    val = np.full((W, W), VIDE, np.int32)
+    L = lambda a: np.clip(np.round((a + 500.0) / 5.0), 0, 2047).astype(np.int32)
+    ok = eau & np.isfinite(niveau)
+    val[ok] = L(niveau[ok]) * 32 + (dans[ok] + 15)
+    ok2 = proche & np.isfinite(niv_proche)
+    val[ok2] = L(niv_proche[ok2]) * 32 + (15 - np.round(dist[ok2]).astype(np.int32))
+    return val[M:M + T, M:M + T], int(eau[M:M + T, M:M + T].sum())
+
+
 # ---------------------------------------------------------------- paquets
 
 def encoder(v):
@@ -232,7 +340,9 @@ def main():
         for tz in range(z0 >> 9, (z1 >> 9) + 1):
             for tx in range(x0 >> 9, (x1 >> 9) + 1):
                 regions.add((tx, tz))
-    paquets, bilan = {}, {}
+    paquets, paquets_eau, bilan = {}, {}, {}
+    dem_dir = "/tmp/dem30"
+    os.makedirs(dem_dir, exist_ok=True)
     journal = []
     for tx, tz in sorted(regions):
         t0 = time.time()
@@ -240,6 +350,9 @@ def main():
         r = roche(tx, tz, journal)
         v = np.where(c > 0, r.astype(np.int32) * 256 + c, VIDE)
         paquets.setdefault((tx >> 4, tz >> 4), {})[(tx & 15) + 16 * (tz & 15)] = encoder(v)
+        ve, ne = eau(tx, tz, wc, dem_dir)
+        paquets_eau.setdefault((tx >> 4, tz >> 4), {})[(tx & 15) + 16 * (tz & 15)] = encoder(ve)
+        print(f"  eau : {ne} blocs", flush=True)
         cc = Counter(c.ravel().tolist())
         rr = Counter(r.ravel().tolist())
         bilan[f"{tx},{tz}"] = {"couverture": {str(k): n for k, n in cc.most_common()},
@@ -248,6 +361,8 @@ def main():
               f"roche {[(ROCHES[k], n) for k, n in rr.most_common(4)]}", flush=True)
     for (bx, bz), rs in paquets.items():
         open(os.path.join(sortie, f"sol30_{bx}_{bz}.bin"), "wb").write(paquet(bx, bz, rs))
+    for (bx, bz), rs in paquets_eau.items():
+        open(os.path.join(sortie, f"eau30_{bx}_{bz}.bin"), "wb").write(paquet(bx, bz, rs))
     json.dump({"bilan": bilan, "journal": journal, "unites": {str(k): ROCHES[v] for k, v in _unites.items()}},
               open(os.path.join(sortie, "bilan.json"), "w"), indent=1)
     print("\n".join(journal[:10]))

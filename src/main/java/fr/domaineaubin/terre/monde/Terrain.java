@@ -98,7 +98,8 @@ public final class Terrain {
         double alt = altitudeReelle(x, z);
         double pente = sd >= 0 ? pente(x, z) : 0.0;
         Riviere r = sd >= 0 ? riviereBrute(x, z) : null;
-        Lacs.Proche lp = sd >= 0 && lacs != null ? lacProche(x, z) : null;
+        // 1:30 : les lacs viennent de la couche d'eau satellite (ReliefFin.eau), pas de la carte des lacs à 250 m
+        Lacs.Proche lp = sd >= 0 && lacs != null && echelle >= 250 ? lacProche(x, z) : null;
         int nivLac = lp == null ? SANS_LAC : (int) Math.min(niveauLac(lacs.altitude(lp.lac())), lacs.plafond(lp.lac()));
         // près d'un lac (et dedans), un cours d'eau prend au moins le niveau du lac : il y entre et en sort à niveau
         boolean presLac = lp != null && (lp.distance() > 0 || -lp.distance() <= BERGE);
@@ -122,6 +123,26 @@ public final class Terrain {
                 if (!litOuBerge) h = bergeLac(h, niv, -lp.distance());
                 if (-lp.distance() < BERGE && !litOuBerge) bergeLac = niv;
                 if (-lp.distance() <= BERGE) eauLac = niv;
+            }
+        }
+        // 1:30 (09/11/2026) : eau intérieure réelle (WorldCover 10 m, niveau lu dans le relief 30 m)
+        if (echelle < 250 && sd >= 0) {
+            int e = ReliefFin.eau(x, z);
+            if (e >= 0) {
+                int d = (e & 31) - 15;
+                double altEau = (e >> 5) * 5.0 - 500.0;
+                int niv = altEau < 3.0 ? NIVEAU_MER : Math.max(NIVEAU_MER, Mth.floor(blocsDepuisAltitude(altEau)) + 1);
+                if (d > 0) {
+                    // dans l'eau : fond qui descend avec la distance à la berge (1 à 12 blocs)
+                    litRiv = niv;
+                    eauRiv = niv;
+                    h = Math.min(h, niv - 1 - Math.min(0.6 + 0.7 * d, 12.0));
+                } else {
+                    int dd = -d;
+                    eauRiv = niv;                                // pas d'aquifère au hasard près de l'eau
+                    if (dd <= 4) bergeRiv = niv;                 // la berge tient l'eau
+                    if (dd <= 3) h = Math.max(h, niv + 0.6);
+                }
             }
         }
         // lieux uniques (addons) : ils reprennent la main sur le relief de leur zone
