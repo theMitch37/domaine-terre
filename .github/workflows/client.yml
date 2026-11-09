@@ -15,7 +15,7 @@ permissions:
 jobs:
   client:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v5
@@ -75,12 +75,23 @@ jobs:
             if grep -qE "joined the game|Crash report saved" /tmp/client.log; then break; fi
           done
           sleep 120
-          import -window root /tmp/essai/vue1.png || true
-          xdotool mousemove 640 360 || true
-          sleep 2
-          xdotool mousemove_relative --sync 0 120 || true
-          sleep 20
-          import -window root /tmp/essai/vue2.png || true
+          # vues : téléportation par la console du jeu (monde créatif, commandes permises), HUD masqué (F1)
+          W=$(xdotool search --name "Minecraft" | head -1)
+          xdotool windowactivate --sync $W || true
+          sleep 3
+          xdotool key F1 || true
+          vue() {   # nom x y z lacet tangage attente
+            xdotool key slash; sleep 1
+            xdotool type --delay 30 "tp @s $2 $3 $4 $5 $6"; sleep 0.5
+            xdotool key Return
+            sleep $7
+            import -window root /tmp/essai/$1.png || true
+          }
+          vue leman 24601 110 -172622 0 12 150
+          vue chamonix_mont_blanc 25492 150 -170393 0 -8 180
+          vue grand_canyon -415989 185 -133812 180 25 220
+          vue etretat_mer 557 72 -184606 0 55 180
+          vue seine_paris 8727 80 -181290 90 20 150
           cp /tmp/client.log /tmp/serveur.log /tmp/essai/
           cp -r run/crash-reports /tmp/essai/ 2>/dev/null || true
           grep -nE "Eau opaque|domaine_terre|Mixin|ERROR|Exception|atlas/blocks|embeddium|Relief fin" /tmp/client.log | head -200 > /tmp/essai/extrait.txt || true
