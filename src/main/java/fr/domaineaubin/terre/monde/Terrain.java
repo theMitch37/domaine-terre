@@ -129,8 +129,8 @@ public final class Terrain {
         if (echelle < 250 && sd >= 0) {
             double ye = surfaceEau(x, z, true);
             if (!Double.isNaN(ye)) {
-                int c = ReliefFin.eau(x, z) & 15;
-                int d = c < 8 ? DANS_EAU[c] : -PRES_EAU[c - 8];
+                int ce = ReliefFin.eau(x, z) & 15;
+                int d = ce < 8 ? DANS_EAU[ce] : -PRES_EAU[ce - 8];
                 int niv = Mth.floor(ye) + 1;
                 if (d > 0) {
                     // dans l'eau : fond qui descend avec la distance à la berge (1 à 12 blocs)
