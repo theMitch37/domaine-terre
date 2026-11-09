@@ -323,10 +323,115 @@ public class TerroirBiomeSource extends BiomeSource {
             if (!vraieMer && !CAVERNES.contains(type) && !vraieCote) {
                 int b = Terrain.get().carte().biome(lonF, latF);
                 Holder<Biome>[] tab = t.fixes().get(terroir);
+                // 1:30 : la carte des biomes a des pixels de 3' (185 blocs, lisières droites) ; la vraie couverture
+                // du sol à 10 m (WorldCover) redessine forêts, prairies, déserts et marais au bloc près
+                if (Terrain.echelle() < 250) {
+                    int s = ReliefFin.sol(bx, bz);
+                    if (s >= 0) {
+                        int r = parCouverture(s & 255, b, k, tab);
+                        if (r > 0) return tab[r];
+                    }
+                }
                 if (b > 0 && b < tab.length && tab[b] != null) return tab[b];
             }
         }
         return merSelonFond(t, choix, bx, bz);
+    }
+
+    // ---------------------------------------------------------------- 1:30 : biome d'après la couverture réelle
+
+    private static java.util.Map<String, Integer> indices;
+
+    /** Index d'un biome dans biomes.json (1..n), 0 si absent. */
+    private static synchronized int idx(String nom) {
+        if (indices == null) {
+            java.util.Map<String, Integer> m = new java.util.HashMap<>();
+            int i = 1;
+            for (JsonElement e : lireJson("biomes.json").getAsJsonArray()) m.put(e.getAsString(), i++);
+            indices = m;
+        }
+        return indices.getOrDefault(nom, 0);
+    }
+
+    private static final Set<String> BOISES = Set.of("forest", "birch_forest", "flower_forest", "dark_forest", "taiga",
+            "old_growth_pine_taiga", "old_growth_spruce_taiga", "snowy_taiga", "grove", "cherry_grove", "windswept_forest",
+            "wooded_badlands", "jungle", "sparse_jungle", "bamboo_jungle", "mangrove_swamp", "swamp");
+    private static final Set<String> SECS = Set.of("desert", "badlands", "wooded_badlands", "eroded_badlands", "savanna",
+            "savanna_plateau", "windswept_savanna");
+
+    private static String nom(int b) {
+        if (indices == null) idx("plains");
+        for (java.util.Map.Entry<String, Integer> e : indices.entrySet()) if (e.getValue() == b) return e.getKey();
+        return "";
+    }
+
+    private static final String[] NOMS = new String[64];
+
+    private static String nomDe(int b) {
+        if (b <= 0 || b >= NOMS.length) return "";
+        String n = NOMS[b];
+        if (n == null) NOMS[b] = n = nom(b);
+        return n;
+    }
+
+    /**
+     * Biome d'un point en 1:30, d'après la couverture du sol ESA WorldCover (10 m) croisée avec le climat Köppen et le
+     * biome de la carte 3'. Renvoie l'index du biome (0 = garder celui de la carte). Le biome de la carte est gardé
+     * quand il colle déjà à la couverture (une forêt de bouleaux reste de bouleaux) ; sinon on prend le biome de ce
+     * type qui va avec le climat réel.
+     */
+    static int parCouverture(int cov, int b, int k, Holder<Biome>[] tab) {
+        String actuel = nomDe(b);
+        boolean tropical = k >= 1 && k <= 3, desert = k == 4 || k == 5, steppe = k == 6 || k == 7;
+        boolean polaire = k == 29 || k == 30, froid = k >= 17 && k <= 28;
+        String voulu;
+        switch (cov) {
+            case 10 -> {                                        // arbres
+                if (BOISES.contains(actuel) && !actuel.equals("swamp") && !actuel.equals("mangrove_swamp")) return 0;
+                if (k == 1 || k == 2) voulu = "jungle";
+                else if (k == 3) voulu = "savanna";
+                else if (desert || steppe) voulu = actuel.contains("badlands") ? "wooded_badlands" : "savanna_plateau";
+                else if (polaire) voulu = "snowy_taiga";
+                else if (froid) voulu = "taiga";
+                else voulu = "forest";
+            }
+            case 20, 30, 40 -> {                                // broussailles, prairie, cultures : terrain ouvert
+                if (!BOISES.contains(actuel) || actuel.equals("swamp")) {
+                    if (actuel.equals("swamp")) voulu = "plains";
+                    else return 0;
+                } else if (tropical || desert || steppe) voulu = actuel.contains("badlands") ? "badlands" : "savanna";
+                else if (polaire) voulu = "snowy_plains";
+                else voulu = actuel.contains("snowy") ? "snowy_plains" : "plains";
+            }
+            case 60 -> {                                        // sol nu : désert en pays sec, sinon la carte décide
+                if (!(desert || steppe) || SECS.contains(actuel)) return 0;
+                voulu = desert ? "desert" : "badlands";
+            }
+            case 90 -> voulu = desert || steppe ? null : "swamp";            // zones humides
+            case 95 -> voulu = "mangrove_swamp";
+            default -> voulu = null;
+        }
+        if (voulu == null) return 0;
+        int i = idx(voulu);
+        if (i > 0 && i < tab.length && tab[i] != null) return i;
+        // le terroir n'a pas ce biome : un proche
+        for (String repli : switch (voulu) {
+            case "jungle" -> new String[]{"sparse_jungle", "bamboo_jungle", "forest"};
+            case "savanna_plateau", "wooded_badlands" -> new String[]{"savanna", "windswept_savanna", "forest"};
+            case "taiga" -> new String[]{"old_growth_spruce_taiga", "old_growth_pine_taiga", "snowy_taiga", "forest"};
+            case "snowy_taiga" -> new String[]{"taiga", "old_growth_spruce_taiga"};
+            case "forest" -> new String[]{"birch_forest", "dark_forest", "flower_forest", "taiga"};
+            case "savanna" -> new String[]{"savanna_plateau", "windswept_savanna", "badlands", "plains"};
+            case "badlands" -> new String[]{"eroded_badlands", "desert", "savanna"};
+            case "desert" -> new String[]{"badlands", "savanna"};
+            case "snowy_plains" -> new String[]{"plains"};
+            case "mangrove_swamp" -> new String[]{"swamp"};
+            default -> new String[]{"plains"};
+        }) {
+            int j = idx(repli);
+            if (j > 0 && j < tab.length && tab[j] != null) return j;
+        }
+        return 0;
     }
 
     /**
