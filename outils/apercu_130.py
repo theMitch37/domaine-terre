@@ -17,6 +17,7 @@ ZONES = {                     # nom : (lat centre, lon centre, taille en blocs)
     "cervin": (45.99, 7.70, 768),
     "grand_canyon": (36.10, -112.10, 1024),
     "gullfoss": (64.327, -20.12, 512),
+    "grand_canyon_large": (36.10, -112.10, 2134),   # même emprise que la zone de banc grand_canyon (256 blocs au 1:250)
 }
 
 
