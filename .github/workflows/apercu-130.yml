@@ -1,0 +1,37 @@
+# Aperçu de l'échelle 1:30 (09/11/2026) : relief Copernicus GLO-30 à 1 point par bloc sur quelques zones, rangé sur la
+# branche « apercu-130 » (rendu fait à part).
+name: Aperçu 1:30
+
+on:
+  push:
+    branches: [faune]
+    paths: [outils/apercu_130.py, .github/workflows/apercu-130.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apercu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install rasterio numpy
+      - name: Dalles GLO-30
+        run: |
+          mkdir -p /tmp/dem
+          for d in $(python outils/apercu_130.py --dalles); do
+            curl -sfL --retry 4 -o /tmp/dem/$d.tif https://copernicus-dem-30m.s3.amazonaws.com/$d/$d.tif && echo "$d ok" || echo "$d absente"
+          done
+      - run: python outils/apercu_130.py /tmp/dem /tmp/apercu
+      - name: Rangement
+        run: |
+          cd /tmp/apercu
+          git init -q -b apercu-130
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add . && git commit -qm "Aperçu 1:30"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" apercu-130
