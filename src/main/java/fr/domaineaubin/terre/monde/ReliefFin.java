@@ -215,8 +215,19 @@ public final class ReliefFin {
             return v == VIDE ? Double.NaN : v * (double) Q;
         }
 
+        /** Dernière région lue par chaque fil (évite le verrou du cache : les biomes la lisent des millions de fois). */
+        private final ThreadLocal<Object[]> derniere = new ThreadLocal<>();
+
         short[] region(int tx, int tz) {
             long k = cle(tx, tz);
+            Object[] d = derniere.get();
+            if (d != null && (Long) d[0] == k) return (short[]) d[1];
+            short[] r0 = region0(tx, tz, k);
+            if (r0 != SANS || paquets.containsKey(cle(tx >> decalN, tz >> decalN))) derniere.set(new Object[]{k, r0});
+            return r0;
+        }
+
+        private short[] region0(int tx, int tz, long k) {
             synchronized (regions) {
                 short[] r = regions.get(k);
                 if (r != null) return r;

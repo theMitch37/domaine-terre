@@ -340,17 +340,23 @@ public class TerroirBiomeSource extends BiomeSource {
 
     // ---------------------------------------------------------------- 1:30 : biome d'après la couverture réelle
 
-    private static java.util.Map<String, Integer> indices;
+    private static volatile java.util.Map<String, Integer> indices;
 
-    /** Index d'un biome dans biomes.json (1..n), 0 si absent. */
-    private static synchronized int idx(String nom) {
-        if (indices == null) {
-            java.util.Map<String, Integer> m = new java.util.HashMap<>();
-            int i = 1;
-            for (JsonElement e : lireJson("biomes.json").getAsJsonArray()) m.put(e.getAsString(), i++);
-            indices = m;
+    /** Index d'un biome dans biomes.json (1..n), 0 si absent (sans verrou une fois chargé : appelé très souvent). */
+    private static int idx(String nom) {
+        java.util.Map<String, Integer> m = indices;
+        if (m == null) {
+            synchronized (TerroirBiomeSource.class) {
+                if (indices == null) {
+                    java.util.Map<String, Integer> n = new java.util.HashMap<>();
+                    int i = 1;
+                    for (JsonElement e : lireJson("biomes.json").getAsJsonArray()) n.put(e.getAsString(), i++);
+                    indices = n;
+                }
+                m = indices;
+            }
         }
-        return indices.getOrDefault(nom, 0);
+        return m.getOrDefault(nom, 0);
     }
 
     private static final Set<String> BOISES = Set.of("forest", "birch_forest", "flower_forest", "dark_forest", "taiga",
