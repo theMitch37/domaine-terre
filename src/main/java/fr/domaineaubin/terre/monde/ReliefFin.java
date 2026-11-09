@@ -233,6 +233,20 @@ public final class ReliefFin {
             }
         }
 
+        /** Lance en arrière-plan le téléchargement du paquet (bx, bz) s'il manque (sans attendre). */
+        void prevoir(int bx, int bz) {
+            long k = cle(bx, bz);
+            if (paquets.containsKey(k) || mers.contains(k) || enCours.containsKey(k)) return;
+            Long e = echecs.get(k);
+            if (e != null && System.currentTimeMillis() - e < 300_000) return;
+            Path f = dossier().resolve(prefixe + bx + "_" + bz + ".bin");
+            if (Files.exists(f) || Files.exists(dossier().resolve(prefixe + bx + "_" + bz + ".vide"))) return;
+            enCours.computeIfAbsent(k, kk -> telechargeur.submit(() -> {
+                telecharger(bx, bz, f);
+                enCours.remove(kk);
+            }));
+        }
+
         private Paquet garder(long k, Paquet p) {
             paquets.put(k, p);
             return p;
@@ -362,10 +376,45 @@ public final class ReliefFin {
         }
     }
 
+    private static int tics = 0;
+
+    /**
+     * Téléchargement à l'avance (09/11/2026) : toutes les 2 s, les paquets à moins de MARGE blocs de chaque joueur de
+     * l'Overworld (plus loin s'il va vite : cheval, élytres) sont récupérés en arrière-plan. Quand le joueur arrive au
+     * bord d'un nouveau paquet, celui-ci est déjà sur le disque : la génération n'attend jamais.
+     */
+    private static void prevoir(MinecraftServer s) {
+        int e = Terrain.echelle();
+        Jeu j = e == V30.echelle ? V30 : e == V1.echelle ? V1 : null;
+        if (j == null || !actif) return;
+        int cote = T * j.n;
+        for (var joueur : s.getPlayerList().getPlayers()) {
+            if (joueur.level().dimension() != net.minecraft.world.level.Level.OVERWORLD) continue;
+            double vitesse = joueur.getDeltaMovement().horizontalDistance() * 20.0;         // blocs par seconde
+            double m = Math.min(MARGE + vitesse * 120.0, 3.0 * MARGE);                      // 2 min d'avance en plus
+            int x0 = (int) Math.floor(joueur.getX() - m), x1 = (int) Math.floor(joueur.getX() + m);
+            int z0 = (int) Math.floor(joueur.getZ() - m), z1 = (int) Math.floor(joueur.getZ() + m);
+            for (int bx = Math.floorDiv(x0, cote); bx <= Math.floorDiv(x1, cote); bx++)
+                for (int bz = Math.floorDiv(z0, cote); bz <= Math.floorDiv(z1, cote); bz++)
+                    j.prevoir(bx, bz);
+        }
+    }
+
+    /** Distance (blocs) à laquelle un paquet voisin est téléchargé à l'avance. */
+    static final double MARGE = 2000.0;
+
     /** Prévient une fois les joueurs quand une zone a dû être générée sans le relief fin. */
     @SubscribeEvent
     public static void tic(TickEvent.ServerTickEvent e) {
-        if (e.phase != TickEvent.Phase.END || !manque || prevenu) return;
+        if (e.phase != TickEvent.Phase.END) return;
+        if (++tics % 40 == 0) {
+            MinecraftServer srv = ServerLifecycleHooks.getCurrentServer();
+            if (srv != null) {
+                reglages();
+                prevoir(srv);
+            }
+        }
+        if (!manque || prevenu) return;
         MinecraftServer s = ServerLifecycleHooks.getCurrentServer();
         if (s == null || s.getPlayerList().getPlayerCount() == 0) return;
         prevenu = true;

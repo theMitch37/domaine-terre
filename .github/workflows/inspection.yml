@@ -1,0 +1,38 @@
+# Inspection (09/11/2026) : signatures du rendu des fluides dans Forge 1.20.1 et Embeddium, pour les mixins de l'eau.
+name: Inspection du rendu de l'eau
+
+on:
+  push:
+    branches: [echelle-130]
+    paths: [.github/workflows/inspection.yml]
+
+jobs:
+  inspection:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v3
+      - run: chmod +x gradlew && ./gradlew compileJava --no-daemon -q
+      - name: Forge
+        run: |
+          J=$(find ~/.gradle/caches -name "forge-1.20.1-*_mapped_official_1.20.1.jar" | grep -v sources | head -1)
+          [ -n "$J" ] || J=$(find ~/.gradle build -name "*.jar" | grep -i "mapped_official" | grep -v sources | head -1)
+          echo "JAR $J"
+          javap -p -c -classpath "$J" net.minecraft.client.renderer.block.LiquidBlockRenderer | grep -nE "tesselate|vertex|color|getTintColor|Method|invoke" | head -80
+          unzip -l "$J" | grep -i "textures/block/water" || true
+      - name: Embeddium
+        run: |
+          mkdir -p /tmp/emb && cd /tmp/emb
+          curl -s 'https://api.modrinth.com/v2/project/embeddium/version?loaders=%5B%22forge%22%5D&game_versions=%5B%221.20.1%22%5D' > v.json
+          python3 -c "import json;v=json.load(open('v.json'));print([x['version_number'] for x in v[:8]]);print(v[0]['files'][0]['url'])" | tee urls
+          curl -sL -o emb.jar "$(tail -1 urls)"
+          unzip -l emb.jar | grep -iE "fluid" | head -30
+          for c in $(unzip -l emb.jar | grep -oE "[a-zA-Z0-9/_$]*FluidRenderer[a-zA-Z0-9_$]*\.class" | sort -u); do
+            echo "=== $c"; javap -p -classpath emb.jar "${c%.class}" | head -60
+          done
+          C=$(unzip -l emb.jar | grep -oE "[a-zA-Z0-9/_]*/FluidRenderer\.class" | head -1)
+          javap -p -c -classpath emb.jar "${C%.class}" | grep -nE "Method|invoke|ColorABGR|withAlpha|0xff|ldc" | head -150
