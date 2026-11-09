@@ -1,0 +1,40 @@
+# Sol du monde 1:30 (09/11/2026), essai sur les zones du banc : WorldCover 10 m + roche Macrostrat, un octet chacun
+# par bloc (outils/sol30.py), rangés sur la branche « sol-130 » (le banc les pose comme un pack hors ligne).
+name: Sol 1:30 (essai)
+
+on:
+  push:
+    branches: [echelle-130]
+    paths: [outils/sol30.py, .github/workflows/sol-130.yml]
+  workflow_dispatch:
+    inputs:
+      zones:
+        description: "zones de outils/banc/zones30.json"
+        default: "cervin_30,grand_canyon_30,gullfoss_30"
+
+permissions:
+  contents: write
+
+jobs:
+  sol:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install rasterio numpy mapbox-vector-tile pillow
+      - name: Sol
+        run: |
+          Z="${{ inputs.zones }}"
+          [ -n "$Z" ] || Z="cervin_30,grand_canyon_30,gullfoss_30"
+          python outils/sol30.py outils/banc/zones30.json "$Z" /tmp/sol
+          ls -la /tmp/sol
+      - name: Rangement
+        run: |
+          cd /tmp/sol
+          git init -q -b sol-130
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add . && git commit -qm "Sol 1:30 (essai)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" sol-130
