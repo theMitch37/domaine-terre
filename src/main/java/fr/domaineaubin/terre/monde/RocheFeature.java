@@ -61,7 +61,7 @@ public class RocheFeature extends Feature<NoneFeatureConfiguration> {
         PALETTES[BASALTE] = p(Blocks.BASALT, Blocks.SMOOTH_BASALT, Blocks.BLACKSTONE, Blocks.BASALT);
         PALETTES[ANDESITE] = p(Blocks.ANDESITE, Blocks.TUFF, Blocks.STONE, Blocks.ANDESITE);
         PALETTES[TUF] = p(Blocks.TUFF, Blocks.WHITE_TERRACOTTA, Blocks.ANDESITE, Blocks.TUFF);
-        PALETTES[GRANITE] = p(Blocks.STONE, Blocks.GRANITE, Blocks.DIORITE, Blocks.STONE);
+        PALETTES[GRANITE] = p(Blocks.STONE, Blocks.DIORITE, Blocks.STONE, Blocks.ANDESITE, Blocks.STONE);
         PALETTES[GABBRO] = p(Blocks.DEEPSLATE, Blocks.TUFF, Blocks.ANDESITE, Blocks.DEEPSLATE);
         PALETTES[GNEISS] = p(Blocks.STONE, Blocks.DEEPSLATE, Blocks.ANDESITE, Blocks.TUFF, Blocks.STONE);
         PALETTES[QUARTZITE] = p(Blocks.CALCITE, Blocks.DIORITE, Blocks.WHITE_TERRACOTTA);
@@ -107,9 +107,9 @@ public class RocheFeature extends Feature<NoneFeatureConfiguration> {
     }
 
     /** Sol sec : terre grossière, sable rouge sur grès et argiles, ou le haut de la roche du lieu. */
-    private static BlockState sec(int roche, double b, int x, int z) {
+    private static BlockState sec(int roche, double b, int x, int z, double aride) {
         if (b > 0.3 && roche != INCONNUE) return PALETTES[roche][0];
-        if ((roche == GRES || roche == ARGILE || roche == CONGLOMERAT) && b > -0.2) return Blocks.RED_SAND.defaultBlockState();
+        if (aride >= 0.5 && (roche == GRES || roche == ARGILE) && b > -0.2) return Blocks.RED_SAND.defaultBlockState();
         return Blocks.COARSE_DIRT.defaultBlockState();
     }
 
@@ -140,11 +140,13 @@ public class RocheFeature extends Feature<NoneFeatureConfiguration> {
                 int y = n.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x, z) - 1;
                 if (y <= Terrain.NIVEAU_MER) continue;
                 if (!n.getBlockState(p.set(x, y, z)).getFluidState().isEmpty()) continue;
-                double b = BRUIT.noise(x / 9.0, y / 7.0, z / 9.0);
+                // taches de 20 à 40 blocs avec un peu de détail (le bruit à 9 blocs faisait un damier sur les pentes)
+                double b = BRUIT.noise(x / 34.0, 3.0, z / 34.0) * 0.8 + BRUIT.noise(x / 9.0, y / 7.0, z / 9.0) * 0.3;
                 // berges des cours d'eau (couche d'eau 1:30) : rives meubles, pas de roche à nu le long des ruisseaux
                 int e = ReliefFin.eau(x, z);
                 if (e >= 0 && (e & 15) >= 8 && (e & 15) <= 11 && cov != 60) {
                     boolean haut = cov == 70 || cov == 100 || y >= Y_EBOULIS;
+                    if (cov == 70) e = -1;                       // sur un glacier : pas de liseré, la glace
                     // pays sec : seul le bord immédiat de l'eau reste vert (ripisylve d'un bloc), le reste suit le sol
                     if (!haut && (aride < 0.5 || (e & 15) == 8)) continue;
                     if (!haut) e = -1;
@@ -164,22 +166,22 @@ public class RocheFeature extends Feature<NoneFeatureConfiguration> {
                     pose |= glace(n, p, x, y, z);
                 } else if (cov == 20) {                         // broussailles : terre sèche entre les touffes
                     // pays sec : presque plus d'herbe, le sol et la roche affleurent
-                    if (b > -0.05 - 0.5 * aride) pose |= remplacer(n, p, x, y, z, sec(roche, b, x, z));
+                    if (b > -0.05 - 0.5 * aride) pose |= remplacer(n, p, x, y, z, sec(roche, b, x, z, aride));
                 } else if (cov == 10 && aride >= 0.5) {         // bois clairs de pays sec : sol nu entre les arbres
                     if (b > 0.45 - 0.9 * aride) pose |= remplacer(n, p, x, y, z, b > 0.1 ? Blocks.PODZOL.defaultBlockState()
-                            : sec(roche, b, x, z));
+                            : sec(roche, b, x, z, aride));
                 } else if (cov == 30 && aride > 0) {            // prairie de pays sec : steppe rase
-                    if (b > 0.35 - 0.75 * aride) pose |= remplacer(n, p, x, y, z, sec(roche, b, x, z));
+                    if (b > 0.35 - 0.75 * aride) pose |= remplacer(n, p, x, y, z, sec(roche, b, x, z, aride));
                 } else if (cov == 100) {                        // mousses et lichens (toundra)
                     pose |= remplacer(n, p, x, y, z, b > 0.15 ? Blocks.MOSS_BLOCK.defaultBlockState()
                             : b > -0.2 ? Blocks.COARSE_DIRT.defaultBlockState() : Blocks.GRAVEL.defaultBlockState());
                 } else if (cov == 90) {                         // zone humide
                     if (b > 0.1) pose |= remplacer(n, p, x, y, z, Blocks.MUD.defaultBlockState());
                 } else if (pente >= EBOULIS && y >= Y_EBOULIS - 8 * b && b > -0.1) {
-                    pose |= remplacer(n, p, x, y, z, roche == INCONNUE || roche == GRANITE || roche == GNEISS
-                            ? (b > 0.25 ? Blocks.GRAVEL.defaultBlockState() : Blocks.COARSE_DIRT.defaultBlockState())
-                            : (b > 0.25 ? Blocks.GRAVEL.defaultBlockState() : PALETTES[roche][1]));
+                    pose |= remplacer(n, p, x, y, z, b > 0.25 ? Blocks.GRAVEL.defaultBlockState() : bloc(roche, x, y, z));
                 }
+                // pentes : sous l'herbe, la roche (pas de terre brune sur les flancs des marches)
+                if (pente >= EBOULIS * 0.8) pose |= sousCouche(n, p, x, y, z, roche);
             }
         }
         return pose;
@@ -196,6 +198,23 @@ public class RocheFeature extends Feature<NoneFeatureConfiguration> {
         if (!sol(s)) return false;
         n.setBlock(p, v, 2);
         return true;
+    }
+
+    /** Sous le bloc du dessus : la terre (2 à 5 blocs) remplacée par la roche de la famille. */
+    private static boolean sousCouche(WorldGenLevel n, BlockPos.MutableBlockPos p, int x, int y, int z, int roche) {
+        boolean pose = false;
+        for (int k = 1; k <= 5; k++) {
+            BlockState s = n.getBlockState(p.set(x, y - k, z));
+            Block b = s.getBlock();
+            if (b != Blocks.DIRT && b != Blocks.COARSE_DIRT && b != Blocks.ROOTED_DIRT && b != Blocks.GRASS_BLOCK
+                    && b != Blocks.SAND && b != Blocks.GRAVEL) {
+                if (b == Blocks.STONE || b == Blocks.DEEPSLATE || b == Blocks.AIR) break;
+                continue;
+            }
+            n.setBlock(p, bloc(roche, x, y - k, z), 2);
+            pose = true;
+        }
+        return pose;
     }
 
     /** Roche de la famille sur `prof` blocs (neige et herbes du dessus enlevées). */

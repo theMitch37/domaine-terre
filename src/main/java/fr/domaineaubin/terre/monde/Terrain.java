@@ -132,7 +132,11 @@ public final class Terrain {
                 int ce = ReliefFin.eau(x, z) & 15;
                 int d = ce < 8 ? DANS_EAU[ce] : -PRES_EAU[ce - 8];
                 int niv = Mth.floor(ye) + 1;
-                if (d > 0) {
+                if (d > 0 && penteEau(x, z, ye) > 0.6) {
+                    // eau sur une pente raide (torrent de montagne, chute) : pas d'eau posée en marches de blocs
+                    // suspendues ; un petit ravin sec à la place (les vraies cascades viendront à part)
+                    h = Math.min(h, niv - 1.4);
+                } else if (d > 0) {
                     // dans l'eau : fond qui descend avec la distance à la berge (1 à 12 blocs)
                     litRiv = niv;
                     eauRiv = niv;
@@ -230,6 +234,17 @@ public final class Terrain {
      * Hauteur exacte de la surface de l'eau intérieure (1:30) en y, ou NaN ; l'eau remplit les blocs sous floor(y) + 1.
      * `proche` : aussi pour la terre proche (niveau de l'eau la plus proche). Au niveau de la mer et en dessous : mer.
      */
+    /** Pente de la surface de l'eau (blocs par bloc) autour de (x, z), sur ±3 blocs. */
+    private double penteEau(int x, int z, double ye) {
+        double g = 0.0;
+        int[][] v = {{3, 0}, {-3, 0}, {0, 3}, {0, -3}};
+        for (int[] o : v) {
+            double yn = surfaceEau(x + o[0], z + o[1], false);
+            if (!Double.isNaN(yn)) g = Math.max(g, Math.abs(yn - ye) / 3.0);
+        }
+        return g;
+    }
+
     public double surfaceEau(int x, int z, boolean proche) {
         if (echelle >= 250) return Double.NaN;
         int e = ReliefFin.eau(x, z);

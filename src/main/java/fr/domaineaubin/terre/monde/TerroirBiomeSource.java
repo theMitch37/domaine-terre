@@ -317,6 +317,10 @@ public class TerroirBiomeSource extends BiomeSource {
             // plages et côtes rocheuses : seulement au bord de la vraie mer (moins de 3' de la côte, hors lac).
             // Ailleurs (lac Mead, plateaux), le bruit vanilla inventait des côtes rocheuses grises et enneigées.
             boolean vraieCote = COTES.contains(type) && !lac && Terrain.get().distanceCote(bx, bz) < 3.0;
+            // 1:30 : plage seulement au ras de l'eau (à moins de ~20 blocs du rivage et sous y 68) ; les falaises
+            // (Étretat) gardent le biome de terre et leur vraie roche au lieu de couches de sable
+            if (vraieCote && Terrain.echelle() < 250 && (Terrain.get().distanceCote(bx, bz) > 20.0 * 60.0 / Terrain.BLOCS_PAR_DEGRE
+                    || Terrain.get().hauteur(bx, bz) > Terrain.NIVEAU_MER + 4)) vraieCote = false;
             // 04/11 (Skógafoss) : un océan choisi par le bruit vanilla sur la terre ferme (près de la côte) n'est pas
             // de la mer : la terre garde son vrai biome
             boolean vraieMer = OCEANS.contains(type) && Terrain.get().hauteur(bx, bz) < Terrain.NIVEAU_MER - 1;
