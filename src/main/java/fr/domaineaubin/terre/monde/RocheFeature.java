@@ -92,6 +92,20 @@ public class RocheFeature extends Feature<NoneFeatureConfiguration> {
         return Mth.clamp((sec / (double) terre - 0.3) / 0.4, 0.0, 1.0);
     }
 
+    /**
+     * Aridité d'après le climat réel (Köppen-Geiger, Beck et al. 2023, déjà dans le mod) : désert 1, steppe 0,75,
+     * méditerranéen à été sec 0,35. Le plateau du Grand Canyon (steppe froide BSk) est sec même sous les genévriers.
+     */
+    static double climatSec(Terrain t, int x, int z) {
+        int k = t.carte().climat(Terrain.lon(x + 0.5), Terrain.lat(z + 0.5));
+        return switch (k) {
+            case 4, 5 -> 1.0;                                   // BWh, BWk : désert
+            case 6, 7 -> 0.75;                                  // BSh, BSk : steppe
+            case 8, 17 -> 0.35;                                 // Csa, Dsa : été chaud et sec
+            default -> 0.0;
+        };
+    }
+
     /** Sol sec : terre grossière, sable rouge sur grès et argiles, ou le haut de la roche du lieu. */
     private static BlockState sec(int roche, double b, int x, int z) {
         if (b > 0.3 && roche != INCONNUE) return PALETTES[roche][0];
@@ -111,7 +125,7 @@ public class RocheFeature extends Feature<NoneFeatureConfiguration> {
         int x0 = ctx.origin().getX() & ~15, z0 = ctx.origin().getZ() & ~15;
         BlockPos.MutableBlockPos p = new BlockPos.MutableBlockPos();
         boolean pose = false;
-        double aride = aridite(x0 + 8, z0 + 8);
+        double aride = Math.max(aridite(x0 + 8, z0 + 8), climatSec(t, x0 + 8, z0 + 8));
         double[] h = new double[18 * 18];
         for (int dz = -1; dz <= 16; dz++)
             for (int dx = -1; dx <= 16; dx++)
@@ -130,11 +144,15 @@ public class RocheFeature extends Feature<NoneFeatureConfiguration> {
                 // berges des cours d'eau (couche d'eau 1:30) : rives meubles, pas de roche à nu le long des ruisseaux
                 int e = ReliefFin.eau(x, z);
                 if (e >= 0 && (e & 15) >= 8 && (e & 15) <= 11 && cov != 60) {
-                    // en haute montagne (glacier, toundra, au-dessus des éboulis) : rives de gravier, pas d'herbe
-                    if (cov == 70 || cov == 100 || y >= Y_EBOULIS)
+                    boolean haut = cov == 70 || cov == 100 || y >= Y_EBOULIS;
+                    if (!haut) continue;
+                    // en haute montagne : un liseré de gravier au bord du torrent (1 à 2 blocs), puis le sol normal
+                    // (glacier, toundra, éboulis) ; des rives larges faisaient des bandes droites dans les alpages
+                    if ((e & 15) <= 9) {
                         pose |= remplacer(n, p, x, y, z, b > 0.2 ? Blocks.COBBLESTONE.defaultBlockState()
                                 : Blocks.GRAVEL.defaultBlockState());
-                    continue;
+                        continue;
+                    }
                 }
                 boolean paroi = pente >= PAROI + 0.15 * b;
                 if (paroi || cov == 60 || (cov == 70 && pente > 0.8)) {
@@ -145,6 +163,9 @@ public class RocheFeature extends Feature<NoneFeatureConfiguration> {
                 } else if (cov == 20) {                         // broussailles : terre sèche entre les touffes
                     // pays sec : presque plus d'herbe, le sol et la roche affleurent
                     if (b > -0.05 - 0.5 * aride) pose |= remplacer(n, p, x, y, z, sec(roche, b, x, z));
+                } else if (cov == 10 && aride >= 0.5) {         // bois clairs de pays sec : sol nu entre les arbres
+                    if (b > 0.45 - 0.9 * aride) pose |= remplacer(n, p, x, y, z, b > 0.1 ? Blocks.PODZOL.defaultBlockState()
+                            : sec(roche, b, x, z));
                 } else if (cov == 30 && aride > 0) {            // prairie de pays sec : steppe rase
                     if (b > 0.35 - 0.75 * aride) pose |= remplacer(n, p, x, y, z, sec(roche, b, x, z));
                 } else if (cov == 100) {                        // mousses et lichens (toundra)
