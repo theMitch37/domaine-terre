@@ -145,7 +145,9 @@ public class RocheFeature extends Feature<NoneFeatureConfiguration> {
                 int e = ReliefFin.eau(x, z);
                 if (e >= 0 && (e & 15) >= 8 && (e & 15) <= 11 && cov != 60) {
                     boolean haut = cov == 70 || cov == 100 || y >= Y_EBOULIS;
-                    if (!haut) continue;
+                    // pays sec : seul le bord immédiat de l'eau reste vert (ripisylve d'un bloc), le reste suit le sol
+                    if (!haut && (aride < 0.5 || (e & 15) == 8)) continue;
+                    if (!haut) e = -1;
                     // en haute montagne : un liseré de gravier au bord du torrent (1 à 2 blocs), puis le sol normal
                     // (glacier, toundra, éboulis) ; des rives larges faisaient des bandes droites dans les alpages
                     if ((e & 15) <= 9) {
