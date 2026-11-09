@@ -64,8 +64,17 @@ jobs:
           for i in $(seq 1 90); do
             sleep 10
             if grep -qE "Crash report saved|Mixin apply failed|MixinApplyError|InvalidInjectionException" /tmp/client.log; then break; fi
-            if grep -qE "joined the game|Loaded [0-9]+ advancements" /tmp/client.log; then sleep 150; break; fi
+            if grep -qE "Loaded [0-9]+ advancements" /tmp/client.log; then break; fi
           done
+          # écran « paramètres expérimentaux » (monde à réglages de génération propres) : Continuer
+          sleep 15
+          import -window root /tmp/essai/avertissement.png || true
+          xdotool mousemove 478 437 click 1 || true
+          for i in $(seq 1 60); do
+            sleep 10
+            if grep -qE "joined the game|Crash report saved" /tmp/client.log; then break; fi
+          done
+          sleep 120
           import -window root /tmp/essai/vue1.png || true
           xdotool mousemove 640 360 || true
           sleep 2
