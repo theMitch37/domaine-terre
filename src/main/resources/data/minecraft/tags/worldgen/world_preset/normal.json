@@ -1,6 +1,7 @@
 {
  "replace": false,
  "values": [
+  "domaine_terre:terre_30",
   "domaine_terre:terre_500",
   "domaine_terre:terre_1000"
  ]

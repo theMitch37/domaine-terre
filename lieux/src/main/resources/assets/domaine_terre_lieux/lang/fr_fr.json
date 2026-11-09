@@ -1,6 +1,6 @@
 {
  "biome.domaine_terre_lieux.grand_canyon": "Grand Canyon",
- "message.domaine_terre_lieux.echelle": "Lieux uniques : réglés pour l'échelle 1:250. Ce monde est en 1:%s, le Grand Canyon et les autres lieux peuvent y être moins beaux.",
+ "message.domaine_terre_lieux.echelle": "Lieux uniques : réglés pour l'échelle 1:250. Ce monde est en 1:%s, les lieux y sont moins beaux, et ne sont pas posés du tout en 1:30 (le vrai relief à 30 m en tient lieu).",
  "biome.domaine_terre_lieux.verdon": "Gorges du Verdon",
  "biome.domaine_terre_lieux.etretat": "Falaises d'Étretat",
  "biome.domaine_terre_lieux.moher": "Falaises de Moher",

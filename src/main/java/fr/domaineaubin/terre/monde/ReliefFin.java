@@ -12,6 +12,7 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.server.ServerLifecycleHooks;
 
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -34,31 +35,41 @@ import java.util.concurrent.TimeUnit;
 import java.util.zip.Inflater;
 
 /**
- * Relief fin (chantier du 08/11/2026) : le vrai relief à un point par bloc (Copernicus DEM GLO-90 ramené à 250 m,
- * outils/relief_fin.py), par paquets de 4 x 4 régions de 512 blocs (relief_<bx>_<bz>.bin).
- *
- * Les paquets sont cherchés dans <jeu>/domaine_terre/relief/ (cache, et packs hors ligne posés à la main), sinon
- * téléchargés (une seule fois, gardés dans ce dossier). Sans paquet (hors ligne, serveur injoignable) : NaN, le
+ * Relief fin (chantier du 08/11/2026) : le vrai relief à un point par bloc, téléchargé pendant la génération.
+ * <ul>
+ * <li>1:250 : Copernicus DEM GLO-90 ramené à 250 m (outils/relief_fin.py), paquets v1 de 4 x 4 régions de 512 blocs
+ * (relief_&lt;bx&gt;_&lt;bz&gt;.bin, releases v1-z&lt;bz&gt;), dossier &lt;jeu&gt;/domaine_terre/relief/.</li>
+ * <li>1:30 (09/11/2026) : Copernicus DEM GLO-30 à 30 m (relief30.py du dépôt relief), paquets v2 de 16 x 16 régions
+ * (relief30_&lt;bx&gt;_&lt;bz&gt;.bin, releases v30-z&lt;bz&gt;), dossier &lt;jeu&gt;/domaine_terre/relief30/. Là où ils
+ * manquent encore, le relief à 250 m est interpolé entre ses points.</li>
+ * <li>1:500 et 1:1000 : le relief à 250 m, interpolé à la position réelle de chaque bloc.</li>
+ * </ul>
+ * Les paquets sont cherchés dans leur dossier (cache, et packs hors ligne posés à la main), sinon téléchargés (une
+ * seule fois, gardés). Une région n'est décodée qu'au besoin. Sans paquet (hors ligne, serveur injoignable) : NaN, le
  * terrain reprend la génération d'avant (carte 3') et un message prévient les joueurs.
- * Réglages : config/domaine_terre_relief.json {"actif": true, "url": "...{bx}...{bz}...", "detail": 0.25}.
+ * Réglages : config/domaine_terre_relief.json {"actif", "url", "detail", "url_30", "detail_30"}.
  */
 @Mod.EventBusSubscriber(modid = DomaineTerre.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class ReliefFin {
     static final int T = 512, Q = 5;
     static final short VIDE = Short.MIN_VALUE;
     private static final short[] SANS = new short[0];          // paquet ou région sans terre
-    private static final int MAX_REGIONS = 96;                  // ~48 Mo en mémoire
 
     private static volatile boolean actif = true;
-    private static volatile String url =
-            "https://github.com/theMitch37/domaine-terre-relief/releases/download/v1-z{bz}/relief_{bx}_{bz}.bin";
-    private static volatile double detail = 0.25;
+    private static volatile double detail = 0.25, detail30 = 1.0;
     private static volatile boolean charge = false;
+    private static volatile boolean manque = false, prevenu = false;
 
-    private static final Map<Long, short[]> regions = new LinkedHashMap<>(128, 0.75f, true);
-    private static final Map<Long, Future<?>> enCours = new ConcurrentHashMap<>();
-    private static final java.util.Set<Long> mers = ConcurrentHashMap.newKeySet();
-    private static final Map<Long, Long> echecs = new ConcurrentHashMap<>();       // paquet -> instant de l'échec
+    private static final String URL_V1 =
+            "https://github.com/theMitch37/domaine-terre-relief/releases/download/v1-z{bz}/relief_{bx}_{bz}.bin";
+    private static final String URL_V30 =
+            "https://github.com/theMitch37/domaine-terre-relief/releases/download/v30-z{bz}/relief30_{bx}_{bz}.bin";
+
+    /** Relief à 250 m (un point par bloc en 1:250). */
+    private static final Jeu V1 = new Jeu("relief", "relief_", 250, 4, URL_V1, 96, 45, 60);
+    /** Relief à 30 m (un point par bloc en 1:30). */
+    private static final Jeu V30 = new Jeu("relief30", "relief30_", 30, 16, URL_V30, 128, 300, 90);
+
     private static final ExecutorService telechargeur = Executors.newFixedThreadPool(2, r -> {
         Thread t = new Thread(r, "Domaine Terre - relief fin");
         t.setDaemon(true);
@@ -66,151 +77,238 @@ public final class ReliefFin {
     });
     private static final HttpClient http = HttpClient.newBuilder()
             .followRedirects(HttpClient.Redirect.NORMAL).connectTimeout(Duration.ofSeconds(10)).build();
-    private static volatile boolean manque = false, prevenu = false;
 
     private ReliefFin() {
     }
 
-    /** Part du détail fin gardée (le mod exagère les hauteurs ×6 à ×10 : tout le détail ferait des murs). */
+    /** Part du détail fin gardée : 0,25 en 1:250 (hauteurs exagérées ×6 à ×10), tout en 1:30 (vraies proportions). */
     public static double detail() {
         reglages();
-        return detail;
+        return Terrain.echelle() < 250 ? detail30 : detail;
     }
 
-    /** Altitude réelle (m) au bloc (x, z), ou NaN (pas de relief fin : mer, ou paquet indisponible). */
+    /** Altitude réelle (m) au bloc (x, z) du monde chargé, ou NaN (pas de relief fin : mer, ou paquet indisponible). */
     public static double altitude(int x, int z) {
         reglages();
         if (!actif) return Double.NaN;
-        int tx = x >> 9, tz = z >> 9;
-        short[] r = region(tx, tz);
-        if (r.length == 0) return Double.NaN;
-        short v = r[(z & 511) * T + (x & 511)];
-        return v == VIDE ? Double.NaN : v * (double) Q;
+        int e = Terrain.echelle();
+        if (e == V1.echelle) return V1.valeur(x, z);
+        if (e == V30.echelle) {
+            double a = V30.valeur(x, z);
+            if (!Double.isNaN(a)) return a;
+        }
+        return interpole(V1, Terrain.lon(x + 0.5), Terrain.lat(z + 0.5));
+    }
+
+    /** Relief d'un jeu de données à une position quelconque : bilinéaire entre les centres de ses blocs. */
+    private static double interpole(Jeu j, double lon, double lat) {
+        double gx = lon * j.bpd - 0.5, gz = -lat * j.bpd - 0.5;
+        int ix = (int) Math.floor(gx), iz = (int) Math.floor(gz);
+        double fx = gx - ix, fz = gz - iz;
+        double a = j.valeur(ix, iz), b = j.valeur(ix + 1, iz), c = j.valeur(ix, iz + 1), d = j.valeur(ix + 1, iz + 1);
+        if (Double.isNaN(a) || Double.isNaN(b) || Double.isNaN(c) || Double.isNaN(d)) {
+            // près de la mer : le point le plus proche (pas de moyenne avec le vide)
+            return j.valeur(fx < 0.5 ? ix : ix + 1, fz < 0.5 ? iz : iz + 1);
+        }
+        return (a * (1 - fx) + b * fx) * (1 - fz) + (c * (1 - fx) + d * fx) * fz;
     }
 
     private static long cle(int a, int b) {
         return ((long) a << 32) ^ (b & 0xFFFFFFFFL);
     }
 
-    private static short[] region(int tx, int tz) {
-        long k = cle(tx, tz);
-        synchronized (regions) {
-            short[] r = regions.get(k);
-            if (r != null) return r;
-        }
-        int bx = tx >> 2, bz = tz >> 2;
-        Map<Integer, short[]> paquet = paquet(bx, bz);
-        short[] r = SANS;
-        synchronized (regions) {
-            for (var e : paquet.entrySet()) {
-                int i = e.getKey();
-                regions.put(cle((bx << 2) + (i & 3), (bz << 2) + (i >> 2)), e.getValue());
-            }
-            if (paquet.isEmpty()) {
-                for (int i = 0; i < 16; i++) regions.putIfAbsent(cle((bx << 2) + (i & 3), (bz << 2) + (i >> 2)), SANS);
-            }
-            r = regions.getOrDefault(k, SANS);
-            if (paquet.containsKey(-1)) {                      // indisponible : ne pas garder, on réessaiera plus tard
-                for (int i = 0; i < 16; i++) regions.remove(cle((bx << 2) + (i & 3), (bz << 2) + (i >> 2)));
-                r = SANS;
-            }
-            while (regions.size() > MAX_REGIONS) regions.remove(regions.keySet().iterator().next());
-        }
-        return r;
+    /** Table d'un paquet : où trouver chacune de ses régions dans le fichier. */
+    private record Paquet(Path fichier, int[] decalage, int[] longueur) {
     }
 
-    private static Path dossier() {
-        return FMLPaths.GAMEDIR.get().resolve("domaine_terre").resolve("relief");
-    }
+    private static final Paquet VIDE_PAQUET = new Paquet(null, new int[0], new int[0]);   // pas de terre
+    private static final Paquet ABSENT = new Paquet(null, null, null);                    // pas encore là
 
-    /** Régions d'un paquet (index 0..15 -> altitudes / 5 m) ; {-1: ...} si indisponible pour l'instant. */
-    private static Map<Integer, short[]> paquet(int bx, int bz) {
-        Path f = dossier().resolve("relief_" + bx + "_" + bz + ".bin");
-        Path vide = dossier().resolve("relief_" + bx + "_" + bz + ".vide");
-        if (Files.exists(vide) || mers.contains(cle(bx, bz))) return Map.of();
-        if (!Files.exists(f)) {
-            long k = cle(bx, bz);
-            Long e = echecs.get(k);
-            if (e != null && System.currentTimeMillis() - e < 300_000) return indisponible();
-            Future<?> tache = enCours.computeIfAbsent(k, kk -> telechargeur.submit(() -> telecharger(bx, bz, f, vide)));
-            try {
-                tache.get(60, TimeUnit.SECONDS);
-            } catch (Exception ex) {
-                DomaineTerre.LOGGER.warn("Relief fin : paquet {} {} pas encore là ({})", bx, bz, ex.toString());
-            } finally {
-                enCours.remove(k, tache);
-            }
-            if (Files.exists(vide) || mers.contains(k)) return Map.of();
-            if (!Files.exists(f)) {
-                echecs.put(k, System.currentTimeMillis());
-                manque = true;
-                return indisponible();
-            }
+    /** Un jeu de données (une résolution) : ses paquets, leur téléchargement et le cache de régions décodées. */
+    private static final class Jeu {
+        final String dossier, prefixe;
+        final int echelle, n, decalN, maxRegions, delaiTelechargement, attente;
+        final double bpd;
+        volatile String url;
+        final Map<Long, short[]> regions = new LinkedHashMap<>(256, 0.75f, true);
+        final Map<Long, Paquet> paquets = new ConcurrentHashMap<>();
+        final Map<Long, Future<?>> enCours = new ConcurrentHashMap<>();
+        final java.util.Set<Long> mers = ConcurrentHashMap.newKeySet();
+        final Map<Long, Long> echecs = new ConcurrentHashMap<>();       // paquet -> instant de l'échec
+
+        Jeu(String dossier, String prefixe, int echelle, int n, String url, int maxRegions, int delaiTelechargement,
+            int attente) {
+            this.dossier = dossier;
+            this.prefixe = prefixe;
+            this.echelle = echelle;
+            this.bpd = 111.32 * 1000.0 / echelle;
+            this.n = n;
+            this.decalN = Integer.numberOfTrailingZeros(n);
+            this.url = url;
+            this.maxRegions = maxRegions;
+            this.delaiTelechargement = delaiTelechargement;
+            this.attente = attente;
         }
-        try {
-            return lire(Files.readAllBytes(f));
-        } catch (Exception ex) {
-            DomaineTerre.LOGGER.error("Relief fin : {} illisible, supprimé", f, ex);
+
+        Path dossier() {
+            return FMLPaths.GAMEDIR.get().resolve("domaine_terre").resolve(dossier);
+        }
+
+        double valeur(int x, int z) {
+            short[] r = region(x >> 9, z >> 9);
+            if (r.length == 0) return Double.NaN;
+            short v = r[(z & 511) * T + (x & 511)];
+            return v == VIDE ? Double.NaN : v * (double) Q;
+        }
+
+        short[] region(int tx, int tz) {
+            long k = cle(tx, tz);
+            synchronized (regions) {
+                short[] r = regions.get(k);
+                if (r != null) return r;
+            }
+            Paquet p = paquet(tx >> decalN, tz >> decalN);
+            if (p == ABSENT) return SANS;                     // indisponible : pas gardé, on réessaiera plus tard
+            short[] r = SANS;
+            if (p != VIDE_PAQUET) {
+                int i = (tx & (n - 1)) + n * (tz & (n - 1));
+                if (p.longueur()[i] > 0) {
+                    try {
+                        r = lireRegion(p.fichier(), p.decalage()[i], p.longueur()[i]);
+                    } catch (Exception ex) {
+                        DomaineTerre.LOGGER.error("Relief fin : région {} {} illisible dans {}", tx, tz, p.fichier(), ex);
+                        oublier(tx >> decalN, tz >> decalN, p.fichier());
+                        return SANS;
+                    }
+                }
+            }
+            synchronized (regions) {
+                regions.put(k, r);
+                while (regions.size() > maxRegions) regions.remove(regions.keySet().iterator().next());
+            }
+            return r;
+        }
+
+        private void oublier(int bx, int bz, Path f) {
+            paquets.remove(cle(bx, bz));
             try {
                 Files.deleteIfExists(f);
             } catch (IOException ignore) {
             }
-            return indisponible();
         }
-    }
 
-    private static Map<Integer, short[]> indisponible() {
-        return Map.of(-1, SANS);
-    }
-
-    private static void telecharger(int bx, int bz, Path f, Path vide) {
-        String u = url.replace("{bx}", Integer.toString(bx)).replace("{bz}", Integer.toString(bz));
-        try {
-            Files.createDirectories(f.getParent());
-            HttpRequest req = HttpRequest.newBuilder(URI.create(u)).timeout(Duration.ofSeconds(45))
-                    .header("User-Agent", "DomaineTerre").GET().build();
-            HttpResponse<byte[]> rep = http.send(req, HttpResponse.BodyHandlers.ofByteArray());
-            if (rep.statusCode() == 404) {                    // pas de paquet : rien que de la mer (retenu le temps de la
-                mers.add(cle(bx, bz));                         // session seulement : un dépôt absent répond aussi 404)
-                return;
+        /** Table du paquet (bx, bz), VIDE_PAQUET s'il n'a pas de terre, ABSENT s'il n'est pas disponible pour l'instant. */
+        Paquet paquet(int bx, int bz) {
+            long k = cle(bx, bz);
+            Paquet p = paquets.get(k);
+            if (p != null) return p;
+            Path f = dossier().resolve(prefixe + bx + "_" + bz + ".bin");
+            Path vide = dossier().resolve(prefixe + bx + "_" + bz + ".vide");
+            if (Files.exists(vide) || mers.contains(k)) return garder(k, VIDE_PAQUET);
+            if (!Files.exists(f)) {
+                Long e = echecs.get(k);
+                if (e != null && System.currentTimeMillis() - e < 300_000) return ABSENT;
+                Future<?> tache = enCours.computeIfAbsent(k, kk -> telechargeur.submit(() -> telecharger(bx, bz, f)));
+                try {
+                    tache.get(attente, TimeUnit.SECONDS);
+                    enCours.remove(k, tache);
+                } catch (Exception ex) {
+                    // le téléchargement continue en arrière-plan ; le paquet servira dès qu'il sera là
+                    DomaineTerre.LOGGER.warn("Relief fin : paquet {} {} {} pas encore là ({})", dossier, bx, bz, ex.toString());
+                    if (tache.isDone()) enCours.remove(k, tache);
+                }
+                if (mers.contains(k)) return garder(k, VIDE_PAQUET);
+                if (!Files.exists(f)) {
+                    echecs.put(k, System.currentTimeMillis());
+                    manque = true;
+                    return ABSENT;
+                }
             }
-            if (rep.statusCode() != 200) {
-                DomaineTerre.LOGGER.warn("Relief fin : {} -> {}", u, rep.statusCode());
-                return;
+            try {
+                return garder(k, table(f));
+            } catch (Exception ex) {
+                DomaineTerre.LOGGER.error("Relief fin : {} illisible, supprimé", f, ex);
+                oublier(bx, bz, f);
+                return ABSENT;
             }
-            byte[] b = rep.body();
-            lire(b);                                           // vérifie avant de garder
-            Path tmp = f.resolveSibling(f.getFileName() + ".part");
-            Files.write(tmp, b);
-            Files.move(tmp, f, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
-            DomaineTerre.LOGGER.info("Relief fin : paquet {} {} téléchargé ({} Ko)", bx, bz, b.length / 1024);
-        } catch (Exception ex) {
-            DomaineTerre.LOGGER.warn("Relief fin : téléchargement de {} impossible ({})", u, ex.toString());
         }
-    }
 
-    static Map<Integer, short[]> lire(byte[] b) throws Exception {
-        ByteBuffer bb = ByteBuffer.wrap(b).order(ByteOrder.LITTLE_ENDIAN);
-        if (b.length < 16 + 128 || b[0] != 'R' || b[1] != 'E' || b[2] != 'L' || b[3] != 'B')
-            throw new IOException("pas un paquet de relief");
-        bb.position(4);
-        int version = bb.getInt();
-        if (version != 1) throw new IOException("version " + version);
-        bb.getInt();
-        bb.getInt();
-        Map<Integer, short[]> m = new LinkedHashMap<>();
-        for (int i = 0; i < 16; i++) {
-            int o = bb.getInt(16 + 8 * i), l = bb.getInt(20 + 8 * i);
-            if (l == 0) continue;
-            m.put(i, region(b, o, l));
+        private Paquet garder(long k, Paquet p) {
+            paquets.put(k, p);
+            return p;
         }
-        return m;
+
+        /** Lit l'en-tête d'un paquet (v1 : 4 x 4 régions ; v2 : n x n). */
+        Paquet table(Path f) throws IOException {
+            try (RandomAccessFile raf = new RandomAccessFile(f.toFile(), "r")) {
+                byte[] t = new byte[24];
+                raf.readFully(t, 0, 16);
+                ByteBuffer bb = ByteBuffer.wrap(t).order(ByteOrder.LITTLE_ENDIAN);
+                if (t[0] != 'R' || t[1] != 'E' || t[2] != 'L' || t[3] != 'B') throw new IOException("pas un paquet de relief");
+                int version = bb.getInt(4), debut, cote;
+                if (version == 1) {
+                    cote = 4;
+                    debut = 16;
+                } else if (version == 2) {
+                    raf.readFully(t, 16, 8);
+                    cote = bb.getInt(16);
+                    debut = 24;
+                } else {
+                    throw new IOException("version " + version);
+                }
+                if (cote != n) throw new IOException(cote + " régions par côté au lieu de " + n);
+                byte[] tab = new byte[n * n * 8];
+                raf.seek(debut);
+                raf.readFully(tab);
+                ByteBuffer tb = ByteBuffer.wrap(tab).order(ByteOrder.LITTLE_ENDIAN);
+                int[] dec = new int[n * n], lon = new int[n * n];
+                long taille = raf.length();
+                for (int i = 0; i < n * n; i++) {
+                    dec[i] = tb.getInt();
+                    lon[i] = tb.getInt();
+                    if (lon[i] > 0 && (dec[i] < debut || (long) dec[i] + lon[i] > taille)) throw new IOException("paquet tronqué");
+                }
+                return new Paquet(f, dec, lon);
+            }
+        }
+
+        private void telecharger(int bx, int bz, Path f) {
+            String u = url.replace("{bx}", Integer.toString(bx)).replace("{bz}", Integer.toString(bz));
+            try {
+                Files.createDirectories(f.getParent());
+                HttpRequest req = HttpRequest.newBuilder(URI.create(u)).timeout(Duration.ofSeconds(delaiTelechargement))
+                        .header("User-Agent", "DomaineTerre").GET().build();
+                Path tmp = f.resolveSibling(f.getFileName() + ".part");
+                HttpResponse<Path> rep = http.send(req, HttpResponse.BodyHandlers.ofFile(tmp));
+                if (rep.statusCode() == 404) {                    // pas de paquet : rien que de la mer (retenu le temps
+                    Files.deleteIfExists(tmp);                     // de la session : une release absente répond aussi 404)
+                    mers.add(cle(bx, bz));
+                    return;
+                }
+                if (rep.statusCode() != 200) {
+                    Files.deleteIfExists(tmp);
+                    DomaineTerre.LOGGER.warn("Relief fin : {} -> {}", u, rep.statusCode());
+                    return;
+                }
+                table(tmp);                                        // vérifie avant de garder
+                long taille = Files.size(tmp);
+                Files.move(tmp, f, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
+                DomaineTerre.LOGGER.info("Relief fin : paquet {} {} {} téléchargé ({} Ko)", dossier, bx, bz, taille / 1024);
+            } catch (Exception ex) {
+                DomaineTerre.LOGGER.warn("Relief fin : téléchargement de {} impossible ({})", u, ex.toString());
+            }
+        }
     }
 
     /** Une région : zlib(512 x 512 int16), écart avec le voisin de gauche, VIDE = pas de donnée. */
-    private static short[] region(byte[] b, int o, int l) throws Exception {
+    private static short[] lireRegion(Path f, int o, int l) throws Exception {
+        byte[] b = new byte[l];
+        try (RandomAccessFile raf = new RandomAccessFile(f.toFile(), "r")) {
+            raf.seek(o);
+            raf.readFully(b);
+        }
         Inflater inf = new Inflater();
-        inf.setInput(b, o, l);
+        inf.setInput(b, 0, l);
         byte[] brut = new byte[T * T * 2];
         int n = 0;
         while (n < brut.length && !inf.finished()) {
@@ -244,18 +342,22 @@ public final class ReliefFin {
                     try (Reader r = Files.newBufferedReader(cfg, StandardCharsets.UTF_8)) {
                         JsonObject o = JsonParser.parseReader(r).getAsJsonObject();
                         if (o.has("actif")) actif = o.get("actif").getAsBoolean();
-                        if (o.has("url")) url = o.get("url").getAsString();
+                        if (o.has("url")) V1.url = o.get("url").getAsString();
                         if (o.has("detail")) detail = o.get("detail").getAsDouble();
+                        if (o.has("url_30")) V30.url = o.get("url_30").getAsString();
+                        if (o.has("detail_30")) detail30 = o.get("detail_30").getAsDouble();
                     }
                 } else {
                     Files.createDirectories(cfg.getParent());
-                    Files.writeString(cfg, "{\n  \"actif\": true,\n  \"url\": \"" + url + "\",\n  \"detail\": " + detail
-                            + "\n}\n", StandardCharsets.UTF_8);
+                    Files.writeString(cfg, "{\n  \"actif\": true,\n  \"url\": \"" + V1.url + "\",\n  \"detail\": " + detail
+                            + ",\n  \"url_30\": \"" + V30.url + "\",\n  \"detail_30\": " + detail30 + "\n}\n",
+                            StandardCharsets.UTF_8);
                 }
             } catch (Exception e) {
                 DomaineTerre.LOGGER.error("Relief fin : {} illisible", cfg, e);
             }
-            DomaineTerre.LOGGER.info("Relief fin : {} (détail {}, dossier {})", actif ? "actif" : "désactivé", detail, dossier());
+            DomaineTerre.LOGGER.info("Relief fin : {} (détail {} en 1:250, {} en 1:30, dossier {})", actif ? "actif" : "désactivé",
+                    detail, detail30, V1.dossier().getParent());
             charge = true;
         }
     }

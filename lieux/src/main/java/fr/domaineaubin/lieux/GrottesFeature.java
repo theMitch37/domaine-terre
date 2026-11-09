@@ -76,6 +76,7 @@ public class GrottesFeature extends Feature<NoneFeatureConfiguration> {
 
     /** Colonne dans l'emprise d'une grotte célèbre (son chunk ou un chunk voisin) ? */
     public static boolean dansGrotte(int x, int z) {
+        if (fr.domaineaubin.terre.monde.Terrain.echelle() != GrandCanyon.ECHELLE_REFERENCE) return false;
         Long2ObjectOpenHashMap<int[]> b = blocs();
         int cx = x >> 4, cz = z >> 4;
         for (int dx = -1; dx <= 1; dx++) {
@@ -88,6 +89,8 @@ public class GrottesFeature extends Feature<NoneFeatureConfiguration> {
 
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> ctx) {
+        // grottes placées en blocs du 1:250 : pas dans un monde à une autre échelle
+        if (fr.domaineaubin.terre.monde.Terrain.echelle() != GrandCanyon.ECHELLE_REFERENCE) return false;
         WorldGenLevel niveau = ctx.level();
         int cx = ctx.origin().getX() >> 4, cz = ctx.origin().getZ() >> 4;
         int[] l = blocs().get(cle(cx, cz));

@@ -8,15 +8,14 @@ import net.minecraft.world.level.levelgen.synth.ImprovedNoise;
 
 /**
  * Transforme la carte de la Terre en terrain Minecraft.
- * Prototype : échelle 1:1000 fixe (1 bloc ≈ 1 km), x = longitude, z = -latitude.
+ * x = longitude, z = -latitude ; échelle fixée au démarrage du monde (1:250 par défaut, 1:30, 1:500, 1:1000).
  */
 public final class Terrain {
-    /** 1:1000 : un degré de longitude ou de latitude = 111,32 blocs. */
     /** Blocs par degré : 1:1000 = 111,32 ; 1:500 = 222,64 ; 1:250 = 445,28 (défaut). Fixé au démarrage du monde. */
     public static volatile double BLOCS_PAR_DEGRE = 445.28;
     private static volatile int echelle = 250;
 
-    /** Active l'échelle du monde chargé (250, 500 ou 1000). */
+    /** Active l'échelle du monde chargé (30, 250, 500 ou 1000). */
     public static synchronized void activer(int nouvelle) {
         double bpd = 111.32 * 1000.0 / nouvelle;
         // on compare aussi les blocs par degré : l'échelle et BLOCS_PAR_DEGRE doivent toujours aller ensemble
@@ -99,7 +98,7 @@ public final class Terrain {
         double alt = altitudeReelle(x, z);
         double pente = sd >= 0 ? pente(x, z) : 0.0;
         Riviere r = sd >= 0 ? riviereBrute(x, z) : null;
-        Lacs.Proche lp = sd >= 0 && lacs != null ? lacs.proche(lon(x + 0.5), lat(z + 0.5)) : null;
+        Lacs.Proche lp = sd >= 0 && lacs != null ? lacProche(x, z) : null;
         int nivLac = lp == null ? SANS_LAC : (int) Math.min(niveauLac(lacs.altitude(lp.lac())), lacs.plafond(lp.lac()));
         // près d'un lac (et dedans), un cours d'eau prend au moins le niveau du lac : il y entre et en sort à niveau
         boolean presLac = lp != null && (lp.distance() > 0 || -lp.distance() <= BERGE);
@@ -166,6 +165,41 @@ public final class Terrain {
         return c;
     }
 
+    /** Blocs par case des cartes fines (côtes, lacs : une case = un bloc en 1:250). */
+    static double blocsParCase() {
+        return BLOCS_PAR_DEGRE / CotesFines.CASES_PAR_DEGRE;
+    }
+
+    /** Valeur d'une carte fine (en cases) interpolée entre les centres des cases, pour une colonne (1:30). */
+    private interface CarteCases {
+        double valeur(double lon, double lat);
+    }
+
+    private static double bilineaire(int x, int z, CarteCases c) {
+        double k = CotesFines.CASES_PAR_DEGRE;
+        double gx = lon(x + 0.5) * k - 0.5, gz = -lat(z + 0.5) * k - 0.5;
+        double ix = Math.floor(gx), iz = Math.floor(gz), fx = gx - ix, fz = gz - iz;
+        double a = c.valeur((ix + 0.5) / k, -(iz + 0.5) / k), b = c.valeur((ix + 1.5) / k, -(iz + 0.5) / k);
+        double cc = c.valeur((ix + 0.5) / k, -(iz + 1.5) / k), d = c.valeur((ix + 1.5) / k, -(iz + 1.5) / k);
+        return (a * (1 - fx) + b * fx) * (1 - fz) + (cc * (1 - fx) + d * fx) * fz;
+    }
+
+    /**
+     * Lac le plus proche, distance au rivage en blocs (cases × blocsParCase). En 1:30, une case fait ~8 blocs : la
+     * distance est interpolée entre les cases voisines du même lac (rivages arrondis, pas en escalier).
+     */
+    private Lacs.Proche lacProche(int x, int z) {
+        Lacs.Proche p = lacs.proche(lon(x + 0.5), lat(z + 0.5));
+        if (echelle >= 250) return p;
+        if (p == null) return null;
+        int lac = p.lac();
+        double d = bilineaire(x, z, (lo, la) -> {
+            Lacs.Proche q = lacs.proche(lo, la);
+            return q == null ? -Lacs.RAYON : q.lac() == lac ? q.distance() : Math.min(q.distance(), 0.0) - 1.0;
+        });
+        return new Lacs.Proche(lac, d * blocsParCase());
+    }
+
     public static double lon(double x) { return x / BLOCS_PAR_DEGRE; }
     public static double lat(double z) { return -z / BLOCS_PAR_DEGRE; }
     public static double x(double lon) { return lon * BLOCS_PAR_DEGRE; }
@@ -184,7 +218,7 @@ public final class Terrain {
         if (cotes == null) {
             return grossiere + bruitCote.noise(x / 37.0, 0, z / 37.0) * 0.8 + bruitCote.noise(x / 11.0, 10, z / 11.0) * 0.35;
         }
-        double fine = cotes.distance(lon(x + 0.5), lat(z + 0.5));
+        double fine = echelle >= 250 ? cotes.distance(lon(x + 0.5), lat(z + 0.5)) : bilineaire(x, z, cotes::distance);
         if (Math.abs(fine) < CotesFines.RAYON) return fine * MIN_PAR_CASE;
         double bord = CotesFines.RAYON * MIN_PAR_CASE;
         return fine > 0 ? Math.max(grossiere, bord) : Math.min(grossiere, -bord);
@@ -375,6 +409,8 @@ public final class Terrain {
     }
 
     public static double demiLargeur(int classe) {
+        // 1:30 (09/11/2026) : plus proches des vraies largeurs (fleuve ~720 m, rivière ~360 m, ruisseau ~180 m)
+        if (echelle < 250) return switch (classe) { case 1 -> 12.0; case 2 -> 6.0; default -> 3.0; };
         return switch (classe) { case 1 -> 30.0; case 2 -> 12.0; default -> 4.5; };
     }
 
@@ -448,10 +484,18 @@ public final class Terrain {
                 double base = blocsDepuisAltitude(Math.max(alt, 1.0));
                 hTerre = base + (blocsDepuisAltitude(Math.max(af, 1.0)) - base) * ReliefFin.detail();
             }
-            return Mth.lerp(lisse(Mth.clamp(sd / 2.0, 0.0, 1.0)), NIVEAU_MER + 0.6, Math.max(hTerre, NIVEAU_MER + 0.6));
+            return Mth.lerp(lisse(Mth.clamp(sd / transitionCote(), 0.0, 1.0)), NIVEAU_MER + 0.6, Math.max(hTerre, NIVEAU_MER + 0.6));
         }
         double hMer = alt < -9300 ? fosse(x, z, alt) : blocsDepuisAltitude(Math.min(alt, -1.0));
-        return Mth.lerp(lisse(Mth.clamp(-sd / 2.0, 0.0, 1.0)), NIVEAU_MER - 1.0, Math.min(hMer, NIVEAU_MER - 1.0));
+        return Mth.lerp(lisse(Mth.clamp(-sd / transitionCote(), 0.0, 1.0)), NIVEAU_MER - 1.0, Math.min(hMer, NIVEAU_MER - 1.0));
+    }
+
+    /**
+     * Largeur (minutes d'arc) du passage du terrain au niveau de la mer le long des côtes : 2' (~15 blocs en 1:250).
+     * En 1:30, 6 blocs : le vrai relief garde ses falaises.
+     */
+    private static double transitionCote() {
+        return echelle >= 250 ? 2.0 : 6.0 * 60.0 / BLOCS_PAR_DEGRE;
     }
 
     /**

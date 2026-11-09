@@ -22,15 +22,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(targets = "net.minecraft.world.level.levelgen.Aquifer$NoiseBasedAquifer")
 public abstract class AquifereMerMixin {
 
-    /** 16 blocs (à 1:250) en minutes d'arc. */
-    private static final double RIVAGE = 16 * 60.0 / 445.28;
 
     @Shadow @Final private Aquifer.FluidPicker globalFluidPicker;
 
     @Inject(method = "computeFluid", at = @At("HEAD"), cancellable = true)
     private void domaineTerre$merAuNiveau(int x, int y, int z, CallbackInfoReturnable<Aquifer.FluidStatus> retour) {
         Terrain t = Terrain.get();
-        if ((t.enMer(x, z) || t.distanceCote(x, z) < RIVAGE) && t.niveauLac(x, z) == Terrain.SANS_LAC && !t.sansAquifere(x, z)) {
+        // 16 blocs en minutes d'arc (à l'échelle du monde chargé)
+        if ((t.enMer(x, z) || t.distanceCote(x, z) < 16 * 60.0 / Terrain.BLOCS_PAR_DEGRE) && t.niveauLac(x, z) == Terrain.SANS_LAC && !t.sansAquifere(x, z)) {
             retour.setReturnValue(globalFluidPicker.computeFluid(x, y, z));
         }
     }

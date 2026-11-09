@@ -12,6 +12,10 @@ on:
         description: "Lieux à générer, séparés par des virgules (vide = tous)"
         required: false
         default: ""
+      echelle:
+        description: "Échelle du monde : 250 (défaut, zones.json) ou 30 (zones30.json, résultats sur la branche banc-130)"
+        required: false
+        default: "250"
 
 permissions:
   contents: write
@@ -75,7 +79,12 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p /tmp/banc
-          python outils/banc/serveur.py /tmp/serveur outils/banc/zones.json /tmp/banc ${{ github.event.inputs.lieux }} 2>&1 | tee /tmp/banc_script.log
+          Z=outils/banc/zones.json
+          if [ "${{ github.event.inputs.echelle }}" = "30" ]; then
+            Z=outils/banc/zones30.json
+            export BANC_TYPE=domaine_terre:terre_30
+          fi
+          python outils/banc/serveur.py /tmp/serveur $Z /tmp/banc ${{ github.event.inputs.lieux }} 2>&1 | tee /tmp/banc_script.log
 
       - name: Résultats sur la branche banc
         if: always()
@@ -90,5 +99,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898+github-actions[bot]@users.noreply.github.com"
           git add -A
+          B=banc
+          [ "${{ github.event.inputs.echelle }}" = "30" ] && B=banc-130
           git commit -q -m "Banc d'essai de $GITHUB_REF_NAME @ ${GITHUB_SHA::7}"
-          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" banc
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:$B
