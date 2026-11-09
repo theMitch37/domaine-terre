@@ -4,6 +4,9 @@
 name: Essai du client
 
 on:
+  push:
+    branches: [echelle-130]
+    paths: [.github/workflows/client.yml, src/main/java/fr/domaineaubin/terre/client/**, src/main/java/fr/domaineaubin/terre/mixin/client/**]
   workflow_dispatch:
 
 permissions:
