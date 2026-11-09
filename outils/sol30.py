@@ -236,7 +236,7 @@ def ouvrir(urls_noms, dossier):
 
 # ---------------------------------------------------------------- ruisseaux (09/11/2026)
 
-G = 8                       # blocs par case du calcul d'écoulement
+G = 4                       # blocs par case du calcul d'écoulement (tracés plus souples qu'à 8)
 MR = 2048                   # marge (blocs) autour du paquet : bassins versants qui débordent
 A_RUISSEAU = 2.0e6          # m² de bassin versant pour qu'un ruisseau commence
 A_LARGE = 2.0e7             # m² au-delà desquels il fait 2 à 3 blocs de large

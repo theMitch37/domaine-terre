@@ -99,6 +99,9 @@ public class RocheFeature extends Feature<NoneFeatureConfiguration> {
                 if (y <= Terrain.NIVEAU_MER) continue;
                 if (!n.getBlockState(p.set(x, y, z)).getFluidState().isEmpty()) continue;
                 double b = BRUIT.noise(x / 9.0, y / 7.0, z / 9.0);
+                // berges des cours d'eau (couche d'eau 1:30) : rives meubles, pas de roche à nu le long des ruisseaux
+                int e = ReliefFin.eau(x, z);
+                if (e >= 0 && (e & 15) >= 8 && (e & 15) <= 11 && cov != 60) continue;
                 boolean paroi = pente >= PAROI + 0.15 * b;
                 if (paroi || cov == 60 || (cov == 70 && pente > 0.8)) {
                     // roche à nu (ou sol nu) : la vraie roche ; sur le plat, les roches meubles donnent sable et gravier
