@@ -24,6 +24,11 @@ public abstract class StructuresMixin {
     @Inject(method = "findValidGenerationPoint", at = @At("HEAD"), cancellable = true)
     private void domaineTerre$sansStructuresVanilla(Structure.GenerationContext contexte,
                                                     CallbackInfoReturnable<Optional<Structure.GenerationStub>> retour) {
+        // monde 1:30 (09/11/2026) : aucune structure, de tous les mods, le temps des tests (BacASable)
+        if (fr.domaineaubin.terre.monde.BacASable.actif()) {
+            retour.setReturnValue(Optional.empty());
+            return;
+        }
         ResourceLocation cle = contexte.registryAccess().registryOrThrow(Registries.STRUCTURE).getKey((Structure) (Object) this);
         if (cle != null && "minecraft".equals(cle.getNamespace()) && !GARDEES.contains(cle.getPath())) {
             retour.setReturnValue(Optional.empty());
