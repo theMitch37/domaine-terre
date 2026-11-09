@@ -85,6 +85,10 @@ minecraft {
         client {
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             property 'forge.enabledGameTestNamespaces', mod_id
+            // essai client (09/11/2026) : entre directement dans le monde « essai » (-Pessai_monde)
+            if (project.hasProperty('essai_monde')) {
+                args '--quickPlaySingleplayer', 'essai'
+            }
         }
 
         server {

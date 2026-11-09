@@ -6,7 +6,7 @@ name: Essai du client
 on:
   push:
     branches: [echelle-130]
-    paths: [.github/workflows/client.yml, src/main/java/fr/domaineaubin/terre/client/**, src/main/java/fr/domaineaubin/terre/mixin/client/**]
+    paths: [.github/workflows/client.yml, outils/rcon.py, src/main/java/fr/domaineaubin/terre/client/**, src/main/java/fr/domaineaubin/terre/mixin/client/**]
   workflow_dispatch:
 
 permissions:
@@ -15,7 +15,7 @@ permissions:
 jobs:
   client:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v5
@@ -23,30 +23,58 @@ jobs:
           distribution: temurin
           java-version: 17
       - uses: gradle/actions/setup-gradle@v3
-      - run: sudo apt-get update -q && sudo apt-get install -y -q xvfb mesa-utils libgl1-mesa-dri imagemagick x11-utils
+      - run: sudo apt-get update -q && sudo apt-get install -y -q xvfb mesa-utils libgl1-mesa-dri imagemagick x11-utils xdotool
+      - name: Monde d'essai 1:30 (serveur)
+        run: |
+          chmod +x gradlew
+          mkdir -p run
+          echo "eula=true" > run/eula.txt
+          printf 'online-mode=false\nlevel-name=essai\nlevel-type=domaine_terre\\:terre_30\nlevel-seed=20261025\nenable-rcon=true\nrcon.password=essai\nrcon.port=25575\nspawn-protection=0\ngamemode=creative\nforce-gamemode=true\n' > run/server.properties
+          (./gradlew runServer --no-daemon > /tmp/serveur.log 2>&1 &)
+          for i in $(seq 1 90); do sleep 10; grep -q "Done (" /tmp/serveur.log && break; done
+          # Lausanne, au bord du Léman (lat 46,52, lon 6,63), vue vers le lac
+          python outils/rcon.py 25575 essai "gamerule spawnRadius 0" "setworldspawn 24601 140 -172622" "forceload add 24400 -172800 24800 -172200" || true
+          sleep 120
+          python outils/rcon.py 25575 essai "save-all flush" "stop" || true
+          sleep 30
+          pkill -f java || true
+          ls run; mkdir -p run/saves && mv run/essai run/saves/essai
+          python3 - <<'PY'
+          import gzip, struct
+          # cheats permis dans le monde d'essai (allowCommands = 1) : on cherche l'octet dans level.dat
+          p = "run/saves/essai/level.dat"
+          d = bytearray(gzip.open(p).read())
+          k = d.find(b"allowCommands")
+          if k > 0:
+              d[k + len("allowCommands")] = 1
+              gzip.open(p, "wb").write(bytes(d))
+              print("allowCommands = 1")
+          PY
       - name: Client
         env:
           LIBGL_ALWAYS_SOFTWARE: "1"
         run: |
-          chmod +x gradlew
-          mkdir -p run
           echo "onboardAccessibility:false" > run/options.txt
           echo "skipMultiplayerWarning:true" >> run/options.txt
+          echo "renderDistance:8" >> run/options.txt
           Xvfb :99 -screen 0 1280x720x24 &
           export DISPLAY=:99
-          (./gradlew runClient -Pessai_client --no-daemon > /tmp/client.log 2>&1 &)
-          ok=0
-          for i in $(seq 1 120); do
-            sleep 10
-            if grep -qE "Sound engine started|Created: .*minecraft:textures/atlas/blocks" /tmp/client.log; then ok=1; fi
-            if grep -qE "Crash report saved|Mixin apply failed|MixinApplyError|InvalidInjectionException" /tmp/client.log; then break; fi
-            if [ $ok = 1 ] && grep -q "Sound engine started" /tmp/client.log; then sleep 40; break; fi
-          done
+          (./gradlew runClient -Pessai_client -Pessai_monde --no-daemon > /tmp/client.log 2>&1 &)
           mkdir -p /tmp/essai
-          import -window root /tmp/essai/menu.png || true
-          cp /tmp/client.log /tmp/essai/
+          for i in $(seq 1 90); do
+            sleep 10
+            if grep -qE "Crash report saved|Mixin apply failed|MixinApplyError|InvalidInjectionException" /tmp/client.log; then break; fi
+            if grep -qE "joined the game|Loaded [0-9]+ advancements" /tmp/client.log; then sleep 150; break; fi
+          done
+          import -window root /tmp/essai/vue1.png || true
+          xdotool mousemove 640 360 || true
+          sleep 2
+          xdotool mousemove_relative --sync 0 120 || true
+          sleep 20
+          import -window root /tmp/essai/vue2.png || true
+          cp /tmp/client.log /tmp/serveur.log /tmp/essai/
           cp -r run/crash-reports /tmp/essai/ 2>/dev/null || true
-          grep -nE "Eau opaque|domaine_terre|Mixin|ERROR|Exception|atlas/blocks|embeddium" /tmp/client.log | head -150 > /tmp/essai/extrait.txt || true
+          grep -nE "Eau opaque|domaine_terre|Mixin|ERROR|Exception|atlas/blocks|embeddium|Relief fin" /tmp/client.log | head -200 > /tmp/essai/extrait.txt || true
           pkill -f java || true
       - name: Rangement
         if: always()
