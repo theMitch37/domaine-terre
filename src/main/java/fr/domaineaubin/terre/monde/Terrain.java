@@ -140,8 +140,10 @@ public final class Terrain {
                 } else {
                     int dd = -d;
                     eauRiv = niv;                                // pas d'aquifère au hasard près de l'eau
-                    if (dd <= 4) bergeRiv = niv;                 // la berge tient l'eau
-                    if (dd <= 3) h = Math.max(h, niv + 0.6);
+                    if (dd <= 4 && niv + 0.6 - h < 2.0) bergeRiv = niv;     // la berge tient l'eau
+                    // la berge tient l'eau, mais ne monte jamais en muret : en montagne, l'eau la plus proche peut couler
+                    // bien plus haut sur la pente (torrent) ; on ne relève que de 2 blocs au plus
+                    if (dd <= 3 && niv + 0.6 - h < 2.0) h = Math.max(h, niv + 0.6);
                 }
             }
         }
