@@ -69,6 +69,24 @@ public final class ReliefFin {
     private static final Jeu V1 = new Jeu("relief", "relief_", 250, 4, URL_V1, 96, 45, 60);
     /** Relief à 30 m (un point par bloc en 1:30). */
     private static final Jeu V30 = new Jeu("relief30", "relief30_", 30, 16, URL_V30, 128, 300, 90);
+    /**
+     * Sol à 30 m (09/11/2026, outils/sol30.py) : roche × 256 + couverture du sol (ESA WorldCover), même format de
+     * paquets que le relief 1:30.
+     */
+    private static final Jeu SOL30 = new Jeu("sol30", "sol30_", 30, 16,
+            "https://github.com/theMitch37/domaine-terre-relief/releases/download/s30-z{bz}/sol30_{bx}_{bz}.bin", 128, 300, 90);
+
+    /**
+     * Sol du bloc (x, z) d'un monde 1:30 : roche × 256 + couverture (classes WorldCover : 10 arbres, 20 broussailles,
+     * 30 prairie, 40 cultures, 50 bâti, 60 sol nu, 70 neige et glace, 80 eau, 90 zone humide, 95 mangrove,
+     * 100 mousses et lichens) ; -1 sans donnée (autre échelle, paquet absent).
+     */
+    public static int sol(int x, int z) {
+        reglages();
+        if (!actif || Terrain.echelle() != SOL30.echelle) return -1;
+        int v = SOL30.brut(x, z);
+        return v == VIDE ? -1 : v & 0xFFFF;
+    }
 
     private static final ExecutorService telechargeur = Executors.newFixedThreadPool(2, r -> {
         Thread t = new Thread(r, "Domaine Terre - relief fin");
@@ -152,6 +170,13 @@ public final class ReliefFin {
 
         Path dossier() {
             return FMLPaths.GAMEDIR.get().resolve("domaine_terre").resolve(dossier);
+        }
+
+        /** Valeur brute du bloc, VIDE sans donnée. */
+        int brut(int x, int z) {
+            short[] r = region(x >> 9, z >> 9);
+            if (r.length == 0) return VIDE;
+            return r[(z & 511) * T + (x & 511)];
         }
 
         double valeur(int x, int z) {
@@ -385,8 +410,16 @@ public final class ReliefFin {
      */
     private static void prevoir(MinecraftServer s) {
         int e = Terrain.echelle();
-        Jeu j = e == V30.echelle ? V30 : e == V1.echelle ? V1 : null;
-        if (j == null || !actif) return;
+        if (!actif) return;
+        if (e == V30.echelle) {
+            prevoir(s, V30);
+            prevoir(s, SOL30);
+        } else if (e == V1.echelle) {
+            prevoir(s, V1);
+        }
+    }
+
+    private static void prevoir(MinecraftServer s, Jeu j) {
         int cote = T * j.n;
         for (var joueur : s.getPlayerList().getPlayers()) {
             if (joueur.level().dimension() != net.minecraft.world.level.Level.OVERWORLD) continue;

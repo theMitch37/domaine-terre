@@ -74,6 +74,13 @@ jobs:
             find /tmp/zones -name '*.bin' -exec cp {} domaine_terre/relief/ \;
           fi
           ls domaine_terre/relief | head
+          # sol 1:30 (09/11/2026) : paquets d'essai (branche sol-130), posés comme un pack hors ligne
+          rm -rf domaine_terre/sol30 && mkdir -p domaine_terre/sol30
+          if git -C $GITHUB_WORKSPACE fetch -q --depth 1 origin sol-130 2>/dev/null; then
+            mkdir -p /tmp/sol && git -C $GITHUB_WORKSPACE archive FETCH_HEAD | tar -x -C /tmp/sol
+            cp /tmp/sol/*.bin domaine_terre/sol30/ 2>/dev/null || true
+          fi
+          ls domaine_terre/sol30
 
       - name: Génération des lieux
         run: |
