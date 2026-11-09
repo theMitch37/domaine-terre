@@ -371,5 +371,45 @@ def main():
     print("\n".join(journal[:10]))
 
 
+def paquet_complet(bx, bz, sortie, publier=False):
+    """Un paquet entier (16 x 16 régions) : sol30_<bx>_<bz>.bin et eau30_<bx>_<bz>.bin, publiés si demandé."""
+    import subprocess
+    os.makedirs(sortie, exist_ok=True)
+    wc, dem_dir = "/tmp/worldcover", "/tmp/dem30"
+    os.makedirs(wc, exist_ok=True)
+    os.makedirs(dem_dir, exist_ok=True)
+    sol, eaux, journal = {}, {}, []
+    t0 = time.time()
+    for k in range(N * N):
+        tx, tz = bx * N + (k % N), bz * N + (k // N)
+        c = couverture(tx, tz, wc)
+        if not c.any():
+            continue
+        r = roche(tx, tz, journal)
+        sol[k] = encoder(np.where(c > 0, r.astype(np.int32) * 256 + c, VIDE))
+        ve, ne = eau(tx, tz, wc, dem_dir)
+        if ne or (ve != VIDE).any():
+            eaux[k] = encoder(ve)
+        print(f"région {tx} {tz} ({k + 1}/256) : {time.time() - t0:.0f} s, eau {ne}", flush=True)
+    for nom, rs, tag in (("sol30", sol, f"s30-z{bz}"), ("eau30", eaux, f"e30-z{bz}")):
+        if not rs:
+            continue
+        f = os.path.join(sortie, f"{nom}_{bx}_{bz}.bin")
+        open(f, "wb").write(paquet(bx, bz, rs))
+        print(f, os.path.getsize(f) // 1024, "Ko", flush=True)
+        if publier:
+            if subprocess.run(["gh", "release", "view", tag], capture_output=True).returncode != 0:
+                subprocess.run(["gh", "release", "create", tag, "--title", f"{nom} 1:30, bande z{bz}", "--notes",
+                                "ESA WorldCover 10 m 2021 (© ESA WorldCover project 2021, CC BY 4.0), Macrostrat (CC BY 4.0), "
+                                "Copernicus DEM GLO-30 : sol et eau à 1 point par bloc (1:30) pour Domaine d'Aubin – Terre."])
+            for essai in range(6):
+                if subprocess.run(["gh", "release", "upload", tag, f, "--clobber"]).returncode == 0:
+                    break
+                time.sleep(20 * (essai + 1))
+
+
 if __name__ == "__main__":
-    main()
+    if sys.argv[1] == "--paquet":
+        paquet_complet(int(sys.argv[2]), int(sys.argv[3]), sys.argv[4], "--publier" in sys.argv)
+    else:
+        main()
