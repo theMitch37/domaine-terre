@@ -1,0 +1,55 @@
+{
+ "total": 6,
+ "especes": [
+  [
+   "item:minecraft:stick",
+   3
+  ],
+  [
+   "item:minecraft:brown_mushroom",
+   2
+  ],
+  [
+   "item:minecraft:wheat_seeds",
+   1
+  ]
+ ],
+ "positions": [
+  [
+   "item:minecraft:stick",
+   -415751.75077005423,
+   169.0,
+   -134055.72159759415
+  ],
+  [
+   "item:minecraft:brown_mushroom",
+   -416172.73779197206,
+   99.058708435919,
+   -133975.875
+  ],
+  [
+   "item:minecraft:brown_mushroom",
+   -416175.2262298677,
+   100.28713769244524,
+   -133973.50297891576
+  ],
+  [
+   "item:minecraft:stick",
+   -416196.34674666857,
+   105.0,
+   -133953.47381002203
+  ],
+  [
+   "item:minecraft:stick",
+   -416097.7878927076,
+   107.0,
+   -133963.13589004608
+  ],
+  [
+   "item:minecraft:wheat_seeds",
+   -415969.6162183381,
+   126.0,
+   -133833.14142422087
+  ]
+ ]
+}

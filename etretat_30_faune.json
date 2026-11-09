@@ -1,0 +1,65 @@
+{
+ "total": 9,
+ "especes": [
+  [
+   "minecraft:falling_block",
+   9
+  ]
+ ],
+ "positions": [
+  [
+   "minecraft:falling_block",
+   875.5,
+   -240.24521389063193,
+   -184595.5
+  ],
+  [
+   "minecraft:falling_block",
+   874.5,
+   -240.24521389063193,
+   -184594.5
+  ],
+  [
+   "minecraft:falling_block",
+   875.5,
+   -236.9562826849562,
+   -184594.5
+  ],
+  [
+   "minecraft:falling_block",
+   875.5,
+   -235.9562826849562,
+   -184595.5
+  ],
+  [
+   "minecraft:falling_block",
+   874.5,
+   -235.9562826849562,
+   -184594.5
+  ],
+  [
+   "minecraft:falling_block",
+   875.5,
+   -233.6966708506416,
+   -184593.5
+  ],
+  [
+   "minecraft:falling_block",
+   875.5,
+   -232.6966708506416,
+   -184594.5
+  ],
+  [
+   "minecraft:falling_block",
+   874.5,
+   -231.6966708506416,
+   -184594.5
+  ],
+  [
+   "minecraft:falling_block",
+   875.5,
+   -229.46758730803998,
+   -184593.5
+  ]
+ ]
+}

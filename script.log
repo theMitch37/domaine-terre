@@ -1,0 +1,14 @@
+serveur prêt en 75 s
+lot 1/2 : etretat_30, grand_canyon_30 — 2048 chunks
+  2048/2048 chunks complets (280 s)
+lot 2/2 : cervin_30 — 1024 chunks
+  1024/1024 chunks complets (387 s)
+3072 chunks demandés en 2 lots
+etretat_30 : (511, 736, 511), 69 sortes de blocs
+grand_canyon_30 : (511, 736, 511), 82 sortes de blocs
+cervin_30 : (511, 736, 511), 77 sortes de blocs
+entités lues : 169 [('proto:minecraft:frog', 91), ('minecraft:falling_block', 69), ('item:minecraft:wheat_seeds', 4), ('item:minecraft:stick', 3), ('item:minecraft:brown_mushroom', 2)]
+etretat_30 : 9 animaux
+grand_canyon_30 : 6 animaux
+cervin_30 : 3 animaux
+terminé en 406 s
