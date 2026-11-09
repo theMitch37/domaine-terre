@@ -545,6 +545,11 @@ public final class Terrain {
             }
             return Mth.lerp(lisse(Mth.clamp(sd / transitionCote(), 0.0, 1.0)), NIVEAU_MER + 0.6, Math.max(hTerre, NIVEAU_MER + 0.6));
         }
+        // 1:30 : le vrai fond à 15" (ETOPO 2022, ~15 blocs) quand son paquet est là, au lieu de la carte 3' (185 blocs)
+        if (echelle < 250) {
+            double af = ReliefFin.fond(x, z);
+            if (!Double.isNaN(af) && af < 0) alt = af;
+        }
         double hMer = alt < -9300 && echelle >= 250 ? fosse(x, z, alt) : blocsDepuisAltitude(Math.min(alt, -1.0));
         // 1:30 : le fond rejoint sa profondeur (8 blocs au moins, navigable) sur 40 blocs depuis le rivage
         double tr = echelle >= 250 ? transitionCote() : 40.0 * 60.0 / BLOCS_PAR_DEGRE;

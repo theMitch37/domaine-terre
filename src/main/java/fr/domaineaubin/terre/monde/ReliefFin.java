@@ -81,6 +81,20 @@ public final class ReliefFin {
             "https://github.com/theMitch37/domaine-terre-relief/releases/download/e30-z{bz}/eau30_{bx}_{bz}.bin", 128, 300, 90);
 
     /**
+     * Fond des mers à 15" (09/11/2026, fond.py du dépôt relief) : ETOPO 2022 (NOAA, domaine public), ramené sur la
+     * grille du relief 1:250 (un point tous les 250 m), seulement en mer et près des côtes ; lu en bilinéaire.
+     */
+    private static final Jeu FOND = new Jeu("fond", "fond_", 250, 4,
+            "https://github.com/theMitch37/domaine-terre-relief/releases/download/f-z{bz}/fond_{bx}_{bz}.bin", 96, 120, 30);
+
+    /** Altitude réelle du fond (m, négative en mer) au bloc (x, z), NaN sans donnée. Seulement en 1:30 pour l'instant. */
+    public static double fond(int x, int z) {
+        reglages();
+        if (!actif || Terrain.echelle() >= 250) return Double.NaN;
+        return interpole(FOND, Terrain.lon(x + 0.5), Terrain.lat(z + 0.5));
+    }
+
+    /**
      * Eau intérieure du bloc (x, z) d'un monde 1:30 : round((niveau en m + 500) / 3) × 16 + c (c de 0 à 7 : dans
      * l'eau, Terrain.DANS_EAU ; de 8 à 15 : terre proche, Terrain.PRES_EAU) ; -1 sans eau proche ou sans donnée.
      */
@@ -430,6 +444,7 @@ public final class ReliefFin {
             prevoir(s, V30);
             prevoir(s, SOL30);
             prevoir(s, EAU30);
+            prevoir(s, FOND);
         } else if (e == V1.echelle) {
             prevoir(s, V1);
         }
@@ -441,8 +456,10 @@ public final class ReliefFin {
             if (joueur.level().dimension() != net.minecraft.world.level.Level.OVERWORLD) continue;
             double vitesse = joueur.getDeltaMovement().horizontalDistance() * 20.0;         // blocs par seconde
             double m = Math.min(MARGE + vitesse * 120.0, 3.0 * MARGE);                      // 2 min d'avance en plus
-            int x0 = (int) Math.floor(joueur.getX() - m), x1 = (int) Math.floor(joueur.getX() + m);
-            int z0 = (int) Math.floor(joueur.getZ() - m), z1 = (int) Math.floor(joueur.getZ() + m);
+            // grille du jeu de données (le fond 1:250 sert aussi au monde 1:30)
+            double f = j.bpd / Terrain.BLOCS_PAR_DEGRE;
+            int x0 = (int) Math.floor((joueur.getX() - m) * f), x1 = (int) Math.floor((joueur.getX() + m) * f);
+            int z0 = (int) Math.floor((joueur.getZ() - m) * f), z1 = (int) Math.floor((joueur.getZ() + m) * f);
             for (int bx = Math.floorDiv(x0, cote); bx <= Math.floorDiv(x1, cote); bx++)
                 for (int bz = Math.floorDiv(z0, cote); bz <= Math.floorDiv(z1, cote); bz++)
                     j.prevoir(bx, bz);
