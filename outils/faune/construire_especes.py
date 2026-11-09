@@ -2,7 +2,11 @@
 « Le Domaine d'Aubin v2 » (liste du dossier mods lue le 04/11/2026) :
 Untamed Wilds 4.0.4, Naturalist 5.0pre2, Let's Do WilderNature 1.0.6, Let's Do Meadow 1.3.25, Ecologics 2.2.7,
 Aquaculture 2.5.7, Savage and Ravage 6.0.1, Guard Villagers 1.6.19 + jeu de base.
-Une ligne = une créature (ou une espèce d'Untamed Wilds). Colonnes : voir l'en-tête."""
+Une ligne = une créature (ou une espèce d'Untamed Wilds). Colonnes : voir l'en-tête.
+
+⚠ NE PLUS LANCER (constat du 09/11/2026) : especes.csv a été retouché à la main depuis (Critters and Companions,
+lapins, ours, tigres, abondances…) ; ce script l'écraserait. Le CSV fait foi : on le modifie directement, puis
+zones.py et generer_faune.py."""
 import csv, os
 
 ICI = os.path.dirname(os.path.abspath(__file__))

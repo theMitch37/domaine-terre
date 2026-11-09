@@ -45,7 +45,13 @@ public final class FauneTerre {
     /** Une ligne de la table, résolue. */
     public record Entree(String id, EntityType<?> type, MobCategory categorie, long terroirs, boolean tousTerroirs,
                          int biomes, int[][] precis, boolean eau, boolean cote, int temps, int bandes, boolean mer,
-                         boolean nuit, Etage etage, MobSpawnSettings.SpawnerData donnees, boolean generationSeule) {
+                         boolean nuit, Etage etage, MobSpawnSettings.SpawnerData donnees, boolean generationSeule,
+                         String biomeJeu, double altitudeMin, int tirage, boolean monstreSurface) {
+        /** Conditions en plus de la règle générale (09/11/2026) : biome du jeu, altitude, tirage. */
+        boolean conditionnee() {
+            return biomeJeu != null || !Double.isNaN(altitudeMin) || tirage > 1;
+        }
+
         boolean dansTerroir(int t) {
             return t > 0 && t < 64 && (terroirs & (1L << t)) != 0;
         }
@@ -79,9 +85,17 @@ public final class FauneTerre {
         this.surface = surface;
         this.souterrain = souterrain;
         java.util.Set<EntityType<?>> t = new java.util.HashSet<>();
-        for (Entree e : surface) t.add(e.donnees().type);
+        java.util.Map<EntityType<?>, Entree> c = new java.util.HashMap<>();
+        for (Entree e : surface) {
+            t.add(e.donnees().type);
+            if (e.conditionnee() || e.monstreSurface()) c.putIfAbsent(e.donnees().type, e);
+        }
         this.types = java.util.Set.copyOf(t);
+        this.conditions = java.util.Map.copyOf(c);
     }
+
+    /** Bêtes de la table qui ont des conditions en plus (biome du jeu, altitude, tirage, monstre de surface). */
+    private final java.util.Map<EntityType<?>, Entree> conditions;
 
     private final java.util.Set<EntityType<?>> types;
 
@@ -177,9 +191,13 @@ public final class FauneTerre {
             MobCategory cat = type.getCategory();
             boolean generationSeule = cat == MobCategory.MISC;
             if (generationSeule) cat = MobCategory.CREATURE;
+            String biomeJeu = o.has("biome_jeu") ? o.get("biome_jeu").getAsString() : null;
+            double altitudeMin = o.has("altitude_min") ? o.get("altitude_min").getAsDouble() : Double.NaN;
+            int tirage = o.has("tirage") ? Math.max(1, o.get("tirage").getAsInt()) : 1;
+            boolean monstreSurface = o.has("monstre_surface") && o.get("monstre_surface").getAsBoolean();
             Entree en = new Entree(o.get("id").getAsString(), type, cat, ts, nb >= 29, bio, precis,
                     o.get("eau").getAsBoolean(), o.get("cote").getAsBoolean(), temps, bandes, mer,
-                    o.get("nuit").getAsBoolean(), etage, d, generationSeule);
+                    o.get("nuit").getAsBoolean(), etage, d, generationSeule, biomeJeu, altitudeMin, tirage, monstreSurface);
             (etage == null ? surface : souterrain).add(en);
         }
         DomaineTerre.LOGGER.info("Faune de la Terre : {} espèces en surface, {} sous terre ({} absentes du pack), {} ms",
@@ -198,6 +216,45 @@ public final class FauneTerre {
 
     public List<Entree> souterrain() {
         return souterrain;
+    }
+
+    /**
+     * Conditions en plus de la règle générale (09/11/2026, décisions de Maxime) : le Papilloneur seulement dans les
+     * grottes luxuriantes, l'Oiseau de soleil au-dessus de 2 500 m réels, et les espèces rares gardées une fois sur N
+     * tentatives (sans toucher aux poids des autres). La liste en cache reste la même ; ce tri se fait à chaque appel.
+     */
+    public List<MobSpawnSettings.SpawnerData> filtrer(List<MobSpawnSettings.SpawnerData> l, BlockPos pos,
+                                                      Holder<Biome> biome, net.minecraft.util.RandomSource hasard) {
+        if (conditions.isEmpty() || l.isEmpty()) return l;
+        List<MobSpawnSettings.SpawnerData> out = null;
+        for (int i = 0; i < l.size(); i++) {
+            MobSpawnSettings.SpawnerData d = l.get(i);
+            Entree e = conditions.get(d.type);
+            boolean garder = e == null || accepte(e, pos, biome, hasard);
+            if (!garder && out == null) out = new ArrayList<>(l.subList(0, i));
+            if (garder && out != null) out.add(d);
+        }
+        return out == null ? l : out;
+    }
+
+    private static boolean accepte(Entree e, BlockPos pos, Holder<Biome> biome, net.minecraft.util.RandomSource hasard) {
+        if (e.biomeJeu() != null
+                && !biome.unwrapKey().map(k -> k.location().getPath().equals(e.biomeJeu())).orElse(false)) return false;
+        if (!Double.isNaN(e.altitudeMin())
+                && Terrain.get().altitudeReelle(pos.getX(), pos.getZ()) < e.altitudeMin()) return false;
+        return e.tirage() <= 1 || hasard.nextInt(e.tirage()) == 0;
+    }
+
+    /** Monstres de la table autorisés en surface (Rafalleur des grands ergs), conditions comprises. */
+    public List<MobSpawnSettings.SpawnerData> monstresSurface(LevelAccessor niveau, BlockPos pos, Holder<Biome> biome,
+                                                              boolean nuit, net.minecraft.util.RandomSource hasard) {
+        List<MobSpawnSettings.SpawnerData> l = liste(niveau, MobCategory.MONSTER, pos, biome, false, false, nuit, false);
+        List<MobSpawnSettings.SpawnerData> out = new ArrayList<>();
+        for (MobSpawnSettings.SpawnerData d : l) {
+            Entree e = conditions.get(d.type);
+            if (e != null && e.monstreSurface() && accepte(e, pos, biome, hasard)) out.add(d);
+        }
+        return out;
     }
 
     private int pixel(int x, int z) {

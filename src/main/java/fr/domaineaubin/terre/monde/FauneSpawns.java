@@ -82,7 +82,7 @@ public final class FauneSpawns {
         boolean nuit = niveau instanceof Level l && !l.isDay();
         List<MobSpawnSettings.SpawnerData> l = faune.liste(niveau, cat, pos, biome,
                 FauneTerre.eauProche(niveau, pos), FauneTerre.coteProche(pos), nuit, false);
-        remplacer(event, l);
+        remplacer(event, faune.filtrer(l, pos, biome, niveau.getRandom()));
     }
 
     private static void remplacer(LevelEvent.PotentialSpawns event, List<MobSpawnSettings.SpawnerData> l) {
@@ -108,12 +108,18 @@ public final class FauneSpawns {
         int e = etage(pos.getX(), pos.getY(), pos.getZ());
         List<MobSpawnSettings.SpawnerData> garder = new ArrayList<>();
         if (e < 0) {
-            // surface : seulement les sorcières des marais
-            String chemin = niveau.getBiome(pos).unwrapKey().map(k -> k.location().getPath()).orElse("");
+            // surface : seulement les sorcières des marais, et les monstres de la table autorisés en surface
+            // (Rafalleur des grands ergs, 09/11/2026)
+            Holder<Biome> biome = niveau.getBiome(pos);
+            String chemin = biome.unwrapKey().map(k -> k.location().getPath()).orElse("");
             if (chemin.endsWith("swamp")) {
                 for (MobSpawnSettings.SpawnerData d : event.getSpawnerDataList()) {
                     if (d.type == EntityType.WITCH) garder.add(d);
                 }
+            }
+            if (!dansLieu(pos.getX(), pos.getZ())) {
+                boolean nuit = niveau instanceof Level l && !l.isDay();
+                garder.addAll(faune.monstresSurface(niveau, pos, biome, nuit, niveau.getRandom()));
             }
             remplacer(event, garder);
             return;
@@ -208,6 +214,6 @@ public final class FauneSpawns {
                     biome.unwrapKey().map(k -> k.location().toString()).orElse("?"), l.size(),
                     l.stream().map(d -> EntityType.getKey(d.type).getPath()).toList());
         }
-        return net.minecraft.util.random.WeightedRandomList.create(l);
+        return net.minecraft.util.random.WeightedRandomList.create(faune.filtrer(l, centre, biome, niveau.getRandom()));
     }
 }

@@ -33,7 +33,7 @@ MILIEUX = {
     "foret (montagne)": [3, 4, 5, 10], "foret_tropicale (nuit)": [1, 3], "prairie (pluie)": [4, 7, 8, 12],
     "prairie, foret (nuit)": [1, 2, 4, 5, 7, 8, 12], "desert (côtier)": [13], "culture (rizières)": [1, 2, 9],
     "marais (lagunes salées)": [9, 14], "toundra,foret": [6, 11], "mangrove": [14],
-    "partout": list(range(1, 15)), "sol": list(range(1, 15)),
+    "partout": list(range(1, 15)), "sol": list(range(1, 15)), "haute_montagne": [10],
 }
 # Espèces emblématiques à aire réduite : dans les terroirs nommés, seulement ces écorégions (noms RESOLVE exacts).
 # Les autres terroirs de l'espèce gardent la règle générale. Vaut aussi pour l'eau (ornithorynque).
@@ -62,6 +62,18 @@ PRECIS = {
     "alexsmobs:platypus": {"australie": ["Eastern Australian temperate forests", "Southeast Australia temperate forests",
                                          "Queensland tropical rain forests", "Tasmanian temperate forests",
                                          "Tasmanian temperate rain forests", "Tasmanian Central Highland forests"]},
+    # Rafalleur (09/11/2026, décision de Maxime) : grands ergs seulement, rare
+    "alexsmobs:guster": {"sahara_sahel": ["East Sahara Desert", "South Sahara desert", "West Sahara desert"],
+                         "maghreb": ["East Sahara Desert", "West Sahara desert"],
+                         "moyen_orient": ["Arabian sand desert", "East Arabian fog shrublands and sand desert",
+                                          "Arabian desert", "Central Asian southern desert",
+                                          "Registan-North Pakistan sandy desert"],
+                         "steppes_tibet": ["Taklimakan desert", "Central Asian southern desert"],
+                         "chine": ["Taklimakan desert"],
+                         "inde": ["Thar desert", "Registan-North Pakistan sandy desert"],
+                         "afrique_australe": ["Namib Desert"],
+                         "australie": ["Great Sandy-Tanami desert", "Great Victoria desert", "Simpson desert",
+                                       "Gibson desert"]},
 }
 EAU = {"eau_douce", "marais", "près de l'eau"}
 COTE = {"cote", "plage", "plage tropicale"}

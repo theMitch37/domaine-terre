@@ -394,13 +394,13 @@ alexsmobs:skreecher;Skreecher;—;fantastique;souterrain;—;1;souterrain;"abîm
 alexsmobs:farseer;Voyant éloigné;—;fantastique;souterrain;—;1;souterrain;"abîmes ; mod à installer";
 alexsmobs:froststalker;Traqueur givrant;—;fantastique;souterrain;—;—;souterrain;"profondeurs ; mod à installer";
 alexsmobs:tusklin;Tusklin;—;fantastique;souterrain;—;—;souterrain;"profondeurs ; mod à installer";
-alexsmobs:guster;Rafalleur;—;fantastique;—;—;—;a_confirmer;"créature inventée : abîmes ou retirée ? ; mod à installer";R
-alexsmobs:flutter;Papilloneur;—;fantastique;—;—;—;a_confirmer;"créature inventée : abîmes ou retirée ? ; mod à installer";R
-alexsmobs:sunbird;Oiseau de soleil;—;fantastique;—;—;—;a_confirmer;"créature inventée : abîmes ou retirée ? ; mod à installer";R
+alexsmobs:guster;Rafalleur;—;fantastique;desert;sahara_sahel,maghreb,moyen_orient,steppes_tibet,chine,inde,afrique_australe,australie;1;garder;"grands ergs seulement (écorégions précises), rare ; ne sort que sur le sable et par temps de pluie ou d'orage (règle d'Alex's Mobs) ; décision de Maxime 09/11";R
+alexsmobs:flutter;Papilloneur;—;fantastique;partout;partout;1;garder;"grottes luxuriantes seulement (biome lush_caves du jeu) ; décision de Maxime 09/11";R
+alexsmobs:sunbird;Oiseau de soleil;—;fantastique;montagne;alpine,steppes_tibet,inde,chine,andes;1;garder;"très rare, au-dessus de 2 500 m réels (Alpes, Himalaya, Tibet, Andes) ; décision de Maxime 09/11";R
 alexsmobs:sea_bear;Tardigrade géant;—;fantastique;souterrain (eau), fosses océaniques;—;—;souterrain;"grottes inondées des profondeurs et fond des fosses (Mariannes, sous y 0) ; mod à installer";
 alexsmobs:skelewag;Squeladon;—;fantastique;souterrain (eau), fosses océaniques;—;—;souterrain;"grottes inondées des profondeurs et fond des fosses (Mariannes, sous y 0) ; mod à installer";
-alexsmobs:mungus;Mongus;—;fantastique;—;—;—;a_confirmer;"vit sur les îles champignons ; créature inventée : abîmes ou retirée ? ; mod à installer";R
-alexsmobs:bunfungus;Champilièvre;—;fantastique;—;—;—;a_confirmer;"créature inventée : abîmes ou retirée ? ; mod à installer";R
+alexsmobs:mungus;Mongus;—;fantastique;—;—;—;lieu_futur;vit sur les îles champignons : île champignon fictive, lieu unique d'une MAJ future (décision de Maxime 09/11);R
+alexsmobs:bunfungus;Champilièvre;—;fantastique;—;—;—;lieu_futur;île champignon fictive, lieu unique d'une MAJ future (décision de Maxime 09/11);R
 alexsmobs:mimicube;Imicube;—;fantastique;End;—;—;garder;"End : on n'y touche pas ; mod à installer";R
 crittersandcompanions:jumping_spider;Araignée sauteuse;Salticidae (araignée-paon en Australie);insecte;foret,prairie,savane;partout_sauf:arctique,antarctique;1-2;garder;"araignées-paons (Maratus) en Australie";C
 crittersandcompanions:otter;Loutre d'Europe;Lutra lutra;sauvage;eau_douce;atlantique,mediterranee,continentale,nordique,alpine,siberie,chine,japon_coree,inde,maghreb;1-2;garder;;PC

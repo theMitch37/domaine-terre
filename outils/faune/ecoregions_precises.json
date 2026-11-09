@@ -94,5 +94,43 @@
    "Tasmanian temperate rain forests",
    "Tasmanian Central Highland forests"
   ]
+ },
+ "alexsmobs:guster": {
+  "sahara_sahel": [
+   "East Sahara Desert",
+   "South Sahara desert",
+   "West Sahara desert"
+  ],
+  "maghreb": [
+   "East Sahara Desert",
+   "West Sahara desert"
+  ],
+  "moyen_orient": [
+   "Arabian sand desert",
+   "East Arabian fog shrublands and sand desert",
+   "Arabian desert",
+   "Central Asian southern desert",
+   "Registan-North Pakistan sandy desert"
+  ],
+  "steppes_tibet": [
+   "Taklimakan desert",
+   "Central Asian southern desert"
+  ],
+  "chine": [
+   "Taklimakan desert"
+  ],
+  "inde": [
+   "Thar desert",
+   "Registan-North Pakistan sandy desert"
+  ],
+  "afrique_australe": [
+   "Namib Desert"
+  ],
+  "australie": [
+   "Great Sandy-Tanami desert",
+   "Great Victoria desert",
+   "Simpson desert",
+   "Gibson desert"
+  ]
  }
 }

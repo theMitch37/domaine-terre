@@ -101,6 +101,17 @@ ABONDANCE = {"TC": 16, "C": 8, "PC": 3, "R": 1}
 UW_TERRE = {"bear", "big_cat", "hyena", "large_snake", "monitor", "boar", "bison", "camel", "hippo", "rhino",
             "wildebeest", "aardvark", "newt", "snake", "softshell_turtle", "tortoise", "tarantula", "opossum", "butterfly"}
 
+# Conditions en plus de la règle générale (09/11/2026, décisions de Maxime), lues par FauneTerre.filtrer :
+#   biome_jeu      : seulement dans ce biome du jeu (grottes luxuriantes) ;
+#   altitude_min   : seulement au-dessus de cette altitude réelle, en mètres ;
+#   tirage         : garde l'espèce une fois sur N tentatives (rareté sans toucher aux poids des autres) ;
+#   monstre_surface: monstre de la table autorisé en surface (sinon : sorcières des marais seulement).
+CONDITIONS = {
+    "alexsmobs:guster": {"tirage": 40, "monstre_surface": True},      # grands ergs, rare ; sable et pluie : règle du mod
+    "alexsmobs:flutter": {"biome_jeu": "lush_caves"},
+    "alexsmobs:sunbird": {"altitude_min": 2500, "tirage": 10},
+}
+
 rows = list(csv.DictReader(open(os.path.join(ICI, "especes.csv"), encoding="utf-8"), delimiter=";"))
 especes, vus = [], set()
 for r in rows:
@@ -154,7 +165,7 @@ for r in rows:
         "id": r["id"], "entite": ent, "cat": r["categorie"], "terroirs": [INDEX[t] for t in ts], "biomes": biomes,
         "precis": precis, "eau": eau, "cote": cote, "mer": mer, "min": mn, "max": mx,
         "poids": ABONDANCE.get(r.get("abondance", ""), 1 if "RARE" in r["note"] else POIDS.get(r["categorie"], 6)),
-        "nuit": "nuit" in r["milieu"], "etage": etage})
+        "nuit": "nuit" in r["milieu"], "etage": etage, **CONDITIONS.get(r["id"], {})})
 json.dump({"precises": precises, "especes": especes}, open(os.path.join(OUT, "especes.json"), "w", encoding="utf-8"),
           ensure_ascii=False, separators=(",", ":"))
 print("especes.json :", len(especes), "entrées")
