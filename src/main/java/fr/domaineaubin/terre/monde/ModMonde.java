@@ -34,6 +34,10 @@ public final class ModMonde {
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> RIVES =
             FEATURES.register("rives", () -> new RivesFeature(NoneFeatureConfiguration.CODEC));
 
+    /** Roche des parois et éboulis selon la vraie pente (monde 1:30). */
+    public static final RegistryObject<Feature<NoneFeatureConfiguration>> ROCHE =
+            FEATURES.register("roche", () -> new RocheFeature(NoneFeatureConfiguration.CODEC));
+
     public static final DeferredRegister<Codec<? extends BiomeSource>> SOURCES_BIOMES =
             DeferredRegister.create(Registries.BIOME_SOURCE, DomaineTerre.MOD_ID);
 

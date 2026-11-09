@@ -238,6 +238,7 @@ public final class Terrain {
 
     /** Correspondance altitude réelle (m) -> hauteur Minecraft (y), voir le plan v1. */
     public static double blocsDepuisAltitude(double alt) {
+        if (echelle < 250) return blocs130(alt);
         if (alt < 0) {
             // océans profonds : y 10 à 6 000 m (relevés le 08/11/2026) ; plus bas, les fosses, jusqu'à y -61 au fond
             // des Mariannes (≈ -10 300 m dans ETOPO à 3'), juste au-dessus de la bedrock (faille : 28/10)
@@ -255,6 +256,22 @@ public final class Terrain {
         return 140 + Math.min((alt - 2000) / 6800.0, 1.0) * 160;                 // montagnes : y 140 à 300
     }
 
+    /**
+     * Monde 1:30 (09/11/2026, fiche « Échelle 1:30 ») : monde de y -160 à 576. Terres ×1,5 (30 m par bloc ×1,5 =
+     * 20 m par bloc : Mont Blanc ≈ y 304, Everest ≈ y 506). Sous l'eau, pas d'exagération mais un tassement au-delà
+     * du plateau, et une profondeur minimale navigable : plateau 8 à 25 blocs, océan moyen ≈ 85 blocs, plaines
+     * abyssales ≈ 105, fond des Mariannes ≈ 200 (y -137).
+     */
+    static double blocs130(double alt) {
+        if (alt >= 0) return 64 + alt / 20.0;
+        double a = -alt, d;
+        if (a < 200) d = 8 + 17 * a / 200.0;
+        else if (a < 4000) d = 25 + 60 * (a - 200) / 3800.0;
+        else if (a < 6000) d = 85 + 20 * (a - 4000) / 2000.0;
+        else d = 105 + 95 * Math.min((a - 6000) / 5000.0, 1.0);
+        return Math.max(NIVEAU_MER - d, -150.0);
+    }
+
     private static double lisse(double t) {
         return t * t * (3 - 2 * t);
     }
@@ -266,7 +283,7 @@ public final class Terrain {
      * l'altitude réelle de sa surface, avec la même courbe que la terre (sous 0 m, la pente des plaines continue).
      */
     public static int niveauLac(double altitude) {
-        double y = altitude < 0 ? 64 + altitude / 500.0 * 16 : blocsDepuisAltitude(altitude);
+        double y = altitude < 0 ? (echelle < 250 ? 64 + altitude / 20.0 : 64 + altitude / 500.0 * 16) : blocsDepuisAltitude(altitude);
         return Mth.floor(y);
     }
 
@@ -435,6 +452,9 @@ public final class Terrain {
     }
 
     private Riviere riviereBrute(int x, int z) {
+        // 1:30 (09/11/2026) : les tracés des cours d'eau (~500 m de précision, niveaux de la carte 3') ne tombent pas
+        // dans les vraies vallées à 30 m (aqueducs sur les pentes) : retirés en attendant la couche d'eau satellite
+        if (echelle < 250) return null;
         Fleuves.Proche p = fleuves().proche(x, z);
         if (p == null) return null;
         double hw = demiLargeur(p.classe());
@@ -486,8 +506,10 @@ public final class Terrain {
             }
             return Mth.lerp(lisse(Mth.clamp(sd / transitionCote(), 0.0, 1.0)), NIVEAU_MER + 0.6, Math.max(hTerre, NIVEAU_MER + 0.6));
         }
-        double hMer = alt < -9300 ? fosse(x, z, alt) : blocsDepuisAltitude(Math.min(alt, -1.0));
-        return Mth.lerp(lisse(Mth.clamp(-sd / transitionCote(), 0.0, 1.0)), NIVEAU_MER - 1.0, Math.min(hMer, NIVEAU_MER - 1.0));
+        double hMer = alt < -9300 && echelle >= 250 ? fosse(x, z, alt) : blocsDepuisAltitude(Math.min(alt, -1.0));
+        // 1:30 : le fond rejoint sa profondeur (8 blocs au moins, navigable) sur 40 blocs depuis le rivage
+        double tr = echelle >= 250 ? transitionCote() : 40.0 * 60.0 / BLOCS_PAR_DEGRE;
+        return Mth.lerp(lisse(Mth.clamp(-sd / tr, 0.0, 1.0)), NIVEAU_MER - 1.0, Math.min(hMer, NIVEAU_MER - 1.0));
     }
 
     /**

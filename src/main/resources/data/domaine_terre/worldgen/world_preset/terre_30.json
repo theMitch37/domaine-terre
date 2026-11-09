@@ -1,10 +1,10 @@
 {
  "dimensions": {
   "minecraft:overworld": {
-   "type": "minecraft:overworld",
+   "type": "domaine_terre:terre_30",
    "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraft:overworld",
+    "settings": "domaine_terre:terre_30",
     "biome_source": {
      "type": "domaine_terre:terre",
      "echelle": 30

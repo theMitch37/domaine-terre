@@ -1,0 +1,9 @@
+{
+ "type": "minecraft:mul",
+ "argument1": 4.0,
+ "argument2": {
+  "type": "minecraft:mul",
+  "argument1": "domaine_terre:terre30/depth",
+  "argument2": "minecraft:overworld/factor"
+ }
+}
