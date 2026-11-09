@@ -1,0 +1,56 @@
+# Essai du client (09/11/2026) : lance un vrai client Minecraft (Forge, avec Embeddium) sans écran (Xvfb + Mesa), attend
+# le menu principal, et vérifie que les mixins du rendu de l'eau s'appliquent et que les textures d'eau opaques
+# sont fabriquées. Capture d'écran et journal rangés sur la branche « client-essai ».
+name: Essai du client
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  client:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v3
+      - run: sudo apt-get update -q && sudo apt-get install -y -q xvfb mesa-utils libgl1-mesa-dri imagemagick x11-utils
+      - name: Client
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          chmod +x gradlew
+          mkdir -p run
+          echo "onboardAccessibility:false" > run/options.txt
+          echo "skipMultiplayerWarning:true" >> run/options.txt
+          Xvfb :99 -screen 0 1280x720x24 &
+          export DISPLAY=:99
+          (./gradlew runClient -Pessai_client --no-daemon > /tmp/client.log 2>&1 &)
+          ok=0
+          for i in $(seq 1 120); do
+            sleep 10
+            if grep -qE "Sound engine started|Created: .*minecraft:textures/atlas/blocks" /tmp/client.log; then ok=1; fi
+            if grep -qE "Crash report saved|Mixin apply failed|MixinApplyError|InvalidInjectionException" /tmp/client.log; then break; fi
+            if [ $ok = 1 ] && grep -q "Sound engine started" /tmp/client.log; then sleep 40; break; fi
+          done
+          mkdir -p /tmp/essai
+          import -window root /tmp/essai/menu.png || true
+          cp /tmp/client.log /tmp/essai/
+          cp -r run/crash-reports /tmp/essai/ 2>/dev/null || true
+          grep -nE "Eau opaque|domaine_terre|Mixin|ERROR|Exception|atlas/blocks|embeddium" /tmp/client.log | head -150 > /tmp/essai/extrait.txt || true
+          pkill -f java || true
+      - name: Rangement
+        if: always()
+        run: |
+          cd /tmp/essai
+          git init -q -b client-essai
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -qm "Essai du client"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" client-essai
