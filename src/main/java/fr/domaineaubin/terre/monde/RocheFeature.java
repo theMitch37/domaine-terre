@@ -72,6 +72,33 @@ public class RocheFeature extends Feature<NoneFeatureConfiguration> {
         for (int f : new int[]{GRES, ARGILE, CALCAIRE, DOLOMIE, CRAIE, CONGLOMERAT, EVAPORITE, TUF}) STRATES[f] = true;
     }
 
+    /**
+     * Aridité 0..1 autour d'un point, d'après la vraie couverture du sol (WorldCover) sur ~2 km : part des
+     * broussailles et du sol nu parmi les terres. Le Grand Canyon (broussailles + roche) est sec, la Beauce
+     * (cultures) ne l'est pas. En attendant une couche climatique (Köppen), c'est la meilleure mesure qu'on ait.
+     */
+    static double aridite(int cx, int cz) {
+        int sec = 0, terre = 0;
+        for (int i = -3; i <= 3; i++)
+            for (int j = -3; j <= 3; j++) {
+                int s = ReliefFin.sol(cx + i * 96, cz + j * 96);
+                if (s < 0) continue;
+                int c = s & 255;
+                if (c == 80 || c == 70 || c == 0) continue;     // eau, glace, sans donnée
+                terre++;
+                if (c == 20 || c == 60) sec++;
+            }
+        if (terre < 10) return 0;
+        return Mth.clamp((sec / (double) terre - 0.3) / 0.4, 0.0, 1.0);
+    }
+
+    /** Sol sec : terre grossière, sable rouge sur grès et argiles, ou le haut de la roche du lieu. */
+    private static BlockState sec(int roche, double b, int x, int z) {
+        if (b > 0.3 && roche != INCONNUE) return PALETTES[roche][0];
+        if ((roche == GRES || roche == ARGILE || roche == CONGLOMERAT) && b > -0.2) return Blocks.RED_SAND.defaultBlockState();
+        return Blocks.COARSE_DIRT.defaultBlockState();
+    }
+
     public RocheFeature(Codec<NoneFeatureConfiguration> codec) {
         super(codec);
     }
@@ -84,6 +111,7 @@ public class RocheFeature extends Feature<NoneFeatureConfiguration> {
         int x0 = ctx.origin().getX() & ~15, z0 = ctx.origin().getZ() & ~15;
         BlockPos.MutableBlockPos p = new BlockPos.MutableBlockPos();
         boolean pose = false;
+        double aride = aridite(x0 + 8, z0 + 8);
         double[] h = new double[18 * 18];
         for (int dz = -1; dz <= 16; dz++)
             for (int dx = -1; dx <= 16; dx++)
@@ -115,8 +143,10 @@ public class RocheFeature extends Feature<NoneFeatureConfiguration> {
                 } else if (cov == 70) {
                     pose |= glace(n, p, x, y, z);
                 } else if (cov == 20) {                         // broussailles : terre sèche entre les touffes
-                    if (b > -0.05) pose |= remplacer(n, p, x, y, z, b > 0.3 && roche != INCONNUE
-                            ? PALETTES[roche][0] : Blocks.COARSE_DIRT.defaultBlockState());
+                    // pays sec : presque plus d'herbe, le sol et la roche affleurent
+                    if (b > -0.05 - 0.5 * aride) pose |= remplacer(n, p, x, y, z, sec(roche, b, x, z));
+                } else if (cov == 30 && aride > 0) {            // prairie de pays sec : steppe rase
+                    if (b > 0.35 - 0.75 * aride) pose |= remplacer(n, p, x, y, z, sec(roche, b, x, z));
                 } else if (cov == 100) {                        // mousses et lichens (toundra)
                     pose |= remplacer(n, p, x, y, z, b > 0.15 ? Blocks.MOSS_BLOCK.defaultBlockState()
                             : b > -0.2 ? Blocks.COARSE_DIRT.defaultBlockState() : Blocks.GRAVEL.defaultBlockState());
