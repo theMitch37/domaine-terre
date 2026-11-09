@@ -127,11 +127,11 @@ public final class Terrain {
         }
         // 1:30 (09/11/2026) : eau intérieure réelle (WorldCover 10 m, niveau lu dans le relief 30 m)
         if (echelle < 250 && sd >= 0) {
-            int e = ReliefFin.eau(x, z);
-            if (e >= 0) {
-                int d = (e & 31) - 15;
-                double altEau = (e >> 5) * 5.0 - 500.0;
-                int niv = altEau < 3.0 ? NIVEAU_MER : Math.max(NIVEAU_MER, Mth.floor(blocsDepuisAltitude(altEau)) + 1);
+            double ye = surfaceEau(x, z, true);
+            if (!Double.isNaN(ye)) {
+                int c = ReliefFin.eau(x, z) & 15;
+                int d = c < 8 ? DANS_EAU[c] : -PRES_EAU[c - 8];
+                int niv = Mth.floor(ye) + 1;
                 if (d > 0) {
                     // dans l'eau : fond qui descend avec la distance à la berge (1 à 12 blocs)
                     litRiv = niv;
@@ -219,6 +219,22 @@ public final class Terrain {
             return q == null ? -Lacs.RAYON : q.lac() == lac ? q.distance() : Math.min(q.distance(), 0.0) - 1.0;
         });
         return new Lacs.Proche(lac, d * blocsParCase());
+    }
+
+    /** Couche d'eau 1:30 : distances à la berge (blocs) codées dans l'eau (0 à 7) et sur la terre proche (8 à 15). */
+    static final int[] DANS_EAU = {1, 2, 3, 4, 6, 9, 13, 16}, PRES_EAU = {1, 2, 3, 4, 6, 9, 12, 15};
+
+    /**
+     * Hauteur exacte de la surface de l'eau intérieure (1:30) en y, ou NaN ; l'eau remplit les blocs sous floor(y) + 1.
+     * `proche` : aussi pour la terre proche (niveau de l'eau la plus proche). Au niveau de la mer et en dessous : mer.
+     */
+    public double surfaceEau(int x, int z, boolean proche) {
+        if (echelle >= 250) return Double.NaN;
+        int e = ReliefFin.eau(x, z);
+        if (e < 0 || (!proche && (e & 15) >= 8)) return Double.NaN;
+        double altEau = (e >> 4) * 3.0 - 500.0;
+        if (altEau < 3.0) return NIVEAU_MER - 0.11;
+        return Math.max(NIVEAU_MER - 0.11, blocsDepuisAltitude(altEau));
     }
 
     public static double lon(double x) { return x / BLOCS_PAR_DEGRE; }

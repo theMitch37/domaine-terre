@@ -81,8 +81,8 @@ public final class ReliefFin {
             "https://github.com/theMitch37/domaine-terre-relief/releases/download/e30-z{bz}/eau30_{bx}_{bz}.bin", 128, 300, 90);
 
     /**
-     * Eau intérieure du bloc (x, z) d'un monde 1:30 : round((niveau en m + 500) / 5) × 32 + (d + 15), d de 1 à 16 dans
-     * l'eau (blocs jusqu'à la berge), de -1 à -15 sur la terre proche ; -1 sans eau à moins de 15 blocs ou sans donnée.
+     * Eau intérieure du bloc (x, z) d'un monde 1:30 : round((niveau en m + 500) / 3) × 16 + c (c de 0 à 7 : dans
+     * l'eau, Terrain.DANS_EAU ; de 8 à 15 : terre proche, Terrain.PRES_EAU) ; -1 sans eau proche ou sans donnée.
      */
     public static int eau(int x, int z) {
         reglages();

@@ -237,9 +237,10 @@ def ouvrir(urls_noms, dossier):
 def eau(tx, tz, wc_dir, dem_dir):
     """Eau intérieure d'une région : niveau (altitude réelle de la surface) et distance signée à la berge.
 
-    Valeur = round((niveau + 500) / 5) * 32 + (d + 15) : d de 1 à 16 dans l'eau (blocs jusqu'à la berge), de -1 à -15
-    sur la terre proche (blocs jusqu'à l'eau, niveau de l'eau la plus proche) ; VIDE ailleurs. La mer (relief <= 0,5 m)
-    est laissée aux côtes du mod.
+    Valeur = round((niveau + 500) / 3) * 16 + c (niveau au pas de 3 m, jusqu'à ~5 640 m ; tient dans un int16 positif) :
+    c de 0 à 7 dans l'eau, distance à la berge 1, 2, 3, 4, 6, 9, 13, 16 blocs ; c de 8 à 15 sur la terre proche,
+    distance à l'eau 1, 2, 3, 4, 6, 9, 12, 15 blocs (niveau de l'eau la plus proche) ; VIDE ailleurs. La mer (relief
+    <= 0,5 m) est laissée aux côtes du mod.
     """
     import rasterio
     from scipy import ndimage
@@ -289,16 +290,18 @@ def eau(tx, tz, wc_dir, dem_dir):
             v = dem[sel]
             if v.size >= 150 and np.percentile(v, 90) - np.percentile(v, 10) < 4.0:
                 niveau[sel] = np.median(v)
-    dans = np.minimum(np.round(ndimage.distance_transform_edt(eau)), 16).astype(np.int32)
+    dans = np.searchsorted(np.array([1, 2, 3, 4, 6, 9, 13, 16]),
+                           np.minimum(np.round(ndimage.distance_transform_edt(eau)), 16), side="right") - 1
     dist, (iz, ix) = ndimage.distance_transform_edt(~eau, return_indices=True)
     proche = (~eau) & (dist <= 15) & eau.any()
     niv_proche = niveau[iz, ix]
     val = np.full((W, W), VIDE, np.int32)
-    L = lambda a: np.clip(np.round((a + 500.0) / 5.0), 0, 2047).astype(np.int32)
+    L = lambda a: np.clip(np.round((a + 500.0) / 3.0), 0, 2047).astype(np.int32)
     ok = eau & np.isfinite(niveau)
-    val[ok] = L(niveau[ok]) * 32 + (dans[ok] + 15)
+    val[ok] = L(niveau[ok]) * 16 + np.clip(dans[ok], 0, 7)
     ok2 = proche & np.isfinite(niv_proche)
-    val[ok2] = L(niv_proche[ok2]) * 32 + (15 - np.round(dist[ok2]).astype(np.int32))
+    cl = np.searchsorted(np.array([1, 2, 3, 4, 6, 9, 12, 15]), np.round(dist[ok2]), side="right") - 1
+    val[ok2] = L(niv_proche[ok2]) * 16 + 8 + np.clip(cl, 0, 7)
     return val[M:M + T, M:M + T], int(eau[M:M + T, M:M + T].sum())
 
 

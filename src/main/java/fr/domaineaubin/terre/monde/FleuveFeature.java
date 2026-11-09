@@ -60,6 +60,14 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
                     }
                     if (y == w - 1) eauEnHaut = true;
                 }
+                // 1:30 (09/11/2026) : la surface suit la pente au lieu de marches d'un bloc. Le bloc du dessus devient de
+                // l'eau courante dont la hauteur (niveau 1 à 7) suit la vraie surface ; juste avant chaque marche il ne
+                // reste qu'un neuvième de bloc, et le bief d'aval, plein, reprend presque à la même hauteur. Ces niveaux
+                // respectent la règle du jeu (un de plus que le voisin d'amont) : l'eau garde cette forme.
+                if (Terrain.echelle() < 250) {
+                    if (eauEnHaut) pente(niveau, t, pos, x, z, w);
+                    continue;
+                }
                 // marche : un voisin du lit est plus bas, l'eau de surface doit couler (sinon un mur d'eau immobile)
                 if (eauEnHaut && niveau.getBlockState(pos.set(x, w - 1, z)).is(Blocks.WATER)
                         && (plusBas(t, x + 1, z, w) || plusBas(t, x - 1, z, w) || plusBas(t, x, z + 1, w)
@@ -69,6 +77,24 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
             }
         }
         return modifie;
+    }
+
+    /** Bloc d'eau du dessus d'un cours d'eau 1:30 : eau courante à la hauteur de la vraie surface (sauf eau plate). */
+    private static void pente(WorldGenLevel niveau, Terrain t, BlockPos.MutableBlockPos pos, int x, int z, int w) {
+        double y = t.surfaceEau(x, z, false);
+        if (Double.isNaN(y)) return;
+        double plat = 0.0;
+        for (int[] o : new int[][]{{2, 0}, {-2, 0}, {0, 2}, {0, -2}}) {
+            double v = t.surfaceEau(x + o[0], z + o[1], true);
+            if (!Double.isNaN(v)) plat = Math.max(plat, Math.abs(v - y));
+        }
+        if (plat < 0.02) return;                               // lac, bief plat : eau immobile pleine
+        double f = y - (w - 1);                                // hauteur voulue dans le bloc du dessus (0 à 1)
+        if (f >= 0.85) return;
+        int k = net.minecraft.util.Mth.clamp((int) Math.round(8 - 9 * f), 1, 7);
+        if (niveau.getBlockState(pos.set(x, w - 1, z)).is(Blocks.WATER)) {
+            niveau.setBlock(pos, Blocks.WATER.defaultBlockState().setValue(net.minecraft.world.level.block.LiquidBlock.LEVEL, k), 2);
+        }
     }
 
     /** Sol meuble posé par les règles de surface (herbe, terre, sable…) ; la roche des lits de montagne reste. */
