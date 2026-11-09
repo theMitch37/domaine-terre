@@ -70,6 +70,17 @@ public final class Ambiances {
             event.setCanceled(true);
             return;
         }
+        // eau opaque (09/11/2026) : distance de vue sous l'eau selon le type d'eau (boueuse 3,5 blocs, mer 28 à 16)
+        if (event.getCamera().getFluidInCamera() == FogType.WATER) {
+            Minecraft mc = Minecraft.getInstance();
+            double v = mc.level == null ? Double.NaN : EauOpaque.visibilite(mc.level, event.getCamera().getBlockPosition());
+            if (!Double.isNaN(v) && v < event.getFarPlaneDistance()) {
+                event.setFarPlaneDistance((float) v);
+                event.setNearPlaneDistance(-4.0f);
+                event.setCanceled(true);
+            }
+            return;
+        }
         double s = surplomb(event.getCamera());
         if (!Double.isNaN(s) && event.getMode() == net.minecraft.client.renderer.FogRenderer.FogMode.FOG_TERRAIN
                 && s < event.getFarPlaneDistance()) {

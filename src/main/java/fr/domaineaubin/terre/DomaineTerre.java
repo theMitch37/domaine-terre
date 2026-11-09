@@ -20,6 +20,10 @@ public class DomaineTerre {
         ModMonde.TYPES_DENSITE.register(bus);
         ModMonde.FEATURES.register(bus);
         ModMonde.SOURCES_BIOMES.register(bus);
+        // eau opaque selon le type d'eau et la profondeur (09/11/2026) : source d'atlas inscrite avant les textures
+        if (net.minecraftforge.fml.loading.FMLEnvironment.dist == net.minecraftforge.api.distmarker.Dist.CLIENT) {
+            fr.domaineaubin.terre.client.EauOpaque.inscrire();
+        }
         LOGGER.info("Domaine d'Aubin - Terre : mod chargé.");
     }
 }
