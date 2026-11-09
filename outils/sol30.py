@@ -11,7 +11,7 @@ avec le voisin de gauche) ; valeur = roche * 256 + couverture ; -32768 = pas de 
 
 Usage : python outils/sol30.py <zones.json> <noms,séparés,virgules> <sortie>   (régions de 512 couvrant les zones)
 """
-import io, json, math, os, struct, sys, time, urllib.request, zlib
+import io, json, math, os, re, struct, sys, time, urllib.request, zlib
 from collections import Counter
 import numpy as np
 
@@ -28,13 +28,13 @@ Z = 12
 ROCHES = ["inconnue", "gres", "argile", "calcaire", "dolomie", "craie", "conglomerat", "evaporite", "basalte",
           "andesite", "tuf", "granite", "gabbro", "gneiss", "quartzite", "marbre", "meuble", "glaciaire", "dune"]
 MOTS = [  # (mot dans le nom de la lithologie, famille) : le premier qui correspond gagne
-    ("dune", "dune"), ("eolian", "dune"), ("loess", "meuble"), ("till", "glaciaire"), ("moraine", "glaciaire"),
+    ("basalt", "basalte"), ("dune", "dune"), ("loess", "meuble"), ("till", "glaciaire"), ("moraine", "glaciaire"),
     ("glacial", "glaciaire"), ("alluvi", "meuble"), ("gravel", "meuble"), ("unconsolidated", "meuble"),
     ("colluvi", "meuble"), ("sand", "gres"), ("arkose", "gres"), ("wacke", "gres"), ("arenite", "gres"),
     ("conglomerate", "conglomerat"), ("breccia", "conglomerat"), ("chalk", "craie"), ("dolo", "dolomie"),
     ("limestone", "calcaire"), ("carbonate", "calcaire"), ("travertine", "calcaire"), ("marble", "marbre"),
     ("quartzite", "quartzite"), ("gypsum", "evaporite"), ("evaporite", "evaporite"), ("salt", "evaporite"),
-    ("anhydrite", "evaporite"), ("shale", "argile"), ("mud", "argile"), ("silt", "argile"), ("clay", "argile"),
+    ("anhydrite", "evaporite"), ("eolian", "gres"), ("shale", "argile"), ("mud", "argile"), ("silt", "argile"), ("clay", "argile"),
     ("argillite", "argile"), ("marl", "argile"), ("slate", "gneiss"), ("phyllite", "gneiss"), ("schist", "gneiss"),
     ("gneiss", "gneiss"), ("migmatite", "gneiss"), ("amphibolite", "gneiss"), ("metavolcanic", "gneiss"),
     ("metasediment", "gneiss"), ("metamorphic", "gneiss"), ("basalt", "basalte"), ("mafic volcanic", "basalte"),
@@ -49,8 +49,19 @@ MOTS = [  # (mot dans le nom de la lithologie, famille) : le premier qui corresp
 def famille(texte):
     t = (texte or "").lower()
     for m, f in MOTS:
-        if m in t:
+        if (re.search(r"\b" + m + r"\b", t) if m == "salt" else m in t):
             return ROCHES.index(f)
+    return 0
+
+
+def famille_props(p):
+    """Famille d'une unité d'après les propriétés de la tuile carto (lithologie principale d'abord)."""
+    txt = p.get("lith") or ""
+    maj = txt.split("Major:{")[1].split("}")[0] if "Major:{" in txt else txt
+    for t in (maj, txt, p.get("lith_type1"), p.get("name"), p.get("descrip"), p.get("lith_class1")):
+        f = famille(t)
+        if f:
+            return f
     return 0
 
 
@@ -164,6 +175,8 @@ def roche(tx, tz, journal):
                     if not journal or len(journal) < 3:
                         journal.append(f"couche {nom_couche} : {sorted(p.keys())}")
                     k = ids.setdefault(mid, len(ids) + 1)
+                    if mid not in _unites:
+                        _unites[mid] = famille_props(p)
                     g = f["geometry"]
                     polys = [g["coordinates"]] if g["type"] == "Polygon" else g["coordinates"] if g["type"] == "MultiPolygon" else []
                     for poly in polys:
@@ -176,7 +189,7 @@ def roche(tx, tz, journal):
             px = np.clip(((fx[sel] - txx) * R).astype(int), 0, R - 1)
             py = np.clip(((fy[sel] - ty) * R).astype(int), 0, R - 1)
             v = a[py, px]
-            inv = {k: unite(m) for m, k in ids.items()}
+            inv = {k: _unites.get(m, 0) for m, k in ids.items()}
             out[sel] = np.array([inv.get(int(k), 0) for k in v], np.uint8)
     return out
 
