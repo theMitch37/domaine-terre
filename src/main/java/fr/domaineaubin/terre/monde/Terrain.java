@@ -151,15 +151,10 @@ public final class Terrain {
                 else if (!(r != null && r.distance() <= r.demiLargeur() + BERGE_RIVIERE)) hAvant = bergeLac(hAvant, nivLac, -lp.distance());
             }
             double hl = lieu.hauteur(x, z, hAvant);
-            // les cours d'eau et lacs du mod n'existent pas dans un lieu : leur vrai fond de vallée non plus (10/11/2026,
-            // Gullfoss : le plateau autour de la gorge était descendu au fond de la vallée réelle, laissant ses parois
-            // debout comme des murs)
-            if (procheRiv > 0.0 || procheLac > 0.0) h = calculerHauteur(x, z, sd, alt, pente, r, true, 0.0, 0.0);
-            if (Math.abs(hl - hAvant) < 1e-9) {
-                hl = lieu.hauteur(x, z, h);                    // colonne non sculptée : le terrain du mod (relief fin)
-            } else if (h != hAvant) {
-                hl += (h - hAvant) * (1.0 - Mth.clamp(interieurLieu(x, z) / RACCORD_FIN, 0.0, 1.0));
-            }
+            // toutes les colonnes de la zone, sculptées ou non, gardent le terrain d'avant à l'intérieur (10/11/2026,
+            // Gullfoss : le plateau non sculpté suivait le relief fin, qui y voit la vallée de la Hvítá en V large, et
+            // descendait de 12 blocs au pied des parois de la gorge, sculptées sur le terrain d'avant : murs debout)
+            if (h != hAvant) hl += (h - hAvant) * (1.0 - Mth.clamp(interieurLieu(x, z) / RACCORD_FIN, 0.0, 1.0));
             h = hl;
             poids = Mth.clamp(lieu.poids(x, z), 0.0, 1.0);
             // un lieu sculpté (Grand Canyon, Verdon) gère l'eau de son cours d'eau lui-même (niveau de la mer)
