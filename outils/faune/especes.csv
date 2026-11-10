@@ -341,7 +341,7 @@ alexsmobs:capuchin_monkey;Capucin;Cebus;sauvage;foret_tropicale;amazonie,ameriqu
 alexsmobs:catfish;Poisson-chat (AM);Silurus;poisson;eau_douce;grandes_plaines,boreale,amazonie;1;garder;"race / variante de la famille untamedwilds:catfish ; mod à installer";C
 alexsmobs:cockroach;Cafard;Blattodea;insecte;sol,souterrain;partout_sauf:arctique,antarctique,boreale,siberie,nordique;2-4;garder;mod à installer;PC
 alexsmobs:comb_jelly;Cténophore;Ctenophora;sauvage;mer,large;toutes_les_mers;1-3;garder;mod à installer;C
-alexsmobs:crocodile;Crocodile;Crocodylus niloticus / porosus;sauvage;eau_douce,cote;sahara_sahel,afrique_tropicale,afrique_est,inde,asie_sud_est,australie,melanesie;1-3;garder;"prédateur ; mod à installer ; Nil jusqu'en Égypte (eau douce seulement)";C
+alexsmobs:crocodile;Crocodile;Crocodylus niloticus / porosus;sauvage;eau_douce,cote;sahara_sahel,afrique_tropicale,afrique_est,inde,asie_sud_est,australie,melanesie;1-3;garder;"prédateur ; mod à installer ; Nil jusqu'en Égypte (eau douce seulement)";PC
 alexsmobs:crow;Corbeau;Corvus;sauvage;culture,foret;partout_sauf:antarctique,amazonie;2-5;garder;mod à installer;C
 alexsmobs:devils_hole_pupfish;Cyprinodon du trou du Diable;Cyprinodon diabolis;poisson;eau_douce;ouest_mexique;2-4;garder;"très rare (une seule source au Nevada) ; mod à installer";R
 alexsmobs:elephant;Éléphant;Loxodonta / Elephas;sauvage;savane,foret_tropicale;inde,asie_sud_est;3-8;garder;"mod à installer ; race régionale (Asie) de naturalist:elephant";PC

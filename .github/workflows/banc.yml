@@ -69,7 +69,10 @@ jobs:
           # réglages du pack comme sur l'instance (10/11/2026) : un premier démarrage crée les configs des mods, puis
           # generer_placement.py écrit le datapack domaine_terroirs (OpenLoader) et règle Untamed Wilds et Alex's Mobs
           rm -rf config && echo "eula=true" > eula.txt
-          timeout 600 java -Xmx6G @libraries/net/minecraftforge/forge/1.20.1-47.4.10/unix_args.txt nogui --initSettings > init.log 2>&1 || true
+          # (vrai démarrage puis arrêt : Untamed Wilds n'écrit sa config qu'au démarrage du serveur ; monde jeté ensuite)
+          ( timeout 900 bash -c 'until grep -q "Done (" logs/latest.log 2>/dev/null; do sleep 5; done'; echo stop ) \
+            | timeout 1000 java -Xmx6G @libraries/net/minecraftforge/forge/1.20.1-47.4.10/unix_args.txt nogui > init.log 2>&1 || true
+          rm -rf world banc logs/latest.log
           ls config | head -40
           mkdir -p config/openloader/data
           (cd $GITHUB_WORKSPACE && python outils/generer_placement.py /tmp/serveur) || echo "::warning::réglages du pack non appliqués"
