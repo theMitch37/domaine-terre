@@ -46,7 +46,8 @@ public final class FauneTerre {
     public record Entree(String id, EntityType<?> type, MobCategory categorie, long terroirs, boolean tousTerroirs,
                          int biomes, int[][] precis, boolean eau, boolean cote, int temps, int bandes, boolean mer,
                          boolean nuit, Etage etage, MobSpawnSettings.SpawnerData donnees, boolean generationSeule,
-                         String biomeJeu, double altitudeMin, int tirage, boolean monstreSurface) {
+                         String biomeJeu, double altitudeMin, int tirage, boolean monstreSurface,
+                         boolean sousTerre, boolean noir, String sol, boolean pluie) {
         /** Conditions en plus de la règle générale (09/11/2026) : biome du jeu, altitude, tirage. */
         boolean conditionnee() {
             return biomeJeu != null || !Double.isNaN(altitudeMin) || tirage > 1;
@@ -92,6 +93,18 @@ public final class FauneTerre {
         }
         this.types = java.util.Set.copyOf(t);
         this.conditions = java.util.Map.copyOf(c);
+        java.util.Map<EntityType<?>, Entree> p = new java.util.HashMap<>();
+        for (Entree e : surface) p.putIfAbsent(e.donnees().type, e);
+        for (Entree e : souterrain) p.putIfAbsent(e.donnees().type, e);
+        this.parType = java.util.Map.copyOf(p);
+    }
+
+    /** Toutes les bêtes de la table (surface et sous terre), pour les règles d'apparition (10/11/2026). */
+    private final java.util.Map<EntityType<?>, Entree> parType;
+
+    /** La ligne de la table de cette bête (surface d'abord), ou null si la table ne la connaît pas. */
+    public Entree entree(EntityType<?> type) {
+        return parType.get(type);
     }
 
     /** Bêtes de la table qui ont des conditions en plus (biome du jeu, altitude, tirage, monstre de surface). */
@@ -195,9 +208,14 @@ public final class FauneTerre {
             double altitudeMin = o.has("altitude_min") ? o.get("altitude_min").getAsDouble() : Double.NaN;
             int tirage = o.has("tirage") ? Math.max(1, o.get("tirage").getAsInt()) : 1;
             boolean monstreSurface = o.has("monstre_surface") && o.get("monstre_surface").getAsBoolean();
+            boolean sousTerre = o.has("sous_terre") && o.get("sous_terre").getAsBoolean();
+            boolean noir = o.has("noir") && o.get("noir").getAsBoolean();
+            String sol = o.has("sol") ? o.get("sol").getAsString() : null;
+            boolean pluie = o.has("pluie") && o.get("pluie").getAsBoolean();
             Entree en = new Entree(o.get("id").getAsString(), type, cat, ts, nb >= 29, bio, precis,
                     o.get("eau").getAsBoolean(), o.get("cote").getAsBoolean(), temps, bandes, mer,
-                    o.get("nuit").getAsBoolean(), etage, d, generationSeule, biomeJeu, altitudeMin, tirage, monstreSurface);
+                    o.get("nuit").getAsBoolean(), etage, d, generationSeule, biomeJeu, altitudeMin, tirage, monstreSurface,
+                    sousTerre, noir, sol, pluie);
             (etage == null ? surface : souterrain).add(en);
         }
         DomaineTerre.LOGGER.info("Faune de la Terre : {} espèces en surface, {} sous terre ({} absentes du pack), {} ms",

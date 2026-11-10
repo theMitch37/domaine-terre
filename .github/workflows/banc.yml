@@ -62,6 +62,23 @@ jobs:
           rm -rf mods banc && mkdir mods
           cp $GITHUB_WORKSPACE/build/libs/domaine_terre-*.jar $GITHUB_WORKSPACE/lieux/build/libs/domaine_terre_lieux-*.jar mods/
           rm -f mods/*-sources.jar mods/*-slim.jar
+          # Mods d'animaux du pack (10/11/2026) : sans eux le banc ne peut voir ni crocodile ni aucune bête d'Alex's Mobs.
+          # Mêmes versions que l'instance « Refonte d'Aubin » ; pris sur Modrinth (échec = avertissement, banc sans eux).
+          python - <<'EOF' || echo "::warning::mods d'animaux non téléchargés : banc sans Alex's Mobs"
+          import json, urllib.request, urllib.parse
+          VOULUS = {"alexs-mobs": "alexsmobs-1.22.9.jar", "citadel": "citadel-2.6.3-1.20.1.jar"}
+          for slug, fichier in VOULUS.items():
+              q = urllib.parse.urlencode({"loaders": '["forge"]', "game_versions": '["1.20.1"]'})
+              req = urllib.request.Request(f"https://api.modrinth.com/v2/project/{slug}/version?{q}",
+                                           headers={"User-Agent": "theMitch37/domaine-terre banc"})
+              versions = json.load(urllib.request.urlopen(req, timeout=60))
+              f = next((f for v in versions for f in v["files"] if f["filename"] == fichier), None)
+              if f is None:
+                  f = versions[0]["files"][0]
+                  print(f"::warning::{fichier} introuvable sur Modrinth, pris {f['filename']}")
+              urllib.request.urlretrieve(f["url"], "mods/" + f["filename"])
+              print("téléchargé", f["filename"])
+          EOF
           ls mods
 
       - name: Génération des lieux

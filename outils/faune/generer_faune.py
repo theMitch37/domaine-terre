@@ -105,11 +105,17 @@ UW_TERRE = {"bear", "big_cat", "hyena", "large_snake", "monitor", "boar", "bison
 #   biome_jeu      : seulement dans ce biome du jeu (grottes luxuriantes) ;
 #   altitude_min   : seulement au-dessus de cette altitude réelle, en mètres ;
 #   tirage         : garde l'espèce une fois sur N tentatives (rareté sans toucher aux poids des autres) ;
-#   monstre_surface: monstre de la table autorisé en surface (sinon : sorcières des marais seulement).
+#   monstre_surface: monstre de la table autorisé en surface (sinon : sorcières des marais seulement) ;
+# règles de position (10/11/2026 : seules nos règles décident, celles des mods sont coupées ; FauneSpawns.nosRegles) :
+#   sous_terre     : bête de surface qui peut aussi naître sous le sol d'origine ;
+#   noir           : seulement dans le noir ;
+#   sol            : bloc dessous (« sable » = #minecraft:sand) ;
+#   pluie          : seulement par pluie ou orage.
 CONDITIONS = {
-    "alexsmobs:guster": {"tirage": 40, "monstre_surface": True},      # grands ergs, rare ; sable et pluie : règle du mod
+    "alexsmobs:guster": {"tirage": 40, "monstre_surface": True, "sol": "sable", "pluie": True},  # tempête dans les ergs
     "alexsmobs:flutter": {"biome_jeu": "lush_caves"},
     "alexsmobs:sunbird": {"altitude_min": 2500, "tirage": 10},
+    "minecraft:bat": {"sous_terre": True, "noir": True},
 }
 
 rows = list(csv.DictReader(open(os.path.join(ICI, "especes.csv"), encoding="utf-8"), delimiter=";"))

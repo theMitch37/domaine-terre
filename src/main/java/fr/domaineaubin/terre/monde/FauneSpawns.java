@@ -10,12 +10,14 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
@@ -153,21 +155,53 @@ public final class FauneSpawns {
     }
 
     /**
-     * Règles d'apparition des mods (08/11/2026). Untamed Wilds n'en a aucune et passe toujours ; Alex's Mobs, Naturalist…
-     * refusent souvent sur la Terre (crocodile : jamais au-dessus de y 67, gazelle, jerboa… : tirages, lumière, blocs
-     * précis). Résultat : dromadaires et varans partout, crocodiles du Nil presque absents. Pour les bêtes de la table,
-     * c'est la table qui décide où et combien : on ne garde que la vérification physique du jeu (sol porteur, place libre,
-     * eau pour les bêtes d'eau).
+     * Seules nos règles décident (10/11/2026, décision de Maxime : « que les spawns ne dépendent que de nos choix »).
+     * Pour toute bête de la table (surface et étages, tous mods confondus), les règles propres des mods sont coupées :
+     * prédicat de placement (crocodile d'Alex's Mobs : jamais au-dessus de y 67 ; sol précis, lumière, herbe…) et
+     * checkSpawnRules / checkSpawnObstruction (tirages d'Alex's Mobs, règles de Naturalist…). À leur place,
+     * {@link #nosRegles}. Ne touche que les apparitions naturelles et celles de la génération (pas les œufs, les
+     * générateurs, l'élevage). Les bêtes hors table (monstres du jeu de base des étages) gardent les règles du jeu.
      */
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGH)
     public static void placement(MobSpawnEvent.SpawnPlacementCheck event) {
-        if (event.getDefaultResult() || !terre(event.getLevel())) return;
-        EntityType<?> type = event.getEntityType();
-        if (type.getCategory() == MobCategory.MONSTER || !FauneTerre.get().dansLaTable(type)) return;
-        if (net.minecraft.world.level.NaturalSpawner.isSpawnPositionOk(
-                net.minecraft.world.entity.SpawnPlacements.getPlacementType(type), event.getLevel(), event.getPos(), type)) {
-            event.setResult(Event.Result.ALLOW);
-        }
+        if (!naturelle(event.getSpawnType()) || !terre(event.getLevel())) return;
+        if (FauneTerre.get().entree(event.getEntityType()) != null) event.setResult(Event.Result.ALLOW);
+    }
+
+    /** Priorité haute : le refus des grottes célèbres (addon Lieux, priorité normale) passe après et l'emporte. */
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public static void position(MobSpawnEvent.PositionCheck event) {
+        if (!naturelle(event.getSpawnType()) || !terre(event.getLevel())) return;
+        FauneTerre.Entree e = FauneTerre.get().entree(event.getEntity().getType());
+        if (e == null) return;
+        event.setResult(nosRegles(e, event.getEntity(), event.getLevel()) ? Event.Result.ALLOW : Event.Result.DENY);
+    }
+
+    private static boolean naturelle(MobSpawnType t) {
+        return t == MobSpawnType.NATURAL || t == MobSpawnType.CHUNK_GENERATION;
+    }
+
+    /**
+     * Nos règles, et seulement elles (le où et le combien sont déjà décidés par les listes de la table) :
+     * - physique : la bête tient à cette place (pas d'autre entité, pas de bloc) ; une bête de terre pas dans un liquide ;
+     * - surface : une bête de surface naît au-dessus du sol d'origine, sauf `sous_terre` (chauve-souris) ou un biome de
+     *   grotte imposé (Papilloneur, grottes luxuriantes) ; les poissons ne sont pas concernés ;
+     * - monstres de la table : dans le noir (comme ceux du jeu de base), sauf `monstre_surface` (Rafalleur) ;
+     * - `noir` : dans le noir aussi (chauve-souris) ; `sol` : bloc dessous (« sable ») ; `pluie` : par pluie ou orage.
+     */
+    static boolean nosRegles(FauneTerre.Entree e, Mob m, ServerLevelAccessor n) {
+        BlockPos pos = m.blockPosition();
+        if (!n.isUnobstructed(m) || !n.noCollision(m)) return false;
+        boolean eau = net.minecraft.world.entity.SpawnPlacements.getPlacementType(m.getType())
+                == net.minecraft.world.entity.SpawnPlacements.Type.IN_WATER;
+        if (!eau && !n.getFluidState(pos).isEmpty()) return false;
+        if (!eau && e.etage() == null && !e.sousTerre() && e.biomeJeu() == null
+                && etage(pos.getX(), pos.getY(), pos.getZ()) >= 0) return false;
+        boolean monstre = e.categorie() == MobCategory.MONSTER;
+        if (((monstre && !e.monstreSurface()) || e.noir())
+                && !net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn(n, pos, n.getRandom())) return false;
+        if ("sable".equals(e.sol()) && !n.getBlockState(pos.below()).is(net.minecraft.tags.BlockTags.SAND)) return false;
+        return !e.pluie() || n.getLevelData().isRaining();
     }
 
     /** Monstres plus forts en descendant : +50 % de vie, +2 dégâts, +2 armure par étage sous les couches hautes. */
