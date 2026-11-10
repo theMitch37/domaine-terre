@@ -190,12 +190,14 @@ def relief(lon, lat):
 
 
 def blocs(a):
+    """Copie de Terrain.blocsDepuisAltitude (monde de y -512 à 1024 depuis le 10/11/2026)."""
     a = np.asarray(a, float)
-    mer = np.select([a > -200, a > -6000], [62 + a / 200 * 20, 42 + (a + 200) / 5800 * 32],
-                    10 - 20 * np.minimum((-a - 6000) / 3800, 1) - 51 * (1 - (1 - np.clip((-a - 9800) / 500, 0, 1)) ** 2.5))
-    return np.where(a < 0, mer,
-                    np.where(a <= 500, 64 + a / 500 * 16, np.where(a <= 2000, 80 + (a - 500) / 1500 * 60,
-                                                                    140 + np.minimum((a - 2000) / 6800, 1) * 160)))
+    mer = np.select([a > -200, a > -6000], [62 + a / 200 * 20, 42 + (a + 200) / 5800 * 292],
+                    -250 - 170 * np.minimum((-a - 6000) / 3800, 1) - 80 * (1 - (1 - np.clip((-a - 9800) / 500, 0, 1)) ** 2.5))
+    terre = np.select([a <= 500, a <= 2000, a <= 4000],
+                      [64 + a / 500 * 16, 80 + (a - 500) / 1500 * 60, 140 + (a - 2000) / 2000 * 100],
+                      240 + np.minimum((a - 4000) / 4849, 1) * 380)
+    return np.where(a < 0, mer, terre)
 
 
 def lisse(t):

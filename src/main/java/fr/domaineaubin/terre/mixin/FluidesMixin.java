@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * Sous y -54, le jeu remplit tout de lave. Les fosses océaniques descendent jusqu'à y -61 :
+ * Sous y -54, le jeu remplit tout de lave. Les fosses océaniques descendent jusqu'à y -505 (monde agrandi, 10/11/2026) :
  * en mer (d'après la carte), l'eau de la mer y descend aussi. Sous les terres, la lave vanilla reste.
  * Dans un lac (étape C1), l'eau prend le niveau de ce lac au lieu de celui de la mer.
  */
@@ -27,14 +27,14 @@ public abstract class FluidesMixin {
         int mer = reglages.seaLevel();
         Aquifer.FluidStatus eau = new Aquifer.FluidStatus(mer, reglages.defaultFluid());
         // lacs en altitude (étape C1) : dans un lac, l'eau monte jusqu'au niveau de ce lac
-        Aquifer.FluidStatus[] lacs = new Aquifer.FluidStatus[512];
+        Aquifer.FluidStatus[] lacs = new Aquifer.FluidStatus[Terrain.Y_MAX - Terrain.Y_MIN];
         Aquifer.FluidStatus sec = new Aquifer.FluidStatus(-2048, Blocks.AIR.defaultBlockState());
         retour.setReturnValue((x, y, z) -> {
             Terrain t = Terrain.get();
             int niv = t.niveauLac(x, z);
-            if (niv != Terrain.SANS_LAC && niv > -128 && niv < 384) {
-                Aquifer.FluidStatus s = lacs[niv + 128];
-                if (s == null) lacs[niv + 128] = s = new Aquifer.FluidStatus(niv, reglages.defaultFluid());
+            if (niv != Terrain.SANS_LAC && niv > Terrain.Y_MIN && niv < Terrain.Y_MAX) {
+                Aquifer.FluidStatus s = lacs[niv - Terrain.Y_MIN];
+                if (s == null) lacs[niv - Terrain.Y_MIN] = s = new Aquifer.FluidStatus(niv, reglages.defaultFluid());
                 return s;
             }
             if (t.sansAquifere(x, z)) return sec;          // lit d'un cours d'eau : FleuveFeature y met l'eau

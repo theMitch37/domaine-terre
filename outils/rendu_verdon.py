@@ -29,9 +29,9 @@ PROFIL_G = [0.00, 0.50, 0.62, 0.66, 0.66, 0.95, 1.00, 1.0]
 def lis(t):
     t = np.clip(t, 0, 1); return t * t * (3 - 2 * t)
 def blocs(a):
-    a = np.asarray(a, float)
-    return np.where(a <= 500, 64 + a / 500 * 16, np.where(a <= 2000, 80 + (a - 500) / 1500 * 60,
-                    140 + np.minimum((a - 2000) / 6800, 1) * 160))
+    import os, sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from terre_py import blocs as b      # même courbe que le mod (10/11/2026)
+    return b(a)
 def bruit(X, Z, ech, graine):
     r = np.random.default_rng(graine); g = r.standard_normal((64, 64))
     g = ndimage.gaussian_filter(g, 1.0, mode="wrap"); g /= g.std()

@@ -76,8 +76,8 @@
           "argument1": 0.1171875,
           "argument2": {
            "argument1": {
-            "from_y": -64,
-            "to_y": -40,
+            "from_y": -512,
+            "to_y": -488,
             "from_value": 0.0,
             "to_value": 1.0,
             "type": "minecraft:y_clamped_gradient"
@@ -88,8 +88,8 @@
              "argument1": -0.078125,
              "argument2": {
               "argument1": {
-               "from_y": 300,
-               "to_y": 316,
+               "from_y": 1000,
+               "to_y": 1016,
                "from_value": 1.0,
                "to_value": 0.0,
                "type": "minecraft:y_clamped_gradient"
@@ -287,8 +287,8 @@
    "argument1": 0.1171875,
    "argument2": {
     "argument1": {
-     "from_y": -64,
-     "to_y": -40,
+     "from_y": -512,
+     "to_y": -488,
      "from_value": 0.0,
      "to_value": 1.0,
      "type": "minecraft:y_clamped_gradient"
@@ -299,8 +299,8 @@
       "argument1": -0.078125,
       "argument2": {
        "argument1": {
-        "from_y": 300,
-        "to_y": 316,
+        "from_y": 1000,
+        "to_y": 1016,
         "from_value": 1.0,
         "to_value": 0.0,
         "type": "minecraft:y_clamped_gradient"
@@ -3121,8 +3121,8 @@
   "type": "minecraft:sequence"
  },
  "noise": {
-  "min_y": -64,
-  "height": 384,
+  "min_y": -512,
+  "height": 1536,
   "size_horizontal": 1,
   "size_vertical": 2
  },

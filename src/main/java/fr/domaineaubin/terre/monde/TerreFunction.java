@@ -51,7 +51,7 @@ public record TerreFunction(Sortie sortie) implements DensityFunction.SimpleFunc
     }
 
     public enum Sortie implements StringRepresentable {
-        OFFSET("offset", -1.5, 1.5),
+        OFFSET("offset", -5.0, 7.0),             // (H - 128) / 128, H de y -512 à 1024 (10/11/2026)
         FACTOR("factor", 0.0, 30.0),
         JAGGEDNESS("jaggedness", 0.0, 1.0),
         CONTINENTS("continents", -1.1, 0.5),

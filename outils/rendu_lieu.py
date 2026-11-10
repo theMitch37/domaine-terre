@@ -21,9 +21,9 @@ E,P,R,D=G
 BPD=445.28; FOND=56; PIED=62.5
 EP=[90,70,100,100,70,70,70,70,150,120,100,60]; FA=[1,0,1,0,1,0,1,0,1,1,0,1]; SOM=sum(EP)
 def blocs(a):
-    if a<=500: return 64+a/500*16
-    if a<=2000: return 80+(a-500)/1500*60
-    return 140+min((a-2000)/6800,1)*160
+    import os,sys; sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
+    from terre_py import blocs as b      # même courbe que le mod (10/11/2026)
+    return float(b(a))
 def ep(i,span):
     vis=min(max(span-SOM,0),300)
     return vis if i==12 else EP[i]*max(1,(span-vis)/SOM)

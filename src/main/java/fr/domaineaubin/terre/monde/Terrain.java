@@ -33,6 +33,9 @@ public final class Terrain {
         return echelle;
     }
     public static final int NIVEAU_MER = 63;
+    /** Hauteur du monde (10/11/2026, décision de Maxime) : y -512 à 1023 ; le fond des fosses reste au-dessus de la bedrock. */
+    public static final int Y_MIN = -512, Y_MAX = 1024;
+    static final double PLANCHER_FOSSES = -505.0;
 
     private static volatile Terrain instance;
 
@@ -190,21 +193,21 @@ public final class Terrain {
 
     /** Correspondance altitude réelle (m) -> hauteur Minecraft (y), voir le plan v1. */
     public static double blocsDepuisAltitude(double alt) {
+        // 10/11/2026 (décision de Maxime) : monde de y -512 à 1024. Plaines, collines et plateau continental gardent
+        // leur hauteur ; seules les hautes montagnes (toit du monde) et les grands fonds sont étirés.
         if (alt < 0) {
-            // océans profonds : y 10 à 6 000 m (relevés le 08/11/2026) ; plus bas, les fosses, jusqu'à y -61 au fond
-            // des Mariannes (≈ -10 300 m dans ETOPO à 3'), juste au-dessus de la bedrock (faille : 28/10)
             if (alt > -200) return 62 + alt / 200.0 * 20;                       // plateau continental : y 42 à 62 (10 m/bloc)
-            // 08/11/2026 : océans relevés, les plaines abyssales s'arrêtent à y 10 ; tout ce qui est plus bas est aux fosses
-            if (alt > -6000) return 42 + (alt + 200) / 5800.0 * 32;             // talus, glacis, plaines abyssales : y 10 à 42
-            // fosses : y 10 à -10 jusqu'à 9 800 m, puis une faille au fond des plus profondes (Mariannes, Tonga,
-            // Philippines, Kermadec) : parois presque verticales de 9 800 à 10 300 m, jusqu'à y -61 (51 blocs)
+            if (alt > -6000) return 42 + (alt + 200) / 5800.0 * 292;            // talus, glacis, plaines abyssales : y 42 à -250
+            // fosses : y -250 à -420 jusqu'à 9 800 m, puis une faille au fond des plus profondes (Mariannes, Tonga,
+            // Philippines, Kermadec) : parois presque verticales de 9 800 à 10 300 m, jusqu'à y -500 (80 blocs)
             double t1 = Math.min((-alt - 6000) / 3800.0, 1.0);
             double t2 = Mth.clamp((-alt - 9800) / 500.0, 0.0, 1.0);
-            return 10 - 20 * t1 - 51 * (1 - Math.pow(1 - t2, 2.5));
+            return -250 - 170 * t1 - 80 * (1 - Math.pow(1 - t2, 2.5));
         }
         if (alt <= 500) return 64 + alt / 500.0 * 16;                            // plaines : y 64 à 80
         if (alt <= 2000) return 80 + (alt - 500) / 1500.0 * 60;                  // collines et plateaux : y 80 à 140
-        return 140 + Math.min((alt - 2000) / 6800.0, 1.0) * 160;                 // montagnes : y 140 à 300
+        if (alt <= 4000) return 140 + (alt - 2000) / 2000.0 * 100;               // montagnes : y 140 à 240
+        return 240 + Math.min((alt - 4000) / 4849.0, 1.0) * 380;                 // hautes montagnes : y 240 à 620 (Everest)
     }
 
     private static double lisse(double t) {
@@ -438,15 +441,16 @@ public final class Terrain {
         double w = Mth.clamp((-alt - 9300) / 600.0, 0.0, 1.0);
         double a = alt + w * (bruitDetail.noise(x / 56.0, 40, z / 56.0) * 260 + bruitDetail.noise(x / 17.0, 41, z / 17.0) * 90);
         double h = blocsDepuisAltitude(Math.min(a, -1.0));
-        if (h < -12 && h > -56) {                                // corniches : paliers de 6 blocs, contremarches raides
-            double q = 6.0, b = Math.floor(h / q) * q, f = (h - b) / q;
+        // 10/11/2026 : mêmes formes, à la nouvelle profondeur (faille de y -420 à -500)
+        if (h < -428 && h > -495) {                              // corniches : paliers de 8 blocs, contremarches raides
+            double q = 8.0, b = Math.floor(h / q) * q, f = (h - b) / q;
             h = Mth.lerp(0.55, h, b + q * f * f * f);
         }
-        if (h < -54) {                                           // fond : cuvettes et buttes (jusqu'à 9 blocs)
+        if (h < -490) {                                          // fond : cuvettes et buttes (jusqu'à 9 blocs)
             double m = bruitDetail.noise(x / 38.0, 42, z / 38.0) + 0.35 * bruitDetail.noise(x / 11.0, 43, z / 11.0);
-            h += Math.max(0.0, m) * 9.0 * Mth.clamp((-54.0 - h) / 7.0, 0.0, 1.0);
+            h += Math.max(0.0, m) * 9.0 * Mth.clamp((-490.0 - h) / 7.0, 0.0, 1.0);
         }
-        return Math.max(h, -61.0);
+        return Math.max(h, PLANCHER_FOSSES);
     }
 
     // ---------------------------------------------------------------- sorties pour le routeur de bruit vanilla
@@ -494,6 +498,8 @@ public final class Terrain {
 
     /** Profondeur sous le sol où les grottes peuvent commencer (sous l'eau : plus bas, pour ne jamais percer un fond). */
     static final double GROTTES_SOUS_SOL = 18.0, GROTTES_SOUS_EAU = 32.0;
+    /** Bas des grottes (10/11/2026) : l'ancien fond du monde, + 8 blocs pour le fond arrondi (vide jusqu'à y -60). */
+    static final double FOND_GROTTES = -52.0;
     /**
      * Autour des lieux (07/11/2026) : sur cette distance, la limite des grottes descend progressivement, jusqu'à
      * GROTTES_LIEU blocs de plus sous le sol au bord et sous le lieu (aucune grotte à portée de vue). Avant, la limite tombait d'un
@@ -511,6 +517,10 @@ public final class Terrain {
      * La pente de 8 blocs arrondit les voûtes : pas de plafond plat à la limite.
      */
     public double grottes(int x, int y, int z) {
+        // 10/11/2026 : monde agrandi vers le bas ; vers l'ancien fond du monde (y -64), les grottes se referment
+        // (pente de 8 blocs, fond arrondi) et tout reste plein en dessous
+        double bas = Mth.clamp((FOND_GROTTES - y) / 8.0, -1.0, 1.0);
+        if (bas >= 1.0) return 1.0;
         Colonne c = colonne(x, z);
         boolean eau = c.sd() < 0 || c.eauLac() != SANS_LAC || c.eauRiv() != SANS_LAC;
         double marge = eau ? GROTTES_SOUS_EAU : GROTTES_SOUS_SOL;
@@ -521,7 +531,7 @@ public final class Terrain {
             marge += p * GROTTES_LIEU;
         }
         double limite = c.h() - marge;
-        return Mth.clamp((y - limite) / 8.0, -1.0, 1.0);
+        return Math.max(bas, Mth.clamp((y - limite) / 8.0, -1.0, 1.0));
     }
 
     /** 1 dans un lieu, puis de 1 à 0 en s'en éloignant (0 à GROTTES_APPROCHE blocs et au-delà). Mis en cache par colonne. */

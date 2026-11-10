@@ -35,7 +35,7 @@ public final class Ambiances {
         if (camera.getFluidInCamera() != FogType.WATER) return -1;
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null || !abysse(mc, camera.getBlockPosition())) return -1;
-        return Mth.clamp((63.0 - camera.getPosition().y) / 124.0, 0.0, 1.0);
+        return Mth.clamp((63.0 - camera.getPosition().y) / 568.0, 0.0, 1.0);   // jusqu'au fond des Mariannes, y -505 (10/11/2026)
     }
 
     private static boolean merProfonde(Minecraft mc, BlockPos p) {
