@@ -54,7 +54,7 @@ def composante(masque, j, i):
     return lab == lab[j, i] if lab[j, i] else np.zeros(masque.shape, bool)
 
 
-def lieu_iso(nom, lat_a, lon_a, seuil, marge=70, fondu=50, ile=True, zone=None):
+def lieu_iso(nom, lat_a, lon_a, seuil, marge=70, fondu=50, ile=True, zone=None, rayon_km=None):
     """ile=True : île (mer autour) ; False : massif (plaine du mod autour) ; zone=(ouest, est, nord, sud) en blocs
     depuis l'ancrage : côte (tout le terrain de la zone resserré, l'ancrage pris sur le rivage pour que la côte
     reste à sa place au bord nord et sud)."""
@@ -63,11 +63,14 @@ def lieu_iso(nom, lat_a, lon_a, seuil, marge=70, fondu=50, ile=True, zone=None):
     if zone is not None:
         return lieu_cote(nom, cx, cz, f, zone, fondu)
     # zone : le massif étiré du mod (terre reliée à l'ancrage au-dessus du seuil), plus la marge
-    r = int(3.0 * BPD)
+    r = int(3.0 * BPD) if rayon_km is None else int(rayon_km / 111.32 * BPD) + 20
     Xg, Zg = np.meshgrid(np.arange(int(cx) - 6 * r, int(cx) + 6 * r, 2.0), np.arange(int(cz) - r, int(cz) + r, 2.0))
     _, sdg, ag = terrain_mod(Xg, Zg)
     jA, iA = r // 2, 3 * r
-    etire = composante((sdg >= 0) & (ag > seuil), jA, iA)
+    dans = np.ones(Xg.shape, bool)
+    if rayon_km is not None:                             # massif pris dans un rayon (km réels) autour de l'ancrage
+        dans = np.hypot((Xg - cx) * f, Zg - cz) / BPD * 111.32 < rayon_km
+    etire = composante((sdg >= 0) & (ag > seuil) & dans, jA, iA)
     jj, ii = np.nonzero(etire)
     x0, x1 = int(Xg[0, ii.min()]) - marge, int(Xg[0, ii.max()]) + marge
     z0, z1 = int(Zg[jj.min(), 0]) - marge, int(Zg[jj.max(), 0]) + marge
@@ -79,7 +82,8 @@ def lieu_iso(nom, lat_a, lon_a, seuil, marge=70, fondu=50, ile=True, zone=None):
     Xw = cx + (X - cx) / f
     hw, sdw, aw = terrain_mod(Xw, Z)                     # terrain resserré (vraies proportions)
     jA, iA = int(round(cz - z0)), int(round(cx - x0))
-    coeur = composante((sdw >= 0) & (aw > seuil), jA, iA)
+    dansw = np.ones(X.shape, bool) if rayon_km is None else np.hypot(X - cx, Z - cz) / BPD * 111.32 < rayon_km
+    coeur = composante((sdw >= 0) & (aw > seuil) & dansw, jA, iA)
     print(f"  cœur aux vraies proportions : {int(coeur.sum())} colonnes "
           f"({np.ptp(np.nonzero(coeur)[1]) + 1} x {np.ptp(np.nonzero(coeur)[0]) + 1} blocs)")
     dC = ndimage.distance_transform_edt(~coeur)
@@ -176,12 +180,57 @@ def erebus():
 def kamtchatka():
     """Volcans du groupe de la Klioutchevskaïa (Kamtchatka, 56° N) : le massif aux vraies proportions (étiré ×1,8),
     posé sur la dépression centrale du mod ; neige au-dessus de 1 900 m, glaciers sur les pentes douces."""
-    L = lieu_iso("kamtchatka", 56.056, 160.642, 400.0, ile=False)
+    L = lieu_iso("kamtchatka", 56.056, 160.642, 800.0, ile=False, rayon_km=45.0)
     typ = neige_glace(L, ligne_neige=1900.0, biome_seuil=1000.0)
     return M.ecrire("kamtchatka", L["X"], L["Z"], L["y"], L["h"], L["y"].copy(), typ, L["sd"], L["eau"], "VOLCAN")
 
 
-LIEUX = {"erebus": erebus, "kamtchatka": kamtchatka}
+def icebergs(L, masque, n, graine, pres=None, h_max=6.0, r_max=4.5):
+    """Icebergs posés dans l'eau du masque : blocs de glace de 1 à h_max blocs au-dessus de l'eau (plus gros près de
+    `pres`, distance en blocs au front du glacier). Rend le masque des colonnes de glace."""
+    X, Z = L["X"], L["Z"]
+    rng = np.random.default_rng(graine)
+    ice = np.zeros(X.shape, bool)
+    jj, ii = np.nonzero(masque)
+    for k in (rng.choice(len(jj), size=min(len(jj), n), replace=False) if len(jj) else []):
+        j, i = jj[k], ii[k]
+        p = 1.0 if pres is None else float(np.clip(1 - pres[j, i] / 150, 0.15, 1))
+        if rng.random() > 0.3 + 0.7 * p:
+            continue
+        r = 1.0 + rng.random() * (1.0 + (r_max - 1.0) * p)
+        hg = 1.0 + rng.random() * (h_max - 1.0) * p
+        nn = np.hypot((X - X[j, i]) / r, (Z - Z[j, i]) / (r * (0.6 + 0.8 * rng.random())))
+        m = (nn < 1) & masque
+        L["y"] = np.where(m, np.maximum(L["y"], 63.0 + hg * (1 - 0.5 * nn ** 2) + 0.4 * bruit(X, Z, 1.5, graine + 1)),
+                          L["y"])
+        ice |= m
+    L["eau"] = np.where(ice, np.nan, L["eau"])
+    return ice
+
+
+def ilulissat():
+    """Fjord glacé d'Ilulissat (Groenland, 69° N) aux vraies proportions (étiré ×2,8 est-ouest) : le fjord de Kangia,
+    rempli d'icebergs, du glacier Sermeq Kujalleq (inlandsis) à la baie de Disko ; ancré à l'embouchure, si bien que
+    la côte reste à sa place aux bords nord et sud."""
+    L = lieu_iso("ilulissat", 69.13, -51.12, 0.0, zone=(150, 450, 220, 220), fondu=60)
+    X, Z, mer = L["X"], L["Z"], L["mer"]
+    cx = -51.12 * BPD
+    fjord = mer & (X > cx + 4)
+    dTerre = ndimage.distance_transform_edt(mer)
+    # front du glacier : bout est du fjord
+    front = np.zeros(X.shape)
+    if fjord.any():
+        xf = X[fjord].max()
+        front = np.abs(X - xf)
+    ice = icebergs(L, fjord & (dTerre > 0.8), 900, 2101, pres=front)
+    ice |= icebergs(L, mer & (X <= cx + 4) & (dTerre > 3), 60, 2103, h_max=8.0, r_max=5.0)
+    typ = neige_glace(L, ligne_neige=600.0, biome_seuil=None)
+    typ[ice] = GLACE | TAILLEE
+    print(f"ilulissat : fjord {int(fjord.sum())} colonnes, glace flottante {int(ice.sum())} colonnes")
+    return M.ecrire("ilulissat", X, Z, L["y"], L["h"], L["y"].copy(), typ, L["sd"], L["eau"], "GRANITE")
+
+
+LIEUX = {"erebus": erebus, "kamtchatka": kamtchatka, "ilulissat": ilulissat}
 
 if __name__ == "__main__":
     noms = [a for a in sys.argv[2:] if not a.startswith("--")]
