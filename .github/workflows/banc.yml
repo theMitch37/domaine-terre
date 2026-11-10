@@ -92,6 +92,7 @@ jobs:
           cp /tmp/banc_script.log /tmp/banc/script.log 2>/dev/null || true
           cp /tmp/serveur/domaine_tailles.csv /tmp/banc/domaine_tailles.csv 2>/dev/null || true   # tailles d'origine
           ls /tmp/serveur/mods > /tmp/banc/mods.txt 2>/dev/null || true
+          cp /tmp/serveur/config/untamedwilds-common.toml /tmp/banc/ 2>/dev/null || true
           cp -r /tmp/serveur/crash-reports /tmp/banc/ 2>/dev/null || true
           printf 'branche=%s\ncommit=%s\ndate=%s\nresultat=%s\n' "$GITHUB_REF_NAME" "$GITHUB_SHA" "$(date -u +%FT%TZ)" "${{ job.status }}" > /tmp/banc/SOURCE.txt
           cd /tmp/banc

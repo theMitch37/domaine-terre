@@ -155,6 +155,9 @@ def _aire(ts):
     return [t for t in ts.split(",") if t in LISTES]
 
 
+# bêtes de terre d'Untamed Wilds confiées à la table du mod Terre (même liste que outils/faune/generer_faune.py)
+UW_TABLE = {"bear", "big_cat", "hyena", "large_snake", "monitor", "boar", "bison", "camel", "hippo", "rhino",
+            "wildebeest", "aardvark", "newt", "snake", "softshell_turtle", "tortoise", "tarantula", "opossum", "butterfly"}
 UW = {}
 RARETE = {}            # (entité, espèce) -> poids de l'abondance réelle (07/11/2026), « rarity » d'Untamed Wilds
 _ABONDANCE = {"TC": 16, "C": 8, "PC": 3, "R": 1}
@@ -167,11 +170,21 @@ for _r in _csv.DictReader(open("outils/faune/especes.csv", encoding="utf-8"), de
     if _r["statut"] in ("retirer", "souterrain"):
         UW.setdefault(_ent, {})[_sp] = None
         continue
+    if _ent in UW_TABLE:
+        # 10/11/2026 : bête de terre que la table du mod Terre fait naître (généré par generer_faune.py) : plus aucun
+        # biome pour Untamed Wilds lui-même (banc : hippos et dromadaires au Nil d'Assouan, nés deux fois ; la config
+        # freqherbivore… ne suffisait pas)
+        UW.setdefault(_ent, {})[_sp] = None
+        continue
     if not _aire(_r["terroirs"]) or re.search(r"\b(mer|large|abysses)\b", _r["milieu"]):
         continue                                 # espèces marines : biomes d'origine (tags d'océan, mers du mod)
     _toks = {x.strip() for x in _r["milieu"].replace("(", ",").replace(")", ",").split(",") if x.strip()}
     _types = set().union(*[TYPES_MILIEU.get(t, set()) for t in _toks]) if _toks else set()
     UW.setdefault(_ent, {})[_sp] = (_aire(_r["terroirs"]), _types, bool(_toks & EAU_UW))
+
+
+for _ent in UW_TABLE:                            # espèces absentes de la table : pas de biome non plus
+    UW.setdefault(_ent, {})["*"] = None
 
 
 def resources_milieu(terroirs, types, eau):
