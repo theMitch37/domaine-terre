@@ -45,17 +45,25 @@ public class HauteMontagneFeature extends Feature<NoneFeatureConfiguration> {
         return t[t.length - 1];
     }
 
+    /** Altitude réelle (m) : relief fin s'il est là, sinon la carte 3'. */
+    private static double altitude(int x, int z) {
+        double a = ReliefFin.altitude(x, z);
+        return Double.isNaN(a) ? Terrain.get().altitudeReelle(x, z) : a;
+    }
+
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> ctx) {
         WorldGenLevel n = ctx.level();
         int x0 = ctx.origin().getX() & ~15, z0 = ctx.origin().getZ() & ~15;
         double lat = Terrain.lat(z0 + 8);
-        double arbres = Terrain.blocsDepuisAltitude(limite(ARBRES, lat));
-        double neige = Terrain.blocsDepuisAltitude(limite(NEIGE, lat));
-        // chunk entièrement sous la limite des arbres : rien à faire
-        int haut = n.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x0 + 8, z0 + 8);
-        boolean vu = haut >= arbres - 24;
-        for (int k = 0; k < 4 && !vu; k++) vu = n.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x0 + (k & 1) * 15, z0 + (k >> 1) * 15) >= arbres - 24;
+        // limites en mètres réels (10/11/2026 : avec le relief fin, une hauteur en blocs ne dit pas l'altitude réelle ;
+        // la règle se fait sur la vraie altitude du lieu)
+        double arbres = limite(ARBRES, lat), neige = limite(NEIGE, lat);
+        boolean vu = false;
+        for (int k = 0; k < 5 && !vu; k++) {
+            int x = k == 4 ? x0 + 8 : x0 + (k & 1) * 15, z = k == 4 ? z0 + 8 : z0 + (k >> 1) * 15;
+            vu = altitude(x, z) >= arbres - 400;
+        }
         if (!vu) return false;
         BlockPos.MutableBlockPos p = new BlockPos.MutableBlockPos();
         boolean modifie = false;
@@ -63,9 +71,10 @@ public class HauteMontagneFeature extends Feature<NoneFeatureConfiguration> {
             for (int dz = 0; dz < 16; dz++) {
                 int x = x0 + dx, z = z0 + dz;
                 int y = n.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x, z) - 1;
-                // un peu de bruit sur les limites : pas de ligne droite sur les versants
-                double b = Terrain.get().bruit(x / 23.0, 71, z / 23.0) * 6 + Terrain.get().bruit(x / 7.0, 72, z / 7.0) * 2;
-                if (y + b < arbres || LieuxTerre.a(x, z) != null) continue;
+                // un peu de bruit sur les limites (en mètres) : pas de ligne droite sur les versants
+                double b = Terrain.get().bruit(x / 23.0, 71, z / 23.0) * 150 + Terrain.get().bruit(x / 7.0, 72, z / 7.0) * 50;
+                double alt = altitude(x, z) + b;
+                if (alt < arbres || LieuxTerre.a(x, z) != null) continue;
                 if (!n.getFluidState(p.set(x, y + 1, z)).isEmpty()) continue;
                 int raide = 0;
                 raide = Math.max(raide, Math.abs(y + 1 - n.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x + 1, z)));
@@ -76,12 +85,13 @@ public class HauteMontagneFeature extends Feature<NoneFeatureConfiguration> {
                 BlockState dessus;
                 if (raide >= 3) {
                     dessus = (v > 0.45 ? Blocks.ANDESITE : Blocks.STONE).defaultBlockState();
-                } else if (y + b >= neige) {
+                } else if (alt >= neige) {
                     dessus = Blocks.SNOW_BLOCK.defaultBlockState();
                 } else {
-                    // pelouses alpines, éboulis et roche, de plus en plus minéral en montant vers les neiges
-                    double t = Mth.clamp((y + b - arbres) / Math.max(neige - arbres, 1.0), 0.0, 1.0);
-                    if (v < 0.35 - 0.9 * t) continue;                                    // herbe rase gardée
+                    // pelouses alpines, éboulis et roche, de plus en plus minéral en montant vers les neiges (Alpes :
+                    // surtout des alpages juste au-dessus des arbres, surtout de la roche sous les glaciers)
+                    double t = Mth.clamp((alt - arbres) / Math.max(neige - arbres, 1.0), 0.0, 1.0);
+                    if (v < 0.8 - 1.1 * t) continue;                                     // herbe rase gardée
                     dessus = (v < 0.55 - 0.3 * t ? Blocks.GRAVEL : v < 0.8 ? Blocks.STONE : Blocks.COBBLESTONE).defaultBlockState();
                 }
                 for (int k = 0; k < 4; k++) {
