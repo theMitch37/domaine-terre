@@ -146,9 +146,34 @@ def loin_des_fleuves(X, Z, w, marge=35.0):
     return w * lisse(np.clip((inf - 3.0) / marge, 0, 1))
 
 
-def ecrire(nom, X, Z, y, h, sommet, typ, sd, eau, palette, marge=10, garder_fleuves=True, vox=None):
+def talus(y, eau, pente=1.0, haut=4.0, portee=16):
+    """Murs fins adoucis (10/11/2026, idée de Maxime : « les murs côté extérieur ont juste à adoucir leurs pentes »).
+    Une colonne plus haute d'au moins `haut` blocs que ses deux voisines opposées (à 2 blocs) est un mur fin : le
+    terrain hors de l'eau autour d'elle remonte en talus de `pente` blocs par bloc jusqu'à son sommet. Les parois qui
+    tombent dans l'eau (gorge, chute) restent droites côté eau. Rend y et le masque des colonnes relevées."""
+    mur = np.zeros(y.shape, bool)
+    c = y[2:-2, 2:-2]
+    for dj, di in ((0, 2), (2, 0), (2, 2), (2, -2)):
+        a_ = y[2 + dj:y.shape[0] - 2 + dj, 2 + di:y.shape[1] - 2 + di]
+        b_ = y[2 - dj:y.shape[0] - 2 - dj, 2 - di:y.shape[1] - 2 - di]
+        mur[2:-2, 2:-2] |= (c - a_ >= haut) & (c - b_ >= haut)
+    sec = ~np.isfinite(eau)
+    mur &= sec
+    E = np.where(mur, y, -1e9)
+    for _ in range(portee):
+        E = np.maximum(E, ndimage.maximum_filter(E, 3) - pente)
+    releve = sec & (E > y + 0.01)
+    return np.where(releve, E, y), releve
+
+
+def ecrire(nom, X, Z, y, h, sommet, typ, sd, eau, palette, marge=10, garder_fleuves=True, vox=None, adoucir=False):
     """Contrôles d'eau, écriture dans les tuiles, aperçu éventuel."""
     y = np.where(np.isfinite(eau), np.minimum(y, eau - 1.05), y)          # au moins un bloc d'eau
+    if adoucir:
+        y, rel = talus(y, eau)
+        sommet = np.where(rel, np.maximum(sommet, y), sommet)
+        typ = np.where(rel & (typ == 0), PLATEAU | TAILLEE, typ)
+        print(f"  talus derrière les murs fins : {int(rel.sum())} colonnes relevées")
     y = retenir(y, eau)
     verifier_eau(nom, y, eau)
     typ, actif = en_tuiles(nom, X, Z, y, h, sommet, typ, sd, marge=marge, eau=eau, garder_fleuves=garder_fleuves,
@@ -387,6 +412,9 @@ def gullfoss():
     w = np.where(np.isfinite(eau) & ~np.isfinite(eau_mod), 1.0, w)
     y = h + (y - h) * w
     eau = np.where(w > 0.97, eau, np.nan)
+    # 10/11/2026 (test : « le coin gauche est à sec ») : dans la zone d'un lieu, le jeu n'y met plus l'eau des cours
+    # d'eau du mod ; la Þjórsá gardée telle quelle restait un lit sec. Le lieu lui rend son eau.
+    eau = np.where(np.isfinite(eau_mod), eau_mod, eau)
     # 10/11/2026 (banc : parois de la gorge debout, 12 blocs au-dessus du terrain des deux côtés, là où la gorge entre
     # dans la vallée de la Þjórsá du mod, que le lieu garde telle quelle) : une paroi ne dépasse jamais le terrain
     # juste derrière elle (+1) ; la gorge s'efface en entrant dans la vallée
@@ -451,7 +479,7 @@ def gullfoss():
     typ[w < 0.02] = 0
     sommet = y.copy()
     print(f"gullfoss : chute 1 de {86 - 79} blocs puis chute 2 de {79 - 66} ; gorge {L - s_c2:.0f} blocs")
-    return ecrire("gullfoss", X, Z, y, h, sommet, typ, sd, eau, "BASALTE", garder_fleuves=False, vox=vox)
+    return ecrire("gullfoss", X, Z, y, h, sommet, typ, sd, eau, "BASALTE", garder_fleuves=False, vox=vox, adoucir=True)
 
 
 def skogafoss():
@@ -531,7 +559,7 @@ def skogafoss():
     typ[(w < 0.02) | mer] = 0
     sommet = y.copy()
     print(f"skogafoss : lèvre y {lev:.0f}, bassin y 66 -> chute de {lev - 66:.0f} blocs ; rivière {L:.0f} blocs")
-    return ecrire("skogafoss", X, Z, y, h, sommet, typ, sd, eau, "BASALTE")
+    return ecrire("skogafoss", X, Z, y, h, sommet, typ, sd, eau, "BASALTE", adoucir=True)
 
 
 def plitvice():
