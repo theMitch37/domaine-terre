@@ -124,6 +124,7 @@ public final class CommandesDomaine {
                                     return aller(c, ll[0], ll[1], nom);
                                 })))
                 .then(Commands.literal("ici").executes(CommandesDomaine::ici))
+                .then(Commands.literal("zoo").executes(CommandesDomaine::zoo))
                 .then(Commands.literal("depart")
                         .then(Commands.argument("continent", StringArgumentType.word())
                                 .suggests((c, b) -> SharedSuggestionProvider.suggest(
@@ -199,5 +200,49 @@ public final class CommandesDomaine {
         }
         c.getSource().sendFailure(Component.literal("Aucune terre trouvée pour : " + continent));
         return 0;
+    }
+
+    /**
+     * Zoo (10/11/2026) : les grandes bêtes alignées devant le joueur, immobiles et nommées, pour comparer leurs tailles
+     * entre elles et au joueur (1,8 bloc = 1,8 m). Les espèces absentes du pack sont sautées.
+     */
+    private static final String[] ZOO = {
+            "alexsmobs:crocodile", "naturalist:alligator", "alexsmobs:caiman", "untamedwilds:hippo", "naturalist:hippo",
+            "alexsmobs:elephant", "naturalist:elephant", "untamedwilds:rhino", "alexsmobs:rhinoceros", "naturalist:rhino",
+            "naturalist:giraffe", "naturalist:zebra", "untamedwilds:bison", "alexsmobs:bison", "wildernature:bison",
+            "untamedwilds:bear", "alexsmobs:grizzly_bear", "naturalist:bear", "untamedwilds:big_cat", "naturalist:lion",
+            "alexsmobs:tiger", "untamedwilds:camel", "minecraft:camel", "minecraft:horse", "minecraft:cow",
+            "alexsmobs:gazelle", "alexsmobs:kangaroo", "alexsmobs:emu", "alexsmobs:komodo_dragon", "untamedwilds:monitor"};
+
+    private static int zoo(CommandContext<CommandSourceStack> c) throws CommandSyntaxException {
+        ServerPlayer j = c.getSource().getPlayerOrException();
+        ServerLevel n = j.serverLevel();
+        Vec3 dir = Vec3.directionFromRotation(0, j.getYRot());
+        Vec3 cote = new Vec3(-dir.z, 0, dir.x);
+        Vec3 base = j.position().add(dir.scale(6));
+        double t = 0;
+        int nb = 0;
+        for (String id : ZOO) {
+            net.minecraft.resources.ResourceLocation rl = net.minecraft.resources.ResourceLocation.tryParse(id);
+            var type = rl == null ? null
+                    : net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getOptional(rl).orElse(null);
+            if (type == null || !rl.equals(net.minecraft.world.entity.EntityType.getKey(type))) continue;
+            var e = type.create(n);
+            if (!(e instanceof net.minecraft.world.entity.Mob m)) continue;
+            Vec3 p = base.add(cote.scale(t));
+            int y = n.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (int) Math.floor(p.x), (int) Math.floor(p.z));
+            m.moveTo(p.x, y, p.z, j.getYRot() + 180f, 0f);
+            m.finalizeSpawn(n, n.getCurrentDifficultyAt(m.blockPosition()), net.minecraft.world.entity.MobSpawnType.COMMAND, null, null);
+            m.setNoAi(true);
+            m.setPersistenceRequired();
+            m.setCustomName(Component.literal(id + String.format(Locale.ROOT, " (%.1f x %.1f)", m.getBbWidth(), m.getBbHeight())));
+            m.setCustomNameVisible(true);
+            n.addFreshEntityWithPassengers(m);
+            t += Math.max(m.getBbWidth(), 1.0) + 2.5;
+            nb++;
+        }
+        int total = nb;
+        c.getSource().sendSuccess(() -> Component.literal("Zoo : " + total + " bêtes alignées (immobiles ; /kill @e[type=!player,distance=..120] pour les retirer)"), false);
+        return nb;
     }
 }

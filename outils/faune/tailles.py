@@ -17,7 +17,7 @@ T = {
     "alexsmobs:bald_eagle": (0.85, "h", 0.9), "alexsmobs:banana_slug": (0.2, "i", 0.45), "alexsmobs:bison": (1.9, "h", 0.9),
     "alexsmobs:blobfish": (0.3, "l", 0.45), "alexsmobs:blue_jay": (0.28, "l", 0.5), "alexsmobs:caiman": (2.0, "l", 1.2),
     "alexsmobs:capuchin_monkey": (0.45, "h", 0.65), "alexsmobs:catfish": (1.5, "l", 1.6), "alexsmobs:cockroach": (0.03, "i", 0.25),
-    "alexsmobs:comb_jelly": (0.1, "l", 0.2), "alexsmobs:crocodile": (4.5, "l", 1.4), "alexsmobs:crow": (0.45, "l", 1.0),
+    "alexsmobs:comb_jelly": (0.1, "l", 0.2), "alexsmobs:crocodile": (4.5, "l", 1.0), "alexsmobs:crow": (0.45, "l", 1.0),   # crocodile : 1,4 le 08/11, plus grand que l'hippo en jeu (10/11)
     "alexsmobs:devils_hole_pupfish": (0.025, "l", 0.2), "alexsmobs:elephant": (3.3, "h", 0.95), "alexsmobs:emu": (1.75, "h", 1.0),
     "alexsmobs:fly": (0.007, "i", 0.35), "alexsmobs:flying_fish": (0.3, "l", 0.5), "alexsmobs:frilled_shark": (1.6, "l", 1.0),
     "alexsmobs:gazelle": (1.0, "h", 0.8), "alexsmobs:gelada_monkey": (0.7, "h", 0.6), "alexsmobs:gorilla": (1.5, "h", 1.1),

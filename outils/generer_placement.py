@@ -258,7 +258,7 @@ ECHELLE = {("aardvark", "common"): 0.72,
            ("giant_salamander", "chinese"): 1.15,
            ("giant_salamander", "hellbender"): 0.44,
            ("giant_salamander", "japanese"): 0.92,
-           ("hippo", "common"): 0.89,
+           ("hippo", "common"): 1.1,     # 10/11 : 0,89 plus petit que le crocodile en jeu
            ("hyena", "aardwolf"): 0.5,
            ("hyena", "brown"): 0.73,
            ("hyena", "spotted"): 0.82,
