@@ -1,13 +1,11 @@
 RiverATLAS : https://ndownloader.figshare.com/files/20087486 ; licence : CC BY 4.0
--rw-r--r-- 1 runner runner 2418581202 Nov 10 20:11 ra.zip
+-rw-r--r-- 1 runner runner 2418581202 Nov 10 20:15 ra.zip
 Filesystem      Size  Used Avail Use% Mounted on
 /dev/root        72G   42G   31G  58% /
-271 embouchures à terre à examiner (2 s)
+271 embouchures à terre à examiner (1 s)
 Traceback (most recent call last):
-  File "/home/runner/work/domaine-terre/domaine-terre/outils/fleuves_hydro.py", line 74, in <module>
-    df = pyogrio.read_dataframe(shp, columns=[champs["HYRIV_ID"], champs["NEXT_DOWN"], champs["ENDORHEIC"], q,
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pyogrio/geopandas.py", line 361, in read_dataframe
-    raise ImportError("geopandas is required to use pyogrio.read_dataframe()")
-ImportError: geopandas is required to use pyogrio.read_dataframe()
+  File "/home/runner/work/domaine-terre/domaine-terre/outils/fleuves_hydro.py", line 75, in <module>
+    meta, _, wkb, data = pyogrio.read(shp, columns=noms_, where=f"{champs['UPLAND_SKM']} > 200")
+                         ^^^^^^^^^^^^
+AttributeError: module 'pyogrio' has no attribute 'read'
 0 embouchures prolongées jusqu'à la mer
