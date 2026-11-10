@@ -54,9 +54,14 @@ def composante(masque, j, i):
     return lab == lab[j, i] if lab[j, i] else np.zeros(masque.shape, bool)
 
 
-def lieu_iso(nom, lat_a, lon_a, seuil, marge=70, fondu=50, ile=True):
+def lieu_iso(nom, lat_a, lon_a, seuil, marge=70, fondu=50, ile=True, zone=None):
+    """ile=True : île (mer autour) ; False : massif (plaine du mod autour) ; zone=(ouest, est, nord, sud) en blocs
+    depuis l'ancrage : côte (tout le terrain de la zone resserré, l'ancrage pris sur le rivage pour que la côte
+    reste à sa place au bord nord et sud)."""
     cx, cz = lon_a * BPD, -lat_a * BPD
     f = np.cos(np.radians(lat_a))
+    if zone is not None:
+        return lieu_cote(nom, cx, cz, f, zone, fondu)
     # zone : le massif étiré du mod (terre reliée à l'ancrage au-dessus du seuil), plus la marge
     r = int(3.0 * BPD)
     Xg, Zg = np.meshgrid(np.arange(int(cx) - 6 * r, int(cx) + 6 * r, 2.0), np.arange(int(cz) - r, int(cz) + r, 2.0))
@@ -118,6 +123,31 @@ def lieu_iso(nom, lat_a, lon_a, seuil, marge=70, fondu=50, ile=True):
     return dict(X=X, Z=Z, y=y, h=h, sd=sd, eau=eau, mer=mer, coeur=coeur, alt=aw, de=de, wy=wy)
 
 
+def lieu_cote(nom, cx, cz, f, zone, fondu):
+    x0, x1 = int(cx) - zone[0], int(cx) + zone[1]
+    z0, z1 = int(cz) - zone[2], int(cz) + zone[3]
+    print(f"{nom} : zone {x1 - x0} x {z1 - z0} (x {x0}..{x1}, z {z0}..{z1}), resserrement {1 / f:.2f}")
+    X, Z = np.meshgrid(np.arange(x0, x1, dtype=float), np.arange(z0, z1, dtype=float))
+    h, sd = T.hauteur_base(X, Z)
+    hm, sdm, _ = terrain_mod(X, Z)
+    hw, sdw, aw = terrain_mod(cx + (X - cx) / f, Z)
+    H, W = X.shape
+    jj, ii = np.mgrid[0:H, 0:W]
+    de = np.minimum(np.minimum(ii, W - 1 - ii), np.minimum(jj, H - 1 - jj)).astype(float)
+    den = np.maximum(de - 14 * (0.5 + 0.5 * bruit(X, Z, 22, 1977)), 0)
+    a = lisse(np.clip((den - 4) / (fondu - 4), 0, 1))
+    y = hw * a + hm * (1 - a)
+    wy = lisse(np.clip((de - 13) / 10, 0, 1))
+    y = h + (y - h) * wy
+    mer = y < 62.9
+    lab, n = ndimage.label(mer)
+    dehors = lab[(de < 3) & (sd < 0)]
+    mer = np.isin(lab, np.unique(dehors[dehors > 0]))
+    y = np.where(mer, np.minimum(y, 61.9), np.maximum(y, 63.6))
+    eau = np.where(mer & (wy > 0.02), 63.0, np.nan)
+    return dict(X=X, Z=Z, y=y, h=h, sd=sd, eau=eau, mer=mer, coeur=a > 0.5, alt=aw, de=de, wy=wy)
+
+
 def neige_glace(L, ligne_neige, roche=1.2, biome_seuil=None):
     """Surface des terres froides : neige, glace sur les pentes douces basses, roche sur les pentes raides."""
     X, Z, y = L["X"], L["Z"], L["y"]
@@ -143,7 +173,15 @@ def erebus():
                     garder_fleuves=False)
 
 
-LIEUX = {"erebus": erebus}
+def kamtchatka():
+    """Volcans du groupe de la Klioutchevskaïa (Kamtchatka, 56° N) : le massif aux vraies proportions (étiré ×1,8),
+    posé sur la dépression centrale du mod ; neige au-dessus de 1 900 m, glaciers sur les pentes douces."""
+    L = lieu_iso("kamtchatka", 56.056, 160.642, 400.0, ile=False)
+    typ = neige_glace(L, ligne_neige=1900.0, biome_seuil=1000.0)
+    return M.ecrire("kamtchatka", L["X"], L["Z"], L["y"], L["h"], L["y"].copy(), typ, L["sd"], L["eau"], "VOLCAN")
+
+
+LIEUX = {"erebus": erebus, "kamtchatka": kamtchatka}
 
 if __name__ == "__main__":
     noms = [a for a in sys.argv[2:] if not a.startswith("--")]
