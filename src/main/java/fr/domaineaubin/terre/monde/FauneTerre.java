@@ -328,7 +328,9 @@ public final class FauneTerre {
             int terroir = Terrain.get().carte().terroir(lon, lat);
             int precis = zz >= 16 && zz - 16 < biomePrecis.length ? zz - 16 : -1;
             for (Entree e : surface) {
-                if (e.categorie() != MobCategory.CREATURE || !e.eau() || e.mer() || e.generationSeule()) continue;
+                // 10/11/2026 : les bêtes d'Untamed Wilds (« génération seule ») en sont aussi : les rives sont posées à la
+                // génération ; sans elles, sur le Nil la liste ne gardait que le crocodile (36 bêtes sur 115 au banc)
+                if (e.categorie() != MobCategory.CREATURE || !e.eau() || e.mer()) continue;
                 if (!e.dansTerroir(terroir)) continue;
                 if (e.precis() != null && e.precis()[terroir] != null && !contient(e.precis()[terroir], precis)) continue;
                 if (net.minecraft.world.entity.SpawnPlacements.getPlacementType(e.type())
@@ -336,7 +338,7 @@ public final class FauneTerre {
                 out.add(e.donnees());
             }
         }
-        l = List.copyOf(out);
+        l = equilibrer(out);
         if (cacheRives.size() > 200_000) cacheRives.clear();
         cacheRives.put(pix, l);
         return l;
@@ -375,9 +377,54 @@ public final class FauneTerre {
             boolean terre = (e.biomes() & (1 << grand)) != 0 && grand > 0;
             // à la génération, eauProche / coteProche disent si le chunk a un cours d'eau, un lac ou la côte (07/11/2026 :
             // sinon crocodiles, hippopotames… ne naissaient jamais, les apparitions naturelles étant trop rares)
-            boolean eau = e.eau() && eauProche;
+            // 10/11/2026 : à la génération, les bêtes d'eau ne naissent plus que par les rives (RivesFeature), posées
+            // sur la berge ; avant, un chunk traversé par une rivière les recevait deux fois (127 crocodiles au banc
+            // sur le Nil d'Assouan)
+            boolean eau = e.eau() && eauProche && !generation;
             boolean cote = e.cote() && coteProche;
             if (terre || eau || cote) out.add(e.donnees());
+        }
+        return equilibrer(out);
+    }
+
+    /** Part maximale d'une espèce dans les bêtes d'un endroit (10/11/2026, équilibre de la faune). */
+    static final double PART_MAX = 0.20;
+
+    /**
+     * Équilibre (10/11/2026, demande de Maxime : « réaliste, varié et bien équilibré ») : dès 5 espèces dans la liste,
+     * aucune ne dépasse PART_MAX des individus attendus (poids x taille moyenne du groupe) ; les poids sont multipliés
+     * par 10 pour garder la précision. Même calcul dans outils/faune/bilan_faune.py.
+     */
+    static List<MobSpawnSettings.SpawnerData> equilibrer(List<MobSpawnSettings.SpawnerData> l) {
+        if (l.size() < 5) return List.copyOf(l);
+        int n = l.size();
+        double[] w = new double[n], m = new double[n];
+        for (int i = 0; i < n; i++) {
+            MobSpawnSettings.SpawnerData d = l.get(i);
+            w[i] = d.getWeight().asInt();
+            m[i] = (d.minCount + d.maxCount) / 2.0;
+        }
+        boolean[] trop = new boolean[n];
+        for (int k = 0; k < 10; k++) {
+            double tot = 0, reste = 0;
+            for (int i = 0; i < n; i++) tot += w[i] * m[i];
+            int nb = 0;
+            for (int i = 0; i < n; i++) {
+                trop[i] = w[i] * m[i] > PART_MAX * tot * 1.0001;
+                if (trop[i]) nb++; else reste += w[i] * m[i];
+            }
+            if (nb == 0) break;
+            double cible = PART_MAX * reste / (1 - PART_MAX * nb);
+            for (int i = 0; i < n; i++) if (trop[i]) w[i] = cible / m[i];
+        }
+        List<MobSpawnSettings.SpawnerData> out = new ArrayList<>(n);
+        for (int i = 0; i < n; i++) {
+            MobSpawnSettings.SpawnerData d = l.get(i);
+            MobSpawnSettings.SpawnerData e = new MobSpawnSettings.SpawnerData(d.type, Math.max(1, (int) Math.round(w[i] * 10)), d.minCount, d.maxCount);
+            // le constructeur du jeu met un cochon à la place de tout type MISC (Untamed Wilds, voir le chargement) :
+            // on remet le bon type (banc du 10/11/2026 : 182 cochons au Serengeti)
+            if (e.type != d.type) ((fr.domaineaubin.terre.mixin.SpawnerDataAcces) (Object) e).domaineTerre$type(d.type);
+            out.add(e);
         }
         return List.copyOf(out);
     }

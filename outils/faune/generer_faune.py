@@ -118,6 +118,25 @@ CONDITIONS = {
     "minecraft:bat": {"sous_terre": True, "noir": True},
 }
 
+# petite faune discrète (10/11/2026) : nombreuse en vrai, mais on la voit peu ; comptée comme les insectes
+DISCRETS = ("snake", "lizard", "newt", "salamander", "tarantula", "spider", "scorpion", "toad", "gecko", "skink",
+            "roly_poly", "termite", "centipede", "millipede", "snail", "slug")
+
+
+def poids(r, mn, mx, terre):
+    """Poids de tirage. Bêtes de terre et d'eau douce (10/11/2026, équilibre de la faune) : un groupe pèse moins à
+    mesure qu'il est grand (poids = abondance x 4 / racine(2 x taille moyenne)) : un troupeau de 8 ne pèse pas 8 fois
+    un renard seul, sans que les bêtes solitaires prennent le dessus ; insectes et petite faune discrète : moitié.
+    Mer et étages souterrains : inchangés."""
+    base = ABONDANCE.get(r.get("abondance", ""), 1 if "RARE" in r["note"] else POIDS.get(r["categorie"], 6))
+    if not terre:
+        return base
+    p = base * 4.0 / ((mn + mx) / 2.0 * 2.0) ** 0.5
+    if r["categorie"] == "insecte" or any(k in r["id"] for k in DISCRETS):
+        p /= 2.0
+    return max(1, round(p))
+
+
 rows = list(csv.DictReader(open(os.path.join(ICI, "especes.csv"), encoding="utf-8"), delimiter=";"))
 especes, vus = [], set()
 for r in rows:
@@ -170,7 +189,7 @@ for r in rows:
     especes.append({
         "id": r["id"], "entite": ent, "cat": r["categorie"], "terroirs": [INDEX[t] for t in ts], "biomes": biomes,
         "precis": precis, "eau": eau, "cote": cote, "mer": mer, "min": mn, "max": mx,
-        "poids": ABONDANCE.get(r.get("abondance", ""), 1 if "RARE" in r["note"] else POIDS.get(r["categorie"], 6)),
+        "poids": poids(r, mn, mx, mer is None and etage is None),
         "nuit": "nuit" in r["milieu"], "etage": etage, **CONDITIONS.get(r["id"], {})})
 json.dump({"precises": precises, "especes": especes}, open(os.path.join(OUT, "especes.json"), "w", encoding="utf-8"),
           ensure_ascii=False, separators=(",", ":"))

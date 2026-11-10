@@ -258,7 +258,7 @@ ECHELLE = {("aardvark", "common"): 0.72,
            ("giant_salamander", "chinese"): 1.15,
            ("giant_salamander", "hellbender"): 0.44,
            ("giant_salamander", "japanese"): 0.92,
-           ("hippo", "common"): 0.89,
+           ("hippo", "common"): 1.1,     # 10/11 : 0,89 plus petit que le crocodile en jeu
            ("hyena", "aardwolf"): 0.5,
            ("hyena", "brown"): 0.73,
            ("hyena", "spotted"): 0.82,
@@ -413,6 +413,13 @@ if z:
             change = True
         if change:
             fichiers[chemin] = d
+
+# Untamed Wilds (10/11/2026) : ses propres tables d'apparition des bêtes de terre sont vidées. Malgré freqherbivore,
+# freqapex et freqcritter à 0, le banc montrait des paires d'hippos, de dromadaires et de varans au coin des chunks
+# (au Nil d'Assouan, où la table ne met pas d'hippo) : ces bêtes ne naissent plus que par la table du mod Terre.
+# Les biomes des espèces restent : Untamed Wilds s'en sert pour choisir l'espèce d'une bête née par la table.
+for _t in ("herbivores", "predators", "critter", "feeder"):
+    fichiers[f"data/untamedwilds/spawn_tables/{_t}.json"] = {"name": _t, "entries": []}
 
 # ---------------------------------------------------------------- écriture du datapack
 fichiers["pack.mcmeta"] = {"pack": {"pack_format": 15, "description": "Le Domaine d'Aubin : plantes et animaux par terroir"}}

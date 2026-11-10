@@ -20,10 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Bêtes des rives (08/11/2026) : à la génération, un chunk sur deux qui a une berge d'eau douce reçoit un groupe
+ * Bêtes des rives (08/11/2026) : à la génération, un chunk sur trois (10/11/2026 : un sur deux, trop de crocodiles) qui a une berge d'eau douce reçoit un groupe
  * d'animaux des rives de sa région (FauneTerre.rives : crocodiles du Nil, loutres, tortues…), posé sur la berge.
  */
 public class RivesFeature extends Feature<NoneFeatureConfiguration> {
+    /** Un chunk de berge sur SUR reçoit un groupe (même valeur dans outils/faune/bilan_faune.py). */
+    static final int SUR = 3;
+
     public RivesFeature(Codec<NoneFeatureConfiguration> codec) {
         super(codec);
     }
@@ -32,7 +35,7 @@ public class RivesFeature extends Feature<NoneFeatureConfiguration> {
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> ctx) {
         WorldGenLevel n = ctx.level();
         RandomSource r = ctx.random();
-        if (r.nextInt(2) != 0) return false;
+        if (r.nextInt(SUR) != 0) return false;
         int x0 = ctx.origin().getX() & ~15, z0 = ctx.origin().getZ() & ~15;
         if (!FauneTerre.get().active() || !FauneTerre.eauDansChunk(x0, z0)) return false;
         if (n.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x0 + 8, z0 + 8) < Terrain.NIVEAU_MER - 40) return false;

@@ -1,0 +1,14 @@
+{
+  "replace": true,
+  "values": [
+    "domaine_terre:inde/beach",
+    "domaine_terre:inde/mangrove_swamp",
+    "domaine_terre:asie_sud_est/beach",
+    "domaine_terre:asie_sud_est/mangrove_swamp",
+    "domaine_terre:asie_sud_est/stony_shore",
+    "domaine_terre:australie/beach",
+    "domaine_terre:australie/mangrove_swamp",
+    "domaine_terre:melanesie/beach",
+    "domaine_terre:melanesie/mangrove_swamp"
+  ]
+}

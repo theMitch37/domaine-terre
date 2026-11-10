@@ -12,6 +12,10 @@ on:
         description: "Lieux à générer, séparés par des virgules (vide = tous)"
         required: false
         default: ""
+      profil:
+        description: "Profil Java Flight Recorder (oui / non) ; il ralentit un peu la génération"
+        required: false
+        default: "non"
 
 permissions:
   contents: write
@@ -62,23 +66,20 @@ jobs:
           rm -rf mods banc && mkdir mods
           cp $GITHUB_WORKSPACE/build/libs/domaine_terre-*.jar $GITHUB_WORKSPACE/lieux/build/libs/domaine_terre_lieux-*.jar mods/
           rm -f mods/*-sources.jar mods/*-slim.jar
-          # Mods d'animaux du pack (10/11/2026) : sans eux le banc ne peut voir ni crocodile ni aucune bête d'Alex's Mobs.
-          # Mêmes versions que l'instance « Refonte d'Aubin » ; pris sur Modrinth (échec = avertissement, banc sans eux).
-          python - <<'EOF' || echo "::warning::mods d'animaux non téléchargés : banc sans Alex's Mobs"
-          import json, urllib.request, urllib.parse
-          VOULUS = {"alexs-mobs": "alexsmobs-1.22.9.jar", "citadel": "citadel-2.6.3-1.20.1.jar"}
-          for slug, fichier in VOULUS.items():
-              q = urllib.parse.urlencode({"loaders": '["forge"]', "game_versions": '["1.20.1"]'})
-              req = urllib.request.Request(f"https://api.modrinth.com/v2/project/{slug}/version?{q}",
-                                           headers={"User-Agent": "theMitch37/domaine-terre banc"})
-              versions = json.load(urllib.request.urlopen(req, timeout=60))
-              f = next((f for v in versions for f in v["files"] if f["filename"] == fichier), None)
-              if f is None:
-                  f = versions[0]["files"][0]
-                  print(f"::warning::{fichier} introuvable sur Modrinth, pris {f['filename']}")
-              urllib.request.urlretrieve(f["url"], "mods/" + f["filename"])
-              print("téléchargé", f["filename"])
-          EOF
+          # Mods d'animaux du pack et leurs dépendances (10/11/2026 : Alex's Mobs, Untamed Wilds, Naturalist, Let's Do,
+          # Ecologics, Aquaculture, Savage and Ravage, Best Revived Animals, Critters and Companions), mêmes fichiers que
+          # l'instance « Refonte d'Aubin » ; un mod introuvable ou sans ses dépendances est laissé de côté (avertissement)
+          python $GITHUB_WORKSPACE/outils/banc/mods_animaux.py mods || echo "::warning::mods d'animaux non téléchargés"
+          # réglages du pack comme sur l'instance (10/11/2026) : un premier démarrage crée les configs des mods, puis
+          # generer_placement.py écrit le datapack domaine_terroirs (OpenLoader) et règle Untamed Wilds et Alex's Mobs
+          rm -rf config && echo "eula=true" > eula.txt
+          # (vrai démarrage puis arrêt : Untamed Wilds n'écrit sa config qu'au démarrage du serveur ; monde jeté ensuite)
+          ( timeout 900 bash -c 'until grep -q "Done (" logs/latest.log 2>/dev/null; do sleep 5; done'; echo stop ) \
+            | timeout 1000 java -Xmx6G @libraries/net/minecraftforge/forge/1.20.1-47.4.10/unix_args.txt nogui > init.log 2>&1 || true
+          rm -rf world banc logs/latest.log
+          ls config | head -40
+          mkdir -p config/openloader/data
+          (cd $GITHUB_WORKSPACE && python outils/generer_placement.py /tmp/serveur) || echo "::warning::réglages du pack non appliqués"
           ls mods
 
       - name: Génération des lieux
@@ -86,7 +87,9 @@ jobs:
           set -o pipefail
           mkdir -p /tmp/banc
           # profil du serveur (10/11/2026 : monde agrandi plus lent) : enregistrement Java Flight Recorder, résumé plus bas
-          export JAVA_TOOL_OPTIONS="-XX:StartFlightRecording=filename=/tmp/prof.jfr,settings=profile,dumponexit=true"
+          if [ "${{ github.event.inputs.profil }}" = "oui" ]; then
+            export JAVA_TOOL_OPTIONS="-XX:StartFlightRecording=filename=/tmp/prof.jfr,settings=profile,dumponexit=true"
+          fi
           python outils/banc/serveur.py /tmp/serveur outils/banc/zones.json /tmp/banc ${{ github.event.inputs.lieux }} 2>&1 | tee /tmp/banc_script.log
 
       - name: Profil
@@ -105,6 +108,12 @@ jobs:
           mkdir -p /tmp/banc
           cp /tmp/serveur/logs/latest.log /tmp/banc/latest.log 2>/dev/null || true
           cp /tmp/banc_script.log /tmp/banc/script.log 2>/dev/null || true
+          cp /tmp/serveur/domaine_tailles.csv /tmp/banc/domaine_tailles.csv 2>/dev/null || true   # tailles d'origine
+          ls /tmp/serveur/mods > /tmp/banc/mods.txt 2>/dev/null || true
+          cp /tmp/serveur/config/untamedwilds-common.toml /tmp/banc/ 2>/dev/null || true
+          # tables d'apparition propres d'Untamed Wilds (10/11/2026 : bêtes nées en plus de la table)
+          (cd /tmp/banc && unzip -o -q /tmp/serveur/mods/untamedwilds-*.jar 'data/untamedwilds/spawn_tables/*' -d uw) 2>/dev/null || true
+          unzip -l /tmp/serveur/config/openloader/data/domaine_terroirs.zip > /tmp/banc/datapack.txt 2>/dev/null || true
           cp -r /tmp/serveur/crash-reports /tmp/banc/ 2>/dev/null || true
           printf 'branche=%s\ncommit=%s\ndate=%s\nresultat=%s\n' "$GITHUB_REF_NAME" "$GITHUB_SHA" "$(date -u +%FT%TZ)" "${{ job.status }}" > /tmp/banc/SOURCE.txt
           cd /tmp/banc

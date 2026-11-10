@@ -122,6 +122,8 @@ for f in glob.glob(os.path.join(SERVEUR, "banc", "entities", "*.mca")):
             nom = e.get("id", "?")
             if nom == "minecraft:item":
                 nom = "item:" + str(e.get("Item", {}).get("id", "?"))
+            if nom == "alexsmobs:crocodile" and e.get("Desert"):     # crocodile blanc (marin), 10/11/2026
+                nom += "[blanc]"
             ents.append((nom, float(pos[0]), float(pos[1]), float(pos[2])))
 # chunks restés « proto » : leurs animaux sont encore dans la région (clé entities)
 for f in glob.glob(os.path.join(SERVEUR, "banc", "region", "*.mca")):
