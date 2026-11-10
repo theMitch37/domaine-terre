@@ -138,3 +138,5 @@ jobs:
           git add -A
           git commit -q -m "Banc d'essai de $GITHUB_REF_NAME @ ${GITHUB_SHA::7}"
           git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" banc
+          # aussi sur banc-<branche> (10/11/2026) : plusieurs essais en même temps ne s'écrasent plus
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" "banc:banc-$GITHUB_REF_NAME"
