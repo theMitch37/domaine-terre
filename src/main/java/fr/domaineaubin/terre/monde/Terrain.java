@@ -534,6 +534,32 @@ public final class Terrain {
         return Math.max(bas, Mth.clamp((y - limite) / 8.0, -1.0, 1.0));
     }
 
+    /** Pas de plancher dans cette colonne (bornes vides). */
+    public static final double SANS_PLANCHER = -1.0e6;
+
+    /**
+     * Masques d'une colonne en un seul calcul (10/11/2026, génération plus rapide : MasquesFunction) :
+     * {limite des grottes, haut du plancher, bas du plancher, plafond de la colonne (1 ou -20)}. Mêmes règles que
+     * grottes(), plancher() et plafond(), qui restent pour les outils.
+     */
+    public void masques(int x, int z, double[] dans) {
+        Colonne c = colonne(x, z);
+        boolean eau = c.sd() < 0 || c.eauLac() != SANS_LAC || c.eauRiv() != SANS_LAC;
+        double marge = eau ? GROTTES_SOUS_EAU : GROTTES_SOUS_SOL;
+        if (!LieuxTerre.liste().isEmpty()) marge += (c.lieu() ? 1.0 : procheLieu(x, z)) * GROTTES_LIEU;
+        dans[0] = c.h() - marge;
+        if (c.bergeLac() != SANS_LAC) {
+            dans[1] = c.bergeLac(); dans[2] = c.bergeLac() - 6;
+        } else if (c.bergeRiv() != SANS_LAC && c.eauLac() == SANS_LAC) {
+            dans[1] = c.bergeRiv(); dans[2] = c.bergeRiv() - 6;
+        } else if (c.sd() < 0 || c.r() != null || c.h() < NIVEAU_MER) {
+            dans[1] = SANS_PLANCHER; dans[2] = -SANS_PLANCHER;
+        } else {
+            dans[1] = NIVEAU_MER - 1; dans[2] = NIVEAU_MER - 5;
+        }
+        dans[3] = c.sd() >= 0 || c.h() >= PLAFOND_MER + 1.0 ? 1.0 : -20.0;
+    }
+
     /** 1 dans un lieu, puis de 1 à 0 en s'en éloignant (0 à GROTTES_APPROCHE blocs et au-delà). Mis en cache par colonne. */
     private double procheLieu(int x, int z) {
         long[] tab = cacheLieux.get();

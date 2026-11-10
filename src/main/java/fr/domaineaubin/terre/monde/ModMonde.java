@@ -18,6 +18,8 @@ public final class ModMonde {
 
     public static final RegistryObject<Codec<? extends DensityFunction>> TERRE =
             TYPES_DENSITE.register("terre", TerreFunction.CODEC::codec);
+    public static final RegistryObject<Codec<? extends DensityFunction>> MASQUES =
+            TYPES_DENSITE.register("masques", MasquesFunction.CODEC::codec);
 
     public static final DeferredRegister<Feature<?>> FEATURES =
             DeferredRegister.create(ForgeRegistries.FEATURES, DomaineTerre.MOD_ID);
