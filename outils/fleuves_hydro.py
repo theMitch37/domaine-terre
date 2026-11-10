@@ -63,7 +63,12 @@ print(f"{len(bouts)} embouchures à terre à examiner ({time.time() - t0:.0f} s)
 import pyogrio
 from shapely import STRtree, LineString, Point, get_coordinates
 ids, aval, endo, debit, geoms = [], [], [], [], []
-for shp in sorted(glob.glob(os.path.join(sys.argv[1], "**", "*.shp"), recursive=True)):
+if sys.argv[1].endswith(".zip"):                  # lu dans le zip, sans décompresser (GDAL /vsizip/)
+    import zipfile
+    fichiers = [f"/vsizip/{sys.argv[1]}/{n}" for n in zipfile.ZipFile(sys.argv[1]).namelist() if n.endswith(".shp")]
+else:
+    fichiers = glob.glob(os.path.join(sys.argv[1], "**", "*.shp"), recursive=True)
+for shp in sorted(fichiers):
     champs = {c.upper(): c for c in pyogrio.read_info(shp)["fields"]}
     q = champs.get("DIS_AV_CMS") or champs.get("DIS_M3_PYR") or champs["UPLAND_SKM"]
     df = pyogrio.read_dataframe(shp, columns=[champs["HYRIV_ID"], champs["NEXT_DOWN"], champs["ENDORHEIC"], q,

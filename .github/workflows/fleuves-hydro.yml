@@ -23,6 +23,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Place sur le disque (RiverATLAS fait plusieurs Go)
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL /usr/local/share/boost
+          df -h /
       - name: Outils Python
         run: pip install numpy scipy shapely pyogrio pandas pillow
       - name: Téléchargement et construction (journal toujours rapporté)
@@ -37,11 +41,10 @@ jobs:
             url=$(python -c "import json; d=json.load(open('article.json')); print([f['download_url'] for f in d['files'] if f['name']=='RiverATLAS_Data_v10_shp.zip'][0])")
             echo "RiverATLAS : $url ; licence : $(python -c "import json; print(json.load(open('article.json')).get('license', {}).get('name'))")"
             curl -sSfL --retry 5 --retry-delay 30 -o ra.zip "$url"
-            ls -la ra.zip
-            unzip -q ra.zip -d ra && rm ra.zip
-            du -sh ra; find ra -name "*.shp" | head
+            ls -la ra.zip; df -h /
+            # lu directement dans le zip (GDAL /vsizip/) : pas de décompression sur le disque
             cd $GITHUB_WORKSPACE
-            python outils/fleuves_hydro.py /tmp/hydro
+            python outils/fleuves_hydro.py /tmp/hydro/ra.zip
             python outils/fleuves_mer.py
           } > /tmp/journal.txt 2>&1 || echo "ÉCHEC" >> /tmp/journal.txt
           cp /tmp/journal.txt outils/donnees/fleuves_hydro.log; cat outils/donnees/fleuves_hydro.log
@@ -56,4 +59,4 @@ jobs:
             git fetch origin "${GITHUB_REF_NAME}" && git rebase "origin/${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
             sleep 10
           done
-# déclenché le 10/11/2026 (2 : RiverATLAS par figshare)
+# déclenché le 10/11/2026 (3 : RiverATLAS lu dans le zip)
