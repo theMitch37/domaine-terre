@@ -1,42 +1,13 @@
-curl: (22) The requested URL returned error: 403
-unzip:  cannot find or open af.zip, af.zip.zip or af.zip.ZIP.
-du: cannot access 'af': No such file or directory
-af : 
-curl: (22) The requested URL returned error: 403
-unzip:  cannot find or open ar.zip, ar.zip.zip or ar.zip.ZIP.
-du: cannot access 'ar': No such file or directory
-ar : 
-curl: (22) The requested URL returned error: 403
-unzip:  cannot find or open as.zip, as.zip.zip or as.zip.ZIP.
-du: cannot access 'as': No such file or directory
-as : 
-curl: (22) The requested URL returned error: 403
-unzip:  cannot find or open au.zip, au.zip.zip or au.zip.ZIP.
-du: cannot access 'au': No such file or directory
-au : 
-curl: (22) The requested URL returned error: 403
-unzip:  cannot find or open eu.zip, eu.zip.zip or eu.zip.ZIP.
-du: cannot access 'eu': No such file or directory
-eu : 
-curl: (22) The requested URL returned error: 403
-unzip:  cannot find or open na.zip, na.zip.zip or na.zip.ZIP.
-du: cannot access 'na': No such file or directory
-na : 
-curl: (22) The requested URL returned error: 403
-unzip:  cannot find or open sa.zip, sa.zip.zip or sa.zip.ZIP.
-du: cannot access 'sa': No such file or directory
-sa : 
-curl: (22) The requested URL returned error: 403
-unzip:  cannot find or open si.zip, si.zip.zip or si.zip.ZIP.
-du: cannot access 'si': No such file or directory
-si : 
+RiverATLAS : https://ndownloader.figshare.com/files/20087486 ; licence : CC BY 4.0
+-rw-r--r-- 1 runner runner 2418581202 Nov 10 20:11 ra.zip
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root        72G   42G   31G  58% /
 271 embouchures à terre à examiner (2 s)
 Traceback (most recent call last):
-  File "/home/runner/work/domaine-terre/domaine-terre/outils/fleuves_hydro.py", line 75, in <module>
-    ids, aval, endo, debit = (np.concatenate(v) for v in (ids, aval, endo, debit))
-    ^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/domaine-terre/domaine-terre/outils/fleuves_hydro.py", line 75, in <genexpr>
-    ids, aval, endo, debit = (np.concatenate(v) for v in (ids, aval, endo, debit))
-                              ^^^^^^^^^^^^^^^^^
-ValueError: need at least one array to concatenate
+  File "/home/runner/work/domaine-terre/domaine-terre/outils/fleuves_hydro.py", line 74, in <module>
+    df = pyogrio.read_dataframe(shp, columns=[champs["HYRIV_ID"], champs["NEXT_DOWN"], champs["ENDORHEIC"], q,
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pyogrio/geopandas.py", line 361, in read_dataframe
+    raise ImportError("geopandas is required to use pyogrio.read_dataframe()")
+ImportError: geopandas is required to use pyogrio.read_dataframe()
 0 embouchures prolongées jusqu'à la mer
