@@ -85,7 +85,19 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p /tmp/banc
+          # profil du serveur (10/11/2026 : monde agrandi plus lent) : enregistrement Java Flight Recorder, résumé plus bas
+          export JAVA_TOOL_OPTIONS="-XX:StartFlightRecording=filename=/tmp/prof.jfr,settings=profile,dumponexit=true"
           python outils/banc/serveur.py /tmp/serveur outils/banc/zones.json /tmp/banc ${{ github.event.inputs.lieux }} 2>&1 | tee /tmp/banc_script.log
+
+      - name: Profil
+        if: always()
+        run: |
+          mkdir -p /tmp/banc
+          if [ -f /tmp/prof.jfr ]; then
+            jfr print --events jdk.ExecutionSample /tmp/prof.jfr > /tmp/echant.txt 2>/dev/null || true
+            python outils/banc/profil.py /tmp/echant.txt > /tmp/banc/profil.txt || true
+            head -60 /tmp/banc/profil.txt
+          fi
 
       - name: Résultats sur la branche banc
         if: always()
