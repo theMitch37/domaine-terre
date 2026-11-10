@@ -9,7 +9,7 @@ Pour chaque embouchure restée à terre (bout le plus bas d'un tracé, sans autr
 chaîne des tronçons d'aval jusqu'au bout. Gardé seulement s'il finit à la mer (pas endoréique) et si le chemin fait
 moins de 400 km. Le chemin, simplifié (~2 blocs), est ajouté au bout du tracé. Rien n'est touché d'autre.
 
-Usage (GitHub Actions, internet) : python3 outils/fleuves_hydro.py <dossier des .shp HydroRIVERS>
+Usage (GitHub Actions, internet) : python3 outils/fleuves_hydro.py <dossier des .shp HydroRIVERS ou RiverATLAS>
 Écrit src/main/resources/domaine_terre/carte/fleuves.json (corrigé) et outils/donnees/fleuves_hydro.json (ajouts).
 """
 import glob, json, os, sys, time
@@ -61,17 +61,34 @@ print(f"{len(bouts)} embouchures à terre à examiner ({time.time() - t0:.0f} s)
 
 # --- HydroRIVERS (tronçons d'un bassin de plus de 200 km² seulement : les cours d'eau du mod sont grands)
 import pyogrio
-from shapely import STRtree, LineString, Point, get_coordinates
+import pyogrio.raw
+from shapely import STRtree, LineString, Point, get_coordinates, from_wkb
 ids, aval, endo, debit, geoms = [], [], [], [], []
-for shp in sorted(glob.glob(os.path.join(sys.argv[1], "**", "*.shp"), recursive=True)):
-    df = pyogrio.read_dataframe(shp, columns=["HYRIV_ID", "NEXT_DOWN", "ENDORHEIC", "DIS_AV_CMS", "UPLAND_SKM"],
-                                where="UPLAND_SKM > 200")
-    ids.append(df["HYRIV_ID"].to_numpy())
-    aval.append(df["NEXT_DOWN"].to_numpy())
-    endo.append(df["ENDORHEIC"].to_numpy())
-    debit.append(df["DIS_AV_CMS"].to_numpy())
-    geoms.extend(df.geometry.values)
-    print(os.path.basename(shp), len(df), "tronçons", flush=True)
+if sys.argv[1].endswith(".zip"):                  # lu dans le zip, sans décompresser (GDAL /vsizip/)
+    import zipfile
+    fichiers = [f"/vsizip/{sys.argv[1]}/{n}" for n in zipfile.ZipFile(sys.argv[1]).namelist() if n.endswith(".shp")]
+else:
+    fichiers = glob.glob(os.path.join(sys.argv[1], "**", "*.shp"), recursive=True)
+for shp in sorted(fichiers):
+    champs = {c.upper(): c for c in pyogrio.read_info(shp)["fields"]}
+    q = champs.get("DIS_AV_CMS") or champs.get("DIS_M3_PYR") or champs["UPLAND_SKM"]
+    noms_ = [champs["HYRIV_ID"], champs["NEXT_DOWN"], champs["ENDORHEIC"], q]
+    # attributs seuls d'abord (tous les tronçons), puis la géométrie des seuls tronçons gardés (par leur fid)
+    meta, fids, _, data = pyogrio.raw.read(shp, columns=noms_ + [champs["UPLAND_SKM"]], read_geometry=False,
+                                           return_fids=True)
+    tout = dict(zip(meta["fields"], data))
+    garde = np.asarray(tout[champs["UPLAND_SKM"]], float) > 200
+    if not garde.any():
+        print(os.path.basename(shp), "champs :", list(champs), "aucun tronçon gardé", flush=True)
+        continue
+    meta, _, wkb, data = pyogrio.raw.read(shp, columns=noms_, fids=np.asarray(fids)[garde])
+    col = dict(zip(meta["fields"], data))
+    ids.append(np.asarray(col[noms_[0]]))
+    aval.append(np.asarray(col[noms_[1]]))
+    endo.append(np.asarray(col[noms_[2]]))
+    debit.append(np.asarray(col[noms_[3]], float))
+    geoms.extend(from_wkb(wkb))
+    print(os.path.basename(shp), len(wkb), "tronçons", flush=True)
 ids, aval, endo, debit = (np.concatenate(v) for v in (ids, aval, endo, debit))
 geoms = np.array(geoms, dtype=object)
 rang = {int(i): n for n, i in enumerate(ids)}
