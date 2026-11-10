@@ -32,10 +32,6 @@ public final class Fleuves {
         int niveau(double x, double z);
     }
 
-    /** Point de mer (blocs) le plus proche d'une embouchure restée à terre, ou null (10/11/2026). */
-    public interface VersMer {
-        double[] mer(double x, double z);
-    }
 
     private final float[] ax, az, bx, bz;
     private final byte[] classe;
@@ -73,15 +69,6 @@ public final class Fleuves {
     }
 
     public static Fleuves charger(double blocsParDegre, CalculNiveau calcul) {
-        return charger(blocsParDegre, calcul, null);
-    }
-
-    /**
-     * versMer (10/11/2026, test : « les fleuves ne rejoignent pas toujours la mer ») : le tracé Natural Earth s'arrête
-     * souvent quelques dizaines de blocs avant le trait de côte (deltas du Gange, de l'Indus, du Niger…) et le lit
-     * finissait en cul-de-sac dans les terres. Une embouchure restée à terre est prolongée tout droit jusqu'à la mer.
-     */
-    public static Fleuves charger(double blocsParDegre, CalculNiveau calcul, VersMer versMer) {
         long t0 = System.currentTimeMillis();
         JsonArray tab;
         try (InputStream in = Fleuves.class.getResourceAsStream("/domaine_terre/carte/fleuves.json")) {
@@ -91,34 +78,10 @@ public final class Fleuves {
             throw new UncheckedIOException(e);
         }
         java.util.List<double[]> traces = new java.util.ArrayList<>(tab.size());
-        int prolonges = 0;
         for (JsonElement e : tab) {
             JsonArray ja = e.getAsJsonObject().getAsJsonArray("p");
             double[] d = new double[ja.size()];
             for (int k = 0; k < d.length; k++) d[k] = ja.get(k).getAsDouble();
-            int m = d.length / 2;
-            if (versMer != null && m >= 2) {
-                // embouchure : le bout le plus bas
-                double xa = d[0] * blocsParDegre, za = -d[1] * blocsParDegre;
-                double xb = d[2 * m - 2] * blocsParDegre, zb = -d[2 * m - 1] * blocsParDegre;
-                boolean finEnAval = calcul.niveau(xb, zb) <= calcul.niveau(xa, za);
-                double[] mer = finEnAval ? versMer.mer(xb, zb) : versMer.mer(xa, za);
-                if (mer != null) {
-                    double[] d2 = new double[d.length + 2];
-                    double lo = mer[0] / blocsParDegre, la = -mer[1] / blocsParDegre;
-                    if (finEnAval) {
-                        System.arraycopy(d, 0, d2, 0, d.length);
-                        d2[d.length] = lo;
-                        d2[d.length + 1] = la;
-                    } else {
-                        d2[0] = lo;
-                        d2[1] = la;
-                        System.arraycopy(d, 0, d2, 2, d.length);
-                    }
-                    d = d2;
-                    prolonges++;
-                }
-            }
             traces.add(d);
         }
         int n = 0;
@@ -178,8 +141,7 @@ public final class Fleuves {
         }
         Long2ObjectOpenHashMap<int[]> grille = new Long2ObjectOpenHashMap<>(tmp.size());
         tmp.long2ObjectEntrySet().forEach(en -> grille.put(en.getLongKey(), en.getValue().toIntArray()));
-        DomaineTerre.LOGGER.info("Fleuves chargés : {} segments ({} embouchures prolongées jusqu'à la mer) en {} ms", n,
-                prolonges, System.currentTimeMillis() - t0);
+        DomaineTerre.LOGGER.info("Fleuves chargés : {} segments en {} ms", n, System.currentTimeMillis() - t0);
         return new Fleuves(ax, az, bx, bz, cl, nva, nvb, src, grille, deb, nbr, amd);
     }
 
