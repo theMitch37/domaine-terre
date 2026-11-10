@@ -382,7 +382,7 @@ public final class Terrain {
         if (fleuves == null) {
             synchronized (this) {
                 if (fleuves == null) {
-                    Fleuves f = Fleuves.charger(BLOCS_PAR_DEGRE, this::niveauEau);
+                    Fleuves f = Fleuves.charger(BLOCS_PAR_DEGRE, this::niveauEau, this::versMer);
                     f.reliefFin(this::niveauFin);
                     fleuves = f;
                 }
@@ -449,6 +449,40 @@ public final class Terrain {
         Lacs.Proche lp = lacs != null ? lacs.proche(lon(xi + 0.5), lat(zi + 0.5)) : null;
         if (lp != null) n = Math.max(n, (int) Math.min(niveauLac(lacs.altitude(lp.lac())), lacs.plafond(lp.lac())));
         return n;
+    }
+
+    /** Plus loin que ça, une embouchure à terre reste telle quelle (lac salé, delta intérieur, tracé incomplet). */
+    private static final int MER_MAX = 64;
+
+    /**
+     * Mer la plus proche d'une embouchure restée à terre (10/11/2026) : 32 directions, pas d'un bloc, jusqu'à MER_MAX
+     * blocs ; le point rendu est 4 blocs dans la mer (le lit y débouche franchement). null si l'embouchure est déjà en
+     * mer ou si la mer est trop loin.
+     */
+    private double[] versMer(double x, double z) {
+        int xi = Mth.floor(x), zi = Mth.floor(z);
+        if (distanceCote(xi, zi) <= 0.0 || distanceCote(xi, zi) > MER_MAX * 60.0 / BLOCS_PAR_DEGRE) return null;
+        double meilleur = Double.MAX_VALUE, mx = 0, mz = 0;
+        for (int k = 0; k < 32; k++) {
+            double a = k * Math.PI / 16, dx = Math.cos(a), dz = Math.sin(a);
+            for (int r = 1; r <= MER_MAX && r < meilleur; r++) {
+                if (distanceCote(Mth.floor(x + dx * r), Mth.floor(z + dz * r)) < 0.0) {
+                    meilleur = r;
+                    mx = x + dx * (r + 4);
+                    mz = z + dz * (r + 4);
+                    break;
+                }
+            }
+        }
+        if (meilleur == Double.MAX_VALUE) return null;
+        // pas dans un lieu (ses colonnes non sculptées garderaient un lit sans eau ; les outils Python ne le savent pas)
+        if (!LieuxTerre.liste().isEmpty()) {
+            for (int r = 0; r <= meilleur + 4; r += 4) {
+                double t = r / (meilleur + 4.0);
+                if (LieuxTerre.a(Mth.floor(x + (mx - x) * t), Mth.floor(z + (mz - z) * t)) != null) return null;
+            }
+        }
+        return new double[]{mx, mz};
     }
 
     /** Niveau de l'eau d'un sommet de cours d'eau au relief fin (vrai fond de vallée), ou Integer.MIN_VALUE sans relief fin. */

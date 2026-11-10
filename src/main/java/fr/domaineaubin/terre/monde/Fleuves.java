@@ -32,6 +32,11 @@ public final class Fleuves {
         int niveau(double x, double z);
     }
 
+    /** Point de mer (blocs) le plus proche d'une embouchure restée à terre, ou null (10/11/2026). */
+    public interface VersMer {
+        double[] mer(double x, double z);
+    }
+
     private final float[] ax, az, bx, bz;
     private final byte[] classe;
     private final short[] niveauA, niveauB;
@@ -68,6 +73,15 @@ public final class Fleuves {
     }
 
     public static Fleuves charger(double blocsParDegre, CalculNiveau calcul) {
+        return charger(blocsParDegre, calcul, null);
+    }
+
+    /**
+     * versMer (10/11/2026, test : « les fleuves ne rejoignent pas toujours la mer ») : le tracé Natural Earth s'arrête
+     * souvent quelques dizaines de blocs avant le trait de côte (deltas du Gange, de l'Indus, du Niger…) et le lit
+     * finissait en cul-de-sac dans les terres. Une embouchure restée à terre est prolongée tout droit jusqu'à la mer.
+     */
+    public static Fleuves charger(double blocsParDegre, CalculNiveau calcul, VersMer versMer) {
         long t0 = System.currentTimeMillis();
         JsonArray tab;
         try (InputStream in = Fleuves.class.getResourceAsStream("/domaine_terre/carte/fleuves.json")) {
@@ -76,8 +90,39 @@ public final class Fleuves {
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
+        java.util.List<double[]> traces = new java.util.ArrayList<>(tab.size());
+        int prolonges = 0;
+        for (JsonElement e : tab) {
+            JsonArray ja = e.getAsJsonObject().getAsJsonArray("p");
+            double[] d = new double[ja.size()];
+            for (int k = 0; k < d.length; k++) d[k] = ja.get(k).getAsDouble();
+            int m = d.length / 2;
+            if (versMer != null && m >= 2) {
+                // embouchure : le bout le plus bas
+                double xa = d[0] * blocsParDegre, za = -d[1] * blocsParDegre;
+                double xb = d[2 * m - 2] * blocsParDegre, zb = -d[2 * m - 1] * blocsParDegre;
+                boolean finEnAval = calcul.niveau(xb, zb) <= calcul.niveau(xa, za);
+                double[] mer = finEnAval ? versMer.mer(xb, zb) : versMer.mer(xa, za);
+                if (mer != null) {
+                    double[] d2 = new double[d.length + 2];
+                    double lo = mer[0] / blocsParDegre, la = -mer[1] / blocsParDegre;
+                    if (finEnAval) {
+                        System.arraycopy(d, 0, d2, 0, d.length);
+                        d2[d.length] = lo;
+                        d2[d.length + 1] = la;
+                    } else {
+                        d2[0] = lo;
+                        d2[1] = la;
+                        System.arraycopy(d, 0, d2, 2, d.length);
+                    }
+                    d = d2;
+                    prolonges++;
+                }
+            }
+            traces.add(d);
+        }
         int n = 0;
-        for (JsonElement e : tab) n += Math.max(0, e.getAsJsonObject().getAsJsonArray("p").size() / 2 - 1);
+        for (double[] d : traces) n += Math.max(0, d.length / 2 - 1);
         float[] ax = new float[n], az = new float[n], bx = new float[n], bz = new float[n];
         byte[] cl = new byte[n];
         short[] nva = new short[n], nvb = new short[n];
@@ -86,17 +131,17 @@ public final class Fleuves {
         boolean[] amd = new boolean[n];
         Long2ObjectOpenHashMap<IntArrayList> tmp = new Long2ObjectOpenHashMap<>();
         int i = 0;
-        for (JsonElement e : tab) {
-            JsonObject o = e.getAsJsonObject();
+        for (int r = 0; r < tab.size(); r++) {
+            JsonObject o = tab.get(r).getAsJsonObject();
             int c = o.get("c").getAsInt();
-            JsonArray p = o.getAsJsonArray("p");
+            double[] p = traces.get(r);
             double marge = Math.max(Terrain.demiLargeur(c) + Terrain.VALLEE_MAX, RAYON_INDEX);
             // niveau de l'eau à chaque sommet (étape C2) : depuis le fond de vallée réel, puis il ne fait que descendre
             // de l'amont (le bout le plus haut) vers l'aval : jamais d'eau qui remonte le long d'un cours d'eau
-            int nb = p.size() / 2;
+            int nb = p.length / 2;
             int[] nivS = new int[nb];
             for (int s = 0; s < nb; s++)
-                nivS[s] = calcul.niveau(p.get(2 * s).getAsDouble() * blocsParDegre, -p.get(2 * s + 1).getAsDouble() * blocsParDegre);
+                nivS[s] = calcul.niveau(p[2 * s] * blocsParDegre, -p[2 * s + 1] * blocsParDegre);
             boolean amontAuDebut = nb > 1 && nivS[0] >= nivS[nb - 1];
             if (amontAuDebut) {
                 for (int s = 1; s < nb; s++) nivS[s] = Math.min(nivS[s], nivS[s - 1]);
@@ -104,17 +149,17 @@ public final class Fleuves {
                 for (int s = nb - 2; s >= 0; s--) nivS[s] = Math.min(nivS[s], nivS[s + 1]);
             }
             int premier = i;
-            for (int k = 0; k + 3 < p.size(); k += 2) {
+            for (int k = 0; k + 3 < p.length; k += 2) {
                 deb[i] = premier;
                 nbr[i] = nb - 1;
                 amd[i] = amontAuDebut;
-                double x1 = p.get(k).getAsDouble() * blocsParDegre, z1 = -p.get(k + 1).getAsDouble() * blocsParDegre;
-                double x2 = p.get(k + 2).getAsDouble() * blocsParDegre, z2 = -p.get(k + 3).getAsDouble() * blocsParDegre;
+                double x1 = p[k] * blocsParDegre, z1 = -p[k + 1] * blocsParDegre;
+                double x2 = p[k + 2] * blocsParDegre, z2 = -p[k + 3] * blocsParDegre;
                 ax[i] = (float) x1; az[i] = (float) z1; bx[i] = (float) x2; bz[i] = (float) z2; cl[i] = (byte) c;
                 nva[i] = (short) nivS[k / 2];
                 nvb[i] = (short) nivS[k / 2 + 1];
                 if (amontAuDebut && k == 0) src[i] |= 1;
-                if (!amontAuDebut && k + 4 >= p.size()) src[i] |= 2;
+                if (!amontAuDebut && k + 4 >= p.length) src[i] |= 2;
                 int c0x = (int) Math.floor((Math.min(x1, x2) - marge) / CELLULE), c1x = (int) Math.floor((Math.max(x1, x2) + marge) / CELLULE);
                 int c0z = (int) Math.floor((Math.min(z1, z2) - marge) / CELLULE), c1z = (int) Math.floor((Math.max(z1, z2) + marge) / CELLULE);
                 for (int gx = c0x; gx <= c1x; gx++)
@@ -133,7 +178,8 @@ public final class Fleuves {
         }
         Long2ObjectOpenHashMap<int[]> grille = new Long2ObjectOpenHashMap<>(tmp.size());
         tmp.long2ObjectEntrySet().forEach(en -> grille.put(en.getLongKey(), en.getValue().toIntArray()));
-        DomaineTerre.LOGGER.info("Fleuves chargés : {} segments en {} ms", n, System.currentTimeMillis() - t0);
+        DomaineTerre.LOGGER.info("Fleuves chargés : {} segments ({} embouchures prolongées jusqu'à la mer) en {} ms", n,
+                prolonges, System.currentTimeMillis() - t0);
         return new Fleuves(ax, az, bx, bz, cl, nva, nvb, src, grille, deb, nbr, amd);
     }
 
