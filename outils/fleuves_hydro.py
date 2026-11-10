@@ -73,7 +73,15 @@ for shp in sorted(fichiers):
     champs = {c.upper(): c for c in pyogrio.read_info(shp)["fields"]}
     q = champs.get("DIS_AV_CMS") or champs.get("DIS_M3_PYR") or champs["UPLAND_SKM"]
     noms_ = [champs["HYRIV_ID"], champs["NEXT_DOWN"], champs["ENDORHEIC"], q]
-    meta, _, wkb, data = pyogrio.raw.read(shp, columns=noms_, where=f"{champs['UPLAND_SKM']} > 200")
+    # attributs seuls d'abord (tous les tronçons), puis la géométrie des seuls tronçons gardés (par leur fid)
+    meta, fids, _, data = pyogrio.raw.read(shp, columns=noms_ + [champs["UPLAND_SKM"]], read_geometry=False,
+                                           return_fids=True)
+    tout = dict(zip(meta["fields"], data))
+    garde = np.asarray(tout[champs["UPLAND_SKM"]], float) > 200
+    if not garde.any():
+        print(os.path.basename(shp), "champs :", list(champs), "aucun tronçon gardé", flush=True)
+        continue
+    meta, _, wkb, data = pyogrio.raw.read(shp, columns=noms_, fids=np.asarray(fids)[garde])
     col = dict(zip(meta["fields"], data))
     ids.append(np.asarray(col[noms_[0]]))
     aval.append(np.asarray(col[noms_[1]]))
