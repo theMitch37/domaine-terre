@@ -297,11 +297,12 @@ def creuser_riviere(X, Z, y, eau, trace, niv, larg, prof=2.0, pente=0.7, rive=0.
     return y, eau, d, s, Ltot
 
 
-def fleuve_du_mod(X, Z, h):
-    """Le cours d'eau du mod tel quel (pour un lieu qui s'y raccorde) : eau de son lit, terrain h inchangé."""
+def fleuve_du_mod(X, Z, h, vallee=64):
+    """Le cours d'eau du mod tel quel (pour un lieu qui s'y raccorde) : eau de son lit, terrain h inchangé sur `vallee`
+    blocs au-delà du lit."""
     pres, d, hw, prof, niv, w = T.rivieres(X, Z)
     lit = pres & (d <= hw)
-    return np.where(lit, w.astype(float), np.nan), pres & (d <= hw + 64)
+    return np.where(lit, w.astype(float), np.nan), pres & (d <= hw + vallee)
 
 
 def gullfoss():
@@ -313,7 +314,10 @@ def gullfoss():
     h, sd = T.hauteur_base(X, Z)
     dx, dz = X - c[0], Z - c[1]
     r = np.hypot(dx, dz)
-    eau_mod, vallee_mod = fleuve_du_mod(X, Z, h)
+    # 10/11/2026 (test : « encore un mur ») : la gorge courait dans le versant de la vallée du mod gardée telle quelle
+    # (64 blocs de part et d'autre de la rivière), haut d'un côté, 10 blocs plus bas de l'autre : une marche le long de
+    # la gorge. Le plateau du lieu s'étend maintenant jusqu'à 18 blocs de la rivière, des deux côtés de la gorge.
+    eau_mod, vallee_mod = fleuve_du_mod(X, Z, h, vallee=18)
     # plateau de lave relevé autour des chutes (la gorge s'y enfonce)
     bosse = 81.5 + 1.2 * bruit(X, Z, 20, 201) - 0.15 * np.maximum(r - 40, 0)
     y = np.maximum(h, bosse)
@@ -390,6 +394,25 @@ def gullfoss():
     anneau = (s > s_c2 - 1) & (d >= larg(s) + 3.5) & (d < larg(s) + 8.0) & ~np.isfinite(eau)
     ref = ndimage.maximum_filter(np.where(anneau, y, -1e9), size=11)
     y = np.where(mur & (ref > -1e8), np.minimum(y, ref + 1.0), y)
+    # contrôle : écart de hauteur entre les deux rives de la gorge (5 blocs derrière chaque paroi)
+    ecarts = []
+    for k in range(len(trace) - 1):
+        sk = L * k / (len(trace) - 1)
+        if not (s_c2 + 5 < sk < L - 25):
+            continue
+        p0, p1 = np.array(trace[k]), np.array(trace[k + 1])
+        nx, nz = -(p1 - p0)[1], (p1 - p0)[0]
+        nn = np.hypot(nx, nz) or 1.0
+        cote = []
+        for sg in (-1, 1):
+            q = p0 + sg * np.array([nx, nz]) / nn * 9.5
+            jj, ii = int(round(q[1] - Z[0, 0])), int(round(q[0] - X[0, 0]))
+            if 0 <= jj < X.shape[0] and 0 <= ii < X.shape[1]:
+                cote.append(y[jj, ii])
+        if len(cote) == 2:
+            ecarts.append(abs(cote[0] - cote[1]))
+    if ecarts:
+        print(f"  gorge : écart entre les rives médian {np.median(ecarts):.1f}, max {np.max(ecarts):.1f} blocs")
     pl = pente_locale(y)
     typ = np.full(X.shape, PLATEAU | TAILLEE, np.int32)
     mousse = (bruit(X, Z, 9, 203) * 0.5 + (1 - r / 85)) > 0.35
