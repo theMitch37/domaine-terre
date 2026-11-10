@@ -108,13 +108,7 @@ public final class Terrain {
         // carte 3' (fond de vallée lissé, plus haut que le vrai) ; sur le relief fin, le vrai fond de vallée est plus
         // bas et la berge, tenue au-dessus de l'eau, faisait un canal perché. L'eau descend au vrai fond de vallée,
         // pris sur l'axe du cours d'eau (le même des deux rives) ; elle ne monte jamais plus haut qu'avant.
-        if (r != null) {
-            double fond = ReliefFin.altitudeFond(r.cx(), r.cz());
-            if (!Double.isNaN(fond)) {
-                int wf = Math.max(NIVEAU_MER, Mth.floor(blocsDepuisAltitude(Math.max(fond, 1.0))));
-                if (wf < r.eau()) r = r.avecEau(wf);
-            }
-        }
+        // (le niveau est calculé par Fleuves sur le vrai fond de vallée, sommet par sommet : niveauFin)
         // près d'un lac (et dedans), un cours d'eau prend au moins le niveau du lac : il y entre et en sort à niveau
         boolean presLac = lp != null && (lp.distance() > 0 || -lp.distance() <= BERGE);
         if (r != null && presLac && r.eau() < nivLac) r = r.avecEau(nivLac);
@@ -388,7 +382,11 @@ public final class Terrain {
     private Fleuves fleuves() {
         if (fleuves == null) {
             synchronized (this) {
-                if (fleuves == null) fleuves = Fleuves.charger(BLOCS_PAR_DEGRE, this::niveauEau);
+                if (fleuves == null) {
+                    Fleuves f = Fleuves.charger(BLOCS_PAR_DEGRE, this::niveauEau);
+                    f.reliefFin(this::niveauFin);
+                    fleuves = f;
+                }
             }
         }
         return fleuves;
@@ -452,6 +450,13 @@ public final class Terrain {
         Lacs.Proche lp = lacs != null ? lacs.proche(lon(xi + 0.5), lat(zi + 0.5)) : null;
         if (lp != null) n = Math.max(n, (int) Math.min(niveauLac(lacs.altitude(lp.lac())), lacs.plafond(lp.lac())));
         return n;
+    }
+
+    /** Niveau de l'eau d'un sommet de cours d'eau au relief fin (vrai fond de vallée), ou Integer.MIN_VALUE sans relief fin. */
+    private int niveauFin(double x, double z) {
+        double f = ReliefFin.altitudeFond(Mth.floor(x), Mth.floor(z));
+        if (Double.isNaN(f)) return Integer.MIN_VALUE;
+        return Math.max(NIVEAU_MER, Mth.floor(blocsDepuisAltitude(Math.max(f, 1.0))));
     }
 
     /** Hauteur visée du sol sans les fleuves. */

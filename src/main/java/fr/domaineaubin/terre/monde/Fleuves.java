@@ -38,9 +38,23 @@ public final class Fleuves {
     /** Bit 1 : le sommet A est la source du cours d'eau ; bit 2 : le sommet B (le lit ne déborde pas au-delà). */
     private final byte[] source;
     private final Long2ObjectOpenHashMap<int[]> grille;
+    /** Par segment : premier segment de son cours d'eau, nombre de segments, et sens (amont au début ?). */
+    private final int[] debut, nombre;
+    private final boolean[] amontDebut;
+    /** Niveau d'eau au relief fin aux sommets A et B (calculé à la demande ; INCONNU = pas encore, SANS = pas de relief). */
+    private final short[] finA, finB;
+    private static final short INCONNU = Short.MIN_VALUE, SANS = Short.MIN_VALUE + 1;
+    private volatile CalculNiveau calculFin;
 
     private Fleuves(float[] ax, float[] az, float[] bx, float[] bz, byte[] classe, short[] niveauA, short[] niveauB, byte[] source,
-                    Long2ObjectOpenHashMap<int[]> grille) {
+                    Long2ObjectOpenHashMap<int[]> grille, int[] debut, int[] nombre, boolean[] amontDebut) {
+        this.debut = debut;
+        this.nombre = nombre;
+        this.amontDebut = amontDebut;
+        this.finA = new short[ax.length];
+        this.finB = new short[ax.length];
+        java.util.Arrays.fill(finA, INCONNU);
+        java.util.Arrays.fill(finB, INCONNU);
         this.source = source;
         this.ax = ax; this.az = az; this.bx = bx; this.bz = bz;
         this.classe = classe;
@@ -68,6 +82,8 @@ public final class Fleuves {
         byte[] cl = new byte[n];
         short[] nva = new short[n], nvb = new short[n];
         byte[] src = new byte[n];
+        int[] deb = new int[n], nbr = new int[n];
+        boolean[] amd = new boolean[n];
         Long2ObjectOpenHashMap<IntArrayList> tmp = new Long2ObjectOpenHashMap<>();
         int i = 0;
         for (JsonElement e : tab) {
@@ -87,7 +103,11 @@ public final class Fleuves {
             } else {
                 for (int s = nb - 2; s >= 0; s--) nivS[s] = Math.min(nivS[s], nivS[s + 1]);
             }
+            int premier = i;
             for (int k = 0; k + 3 < p.size(); k += 2) {
+                deb[i] = premier;
+                nbr[i] = nb - 1;
+                amd[i] = amontAuDebut;
                 double x1 = p.get(k).getAsDouble() * blocsParDegre, z1 = -p.get(k + 1).getAsDouble() * blocsParDegre;
                 double x2 = p.get(k + 2).getAsDouble() * blocsParDegre, z2 = -p.get(k + 3).getAsDouble() * blocsParDegre;
                 ax[i] = (float) x1; az[i] = (float) z1; bx[i] = (float) x2; bz[i] = (float) z2; cl[i] = (byte) c;
@@ -114,7 +134,40 @@ public final class Fleuves {
         Long2ObjectOpenHashMap<int[]> grille = new Long2ObjectOpenHashMap<>(tmp.size());
         tmp.long2ObjectEntrySet().forEach(en -> grille.put(en.getLongKey(), en.getValue().toIntArray()));
         DomaineTerre.LOGGER.info("Fleuves chargés : {} segments en {} ms", n, System.currentTimeMillis() - t0);
-        return new Fleuves(ax, az, bx, bz, cl, nva, nvb, src, grille);
+        return new Fleuves(ax, az, bx, bz, cl, nva, nvb, src, grille, deb, nbr, amd);
+    }
+
+    /**
+     * Relief fin (10/11/2026) : le niveau de l'eau suit le vrai fond de vallée. Sans lui, il venait de la carte 3'
+     * (fond lissé, plus haut que le vrai) et la rivière coulait perchée entre deux murs. Niveau d'un sommet : le plus
+     * bas des fonds de vallée de ce sommet et des 3 sommets en amont (~90 blocs), si bien qu'il ne remonte pas d'une
+     * bosse du relief à l'autre ; jamais plus haut que le niveau d'avant (qui ne fait que descendre).
+     */
+    public void reliefFin(CalculNiveau calcul) {
+        this.calculFin = calcul;
+    }
+
+    private int fin(int id, boolean a, CalculNiveau cf) {
+        short[] tab = a ? finA : finB;
+        short v = tab[id];
+        if (v != INCONNU) return v;
+        int s = id - debut[id] + (a ? 0 : 1);                   // sommet dans son cours d'eau (0 .. nombre)
+        int m = Integer.MAX_VALUE;
+        boolean vu = false;
+        for (int k = 0; k <= 3; k++) {
+            int t = amontDebut[id] ? s - k : s + k;
+            if (t < 0 || t > nombre[id]) break;
+            int seg = debut[id] + Math.min(t, nombre[id] - 1);
+            double x = t < nombre[id] ? ax[seg] : bx[seg], z = t < nombre[id] ? az[seg] : bz[seg];
+            int n = cf.niveau(x, z);
+            if (n == Integer.MIN_VALUE) continue;
+            vu = true;
+            m = Math.min(m, n);
+        }
+        if (!vu) return SANS;                                    // mer, ou paquet pas encore là : pas gardé
+        short r = (short) Math.max(Math.min(m, Short.MAX_VALUE), SANS + 1);
+        tab[id] = r;
+        return r;
     }
 
     /**
@@ -139,7 +192,14 @@ public final class Fleuves {
             double score = d - Terrain.demiLargeur(classe[id]);
             if (score < meilleur) {
                 meilleur = score;
-                double nv = niveauA[id] + (niveauB[id] - niveauA[id]) * t;
+                int na = niveauA[id], nb = niveauB[id];
+                CalculNiveau cf = calculFin;
+                if (cf != null) {
+                    int fa = fin(id, true, cf), fb = fin(id, false, cf);
+                    if (fa != SANS) na = Math.min(na, fa);
+                    if (fb != SANS) nb = Math.min(nb, fb);
+                }
+                double nv = na + (nb - na) * t;
                 // biefs plats : le niveau ne change que par marches d'un bloc (petites chutes, rapides)
                 res = new Proche(d, classe[id], px, pz, (int) Math.floor(nv));
             }
