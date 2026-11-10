@@ -1,6 +1,10 @@
 Données géographiques utilisées par le mod Domaine d'Aubin - Terre :
 - Côtes, lacs, fleuves : Natural Earth (domaine public), naturalearthdata.com
   fleuves.json : 234 embouchures prolongées jusqu'à la vraie mer du trait de côte fin (outils/embouchures.py, 26/10/2026).
+  10/11/2026 : embouchures restées à terre prolongées tout droit jusqu'à la mer franche (outils/fleuves_mer.py) ou par
+  le vrai cours d'aval de HydroRIVERS v1.0 (outils/fleuves_hydro.py).
+- HydroRIVERS v1.0 : Lehner, B., Grill G. (2013), Hydrological Processes 27(15) ; HydroSHEDS, hydrosheds.org
+  (licence HydroSHEDS, libre avec attribution).
 - Relief : ETOPO 2022, NOAA National Centers for Environmental Information (domaine public)
 - Climat : Beck, H. E., et al. High-resolution (1 km) Köppen-Geiger maps for 1901–2099 based on
   constrained CMIP6 projections. Scientific Data 10, 724 (2023). Licence CC BY 4.0.

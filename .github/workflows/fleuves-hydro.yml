@@ -1,0 +1,54 @@
+# Embouchures réelles depuis HydroRIVERS (10/11/2026) : les tracés de fleuves.json restés à terre sont prolongés par
+# le vrai cours d'aval jusqu'à la mer (outils/fleuves_hydro.py), puis fleuves_mer.py finit les derniers blocs.
+# Lancé à la main ou en poussant sur une branche « fleuves-* » ; le résultat est ajouté à la branche.
+name: Fleuves HydroRIVERS
+
+on:
+  push:
+    branches: ['fleuves-*']
+    paths:
+      - outils/fleuves_hydro.py
+      - .github/workflows/fleuves-hydro.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  construire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Outils Python
+        run: pip install numpy scipy shapely pyogrio pandas pillow
+      - name: Téléchargement et construction (journal toujours rapporté)
+        run: |
+          mkdir -p outils/donnees /tmp/hydro
+          {
+            set -e
+            cd /tmp/hydro
+            for r in af ar as au eu na sa si; do
+              curl -sSfL --retry 5 --retry-delay 20 -o $r.zip https://data.hydrosheds.org/file/HydroRIVERS/HydroRIVERS_v10_${r}_shp.zip
+              unzip -q -o $r.zip -d $r && rm $r.zip
+              echo "$r : $(du -sh $r | cut -f1)"
+            done
+            cd $GITHUB_WORKSPACE
+            python outils/fleuves_hydro.py /tmp/hydro
+            python outils/fleuves_mer.py
+          } > /tmp/journal.txt 2>&1 || echo "ÉCHEC" >> /tmp/journal.txt
+          cp /tmp/journal.txt outils/donnees/fleuves_hydro.log; cat outils/donnees/fleuves_hydro.log
+      - name: Ajout à la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add -f outils/donnees/fleuves_hydro.log
+          [ -f outils/donnees/fleuves_hydro.json ] && git add -f outils/donnees/fleuves_hydro.json src/main/resources/domaine_terre/carte/fleuves.json
+          git commit -m "Embouchures réelles HydroRIVERS (automatique)" || exit 0
+          for i in 1 2 3; do
+            git fetch origin "${GITHUB_REF_NAME}" && git rebase "origin/${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep 10
+          done
