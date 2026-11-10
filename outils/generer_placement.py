@@ -414,6 +414,13 @@ if z:
         if change:
             fichiers[chemin] = d
 
+# Untamed Wilds (10/11/2026) : ses propres tables d'apparition des bêtes de terre sont vidées. Malgré freqherbivore,
+# freqapex et freqcritter à 0, le banc montrait des paires d'hippos, de dromadaires et de varans au coin des chunks
+# (au Nil d'Assouan, où la table ne met pas d'hippo) : ces bêtes ne naissent plus que par la table du mod Terre.
+# Les biomes des espèces restent : Untamed Wilds s'en sert pour choisir l'espèce d'une bête née par la table.
+for _t in ("herbivores", "predators", "critter", "feeder"):
+    fichiers[f"data/untamedwilds/spawn_tables/{_t}.json"] = {"name": _t, "entries": []}
+
 # ---------------------------------------------------------------- écriture du datapack
 fichiers["pack.mcmeta"] = {"pack": {"pack_format": 15, "description": "Le Domaine d'Aubin : plantes et animaux par terroir"}}
 dst = os.path.join(INST, "config/openloader/data/domaine_terroirs.zip")
