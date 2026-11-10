@@ -153,7 +153,7 @@ def lieu_iso(nom, lat_a, lon_a, seuil, marge=70, fondu=50, ile=True, zone=None, 
     lab, n = ndimage.label(mer)
     dehors = lab[(de < 3) & (sd < 0)]
     mer = np.isin(lab, np.unique(dehors[dehors > 0]))
-    y = np.where(mer, np.minimum(y, 61.9), np.maximum(y, 63.6))
+    y = np.where(wy > 0.02, np.where(mer, np.minimum(y, 61.9), np.maximum(y, 63.6)), y)   # pas au bord : terrain calculé
     eau = np.where(mer & (wy > 0.02), 63.0, np.nan)
     return dict(X=X, Z=Z, y=y, h=h, sd=sd, eau=eau, mer=mer, coeur=coeur, alt=aw, de=de, wy=wy)
 
@@ -179,7 +179,7 @@ def lieu_cote(nom, cx, cz, f, zone, fondu):
     lab, n = ndimage.label(mer)
     dehors = lab[(de < 3) & (sd < 0)]
     mer = np.isin(lab, np.unique(dehors[dehors > 0]))
-    y = np.where(mer, np.minimum(y, 61.9), np.maximum(y, 63.6))
+    y = np.where(wy > 0.02, np.where(mer, np.minimum(y, 61.9), np.maximum(y, 63.6)), y)   # pas au bord : terrain calculé
     eau = np.where(mer & (wy > 0.02), 63.0, np.nan)
     return dict(X=X, Z=Z, y=y, h=h, sd=sd, eau=eau, mer=mer, coeur=a > 0.5, alt=aw, de=de, wy=wy)
 
@@ -223,6 +223,7 @@ def icebergs(L, masque, n, graine, pres=None, h_max=6.0, r_max=4.5):
     X, Z = L["X"], L["Z"]
     rng = np.random.default_rng(graine)
     ice = np.zeros(X.shape, bool)
+    masque = masque & (L["wy"] > 0.6)                    # pas sur la bande du bord (terrain calculé)
     jj, ii = np.nonzero(masque)
     for k in (rng.choice(len(jj), size=min(len(jj), n), replace=False) if len(jj) else []):
         j, i = jj[k], ii[k]
@@ -262,9 +263,13 @@ def ilulissat():
     return M.ecrire("ilulissat", X, Z, L["y"], L["h"], L["y"].copy(), typ, L["sd"], L["eau"], "GRANITE")
 
 
-LIEUX = {"erebus": erebus, "kamtchatka": kamtchatka, "ilulissat": ilulissat}
+# Essais écartés (10/11/2026) : Kamtchatka (massif) et Ilulissat (côte). Sur un continent, le terrain resserré ne
+# rejoint pas le terrain étiré du mod au bord de la zone (plateau carré, mur de 50 blocs) ; seule une île entourée
+# de mer (Erebus) se raccorde proprement. Gardés pour mémoire, pas inscrits.
+LIEUX = {"erebus": erebus}
+ESSAIS = {"kamtchatka": kamtchatka, "ilulissat": ilulissat}
 
 if __name__ == "__main__":
     noms = [a for a in sys.argv[2:] if not a.startswith("--")]
     for n in (noms or LIEUX):
-        LIEUX[n]()
+        (LIEUX.get(n) or ESSAIS[n])()
