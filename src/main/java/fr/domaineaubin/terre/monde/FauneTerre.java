@@ -418,7 +418,11 @@ public final class FauneTerre {
         List<MobSpawnSettings.SpawnerData> out = new ArrayList<>(n);
         for (int i = 0; i < n; i++) {
             MobSpawnSettings.SpawnerData d = l.get(i);
-            out.add(new MobSpawnSettings.SpawnerData(d.type, Math.max(1, (int) Math.round(w[i] * 10)), d.minCount, d.maxCount));
+            MobSpawnSettings.SpawnerData e = new MobSpawnSettings.SpawnerData(d.type, Math.max(1, (int) Math.round(w[i] * 10)), d.minCount, d.maxCount);
+            // le constructeur du jeu met un cochon à la place de tout type MISC (Untamed Wilds, voir le chargement) :
+            // on remet le bon type (banc du 10/11/2026 : 182 cochons au Serengeti)
+            if (e.type != d.type) ((fr.domaineaubin.terre.mixin.SpawnerDataAcces) (Object) e).domaineTerre$type(d.type);
+            out.add(e);
         }
         return List.copyOf(out);
     }

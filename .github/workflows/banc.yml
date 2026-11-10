@@ -66,6 +66,13 @@ jobs:
           # Ecologics, Aquaculture, Savage and Ravage, Best Revived Animals, Critters and Companions), mêmes fichiers que
           # l'instance « Refonte d'Aubin » ; un mod introuvable ou sans ses dépendances est laissé de côté (avertissement)
           python $GITHUB_WORKSPACE/outils/banc/mods_animaux.py mods || echo "::warning::mods d'animaux non téléchargés"
+          # réglages du pack comme sur l'instance (10/11/2026) : un premier démarrage crée les configs des mods, puis
+          # generer_placement.py écrit le datapack domaine_terroirs (OpenLoader) et règle Untamed Wilds et Alex's Mobs
+          rm -rf config && echo "eula=true" > eula.txt
+          timeout 600 java -Xmx6G @libraries/net/minecraftforge/forge/1.20.1-47.4.10/unix_args.txt nogui --initSettings > init.log 2>&1 || true
+          ls config | head -40
+          mkdir -p config/openloader/data
+          (cd $GITHUB_WORKSPACE && python outils/generer_placement.py /tmp/serveur) || echo "::warning::réglages du pack non appliqués"
           ls mods
 
       - name: Génération des lieux

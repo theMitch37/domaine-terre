@@ -32,6 +32,8 @@ MODS = {
     "curios-forge-5.14.1+1.20.1.jar": (["curios"], []),
     "mysterious_mountain_lib-1.6.34-1.20.1.jar": (["mysterious-mountain-lib"], []),
     "FarmersDelight-1.20.1-1.3.4.jar": (["farmers-delight"], []),
+    "OpenLoader-Forge-1.20.1-19.0.5.jar": (["open-loader", "openloader"], []),       # datapack domaine_terroirs
+    "yet_another_config_lib_v3-3.6.6+1.20.1-forge.jar": (["yacl"], []),              # Critters and Companions
 }
 
 
