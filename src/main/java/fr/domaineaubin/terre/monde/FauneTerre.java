@@ -328,7 +328,9 @@ public final class FauneTerre {
             int terroir = Terrain.get().carte().terroir(lon, lat);
             int precis = zz >= 16 && zz - 16 < biomePrecis.length ? zz - 16 : -1;
             for (Entree e : surface) {
-                if (e.categorie() != MobCategory.CREATURE || !e.eau() || e.mer() || e.generationSeule()) continue;
+                // 10/11/2026 : les bêtes d'Untamed Wilds (« génération seule ») en sont aussi : les rives sont posées à la
+                // génération ; sans elles, sur le Nil la liste ne gardait que le crocodile (36 bêtes sur 115 au banc)
+                if (e.categorie() != MobCategory.CREATURE || !e.eau() || e.mer()) continue;
                 if (!e.dansTerroir(terroir)) continue;
                 if (e.precis() != null && e.precis()[terroir] != null && !contient(e.precis()[terroir], precis)) continue;
                 if (net.minecraft.world.entity.SpawnPlacements.getPlacementType(e.type())

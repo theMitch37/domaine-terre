@@ -95,6 +95,16 @@
    "Tasmanian Central Highland forests"
   ]
  },
+ "untamedwilds:hippo/common": {
+  "sahara_sahel": [
+   "Sahelian Acacia savanna",
+   "West Sudanian savanna",
+   "East Sudanian savanna",
+   "Lake Chad flooded savanna",
+   "Inner Niger Delta flooded savanna",
+   "Sudd flooded grasslands"
+  ]
+ },
  "alexsmobs:guster": {
   "sahara_sahel": [
    "East Sahara Desert",

@@ -62,6 +62,11 @@ PRECIS = {
     "alexsmobs:platypus": {"australie": ["Eastern Australian temperate forests", "Southeast Australia temperate forests",
                                          "Queensland tropical rain forests", "Tasmanian temperate forests",
                                          "Tasmanian temperate rain forests", "Tasmanian Central Highland forests"]},
+    # Hippopotame (10/11/2026) : disparu d'Égypte ; au Sahara-Sahel, seulement les savanes et plaines inondables du
+    # Sahel et du Soudan (Niger, lac Tchad, Sudd, Nil soudanais), pas le Nil désertique d'Assouan
+    "untamedwilds:hippo/common": {"sahara_sahel": ["Sahelian Acacia savanna", "West Sudanian savanna",
+                                                   "East Sudanian savanna", "Lake Chad flooded savanna",
+                                                   "Inner Niger Delta flooded savanna", "Sudd flooded grasslands"]},
     # Rafalleur (09/11/2026, décision de Maxime) : grands ergs seulement, rare
     "alexsmobs:guster": {"sahara_sahel": ["East Sahara Desert", "South Sahara desert", "West Sahara desert"],
                          "maghreb": ["East Sahara Desert", "West Sahara desert"],
