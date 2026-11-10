@@ -369,6 +369,11 @@ public final class LieuGrille implements LieuSculpte {
             case VOLCAN -> {
                 // coulées de lave noires, cendres et scories, soufre autour des fumerolles
                 if (cl == FOND) return h2(x, z, y) % 4 == 0 ? Blocks.BLACKSTONE : Blocks.BASALT;
+                // volcans polaires (Erebus, 10/11/2026) : neige sur glace, glace bleue par endroits (Etna et Vésuve n'en ont pas)
+                if (cl == NEIGE && dessus) return Blocks.SNOW_BLOCK;
+                if (cl == NEIGE && y >= top - 3) return Blocks.PACKED_ICE;
+                if (cl == GLACE && dessus) return Blocks.SNOW_BLOCK;
+                if (cl == GLACE && y >= top - 5) return h2(x, z, y) % 6 == 0 ? Blocks.BLUE_ICE : Blocks.PACKED_ICE;
                 if (cl == EBOULIS) {
                     // 04/11 : par plaques de 4 blocs (bloc à bloc, le cône faisait du bruit) ; cendres et scories sombres
                     int m = h2(Math.floorDiv(x, 4), Math.floorDiv(z, 4), Math.floorDiv(y, 4)) % 5;

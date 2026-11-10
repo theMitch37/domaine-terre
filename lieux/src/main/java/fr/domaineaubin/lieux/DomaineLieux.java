@@ -57,6 +57,8 @@ public class DomaineLieux {
         // îles construites pour les grottes marines (Staffa : grotte de Fingal ; Capri : grotte bleue)
         LieuxTerre.inscrire(new LieuGrille("fingal", LieuGrille.Palette.CHAUSSEE, true, 45));
         LieuxTerre.inscrire(new LieuGrille("capri", LieuGrille.Palette.CALCAIRE, true, 40));
+        // hautes latitudes aux vraies proportions (10/11/2026, outils/lieux_iso.py) : la carte les étire est-ouest
+        LieuxTerre.inscrire(new LieuGrille("erebus", LieuGrille.Palette.VOLCAN, true, 35));
         LOGGER.info("Domaine d'Aubin - Lieux uniques : {} lieu(x) inscrit(s).", LieuxTerre.liste().size());
     }
 }
