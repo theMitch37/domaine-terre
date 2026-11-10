@@ -120,11 +120,10 @@ public final class Terrain {
         if (r != null && presLac && r.eau() < nivLac) r = r.avecEau(nivLac);
         // près de l'eau, le relief réel en entier (10/11/2026) : l'eau est à sa vraie altitude, les rives aussi (avec
         // une part seulement du détail fin, la rive restait au-dessus ou au-dessous de l'eau : murs, lacs perchés)
-        double pres = 0.0;
-        if (r != null) pres = 1.0 - lisse(Mth.clamp((r.distance() - r.demiLargeur() - BERGE_RIVIERE) / 24.0, 0.0, 1.0));
-        if (lp != null) pres = Math.max(pres, lp.distance() > 0 ? 1.0
-                : 1.0 - lisse(Mth.clamp((-lp.distance() - 6.0) / 30.0, 0.0, 1.0)));
-        double h = calculerHauteur(x, z, sd, alt, pente, r, true, pres);
+        double presRiv = 0.0, presLac = 0.0;
+        if (r != null) presRiv = 1.0 - lisse(Mth.clamp((r.distance() - r.demiLargeur() - BERGE_RIVIERE) / 24.0, 0.0, 1.0));
+        if (lp != null) presLac = lp.distance() > 0 ? 1.0 : 1.0 - lisse(Mth.clamp((-lp.distance() - 6.0) / 30.0, 0.0, 1.0));
+        double h = calculerHauteur(x, z, sd, alt, pente, r, true, presRiv, presLac);
         // lacs (étape C1) : cuvette dans le lac, berges qui descendent jusqu'à son niveau autour
         int niveauLac = SANS_LAC, bergeLac = SANS_LAC, eauLac = SANS_LAC;
         int eauRiv = SANS_LAC, bergeRiv = SANS_LAC, litRiv = SANS_LAC;
@@ -152,7 +151,7 @@ public final class Terrain {
             // relief fin (09/11/2026) : les lieux ont été sculptés et raccordés sur le terrain d'avant (carte 3') ; ils
             // reçoivent ce terrain-là, et l'écart avec le relief fin est ajouté à leurs colonnes sculptées, en entier au
             // bord de la zone du lieu et plus du tout à RACCORD_FIN blocs à l'intérieur : plus de marche au bord
-            double hAvant = calculerHauteur(x, z, sd, alt, pente, r, false, 0.0);
+            double hAvant = calculerHauteur(x, z, sd, alt, pente, r, false, 0.0, 0.0);
             if (lp != null) {
                 if (lp.distance() > 0) hAvant = fondLac(nivLac, lp.distance(), lacs.superficie(lp.lac()));
                 else if (!(r != null && r.distance() <= r.demiLargeur() + BERGE_RIVIERE)) hAvant = bergeLac(hAvant, nivLac, -lp.distance());
@@ -349,11 +348,12 @@ public final class Terrain {
     }
 
     private double calculerHauteur(int x, int z, double sd, double alt, double pente, Riviere r) {
-        return calculerHauteur(x, z, sd, alt, pente, r, true, 0.0);
+        return calculerHauteur(x, z, sd, alt, pente, r, true, 0.0, 0.0);
     }
 
-    private double calculerHauteur(int x, int z, double sd, double alt, double pente, Riviere r, boolean fin, double pres) {
-        double h = hauteurBase(x, z, sd, alt, pente, fin, pres);
+    private double calculerHauteur(int x, int z, double sd, double alt, double pente, Riviere r, boolean fin, double presRiv,
+                                   double presLac) {
+        double h = hauteurBase(x, z, sd, alt, pente, fin, presRiv, presLac);
         if (r == null) return h;
         // étape C2 : chaque cours d'eau a son niveau (r.eau(), qui descend vers l'aval), en altitude comme en plaine
         int w = r.eau();
@@ -456,11 +456,15 @@ public final class Terrain {
 
     /** Hauteur visée du sol sans les fleuves. */
     private double hauteurBase(int x, int z, double sd, double alt, double pente, boolean fin) {
-        return hauteurBase(x, z, sd, alt, pente, fin, 0.0);
+        return hauteurBase(x, z, sd, alt, pente, fin, 0.0, 0.0);
     }
 
-    /** pres : proximité d'un cours d'eau ou d'un lac (0 à 1) ; près de l'eau, tout le détail du relief fin. */
-    private double hauteurBase(int x, int z, double sd, double alt, double pente, boolean fin, double pres) {
+    /**
+     * presRiv, presLac : proximité d'un cours d'eau, d'un lac (0 à 1). Près d'un cours d'eau, le vrai fond de vallée
+     * (jamais plus haut que le terrain) ; près d'un lac, la vraie altitude des rives (celle du lac).
+     */
+    private double hauteurBase(int x, int z, double sd, double alt, double pente, boolean fin, double presRiv,
+                               double presLac) {
         if (sd >= 0) {
             double p = Mth.clamp(pente / 80.0, 0.0, 1.0);
             double detail = bruitDetail.noise(x / 48.0, 0, z / 48.0) * (1.2 + 6.0 * p)
@@ -468,11 +472,18 @@ public final class Terrain {
             double hTerre = blocsDepuisAltitude(Math.max(alt, 1.0)) + detail;
             // relief fin (08/11/2026) : le vrai relief à 250 m remplace le bruit de détail ; la carte 3' garde le niveau
             // moyen, seule une part du détail fin est gardée (les hauteurs sont exagérées ×6 à ×10)
-            double af = fin ? ReliefFin.altitude(x, z) : Double.NaN;
+            double af = fin ? ReliefFin.altitudeTerrain(x, z) : Double.NaN;      // pente limitée (10/11/2026)
             if (!Double.isNaN(af)) {
                 double base = blocsDepuisAltitude(Math.max(alt, 1.0));
-                double d = ReliefFin.detail();
-                hTerre = base + (blocsDepuisAltitude(Math.max(af, 1.0)) - base) * (d + (1.0 - d) * pres);
+                hTerre = base + (blocsDepuisAltitude(Math.max(af, 1.0)) - base) * ReliefFin.detail();
+                if (presRiv > 0.0 || presLac > 0.0) {
+                    double ar = ReliefFin.altitude(x, z);
+                    if (!Double.isNaN(ar)) {
+                        double hr = blocsDepuisAltitude(Math.max(ar, 1.0));
+                        hTerre += (Math.min(hr, hTerre) - hTerre) * presRiv;
+                        hTerre += (hr - hTerre) * presLac;
+                    }
+                }
             }
             return Mth.lerp(lisse(Mth.clamp(sd / 2.0, 0.0, 1.0)), NIVEAU_MER + 0.6, Math.max(hTerre, NIVEAU_MER + 0.6));
         }

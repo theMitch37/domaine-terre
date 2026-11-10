@@ -49,6 +49,36 @@ def terrain_mod(X, Z):
     return h, sd, np.where(np.isfinite(af), af, alt)
 
 
+PENTE_MAX = 2.14                                 # ReliefFin.PENTE_MAX (blocs par bloc, 65°)
+
+
+def limiter(h, s=PENTE_MAX):
+    """Enveloppe de pente (ReliefFin.calculerLimitee) : h rabaissé là où il monte plus vite que s depuis un point plus
+    bas ; deux passes en chanfrein (pas de 1 et racine de 2)."""
+    E = h.astype(float).copy()
+    H, W = E.shape
+    d2 = s * 2 ** 0.5
+    for j in range(H):
+        if j:
+            E[j] = np.minimum(E[j], E[j - 1] + s)
+            E[j, 1:] = np.minimum(E[j, 1:], E[j - 1, :-1] + d2)
+            E[j, :-1] = np.minimum(E[j, :-1], E[j - 1, 1:] + d2)
+        r = E[j]
+        for i in range(1, W):
+            if r[i] > r[i - 1] + s:
+                r[i] = r[i - 1] + s
+    for j in range(H - 1, -1, -1):
+        if j < H - 1:
+            E[j] = np.minimum(E[j], E[j + 1] + s)
+            E[j, 1:] = np.minimum(E[j, 1:], E[j + 1, :-1] + d2)
+            E[j, :-1] = np.minimum(E[j, :-1], E[j + 1, 1:] + d2)
+        r = E[j]
+        for i in range(W - 2, -1, -1):
+            if r[i] > r[i + 1] + s:
+                r[i] = r[i + 1] + s
+    return E
+
+
 def composante(masque, j, i):
     lab, _ = ndimage.label(masque)
     return lab == lab[j, i] if lab[j, i] else np.zeros(masque.shape, bool)
@@ -81,6 +111,7 @@ def lieu_iso(nom, lat_a, lon_a, seuil, marge=70, fondu=50, ile=True, zone=None, 
     hm, sdm, _ = terrain_mod(X, Z)                       # terrain en jeu (avec relief fin)
     Xw = cx + (X - cx) / f
     hw, sdw, aw = terrain_mod(Xw, Z)                     # terrain resserré (vraies proportions)
+    hm, hw = limiter(hm), limiter(hw)                    # pente limitée comme en jeu
     jA, iA = int(round(cz - z0)), int(round(cx - x0))
     dansw = np.ones(X.shape, bool) if rayon_km is None else np.hypot(X - cx, Z - cz) / BPD * 111.32 < rayon_km
     coeur = composante((sdw >= 0) & (aw > seuil) & dansw, jA, iA)
@@ -135,6 +166,7 @@ def lieu_cote(nom, cx, cz, f, zone, fondu):
     h, sd = T.hauteur_base(X, Z)
     hm, sdm, _ = terrain_mod(X, Z)
     hw, sdw, aw = terrain_mod(cx + (X - cx) / f, Z)
+    hm, hw = limiter(hm), limiter(hw)
     H, W = X.shape
     jj, ii = np.mgrid[0:H, 0:W]
     de = np.minimum(np.minimum(ii, W - 1 - ii), np.minimum(jj, H - 1 - jj)).astype(float)

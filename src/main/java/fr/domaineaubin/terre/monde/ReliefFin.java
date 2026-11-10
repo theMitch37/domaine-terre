@@ -88,6 +88,145 @@ public final class ReliefFin {
         return v == VIDE ? Double.NaN : v * (double) Q;
     }
 
+    // ---------------------------------------------------------------- pente limitée (10/11/2026)
+
+    /**
+     * Pente maximale du terrain, en blocs par bloc (décision de Maxime, 10/11/2026 : « limiter la pente » plutôt que
+     * baisser le toit du monde). Au-dessus de 4 000 m, un bloc vaut 12,8 m en hauteur pour 250 m à l'horizontale :
+     * une pente réelle de 30° y devenait presque verticale (aiguilles). Le terrain est rabaissé là où il monte plus
+     * vite que 65° depuis un point plus bas (enveloppe de pente, aussi dite « lipschitzienne ») : les fonds de vallée
+     * ne bougent pas, les sommets deviennent des pyramides à arêtes (l'Everest perd environ 15 % de sa hauteur).
+     */
+    static final double PENTE_MAX = 2.14;
+    /** Marge lue autour d'une région : un sommet est limité par les points bas jusqu'à ~100 blocs. */
+    private static final int MARGE = 96;
+    private static final Map<Long, short[]> limitees = new LinkedHashMap<>(128, 0.75f, true);
+
+    /**
+     * Altitude (m) que le terrain utilise au bloc (x, z) : celle du relief fin, rabaissée là où la pente du terrain
+     * dépasserait {@link #PENTE_MAX} ; NaN sans relief fin. L'altitude réelle ({@link #altitude}) reste celle des
+     * règles (neige, roche, arbres).
+     */
+    public static double altitudeTerrain(int x, int z) {
+        reglages();
+        if (!actif) return Double.NaN;
+        int tx = x >> 9, tz = z >> 9;
+        short[] r = limitee(tx, tz);
+        if (r.length == 0) return Double.NaN;
+        short v = r[(z & 511) * T + (x & 511)];
+        return v == VIDE ? Double.NaN : v * (double) Q;
+    }
+
+    /** Régions gardées en relief brut faute de voisin disponible : instant du dernier essai. */
+    private static final Map<Long, Long> provisoires = new ConcurrentHashMap<>();
+
+    private static short[] limitee(int tx, int tz) {
+        long k = cle(tx, tz);
+        synchronized (limitees) {
+            short[] r = limitees.get(k);
+            if (r != null) {
+                Long p = provisoires.get(k);
+                if (p == null || System.currentTimeMillis() - p < 60_000) return r;
+            }
+        }
+        short[] brut = region(tx, tz);
+        if (brut.length == 0) return brut;
+        short[] r = calculerLimitee(tx, tz, brut);
+        if (r == null) {                                         // voisin pas encore là : relief brut, réessayé plus tard
+            provisoires.put(k, System.currentTimeMillis());
+            r = brut;
+        } else {
+            provisoires.remove(k);
+        }
+        synchronized (limitees) {
+            limitees.put(k, r);
+            while (limitees.size() > MAX_REGIONS) limitees.remove(limitees.keySet().iterator().next());
+        }
+        return r;
+    }
+
+    /** Région limitée en pente, ou null si une région voisine n'est pas encore disponible. */
+    private static short[] calculerLimitee(int tx, int tz, short[] brut) {
+        Terrain t = Terrain.get();
+        double d = detail();
+        int n = T + 2 * MARGE;
+        int x0 = tx * T - MARGE, z0 = tz * T - MARGE;
+        short[][] vois = new short[9][];
+        for (int j = -1; j <= 1; j++) {
+            for (int i = -1; i <= 1; i++) {
+                short[] v = (i == 0 && j == 0) ? brut : region(tx + i, tz + j);
+                if (v.length == 0) {
+                    synchronized (regions) {
+                        if (!regions.containsKey(cle(tx + i, tz + j))) return null;     // indisponible (pas la mer)
+                    }
+                }
+                vois[(j + 1) * 3 + (i + 1)] = v;
+            }
+        }
+        double[] h = new double[n * n], base = new double[n * n];
+        for (int zz = 0; zz < n; zz++) {
+            int z = z0 + zz;
+            for (int xx = 0; xx < n; xx++) {
+                int x = x0 + xx;
+                short[] v = vois[(Math.floorDiv(z, T) - tz + 1) * 3 + (Math.floorDiv(x, T) - tx + 1)];
+                int i = zz * n + xx;
+                double b = Terrain.blocsDepuisAltitude(Math.max(t.altitudeReelle(x, z), 1.0));
+                base[i] = b;
+                short a = v.length == 0 ? VIDE : v[Math.floorMod(z, T) * T + Math.floorMod(x, T)];
+                h[i] = a == VIDE ? Terrain.NIVEAU_MER : b + (Terrain.blocsDepuisAltitude(Math.max(a * (double) Q, 1.0)) - b) * d;
+            }
+        }
+        double[] e = h.clone();
+        double s = PENTE_MAX, s2 = PENTE_MAX * Math.sqrt(2.0);
+        for (int zz = 0; zz < n; zz++) {                         // passe aller (haut-gauche vers bas-droite)
+            for (int xx = 0; xx < n; xx++) {
+                int i = zz * n + xx;
+                double m = e[i];
+                if (xx > 0) m = Math.min(m, e[i - 1] + s);
+                if (zz > 0) {
+                    m = Math.min(m, e[i - n] + s);
+                    if (xx > 0) m = Math.min(m, e[i - n - 1] + s2);
+                    if (xx < n - 1) m = Math.min(m, e[i - n + 1] + s2);
+                }
+                e[i] = m;
+            }
+        }
+        for (int zz = n - 1; zz >= 0; zz--) {                    // passe retour
+            for (int xx = n - 1; xx >= 0; xx--) {
+                int i = zz * n + xx;
+                double m = e[i];
+                if (xx < n - 1) m = Math.min(m, e[i + 1] + s);
+                if (zz < n - 1) {
+                    m = Math.min(m, e[i + n] + s);
+                    if (xx < n - 1) m = Math.min(m, e[i + n + 1] + s2);
+                    if (xx > 0) m = Math.min(m, e[i + n - 1] + s2);
+                }
+                e[i] = m;
+            }
+        }
+        short[] out = brut.clone();
+        for (int zz = 0; zz < T; zz++) {
+            for (int xx = 0; xx < T; xx++) {
+                int i = (zz + MARGE) * n + (xx + MARGE), o = zz * T + xx;
+                if (out[o] == VIDE || e[i] >= h[i] - 1e-6) continue;
+                // altitude qui redonne, avec la même part de détail, la hauteur limitée
+                double y = base[i] + (e[i] - base[i]) / Math.max(d, 1e-3);
+                double a = altitudeDepuisBlocs(y);
+                out[o] = (short) Math.max(Math.min(Math.round(a / Q), Short.MAX_VALUE), Short.MIN_VALUE + 1);
+            }
+        }
+        return out;
+    }
+
+    /** Inverse de {@link Terrain#blocsDepuisAltitude} sur les terres (y 64 à 620). */
+    static double altitudeDepuisBlocs(double y) {
+        if (y <= 64) return 1.0;
+        if (y <= 80) return (y - 64) * 500.0 / 16.0;
+        if (y <= 140) return 500 + (y - 80) * 1500.0 / 60.0;
+        if (y <= 240) return 2000 + (y - 140) * 2000.0 / 100.0;
+        return 4000 + Math.min(y - 240, 380.0) * 4849.0 / 380.0;
+    }
+
     /**
      * Fond de vallée au relief fin autour d'un point de l'axe d'un cours d'eau (10/11/2026) : la plus basse des
      * altitudes sur 3 x 3 points espacés de 2 blocs (le tracé du cours d'eau s'écarte d'un bloc ou deux du vrai
@@ -122,7 +261,8 @@ public final class ReliefFin {
                 int i = e.getKey();
                 regions.put(cle((bx << 2) + (i & 3), (bz << 2) + (i >> 2)), e.getValue());
             }
-            if (paquet.isEmpty()) {
+            // régions sans terre (paquet de mer, ou mer dans un paquet de terre) : connues, vides
+            if (!paquet.containsKey(-1)) {
                 for (int i = 0; i < 16; i++) regions.putIfAbsent(cle((bx << 2) + (i & 3), (bz << 2) + (i >> 2)), SANS);
             }
             r = regions.getOrDefault(k, SANS);
