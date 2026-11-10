@@ -559,6 +559,11 @@ public final class Terrain {
         return Math.max(bas, Mth.clamp((y - limite) / 8.0, -1.0, 1.0));
     }
 
+    /** Bruit à graine fixe du terrain (même dans tous les mondes), environ -1 à 1, pour les habillages. */
+    public double bruit(double x, double y, double z) {
+        return bruitDetail.noise(x, y, z);
+    }
+
     /** Pas de plancher dans cette colonne (bornes vides). */
     public static final double SANS_PLANCHER = -1.0e6;
 

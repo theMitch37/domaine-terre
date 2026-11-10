@@ -40,7 +40,7 @@ import java.util.zip.Inflater;
  * Les paquets sont cherchés dans <jeu>/domaine_terre/relief/ (cache, et packs hors ligne posés à la main), sinon
  * téléchargés (une seule fois, gardés dans ce dossier). Sans paquet (hors ligne, serveur injoignable) : NaN, le
  * terrain reprend la génération d'avant (carte 3') et un message prévient les joueurs.
- * Réglages : config/domaine_terre_relief.json {"actif": true, "url": "...{bx}...{bz}...", "detail": 0.25}.
+ * Réglages : config/domaine_terre_relief.json {"actif": true, "url": "...{bx}...{bz}...", "detail": 0.5}.
  */
 @Mod.EventBusSubscriber(modid = DomaineTerre.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class ReliefFin {
@@ -52,7 +52,7 @@ public final class ReliefFin {
     private static volatile boolean actif = true;
     private static volatile String url =
             "https://github.com/theMitch37/domaine-terre-relief/releases/download/v1-z{bz}/relief_{bx}_{bz}.bin";
-    private static volatile double detail = 0.25;
+    private static volatile double detail = 0.5;      // 10/11/2026 : 0,25 -> 0,5 (monde agrandi : vraies arêtes, banc Everest)
     private static volatile boolean charge = false;
 
     private static final Map<Long, short[]> regions = new LinkedHashMap<>(128, 0.75f, true);

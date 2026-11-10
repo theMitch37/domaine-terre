@@ -1,0 +1,1 @@
+{"type": "forge:add_features", "biomes": "#minecraft:is_overworld", "features": "domaine_terre:haute_montagne", "step": "local_modifications"}

@@ -27,6 +27,9 @@ public final class ModMonde {
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> FLEUVES =
             FEATURES.register("fleuves", () -> new FleuveFeature(NoneFeatureConfiguration.CODEC));
 
+    public static final RegistryObject<Feature<NoneFeatureConfiguration>> HAUTE_MONTAGNE =
+            FEATURES.register("haute_montagne", () -> new HauteMontagneFeature(NoneFeatureConfiguration.CODEC));
+
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> FOSSES =
             FEATURES.register("fosses", () -> new FosseFeature(NoneFeatureConfiguration.CODEC));
 
