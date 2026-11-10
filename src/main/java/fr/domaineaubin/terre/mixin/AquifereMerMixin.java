@@ -1,7 +1,10 @@
 package fr.domaineaubin.terre.mixin;
 
 import fr.domaineaubin.terre.monde.Terrain;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Aquifer;
+import net.minecraft.world.level.levelgen.DensityFunction;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -33,5 +36,26 @@ public abstract class AquifereMerMixin {
         if ((t.enMer(x, z) || t.distanceCote(x, z) < RIVAGE) && t.niveauLac(x, z) == Terrain.SANS_LAC && !t.sansAquifere(x, z)) {
             retour.setReturnValue(globalFluidPicker.computeFluid(x, y, z));
         }
+    }
+
+    private static final BlockState AIR = Blocks.AIR.defaultBlockState();
+
+    /**
+     * Air au-dessus du sol (10/11/2026, monde agrandi : 17 % du temps de génération passait à chercher une nappe d'eau
+     * dans chaque case d'air jusqu'en haut du monde) : plus haut que le sol, le lac et la mer (+ 4 blocs), c'est de l'air,
+     * sans calcul. Même résultat : l'aquifère n'y mettait jamais d'eau.
+     */
+    @Inject(method = "computeSubstance", at = @At("HEAD"), cancellable = true)
+    private void domaineTerre$airAuDessus(DensityFunction.FunctionContext ctx, double densite,
+                                          CallbackInfoReturnable<BlockState> retour) {
+        if (densite > 0.0) return;
+        int y = ctx.blockY();
+        if (y <= Terrain.NIVEAU_MER + 4) return;
+        Terrain t = Terrain.get();
+        int x = ctx.blockX(), z = ctx.blockZ();
+        if (y <= t.hauteur(x, z) + 4.0) return;
+        int lac = t.niveauLac(x, z);
+        if (lac != Terrain.SANS_LAC && y <= lac + 4) return;
+        retour.setReturnValue(AIR);
     }
 }
