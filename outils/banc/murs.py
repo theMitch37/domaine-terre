@@ -13,7 +13,7 @@ for f in sys.argv[1:]:
     noms = [str(n) for n in d["noms"]]
     b = d["blocs"]
     ignore = np.array([n.split(":")[-1] in ("air", "cave_air", "snow", "grass", "tall_grass", "fern", "large_fern",
-                                             "water") or "flower" in n or "tulip" in n or "leaves" in n or "log" in n
+                                             "water") or "flower" in n or "tulip" in n or "leaves" in n or "log" in n or "kelp" in n or "seagrass" in n or "coral" in n or "pickle" in n
                        for n in noms])
     H = b.shape[1]
     ok = ~ignore[b]
