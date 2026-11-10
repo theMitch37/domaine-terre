@@ -278,10 +278,12 @@ def gavarnie():
     return ecrire("gavarnie", X, Z, y, h, sommet, typ, sd, eau, "CALCAIRE")
 
 
-def creuser_riviere(X, Z, y, eau, trace, niv, larg, prof=2.0, pente=0.7, rive=0.4, masque=None, large=60):
+def creuser_riviere(X, Z, y, eau, trace, niv, larg, prof=2.0, pente=0.7, rive=0.4, masque=None, large=60, lisser_berges=0.0):
     """Creuse un cours d'eau le long d'un tracé (points en blocs) : lit de largeur larg(s), eau au niveau niv(s)
     (entier, par marches : une marche = une chute en travers du lit), berges qui remontent en pente `pente` jusqu'au
-    terrain. Rend y, eau, d (distance au tracé), s (abscisse), L (longueur)."""
+    terrain. Rend y, eau, d (distance au tracé), s (abscisse), L (longueur).
+    lisser_berges (10/11/2026, Gullfoss) : niveau des berges lissé sur ce rayon ; sinon, à un coude du tracé près d'une
+    chute, le point le plus proche saute d'un segment à l'autre et la berge garde une marche droite dans le terrain."""
     d, s, Ltot = polyligne(X, Z, trace)
     n = np.floor(niv(s)); lg = larg(s)
     m = np.ones(X.shape, bool) if masque is None else masque
@@ -290,7 +292,8 @@ def creuser_riviere(X, Z, y, eau, trace, niv, larg, prof=2.0, pente=0.7, rive=0.
     fond = n - 1.15 - prof * lisse(np.clip(1 - d / np.maximum(lg, 0.5), 0, 1))
     y = np.where(lit, np.minimum(y, fond), y)
     berge = ~lit & (d < lg + large) & m
-    y = np.where(berge, np.minimum(y, np.maximum(n - 0.5 + rive, n + rive + pente * (d - lg))), y)
+    nb = ndimage.gaussian_filter(n, lisser_berges) if lisser_berges > 0 else n
+    y = np.where(berge, np.minimum(y, np.maximum(n - 0.5 + rive, nb + rive + pente * (d - lg))), y)
     return y, eau, d, s, Ltot
 
 
@@ -336,8 +339,13 @@ def gullfoss():
     # s'élèvent doucement de part et d'autre
     berges = niv(s0) + 1.4 + 0.08 * np.maximum(d0 - 9, 0) + 0.8 * bruit(X, Z, 8, 209)
     f_b = lisse(np.clip((75 - d0) / 35, 0, 1)) * lisse(np.clip((s_c1 + 3 - s0) / 22, 0, 1))
-    y = np.maximum(y, y + (berges - y) * f_b)
-    y, eau, d, s, L = creuser_riviere(X, Z, y, np.full(X.shape, np.nan), trace, niv, larg, prof=1.6, pente=0.55)
+    # 10/11/2026 (test en jeu : « murs à côté de Geysir ») : le point le plus proche du tracé saute d'un segment à
+    # l'autre au coude des chutes, et ce relèvement s'y arrêtait net (marches de 8 à 11 blocs en diagonale dans le
+    # plateau) : relèvement lissé, le plateau monte en pente douce jusqu'au haut des parois
+    releve = ndimage.gaussian_filter(np.maximum(berges - y, 0) * f_b, 7.0)
+    y = y + releve
+    y, eau, d, s, L = creuser_riviere(X, Z, y, np.full(X.shape, np.nan), trace, niv, larg, prof=1.6, pente=0.55,
+                                       lisser_berges=6.0)
     # rochers et îlots moussus dans les rapides de la Hvítá (en amont de la première chute)
     ilot = (s < s_c1 - 6) & (d < larg(s) - 1.5) & (bruit(X, Z, 3.0, 207) > 0.55)
     eau_il = np.where(ilot, eau, np.nan)
