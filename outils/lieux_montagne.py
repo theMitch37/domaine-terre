@@ -146,17 +146,18 @@ def loin_des_fleuves(X, Z, w, marge=35.0):
     return w * lisse(np.clip((inf - 3.0) / marge, 0, 1))
 
 
-def talus(y, eau, pente=1.0, haut=4.0, portee=16):
+def talus(y, eau, pente=1.0, haut=3.0, portee=16):
     """Murs fins adoucis (10/11/2026, idée de Maxime : « les murs côté extérieur ont juste à adoucir leurs pentes »).
     Une colonne plus haute d'au moins `haut` blocs que ses deux voisines opposées (à 2 blocs) est un mur fin : le
     terrain hors de l'eau autour d'elle remonte en talus de `pente` blocs par bloc jusqu'à son sommet. Les parois qui
     tombent dans l'eau (gorge, chute) restent droites côté eau. Rend y et le masque des colonnes relevées."""
     mur = np.zeros(y.shape, bool)
     c = y[2:-2, 2:-2]
-    for dj, di in ((0, 2), (2, 0), (2, 2), (2, -2)):
-        a_ = y[2 + dj:y.shape[0] - 2 + dj, 2 + di:y.shape[1] - 2 + di]
-        b_ = y[2 - dj:y.shape[0] - 2 - dj, 2 - di:y.shape[1] - 2 - di]
-        mur[2:-2, 2:-2] |= (c - a_ >= haut) & (c - b_ >= haut)
+    for k in (1, 2):                                     # murs d'un bloc et de deux blocs d'épaisseur
+        for dj, di in ((0, k), (k, 0), (k, k), (k, -k)):
+            a_ = y[2 + dj:y.shape[0] - 2 + dj, 2 + di:y.shape[1] - 2 + di]
+            b_ = y[2 - dj:y.shape[0] - 2 - dj, 2 - di:y.shape[1] - 2 - di]
+            mur[2:-2, 2:-2] |= (c - a_ >= haut) & (c - b_ >= haut)
     sec = ~np.isfinite(eau)
     mur &= sec
     E = np.where(mur, y, -1e9)
@@ -559,7 +560,7 @@ def skogafoss():
     typ[(w < 0.02) | mer] = 0
     sommet = y.copy()
     print(f"skogafoss : lèvre y {lev:.0f}, bassin y 66 -> chute de {lev - 66:.0f} blocs ; rivière {L:.0f} blocs")
-    return ecrire("skogafoss", X, Z, y, h, sommet, typ, sd, eau, "BASALTE", adoucir=True)
+    return ecrire("skogafoss", X, Z, y, h, sommet, typ, sd, eau, "BASALTE")   # talus : ferait des digues entre les eaux
 
 
 def plitvice():
