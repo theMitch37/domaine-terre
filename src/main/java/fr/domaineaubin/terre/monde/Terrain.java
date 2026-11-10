@@ -464,13 +464,15 @@ public final class Terrain {
         // tri rapide sur la carte 3' (la plupart des bouts de tracé sont des confluences loin de la mer) : la côte fine
         // n'est lue que près de la mer (banc du 10/11 : +40 s au chargement des fleuves sans ce tri)
         if (carte.cote(lon(xi), lat(zi)) > MER_MAX * 60.0 / BLOCS_PAR_DEGRE + 4.0) return null;
-        double d0 = distanceCote(xi, zi);
-        if (d0 <= 0.0 || d0 > MER_MAX * 60.0 / BLOCS_PAR_DEGRE) return null;
+        double d0 = distanceCote(xi, zi), large = -3.0 * 60.0 / BLOCS_PAR_DEGRE;
+        // déjà en mer franche (3 blocs au large) : rien à faire ; un pixel de mer isolé (mare de la côte fine, banc du
+        // 10/11 : bouche de l'Hooghly) ne compte pas
+        if (d0 <= large || d0 > MER_MAX * 60.0 / BLOCS_PAR_DEGRE) return null;
         double meilleur = Double.MAX_VALUE, mx = 0, mz = 0;
         for (int k = 0; k < 32; k++) {
             double a = k * Math.PI / 16, dx = Math.cos(a), dz = Math.sin(a);
             for (int r = 2; r <= MER_MAX && r < meilleur; r += 2) {
-                if (distanceCote(Mth.floor(x + dx * r), Mth.floor(z + dz * r)) < 0.0) {
+                if (distanceCote(Mth.floor(x + dx * r), Mth.floor(z + dz * r)) < large) {
                     meilleur = r;
                     mx = x + dx * (r + 4);
                     mz = z + dz * (r + 4);
