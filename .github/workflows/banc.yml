@@ -12,6 +12,10 @@ on:
         description: "Lieux à générer, séparés par des virgules (vide = tous)"
         required: false
         default: ""
+      detail_relief:
+        description: "Part du détail du relief fin (vide = réglage du mod)"
+        required: false
+        default: ""
       profil:
         description: "Profil Java Flight Recorder (oui / non) ; il ralentit un peu la génération"
         required: false
@@ -88,6 +92,10 @@ jobs:
             find /tmp/zones -name '*.bin' -exec cp {} domaine_terre/relief/ \;
           fi
           ls domaine_terre/relief | head
+          if [ -n "${{ github.event.inputs.detail_relief }}" ]; then
+            mkdir -p config && echo '{"actif": true, "detail": ${{ github.event.inputs.detail_relief }}}' > config/domaine_terre_relief.json
+            cat config/domaine_terre_relief.json
+          fi
 
       - name: Génération des lieux
         run: |
