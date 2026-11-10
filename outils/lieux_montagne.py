@@ -383,6 +383,13 @@ def gullfoss():
     w = np.where(np.isfinite(eau) & ~np.isfinite(eau_mod), 1.0, w)
     y = h + (y - h) * w
     eau = np.where(w > 0.97, eau, np.nan)
+    # 10/11/2026 (banc : parois de la gorge debout, 12 blocs au-dessus du terrain des deux côtés, là où la gorge entre
+    # dans la vallée de la Þjórsá du mod, que le lieu garde telle quelle) : une paroi ne dépasse jamais le terrain
+    # juste derrière elle (+1) ; la gorge s'efface en entrant dans la vallée
+    mur = (gorge | paroi) & ~np.isfinite(eau)
+    anneau = (s > s_c2 - 1) & (d >= larg(s) + 3.5) & (d < larg(s) + 8.0) & ~np.isfinite(eau)
+    ref = ndimage.maximum_filter(np.where(anneau, y, -1e9), size=11)
+    y = np.where(mur & (ref > -1e8), np.minimum(y, ref + 1.0), y)
     pl = pente_locale(y)
     typ = np.full(X.shape, PLATEAU | TAILLEE, np.int32)
     mousse = (bruit(X, Z, 9, 203) * 0.5 + (1 - r / 85)) > 0.35
