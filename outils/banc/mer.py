@@ -35,7 +35,7 @@ def controle(chemin):
             P[max(-j0, 0):D - j0, max(-i0, 0):W - i0] < 0.01
     iles = (sd < 0) & hors & (sol > 61)
     mares = (sd > 0.5) & hors & (eau > sol) & (eau <= 62)
-    sec = (sd < 0) & (sol >= -64) & (sol <= 61) & (eau <= sol)
+    sec = (sd < 0) & (sol >= -512) & (sol <= 61) & (eau <= sol)
     print(f"{nom:20s} mer {int(((sd < 0) & hors).sum()):6d} col. -> îles inventées {int(iles.sum()):5d} "
           f"| terre {int(((sd > 0.5) & hors).sum()):6d} col. -> mares au niveau de la mer {int(mares.sum()):5d} "
           f"| fond à sec {int(sec.sum()):5d}")

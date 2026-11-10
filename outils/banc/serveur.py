@@ -11,7 +11,7 @@ import monde
 
 SERVEUR, ZONES, SORTIE = sys.argv[1], sys.argv[2], sys.argv[3]
 FORGE = "1.20.1-47.4.10"
-Y0, Y1 = -64, 320                     # tout le monde en hauteur : fosses et sommets (y 300 pour l'Everest)
+Y0, Y1 = -512, 1024                   # tout le monde en hauteur (agrandi le 10/11/2026) : fosses (y -505) et sommets (y 620 pour l'Everest)
 os.makedirs(SORTIE, exist_ok=True)
 zones = {k: v for k, v in json.load(open(ZONES)).items() if not k.startswith("_")}
 if len(sys.argv) > 4:
