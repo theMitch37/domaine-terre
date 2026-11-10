@@ -9,7 +9,7 @@ Pour chaque embouchure restée à terre (bout le plus bas d'un tracé, sans autr
 chaîne des tronçons d'aval jusqu'au bout. Gardé seulement s'il finit à la mer (pas endoréique) et si le chemin fait
 moins de 400 km. Le chemin, simplifié (~2 blocs), est ajouté au bout du tracé. Rien n'est touché d'autre.
 
-Usage (GitHub Actions, internet) : python3 outils/fleuves_hydro.py <dossier des .shp HydroRIVERS>
+Usage (GitHub Actions, internet) : python3 outils/fleuves_hydro.py <dossier des .shp HydroRIVERS ou RiverATLAS>
 Écrit src/main/resources/domaine_terre/carte/fleuves.json (corrigé) et outils/donnees/fleuves_hydro.json (ajouts).
 """
 import glob, json, os, sys, time
@@ -64,12 +64,14 @@ import pyogrio
 from shapely import STRtree, LineString, Point, get_coordinates
 ids, aval, endo, debit, geoms = [], [], [], [], []
 for shp in sorted(glob.glob(os.path.join(sys.argv[1], "**", "*.shp"), recursive=True)):
-    df = pyogrio.read_dataframe(shp, columns=["HYRIV_ID", "NEXT_DOWN", "ENDORHEIC", "DIS_AV_CMS", "UPLAND_SKM"],
-                                where="UPLAND_SKM > 200")
-    ids.append(df["HYRIV_ID"].to_numpy())
-    aval.append(df["NEXT_DOWN"].to_numpy())
-    endo.append(df["ENDORHEIC"].to_numpy())
-    debit.append(df["DIS_AV_CMS"].to_numpy())
+    champs = {c.upper(): c for c in pyogrio.read_info(shp)["fields"]}
+    q = champs.get("DIS_AV_CMS") or champs.get("DIS_M3_PYR") or champs["UPLAND_SKM"]
+    df = pyogrio.read_dataframe(shp, columns=[champs["HYRIV_ID"], champs["NEXT_DOWN"], champs["ENDORHEIC"], q,
+                                              champs["UPLAND_SKM"]], where=f"{champs['UPLAND_SKM']} > 200")
+    ids.append(df[champs["HYRIV_ID"]].to_numpy())
+    aval.append(df[champs["NEXT_DOWN"]].to_numpy())
+    endo.append(df[champs["ENDORHEIC"]].to_numpy())
+    debit.append(df[q].to_numpy())
     geoms.extend(df.geometry.values)
     print(os.path.basename(shp), len(df), "tronçons", flush=True)
 ids, aval, endo, debit = (np.concatenate(v) for v in (ids, aval, endo, debit))

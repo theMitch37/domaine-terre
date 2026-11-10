@@ -31,11 +31,15 @@ jobs:
           {
             set -e
             cd /tmp/hydro
-            for r in af ar as au eu na sa si; do
-              curl -sSfL --retry 5 --retry-delay 20 -o $r.zip https://data.hydrosheds.org/file/HydroRIVERS/HydroRIVERS_v10_${r}_shp.zip
-              unzip -q -o $r.zip -d $r && rm $r.zip
-              echo "$r : $(du -sh $r | cut -f1)"
-            done
+            # data.hydrosheds.org refuse les téléchargements depuis GitHub (403) : RiverATLAS v1.0 (mêmes tronçons,
+            # mêmes identifiants que HydroRIVERS) sur figshare, par son API publique
+            curl -sSfL --retry 5 -o article.json https://api.figshare.com/v2/articles/9890531
+            url=$(python -c "import json; d=json.load(open('article.json')); print([f['download_url'] for f in d['files'] if f['name']=='RiverATLAS_Data_v10_shp.zip'][0])")
+            echo "RiverATLAS : $url ; licence : $(python -c "import json; print(json.load(open('article.json')).get('license', {}).get('name'))")"
+            curl -sSfL --retry 5 --retry-delay 30 -o ra.zip "$url"
+            ls -la ra.zip
+            unzip -q ra.zip -d ra && rm ra.zip
+            du -sh ra; find ra -name "*.shp" | head
             cd $GITHUB_WORKSPACE
             python outils/fleuves_hydro.py /tmp/hydro
             python outils/fleuves_mer.py
@@ -52,4 +56,4 @@ jobs:
             git fetch origin "${GITHUB_REF_NAME}" && git rebase "origin/${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
             sleep 10
           done
-# déclenché le 10/11/2026
+# déclenché le 10/11/2026 (2 : RiverATLAS par figshare)
