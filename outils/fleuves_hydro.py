@@ -61,6 +61,7 @@ print(f"{len(bouts)} embouchures à terre à examiner ({time.time() - t0:.0f} s)
 
 # --- HydroRIVERS (tronçons d'un bassin de plus de 200 km² seulement : les cours d'eau du mod sont grands)
 import pyogrio
+import pyogrio.raw
 from shapely import STRtree, LineString, Point, get_coordinates, from_wkb
 ids, aval, endo, debit, geoms = [], [], [], [], []
 if sys.argv[1].endswith(".zip"):                  # lu dans le zip, sans décompresser (GDAL /vsizip/)
@@ -72,7 +73,7 @@ for shp in sorted(fichiers):
     champs = {c.upper(): c for c in pyogrio.read_info(shp)["fields"]}
     q = champs.get("DIS_AV_CMS") or champs.get("DIS_M3_PYR") or champs["UPLAND_SKM"]
     noms_ = [champs["HYRIV_ID"], champs["NEXT_DOWN"], champs["ENDORHEIC"], q]
-    meta, _, wkb, data = pyogrio.read(shp, columns=noms_, where=f"{champs['UPLAND_SKM']} > 200")
+    meta, _, wkb, data = pyogrio.raw.read(shp, columns=noms_, where=f"{champs['UPLAND_SKM']} > 200")
     col = dict(zip(meta["fields"], data))
     ids.append(np.asarray(col[noms_[0]]))
     aval.append(np.asarray(col[noms_[1]]))

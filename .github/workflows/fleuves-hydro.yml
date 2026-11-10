@@ -59,4 +59,4 @@ jobs:
             git fetch origin "${GITHUB_REF_NAME}" && git rebase "origin/${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
             sleep 10
           done
-# déclenché le 10/11/2026 (4 : sans geopandas)
+# déclenché le 10/11/2026 (5 : pyogrio.raw)
