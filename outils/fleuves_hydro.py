@@ -61,7 +61,7 @@ print(f"{len(bouts)} embouchures à terre à examiner ({time.time() - t0:.0f} s)
 
 # --- HydroRIVERS (tronçons d'un bassin de plus de 200 km² seulement : les cours d'eau du mod sont grands)
 import pyogrio
-from shapely import STRtree, LineString, Point, get_coordinates
+from shapely import STRtree, LineString, Point, get_coordinates, from_wkb
 ids, aval, endo, debit, geoms = [], [], [], [], []
 if sys.argv[1].endswith(".zip"):                  # lu dans le zip, sans décompresser (GDAL /vsizip/)
     import zipfile
@@ -71,14 +71,15 @@ else:
 for shp in sorted(fichiers):
     champs = {c.upper(): c for c in pyogrio.read_info(shp)["fields"]}
     q = champs.get("DIS_AV_CMS") or champs.get("DIS_M3_PYR") or champs["UPLAND_SKM"]
-    df = pyogrio.read_dataframe(shp, columns=[champs["HYRIV_ID"], champs["NEXT_DOWN"], champs["ENDORHEIC"], q,
-                                              champs["UPLAND_SKM"]], where=f"{champs['UPLAND_SKM']} > 200")
-    ids.append(df[champs["HYRIV_ID"]].to_numpy())
-    aval.append(df[champs["NEXT_DOWN"]].to_numpy())
-    endo.append(df[champs["ENDORHEIC"]].to_numpy())
-    debit.append(df[q].to_numpy())
-    geoms.extend(df.geometry.values)
-    print(os.path.basename(shp), len(df), "tronçons", flush=True)
+    noms_ = [champs["HYRIV_ID"], champs["NEXT_DOWN"], champs["ENDORHEIC"], q]
+    meta, _, wkb, data = pyogrio.read(shp, columns=noms_, where=f"{champs['UPLAND_SKM']} > 200")
+    col = dict(zip(meta["fields"], data))
+    ids.append(np.asarray(col[noms_[0]]))
+    aval.append(np.asarray(col[noms_[1]]))
+    endo.append(np.asarray(col[noms_[2]]))
+    debit.append(np.asarray(col[noms_[3]], float))
+    geoms.extend(from_wkb(wkb))
+    print(os.path.basename(shp), len(wkb), "tronçons", flush=True)
 ids, aval, endo, debit = (np.concatenate(v) for v in (ids, aval, endo, debit))
 geoms = np.array(geoms, dtype=object)
 rang = {int(i): n for n, i in enumerate(ids)}
