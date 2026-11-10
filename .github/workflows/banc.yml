@@ -93,6 +93,9 @@ jobs:
           cp /tmp/serveur/domaine_tailles.csv /tmp/banc/domaine_tailles.csv 2>/dev/null || true   # tailles d'origine
           ls /tmp/serveur/mods > /tmp/banc/mods.txt 2>/dev/null || true
           cp /tmp/serveur/config/untamedwilds-common.toml /tmp/banc/ 2>/dev/null || true
+          # tables d'apparition propres d'Untamed Wilds (10/11/2026 : bêtes nées en plus de la table)
+          (cd /tmp/banc && unzip -o -q /tmp/serveur/mods/untamedwilds-*.jar 'data/untamedwilds/spawn_tables/*' -d uw) 2>/dev/null || true
+          unzip -l /tmp/serveur/config/openloader/data/domaine_terroirs.zip > /tmp/banc/datapack.txt 2>/dev/null || true
           cp -r /tmp/serveur/crash-reports /tmp/banc/ 2>/dev/null || true
           printf 'branche=%s\ncommit=%s\ndate=%s\nresultat=%s\n' "$GITHUB_REF_NAME" "$GITHUB_SHA" "$(date -u +%FT%TZ)" "${{ job.status }}" > /tmp/banc/SOURCE.txt
           cd /tmp/banc
