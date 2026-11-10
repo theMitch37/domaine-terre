@@ -1,11 +1,18 @@
 RiverATLAS : https://ndownloader.figshare.com/files/20087486 ; licence : CC BY 4.0
--rw-r--r-- 1 runner runner 2418581202 Nov 10 20:15 ra.zip
+-rw-r--r-- 1 runner runner 2418581202 Nov 10 20:19 ra.zip
 Filesystem      Size  Used Avail Use% Mounted on
 /dev/root        72G   42G   31G  58% /
-271 embouchures à terre à examiner (1 s)
-Traceback (most recent call last):
-  File "/home/runner/work/domaine-terre/domaine-terre/outils/fleuves_hydro.py", line 75, in <module>
-    meta, _, wkb, data = pyogrio.read(shp, columns=noms_, where=f"{champs['UPLAND_SKM']} > 200")
-                         ^^^^^^^^^^^^
-AttributeError: module 'pyogrio' has no attribute 'read'
+271 embouchures à terre à examiner (2 s)
+RiverATLAS_v10_af.shp 0 tronçons
+RiverATLAS_v10_ar.shp 0 tronçons
+RiverATLAS_v10_as.shp 0 tronçons
+RiverATLAS_v10_au.shp 0 tronçons
+RiverATLAS_v10_eu.shp 0 tronçons
+RiverATLAS_v10_gr.shp 0 tronçons
+RiverATLAS_v10_na.shp 0 tronçons
+RiverATLAS_v10_sa_north.shp 0 tronçons
+RiverATLAS_v10_sa_south.shp 0 tronçons
+RiverATLAS_v10_si.shp 0 tronçons
+0 tronçons chargés (67 s)
+bilan : {'sans tronçon': 271, 'endoréique': 0, 'trop long': 0, 'lieu': 0, 'pas en mer': 0, 'ok': 0} (67 s)
 0 embouchures prolongées jusqu'à la mer
