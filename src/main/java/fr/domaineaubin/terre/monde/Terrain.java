@@ -120,10 +120,10 @@ public final class Terrain {
         if (r != null && presLac && r.eau() < nivLac) r = r.avecEau(nivLac);
         // près de l'eau, le relief réel en entier (10/11/2026) : l'eau est à sa vraie altitude, les rives aussi (avec
         // une part seulement du détail fin, la rive restait au-dessus ou au-dessous de l'eau : murs, lacs perchés)
-        double presRiv = 0.0, presLac = 0.0;
-        if (r != null) presRiv = 1.0 - lisse(Mth.clamp((r.distance() - r.demiLargeur() - BERGE_RIVIERE) / 24.0, 0.0, 1.0));
-        if (lp != null) presLac = lp.distance() > 0 ? 1.0 : 1.0 - lisse(Mth.clamp((-lp.distance() - 6.0) / 30.0, 0.0, 1.0));
-        double h = calculerHauteur(x, z, sd, alt, pente, r, true, presRiv, presLac);
+        double procheRiv = 0.0, procheLac = 0.0;
+        if (r != null) procheRiv = 1.0 - lisse(Mth.clamp((r.distance() - r.demiLargeur() - BERGE_RIVIERE) / 24.0, 0.0, 1.0));
+        if (lp != null) procheLac = lp.distance() > 0 ? 1.0 : 1.0 - lisse(Mth.clamp((-lp.distance() - 6.0) / 30.0, 0.0, 1.0));
+        double h = calculerHauteur(x, z, sd, alt, pente, r, true, procheRiv, procheLac);
         // lacs (étape C1) : cuvette dans le lac, berges qui descendent jusqu'à son niveau autour
         int niveauLac = SANS_LAC, bergeLac = SANS_LAC, eauLac = SANS_LAC;
         int eauRiv = SANS_LAC, bergeRiv = SANS_LAC, litRiv = SANS_LAC;
