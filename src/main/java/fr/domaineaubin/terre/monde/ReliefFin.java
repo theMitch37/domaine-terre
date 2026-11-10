@@ -88,6 +88,22 @@ public final class ReliefFin {
         return v == VIDE ? Double.NaN : v * (double) Q;
     }
 
+    /**
+     * Fond de vallée au relief fin autour d'un point de l'axe d'un cours d'eau (10/11/2026) : la plus basse des
+     * altitudes sur 3 x 3 points espacés de 2 blocs (le tracé du cours d'eau s'écarte d'un bloc ou deux du vrai
+     * talweg), en m ; NaN sans relief fin.
+     */
+    public static double altitudeFond(int x, int z) {
+        double m = Double.NaN;
+        for (int dz = -2; dz <= 2; dz += 2) {
+            for (int dx = -2; dx <= 2; dx += 2) {
+                double a = altitude(x + dx, z + dz);
+                if (!Double.isNaN(a) && (Double.isNaN(m) || a < m)) m = a;
+            }
+        }
+        return m;
+    }
+
     private static long cle(int a, int b) {
         return ((long) a << 32) ^ (b & 0xFFFFFFFFL);
     }

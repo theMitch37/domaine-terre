@@ -172,7 +172,7 @@ def erebus():
     """Île de Ross et mont Erebus (Antarctique, 77,5° S) : l'île aux vraies proportions (étirée ×4,6 par la carte),
     neige et glace partout, roche volcanique sur les pentes raides ; mer autour jusqu'au bord de la zone."""
     L = lieu_iso("erebus", -77.529, 167.153, 60.0, ile=True)   # au-dessus de la barrière de Ross (15-40 m)
-    typ = neige_glace(L, ligne_neige=-1000.0, biome_seuil=60.0)
+    typ = neige_glace(L, ligne_neige=-1000.0, roche=3.0, biome_seuil=60.0)   # calotte de glace : roche aux seules falaises
     return M.ecrire("erebus", L["X"], L["Z"], L["y"], L["h"], L["y"].copy(), typ, L["sd"], L["eau"], "VOLCAN",
                     garder_fleuves=False)
 
