@@ -156,8 +156,14 @@ public final class GrandCanyon implements LieuSculpte {
         return Terrain.blocsDepuisAltitude(pt.p());
     }
 
-    private static boolean dansCanyon(Point pt) {
-        return pt.t() < 1.1 && pt.fondu() > 0.3;
+    /**
+     * Colonne du canyon (strates, biome). 11/11/2026 (banc, sortie du canyon : les parois colorées s'arrêtaient sur une
+     * ligne droite, le bord de la zone de données) : le seuil du fondu est irrégulier.
+     */
+    private boolean dansCanyon(Point pt, int x, int z) {
+        if (pt.t() >= 1.1) return false;
+        double seuil = 0.3 + 0.18 * bruit.noise(x / 13.0, 5.0, z / 13.0) + 0.08 * bruit.noise(x / 4.0, 9.0, z / 4.0);
+        return pt.fondu() > seuil;
     }
 
     // ---------------------------------------------------------------- Lieu
@@ -189,7 +195,7 @@ public final class GrandCanyon implements LieuSculpte {
     public double hauteurNette(int x, int z) {
         if (!concerne(x, z)) return Double.NaN;
         Point pt = point(x, z);
-        if (!dansCanyon(pt) || pt.t() > 1.0) return Double.NaN;
+        if (!dansCanyon(pt, x, z) || pt.t() > 1.0) return Double.NaN;
         double finale = Terrain.get().hauteur(x, z);
         if (pt.t() > 0.9 && finale < coupe(pt) - 0.5) return Double.NaN;   // terrain plus bas que la coupe : pas taillé
         return finale;
@@ -257,14 +263,14 @@ public final class GrandCanyon implements LieuSculpte {
 
     @Override
     public boolean dansBiome(int x, int z) {
-        return concerne(x, z) && dansCanyon(point(x, z));
+        return concerne(x, z) && dansCanyon(point(x, z), x, z);
     }
 
     /** Tout le canyon et les abords des lacs : l'aquifère y prend le niveau de la mer (le fleuve ne s'assèche plus). */
     @Override
     public boolean inonde(int x, int z, double hauteur) {
         Point pt = point(x, z);
-        return dansCanyon(pt) || pt.t() < 1.5 || pt.e() - pt.r() < 60.0;
+        return dansCanyon(pt, x, z) || pt.t() < 1.5 || pt.e() - pt.r() < 60.0;
     }
 
     /** Dans le canyon, son biome descend jusqu'au fond (sinon les replats et parois prennent le biome froid du plateau). */
@@ -278,7 +284,7 @@ public final class GrandCanyon implements LieuSculpte {
     public double rebordSiParoi(int x, int z) {
         if (!concerne(x, z)) return Double.NaN;
         Point pt = point(x, z);
-        return dansCanyon(pt) ? yRebord(pt) : Double.NaN;
+        return dansCanyon(pt, x, z) ? yRebord(pt) : Double.NaN;
     }
 
     /** Fraction de profondeur (0 = rebord, 1 = fleuve) d'un bloc à la hauteur y. */
