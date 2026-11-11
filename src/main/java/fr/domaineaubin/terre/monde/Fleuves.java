@@ -182,6 +182,26 @@ public final class Fleuves {
      * Segment qui « domine » ce point : celui dont le bord du lit est le plus proche
      * (un grand fleuve l'emporte sur une rivière voisine). null si aucun dans la cellule.
      */
+    /** Diagnostic (banc) : ce qui décide du niveau de l'eau en ce point. */
+    public String diagnostic(double x, double z) {
+        int[] ids = grille.get(cle((int) Math.floor(x / CELLULE), (int) Math.floor(z / CELLULE)));
+        if (ids == null) return "aucun segment";
+        StringBuilder b = new StringBuilder();
+        for (int id : ids) {
+            double x1 = ax[id], z1 = az[id], dx = bx[id] - x1, dz = bz[id] - z1;
+            double l2 = dx * dx + dz * dz;
+            double t = l2 > 0 ? ((x - x1) * dx + (z - z1) * dz) / l2 : 0;
+            double tc = Math.max(0, Math.min(1, t));
+            double d = Math.hypot(x - (x1 + tc * dx), z - (z1 + tc * dz));
+            if (d > 40) continue;
+            CalculNiveau cf = calculFin;
+            b.append(String.format(java.util.Locale.ROOT, " [seg %d (%.0f,%.0f)->(%.0f,%.0f) t=%.2f d=%.1f cl=%d nA=%d nB=%d fA=%s fB=%s]",
+                    id, x1, z1, bx[id], bz[id], t, d, classe[id], niveauA[id], niveauB[id],
+                    cf == null ? "-" : fin(id, true, cf), cf == null ? "-" : fin(id, false, cf)));
+        }
+        return b.toString();
+    }
+
     public Proche proche(double x, double z) {
         int[] ids = grille.get(cle((int) Math.floor(x / CELLULE), (int) Math.floor(z / CELLULE)));
         if (ids == null) return null;

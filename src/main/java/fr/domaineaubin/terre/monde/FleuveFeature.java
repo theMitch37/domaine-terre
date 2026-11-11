@@ -34,6 +34,14 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
             for (int dz = 0; dz < 16; dz++) {
                 int x = x0 + dx, z = z0 + dz;
                 int w = t.eauLit(x, z);
+                if (w != Terrain.SANS_LAC && DIAG.get() < 30) {
+                    int v = t.eauLit(x + 1, z), u = t.eauLit(x, z + 1);
+                    if ((v != Terrain.SANS_LAC && Math.abs(v - w) > 8) || (u != Terrain.SANS_LAC && Math.abs(u - w) > 8)) {
+                        DIAG.incrementAndGet();
+                        fr.domaineaubin.terre.DomaineTerre.LOGGER.info("DIAG eau {} {} : {} | x+1 : {} | z+1 : {}", x, z,
+                                t.diagnosticRiviere(x, z), t.diagnosticRiviere(x + 1, z), t.diagnosticRiviere(x, z + 1));
+                    }
+                }
                 // abords du lit : seulement les creux sous le niveau de la rivière (11/11/2026)
                 if (w == Terrain.SANS_LAC) w = t.eauAbords(x, z);
                 if (w == Terrain.SANS_LAC) continue;
@@ -231,6 +239,8 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
         h ^= h >>> 29;
         return (h >>> 11) * 0x1.0p-53;
     }
+
+    private static final java.util.concurrent.atomic.AtomicInteger DIAG = new java.util.concurrent.atomic.AtomicInteger();
 
     private static boolean plusBas(Terrain t, int x, int z, int w) {
         int v = t.eauLit(x, z);

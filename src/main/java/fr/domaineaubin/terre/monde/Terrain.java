@@ -310,6 +310,13 @@ public final class Terrain {
     }
 
     /** Niveau de l'eau (l'eau remplit y < niveau) du lit d'un cours d'eau dans cette colonne, ou SANS_LAC. */
+    /** Diagnostic (banc) du niveau d'un cours d'eau en ce point. */
+    public String diagnosticRiviere(int x, int z) {
+        Colonne c = colonne(x, z);
+        return "lit " + c.litRiv() + " eauRiv " + c.eauRiv() + " eauLac " + c.eauLac() + " lieu " + (LieuxTerre.a(x, z) != null)
+                + " h " + String.format(java.util.Locale.ROOT, "%.1f", c.h()) + fleuves().diagnostic(x, z);
+    }
+
     public int eauLit(int x, int z) {
         return colonne(x, z).litRiv();
     }
