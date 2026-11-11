@@ -70,6 +70,22 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
                 }
             }
         }
+        // mer à sec (11/11/2026, banc : estuaires de l'Indus et de la Gambie, centaines de colonnes de vase ou de sable à
+        // l'air sous le niveau de la mer) : l'aquifère tire l'eau de cellules espacées de 16 blocs ; quand la cellule
+        // tombe dans le lit d'un cours d'eau (sans aquifère), les pixels de mer voisins restaient secs. La mer est
+        // remplie ici jusqu'à son niveau.
+        for (int dx = 0; dx < 16; dx++) {
+            for (int dz = 0; dz < 16; dz++) {
+                int x = x0 + dx, z = z0 + dz;
+                if (!t.enMer(x, z) || t.eauLit(x, z) != Terrain.SANS_LAC) continue;
+                for (int y = Terrain.NIVEAU_MER - 1; y >= Terrain.NIVEAU_MER - 64; y--) {
+                    BlockState b = niveau.getBlockState(pos.set(x, y, z));
+                    if (!b.isAir()) break;
+                    niveau.setBlock(pos, eau, 2);
+                    modifie = true;
+                }
+            }
+        }
         // herbe sous l'eau hors des lits (bord des lacs, plats de la côte, 11/11/2026, banc : 130 à 330 colonnes par
         // zone, sous 1 à 2 blocs d'eau surtout) : les règles de surface ne voient pas l'eau des aquifères du mod ; sous
         // l'eau, le fond du lit
