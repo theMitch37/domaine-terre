@@ -42,7 +42,9 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
                 boolean eauEnHaut = false, mouille = false;
                 for (int y = w - 1; y >= w - 64; y--) {
                     BlockState b = niveau.getBlockState(pos.set(x, y, z));
-                    if (b.isAir()) {
+                    // une plante (herbe, fleur) posée par la végétation d'un chunk voisin avant que ce lit ne soit
+                    // rempli n'est pas le fond (11/11/2026, banc : herbe au fond du Danube sous 5 blocs d'eau)
+                    if (b.isAir() || plante(b)) {
                         niveau.setBlock(pos, eau, 2);
                         modifie = true;
                         mouille = true;
@@ -83,7 +85,7 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
                 if (!t.enMer(x, z) && t.distanceCote(x, z) > 2.5) continue;
                 for (int y = Terrain.NIVEAU_MER - 1; y >= Terrain.NIVEAU_MER - 64; y--) {
                     BlockState b = niveau.getBlockState(pos.set(x, y, z));
-                    if (!b.isAir()) break;
+                    if (!b.isAir() && !plante(b)) break;
                     niveau.setBlock(pos, eau, 2);
                     modifie = true;
                 }
@@ -105,6 +107,12 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
             }
         }
         return modifie;
+    }
+
+    /** Plante terrestre que l'eau remplace (herbe, fougère, fleur, buisson). */
+    private static boolean plante(BlockState b) {
+        return b.getFluidState().isEmpty() && b.canBeReplaced() && !b.is(Blocks.SNOW) && !b.isAir()
+                || b.is(net.minecraft.tags.BlockTags.SMALL_FLOWERS);
     }
 
     /** Sol meuble posé par les règles de surface (herbe, terre, sable…) ; la roche des lits de montagne reste. */
