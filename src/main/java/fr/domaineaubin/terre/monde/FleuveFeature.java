@@ -86,57 +86,6 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
                 }
             }
         }
-        // trous d'eau (11/11/2026, banc, Maxime : « cherche les trous d'eau ») : colonne à sec dont le sol est plus bas
-        // que la surface d'une eau voisine. Peu profond (≤ 3 blocs : creux de la côte, bord d'un lit, rive basse d'un
-        // lac) : l'eau la remplit, en plusieurs passes pour gagner les creux voisins. Plus profond à côté d'un lac (lac
-        // de barrage au bord d'une vallée, Grimsel) : un rebord de terrain retient l'eau, plus de mur d'eau debout.
-        for (int passe = 0; passe < 4; passe++) {
-            boolean change = false;
-            for (int dx = 0; dx < 16; dx++) {
-                for (int dz = 0; dz < 16; dz++) {
-                    int x = x0 + dx, z = z0 + dz;
-                    int sol = niveau.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x, z) - 1;
-                    if (!niveau.getBlockState(pos.set(x, sol + 1, z)).isAir()) continue;
-                    int surface = Integer.MIN_VALUE;
-                    boolean lac = false;
-                    for (int k = 0; k < 4; k++) {
-                        int nx = x + (k == 0 ? 1 : k == 1 ? -1 : 0), nz = z + (k == 2 ? 1 : k == 3 ? -1 : 0);
-                        int y = niveau.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, nx, nz);
-                        if (!niveau.getBlockState(pos.set(nx, y, nz)).is(Blocks.WATER)) continue;
-                        while (niveau.getBlockState(pos.set(nx, y + 1, nz)).is(Blocks.WATER)) y++;
-                        if (y > surface) {
-                            surface = y;
-                            lac = t.niveauLac(nx, nz) != Terrain.SANS_LAC;
-                        }
-                    }
-                    if (surface <= sol) continue;
-                    if (surface - sol <= 3) {
-                        for (int y = sol + 1; y <= surface; y++) {
-                            if (!niveau.getBlockState(pos.set(x, y, z)).isAir()) break;
-                            niveau.setBlock(pos, eau, 2);
-                        }
-                        BlockState b = niveau.getBlockState(pos.set(x, sol, z));
-                        if (b.is(Blocks.GRASS_BLOCK) || b.is(Blocks.PODZOL) || b.is(Blocks.MYCELIUM) || b.is(Blocks.DIRT_PATH))
-                            niveau.setBlock(pos, fond(t, x, z), 2);
-                        if (plusBas(t, x + 1, z, surface + 1) || plusBas(t, x - 1, z, surface + 1)
-                                || plusBas(t, x, z + 1, surface + 1) || plusBas(t, x, z - 1, surface + 1))
-                            niveau.scheduleTick(pos.set(x, surface, z), Fluids.WATER, 1);
-                        change = true;
-                    } else if (lac) {
-                        BlockState b = niveau.getBlockState(pos.set(x, sol, z));
-                        BlockState dessous = b.is(Blocks.GRASS_BLOCK) || b.is(Blocks.PODZOL) || b.is(Blocks.MYCELIUM)
-                                ? Blocks.DIRT.defaultBlockState() : b;
-                        if (b.isAir() || !b.getFluidState().isEmpty()) continue;
-                        niveau.setBlock(pos, dessous, 2);
-                        for (int y = sol + 1; y < surface + 1; y++) niveau.setBlock(pos.set(x, y, z), dessous, 2);
-                        niveau.setBlock(pos.set(x, surface + 1, z), b, 2);
-                        change = true;
-                    }
-                    modifie |= change;
-                }
-            }
-            if (!change) break;
-        }
         // herbe sous l'eau hors des lits (bord des lacs, plats de la côte, 11/11/2026, banc : 130 à 330 colonnes par
         // zone, sous 1 à 2 blocs d'eau surtout) : les règles de surface ne voient pas l'eau des aquifères du mod ; sous
         // l'eau, le fond du lit
