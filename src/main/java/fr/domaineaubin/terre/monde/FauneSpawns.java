@@ -234,6 +234,9 @@ public final class FauneSpawns {
      * jamais retirées ; les bêtes nommées ou apprivoisées non plus.
      */
     @SubscribeEvent(priority = EventPriority.HIGH)
+    /** Vrai pendant l'entrée des bêtes nées à la génération d'un chunk (EntitesGenerationMixin). */
+    public static final ThreadLocal<Boolean> GENERATION = ThreadLocal.withInitial(() -> Boolean.FALSE);
+
     public static void arrivee(EntityJoinLevelEvent event) {
         if (!(event.getEntity() instanceof Mob m) || !(event.getLevel() instanceof ServerLevel n)) return;
         FauneTerre f = FauneTerre.get();
@@ -241,7 +244,9 @@ public final class FauneSpawns {
         net.minecraft.nbt.CompoundTag d = m.getPersistentData();
         if (d.getBoolean(VERIFIEE)) return;
         d.putBoolean(VERIFIEE, true);
-        if (!event.loadedFromDisk() || !terre(n)) return;
+        // 12/11/2026 : les bêtes de la génération des chunks arrivent avec loadedFromDisk faux (Forge) ; sans le drapeau
+        // du mixin, aucune n'était vérifiée (requins d'Untamed Wilds dans les estuaires)
+        if (!(event.loadedFromDisk() || Boolean.TRUE.equals(GENERATION.get())) || !terre(n)) return;
         if (m.hasCustomName() || m.isLeashed()
                 || (m instanceof net.minecraft.world.entity.TamableAnimal a && a.isTame())) return;
         BlockPos pos = m.blockPosition();
