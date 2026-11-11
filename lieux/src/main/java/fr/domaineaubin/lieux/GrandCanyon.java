@@ -120,6 +120,10 @@ public final class GrandCanyon implements LieuSculpte {
                 // 11/11/2026 (banc : aiguilles d'un bloc de large, hautes comme les buttes, au sommet des petites taches
                 // du bruit) : seules les grandes taches montent jusqu'au Supai ; les petites restent des tertres
                 double sb = Mth.clamp((b - 0.25) / 0.35, 0.0, 1.0);
+                // (banc : butte coupée net par une falaise de 35 blocs) la butte s'efface aux bornes de sa bande au lieu
+                // d'y être tranchée
+                sb *= lisse(Mth.clamp((t - 0.28) / 0.1, 0.0, 1.0)) * (1.0 - lisse(Mth.clamp((t - 0.82) / 0.1, 0.0, 1.0)))
+                        * (1.0 - lisse(Mth.clamp((v - 0.3) / 0.2, 0.0, 1.0)));
                 double gt = SOMMET_COUCHE[3] + (1.0 - sb) * (g - SOMMET_COUCHE[3]);
                 g = Math.min(g, gradin(gt));
             }
