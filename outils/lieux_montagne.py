@@ -517,9 +517,18 @@ def skogafoss():
     z_f = c[1] - 3.0                                             # la falaise passe en z_f à la chute
     s_f = float(np.interp(z_f, trace[:, 1], ss))
     lev = float(np.floor(bas + 24.0)) - 1.0                       # eau au bord de la falaise
+    # 11/11/2026 (test en jeu : « la rivière ne coule pas jusqu'à la mer », elle finissait au niveau 65 à 10 blocs de la
+    # côte du jeu, la mer à 62) : en aval, le niveau descend de 66 au niveau de la mer (63) avant la côte
+    i_mer = np.flatnonzero(T.distance_cote(trace[:, 0], trace[:, 1]) < 0)
+    s_mer = float(ss[i_mer[0]]) if len(i_mer) and ss[i_mer[0]] > s_f + 30 else s_f + 90.0
+    # la carte 3' (sd) met la mer plus tôt que la côte fine : le lit s'y arrête, le chenal (plus bas) prend le relais
+    d_t, s_t, _ = polyligne(X, Z, trace)
+    dans_mer = mer & (d_t < 1.5) & (s_t > s_f + 20)
+    s_sd = float(s_t[dans_mer].min()) if dans_mer.any() else s_mer
+    pas_aval = max((min(s_sd, s_mer) - 6.0 - (s_f + 14.0)) / 3.0, 4.0)
     def niv(s):
         amont = np.minimum(lev + np.floor(np.clip(s_f - 8 - s, 0, None) / 14.0), lev + 6)
-        aval = np.maximum(66.0 - np.floor(np.clip(s - s_f - 14, 0, None) / 25.0), 63.0)
+        aval = np.maximum(66.0 - np.floor(np.clip(s - s_f - 14, 0, None) / pas_aval), 63.0)
         return np.where(s < s_f, amont, aval)
     def larg(s):
         return np.where(s < s_f, 3.6, 3.3)
@@ -557,6 +566,11 @@ def skogafoss():
     y = h + (y - h) * w
     eau = np.where(w > 0.97, eau, np.nan)
     y = np.where(mer, h, y)
+    # le lit continue au niveau de la mer dans la bande où la côte du jeu et celle de cette carte diffèrent : jamais de
+    # seuil de terre entre la rivière et la mer
+    chenal = mer & (d0 < 4.5) & (s0 > s_f + 20) & (s0 < s_mer + 12)
+    eau = np.where(chenal, 63.0, eau)
+    y = np.where(chenal, np.minimum(y, 60.5), y)
     pl = pente_locale(y)
     typ = np.full(X.shape, PRE | TAILLEE, np.int32)
     typ[(e > 0) & (pl < 1.2) & (bruit(X, Z, 8, 305) * 0.6 + w > 0.85)] = MOUSSE | TAILLEE
@@ -564,6 +578,7 @@ def skogafoss():
     typ[np.isfinite(eau)] = LIT | TAILLEE
     typ = typ | BIOME
     typ[(w < 0.02) | mer] = 0
+    typ[chenal] = LIT | TAILLEE
     sommet = y.copy()
     print(f"skogafoss : lèvre y {lev:.0f}, bassin y 66 -> chute de {lev - 66:.0f} blocs ; rivière {L:.0f} blocs")
     return ecrire("skogafoss", X, Z, y, h, sommet, typ, sd, eau, "BASALTE")   # talus : ferait des digues entre les eaux
