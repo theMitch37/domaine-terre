@@ -237,7 +237,7 @@ public final class FauneSpawns {
     public static void arrivee(EntityJoinLevelEvent event) {
         if (!(event.getEntity() instanceof Mob m) || !(event.getLevel() instanceof ServerLevel n)) return;
         FauneTerre f = FauneTerre.get();
-        if (!f.active() || !f.dansLaTable(m.getType())) return;
+        if (!f.active() || !f.verifiee(m.getType())) return;
         net.minecraft.nbt.CompoundTag d = m.getPersistentData();
         if (d.getBoolean(VERIFIEE)) return;
         d.putBoolean(VERIFIEE, true);

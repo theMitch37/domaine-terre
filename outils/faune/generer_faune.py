@@ -147,8 +147,9 @@ for r in rows:
     # Untamed Wilds (07/11/2026) : ses bêtes de terre naissent par cette table (abondance cohérente avec le reste) ;
     # ses bêtes de mer et ses poissons d'eau douce gardent son propre système (le jeu ne fait naître à la génération
     # que la catégorie des animaux de terre)
-    if ent.startswith("untamedwilds:") and ent.split(":")[1] not in UW_TERRE:
-        continue
+    # 12/11/2026 (test en jeu : grands requins dans un estuaire) : elles restent nées par Untamed Wilds, mais sont dans la
+    # table « pour contrôle » : le mod Terre ne les garde que là où ces règles les permettent (bande de mer, température)
+    controle = ent.startswith("untamedwilds:") and ent.split(":")[1] not in UW_TERRE
     if ent in ("guardvillagers:guard", "alexsmobs:mimicube"):
         continue
     toks = [j for m in r["milieu"].split(",") for j in jetons(m)] if r["milieu"] not in MILIEUX else [r["milieu"]]
@@ -190,7 +191,8 @@ for r in rows:
         "id": r["id"], "entite": ent, "cat": r["categorie"], "terroirs": [INDEX[t] for t in ts], "biomes": biomes,
         "precis": precis, "eau": eau, "cote": cote, "mer": mer, "min": mn, "max": mx,
         "poids": poids(r, mn, mx, mer is None and etage is None),
-        "nuit": "nuit" in r["milieu"], "etage": etage, **CONDITIONS.get(r["id"], {})})
+        "nuit": "nuit" in r["milieu"], "etage": etage, **({"controle": True} if controle else {}),
+        **CONDITIONS.get(r["id"], {})})
 json.dump({"precises": precises, "especes": especes}, open(os.path.join(OUT, "especes.json"), "w", encoding="utf-8"),
           ensure_ascii=False, separators=(",", ":"))
 print("especes.json :", len(especes), "entrées")

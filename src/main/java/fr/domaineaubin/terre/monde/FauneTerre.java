@@ -80,7 +80,10 @@ public final class FauneTerre {
     private final List<Entree> souterrain;
     private final Map<Long, List<MobSpawnSettings.SpawnerData>> cache = new ConcurrentHashMap<>();
 
-    private FauneTerre(byte[] zones, int[] biomePrecis, List<Entree> surface, List<Entree> souterrain) {
+    private final List<Entree> controle;
+
+    private FauneTerre(byte[] zones, int[] biomePrecis, List<Entree> surface, List<Entree> souterrain, List<Entree> controle) {
+        this.controle = controle;
         this.zones = zones;
         this.biomePrecis = biomePrecis;
         this.surface = surface;
@@ -92,6 +95,9 @@ public final class FauneTerre {
             if (e.conditionnee() || e.monstreSurface()) c.putIfAbsent(e.donnees().type, e);
         }
         this.types = java.util.Set.copyOf(t);
+        java.util.Set<EntityType<?>> v = new java.util.HashSet<>(t);
+        for (Entree e : controle) v.add(e.donnees().type);
+        this.verifiees = java.util.Set.copyOf(v);
         this.conditions = java.util.Map.copyOf(c);
         java.util.Map<EntityType<?>, Entree> p = new java.util.HashMap<>();
         for (Entree e : surface) p.putIfAbsent(e.donnees().type, e);
@@ -111,6 +117,13 @@ public final class FauneTerre {
     private final java.util.Map<EntityType<?>, Entree> conditions;
 
     private final java.util.Set<EntityType<?>> types;
+
+    private final java.util.Set<EntityType<?>> verifiees;
+
+    /** Bête dont l'arrivée dans le monde passe par nos règles (table de surface et bêtes de contrôle). */
+    public boolean verifiee(EntityType<?> type) {
+        return verifiees.contains(type);
+    }
 
     /** Bête de la table de surface (animaux, poissons, insectes) : c'est la table qui décide où et combien. */
     public boolean dansLaTable(EntityType<?> type) {
@@ -142,7 +155,7 @@ public final class FauneTerre {
         JsonArray pr = racine.getAsJsonArray("precises");
         int[] bp = new int[pr.size()];
         for (int i = 0; i < bp.length; i++) bp[i] = pr.get(i).getAsJsonObject().get("biome").getAsInt();
-        List<Entree> surface = new ArrayList<>(), souterrain = new ArrayList<>();
+        List<Entree> surface = new ArrayList<>(), souterrain = new ArrayList<>(), controle = new ArrayList<>();
         int absents = 0;
         for (JsonElement el : racine.getAsJsonArray("especes")) {
             JsonObject o = el.getAsJsonObject();
@@ -216,11 +229,14 @@ public final class FauneTerre {
                     o.get("eau").getAsBoolean(), o.get("cote").getAsBoolean(), temps, bandes, mer,
                     o.get("nuit").getAsBoolean(), etage, d, generationSeule, biomeJeu, altitudeMin, tirage, monstreSurface,
                     sousTerre, noir, sol, pluie);
-            (etage == null ? surface : souterrain).add(en);
+            // contrôle seulement (12/11/2026) : bêtes nées par leur propre mod (mer d'Untamed Wilds), jamais par la table,
+            // mais gardées seulement là où nos règles les permettent
+            if (o.has("controle") && o.get("controle").getAsBoolean()) controle.add(en);
+            else (etage == null ? surface : souterrain).add(en);
         }
         DomaineTerre.LOGGER.info("Faune de la Terre : {} espèces en surface, {} sous terre ({} absentes du pack), {} ms",
                 surface.size(), souterrain.size(), absents, System.currentTimeMillis() - t0);
-        return new FauneTerre(z, bp, surface, souterrain);
+        return new FauneTerre(z, bp, surface, souterrain, controle);
     }
 
     private static int indice(String[] t, String s) {
@@ -470,7 +486,7 @@ public final class FauneTerre {
         }
         boolean vue = false;
         Boolean eau = null;
-        for (Entree e : surface) {
+        for (Entree e : (Iterable<Entree>) java.util.stream.Stream.concat(surface.stream(), controle.stream())::iterator) {
             if (e.donnees().type != type) continue;
             vue = true;
             if (merBiome) {
