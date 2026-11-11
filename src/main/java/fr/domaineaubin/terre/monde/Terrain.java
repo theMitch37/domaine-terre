@@ -176,6 +176,18 @@ public final class Terrain {
                 inter = Math.min(inter, Math.max(0.0, r.distance() - r.demiLargeur() - BERGE_RIVIERE));
             if (h != hAvant) hl += (h - hAvant) * (1.0 - Mth.clamp(inter / RACCORD_FIN, 0.0, 1.0));
             h = hl;
+            // (12/11/2026, banc Mer de Glace : le Rhône à Martigny et la Doire baltée passaient dans la loupe du
+            // Mont-Blanc en tranchée de 100 blocs de haut, droite) : en s'approchant d'un cours d'eau du mod, le terrain
+            // du lieu descend en vallée vers lui (pente 2 au bord de la berge, plus raide en s'éloignant)
+            boolean creusee = false;
+            if (r != null && !lieu.gereSesCoursDEau()) {
+                double dv = Math.max(0.0, r.distance() - r.demiLargeur() - BERGE_RIVIERE);
+                double plafond = r.eau() + 1.0 + 2.0 * dv + 0.05 * dv * dv;
+                if (h > plafond) {
+                    h = plafond;
+                    creusee = true;
+                }
+            }
             poids = Mth.clamp(lieu.poids(x, z), 0.0, 1.0);
             // un lieu sculpté (Grand Canyon, Verdon) gère l'eau de son cours d'eau lui-même (niveau de la mer)
             eauRiv = SANS_LAC;
@@ -187,6 +199,8 @@ public final class Terrain {
             eauLac = SANS_LAC;
             // lot 2 : eau propre au lieu (torrents, lacs, cascades en altitude), posée comme un lit par FleuveFeature
             int el = lieu.eau(x, z);
+            // l'eau du lieu ne reste pas suspendue au-dessus de la vallée creusée
+            if (creusee && el != SANS_LAC && el > h + 1.0) el = SANS_LAC;
             if (el != SANS_LAC) {
                 eauRiv = el;
                 litRiv = el;
