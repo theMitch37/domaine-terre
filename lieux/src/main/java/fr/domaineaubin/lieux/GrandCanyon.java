@@ -117,7 +117,9 @@ public final class GrandCanyon implements LieuSculpte {
             double wb = demiLargeur();
             double b = bruitButtes.noise(x / (wb * 0.45), 7.0, z / (wb * 0.45));
             if (b > 0.25) {
-                double sb = Mth.clamp((b - 0.25) / 0.15, 0.0, 1.0);
+                // 11/11/2026 (banc : aiguilles d'un bloc de large, hautes comme les buttes, au sommet des petites taches
+                // du bruit) : seules les grandes taches montent jusqu'au Supai ; les petites restent des tertres
+                double sb = Mth.clamp((b - 0.25) / 0.35, 0.0, 1.0);
                 double gt = SOMMET_COUCHE[3] + (1.0 - sb) * (g - SOMMET_COUCHE[3]);
                 g = Math.min(g, gradin(gt));
             }
@@ -209,7 +211,9 @@ public final class GrandCanyon implements LieuSculpte {
             y = Math.min(plafond, coupe(pt));
         }
         // le Colorado (~6 blocs de large) et les lacs (Mead, Mohave, Powell) au niveau du fleuve
-        double lit = Math.max(1.0 - lisse((pt.distBlocs() - 2.5) / 1.5), 1.0 - lisse((pt.e() - pt.r() - 6.0) / 20.0));
+        // lacs : là où le relief réel est à leur niveau (11/11/2026 : jusqu'à 26 m au-dessus, la plaine de la rivière
+        // était noyée aussi, « rivière trop large » à la sortie du canyon)
+        double lit = Math.max(1.0 - lisse((pt.distBlocs() - 2.5) / 1.5), 1.0 - lisse((pt.e() - pt.r() - 3.0) / 8.0));
         y = Mth.lerp(lit, y, FOND);
         return Mth.lerp(pt.fondu(), h, y);
     }
