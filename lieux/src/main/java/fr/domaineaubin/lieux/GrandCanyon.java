@@ -252,7 +252,8 @@ public final class GrandCanyon implements LieuSculpte {
      */
     private static int niveauSortie(Point pt) {
         if (Double.isNaN(pt.r()) || pt.fondu() >= 0.999) return NIVEAU_COLORADO;
-        int reel = Math.max(Terrain.niveauLac(pt.r()), Terrain.NIVEAU_MER);
+        // jamais sous le lac Mead (69) : le niveau réel du fleuve au bord de la zone (67) faisait un creux avant le lac
+        int reel = Math.max(Terrain.niveauLac(pt.r()), NIVEAU_COLORADO - 2);
         return (int) Math.round(Mth.lerp(pt.fondu(), reel, NIVEAU_COLORADO));
     }
 
