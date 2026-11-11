@@ -77,7 +77,10 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
         for (int dx = 0; dx < 16; dx++) {
             for (int dz = 0; dz < 16; dz++) {
                 int x = x0 + dx, z = z0 + dz;
-                if (!t.enMer(x, z) || t.eauLit(x, z) != Terrain.SANS_LAC) continue;
+                if (t.eauLit(x, z) != Terrain.SANS_LAC) continue;
+                // aussi les creux de la côte sous le niveau de la mer (11/11/2026, banc : vase à sec dans les deltas du
+                // Mékong et du Niger, 1 à 3 blocs sous la mer à côté d'elle) ; seulement à moins de ~20 blocs de la côte
+                if (!t.enMer(x, z) && t.distanceCote(x, z) > 2.5) continue;
                 for (int y = Terrain.NIVEAU_MER - 1; y >= Terrain.NIVEAU_MER - 64; y--) {
                     BlockState b = niveau.getBlockState(pos.set(x, y, z));
                     if (!b.isAir()) break;
