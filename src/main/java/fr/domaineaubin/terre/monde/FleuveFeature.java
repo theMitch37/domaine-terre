@@ -72,6 +72,7 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
                 }
             }
         }
+        modifie |= pentes(niveau, t, x0, z0, pos);
         // mer à sec (11/11/2026, banc : estuaires de l'Indus et de la Gambie, centaines de colonnes de vase ou de sable à
         // l'air sous le niveau de la mer) : l'aquifère tire l'eau de cellules espacées de 16 blocs ; quand la cellule
         // tombe dans le lit d'un cours d'eau (sans aquifère), les pixels de mer voisins restaient secs. La mer est
@@ -103,6 +104,79 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
                     continue;
                 if (!niveau.getBlockState(pos.set(x, y + 1, z)).is(Blocks.WATER)) continue;
                 niveau.setBlock(pos.set(x, y, z), fond(t, x, z), 2);
+                modifie = true;
+            }
+        }
+        return modifie;
+    }
+
+    /**
+     * Pentes d'eau au pied des marches (11/11/2026, test en jeu sur le Danube : « que les niveaux d'eau restent en
+     * diagonale plutôt que de s'égaliser en gros carrés ») : le niveau d'un cours d'eau baisse d'un bloc d'un coup, ce
+     * qui fait deux grandes plaques plates séparées par une ligne droite. Sur le bief du dessous, une nappe d'eau qui coule
+     * descend depuis la marche sur 7 blocs, exactement comme le jeu la ferait couler (quantité 7 contre la marche, puis
+     * un de moins par bloc) : la surface descend en pente et reste stable quand l'eau est mise à jour.
+     */
+    private static boolean pentes(WorldGenLevel niveau, Terrain t, int x0, int z0, BlockPos.MutableBlockPos pos) {
+        final int M = 7, N = 16 + 2 * M;
+        int[] w = new int[N * N];
+        boolean marche = false;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                int v = t.eauLit(x0 - M + i, z0 - M + j);
+                w[i * N + j] = v;
+                if (v != Terrain.SANS_LAC && !marche && i > 0) {
+                    int u = w[(i - 1) * N + j];
+                    if (u != Terrain.SANS_LAC && Math.abs(u - v) == 1) marche = true;
+                }
+                if (v != Terrain.SANS_LAC && !marche && j > 0) {
+                    int u = w[i * N + j - 1];
+                    if (u != Terrain.SANS_LAC && Math.abs(u - v) == 1) marche = true;
+                }
+            }
+        }
+        if (!marche) return false;
+        // distance (pas de 4 voisins, comme l'eau qui coule) à une colonne du lit plus haute d'un bloc, sur le même bief
+        int[] d = new int[N * N];
+        java.util.Arrays.fill(d, Integer.MAX_VALUE);
+        java.util.ArrayDeque<Integer> file = new java.util.ArrayDeque<>();
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                int v = w[i * N + j];
+                if (v == Terrain.SANS_LAC) continue;
+                for (int k = 0; k < 4; k++) {
+                    int ii = i + (k == 0 ? 1 : k == 1 ? -1 : 0), jj = j + (k == 2 ? 1 : k == 3 ? -1 : 0);
+                    if (ii < 0 || jj < 0 || ii >= N || jj >= N) continue;
+                    if (w[ii * N + jj] == v + 1) {
+                        d[i * N + j] = 1;
+                        file.add(i * N + j);
+                        break;
+                    }
+                }
+            }
+        }
+        while (!file.isEmpty()) {
+            int c = file.poll(), i = c / N, j = c % N;
+            if (d[c] >= M) continue;
+            for (int k = 0; k < 4; k++) {
+                int ii = i + (k == 0 ? 1 : k == 1 ? -1 : 0), jj = j + (k == 2 ? 1 : k == 3 ? -1 : 0);
+                if (ii < 0 || jj < 0 || ii >= N || jj >= N) continue;
+                int e = ii * N + jj;
+                if (w[e] != w[c] || d[e] <= d[c] + 1) continue;
+                d[e] = d[c] + 1;
+                file.add(e);
+            }
+        }
+        boolean modifie = false;
+        for (int dx = 0; dx < 16; dx++) {
+            for (int dz = 0; dz < 16; dz++) {
+                int c = (dx + M) * N + dz + M;
+                if (d[c] > M) continue;
+                int v = w[c];
+                // la nappe se pose sur l'eau du bief (surface en v - 1), dans l'air juste au-dessus
+                if (!niveau.getBlockState(pos.set(x0 + dx, v - 1, z0 + dz)).is(Blocks.WATER)) continue;
+                if (!niveau.getBlockState(pos.set(x0 + dx, v, z0 + dz)).isAir()) continue;
+                niveau.setBlock(pos, Fluids.FLOWING_WATER.getFlowing(8 - d[c], false).createLegacyBlock(), 2);
                 modifie = true;
             }
         }
