@@ -400,12 +400,16 @@ def jokulsarlon():
     ecart = np.where(terre, L.h - y, 0.0)
     poids_ = ndimage.gaussian_filter(terre.astype(float), 25) + 1e-6
     D = ndimage.gaussian_filter(ecart, 25) / poids_
-    y = np.where(terre, y + np.maximum(D, 0) * lisse(np.clip((dW0 - 3) / 45, 0, 1)), y)
+    # 11/11/2026 : le relevé ne dépasse jamais le terrain du mod (ni le terrain d'avant) : lissé sur 25 blocs, il
+    # débordait dans la bande de raccord, où le lieu rejoint déjà le mod, et y faisait une crête de 4 à 10 blocs le
+    # long des bords de la zone (un cadre rectangulaire autour du lieu)
+    y = np.where(terre, np.minimum(y + np.maximum(D, 0) * lisse(np.clip((dW0 - 3) / 45, 0, 1)), np.maximum(y, L.h)), y)
     # au large, le fond de la mer du mod (pas de cuvette rectangulaire plus profonde que lui)
     au_large = F & (ndimage.distance_transform_edt(L.sd >= 0) <= 15)
     dRive = ndimage.distance_transform_edt(F)
     fond_cote = np.minimum(61.9 - 0.35 * dRive, np.where(L.sd < 0, np.maximum(L.h, 40.0), 61.9))
-    y = np.where(au_large, np.maximum(y, np.minimum(fond_cote, 61.9)), y)
+    # (11/11/2026 : effacé vers le bord de la zone ; il y faisait une marche de 18 blocs sous la mer)
+    y = np.where(au_large, y + (np.maximum(y, np.minimum(fond_cote, 61.9)) - y) * a, y)
     # lagune / mer : la lagune est l'eau du lieu qui n'est pas la mer du mod au large
     dIn = ndimage.distance_transform_edt(F)
     lagune = F & (L.sd >= 0)
@@ -413,10 +417,17 @@ def jokulsarlon():
     G = (C == 70) & ~F
     # 08/11/2026 : le glacier s'arrêtait net au bord du lieu (mur de glace face au terrain du mod) ; il finit
     # maintenant en bordure irrégulière, 30 à 55 blocs avant le bord de la zone, sur sa moraine
-    G &= L.de > 42.0 + 12.0 * bruit(X, Z, 9, 1305)
-    G = ndimage.binary_opening(G, iterations=1)
+    # 11/11/2026 (« glacier carré ») : cette bordure suivait le bord de la zone à 42-54 blocs, donc en lignes droites
+    # parallèles à ses côtés. Elle ondule maintenant fort (lobes de 20 à 80 blocs) et ses coins sont arrondis.
+    G &= L.de > 40.0 + 22.0 * (0.5 + 0.5 * bruit(X, Z, 22, 1305)) + 5.0 * bruit(X, Z, 7, 1307)
+    G = ndimage.binary_opening(G, iterations=4)
     dW = ndimage.distance_transform_edt(~F)
-    y = np.where(G, np.maximum(y, 69.0 + 1.5 * bruit(X, Z, 5, 1301) + 0.12 * np.maximum(dW - 1, 0)), y)
+    # 11/11/2026 (« glacier carré » : plateau de glace aux flancs verticaux) : la glace s'amincit vers ses bords sur
+    # terre (langue bombée qui se pose sur sa moraine) ; seul le front dans la lagune reste une falaise
+    dBord = ndimage.distance_transform_edt(G | (F & (dW <= 2)))
+    amincit = lisse(np.clip((dBord - 1) / 14.0, 0, 1))
+    surface = 69.0 + 1.5 * bruit(X, Z, 5, 1301) + 0.12 * np.maximum(dW - 1, 0)
+    y = np.where(G, y + np.maximum(surface - y, 0) * amincit, y)
     y, crev, serac = glacier_vivant(X, Z, y, G, graine=1300, profondeur=2.0, pas_crev=5.0)
     # icebergs : blocs de glace dans la lagune (plus gros près du front), quelques-uns échoués sur la plage
     rng = np.random.default_rng(1302)

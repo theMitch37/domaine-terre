@@ -80,22 +80,25 @@ def verifier_eau(nom, y, eau, chutes_ok=True):
     return fuites
 
 
-def retenir(y, eau, iterations=3):
-    """Relève les voisines sans eau trop basses (bord d'un bassin) pour qu'elles retiennent l'eau."""
+def retenir(y, eau, iterations=3, mer=None):
+    """Relève les voisines sans eau trop basses (bord d'un bassin) pour qu'elles retiennent l'eau. `mer` : colonnes
+    que la mer du mod remplit de toute façon (pas relevées : 11/11/2026, Jökulsárlón, une digue à fleur d'eau le long
+    du bord de la zone, là où l'eau du lieu s'arrête et la mer du mod prend le relais)."""
     w = np.isfinite(eau)
+    libre = ~w if mer is None else ~w & ~mer
     for _ in range(iterations):
         besoin = np.full(y.shape, -np.inf)
         for dj, di in ((0, 1), (0, -1), (1, 0), (-1, 0)):
             ev = np.roll(np.roll(np.where(w, eau, -np.inf), dj, 0), di, 1)
             besoin = np.maximum(besoin, ev - 0.5)
-        y = np.where(~w & (y < besoin), besoin + 0.05, y)
+        y = np.where(libre & (y < besoin), besoin + 0.05, y)
     # rapides : l'eau d'un bief qui coule sur le bief suivant (marche de 1 à 3 blocs) s'étale jusqu'à 7 blocs en aval,
     # au niveau du bief d'amont ; les rives proches d'une marche sont donc tenues à ce niveau (sinon l'eau déborde)
     from scipy import ndimage
     E = np.where(w, eau, -np.inf)
     amont = ndimage.maximum_filter(E, size=15)
     propre = ndimage.minimum_filter(np.where(w, eau, np.inf), size=3)     # bief le plus bas qui touche la rive
-    rive = ~w & np.isfinite(propre)
+    rive = libre & np.isfinite(propre)
     marche = rive & (amont > propre) & (amont - propre <= 3)
     y = np.where(marche & (y < amont - 0.5), amont - 0.45, y)
     return y
@@ -175,7 +178,7 @@ def ecrire(nom, X, Z, y, h, sommet, typ, sd, eau, palette, marge=10, garder_fleu
         sommet = np.where(rel, np.maximum(sommet, y), sommet)
         typ = np.where(rel & (typ == 0), PLATEAU | TAILLEE, typ)
         print(f"  talus derrière les murs fins : {int(rel.sum())} colonnes relevées")
-    y = retenir(y, eau)
+    y = retenir(y, eau, mer=sd < 0)
     verifier_eau(nom, y, eau)
     typ, actif = en_tuiles(nom, X, Z, y, h, sommet, typ, sd, marge=marge, eau=eau, garder_fleuves=garder_fleuves,
                            vox=vox)
