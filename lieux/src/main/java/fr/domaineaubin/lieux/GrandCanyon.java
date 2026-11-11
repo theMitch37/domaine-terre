@@ -231,6 +231,8 @@ public final class GrandCanyon implements LieuSculpte {
         y = Math.max(Mth.lerp(lit, y, niv - 3.0), Mth.lerp(lit, niv + 0.5, niv - 3.0));
         y = Mth.lerp(pt.fondu(), h, y);
         if (lit > 0.5 && !Double.isNaN(pt.r())) y = Math.min(y, niv - 2.0);
+        // berges : jamais sous l'eau du lit voisin (sinon de l'eau suspendue au bord du lac Powell)
+        else if (lit > 0.02 && !Double.isNaN(pt.r())) y = Math.max(y, niv + 0.5);
         return y;
     }
 
@@ -252,16 +254,23 @@ public final class GrandCanyon implements LieuSculpte {
      */
     private static int niveauSortie(Point pt) {
         if (Double.isNaN(pt.r()) || pt.fondu() >= 0.999) return NIVEAU_COLORADO;
-        // jamais sous le lac Mead (69) : le niveau réel du fleuve au bord de la zone (67) faisait un creux avant le lac
-        int reel = Math.max(Terrain.niveauLac(pt.r()), NIVEAU_COLORADO - 2);
-        return (int) Math.round(Mth.lerp(pt.fondu(), reel, NIVEAU_COLORADO));
+        int reel = Terrain.niveauLac(pt.r());
+        // 12/11/2026 (test en jeu : « les deux sorties du canyon sont vraiment pas bonnes », plaques d'eau à plusieurs
+        // niveaux, fosses en marches). Aval (lac Mead, au niveau du canyon ou plus bas) : le fleuve reste au niveau du
+        // canyon, plat jusqu'au lac. Amont (lac Powell, bien plus haut) : idée de Maxime, un barrage naturel ; le lac
+        // garde son niveau jusqu'à un seuil rocheux puis le fleuve tombe d'un coup dans le canyon (grande cascade)
+        if (reel <= NIVEAU_COLORADO + 3) return NIVEAU_COLORADO;
+        return pt.fondu() < SEUIL_CASCADE ? reel : NIVEAU_COLORADO;
     }
 
+    /** Fondu du bord où le lac Powell tombe dans le canyon (seuil du barrage naturel). */
+    private static final double SEUIL_CASCADE = 0.55;
+
     /**
-     * Niveau du Colorado dans le canyon (y de la première couche d'air) : 2 blocs au-dessus du lac Mead du mod (69), pour
-     * que le fleuve descende vers lui à la sortie ; à l'amont, il descend du lac Powell (plus haut) dans le canyon.
+     * Niveau du Colorado dans le canyon (y de la première couche d'air) : celui du lac Mead du mod (69), plat jusqu'à lui ;
+     * à l'amont, le lac Powell (plus haut) tombe dans le canyon en cascade.
      */
-    static final int NIVEAU_COLORADO = 71;
+    static final int NIVEAU_COLORADO = 69;
 
     /**
      * 11/11/2026 (banc, sortie du canyon : seuil de sable sec entre le Colorado, au niveau de la mer dans le canyon, et le
