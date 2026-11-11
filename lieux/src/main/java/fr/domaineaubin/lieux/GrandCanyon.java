@@ -213,9 +213,42 @@ public final class GrandCanyon implements LieuSculpte {
         // le Colorado (~6 blocs de large) et les lacs (Mead, Mohave, Powell) au niveau du fleuve
         // lacs : là où le relief réel est à leur niveau (11/11/2026 : jusqu'à 26 m au-dessus, la plaine de la rivière
         // était noyée aussi, « rivière trop large » à la sortie du canyon)
-        double lit = Math.max(1.0 - lisse((pt.distBlocs() - 2.5) / 1.5), 1.0 - lisse((pt.e() - pt.r() - 3.0) / 8.0));
+        double lit = lit(pt);
         y = Mth.lerp(lit, y, FOND);
-        return Mth.lerp(pt.fondu(), h, y);
+        y = Mth.lerp(pt.fondu(), h, y);
+        // au bord de la zone, le lit reste creusé sous l'eau qui y monte par paliers (voir eau)
+        if (sortie(pt)) y = Math.min(y, niveauSortie(pt) - 2.0);
+        return y;
+    }
+
+    private static double lit(Point pt) {
+        return Math.max(1.0 - lisse((pt.distBlocs() - 2.5) / 1.5), 1.0 - lisse((pt.e() - pt.r() - 3.0) / 8.0));
+    }
+
+    /** Lit du fleuve ou d'un lac dans le fondu du bord de la zone. */
+    private static boolean sortie(Point pt) {
+        return pt.fondu() < 0.999 && lit(pt) > 0.5 && !Double.isNaN(pt.r());
+    }
+
+    /**
+     * Niveau de l'eau (y de la première couche d'air) dans le fondu du bord : de celui du canyon (la mer) à celui du
+     * fleuve réel, que prennent les lacs du mod hors de la zone (lac Mead, lac Powell).
+     */
+    private static int niveauSortie(Point pt) {
+        int reel = Math.max(Terrain.niveauLac(pt.r()), Terrain.NIVEAU_MER);
+        return (int) Math.round(Mth.lerp(pt.fondu(), reel, Terrain.NIVEAU_MER));
+    }
+
+    /**
+     * 11/11/2026 (banc, sortie du canyon : seuil de sable sec entre le Colorado, au niveau de la mer dans le canyon, et le
+     * lac Mead du mod, 7 blocs plus haut à son altitude réelle) : dans le fondu du bord, l'eau du lit monte par paliers
+     * d'un bloc jusqu'au niveau du lac ; posée comme un torrent, chaque marche coule (rapides).
+     */
+    @Override
+    public int eau(int x, int z) {
+        if (!concerne(x, z)) return Integer.MIN_VALUE;
+        Point pt = point(x, z);
+        return sortie(pt) ? niveauSortie(pt) : Integer.MIN_VALUE;
     }
 
     @Override
