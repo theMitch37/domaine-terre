@@ -45,7 +45,6 @@ jobs:
             # lu directement dans le zip (GDAL /vsizip/) : pas de décompression sur le disque
             cd $GITHUB_WORKSPACE
             python outils/fleuves_hydro.py /tmp/hydro/ra.zip
-            python outils/fleuves_mer.py
           } > /tmp/journal.txt 2>&1 || echo "ÉCHEC" >> /tmp/journal.txt
           cp /tmp/journal.txt outils/donnees/fleuves_hydro.log; cat outils/donnees/fleuves_hydro.log
       - name: Ajout à la branche
@@ -53,10 +52,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
           git add -f outils/donnees/fleuves_hydro.log
-          [ -f outils/donnees/fleuves_hydro.json ] && git add -f outils/donnees/fleuves_hydro.json src/main/resources/domaine_terre/carte/fleuves.json
+          [ -f outils/donnees/fleuves_hydro.json ] && git add -f outils/donnees/fleuves_hydro.json
           git commit -m "Embouchures réelles HydroRIVERS (automatique)" || exit 0
           for i in 1 2 3; do
             git fetch origin "${GITHUB_REF_NAME}" && git rebase "origin/${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
             sleep 10
           done
-# déclenché le 10/11/2026 (6 : tri par fid)
+# déclenché le 10/11/2026 (6 : tri par fid) ; 11/11 : arrêt en mer, fleuves.json posé par fleuves_hydro_appliquer.py

@@ -25,7 +25,7 @@ INDEX = os.path.join(ICI, "../lieux/src/main/resources/domaine_terre_lieux/tuile
 B = T.BPD
 MPB = 60.0 / B
 RAYON = 0.05                      # degrés (~5 km) pour trouver le tronçon HydroRIVERS
-LONG_MAX = 400.0                  # km
+LONG_MAX = 1200.0                 # km (jusqu'à la mer)
 SIMPLE = 2.0 / B                  # tolérance de simplification (2 blocs)
 
 t0 = time.time()
@@ -126,6 +126,11 @@ for k, fin, lo, la, d0 in bouts:
             premier = False
         chemin.extend(xy.tolist())
         longueur += float(np.hypot(*np.diff(xy, axis=0).T).sum()) * 111.0
+        # 11/11/2026 (banc, Saint-Laurent coupé à Cornwall : 147 cours d'eau « trop longs ») : arrivé en mer franche,
+        # on s'arrête là ; la longueur ne compte que jusqu'à la mer
+        fx, fz = xy[-1, 0] * B, -xy[-1, 1] * B
+        if float(T.distance_cote(np.array([fx]), np.array([fz]))[0]) / MPB < -6:
+            break
         if longueur > LONG_MAX:
             ok = False
             rapport["trop long"] += 1
@@ -160,15 +165,8 @@ for k, fin, lo, la, d0 in bouts:
         continue
     plat = [round(float(v), 4) for q in xy for v in q]
     ajouts[k] = {"fin": fin, "p": plat, "nom": t[k]["n"]}
-    o = t[k]
-    if fin:
-        o["p"] = o["p"] + plat
-    else:
-        rev = [round(float(v), 4) for q in xy[::-1] for v in q]
-        o["p"] = rev + o["p"]
     rapport["ok"] += 1
 
 os.makedirs(os.path.dirname(SORTIE), exist_ok=True)
 json.dump(ajouts, open(SORTIE, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
-json.dump(t, open(F, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 print("bilan :", rapport, f"({time.time() - t0:.0f} s)")
