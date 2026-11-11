@@ -225,6 +225,9 @@ public final class FauneSpawns {
     /** Marque des bêtes déjà passées par nos règles (ou nées d'un joueur : œuf, commande, élevage). */
     private static final String VERIFIEE = "domaine_terre_verifiee";
 
+    /** Vrai pendant l'entrée des bêtes nées à la génération d'un chunk (EntitesGenerationMixin). */
+    public static final ThreadLocal<Boolean> GENERATION = ThreadLocal.withInitial(() -> Boolean.FALSE);
+
     /**
      * Bêtes nées par un autre système que les listes (11/11/2026, test en jeu : hippopotames d'Untamed Wilds en plein
      * Sahara, à 800 blocs du Nil ; grand requin dans un estuaire) : Untamed Wilds fait naître les siennes par ses propres
@@ -234,9 +237,6 @@ public final class FauneSpawns {
      * jamais retirées ; les bêtes nommées ou apprivoisées non plus.
      */
     @SubscribeEvent(priority = EventPriority.HIGH)
-    /** Vrai pendant l'entrée des bêtes nées à la génération d'un chunk (EntitesGenerationMixin). */
-    public static final ThreadLocal<Boolean> GENERATION = ThreadLocal.withInitial(() -> Boolean.FALSE);
-
     public static void arrivee(EntityJoinLevelEvent event) {
         if (!(event.getEntity() instanceof Mob m) || !(event.getLevel() instanceof ServerLevel n)) return;
         FauneTerre f = FauneTerre.get();
