@@ -25,6 +25,8 @@ public class DomaineLieux {
             FEATURES.register("strates", () -> new StratesFeature(NoneFeatureConfiguration.CODEC));
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> GROTTES =
             FEATURES.register("grottes", () -> new GrottesFeature(NoneFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<NoneFeatureConfiguration>> ABORDS =
+            FEATURES.register("abords", () -> new AbordsFeature(NoneFeatureConfiguration.CODEC));
 
     public DomaineLieux() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();

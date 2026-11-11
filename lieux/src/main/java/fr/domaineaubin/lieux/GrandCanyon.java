@@ -287,6 +287,33 @@ public final class GrandCanyon implements LieuSculpte {
         return dansCanyon(pt, x, z) ? yRebord(pt) : Double.NaN;
     }
 
+    /**
+     * Transition du canyon au désert (11/11/2026, Maxime : « une transition plus douce entre la mesa et le désert ») :
+     * autour des parois, la surface passe par taches de la terre cuite en bandes (comme les parois) au sable rouge, puis
+     * au sable du désert, sur environ une demi-largeur du canyon. Pareil au bord de la zone, où le canyon s'efface.
+     */
+    @Override
+    public BlockState abords(int x, int y, int z) {
+        if (!concerne(x, z)) return null;
+        Point pt = point(x, z);
+        if (Double.isNaN(pt.t()) || dansCanyon(pt, x, z)) return null;
+        // proche du canyon (t juste au-delà du rebord) ou du canyon qui s'efface au bord de la zone
+        double q = (1.0 - lisse(Mth.clamp((pt.t() - 1.0) / 0.7, 0.0, 1.0))) * lisse(Mth.clamp(pt.fondu() / 0.5, 0.0, 1.0));
+        if (q <= 0.0) return null;
+        double n = 0.5 + 0.35 * bruit.noise(x / 17.0, 11.0, z / 17.0) + 0.15 * bruit.noise(x / 5.0, 13.0, z / 5.0);
+        if (n > q) return null;
+        if (n > q * 0.55) return Blocks.RED_SAND.defaultBlockState();
+        // bandes de terre cuite, ondulées comme les couches des parois
+        int bande = Math.floorMod((int) Math.floor((y + 3.0 * bruit.noise(x / 40.0, 15.0, z / 40.0)) / 3.0), 5);
+        return switch (bande) {
+            case 0 -> Blocks.ORANGE_TERRACOTTA.defaultBlockState();
+            case 1 -> Blocks.TERRACOTTA.defaultBlockState();
+            case 2 -> Blocks.RED_TERRACOTTA.defaultBlockState();
+            case 3 -> Blocks.WHITE_TERRACOTTA.defaultBlockState();
+            default -> Blocks.ORANGE_TERRACOTTA.defaultBlockState();
+        };
+    }
+
     /** Fraction de profondeur (0 = rebord, 1 = fleuve) d'un bloc à la hauteur y. */
     public static double fraction(double y, double rebord) {
         return Mth.clamp((rebord - y) / (rebord - PIED), 0.0, 1.0);

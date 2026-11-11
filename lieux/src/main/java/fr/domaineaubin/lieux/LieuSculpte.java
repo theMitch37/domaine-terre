@@ -47,6 +47,14 @@ public interface LieuSculpte extends Lieu {
     }
 
     /**
+     * Abords (hors des parois) : bloc de surface de cette colonne à la hauteur y, pour une transition vers le terrain
+     * autour (Grand Canyon : taches de terre cuite et de sable rouge vers le désert), ou null pour garder le sol.
+     */
+    default BlockState abords(int x, int y, int z) {
+        return null;
+    }
+
+    /**
      * Garder ce bloc de terre (herbe, terre) au lieu de le recolorer ?
      * @param taillee la colonne a-t-elle été taillée par la sculpture
      * @param sommet  y du dessus de la colonne
