@@ -223,11 +223,14 @@ public final class GrandCanyon implements LieuSculpte {
         // le Colorado (~6 blocs de large) et les lacs (Mead, Mohave, Powell) au niveau du fleuve
         // lacs : là où le relief réel est à leur niveau (11/11/2026 : jusqu'à 26 m au-dessus, la plaine de la rivière
         // était noyée aussi, « rivière trop large » à la sortie du canyon)
+        // 11/11/2026 (test en jeu : « le fleuve remonte à la sortie du canyon ») : le Colorado coule à NIVEAU_COLORADO,
+        // au-dessus du lac Mead du mod (et non plus au niveau de la mer, 7 blocs sous le lac) ; le fond du canyon remonte
+        // d'autant, ses berges restent hors de l'eau
         double lit = lit(pt);
-        y = Mth.lerp(lit, y, FOND);
+        double niv = niveauSortie(pt);
+        y = Math.max(Mth.lerp(lit, y, niv - 3.0), Mth.lerp(lit, niv + 0.5, niv - 3.0));
         y = Mth.lerp(pt.fondu(), h, y);
-        // au bord de la zone, le lit reste creusé sous l'eau qui y monte par paliers (voir eau)
-        if (sortie(pt)) y = Math.min(y, niveauSortie(pt) - 2.0);
+        if (lit > 0.5 && !Double.isNaN(pt.r())) y = Math.min(y, niv - 2.0);
         return y;
     }
 
@@ -245,9 +248,16 @@ public final class GrandCanyon implements LieuSculpte {
      * fleuve réel, que prennent les lacs du mod hors de la zone (lac Mead, lac Powell).
      */
     private static int niveauSortie(Point pt) {
+        if (Double.isNaN(pt.r()) || pt.fondu() >= 0.999) return NIVEAU_COLORADO;
         int reel = Math.max(Terrain.niveauLac(pt.r()), Terrain.NIVEAU_MER);
-        return (int) Math.round(Mth.lerp(pt.fondu(), reel, Terrain.NIVEAU_MER));
+        return (int) Math.round(Mth.lerp(pt.fondu(), reel, NIVEAU_COLORADO));
     }
+
+    /**
+     * Niveau du Colorado dans le canyon (y de la première couche d'air) : 2 blocs au-dessus du lac Mead du mod (69), pour
+     * que le fleuve descende vers lui à la sortie ; à l'amont, il descend du lac Powell (plus haut) dans le canyon.
+     */
+    static final int NIVEAU_COLORADO = 71;
 
     /**
      * 11/11/2026 (banc, sortie du canyon : seuil de sable sec entre le Colorado, au niveau de la mer dans le canyon, et le
@@ -258,7 +268,7 @@ public final class GrandCanyon implements LieuSculpte {
     public int eau(int x, int z) {
         if (!concerne(x, z)) return Integer.MIN_VALUE;
         Point pt = point(x, z);
-        return sortie(pt) ? niveauSortie(pt) : Integer.MIN_VALUE;
+        return lit(pt) > 0.5 && !Double.isNaN(pt.r()) ? niveauSortie(pt) : Integer.MIN_VALUE;
     }
 
     @Override
