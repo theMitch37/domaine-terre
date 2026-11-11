@@ -132,7 +132,11 @@ public final class Terrain {
                 eauLac = niv;
             } else {
                 // le lit et la berge d'un cours d'eau gardent leur forme (à niveau du lac) : la berge du lac ne les comble pas
-                boolean litOuBerge = r != null && r.distance() <= r.demiLargeur() + BERGE_RIVIERE;
+                // 11/11/2026 (test en jeu, Valais : lac de montagne à y 174 au bord de la vallée du Rhône à y 80, son eau
+                // pendait en mur de 70 blocs) : la berge d'un cours d'eau bien plus bas que le lac ne remplace pas le
+                // rebord du lac, qui retient son eau
+                boolean litOuBerge = r != null && r.distance() <= r.demiLargeur() + BERGE_RIVIERE
+                        && (r.eau() >= niv - 2 || r.distance() <= r.demiLargeur());
                 if (!litOuBerge) h = bergeLac(h, niv, -lp.distance());
                 if (-lp.distance() < BERGE && !litOuBerge) bergeLac = niv;
                 if (-lp.distance() <= BERGE) eauLac = niv;
@@ -148,7 +152,8 @@ public final class Terrain {
             double hAvant = calculerHauteur(x, z, sd, alt, pente, r, false, 0.0, 0.0);
             if (lp != null) {
                 if (lp.distance() > 0) hAvant = fondLac(nivLac, lp.distance(), lacs.superficie(lp.lac()));
-                else if (!(r != null && r.distance() <= r.demiLargeur() + BERGE_RIVIERE)) hAvant = bergeLac(hAvant, nivLac, -lp.distance());
+                else if (!(r != null && r.distance() <= r.demiLargeur() + BERGE_RIVIERE
+                        && (r.eau() >= nivLac - 2 || r.distance() <= r.demiLargeur()))) hAvant = bergeLac(hAvant, nivLac, -lp.distance());
             }
             double hl = lieu.hauteur(x, z, hAvant);
             // toutes les colonnes de la zone, sculptées ou non, gardent le terrain d'avant à l'intérieur (10/11/2026,
@@ -468,7 +473,9 @@ public final class Terrain {
     private int niveauFin(double x, double z) {
         double f = ReliefFin.altitudeFond(Mth.floor(x), Mth.floor(z));
         if (Double.isNaN(f)) return Integer.MIN_VALUE;
-        return Math.max(NIVEAU_MER, Mth.floor(blocsDepuisAltitude(Math.max(f, 1.0))));
+        // l'eau un bloc sous le sol du fond de vallée (11/11/2026, test en jeu, delta de l'Indus : un fond à 0 m donnait
+        // une eau un bloc au-dessus de la mer, mêlée à elle par taches à deux niveaux)
+        return Math.max(NIVEAU_MER, Mth.floor(blocsDepuisAltitude(Math.max(f, 1.0))) - 1);
     }
 
     /** Hauteur visée du sol sans les fleuves. */
@@ -493,6 +500,10 @@ public final class Terrain {
             if (!Double.isNaN(af)) {
                 double base = blocsDepuisAltitude(Math.max(alt, 1.0));
                 hTerre = base + (blocsDepuisAltitude(Math.max(af, 1.0)) - base) * ReliefFin.detail();
+                // 11/11/2026 (test en jeu, Sahara : longues marches de sable droites d'un bloc) : sur un terrain presque
+                // plat, chaque bloc de hauteur traçait une courbe de niveau lisse ; un léger bruit (moins d'un bloc) la
+                // fait onduler
+                hTerre += bruitDetail.noise(x / 11.0, 9, z / 11.0) * 0.55 + bruitDetail.noise(x / 4.5, 11, z / 4.5) * 0.3;
                 if (presRiv > 0.0 || presLac > 0.0) {
                     double ar = ReliefFin.altitude(x, z);
                     if (!Double.isNaN(ar)) {

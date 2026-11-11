@@ -235,7 +235,10 @@ public final class GrandCanyon implements LieuSculpte {
     }
 
     private static double lit(Point pt) {
-        return Math.max(1.0 - lisse((pt.distBlocs() - 2.5) / 1.5), 1.0 - lisse((pt.e() - pt.r() - 3.0) / 8.0));
+        // 11/11/2026 (test en jeu : fosses rectangulaires à fond de pierre sur le plateau, loin du fleuve) : un lac seulement
+        // à moins de ~60 blocs du Colorado ; plus loin, une case du relief réel au niveau du fleuve n'est pas un lac
+        double lac = (1.0 - lisse((pt.e() - pt.r() - 3.0) / 8.0)) * (1.0 - lisse((pt.distBlocs() - 50.0) / 25.0));
+        return Math.max(1.0 - lisse((pt.distBlocs() - 2.5) / 1.5), lac);
     }
 
     /** Lit du fleuve ou d'un lac dans le fondu du bord de la zone. */
