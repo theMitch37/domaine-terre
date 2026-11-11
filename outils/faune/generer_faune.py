@@ -175,6 +175,10 @@ for r in rows:
     if "mer" in toks or "large" in toks:
         if mer is None and ts:          # poisson de mer d'un terroir (morue de l'Atlantique…) : mers bordant ce terroir
             mer = {"temperatures": TEMPS, "bandes": BANDES}
+    # 12/11/2026 (Maxime : « des conditions d'apparition logiques pour toutes les bêtes ») : une bête du large seulement
+    # (baleines, requin-baleine, cachalot, orques du large…) ne naît jamais dans la bande côtière
+    if mer is not None and "large" in toks and "mer" not in toks and not cote:
+        mer = {"temperatures": mer["temperatures"], "bandes": [b for b in mer["bandes"] if b != "cote"] or ["large"]}
     if st == "garder" and "souterrain" in toks and not biomes:
         biomes = list(range(1, 15))     # chauve-souris : partout dans son aire, le jeu la met dans les grottes
     if not ts and zone.startswith(("toutes_les_côtes", "partout")):
