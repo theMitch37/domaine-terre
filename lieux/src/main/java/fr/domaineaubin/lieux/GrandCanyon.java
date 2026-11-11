@@ -162,7 +162,7 @@ public final class GrandCanyon implements LieuSculpte {
      */
     private boolean dansCanyon(Point pt, int x, int z) {
         if (pt.t() >= 1.1) return false;
-        double seuil = 0.3 + 0.18 * bruit.noise(x / 13.0, 5.0, z / 13.0) + 0.08 * bruit.noise(x / 4.0, 9.0, z / 4.0);
+        double seuil = 0.4 + 0.3 * bruit.noise(x / 13.0, 5.0, z / 13.0) + 0.1 * bruit.noise(x / 4.0, 9.0, z / 4.0);
         return pt.fondu() > seuil;
     }
 
@@ -300,10 +300,12 @@ public final class GrandCanyon implements LieuSculpte {
         // proche du canyon (t juste au-delà du rebord) ou du canyon qui s'efface au bord de la zone
         // (banc 11/11 : une bande orange de 15 blocs puis le sable d'un coup) dégradé sur 1,5 largeur de canyon, aussi
         // le long du fleuve là où le canyon s'efface au bord de la zone ; les taches s'éclaircissent par densité
-        double q = (1.0 - lisse(Mth.clamp((pt.t() - 1.0) / 1.5, 0.0, 1.0))) * lisse(Mth.clamp(pt.fondu() / 0.08, 0.0, 1.0));
+        // (banc : arrêt net au bord sud des données) s'efface aussi en approchant du bord de la zone
+        double q = (1.0 - lisse(Mth.clamp((pt.t() - 1.0) / 1.5, 0.0, 1.0))) * lisse(Mth.clamp(pt.fondu() / 0.9, 0.0, 1.0));
         if (q <= 0.0) return null;
-        long hc = (x * 341873128712L + z * 132897987541L) * 0x5DEECE66DL;
-        double grain = ((hc >>> 20) & 1023) / 1023.0;
+        // grain par colonne (graine de Mth.getSeed : sans motif en grille)
+        long hc = Mth.getSeed(x, 0, z);
+        double grain = ((hc >>> 16) & 1023) / 1023.0;
         double n = 0.5 + 0.3 * bruit.noise(x / 23.0, 11.0, z / 23.0) + 0.45 * (grain - 0.5);
         if (n > q) return null;
         if (n > q * 0.6) return Blocks.RED_SAND.defaultBlockState();
