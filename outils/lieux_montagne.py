@@ -500,7 +500,9 @@ def skogafoss():
     hf = 24.0 * (1 - lisse(np.clip((np.abs(dx) - 60) / 45, 0, 1)))    # s'abaisse vers les bouts
     bas = 66.6
     haut = bas + hf + 1.0 * bruit(X, Z, 17, 303) * lisse(np.clip((np.abs(dx) - 6) / 10, 0, 1))
-    plateau = np.maximum(h, haut)
+    # 11/11/2026 (« la falaise finit brusquement », plateau plat et rectangulaire derrière elle) : le plateau monte
+    # doucement vers l'intérieur (la Skógá y descend vers la falaise) et la fenêtre du lieu est une ellipse
+    plateau = np.maximum(h, haut + 0.08 * np.maximum(e, 0.0))
     plaine = np.where(mer, h, np.maximum(np.minimum(h, bas + 0.03 * np.maximum(dz, 0)), np.minimum(h, bas)))
     plaine = np.where(mer, h, np.maximum(plaine, np.minimum(bas, h + 2)))
     y = np.where(e > 0, plateau, plaine)
@@ -544,8 +546,9 @@ def skogafoss():
     # embouchure : le lit s'arrête au rivage, la mer prend le relais (même niveau)
     eau = np.where(mer, np.nan, eau)
     # raccord au terrain
-    w = (1 - lisse(np.clip((np.abs(dx) - 105) / 35, 0, 1))) * (1 - lisse(np.clip((-dz - 60) / 40, 0, 1)))
-    w = np.where(dz > 0, (1 - lisse(np.clip((np.abs(dx) - 50) / 30, 0, 1))) * (1 - lisse(np.clip((dz - 40) / 25, 0, 1))), w)
+    # fenêtre du lieu en ellipse (11/11/2026 : en rectangle, ses coins et ses côtés droits se voyaient)
+    r_el = np.hypot(dx / 120.0, np.where(dz > 0, dz / 55.0, dz / 85.0))
+    w = 1 - lisse(np.clip((r_el - 0.75) / 0.3, 0, 1))
     w = np.maximum(w, (1 - lisse(np.clip((d0 - 12) / 14, 0, 1))) * lisse(np.clip((s0 - 10) / 10, 0, 1)))
     w = np.maximum(w, 1 - lisse(np.clip((rl - 1) * 9 / 14, 0, 1)))
     w = np.where(mer, 0.0, w)
