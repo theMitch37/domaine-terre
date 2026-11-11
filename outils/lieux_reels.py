@@ -219,7 +219,7 @@ def classes_montagne(X, Z, y, E, neige=3000.0, glace=None, eboulis=(2300.0, 3300
     return typ
 
 
-def finir_loupe(nom, L, y, typ, eau, palette, roc=1.0, w_typ=None, garder_fleuves=True, vox=None):
+def finir_loupe(nom, L, y, typ, eau, palette, roc=1.0, w_typ=None, garder_fleuves=True, vox=None, biome=None):
     """Écriture d'un lieu à la loupe : y est déjà raccordé (relief réel -> terrain du mod) ; dernier fondu au bord
     et loin des vallées des cours d'eau du mod ; le sol redevient celui du mod vers le bord."""
     X, Z, h, sd = L.X, L.Z, L.h, L.sd
@@ -230,7 +230,8 @@ def finir_loupe(nom, L, y, typ, eau, palette, roc=1.0, w_typ=None, garder_fleuve
     pl = M.pente_locale(y)
     vers_mod = (w < 0.55 + 0.3 * bruit(X, Z, 7, 990)) & (pl <= roc) & ~np.isfinite(eau) & ((typ & 15) != FOND)
     typ = np.where(vers_mod, PRE | TAILLEE, typ)
-    typ = typ | BIOME
+    # biome : celui du lieu partout, ou seulement dans `biome` (le reste garde le biome du mod : neige, couleurs)
+    typ = typ | BIOME if biome is None else np.where(biome, typ | BIOME, typ)
     typ[(wy < 0.02) & ~np.isfinite(eau)] = 0
     sommet = y.copy()
     return M.ecrire(nom, X, Z, y, h, sommet, typ, sd, eau, palette, garder_fleuves=garder_fleuves, vox=vox)
@@ -473,7 +474,12 @@ def jokulsarlon():
     typ[ice] = GLACE | TAILLEE
     print(f"jokulsarlon : lagune {int(lagune.sum())} colonnes, glacier {int(G.sum())}, {n_ib} icebergs, "
           f"plage {int(plage.sum())}, sommets y {y.max():.0f}")
-    return finir_loupe("jokulsarlon", L, y, typ, eau, "ISLANDE", roc=1.4)
+    # 11/11/2026 (test en jeu : « encore trop carré » sur la carte) : le biome du lieu (vert) couvrait toute sa zone,
+    # face aux plaines enneigées du mod autour. Il ne couvre plus que la lagune, le glacier et leurs abords (60 à 90
+    # blocs, bord irrégulier) ; plus loin, le biome du mod (neige) comme autour
+    proche = (dW < 75.0 + 18.0 * bruit(X, Z, 19, 1311)) | G
+    proche = ndimage.binary_closing(ndimage.binary_opening(proche, iterations=3), iterations=3)
+    return finir_loupe("jokulsarlon", L, y, typ, eau, "ISLANDE", roc=1.4, biome=proche)
 
 
 def chaussee():
