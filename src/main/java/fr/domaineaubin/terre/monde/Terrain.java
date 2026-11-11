@@ -147,6 +147,9 @@ public final class Terrain {
         }
         // lieux uniques (addons) : ils reprennent la main sur le relief de leur zone
         Lieu lieu = LieuxTerre.liste().isEmpty() ? null : LieuxTerre.a(x, z);
+        // lit et berge d'un cours d'eau du mod : à lui, sauf dans un lieu qui le gère lui-même (voir Lieu.gereSesCoursDEau)
+        if (lieu != null && !lieu.gereSesCoursDEau() && r != null && r.distance() <= r.demiLargeur() + BERGE_RIVIERE)
+            lieu = null;
         double poids = 0.0;
         if (lieu != null) {
             // relief fin (09/11/2026) : les lieux ont été sculptés et raccordés sur le terrain d'avant (carte 3') ; ils
@@ -162,7 +165,11 @@ public final class Terrain {
             // toutes les colonnes de la zone, sculptées ou non, gardent le terrain d'avant à l'intérieur (10/11/2026,
             // Gullfoss : le plateau non sculpté suivait le relief fin, qui y voit la vallée de la Hvítá en V large, et
             // descendait de 12 blocs au pied des parois de la gorge, sculptées sur le terrain d'avant : murs debout)
-            if (h != hAvant) hl += (h - hAvant) * (1.0 - Mth.clamp(interieurLieu(x, z) / RACCORD_FIN, 0.0, 1.0));
+            // (12/11/2026) aussi en s'approchant d'un cours d'eau du mod, qui garde son lit et sa berge dans le lieu
+            double inter = interieurLieu(x, z);
+            if (r != null && !lieu.gereSesCoursDEau())
+                inter = Math.min(inter, Math.max(0.0, r.distance() - r.demiLargeur() - BERGE_RIVIERE));
+            if (h != hAvant) hl += (h - hAvant) * (1.0 - Mth.clamp(inter / RACCORD_FIN, 0.0, 1.0));
             h = hl;
             poids = Mth.clamp(lieu.poids(x, z), 0.0, 1.0);
             // un lieu sculpté (Grand Canyon, Verdon) gère l'eau de son cours d'eau lui-même (niveau de la mer)

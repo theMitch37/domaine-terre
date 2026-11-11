@@ -294,4 +294,9 @@ public final class Verdon implements LieuSculpte {
     public int fondStrates() {
         return (int) FOND - 4;
     }
+
+    @Override
+    public boolean gereSesCoursDEau() {
+        return true;
+    }
 }

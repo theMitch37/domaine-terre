@@ -65,4 +65,14 @@ public interface Lieu {
     default int eau(int x, int z) {
         return Integer.MIN_VALUE;
     }
+
+    /**
+     * Le lieu gère lui-même le cours d'eau du mod qui le traverse (Grand Canyon, Verdon : son lit et son niveau). Sinon
+     * (12/11/2026, test en jeu : « une immense cascade » en Valais, la zone du Cervin gardait le Rhône à son niveau
+     * d'avant le relief fin, 95 blocs au-dessus du Rhône du mod juste à côté), là où le lieu pose de l'eau dans le lit
+     * d'un cours d'eau du mod à un autre niveau, la colonne revient au mod. Par défaut : non.
+     */
+    default boolean gereSesCoursDEau() {
+        return false;
+    }
 }

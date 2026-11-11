@@ -278,6 +278,11 @@ public final class GrandCanyon implements LieuSculpte {
      * d'un bloc jusqu'au niveau du lac ; posée comme un torrent, chaque marche coule (rapides).
      */
     @Override
+    public boolean gereSesCoursDEau() {
+        return true;
+    }
+
+    @Override
     public int eau(int x, int z) {
         if (!concerne(x, z)) return Integer.MIN_VALUE;
         Point pt = point(x, z);
