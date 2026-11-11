@@ -143,14 +143,14 @@ public final class FauneTerre {
             }
         } catch (Exception e) {
             DomaineTerre.LOGGER.error("Faune : carte des zones illisible, faune du jeu de base", e);
-            return new FauneTerre(null, new int[0], List.of(), List.of());
+            return new FauneTerre(null, new int[0], List.of(), List.of(), List.of());
         }
         JsonObject racine;
         try (InputStream in = FauneTerre.class.getResourceAsStream("/domaine_terre/faune/especes.json")) {
             racine = JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8)).getAsJsonObject();
         } catch (Exception e) {
             DomaineTerre.LOGGER.error("Faune : table des espèces illisible, faune du jeu de base", e);
-            return new FauneTerre(null, new int[0], List.of(), List.of());
+            return new FauneTerre(null, new int[0], List.of(), List.of(), List.of());
         }
         JsonArray pr = racine.getAsJsonArray("precises");
         int[] bp = new int[pr.size()];
