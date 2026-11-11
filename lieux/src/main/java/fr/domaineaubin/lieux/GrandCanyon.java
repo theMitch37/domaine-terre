@@ -302,8 +302,8 @@ public final class GrandCanyon implements LieuSculpte {
         // s'étalent loin : plus on s'éloigne, plus elles sont petites et espacées (îlots), sans grain
         double q = (1.0 - lisse(Mth.clamp((pt.t() - 1.0) / 1.4, 0.0, 1.0))) * lisse(Mth.clamp(pt.fondu() / 0.9, 0.0, 1.0));
         if (q <= 0.0) return null;
-        double n = 0.5 + 0.3 * bruit.noise(x / 19.0, 11.0, z / 19.0) + 0.17 * bruit.noise(x / 8.0, 17.0, z / 8.0)
-                + 0.08 * bruit.noise(x / 3.5, 13.0, z / 3.5);
+        double n = 0.5 + 0.2 * bruit.noise(x / 19.0, 11.0, z / 19.0) + 0.3 * bruit.noise(x / 7.0, 17.0, z / 7.0)
+                + 0.1 * bruit.noise(x / 3.0, 13.0, z / 3.0);
         if (n > q) return null;
         if (n > q * 0.55) return Blocks.RED_SAND.defaultBlockState();
         // bandes de terre cuite, ondulées comme les couches des parois
