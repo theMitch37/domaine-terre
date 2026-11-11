@@ -1,8 +1,8 @@
 RiverATLAS : https://ndownloader.figshare.com/files/20087486 ; licence : CC BY 4.0
--rw-r--r-- 1 runner runner 2418581202 Nov 10 20:23 ra.zip
+-rw-r--r-- 1 runner runner 2418581202 Nov 11 19:01 ra.zip
 Filesystem      Size  Used Avail Use% Mounted on
-/dev/root        72G   42G   31G  58% /
-271 embouchures à terre à examiner (2 s)
+/dev/root       145G   42G  103G  29% /
+247 embouchures à terre à examiner (2 s)
 RiverATLAS_v10_af.shp 396191 tronçons
 RiverATLAS_v10_ar.shp 73772 tronçons
 RiverATLAS_v10_as.shp 313648 tronçons
@@ -14,5 +14,4 @@ RiverATLAS_v10_sa_north.shp 208344 tronçons
 RiverATLAS_v10_sa_south.shp 112543 tronçons
 RiverATLAS_v10_si.shp 172580 tronçons
 1904288 tronçons chargés (96 s)
-bilan : {'sans tronçon': 14, 'endoréique': 7, 'trop long': 147, 'lieu': 1, 'pas en mer': 3, 'ok': 98} (98 s)
-49 embouchures prolongées jusqu'à la mer
+bilan : {'sans tronçon': 14, 'endoréique': 9, 'trop long': 86, 'lieu': 4, 'pas en mer': 5, 'ok': 128} (119 s)
