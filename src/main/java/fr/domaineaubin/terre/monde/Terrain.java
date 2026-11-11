@@ -111,7 +111,10 @@ public final class Terrain {
         // (le niveau est calculé par Fleuves sur le vrai fond de vallée, sommet par sommet : niveauFin)
         // près d'un lac (et dedans), un cours d'eau prend au moins le niveau du lac : il y entre et en sort à niveau
         boolean presLac = lp != null && (lp.distance() > 0 || -lp.distance() <= BERGE);
-        if (r != null && presLac && r.eau() < nivLac) r = r.avecEau(nivLac);
+        // 11/11/2026 (test en jeu, Valais : « une immense cascade ») : un lac de montagne près du Rhône relevait le fleuve
+        // à son niveau, 95 blocs plus haut, sur les colonnes proches du lac seulement : une marche de 95 blocs en
+        // travers du fleuve. Un cours d'eau bien plus bas qu'un lac voisin ne le traverse pas : il garde son niveau
+        if (r != null && presLac && r.eau() < nivLac && nivLac - r.eau() <= 4) r = r.avecEau(nivLac);
         // près de l'eau, le relief réel en entier (10/11/2026) : l'eau est à sa vraie altitude, les rives aussi (avec
         // une part seulement du détail fin, la rive restait au-dessus ou au-dessous de l'eau : murs, lacs perchés)
         double procheRiv = 0.0, procheLac = 0.0;
