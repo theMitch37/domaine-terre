@@ -20,6 +20,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerSpawnPhantomsEvent;
 import net.minecraftforge.event.level.LevelEvent;
@@ -200,8 +201,58 @@ public final class FauneSpawns {
         boolean monstre = e.categorie() == MobCategory.MONSTER;
         if (((monstre && !e.monstreSurface()) || e.noir())
                 && !net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn(n, pos, n.getRandom())) return false;
+        if (eau && !profondeurOk(m, n)) return false;
         if ("sable".equals(e.sol()) && !n.getBlockState(pos.below()).is(net.minecraft.tags.BlockTags.SAND)) return false;
         return !e.pluie() || n.getLevelData().isRaining();
+    }
+
+    /**
+     * Profondeur d'eau à la place de la bête (11/11/2026, test en jeu : grand requin dans 2 blocs d'eau d'un estuaire,
+     * baleine près de la côte) : au moins 2 blocs, et une fois et demie la hauteur de la bête (un grand requin d'Untamed
+     * Wilds : 4 blocs ; une baleine bleue : une quinzaine, la vraie mer du large).
+     */
+    static boolean profondeurOk(Mob m, LevelAccessor n) {
+        int requis = Math.max(2, (int) Math.ceil(m.getBbHeight() * 1.5));
+        BlockPos.MutableBlockPos p = m.blockPosition().mutable();
+        int y0 = p.getY();
+        int bas = y0, haut = y0;
+        while (bas > n.getMinBuildHeight() && y0 - bas < 64 && n.getFluidState(p.setY(bas - 1)).is(FluidTags.WATER)) bas--;
+        while (haut - y0 < 64 && n.getFluidState(p.setY(haut + 1)).is(FluidTags.WATER)) haut++;
+        if (!n.getFluidState(p.setY(y0)).is(FluidTags.WATER)) return false;
+        return haut - bas + 1 >= requis;
+    }
+
+    /** Marque des bêtes déjà passées par nos règles (ou nées d'un joueur : œuf, commande, élevage). */
+    private static final String VERIFIEE = "domaine_terre_verifiee";
+
+    /**
+     * Bêtes nées par un autre système que les listes (11/11/2026, test en jeu : hippopotames d'Untamed Wilds en plein
+     * Sahara, à 800 blocs du Nil ; grand requin dans un estuaire) : Untamed Wilds fait naître les siennes par ses propres
+     * features, qui ne connaissent que les biomes. Quand une bête de la table arrive dans le monde depuis la génération ou
+     * le disque pour la première fois, nos règles décident (FauneTerre.permis, profondeur d'eau) ; refusée, elle n'est
+     * pas ajoutée. Les bêtes nées d'un joueur (œufs, commandes, élevage, /domaine zoo) arrivent « fraîches » : marquées,
+     * jamais retirées ; les bêtes nommées ou apprivoisées non plus.
+     */
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public static void arrivee(EntityJoinLevelEvent event) {
+        if (!(event.getEntity() instanceof Mob m) || !(event.getLevel() instanceof ServerLevel n)) return;
+        FauneTerre f = FauneTerre.get();
+        if (!f.active() || !f.dansLaTable(m.getType())) return;
+        net.minecraft.nbt.CompoundTag d = m.getPersistentData();
+        if (d.getBoolean(VERIFIEE)) return;
+        d.putBoolean(VERIFIEE, true);
+        if (!event.loadedFromDisk() || !terre(n)) return;
+        if (m.hasCustomName() || m.isLeashed()
+                || (m instanceof net.minecraft.world.entity.TamableAnimal a && a.isTame())) return;
+        BlockPos pos = m.blockPosition();
+        boolean eau = net.minecraft.world.entity.SpawnPlacements.getPlacementType(m.getType())
+                == net.minecraft.world.entity.SpawnPlacements.Type.IN_WATER;
+        boolean ok = f.permis(m.getType(), pos.getX(), pos.getZ(), n.getBiome(pos)) && (!eau || profondeurOk(m, n));
+        if (!ok) {
+            event.setCanceled(true);
+            if (JOURNAL.incrementAndGet() <= 20) DomaineTerre.LOGGER.info("Faune : {} retiré en {} (hors de son milieu réel)",
+                    net.minecraftforge.registries.ForgeRegistries.ENTITY_TYPES.getKey(m.getType()), pos.toShortString());
+        }
     }
 
     /** Monstres plus forts en descendant : +50 % de vie, +2 dégâts, +2 armure par étage sous les couches hautes. */

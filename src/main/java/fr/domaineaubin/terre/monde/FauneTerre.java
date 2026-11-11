@@ -434,6 +434,73 @@ public final class FauneTerre {
         return false;
     }
 
+    /**
+     * La table permet-elle cette bête ici ? (11/11/2026, Maxime : « les espèces uniquement là où elles apparaîtraient
+     * dans la vraie vie », après un test en jeu : hippopotames d'Untamed Wilds en plein désert, grand requin dans un
+     * estuaire). Mêmes règles que les listes : terroir, écorégion précise, grand biome, eau douce proche pour les bêtes
+     * d'eau, rivage pour celles de la côte ; en mer, température et bande (côte, plateau, large, abysse). Vrai pour une
+     * bête que la table de surface ne connaît pas. Sert aux bêtes nées par un autre système que les listes (features
+     * d'Untamed Wilds, structures, génération).
+     */
+    public boolean permis(EntityType<?> type, int x, int z, Holder<Biome> biome) {
+        int pix = pixel(x, z);
+        String chemin = biome.unwrapKey().map(k -> k.location().getPath()).orElse("");
+        int temp = -1, bande = -1;
+        if (biome.unwrapKey().map(k -> k.location().getNamespace().equals(DomaineTerre.MOD_ID)).orElse(false)
+                && chemin.startsWith("mer/")) {
+            String[] p = chemin.substring(4).split("_");
+            if (p.length == 2) {
+                temp = indice(TEMPS, p[0]);
+                bande = indice(BANDES, p[1]);
+            }
+        }
+        boolean merBiome = temp >= 0 && bande >= 0;
+        int zz = zones[pix] & 0xFF;
+        int terroir, grand = 0, precis = -1;
+        if (zz >= 128) {
+            terroir = zz - 128;
+        } else {
+            double lon = -180.0 + (pix % W + 0.5) * 0.05, lat = 90.0 - (pix / W + 0.5) * 0.05;
+            terroir = Terrain.get().carte().terroir(lon, lat);
+            if (zz >= 1 && zz <= 14) grand = zz;
+            else if (zz >= 16 && zz - 16 < biomePrecis.length) {
+                precis = zz - 16;
+                grand = biomePrecis[precis];
+            }
+        }
+        boolean vue = false;
+        Boolean eau = null;
+        for (Entree e : surface) {
+            if (e.donnees().type != type) continue;
+            vue = true;
+            if (merBiome) {
+                if (e.mer() && (e.temps() & (1 << temp)) != 0 && (e.bandes() & (1 << bande)) != 0
+                        && (e.tousTerroirs() || e.dansTerroir(terroir))) return true;
+                continue;
+            }
+            if (!e.dansTerroir(terroir)) continue;
+            if (e.precis() != null && e.precis()[terroir] != null && !contient(e.precis()[terroir], precis)) continue;
+            if (grand > 0 && (e.biomes() & (1 << grand)) != 0) return true;
+            if (e.eau()) {
+                if (eau == null) eau = eauDouceProche(x, z);
+                if (eau) return true;
+            }
+            if (e.cote() && Math.abs(Terrain.get().distanceCote(x, z)) < 2.0) return true;
+        }
+        return !vue;
+    }
+
+    /** Cours d'eau ou lac du mod à moins de 6 blocs (d'après le terrain : ne charge aucun chunk). */
+    public static boolean eauDouceProche(int x, int z) {
+        Terrain t = Terrain.get();
+        for (int dx = -6; dx <= 6; dx += 3) {
+            for (int dz = -6; dz <= 6; dz += 3) {
+                if (t.eauLit(x + dx, z + dz) != Terrain.SANS_LAC || t.eauDeLac(x + dx, z + dz)) return true;
+            }
+        }
+        return false;
+    }
+
     /** Eau à moins de 3 blocs (même niveau ou juste dessous). */
     public static boolean eauProche(LevelAccessor niveau, BlockPos pos) {
         BlockPos.MutableBlockPos m = new BlockPos.MutableBlockPos();
