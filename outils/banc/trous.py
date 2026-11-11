@@ -30,7 +30,15 @@ for f in [a for a in sys.argv[1:] if a != "-v"]:
     H = b.shape[1]
     top = H - 1 - np.argmax((~ign[b])[:, ::-1, :], axis=1)
     tb = np.take_along_axis(b, top[:, None, :], 1)[:, 0, :]
-    w = eau[tb]
+    # le premier bloc non vide au-dessus du sol : eau, ou plante d'eau / racines de palétuvier sous la mer (gorgées
+    # d'eau : pas un trou)
+    mouille = eau | np.array([n in ("kelp", "kelp_plant", "seagrass", "tall_seagrass", "sea_pickle") for n in noms])
+    racine = np.array(["root" in n or "propagule" in n for n in noms])
+    dessus = H - 1 - np.argmax((~vide[b])[:, ::-1, :], axis=1)
+    td = np.take_along_axis(b, dessus[:, None, :], 1)[:, 0, :]
+    md = mouille[td] | (racine[td] & (dessus + y0 <= 62))
+    w = md | eau[tb]
+    top = np.where(md, np.maximum(top, dessus), top)
     surf = np.where(w, top, -10**6)
     voisin = np.full(top.shape, -10**6)
     voisin[1:, :] = np.maximum(voisin[1:, :], surf[:-1, :]); voisin[:-1, :] = np.maximum(voisin[:-1, :], surf[1:, :])
