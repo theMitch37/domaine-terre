@@ -114,6 +114,9 @@ public final class Terrain {
         // 11/11/2026 (test en jeu, Valais : « une immense cascade ») : un lac de montagne près du Rhône relevait le fleuve
         // à son niveau, 95 blocs plus haut, sur les colonnes proches du lac seulement : une marche de 95 blocs en
         // travers du fleuve. Un cours d'eau bien plus bas qu'un lac voisin ne le traverse pas : il garde son niveau
+        // 12/11/2026 (test en jeu, lac près du Léman à y 99 dont la rive est était à 92-95) : le niveau d'avant compte
+        // pour la berge du lac ; un cours d'eau relevé au niveau du lac n'a pas de berges assez hautes pour le tenir
+        int eauAvantLac = r == null ? SANS_LAC : r.eau();
         if (r != null && presLac && r.eau() < nivLac && nivLac - r.eau() <= 4) r = r.avecEau(nivLac);
         // près de l'eau, le relief réel en entier (10/11/2026) : l'eau est à sa vraie altitude, les rives aussi (avec
         // une part seulement du détail fin, la rive restait au-dessus ou au-dessous de l'eau : murs, lacs perchés)
@@ -138,8 +141,10 @@ public final class Terrain {
                 // 11/11/2026 (test en jeu, Valais : lac de montagne à y 174 au bord de la vallée du Rhône à y 80, son eau
                 // pendait en mur de 70 blocs) : la berge d'un cours d'eau bien plus bas que le lac ne remplace pas le
                 // rebord du lac, qui retient son eau
+                // (12/11/2026) la berge d'un cours d'eau relevé au niveau du lac est tenue au-dessus du lac comme sa rive,
+                // sinon l'eau du lac s'échappait par-dessus en nappes sur la pente
                 boolean litOuBerge = r != null && r.distance() <= r.demiLargeur() + BERGE_RIVIERE
-                        && (r.eau() >= niv - 2 || r.distance() <= r.demiLargeur());
+                        && (eauAvantLac >= niv - 2 || r.distance() <= r.demiLargeur());
                 if (!litOuBerge) h = bergeLac(h, niv, -lp.distance());
                 if (-lp.distance() < BERGE && !litOuBerge) bergeLac = niv;
                 if (-lp.distance() <= BERGE) eauLac = niv;
@@ -159,7 +164,7 @@ public final class Terrain {
             if (lp != null) {
                 if (lp.distance() > 0) hAvant = fondLac(nivLac, lp.distance(), lacs.superficie(lp.lac()));
                 else if (!(r != null && r.distance() <= r.demiLargeur() + BERGE_RIVIERE
-                        && (r.eau() >= nivLac - 2 || r.distance() <= r.demiLargeur()))) hAvant = bergeLac(hAvant, nivLac, -lp.distance());
+                        && (eauAvantLac >= nivLac - 2 || r.distance() <= r.demiLargeur()))) hAvant = bergeLac(hAvant, nivLac, -lp.distance());
             }
             double hl = lieu.hauteur(x, z, hAvant);
             // toutes les colonnes de la zone, sculptées ou non, gardent le terrain d'avant à l'intérieur (10/11/2026,
