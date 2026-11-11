@@ -100,6 +100,38 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
                 }
             }
         }
+        // poches d'air sous l'eau (12/11/2026, test en jeu : « des zones sans eau dans la mer », Jökulsárlón, Skógafoss) :
+        // les nappes d'eau du jeu laissent parfois de l'air sous une couche d'eau, sans bloc entre les deux ; de la
+        // surface jusqu'au fond, un air coincé sous de l'eau devient de l'eau
+        for (int dx = 0; dx < 16; dx++) {
+            for (int dz = 0; dz < 16; dz++) {
+                int x = x0 + dx, z = z0 + dz;
+                int fond = niveau.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x, z);
+                int haut = niveau.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x, z) - 1;
+                boolean sousEau = false;
+                for (int y = haut; y >= fond; y--) {
+                    BlockState b = niveau.getBlockState(pos.set(x, y, z));
+                    if (b.is(Blocks.WATER)) {
+                        sousEau = true;
+                    } else if (sousEau && (b.isAir() || plante(b))) {
+                        // une poche (12 blocs au plus, fermée par un fond) ; pas le vide sous une chute d'eau
+                        int n = 0;
+                        while (n < 13 && y - n >= fond && niveau.getBlockState(pos.set(x, y - n, z)).isAir()) n++;
+                        if (n > 12) {
+                            sousEau = false;
+                            y -= n - 1;
+                            continue;
+                        }
+                        for (int k = 0; k < n; k++) niveau.setBlock(pos.set(x, y - k, z), eau, 2);
+                        if (n == 0) niveau.setBlock(pos.set(x, y, z), eau, 2);
+                        y -= Math.max(n - 1, 0);
+                        modifie = true;
+                    } else if (!b.isAir() && b.getFluidState().isEmpty()) {
+                        sousEau = false;
+                    }
+                }
+            }
+        }
         // herbe sous l'eau hors des lits (bord des lacs, plats de la côte, 11/11/2026, banc : 130 à 330 colonnes par
         // zone, sous 1 à 2 blocs d'eau surtout) : les règles de surface ne voient pas l'eau des aquifères du mod ; sous
         // l'eau, le fond du lit

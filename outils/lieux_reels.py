@@ -478,6 +478,10 @@ def jokulsarlon():
     # face aux plaines enneigées du mod autour. Il ne couvre plus que la lagune, le glacier et leurs abords (60 à 90
     # blocs, bord irrégulier) ; plus loin, le biome du mod (neige) comme autour
     proche = (dW < 75.0 + 18.0 * bruit(X, Z, 19, 1311)) | G
+    # 12/11/2026 (test en jeu : « beaucoup mieux au nord, la même chose à l'ouest et à l'est ») : la lagune touche presque
+    # les côtés de la zone ; le biome du lieu s'arrête aussi avant le bord (35 à 70 blocs, limite irrégulière), sauf
+    # sur l'eau (la côte au sud garde son sable noir)
+    proche &= (L.de > 35.0 + 35.0 * (0.5 + 0.5 * bruit(X, Z, 17, 1312))) | F
     proche = ndimage.binary_closing(ndimage.binary_opening(proche, iterations=3), iterations=3)
     return finir_loupe("jokulsarlon", L, y, typ, eau, "ISLANDE", roc=1.4, biome=proche)
 
