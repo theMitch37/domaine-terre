@@ -91,6 +91,29 @@ jobs:
             git -C $GITHUB_WORKSPACE archive FETCH_HEAD zones | tar -x -C /tmp
             find /tmp/zones -name '*.bin' -exec cp {} domaine_terre/relief/ \;
           fi
+          # 11/11/2026 : paquets des zones demandées qui manquent, téléchargés depuis les releases du relief (sinon le
+          # serveur génère sans relief fin : zones de test du 11/11 à 85 au lieu de 217)
+          (cd $GITHUB_WORKSPACE && python - "${{ github.event.inputs.lieux }}" <<'PY'
+          import json, math, os, subprocess, sys
+          z = json.load(open("outils/banc/zones.json"))
+          noms = [n for n in sys.argv[1].split(",") if n] or [k for k in z if k != "_"]
+          vus = set()
+          for n in noms:
+              if n not in z: continue
+              x0, x1, z0, z1 = z[n]
+              for bx in range(math.floor(x0 / 2048), math.floor(x1 / 2048) + 1):
+                  for bz in range(math.floor(z0 / 2048), math.floor(z1 / 2048) + 1):
+                      vus.add((bx, bz))
+          d = "/tmp/serveur/domaine_terre/relief"
+          for bx, bz in sorted(vus):
+              f = f"{d}/relief_{bx}_{bz}.bin"
+              if os.path.exists(f): continue
+              url = f"https://github.com/theMitch37/domaine-terre-relief/releases/download/v1-z{bz}/relief_{bx}_{bz}.bin"
+              r = subprocess.run(["curl", "-sSfL", "--retry", "3", "-o", f, url])
+              print("relief", bx, bz, "ok" if r.returncode == 0 else "absent (mer ?)")
+              if r.returncode != 0 and os.path.exists(f): os.remove(f)
+          PY
+          ) || true
           ls domaine_terre/relief | head
           if [ -n "${{ github.event.inputs.detail_relief }}" ]; then
             mkdir -p config && echo '{"actif": true, "detail": ${{ github.event.inputs.detail_relief }}}' > config/domaine_terre_relief.json
