@@ -306,6 +306,16 @@ public final class Terrain {
         return colonne(x, z).litRiv();
     }
 
+    /**
+     * Niveau du cours d'eau aux abords du lit (jusqu'à EAU_RIVIERE blocs), ou SANS_LAC (11/11/2026). Les aquifères n'y
+     * mettent pas d'eau ; un creux plus bas que la rivière y restait à sec (Gambie : vase à sec sous le niveau de la
+     * mer à côté de l'eau).
+     */
+    public int eauAbords(int x, int z) {
+        Colonne c = colonne(x, z);
+        return c.eauLac() == SANS_LAC ? c.eauRiv() : SANS_LAC;
+    }
+
     /** Ancien seuil (avant l'étape C2, toute l'eau au niveau de la mer) : plus utilisé, gardé pour les addons. */
     public static final double VALLEE_EAU = 80.0, VALLEE_SECHE = 86.0;
     /** Largeur maximale de la pente douce entre la rive et le terrain naturel, en blocs. */

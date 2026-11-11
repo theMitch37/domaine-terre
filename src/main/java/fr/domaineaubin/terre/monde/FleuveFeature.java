@@ -34,6 +34,8 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
             for (int dz = 0; dz < 16; dz++) {
                 int x = x0 + dx, z = z0 + dz;
                 int w = t.eauLit(x, z);
+                // abords du lit : seulement les creux sous le niveau de la rivière (11/11/2026)
+                if (w == Terrain.SANS_LAC) w = t.eauAbords(x, z);
                 if (w == Terrain.SANS_LAC) continue;
                 // de la surface de l'eau vers le bas, tant qu'il y a de l'air (la carte de hauteur du moteur n'est pas
                 // fiable ici : un lieu vient peut-être de creuser son lit dans ce chunk, StratesFeature)
@@ -66,6 +68,21 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
                         || plusBas(t, x, z - 1, w))) {
                     niveau.scheduleTick(pos.set(x, w - 1, z), Fluids.WATER, 1);
                 }
+            }
+        }
+        // herbe sous l'eau hors des lits (bord des lacs, plats de la côte, 11/11/2026, banc : 130 à 330 colonnes par
+        // zone, sous 1 à 2 blocs d'eau surtout) : les règles de surface ne voient pas l'eau des aquifères du mod ; sous
+        // l'eau, le fond du lit
+        for (int dx = 0; dx < 16; dx++) {
+            for (int dz = 0; dz < 16; dz++) {
+                int x = x0 + dx, z = z0 + dz;
+                int y = niveau.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x, z) - 1;
+                BlockState b = niveau.getBlockState(pos.set(x, y, z));
+                if (!(b.is(Blocks.GRASS_BLOCK) || b.is(Blocks.PODZOL) || b.is(Blocks.MYCELIUM) || b.is(Blocks.DIRT_PATH)))
+                    continue;
+                if (!niveau.getBlockState(pos.set(x, y + 1, z)).is(Blocks.WATER)) continue;
+                niveau.setBlock(pos.set(x, y, z), fond(t, x, z), 2);
+                modifie = true;
             }
         }
         return modifie;
