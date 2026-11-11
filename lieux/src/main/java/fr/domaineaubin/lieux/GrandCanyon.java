@@ -297,12 +297,13 @@ public final class GrandCanyon implements LieuSculpte {
         if (!concerne(x, z)) return null;
         Point pt = point(x, z);
         if (Double.isNaN(pt.t()) || dansCanyon(pt, x, z)) return null;
-        // proche du canyon (t juste au-delà du rebord) ou du canyon qui s'efface au bord de la zone
-        // (banc : arrêt net au bord sud des données) s'efface aussi en approchant du bord de la zone
-        // (Maxime : le grain par colonne fait « hachuré, pas naturel ») taches à bords irréguliers, sans grain
-        double q = (1.0 - lisse(Mth.clamp((pt.t() - 1.0) / 0.7, 0.0, 1.0))) * lisse(Mth.clamp(pt.fondu() / 0.9, 0.0, 1.0));
+        // proche du canyon (t juste au-delà du rebord), effacé en approchant du bord de la zone.
+        // Maxime : un grain par colonne fait « hachuré, pas naturel » ; des taches à bords irréguliers, mais qui
+        // s'étalent loin : plus on s'éloigne, plus elles sont petites et espacées (îlots), sans grain
+        double q = (1.0 - lisse(Mth.clamp((pt.t() - 1.0) / 1.4, 0.0, 1.0))) * lisse(Mth.clamp(pt.fondu() / 0.9, 0.0, 1.0));
         if (q <= 0.0) return null;
-        double n = 0.5 + 0.35 * bruit.noise(x / 17.0, 11.0, z / 17.0) + 0.15 * bruit.noise(x / 5.0, 13.0, z / 5.0);
+        double n = 0.5 + 0.3 * bruit.noise(x / 19.0, 11.0, z / 19.0) + 0.17 * bruit.noise(x / 8.0, 17.0, z / 8.0)
+                + 0.08 * bruit.noise(x / 3.5, 13.0, z / 3.5);
         if (n > q) return null;
         if (n > q * 0.55) return Blocks.RED_SAND.defaultBlockState();
         // bandes de terre cuite, ondulées comme les couches des parois
