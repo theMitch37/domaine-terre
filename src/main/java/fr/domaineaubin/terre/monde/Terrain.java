@@ -313,7 +313,10 @@ public final class Terrain {
      */
     public int eauAbords(int x, int z) {
         Colonne c = colonne(x, z);
-        return c.eauLac() == SANS_LAC ? c.eauRiv() : SANS_LAC;
+        // seulement au niveau de la mer (estuaires, deltas) : plus haut, une pente qui descend à côté du lit recevait
+        // l'eau de la rivière en pans debout (11/11/2026, banc Oberland : 300 trous et murs d'eau, Grimsel)
+        if (c.eauLac() != SANS_LAC || c.eauRiv() == SANS_LAC || c.eauRiv() > NIVEAU_MER + 1) return SANS_LAC;
+        return c.eauRiv();
     }
 
     /** Ancien seuil (avant l'étape C2, toute l'eau au niveau de la mer) : plus utilisé, gardé pour les addons. */
