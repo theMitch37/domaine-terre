@@ -6,7 +6,7 @@ terre, le vrai cours d'aval jusqu'à la mer. Vérification du 10/11 : la moitié
 lit parallèle. Règles :
   - le chemin s'arrête dès qu'il touche un autre cours d'eau du mod (à 4 blocs) : c'est la confluence ;
   - sinon il doit finir en mer (côte fine) ;
-  - aucun pas de plus de 8 km (un trou dans les données, pas un cours d'eau) ;
+  - aucun pas de plus de 40 km (un trou dans les données, pas un cours d'eau) ;
   - rien dans les tuiles d'un lieu.
 
 Usage : python3 outils/fleuves_hydro_appliquer.py   (part de fleuves.json tel qu'il est ; idempotent)
@@ -24,7 +24,8 @@ INDEX = os.path.join(ICI, "../lieux/src/main/resources/domaine_terre_lieux/tuile
 B = T.BPD
 MPB = 60.0 / B
 CONFLUENCE = 4.0                # blocs
-PAS_MAX = 8.0                   # km (le chemin est simplifié à 2 blocs : une ligne droite peut être longue)
+PAS_MAX = 40.0                  # km : le chemin suit les tronçons liés (pas de trou) ; simplifié à 2 blocs, un bief
+                                # droit peut être long (Saint-Laurent au lac Saint-Pierre : 30 km, 11/11/2026)
 
 t = json.load(open(F, encoding="utf-8"))
 ajouts = json.load(open(H, encoding="utf-8"))
@@ -65,6 +66,8 @@ for ks, v in ajouts.items():
         if float(T.distance_cote(np.array([q[0]]), np.array([q[1]]))[0]) < 0:
             fin_ok = "mer"
             break
+    if fin_ok is None and float(T.distance_cote(np.array([xy[-1][0]]), np.array([xy[-1][1]]))[0]) < 2.0:
+        fin_ok = "mer"                            # au bord de la mer du mod (fleuves_mer.py finit, ≤ 64 blocs)
     if fin_ok is None:
         bilan["ni mer ni confluence"] += 1
         continue
