@@ -61,6 +61,7 @@ BANDES = ["cote", "plateau", "large", "abysse"]
 MERS = {
     "mers_tropicales": (["chaude", "tiede"], BANDES), "mers_chaudes_tempérées": (["chaude", "tiede", "temperee"], BANDES),
     "mers_froides": (["froide", "gelee"], BANDES), "toutes_les_mers_froides": (["froide", "gelee"], BANDES),
+    "mers_froides_tempérées": (["temperee", "froide", "gelee"], BANDES),
     "toutes_les_mers": (TEMPS, BANDES), "tous_les_océans": (TEMPS, ["plateau", "large", "abysse"]),
     "mers_profondes": (TEMPS, ["large", "abysse"]), "tous_les_océans_profonds": (TEMPS, ["large", "abysse"]),
     "abysses": (TEMPS, ["abysse"]),
