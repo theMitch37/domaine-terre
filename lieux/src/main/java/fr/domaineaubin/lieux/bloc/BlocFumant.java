@@ -33,7 +33,10 @@ public class BlocFumant extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level niveau, BlockState etat, BlockEntityType<T> type) {
-        if (!niveau.isClientSide) return null;
+        if (!niveau.isClientSide) {
+            // 12/11/2026 : l'eau du geyser brûle (dégâts côté serveur)
+            return geyser ? createTickerHelper(type, BlocsLieux.ENTITE_FUMANTE.get(), EntiteFumante::tickServeur) : null;
+        }
         return createTickerHelper(type, BlocsLieux.ENTITE_FUMANTE.get(), EntiteFumante::tickClient);
     }
 }
