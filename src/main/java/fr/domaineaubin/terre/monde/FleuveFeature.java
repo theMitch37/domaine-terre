@@ -30,6 +30,10 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
         BlockState eau = Blocks.WATER.defaultBlockState();
         boolean modifie = false;
+        // diagnostic temporaire (12/11/2026) : lac de Joux au banc
+        for (int[] q : DIAG_POINTS)
+            if (q[0] >> 4 == x0 >> 4 && q[1] >> 4 == z0 >> 4)
+                fr.domaineaubin.terre.DomaineTerre.LOGGER.info("DIAG colonne {} {} : {}", q[0], q[1], t.diagnosticColonne(q[0], q[1]));
         for (int dx = 0; dx < 16; dx++) {
             for (int dz = 0; dz < 16; dz++) {
                 int x = x0 + dx, z = z0 + dz;
@@ -272,6 +276,9 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
         return (h >>> 11) * 0x1.0p-53;
     }
 
+    private static final int[][] DIAG_POINTS = {{2844, -20755}, {2842, -20755}, {2858, -20764}, {2862, -20770}, {2840, -20749},
+            {2850, -20762}, {2830, -20762}, {2862, -20767}, {-49604, -16496}, {-49616, -16478}, {-49616, -16494},
+            {-49600, -16488}, {-49590, -16500}};
     private static final java.util.concurrent.atomic.AtomicInteger DIAG = new java.util.concurrent.atomic.AtomicInteger();
 
     private static boolean plusBas(Terrain t, int x, int z, int w) {

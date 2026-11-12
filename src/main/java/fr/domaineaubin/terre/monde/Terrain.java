@@ -337,6 +337,28 @@ public final class Terrain {
 
     /** Niveau de l'eau (l'eau remplit y < niveau) du lit d'un cours d'eau dans cette colonne, ou SANS_LAC. */
     /** Diagnostic (banc) du niveau d'un cours d'eau en ce point. */
+    /**
+     * Distance (blocs) au bord du lit du cours d'eau du mod le plus proche, ou une grande valeur (12/11/2026, faune :
+     * estuaires).
+     */
+    public double distanceCoursDEau(int x, int z) {
+        Fleuves.Proche p = fleuves().proche(x, z);
+        return p == null ? Double.MAX_VALUE : Math.max(0.0, p.distance() - demiLargeur(p.classe()));
+    }
+
+    /** Diagnostic temporaire (12/11/2026, lac de Joux au banc). */
+    public String diagnosticColonne(int x, int z) {
+        Colonne c = colonne(x, z);
+        Lacs.Proche lp = lacs != null ? lacs.proche(lon(x + 0.5), lat(z + 0.5)) : null;
+        String l = lp == null ? "aucun lac" : String.format(java.util.Locale.ROOT, "lac %d d=%.1f alt=%.0f niv=%d plafond=%.1f",
+                lp.lac(), lp.distance(), lacs.altitude(lp.lac()), niveauLac(lacs.altitude(lp.lac())), lacs.plafond(lp.lac()));
+        Lieu li = LieuxTerre.liste().isEmpty() ? null : LieuxTerre.a(x, z);
+        if (li != null) l += " lieu " + li.id() + " eau=" + li.eau(x, z) + " hauteur=" + String.format(java.util.Locale.ROOT, "%.1f", li.hauteur(x, z, c.h()));
+        return String.format(java.util.Locale.ROOT, "h=%.2f nivLac=%d bergeLac=%d eauLac=%d eauRiv=%d litRiv=%d lieu=%b riv=%s %s",
+                c.h(), c.niveauLac(), c.bergeLac(), c.eauLac(), c.eauRiv(), c.litRiv(), c.lieu(),
+                c.r() == null ? "-" : String.format(java.util.Locale.ROOT, "d%.1f hw%.1f eau%d", c.r().distance(), c.r().demiLargeur(), c.r().eau()), l);
+    }
+
     public String diagnosticRiviere(int x, int z) {
         Colonne c = colonne(x, z);
         return "lit " + c.litRiv() + " eauRiv " + c.eauRiv() + " eauLac " + c.eauLac() + " lieu " + (LieuxTerre.a(x, z) != null)

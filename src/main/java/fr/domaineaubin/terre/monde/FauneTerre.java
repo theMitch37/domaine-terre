@@ -38,6 +38,7 @@ public final class FauneTerre {
     private static final int W = 7200, H = 3600;
     private static final String[] TEMPS = {"chaude", "tiede", "temperee", "froide", "gelee"};
     private static final String[] BANDES = {"cote", "plateau", "large", "abysse"};
+    private static final int BANDE_COTE = 0;
 
     /** Étages souterrains, du plus haut au plus profond. */
     public enum Etage { COUCHES_HAUTES, PROFONDEURS, ABIMES, GROTTES_INONDEES, FOSSES }
@@ -315,11 +316,14 @@ public final class FauneTerre {
                 bande = indice(BANDES, p[1]);
             }
         }
-        long cle = ((long) pix << 20) | ((long) cat.ordinal() << 12) | ((temp + 1L) << 8) | ((bande + 1L) << 4)
-                | (eauProche ? 8 : 0) | (coteProche ? 4 : 0) | (nuit ? 2 : 0) | (generation ? 1 : 0);
+        // embouchure d'un cours d'eau du mod (12/11/2026) : pas de bête de mer seulement
+        boolean estuaire = temp >= 0 && bande == BANDE_COTE
+                && Terrain.get().distanceCoursDEau(pos.getX(), pos.getZ()) < 48.0;
+        long cle = ((long) pix << 21) | (estuaire ? 1L << 20 : 0) | ((long) cat.ordinal() << 12) | ((temp + 1L) << 8)
+                | ((bande + 1L) << 4) | (eauProche ? 8 : 0) | (coteProche ? 4 : 0) | (nuit ? 2 : 0) | (generation ? 1 : 0);
         List<MobSpawnSettings.SpawnerData> l = cache.get(cle);
         if (l != null) return l;
-        l = calculer(pix, cat, temp, bande, eauProche, coteProche, nuit, generation);
+        l = calculer(pix, cat, temp, bande, eauProche, coteProche, nuit, generation, estuaire);
         if (cache.size() > 200_000) cache.clear();
         cache.put(cle, l);
         return l;
@@ -361,7 +365,8 @@ public final class FauneTerre {
     }
 
     private List<MobSpawnSettings.SpawnerData> calculer(int pix, MobCategory cat, int temp, int bande, boolean eauProche,
-                                                        boolean coteProche, boolean nuit, boolean generation) {
+                                                        boolean coteProche, boolean nuit, boolean generation,
+                                                        boolean estuaire) {
         int z = zones[pix] & 0xFF;
         boolean merBiome = temp >= 0;
         int terroir;
@@ -384,6 +389,7 @@ public final class FauneTerre {
             if (e.nuit() && !nuit) continue;
             if (merBiome) {
                 if (!e.mer() || (e.temps() & (1 << temp)) == 0 || (e.bandes() & (1 << bande)) == 0) continue;
+                if (estuaire && !e.eau() && !e.cote()) continue;
                 if (!e.tousTerroirs() && !e.dansTerroir(terroir)) continue;
                 out.add(e.donnees());
                 continue;
@@ -485,11 +491,17 @@ public final class FauneTerre {
             }
         }
         boolean vue = false;
-        Boolean eau = null;
+        Boolean eau = null, estuaire = null;
         for (Entree e : (Iterable<Entree>) java.util.stream.Stream.concat(surface.stream(), controle.stream())::iterator) {
             if (e.donnees().type != type) continue;
             vue = true;
             if (merBiome) {
+                // 12/11/2026 (test en jeu : « toujours des requins dans les estuaires ») : une bête de mer seulement
+                // (ni eau douce ni rivage) ne naît pas à l'embouchure d'un cours d'eau du mod (48 blocs autour du lit)
+                if (e.mer() && !e.eau() && !e.cote() && bande == BANDE_COTE) {
+                    if (estuaire == null) estuaire = Terrain.get().distanceCoursDEau(x, z) < 48.0;
+                    if (estuaire) continue;
+                }
                 if (e.mer() && (e.temps() & (1 << temp)) != 0 && (e.bandes() & (1 << bande)) != 0
                         && (e.tousTerroirs() || e.dansTerroir(terroir))) return true;
                 continue;

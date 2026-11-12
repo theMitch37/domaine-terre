@@ -226,6 +226,7 @@ public final class FauneSpawns {
     private static final String VERIFIEE = "domaine_terre_verifiee";
 
     /** Vrai pendant l'entrée des bêtes nées à la génération d'un chunk (EntitesGenerationMixin). */
+    private static final java.util.concurrent.atomic.AtomicInteger VUES_GENERATION = new java.util.concurrent.atomic.AtomicInteger();
     public static final ThreadLocal<Boolean> GENERATION = ThreadLocal.withInitial(() -> Boolean.FALSE);
 
     /**
@@ -247,6 +248,7 @@ public final class FauneSpawns {
         // 12/11/2026 : les bêtes de la génération des chunks arrivent avec loadedFromDisk faux (Forge) ; sans le drapeau
         // du mixin, aucune n'était vérifiée (requins d'Untamed Wilds dans les estuaires)
         if (!(event.loadedFromDisk() || Boolean.TRUE.equals(GENERATION.get())) || !terre(n)) return;
+        if (VUES_GENERATION.incrementAndGet() == 1) DomaineTerre.LOGGER.info("Faune : contrôle des bêtes nées à la génération actif");
         if (m.hasCustomName() || m.isLeashed()
                 || (m instanceof net.minecraft.world.entity.TamableAnimal a && a.isTame())) return;
         BlockPos pos = m.blockPosition();
