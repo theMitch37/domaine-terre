@@ -1,0 +1,28 @@
+serveur prêt en 108 s
+lot 1/2 : embouchure_gambie, embouchure_indus, embouchure_saint_laurent, embouchure_rhone, faune_serengeti, faune_nil_assouan — 1940 chunks
+  1940/1940 chunks complets (355 s)
+lot 2/2 : faune_bourgogne, faune_amazonie, test_indus_plage, test_desert_marches — 1563 chunks
+  1563/1563 chunks complets (563 s)
+3503 chunks demandés en 2 lots
+embouchure_gambie : (200, 1536, 200), 68 sortes de blocs
+embouchure_indus : (200, 1536, 200), 57 sortes de blocs
+embouchure_saint_laurent : (200, 1536, 200), 63 sortes de blocs
+embouchure_rhone : (200, 1536, 200), 74 sortes de blocs
+faune_serengeti : (384, 1536, 384), 58 sortes de blocs
+faune_nil_assouan : (384, 1536, 384), 54 sortes de blocs
+faune_bourgogne : (384, 1536, 384), 66 sortes de blocs
+faune_amazonie : (384, 1536, 384), 76 sortes de blocs
+test_indus_plage : (192, 1536, 192), 57 sortes de blocs
+test_desert_marches : (192, 1536, 192), 43 sortes de blocs
+entités lues : 1999 [('minecraft:rabbit', 170), ('naturalist:zebra', 149), ('alexsmobs:gazelle', 114), ('alexsmobs:crow', 113), ('untamedwilds:butterfly', 99), ('untamedwilds:wildebeest', 97), ('minecraft:frog', 94), ('untamedwilds:big_cat', 58)]
+embouchure_gambie : 73 animaux
+embouchure_indus : 72 animaux
+embouchure_saint_laurent : 68 animaux
+embouchure_rhone : 75 animaux
+faune_serengeti : 495 animaux
+faune_nil_assouan : 57 animaux
+faune_bourgogne : 145 animaux
+faune_amazonie : 131 animaux
+test_indus_plage : 48 animaux
+test_desert_marches : 10 animaux
+terminé en 636 s

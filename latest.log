@@ -1,0 +1,622 @@
+[12Nov2026 01:04:47.762] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserver, --fml.forgeVersion, 47.4.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, nogui]
+[12Nov2026 01:04:47.765] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.21 by Eclipse Adoptium; OS Linux arch amd64 version 7.0.0-1019-azure
+[12Nov2026 01:04:48.018] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserver
+[12Nov2026 01:04:48.062] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/tmp/serveur/libraries/org/spongepowered/mixin/0.8.5/mixin-0.8.5.jar%2365!/ Service=ModLauncher Env=SERVER
+[12Nov2026 01:04:48.302] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/fmlcore/1.20.1-47.4.10/fmlcore-1.20.1-47.4.10.jar is missing mods.toml file
+[12Nov2026 01:04:48.303] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/javafmllanguage/1.20.1-47.4.10/javafmllanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[12Nov2026 01:04:48.303] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/lowcodelanguage/1.20.1-47.4.10/lowcodelanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[12Nov2026 01:04:48.304] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/mclanguage/1.20.1-47.4.10/mclanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[12Nov2026 01:04:48.454] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: Found 12 dependencies adding them to mods collection
+[12Nov2026 01:04:49.803] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[12Nov2026 01:04:49.849] [main/ERROR] [mixin/]: Mixin config yacl.mixins.json does not specify "minVersion" property
+[12Nov2026 01:04:49.870] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserver' with arguments [nogui]
+[12Nov2026 01:04:49.926] [main/WARN] [mixin/]: Reference map 'untamedwilds.refmap.json' for mixins.untamedwilds.json could not be read. If this is a development environment you can ignore this message
+[12Nov2026 01:04:50.019] [main/WARN] [mixin/]: Reference map 'wildernature.forge.mixins.refmap.json' for wildernature.forge.mixins.json could not be read. If this is a development environment you can ignore this message
+[12Nov2026 01:04:50.920] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.3.6).
+[12Nov2026 01:04:51.822] [main/WARN] [mixin/]: @Inject(@At("INVOKE")) Shift.BY=1 on crittersandcompanions.mixins.json:LivingEntityMixin::handler$zdk000$onDie exceeds the maximum allowed value: 0. Increase the value of maxShiftBy to suppress this warning.
+[12Nov2026 01:04:56.310] [modloading-worker-0/INFO] [dev.architectury.networking.forge.NetworkManagerImpl/]: Registering C2S receiver with id architectury:sync_ids
+[12Nov2026 01:04:56.484] [modloading-worker-0/INFO] [YetAnotherConfigLib/]: Deserializing YACLConfig from '/tmp/serveur/config/yacl.json5'
+[12Nov2026 01:04:56.546] [modloading-worker-0/INFO] [YetAnotherConfigLib/]: Deserializing CACCommonConfig from '/tmp/serveur/config/crittersandcompanions-common.json5'
+[12Nov2026 01:04:56.559] [modloading-worker-0/INFO] [dev.architectury.networking.forge.NetworkManagerImpl/]: Registering C2S receiver with id wildernature:screen_action
+[12Nov2026 01:04:56.598] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.10, for MC 1.20.1 with MCP 20230612.114412
+[12Nov2026 01:04:56.598] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.4.10 Initialized
+[12Nov2026 01:04:56.723] [modloading-worker-0/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Domaine d'Aubin - Terre : mod chargé.
+[12Nov2026 01:04:56.727] [modloading-worker-0/INFO] [fr.domaineaubin.lieux.DomaineLieux/]: Domaine d'Aubin - Lieux uniques : 24 lieu(x) inscrit(s).
+[12Nov2026 01:04:57.828] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:dog] was not realized!
+[12Nov2026 01:04:57.828] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:cassowary] was not realized!
+[12Nov2026 01:04:57.828] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / crittersandcompanions:stag_beetle] was not realized!
+[12Nov2026 01:04:57.828] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:deer] was not realized!
+[12Nov2026 01:04:57.828] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / crittersandcompanions:dumbo_octopus] was not realized!
+[12Nov2026 01:04:57.829] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / crittersandcompanions:red_panda] was not realized!
+[12Nov2026 01:04:57.829] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:raccoon] was not realized!
+[12Nov2026 01:04:57.829] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / crittersandcompanions:roly_poly] was not realized!
+[12Nov2026 01:04:57.829] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / crittersandcompanions:jumping_spider] was not realized!
+[12Nov2026 01:04:57.829] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:flamingo] was not realized!
+[12Nov2026 01:04:57.830] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / crittersandcompanions:leaf_insect] was not realized!
+[12Nov2026 01:04:57.830] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / crittersandcompanions:snail] was not realized!
+[12Nov2026 01:04:57.830] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:boar] was not realized!
+[12Nov2026 01:04:57.830] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / crittersandcompanions:shima_enaga] was not realized!
+[12Nov2026 01:04:57.830] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / crittersandcompanions:koi_fish] was not realized!
+[12Nov2026 01:04:57.830] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / crittersandcompanions:ladybug] was not realized!
+[12Nov2026 01:04:57.830] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / crittersandcompanions:dragonfly] was not realized!
+[12Nov2026 01:04:57.830] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / crittersandcompanions:weevil] was not realized!
+[12Nov2026 01:04:57.830] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:penguin] was not realized!
+[12Nov2026 01:04:57.830] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / crittersandcompanions:stick_bug] was not realized!
+[12Nov2026 01:04:57.830] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / crittersandcompanions:ferret] was not realized!
+[12Nov2026 01:04:57.830] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / crittersandcompanions:sea_bunny] was not realized!
+[12Nov2026 01:04:57.831] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:pelican] was not realized!
+[12Nov2026 01:04:57.831] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:red_wolf] was not realized!
+[12Nov2026 01:04:57.831] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:hedgehog] was not realized!
+[12Nov2026 01:04:57.831] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:owl] was not realized!
+[12Nov2026 01:04:57.831] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / crittersandcompanions:otter] was not realized!
+[12Nov2026 01:04:57.832] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:turkey] was not realized!
+[12Nov2026 01:04:57.832] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:squirrel] was not realized!
+[12Nov2026 01:04:57.832] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:bison] was not realized!
+[12Nov2026 01:04:57.832] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:minisheep] was not realized!
+[12Nov2026 01:04:57.837] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:dog] was not realized!
+[12Nov2026 01:04:57.837] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:cassowary] was not realized!
+[12Nov2026 01:04:57.837] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:deer] was not realized!
+[12Nov2026 01:04:57.837] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:raccoon] was not realized!
+[12Nov2026 01:04:57.838] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:flamingo] was not realized!
+[12Nov2026 01:04:57.838] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:boar] was not realized!
+[12Nov2026 01:04:57.838] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:penguin] was not realized!
+[12Nov2026 01:04:57.838] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:pelican] was not realized!
+[12Nov2026 01:04:57.838] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:red_wolf] was not realized!
+[12Nov2026 01:04:57.838] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:hedgehog] was not realized!
+[12Nov2026 01:04:57.838] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:owl] was not realized!
+[12Nov2026 01:04:57.838] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:turkey] was not realized!
+[12Nov2026 01:04:57.838] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:squirrel] was not realized!
+[12Nov2026 01:04:57.838] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:bison] was not realized!
+[12Nov2026 01:04:57.839] [main/WARN] [dev.architectury.registry.registries.forge.RegistrarManagerImpl/]: Registry entry listened Registry Entry [minecraft:entity_type / wildernature:minisheep] was not realized!
+[12Nov2026 01:04:58.153] [modloading-worker-0/INFO] [untamedwilds.UntamedWilds/]: Registering Packets!
+[12Nov2026 01:04:58.178] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[12Nov2026 01:04:58.460] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.4.10 Target: 47.4.28
+[12Nov2026 01:04:58.461] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [openloader] Starting version check at https://updates.blamejared.com/get?n=openloader&gv=1.20.1
+[12Nov2026 01:04:58.956] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [openloader] Found status: BETA Current: 19.0.5 Target: 19.0.5
+[12Nov2026 01:04:59.808] [main/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[12Nov2026 01:04:59.844] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/tmp/serveur/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23139!/assets/.mcassetsroot' uses unexpected schema
+[12Nov2026 01:04:59.844] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/tmp/serveur/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23139!/data/.mcassetsroot' uses unexpected schema
+[12Nov2026 01:04:59.890] [main/INFO] [Open Loader/]: Preparing Data Pack injection.
+[12Nov2026 01:04:59.891] [main/INFO] [Open Loader/]: Loaded archive Data Pack from /tmp/serveur/config/openloader/data/domaine_terroirs.zip.
+[12Nov2026 01:04:59.891] [main/INFO] [Open Loader/]: Successfully injected 1/1 packs from /tmp/serveur/config/openloader/data.
+[12Nov2026 01:04:59.897] [main/INFO] [net.minecraft.server.MinecraftServer/]: Found new data pack data/domaine_terroirs.zip, loading it automatically
+[12Nov2026 01:04:59.922] [main/INFO] [com.teamabnormals.blueprint.core.Blueprint/]: Successfully loaded 0 data remolders!
+[12Nov2026 01:05:00.987] [main/INFO] [com.github.alexthe666.alexsmobs.AlexsMobs/]: Adding datapack listener capsid_recipes
+[12Nov2026 01:05:01.496] [Worker-Main-3/ERROR] [net.minecraftforge.common.ForgeHooks/]: Couldn't parse element loot_tables:naturalist:entities/tortoise
+com.google.gson.JsonSyntaxException: Expected name to be an item, was unknown string 'minecraft:turtle_scute'
+	at net.minecraft.util.GsonHelper.m_13866_(GsonHelper.java:145) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at java.util.Optional.orElseThrow(Optional.java:403) ~[?:?]
+	at net.minecraft.util.GsonHelper.m_13874_(GsonHelper.java:145) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at net.minecraft.util.GsonHelper.m_13909_(GsonHelper.java:153) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at net.minecraft.world.level.storage.loot.entries.LootItem$Serializer.m_7267_(LootItem.java:55) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at net.minecraft.world.level.storage.loot.entries.LootItem$Serializer.m_7267_(LootItem.java:40) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer$Serializer.m_5921_(LootPoolSingletonContainer.java:151) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer$Serializer.m_5921_(LootPoolSingletonContainer.java:129) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer$Serializer.m_7561_(LootPoolEntryContainer.java:86) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer$Serializer.m_7561_(LootPoolEntryContainer.java:74) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at net.minecraft.world.level.storage.loot.GsonAdapterFactory$JsonAdapter.deserialize(GsonAdapterFactory.java:102) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at com.google.gson.internal.bind.TreeTypeAdapter.read(TreeTypeAdapter.java:76) ~[gson-2.10.jar%2372!/:?]
+	at com.google.gson.internal.bind.TypeAdapterRuntimeTypeWrapper.read(TypeAdapterRuntimeTypeWrapper.java:40) ~[gson-2.10.jar%2372!/:?]
+	at com.google.gson.internal.bind.ArrayTypeAdapter.read(ArrayTypeAdapter.java:72) ~[gson-2.10.jar%2372!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1214) ~[gson-2.10.jar%2372!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1319) ~[gson-2.10.jar%2372!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1290) ~[gson-2.10.jar%2372!/:?]
+	at com.google.gson.internal.bind.TreeTypeAdapter$GsonContextImpl.deserialize(TreeTypeAdapter.java:179) ~[gson-2.10.jar%2372!/:?]
+	at net.minecraft.util.GsonHelper.m_13808_(GsonHelper.java:463) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at net.minecraft.util.GsonHelper.m_13836_(GsonHelper.java:471) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at net.minecraft.world.level.storage.loot.LootPool$Serializer.deserialize(LootPool.java:192) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at net.minecraft.world.level.storage.loot.LootPool$Serializer.deserialize(LootPool.java:189) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at com.google.gson.internal.bind.TreeTypeAdapter.read(TreeTypeAdapter.java:76) ~[gson-2.10.jar%2372!/:?]
+	at com.google.gson.internal.bind.TypeAdapterRuntimeTypeWrapper.read(TypeAdapterRuntimeTypeWrapper.java:40) ~[gson-2.10.jar%2372!/:?]
+	at com.google.gson.internal.bind.ArrayTypeAdapter.read(ArrayTypeAdapter.java:72) ~[gson-2.10.jar%2372!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1214) ~[gson-2.10.jar%2372!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1319) ~[gson-2.10.jar%2372!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1290) ~[gson-2.10.jar%2372!/:?]
+	at com.google.gson.internal.bind.TreeTypeAdapter$GsonContextImpl.deserialize(TreeTypeAdapter.java:179) ~[gson-2.10.jar%2372!/:?]
+	at net.minecraft.util.GsonHelper.m_13808_(GsonHelper.java:463) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at net.minecraft.util.GsonHelper.m_13845_(GsonHelper.java:481) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at net.minecraft.world.level.storage.loot.LootTable$Serializer.deserialize(LootTable.java:294) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at net.minecraft.world.level.storage.loot.LootTable$Serializer.deserialize(LootTable.java:291) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at com.google.gson.internal.bind.TreeTypeAdapter.read(TreeTypeAdapter.java:76) ~[gson-2.10.jar%2372!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1214) ~[gson-2.10.jar%2372!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1319) ~[gson-2.10.jar%2372!/:?]
+	at com.google.gson.Gson.fromJson(Gson.java:1261) ~[gson-2.10.jar%2372!/:?]
+	at net.minecraftforge.common.ForgeHooks.loadLootTable(ForgeHooks.java:872) ~[forge-1.20.1-47.4.10-universal.jar%23144!/:?]
+	at net.minecraftforge.common.ForgeHooks.lambda$getLootTableDeserializer$3(ForgeHooks.java:849) ~[forge-1.20.1-47.4.10-universal.jar%23144!/:?]
+	at net.minecraft.world.level.storage.loot.LootDataType.deserialize(LootDataType.java:45) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at net.minecraft.world.level.storage.loot.LootDataManager.lambda$scheduleElementParse$4(LootDataManager.java:56) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at java.util.HashMap.forEach(HashMap.java:1421) ~[?:?]
+	at net.minecraft.world.level.storage.loot.LootDataManager.m_278660_(LootDataManager.java:55) ~[server-1.20.1-20230612.114412-srg.jar%23139!/:?]
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804) ~[?:?]
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1796) ~[?:?]
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373) ~[?:?]
+	at java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182) ~[?:?]
+	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655) ~[?:?]
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622) ~[?:?]
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
+[12Nov2026 01:05:01.561] [main/INFO] [com.teamabnormals.blueprint.core.Blueprint/]: Loot Modification Manager has loaded 5 modifier groups
+[12Nov2026 01:05:01.683] [main/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 12 recipes
+[12Nov2026 01:05:01.698] [main/INFO] [com.teamabnormals.blueprint.core.Blueprint/]: Advancement Modification Manager has loaded 5 modifier groups
+[12Nov2026 01:05:01.792] [main/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 1917 advancements
+[12Nov2026 01:05:01.801] [main/INFO] [top.theillusivec4.curios.Curios/]: Loaded 10 curio slots
+[12Nov2026 01:05:01.805] [main/INFO] [top.theillusivec4.curios.Curios/]: Loaded 1 curio entities
+[12Nov2026 01:05:01.807] [main/INFO] [untamedwilds.UntamedWilds/]: Beginning loading of data for data loader: spawn_tables
+[12Nov2026 01:05:01.808] [main/INFO] [untamedwilds.UntamedWilds/]: Data loader for spawn_tables loaded 8 jsons
+[12Nov2026 01:05:01.808] [main/INFO] [untamedwilds.UntamedWilds/]: Beginning loading of data for data loader: entities
+[12Nov2026 01:05:01.823] [main/INFO] [untamedwilds.UntamedWilds/]: Data loader for entities loaded 36 jsons
+[12Nov2026 01:05:01.834] [main/INFO] [com.teamabnormals.blueprint.core.Blueprint/]: Chunk Generator Modification Manager has loaded 0 modifier groups
+[12Nov2026 01:05:02.497] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting minecraft server version 1.20.1
+[12Nov2026 01:05:02.497] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Loading properties
+[12Nov2026 01:05:02.497] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Default game type: SURVIVAL
+[12Nov2026 01:05:02.497] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[12Nov2026 01:05:02.582] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting Minecraft server on *:25565
+[12Nov2026 01:05:02.597] [Server thread/INFO] [net.minecraft.server.network.ServerConnectionListener/]: Using epoll channel type
+[12Nov2026 01:05:02.655] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[12Nov2026 01:05:02.656] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: The server will make no attempt to authenticate usernames. Beware.
+[12Nov2026 01:05:02.656] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[12Nov2026 01:05:02.656] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: To change this, set "online-mode" to "true" in the server.properties file.
+[12Nov2026 01:05:02.666] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file ./banc/serverconfig/curios-server.toml is not correct. Correcting
+[12Nov2026 01:05:02.667] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key keepCurios was corrected from null to its default, DEFAULT. 
+[12Nov2026 01:05:02.668] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key menu was corrected from null to its default, SimpleCommentedConfig:{}. 
+[12Nov2026 01:05:02.668] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key menu.enableLegacyMenu was corrected from null to its default, false. 
+[12Nov2026 01:05:02.668] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key menu.experimental was corrected from null to its default, SimpleCommentedConfig:{}. 
+[12Nov2026 01:05:02.668] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key menu.experimental.minimumColumns was corrected from null to its default, 1. 
+[12Nov2026 01:05:02.668] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key menu.experimental.maxSlotsPerPage was corrected from null to its default, 48. 
+[12Nov2026 01:05:02.669] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file ./banc/serverconfig/forge-server.toml is not correct. Correcting
+[12Nov2026 01:05:02.670] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server was corrected from null to its default, SimpleCommentedConfig:{}. 
+[12Nov2026 01:05:02.670] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringBlockEntities was corrected from null to its default, false. 
+[12Nov2026 01:05:02.670] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringEntities was corrected from null to its default, false. 
+[12Nov2026 01:05:02.670] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.fullBoundingBoxLadders was corrected from null to its default, false. 
+[12Nov2026 01:05:02.670] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.zombieBaseSummonChance was corrected from null to its default, 0.1. 
+[12Nov2026 01:05:02.670] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.zombieBabyChance was corrected from null to its default, 0.05. 
+[12Nov2026 01:05:02.670] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.permissionHandler was corrected from null to its default, forge:default_handler. 
+[12Nov2026 01:05:02.670] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.advertiseDedicatedServerToLan was corrected from null to its default, true. 
+[12Nov2026 01:05:02.670] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.useItemWithDurationZero was corrected from null to its default, false. 
+[12Nov2026 01:05:02.992] [Server thread/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Monde Terre à l'échelle 1:250
+[12Nov2026 01:05:02.993] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Preparing level "banc"
+[12Nov2026 01:05:06.263] [Worker-Main-3/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Cartes de la Terre chargées en 2137 ms
+[12Nov2026 01:05:06.303] [Worker-Main-3/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Côtes fines chargées : 14423 tuiles côtières en 2 ms
+[12Nov2026 01:05:06.320] [Worker-Main-3/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Lacs chargés : 6573 lacs sur 7199 tuiles en 3 ms
+[12Nov2026 01:05:39.061] [Worker-Main-3/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Fleuves chargés : 79884 segments en 32598 ms
+[12Nov2026 01:05:39.065] [Worker-Main-3/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : actif (détail 0.5, dossier /tmp/serveur/domaine_terre/relief)
+[12Nov2026 01:05:39.287] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 -3 téléchargé (565 Ko)
+[12Nov2026 01:05:39.360] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -1 -3 téléchargé (1084 Ko)
+[12Nov2026 01:05:39.472] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 -3 téléchargé (1031 Ko)
+[12Nov2026 01:05:39.605] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 -2 téléchargé (2336 Ko)
+[12Nov2026 01:05:39.670] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 0 -3 téléchargé (1137 Ko)
+[12Nov2026 01:05:39.833] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 1 -2 téléchargé (1628 Ko)
+[12Nov2026 01:05:39.876] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 -1 téléchargé (1800 Ko)
+[12Nov2026 01:05:40.058] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 2 téléchargé (2064 Ko)
+[12Nov2026 01:05:40.090] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 -1 téléchargé (1575 Ko)
+[12Nov2026 01:05:40.206] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 2 téléchargé (238 Ko)
+[12Nov2026 01:05:40.231] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 0 téléchargé (1912 Ko)
+[12Nov2026 01:05:40.295] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -2 -4 téléchargé (736 Ko)
+[12Nov2026 01:05:40.379] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 0 téléchargé (1953 Ko)
+[12Nov2026 01:05:40.389] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 1 téléchargé (573 Ko)
+[12Nov2026 01:05:40.521] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 1 téléchargé (2590 Ko)
+[12Nov2026 01:05:40.546] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -1 -4 téléchargé (794 Ko)
+[12Nov2026 01:05:40.635] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 0 -4 téléchargé (868 Ko)
+[12Nov2026 01:05:40.741] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 1 -4 téléchargé (945 Ko)
+[12Nov2026 01:05:40.786] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 0 -6 téléchargé (1121 Ko)
+[12Nov2026 01:05:40.895] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 -6 téléchargé (1605 Ko)
+[12Nov2026 01:05:40.959] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -1 -6 téléchargé (1166 Ko)
+[12Nov2026 01:05:40.986] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 -4 téléchargé (986 Ko)
+[12Nov2026 01:05:41.023] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 -5 téléchargé (922 Ko)
+[12Nov2026 01:05:41.160] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 -2 téléchargé (1571 Ko)
+[12Nov2026 01:05:41.165] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 -4 téléchargé (831 Ko)
+[12Nov2026 01:05:41.299] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 0 téléchargé (2097 Ko)
+[12Nov2026 01:05:41.395] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 2 téléchargé (1290 Ko)
+[12Nov2026 01:05:41.426] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 4 téléchargé (1320 Ko)
+[12Nov2026 01:05:41.510] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 4 téléchargé (291 Ko)
+[12Nov2026 01:05:41.591] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -3 -6 téléchargé (813 Ko)
+[12Nov2026 01:05:41.618] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 3 téléchargé (782 Ko)
+[12Nov2026 01:05:41.689] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -2 -6 téléchargé (815 Ko)
+[12Nov2026 01:05:41.823] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -3 -5 téléchargé (1075 Ko)
+[12Nov2026 01:05:41.847] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -1 -7 téléchargé (1437 Ko)
+[12Nov2026 01:05:41.920] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -2 -5 téléchargé (803 Ko)
+[12Nov2026 01:05:41.931] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 1 -7 téléchargé (1544 Ko)
+[12Nov2026 01:05:42.037] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -1 -8 téléchargé (1366 Ko)
+[12Nov2026 01:05:42.162] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 -7 téléchargé (1056 Ko)
+[12Nov2026 01:05:42.231] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 -7 téléchargé (1142 Ko)
+[12Nov2026 01:05:42.344] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 0 -8 téléchargé (1573 Ko)
+[12Nov2026 01:05:42.371] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 -7 téléchargé (782 Ko)
+[12Nov2026 01:05:42.426] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 -5 téléchargé (905 Ko)
+[12Nov2026 01:05:42.479] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 -6 téléchargé (887 Ko)
+[12Nov2026 01:05:42.570] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 0 -7 téléchargé (1252 Ko)
+[12Nov2026 01:05:42.615] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 -6 téléchargé (1358 Ko)
+[12Nov2026 01:05:42.708] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 -6 téléchargé (928 Ko)
+[12Nov2026 01:05:42.741] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 -3 téléchargé (691 Ko)
+[12Nov2026 01:05:42.916] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 -1 téléchargé (2041 Ko)
+[12Nov2026 01:05:42.931] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 -4 téléchargé (1065 Ko)
+[12Nov2026 01:05:43.009] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 1 téléchargé (1831 Ko)
+[12Nov2026 01:05:43.032] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 -1 téléchargé (1783 Ko)
+[12Nov2026 01:05:43.074] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 -4 téléchargé (844 Ko)
+[12Nov2026 01:05:43.136] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 -2 téléchargé (708 Ko)
+[12Nov2026 01:05:43.140] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 1 téléchargé (1793 Ko)
+[12Nov2026 01:05:43.239] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 -2 téléchargé (1556 Ko)
+[12Nov2026 01:05:43.299] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 -3 téléchargé (852 Ko)
+[12Nov2026 01:05:43.339] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 3 téléchargé (1935 Ko)
+[12Nov2026 01:05:43.490] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 5 téléchargé (806 Ko)
+[12Nov2026 01:05:43.589] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 4 téléchargé (515 Ko)
+[12Nov2026 01:05:43.679] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 4 téléchargé (523 Ko)
+[12Nov2026 01:05:43.714] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -9 2 téléchargé (1787 Ko)
+[12Nov2026 01:05:43.793] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 5 téléchargé (758 Ko)
+[12Nov2026 01:05:43.835] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -1 -9 téléchargé (2115 Ko)
+[12Nov2026 01:05:43.926] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -8 2 téléchargé (140 Ko)
+[12Nov2026 01:05:43.961] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -2 -9 téléchargé (1948 Ko)
+[12Nov2026 01:05:44.000] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 -9 téléchargé (353 Ko)
+[12Nov2026 01:05:44.123] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -2 -8 téléchargé (1157 Ko)
+[12Nov2026 01:05:44.161] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 -9 téléchargé (916 Ko)
+[12Nov2026 01:05:44.246] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 -8 téléchargé (163 Ko)
+[12Nov2026 01:05:44.273] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 -8 téléchargé (596 Ko)
+[12Nov2026 01:05:44.389] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 -8 téléchargé (57 Ko)
+[12Nov2026 01:05:44.431] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 -7 téléchargé (950 Ko)
+[12Nov2026 01:05:44.496] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 -5 téléchargé (1644 Ko)
+[12Nov2026 01:05:44.522] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 -7 téléchargé (841 Ko)
+[12Nov2026 01:05:44.603] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 -5 téléchargé (959 Ko)
+[12Nov2026 01:05:44.698] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 -3 téléchargé (1365 Ko)
+[12Nov2026 01:05:44.822] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 -3 téléchargé (2827 Ko)
+[12Nov2026 01:05:44.888] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 -1 téléchargé (1152 Ko)
+[12Nov2026 01:05:44.990] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 1 téléchargé (1039 Ko)
+[12Nov2026 01:05:45.047] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 -2 téléchargé (2676 Ko)
+[12Nov2026 01:05:45.088] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 2 téléchargé (2080 Ko)
+[12Nov2026 01:05:45.115] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 0 téléchargé (1143 Ko)
+[12Nov2026 01:05:45.194] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 2 téléchargé (1361 Ko)
+[12Nov2026 01:05:45.346] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 3 téléchargé (1925 Ko)
+[12Nov2026 01:05:45.380] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 4 téléchargé (924 Ko)
+[12Nov2026 01:05:45.431] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 6 téléchargé (1594 Ko)
+[12Nov2026 01:05:45.539] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 3 téléchargé (1036 Ko)
+[12Nov2026 01:05:45.642] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 4 téléchargé (1505 Ko)
+[12Nov2026 01:05:45.644] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 5 téléchargé (1969 Ko)
+[12Nov2026 01:05:45.702] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 7 téléchargé (1114 Ko)
+[12Nov2026 01:05:45.785] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 6 téléchargé (1427 Ko)
+[12Nov2026 01:05:45.842] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 6 téléchargé (2119 Ko)
+[12Nov2026 01:05:45.958] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 5 téléchargé (393 Ko)
+[12Nov2026 01:05:46.268] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 -9 téléchargé (2451 Ko)
+[12Nov2026 01:05:46.274] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 -10 téléchargé (2361 Ko)
+[12Nov2026 01:05:46.356] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 -6 téléchargé (1762 Ko)
+[12Nov2026 01:05:46.364] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 -9 téléchargé (1117 Ko)
+[12Nov2026 01:05:46.544] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 -10 téléchargé (1516 Ko)
+[12Nov2026 01:05:46.560] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 9 -5 téléchargé (1524 Ko)
+[12Nov2026 01:05:46.628] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 9 -1 téléchargé (581 Ko)
+[12Nov2026 01:05:46.735] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 9 -2 téléchargé (1321 Ko)
+[12Nov2026 01:05:46.771] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 -9 téléchargé (1537 Ko)
+[12Nov2026 01:05:46.831] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 10 -2 téléchargé (676 Ko)
+[12Nov2026 01:05:46.864] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 9 2 téléchargé (41 Ko)
+[12Nov2026 01:05:46.889] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 10 -1 téléchargé (98 Ko)
+[12Nov2026 01:05:47.088] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -10 4 téléchargé (2945 Ko)
+[12Nov2026 01:05:47.112] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -10 2 téléchargé (1705 Ko)
+[12Nov2026 01:05:47.163] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -11 0 téléchargé (1461 Ko)
+[12Nov2026 01:05:47.222] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -10 3 téléchargé (2248 Ko)
+[12Nov2026 01:05:47.258] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -10 0 téléchargé (820 Ko)
+[12Nov2026 01:05:47.378] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -11 1 téléchargé (1995 Ko)
+[12Nov2026 01:05:47.379] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -9 3 téléchargé (1446 Ko)
+[12Nov2026 01:05:47.450] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -9 4 téléchargé (562 Ko)
+[12Nov2026 01:05:47.506] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -10 1 téléchargé (2033 Ko)
+[12Nov2026 01:05:47.515] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 1 -12 téléchargé (730 Ko)
+[12Nov2026 01:05:47.588] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 0 -12 téléchargé (282 Ko)
+[12Nov2026 01:05:47.744] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 10 -3 téléchargé (826 Ko)
+[12Nov2026 01:05:47.757] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 -9 téléchargé (2571 Ko)
+[12Nov2026 01:05:47.806] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 10 4 téléchargé (1658 Ko)
+[12Nov2026 01:05:47.811] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 11 -3 téléchargé (193 Ko)
+[12Nov2026 01:05:47.885] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 -9 téléchargé (2437 Ko)
+[12Nov2026 01:05:48.004] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -12 2 téléchargé (1436 Ko)
+[12Nov2026 01:05:48.041] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 -10 téléchargé (471 Ko)
+[12Nov2026 01:05:48.164] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 -10 téléchargé (711 Ko)
+[12Nov2026 01:05:48.227] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -11 2 téléchargé (1759 Ko)
+[12Nov2026 01:05:48.998] [Worker-Main-3/INFO] [citadel/]: vanilla surface rule behavior unchanged
+[12Nov2026 01:05:49.982] [Worker-Main-2/INFO] [fr.domaineaubin.lieux.DomaineLieux/]: Grottes : 529 chunks
+[12Nov2026 01:05:50.156] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : naturalist:moth introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.156] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : naturalist:hyena introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.156] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : naturalist:ostrich introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.156] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : naturalist:termite introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.156] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : meadow:horned_sheep introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : ecologics:camel introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:reindeer introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:moose introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:walrus introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:deer introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:coyote introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:lammergeier introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:badger introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:pheasant introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:goose introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:songbird introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:crab introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:horseshoe_crab introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:eel_freshwater introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:eel_saltwater introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:lamprey introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:octopus introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:nautilus introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:barracuda introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:bobbit_worm introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:flying_fish introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:squid_giant introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:squid_colossal introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:feral_wolf introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:turkey introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:boar introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:squirrel introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.157] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:butterfly introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.158] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:dragonfly introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.158] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:tarantula introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.158] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:piranha introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.158] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:shark introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.158] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:whale introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.158] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:jellyfish introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.158] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : betteranimalsplus:brownbear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[12Nov2026 01:05:50.158] [Worker-Main-2/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Faune de la Terre : 289 espèces en surface, 13 sous terre (43 absentes du pack), 168 ms
+[12Nov2026 01:05:50.704] [Worker-Main-1/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Tailles : 156 créatures redimensionnées
+[12Nov2026 01:05:51.747] [Worker-Main-2/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Faune (génération) [65, -1360] CREATURE : biome domaine_terre:atlantique/fleuve, 36 espèces [cow, pig, sheep, chicken, horse, rabbit, fox, bee, boar, snake, snake, newt, newt, newt, butterfly, butterfly, butterfly, butterfly, butterfly, butterfly, butterfly, butterfly, butterfly, caterpillar, deer, finch, robin, snail, sparrow, deer, hedgehog, wooly_cow, squirrel, crow, ferret, shima_enaga]
+[12Nov2026 01:05:51.797] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[12Nov2026 01:05:52.337] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[12Nov2026 01:05:52.338] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[12Nov2026 01:05:52.823] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[12Nov2026 01:05:53.303] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[12Nov2026 01:05:53.345] [Worker-Main-3/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Faune (génération) [64, -1360] CREATURE : biome domaine_terre:atlantique/fleuve, 36 espèces [cow, pig, sheep, chicken, horse, rabbit, fox, bee, boar, snake, snake, newt, newt, newt, butterfly, butterfly, butterfly, butterfly, butterfly, butterfly, butterfly, butterfly, butterfly, caterpillar, deer, finch, robin, snail, sparrow, deer, hedgehog, wooly_cow, squirrel, crow, ferret, shima_enaga]
+[12Nov2026 01:05:53.802] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[12Nov2026 01:05:54.110] [Worker-Main-2/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Faune (génération) [64, -1359] CREATURE : biome domaine_terre:atlantique/fleuve, 36 espèces [cow, pig, sheep, chicken, horse, rabbit, fox, bee, boar, snake, snake, newt, newt, newt, butterfly, butterfly, butterfly, butterfly, butterfly, butterfly, butterfly, butterfly, butterfly, caterpillar, deer, finch, robin, snail, sparrow, deer, hedgehog, wooly_cow, squirrel, crow, ferret, shima_enaga]
+[12Nov2026 01:05:54.256] [Server thread/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Faune : contrôle des bêtes nées à la génération actif
+[12Nov2026 01:05:54.366] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[12Nov2026 01:05:54.851] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 1%
+[12Nov2026 01:05:55.306] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 1%
+[12Nov2026 01:05:55.814] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 2%
+[12Nov2026 01:05:56.311] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 2%
+[12Nov2026 01:05:56.812] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 3%
+[12Nov2026 01:05:56.916] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:05:57.316] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 4%
+[12Nov2026 01:05:57.798] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 5%
+[12Nov2026 01:05:58.300] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 6%
+[12Nov2026 01:05:58.562] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:05:58.866] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 7%
+[12Nov2026 01:05:59.298] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 8%
+[12Nov2026 01:05:59.801] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 9%
+[12Nov2026 01:06:00.305] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 10%
+[12Nov2026 01:06:00.829] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 11%
+[12Nov2026 01:06:01.318] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 12%
+[12Nov2026 01:06:01.803] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 13%
+[12Nov2026 01:06:02.312] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 15%
+[12Nov2026 01:06:02.811] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 15%
+[12Nov2026 01:06:03.311] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 16%
+[12Nov2026 01:06:03.803] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 17%
+[12Nov2026 01:06:04.298] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 18%
+[12Nov2026 01:06:04.832] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 20%
+[12Nov2026 01:06:05.311] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 22%
+[12Nov2026 01:06:05.827] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 22%
+[12Nov2026 01:06:06.305] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 23%
+[12Nov2026 01:06:06.466] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:06.466] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:06.466] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:06.466] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:06.803] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 24%
+[12Nov2026 01:06:07.300] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 25%
+[12Nov2026 01:06:07.798] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 26%
+[12Nov2026 01:06:08.305] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 28%
+[12Nov2026 01:06:08.816] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 29%
+[12Nov2026 01:06:09.247] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:09.248] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:09.248] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:09.342] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 31%
+[12Nov2026 01:06:09.853] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 32%
+[12Nov2026 01:06:10.316] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[12Nov2026 01:06:10.798] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 35%
+[12Nov2026 01:06:11.329] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 36%
+[12Nov2026 01:06:11.815] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 36%
+[12Nov2026 01:06:12.068] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:12.316] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 38%
+[12Nov2026 01:06:12.836] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 40%
+[12Nov2026 01:06:13.077] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:13.077] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:13.077] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:13.325] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 41%
+[12Nov2026 01:06:13.806] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 43%
+[12Nov2026 01:06:14.315] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 43%
+[12Nov2026 01:06:14.845] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 45%
+[12Nov2026 01:06:15.304] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 46%
+[12Nov2026 01:06:15.803] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 47%
+[12Nov2026 01:06:16.311] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 48%
+[12Nov2026 01:06:16.393] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:16.814] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 50%
+[12Nov2026 01:06:17.303] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 52%
+[12Nov2026 01:06:17.817] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 53%
+[12Nov2026 01:06:18.303] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 54%
+[12Nov2026 01:06:18.805] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 55%
+[12Nov2026 01:06:19.304] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 56%
+[12Nov2026 01:06:19.813] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 58%
+[12Nov2026 01:06:19.860] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:19.860] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:19.860] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:19.860] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:19.860] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:20.327] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 58%
+[12Nov2026 01:06:20.329] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:20.808] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 60%
+[12Nov2026 01:06:21.300] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 62%
+[12Nov2026 01:06:21.802] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 64%
+[12Nov2026 01:06:22.315] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 65%
+[12Nov2026 01:06:22.800] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 67%
+[12Nov2026 01:06:23.303] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 68%
+[12Nov2026 01:06:23.863] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 69%
+[12Nov2026 01:06:24.331] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 70%
+[12Nov2026 01:06:24.810] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 71%
+[12Nov2026 01:06:24.913] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:24.914] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:24.914] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:25.309] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 73%
+[12Nov2026 01:06:25.798] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 74%
+[12Nov2026 01:06:26.316] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 75%
+[12Nov2026 01:06:26.809] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 77%
+[12Nov2026 01:06:27.355] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 79%
+[12Nov2026 01:06:27.799] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 80%
+[12Nov2026 01:06:28.301] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 82%
+[12Nov2026 01:06:28.848] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 83%
+[12Nov2026 01:06:29.308] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 83%
+[12Nov2026 01:06:29.309] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:29.310] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:29.310] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:06:29.821] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 84%
+[12Nov2026 01:06:30.319] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 86%
+[12Nov2026 01:06:30.799] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 87%
+[12Nov2026 01:06:31.382] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 89%
+[12Nov2026 01:06:31.802] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 90%
+[12Nov2026 01:06:32.359] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 92%
+[12Nov2026 01:06:32.804] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 94%
+[12Nov2026 01:06:33.312] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 95%
+[12Nov2026 01:06:33.838] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 97%
+[12Nov2026 01:06:34.331] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 99%
+[12Nov2026 01:06:34.436] [Server thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 42639 ms
+[12Nov2026 01:06:34.436] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Done (91.771s)! For help, type "help"
+[12Nov2026 01:06:34.456] [Server thread/INFO] [net.minecraftforge.server.permission.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[12Nov2026 01:06:35.031] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -4 -4 téléchargé (447 Ko)
+[12Nov2026 01:06:57.271] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-441, -382] chunks in minecraft:overworld from [-441, -382] to [-429, -369] to be force loaded
+[12Nov2026 01:06:57.776] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 14 -5 téléchargé (2 Ko)
+[12Nov2026 01:07:06.209] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:12.729] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:12.730] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:12.730] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:14.191] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:17.655] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:17.655] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:18.158] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 15 -6 téléchargé (1123 Ko)
+[12Nov2026 01:07:18.359] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 15 -5 téléchargé (564 Ko)
+[12Nov2026 01:07:19.098] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:19.098] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:20.138] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:21.343] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:24.054] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [1876, -673] chunks in minecraft:overworld from [1876, -673] to [1888, -660] to be force loaded
+[12Nov2026 01:07:24.349] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:24.607] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:24.644] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -16 -10 téléchargé (1788 Ko)
+[12Nov2026 01:07:44.498] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:44.498] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:49.282] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-1988, -1309] chunks in minecraft:overworld from [-1988, -1309] to [-1976, -1297] to be force loaded
+[12Nov2026 01:07:51.150] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:52.076] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:52.076] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:52.076] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:52.800] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:53.806] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:54.154] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:58.171] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:59.201] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:07:59.202] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:03.460] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:05.800] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:05.800] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:05.800] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:06.260] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:07.174] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:07.174] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:07.301] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:07.301] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:07.301] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:07.304] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:07.330] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:08.298] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:08.298] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:08.325] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:08.325] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:08.325] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:08.473] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:09.518] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:10.376] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:10.376] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:14.052] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:08:15.177] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [123, -1221] chunks in minecraft:overworld from [123, -1221] to [135, -1208] to be force loaded
+[12Nov2026 01:08:47.012] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [956, 52] chunks in minecraft:overworld from [956, 52] to [971, 67] to be force loaded
+[12Nov2026 01:08:58.974] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [956, 68] chunks in minecraft:overworld from [956, 68] to [971, 75] to be force loaded
+[12Nov2026 01:09:09.710] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [972, 52] chunks in minecraft:overworld from [972, 52] to [980, 67] to be force loaded
+[12Nov2026 01:09:14.811] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [972, 68] chunks in minecraft:overworld from [972, 68] to [980, 75] to be force loaded
+[12Nov2026 01:09:19.322] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:09:48.330] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:09:51.446] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [903, -683] chunks in minecraft:overworld from [903, -683] to [918, -668] to be force loaded
+[12Nov2026 01:10:03.632] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:10:03.632] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:10:05.179] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:10:05.179] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:10:05.179] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:10:05.179] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:10:05.179] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:10:05.793] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [903, -667] chunks in minecraft:overworld from [903, -667] to [918, -659] to be force loaded
+[12Nov2026 01:10:18.119] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [919, -683] chunks in minecraft:overworld from [919, -683] to [927, -668] to be force loaded
+[12Nov2026 01:10:24.508] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [919, -667] chunks in minecraft:overworld from [919, -667] to [927, -659] to be force loaded
+[12Nov2026 01:10:24.509] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving the game (this may take a moment!)
+[12Nov2026 01:10:34.195] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (banc): All chunks are saved
+[12Nov2026 01:10:34.196] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[12Nov2026 01:10:34.196] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[12Nov2026 01:10:34.196] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[12Nov2026 01:10:34.196] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saved the game
+[12Nov2026 01:10:34.215] [Server thread/WARN] [net.minecraft.server.MinecraftServer/]: Can't keep up! Is the server overloaded? Running 239704ms or 4794 ticks behind
+[12Nov2026 01:10:41.462] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Unmarked all force loaded chunks in minecraft:overworld
+[12Nov2026 01:10:55.511] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:10:55.511] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:10:55.511] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:11:08.820] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:11:14.877] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [121, -1320] chunks in minecraft:overworld from [121, -1320] to [136, -1305] to be force loaded
+[12Nov2026 01:11:21.133] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:11:21.133] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:11:29.038] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [121, -1304] chunks in minecraft:overworld from [121, -1304] to [136, -1297] to be force loaded
+[12Nov2026 01:11:29.523] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:11:29.524] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:11:41.357] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:11:41.357] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:11:41.435] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [137, -1320] chunks in minecraft:overworld from [137, -1320] to [145, -1305] to be force loaded
+[12Nov2026 01:11:43.651] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:11:43.657] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:11:47.101] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [137, -1304] chunks in minecraft:overworld from [137, -1304] to [145, -1297] to be force loaded
+[12Nov2026 01:12:01.453] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -14 1 téléchargé (1407 Ko)
+[12Nov2026 01:12:30.337] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-1738, 85] chunks in minecraft:overworld from [-1738, 85] to [-1723, 100] to be force loaded
+[12Nov2026 01:12:33.591] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:12:33.592] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:12:33.592] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:12:33.592] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:12:41.150] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:12:43.590] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:12:43.590] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:12:43.590] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:12:44.811] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:12:47.239] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-1738, 101] chunks in minecraft:overworld from [-1738, 101] to [-1723, 109] to be force loaded
+[12Nov2026 01:12:47.793] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:12:47.793] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:12:47.793] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:13:02.070] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-1722, 85] chunks in minecraft:overworld from [-1722, 85] to [-1714, 100] to be force loaded
+[12Nov2026 01:13:05.855] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:13:08.415] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:13:08.416] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:13:08.416] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:13:08.416] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:13:08.416] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:13:08.416] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:13:08.416] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:13:08.416] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:13:08.416] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:13:08.416] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:13:09.054] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:13:09.473] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [-1722, 101] chunks in minecraft:overworld from [-1722, 101] to [-1714, 109] to be force loaded
+[12Nov2026 01:13:09.607] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [1874, -670] chunks in minecraft:overworld from [1874, -670] to [1886, -658] to be force loaded
+[12Nov2026 01:13:14.013] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:13:17.978] [Server thread/WARN] [net.minecraft.world.entity.EntityType/]: Skipping Entity with id 
+[12Nov2026 01:13:19.001] [Worker-Main-1/ERROR] [net.minecraft.Util/]: Detected setBlock in a far chunk [-1719, 110], pos: MutableBlockPos{x=-27492, y=64, z=1765}, status: minecraft:features, currently generating: Placed Direct{Configured: untamedwilds.world.gen.feature.FeatureFloatingPlants@677b5145: net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration@bf178f6}
+[12Nov2026 01:13:19.002] [Worker-Main-1/ERROR] [net.minecraft.Util/]: Detected setBlock in a far chunk [-1719, 110], pos: MutableBlockPos{x=-27492, y=64, z=1764}, status: minecraft:features, currently generating: Placed Direct{Configured: untamedwilds.world.gen.feature.FeatureFloatingPlants@677b5145: net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration@bf178f6}
+[12Nov2026 01:13:19.002] [Worker-Main-1/ERROR] [net.minecraft.Util/]: Detected setBlock in a far chunk [-1719, 110], pos: MutableBlockPos{x=-27495, y=64, z=1765}, status: minecraft:features, currently generating: Placed Direct{Configured: untamedwilds.world.gen.feature.FeatureFloatingPlants@677b5145: net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration@bf178f6}
+[12Nov2026 01:13:48.334] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Marked [858, -720] chunks in minecraft:overworld from [858, -720] to [870, -708] to be force loaded
+[12Nov2026 01:13:48.334] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving the game (this may take a moment!)
+[12Nov2026 01:13:58.713] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (banc): All chunks are saved
+[12Nov2026 01:13:58.713] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[12Nov2026 01:13:58.713] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[12Nov2026 01:13:58.713] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[12Nov2026 01:13:58.713] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saved the game
+[12Nov2026 01:13:58.723] [Server thread/INFO] [com.github.alexthe666.alexsmobs.AlexsMobs/]: Giving up search for pupfish chunk after 7 minutes. no pupfish will spawn in this world :( 
+[12Nov2026 01:14:09.204] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Unmarked all force loaded chunks in minecraft:overworld
+[12Nov2026 01:14:09.205] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping the server
+[12Nov2026 01:14:09.269] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[12Nov2026 01:14:09.271] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[12Nov2026 01:14:09.272] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[12Nov2026 01:14:29.845] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[banc]'/minecraft:overworld
+[12Nov2026 01:14:30.164] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[banc]'/minecraft:the_end
+[12Nov2026 01:14:30.165] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[banc]'/minecraft:the_nether
+[12Nov2026 01:14:30.188] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (banc): All chunks are saved
+[12Nov2026 01:14:30.188] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[12Nov2026 01:14:30.188] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[12Nov2026 01:14:30.188] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
