@@ -149,11 +149,31 @@ public final class Tailles {
     /** Tailles d'origine (boîte de collision) de toutes les créatures, pour régler la table. */
     @SubscribeEvent
     public static void export(ServerStartedEvent event) {
-        StringBuilder sb = new StringBuilder("id;categorie;largeur;hauteur;facteur\n");
+        // 12/11/2026 : statistiques de base (vie, dégâts, armure, vitesse, portée de suivi) pour classer les monstres
+        StringBuilder sb = new StringBuilder("id;categorie;largeur;hauteur;facteur;vie;degats;armure;vitesse;suivi\n");
         for (var e : ForgeRegistries.ENTITY_TYPES.getEntries()) {
             EntityType<?> t = e.getValue();
             sb.append(e.getKey().location()).append(';').append(t.getCategory().getName()).append(';')
-                    .append(t.getWidth()).append(';').append(t.getHeight()).append(';').append(facteur(t)).append('\n');
+                    .append(t.getWidth()).append(';').append(t.getHeight()).append(';').append(facteur(t));
+            try {
+                @SuppressWarnings("unchecked")
+                EntityType<? extends net.minecraft.world.entity.LivingEntity> v =
+                        (EntityType<? extends net.minecraft.world.entity.LivingEntity>) t;
+                if (net.minecraft.world.entity.ai.attributes.DefaultAttributes.hasSupplier(v)) {
+                    var a = net.minecraft.world.entity.ai.attributes.DefaultAttributes.getSupplier(v);
+                    for (var at : new net.minecraft.world.entity.ai.attributes.Attribute[]{
+                            net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH,
+                            net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE,
+                            net.minecraft.world.entity.ai.attributes.Attributes.ARMOR,
+                            net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED,
+                            net.minecraft.world.entity.ai.attributes.Attributes.FOLLOW_RANGE}) {
+                        sb.append(';').append(a.hasAttribute(at) ? a.getBaseValue(at) : 0.0);
+                    }
+                }
+            } catch (RuntimeException ex) {
+                // pas une créature vivante
+            }
+            sb.append('\n');
         }
         try {
             Files.writeString(FMLPaths.GAMEDIR.get().resolve("domaine_tailles.csv"), sb.toString(), StandardCharsets.UTF_8);
