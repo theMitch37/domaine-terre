@@ -303,10 +303,15 @@ public final class FauneSpawns {
             event.getEntity().getPersistentData().putString(RAISON, event.getSpawnType().name());
     }
 
-    @SubscribeEvent(priority = EventPriority.LOW)
-    public static void espece(EntityJoinLevelEvent event) {
-        if (event.isCanceled() || !(event.getLevel() instanceof ServerLevel n)) return;
-        if (!(event.getEntity() instanceof Mob m) || !m.getClass().getName().startsWith("untamedwilds.")) return;
+    /*
+     * 13/11/2026 (test en jeu : requin-marteau en pleine mer tempérée de l'Atlantique nord) : à l'arrivée dans le monde,
+     * Untamed Wilds n'a pas toujours encore tiré l'espèce (variante 0 : requin-renard, permis en mer tempérée) ; elle
+     * arrive juste après. La vérification se fait donc au deuxième tick de la bête, espèce connue.
+     */
+    @SubscribeEvent
+    public static void espece(net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent event) {
+        if (!(event.getEntity() instanceof Mob m) || m.tickCount < 2 || !(m.level() instanceof ServerLevel n)) return;
+        if (!m.getClass().getName().startsWith("untamedwilds.")) return;
         net.minecraft.nbt.CompoundTag d = m.getPersistentData();
         if (d.getBoolean(ESPECE)) return;
         d.putBoolean(ESPECE, true);
@@ -329,7 +334,7 @@ public final class FauneSpawns {
                 if (f.parEspece(m.getType(), e) && f.permis(m.getType(), e, pos.getX(), pos.getZ(), biome)) ok.add(i);
             }
             if (ok.isEmpty()) {
-                event.setCanceled(true);
+                m.discard();
                 if (JOURNAL.incrementAndGet() <= 20) DomaineTerre.LOGGER.info("Faune : {} ({}) retiré en {} (hors de son milieu réel)",
                         EntityType.getKey(m.getType()), esp, pos.toShortString());
                 return;

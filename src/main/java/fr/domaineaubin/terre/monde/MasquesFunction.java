@@ -73,7 +73,10 @@ public final class MasquesFunction implements DensityFunction {
         int y = ctx.blockY();
         double g = Math.max(Mth.clamp((FOND - y) / 8.0, -1.0, 1.0), Mth.clamp((y - val[k]) / 8.0, -1.0, 1.0));
         double t = terrain.compute(ctx);
-        double m = g >= 1.0 ? Math.min(t, 1.0) : Math.min(t, Math.max(grottes.compute(ctx), g));
+        // 13/11/2026 : sous y -60, les grottes s'élargissent peu à peu en descendant (jusqu'à -0,12 de densité vers y -360) :
+        // sans ça, les grandes cavités du bruit vanilla laissaient des régions entières pleines sous -150
+        double creuse = y < -60 ? Math.min(1.0, (-60.0 - y) / 300.0) * 0.12 : 0.0;
+        double m = g >= 1.0 ? Math.min(t, 1.0) : Math.min(t, Math.max(grottes.compute(ctx) - creuse, g));
         double plancher = y <= val[k + 1] && y >= val[k + 2] ? 0.5 : -1.0;
         double plafond = val[k + 3] >= 1.0 || y <= Terrain.PLAFOND_MER ? 1.0 : -20.0;
         return Math.min(Math.max(m, plancher), plafond);
