@@ -661,7 +661,7 @@ public final class Terrain {
     /** Profondeur sous le sol où les grottes peuvent commencer (sous l'eau : plus bas, pour ne jamais percer un fond). */
     static final double GROTTES_SOUS_SOL = 18.0, GROTTES_SOUS_EAU = 32.0;
     /** Bas des grottes (10/11/2026) : l'ancien fond du monde, + 8 blocs pour le fond arrondi (vide jusqu'à y -60). */
-    static final double FOND_GROTTES = -52.0;
+    static final double FOND_GROTTES = -496.0;   // 12/11/2026 : grottes jusqu'au fond du monde (avant -52)
     /**
      * Autour des lieux (07/11/2026) : sur cette distance, la limite des grottes descend progressivement, jusqu'à
      * GROTTES_LIEU blocs de plus sous le sol au bord et sous le lieu (aucune grotte à portée de vue). Avant, la limite tombait d'un

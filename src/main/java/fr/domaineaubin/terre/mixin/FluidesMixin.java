@@ -39,6 +39,9 @@ public abstract class FluidesMixin {
             }
             if (t.sansAquifere(x, z)) return sec;          // lit d'un cours d'eau : FleuveFeature y met l'eau
             if (y < Math.min(-54, mer) && t.enMer(x, z)) return eau;
+            // 12/11/2026 : grottes jusqu'au fond du monde ; sous y -54, le jeu remplirait tout de lave : grottes sèches
+            // (les poches d'eau et de lave locales de l'aquifère restent)
+            if (y < -54) return sec;
             return vanilla.computeFluid(x, y, z);
         });
     }

@@ -23,7 +23,7 @@ public final class MasquesFunction implements DensityFunction {
             ).apply(i, MasquesFunction::new)));
 
     /** Bas des grottes : comme Terrain.grottes (fond arrondi de y -60 à -44). */
-    private static final double FOND = -52.0;
+    private static final double FOND = Terrain.FOND_GROTTES;
 
     private final DensityFunction terrain, grottes;
     // mémoire par colonne (16 x 16), propre à cette copie
