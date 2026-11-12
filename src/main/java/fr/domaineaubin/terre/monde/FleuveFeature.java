@@ -30,22 +30,10 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
         BlockState eau = Blocks.WATER.defaultBlockState();
         boolean modifie = false;
-        // diagnostic temporaire (12/11/2026) : lac de Joux au banc
-        for (int[] q : DIAG_POINTS)
-            if (q[0] >> 4 == x0 >> 4 && q[1] >> 4 == z0 >> 4)
-                fr.domaineaubin.terre.DomaineTerre.LOGGER.info("DIAG colonne {} {} : {}", q[0], q[1], t.diagnosticColonne(q[0], q[1]));
         for (int dx = 0; dx < 16; dx++) {
             for (int dz = 0; dz < 16; dz++) {
                 int x = x0 + dx, z = z0 + dz;
                 int w = t.eauLit(x, z);
-                if (w != Terrain.SANS_LAC && DIAG.get() < 30) {
-                    int v = t.eauLit(x + 1, z), u = t.eauLit(x, z + 1);
-                    if ((v != Terrain.SANS_LAC && Math.abs(v - w) > 8) || (u != Terrain.SANS_LAC && Math.abs(u - w) > 8)) {
-                        DIAG.incrementAndGet();
-                        fr.domaineaubin.terre.DomaineTerre.LOGGER.info("DIAG eau {} {} : {} | x+1 : {} | z+1 : {}", x, z,
-                                t.diagnosticRiviere(x, z), t.diagnosticRiviere(x + 1, z), t.diagnosticRiviere(x, z + 1));
-                    }
-                }
                 // abords du lit : seulement les creux sous le niveau de la rivière (11/11/2026)
                 if (w == Terrain.SANS_LAC) w = t.eauAbords(x, z);
                 if (w == Terrain.SANS_LAC) continue;
@@ -110,9 +98,7 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
         for (int dx = 0; dx < 16; dx++) {
             for (int dz = 0; dz < 16; dz++) {
                 int x = x0 + dx, z = z0 + dz;
-                // (12/11/2026, banc Jökulsárlón : 800 blocs de poches restées sous la lagune) la carte de hauteur du fond
-                // date du bruit du terrain : un lieu qui a creusé son lit ensuite laissait le fond « plus haut » que les
-                // poches ; on descend jusqu'à 96 blocs sous la surface
+                // jusqu'à 96 blocs sous la surface (la carte de hauteur du fond peut dater d'avant un creusement)
                 int haut = niveau.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x, z) - 1;
                 int fond = Math.max(niveau.getMinBuildHeight(), haut - 96);
                 boolean sousEau = false;
@@ -138,16 +124,6 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
                     }
                 }
             }
-        }
-        // diagnostic temporaire (12/11/2026) : poches de Jökulsárlón
-        for (int[] q : new int[][]{{-7105, -28512}, {-7110, -28497}, {-7106, -28511}}) {
-            if (q[0] >> 4 != x0 >> 4 || q[1] >> 4 != z0 >> 4) continue;
-            StringBuilder sb = new StringBuilder();
-            for (int y = 47; y <= 64; y++) sb.append(y).append('=').append(net.minecraftforge.registries.ForgeRegistries.BLOCKS
-                    .getKey(niveau.getBlockState(pos.set(q[0], y, q[1])).getBlock()).getPath()).append(' ');
-            fr.domaineaubin.terre.DomaineTerre.LOGGER.info("DIAG poche {} {} surfWG={} fondWG={} lit={} mer={} cote={} : {}", q[0], q[1],
-                    niveau.getHeight(Heightmap.Types.WORLD_SURFACE_WG, q[0], q[1]), niveau.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, q[0], q[1]),
-                    t.eauLit(q[0], q[1]), t.enMer(q[0], q[1]), String.format(java.util.Locale.ROOT, "%.1f", t.distanceCote(q[0], q[1])), sb);
         }
         // herbe sous l'eau hors des lits (bord des lacs, plats de la côte, 11/11/2026, banc : 130 à 330 colonnes par
         // zone, sous 1 à 2 blocs d'eau surtout) : les règles de surface ne voient pas l'eau des aquifères du mod ; sous
@@ -289,10 +265,6 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
         return (h >>> 11) * 0x1.0p-53;
     }
 
-    private static final int[][] DIAG_POINTS = {{2844, -20755}, {2842, -20755}, {2858, -20764}, {2862, -20770}, {2840, -20749},
-            {2850, -20762}, {2830, -20762}, {2862, -20767}, {-49604, -16496}, {-49616, -16478}, {-49616, -16494},
-            {-49600, -16488}, {-49590, -16500}};
-    private static final java.util.concurrent.atomic.AtomicInteger DIAG = new java.util.concurrent.atomic.AtomicInteger();
 
     private static boolean plusBas(Terrain t, int x, int z, int w) {
         int v = t.eauLit(x, z);

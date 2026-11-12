@@ -38,7 +38,9 @@ public class MerDesLieuxFeature extends Feature<NoneFeatureConfiguration> {
                 if (fond >= 60 || !l.inonde(x, z, fond)) continue;
                 for (int y = (int) Math.floor(fond) + 2; y <= Terrain.NIVEAU_MER - 1; y++) {
                     BlockState b = niveau.getBlockState(p.set(x, y, z));
-                    if (!b.isAir() && !b.is(Blocks.WATER)) {
+                    // (12/11/2026, banc Jökulsárlón : 800 blocs de poches d'air) l'air sous un banc retiré devient de
+                    // l'eau aussi, sinon il restait une poche sous la mer
+                    if (!b.is(Blocks.WATER)) {
                         niveau.setBlock(p, Blocks.WATER.defaultBlockState(), 2);
                         modifie = true;
                     }
