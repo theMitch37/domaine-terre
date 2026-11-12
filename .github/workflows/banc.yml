@@ -147,6 +147,7 @@ jobs:
           cp /tmp/serveur/logs/latest.log /tmp/banc/latest.log 2>/dev/null || true
           cp /tmp/banc_script.log /tmp/banc/script.log 2>/dev/null || true
           cp /tmp/serveur/domaine_tailles.csv /tmp/banc/domaine_tailles.csv 2>/dev/null || true   # tailles d'origine
+          cp /tmp/serveur/domaine_monstres.csv /tmp/banc/domaine_monstres.csv 2>/dev/null || true   # statistiques des monstres
           ls /tmp/serveur/mods > /tmp/banc/mods.txt 2>/dev/null || true
           cp /tmp/serveur/config/untamedwilds-common.toml /tmp/banc/ 2>/dev/null || true
           # tables d'apparition propres d'Untamed Wilds (10/11/2026 : bêtes nées en plus de la table)
