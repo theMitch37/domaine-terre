@@ -110,8 +110,11 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
         for (int dx = 0; dx < 16; dx++) {
             for (int dz = 0; dz < 16; dz++) {
                 int x = x0 + dx, z = z0 + dz;
-                int fond = niveau.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x, z);
+                // (12/11/2026, banc Jökulsárlón : 800 blocs de poches restées sous la lagune) la carte de hauteur du fond
+                // date du bruit du terrain : un lieu qui a creusé son lit ensuite laissait le fond « plus haut » que les
+                // poches ; on descend jusqu'à 96 blocs sous la surface
                 int haut = niveau.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x, z) - 1;
+                int fond = Math.max(niveau.getMinBuildHeight(), haut - 96);
                 boolean sousEau = false;
                 for (int y = haut; y >= fond; y--) {
                     BlockState b = niveau.getBlockState(pos.set(x, y, z));
