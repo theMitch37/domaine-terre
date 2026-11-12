@@ -180,5 +180,49 @@ public final class Tailles {
         } catch (Exception ex) {
             DomaineTerre.LOGGER.warn("Tailles : export impossible", ex);
         }
+        exportMonstres(event.getServer().overworld());
+    }
+
+    /**
+     * 12/11/2026 (classement des monstres par difficulté, pour les étages) : statistiques de base de toutes les créatures
+     * hostiles (catégorie MONSTER ou interface Enemy) dans domaine_monstres.csv : vie, dégâts, armure, vitesse, portée
+     * de suivi, vol, attaque à distance (RangedAttackMob), explosion (Creeper / nom), poison (nom).
+     */
+    private static void exportMonstres(net.minecraft.server.level.ServerLevel niveau) {
+        StringBuilder sb = new StringBuilder("id;categorie;vie;degats;armure;vitesse;suivi;vole;distance;largeur;hauteur\n");
+        for (var e : ForgeRegistries.ENTITY_TYPES.getEntries()) {
+            EntityType<?> t = e.getValue();
+            try {
+                if (!net.minecraft.world.entity.ai.attributes.DefaultAttributes.hasSupplier(t)) continue;
+                net.minecraft.world.entity.Entity en = t.create(niveau);
+                if (en == null) continue;
+                boolean hostile = t.getCategory() == net.minecraft.world.entity.MobCategory.MONSTER
+                        || en instanceof net.minecraft.world.entity.monster.Enemy;
+                if (!hostile || !(en instanceof net.minecraft.world.entity.LivingEntity le)) { en.discard(); continue; }
+                java.util.function.Function<net.minecraft.world.entity.ai.attributes.Attribute, String> v = a -> {
+                    var i = le.getAttribute(a);
+                    return i == null ? "" : String.valueOf(i.getBaseValue());
+                };
+                boolean vole = en instanceof net.minecraft.world.entity.FlyingMob
+                        || le.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.FLYING_SPEED) != null;
+                boolean distance = en instanceof net.minecraft.world.entity.monster.RangedAttackMob;
+                sb.append(e.getKey().location()).append(';').append(t.getCategory().getName()).append(';')
+                        .append(v.apply(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH)).append(';')
+                        .append(v.apply(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE)).append(';')
+                        .append(v.apply(net.minecraft.world.entity.ai.attributes.Attributes.ARMOR)).append(';')
+                        .append(v.apply(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)).append(';')
+                        .append(v.apply(net.minecraft.world.entity.ai.attributes.Attributes.FOLLOW_RANGE)).append(';')
+                        .append(vole).append(';').append(distance).append(';')
+                        .append(t.getWidth()).append(';').append(t.getHeight()).append('\n');
+                en.discard();
+            } catch (Throwable ex) {
+                sb.append(e.getKey().location()).append(";erreur;;;;;;;;;\n");
+            }
+        }
+        try {
+            Files.writeString(FMLPaths.GAMEDIR.get().resolve("domaine_monstres.csv"), sb.toString(), StandardCharsets.UTF_8);
+        } catch (Exception ex) {
+            DomaineTerre.LOGGER.warn("Monstres : export impossible", ex);
+        }
     }
 }
