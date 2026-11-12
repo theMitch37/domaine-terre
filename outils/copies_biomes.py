@@ -30,6 +30,11 @@ def charger(p):
 RETIRES = {"minecraft:lake_lava_surface", "minecraft:lake_lava_underground", "minecraft:spring_water",
            "minecraft:spring_lava", "minecraft:spring_lava_frozen", "minecraft:monster_room", "minecraft:monster_room_deep"}
 
+# Minerais vanilla remplacés par domaine_terre:minerais (12/11/2026, le retrait par biome_modifier ne prenait pas)
+RETIRES |= {"minecraft:ore_" + n for n in ("coal_upper", "coal_lower", "iron_upper", "iron_middle", "iron_small", "gold_extra",
+            "gold", "gold_lower", "redstone", "redstone_lower", "diamond", "diamond_large", "diamond_buried", "lapis",
+            "lapis_buried", "copper", "copper_large", "emerald")}
+
 
 def ecrire(p, d):
     if isinstance(d, dict) and isinstance(d.get("features"), list):
