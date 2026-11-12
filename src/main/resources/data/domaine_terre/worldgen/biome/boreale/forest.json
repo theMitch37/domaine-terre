@@ -1,6 +1,6 @@
 {
  "has_precipitation": true,
- "temperature": 0.7,
+ "temperature": 0.35,
  "downfall": 0.8,
  "effects": {
   "mood_sound": {
