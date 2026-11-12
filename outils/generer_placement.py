@@ -206,7 +206,7 @@ ECHELLE = {("aardvark", "common"): 0.72,
            ("baleen_whale", "humpback"): 5.36,
            ("baleen_whale", "minke"): 2.86,
            ("baleen_whale", "sei"): 6.07,
-           ("bear", "black"): 1.15,     # 12/11 (test final : encore petit)
+           ("bear", "black"): 1.0,     # 12/11 (test final : encore petit)
            ("bear", "brown"): 1.0,
            ("bear", "panda"): 0.69,
            ("bear", "polar"): 1.08,
@@ -259,10 +259,10 @@ ECHELLE = {("aardvark", "common"): 0.72,
            ("giant_salamander", "hellbender"): 0.44,
            ("giant_salamander", "japanese"): 0.92,
            ("hippo", "common"): 1.6,     # 12/11 (test en jeu, encore petit à 1,25) : 1,5 m au garrot, 3,5 à 4 m de long
-           ("hyena", "aardwolf"): 0.8,     # 12/11 (test final : encore petit)
-           ("hyena", "brown"): 1.15,     # 12/11 (test final : encore petit)
-           ("hyena", "spotted"): 1.3,     # 12/11 (test final : encore petit)
-           ("hyena", "striped"): 1.1,     # 12/11 (test final : encore petit)
+           ("hyena", "aardwolf"): 0.6,     # 12/11 (test final : encore petit)
+           ("hyena", "brown"): 0.95,     # 12/11 (test final : encore petit)
+           ("hyena", "spotted"): 1.05,     # 12/11 (test final : encore petit)
+           ("hyena", "striped"): 0.9,     # 12/11 (test final : encore petit)
            ("king_crab", "centolla"): 1.67,
            ("king_crab", "red"): 2.0,
            ("king_crab", "spiny"): 1.33,
@@ -284,11 +284,11 @@ ECHELLE = {("aardvark", "common"): 0.72,
            ("newt", "ribbed"): 0.52,
            ("newt", "tiger"): 0.52,
            ("opossum", "virginia"): 0.56,
-           ("rhino", "black"): 1.7,     # 12/11 (test final : encore petit)
-           ("rhino", "indian"): 1.8,     # 12/11 (test final : encore petit)
-           ("rhino", "javan"): 1.55,     # 12/11 (test final : encore petit)
-           ("rhino", "sumatran"): 1.3,     # 12/11 (test final : encore petit)
-           ("rhino", "white"): 1.8,     # 12/11 (test final : encore petit)
+           ("rhino", "black"): 1.4,     # 12/11 (test final : encore petit)
+           ("rhino", "indian"): 1.5,     # 12/11 (test final : encore petit)
+           ("rhino", "javan"): 1.3,     # 12/11 (test final : encore petit)
+           ("rhino", "sumatran"): 1.1,     # 12/11 (test final : encore petit)
+           ("rhino", "white"): 1.5,     # 12/11 (test final : encore petit)
            ("sawfish", "dwarf"): 0.72,
            ("sawfish", "green"): 2.3,     # 11/11 : 8 blocs en jeu pour 6-7 m
            ("sawfish", "large_tooth"): 2.3,
