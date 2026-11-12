@@ -341,12 +341,31 @@ public class TerroirBiomeSource extends BiomeSource {
         String chemin = choix.unwrapKey().map(c -> c.location().getPath()).orElse("");
         String temp = TEMP_MER.get(chemin);
         if (temp == null) return choix;
+        temp = temperatureMer(bx, bz);
         Holder<Biome>[] tab = t.mers().get(temp);
         if (tab == null) return choix;
         double fond = Terrain.get().hauteur(bx, bz);
         double prof = Terrain.NIVEAU_MER - fond;
         int i = fond <= FOND_ABYSSE ? 3 : prof < 6.0 ? 0 : prof < 20.0 ? 1 : 2;
         return tab[i];
+    }
+
+    /**
+     * 12/11/2026 (test en jeu : corail aux embouchures, pas de récif sur la Grande Barrière) : la température de la mer
+     * venait du bruit climatique (la mer « chaude » n'apparaissait presque qu'au bord des déserts). Elle suit maintenant
+     * la latitude, comme la vraie température de surface : chaude sous ~24°, tiède jusqu'à ~34°, tempérée jusqu'à ~50°,
+     * froide jusqu'à ~66°, gelée au-delà ; la dérive nord-atlantique (Gulf Stream) repousse le froid de ~10° entre
+     * 40° O et 50° E (côte norvégienne libre de glace) ; frontières adoucies par un bruit de ±1,5°.
+     */
+    static String temperatureMer(int bx, int bz) {
+        double lat = Terrain.lat(bz), lon = Terrain.lon(bx);
+        double a = Math.abs(lat) + BRUIT_FRONTIERE.noise(bx / 900.0, 3.7, bz / 900.0) * 1.5;
+        if (lat > 40.0 && lon > -40.0 && lon < 50.0) a -= 10.0;
+        if (a < 24.0) return "chaude";
+        if (a < 34.0) return "tiede";
+        if (a < 50.0) return "temperee";
+        if (a < 66.0) return "froide";
+        return "gelee";
     }
 
     /**
