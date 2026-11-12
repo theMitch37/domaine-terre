@@ -67,7 +67,11 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
                 // marche : un voisin du lit est plus bas, l'eau de surface doit couler (sinon un mur d'eau immobile)
                 if (eauEnHaut && niveau.getBlockState(pos.set(x, w - 1, z)).is(Blocks.WATER)
                         && (plusBas(t, x + 1, z, w) || plusBas(t, x - 1, z, w) || plusBas(t, x, z + 1, w)
-                        || plusBas(t, x, z - 1, w))) {
+                        || plusBas(t, x, z - 1, w)
+                        // 12/11/2026 (test en jeu, Grand Canyon côté Powell : l'eau restait immobile au bord du rebord) :
+                        // un voisin hors du lit vide sur deux blocs (falaise) : l'eau déborde et tombe en cascade
+                        || falaise(niveau, t, x + 1, z, w, pos) || falaise(niveau, t, x - 1, z, w, pos)
+                        || falaise(niveau, t, x, z + 1, w, pos) || falaise(niveau, t, x, z - 1, w, pos))) {
                     niveau.scheduleTick(pos.set(x, w - 1, z), Fluids.WATER, 1);
                 }
             }
@@ -265,6 +269,13 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
         return (h >>> 11) * 0x1.0p-53;
     }
 
+
+    private static boolean falaise(net.minecraft.world.level.WorldGenLevel niveau, Terrain t, int x, int z, int w,
+                                   net.minecraft.core.BlockPos.MutableBlockPos pos) {
+        if (t.eauLit(x, z) != Terrain.SANS_LAC) return false;
+        BlockPos.MutableBlockPos p = new BlockPos.MutableBlockPos(x, w - 1, z);
+        return niveau.getBlockState(p).isAir() && niveau.getBlockState(p.setY(w - 2)).isAir();
+    }
 
     private static boolean plusBas(Terrain t, int x, int z, int w) {
         int v = t.eauLit(x, z);
