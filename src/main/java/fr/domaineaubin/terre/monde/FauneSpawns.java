@@ -262,6 +262,45 @@ public final class FauneSpawns {
         }
     }
 
+    /*
+     * 12/11/2026 (test en jeu : narvals et bélugas de Better Animals Plus) : ce sont des variantes de sa « baleine »,
+     * qui choisit la sienne d'après des étiquettes de biome que nos mers n'ont pas : n'importe laquelle, n'importe où.
+     * À sa première arrivée, la baleine prend une variante de la température de sa mer (narval et béluga dans les mers
+     * gelées et froides seulement, fausse orque et globicéphale dans les mers chaudes).
+     */
+    private static final String BALEINE = "domaine_terre_baleine";
+    private static final String[][] BALEINES = {
+            {"sperm", "false_killer", "pilot", "cuviers"},                      // chaude
+            {"sperm", "pilot", "false_killer", "cuviers", "blue"},              // tiède
+            {"blue", "right", "sperm", "pilot", "bottlenose", "cuviers"},       // tempérée
+            {"beluga", "right", "blue", "sperm", "bottlenose", "pilot"},        // froide
+            {"narwhal", "beluga", "right"}};                                    // gelée
+    private static final String[] TEMPS_MER = {"chaude", "tiede", "temperee", "froide", "gelee"};
+
+    @SubscribeEvent(priority = EventPriority.LOW)
+    public static void baleine(EntityJoinLevelEvent event) {
+        if (event.isCanceled() || !(event.getLevel() instanceof ServerLevel n)) return;
+        net.minecraft.world.entity.Entity e = event.getEntity();
+        if (!e.getClass().getName().endsWith(".EntityWhale")) return;
+        net.minecraft.nbt.CompoundTag d = e.getPersistentData();
+        if (d.getBoolean(BALEINE) || e.hasCustomName()) return;
+        d.putBoolean(BALEINE, true);
+        String chemin = n.getBiome(e.blockPosition()).unwrapKey()
+                .filter(k -> k.location().getNamespace().equals(DomaineTerre.MOD_ID))
+                .map(k -> k.location().getPath()).orElse("");
+        if (!chemin.startsWith("mer/")) return;
+        String t = chemin.substring(4).split("_")[0];
+        int i = java.util.Arrays.asList(TEMPS_MER).indexOf(t);
+        if (i < 0) return;
+        String[] l = BALEINES[i];
+        String v = l[Math.floorMod(e.getUUID().hashCode(), l.length)];
+        try {
+            e.getClass().getMethod("setType", String.class).invoke(e, v);
+        } catch (ReflectiveOperationException ex) {
+            DomaineTerre.LOGGER.warn("Faune : variante de baleine non réglée ({})", ex.toString());
+        }
+    }
+
     /** Monstres plus forts en descendant : +50 % de vie, +2 dégâts, +2 armure par étage sous les couches hautes. */
     @SubscribeEvent
     public static void force(MobSpawnEvent.FinalizeSpawn event) {

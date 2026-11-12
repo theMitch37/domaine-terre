@@ -83,8 +83,44 @@ public final class Tailles {
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void taille(EntityEvent.Size event) {
-        float f = facteur(event.getEntity().getType());
-        if (f != 1.0f) event.setNewSize(event.getNewSize().scale(f), true);
+        float f = facteur(event.getEntity().getType()) * echelleUW(event.getEntity());
+        if (Math.abs(f - 1.0f) > 0.001f) event.setNewSize(event.getNewSize().scale(f), true);
+    }
+
+    /*
+     * 12/11/2026 (test en jeu : requins, poissons-scies d'Untamed Wilds, boîte bien plus petite ou plus grande que la
+     * bête) : Untamed Wilds agrandit le modèle de chaque espèce (« scale » du datapack × taille de l'individu) mais pas
+     * la boîte de collision, restée celle du type. Elle suit maintenant l'échelle du modèle, relue par réflexion.
+     */
+    private static final Map<Class<?>, java.lang.reflect.Method[]> UW = new java.util.concurrent.ConcurrentHashMap<>();
+    private static final java.lang.reflect.Method[] AUCUNE = new java.lang.reflect.Method[0];
+
+    static float echelleUW(net.minecraft.world.entity.Entity e) {
+        java.lang.reflect.Method[] m = UW.computeIfAbsent(e.getClass(), c -> {
+            if (!c.getName().startsWith("untamedwilds.")) return AUCUNE;
+            try {
+                return new java.lang.reflect.Method[]{c.getMethod("getModelScale"), c.getMethod("getMobSize")};
+            } catch (NoSuchMethodException ex) {
+                return AUCUNE;
+            }
+        });
+        if (m.length == 0) return 1.0f;
+        try {
+            float s = (Float) m[0].invoke(e) * (Float) m[1].invoke(e);
+            return s > 0.05f && s < 20.0f ? s : 1.0f;
+        } catch (Throwable ex) {
+            return 1.0f;  // pendant la construction de l'entité, avant ses données
+        }
+    }
+
+    /** L'espèce et la taille d'une bête d'Untamed Wilds arrivent après sa création (et du serveur au client). */
+    @SubscribeEvent
+    public static void suivreUW(net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent event) {
+        net.minecraft.world.entity.LivingEntity e = event.getEntity();
+        if ((e.tickCount % 20) != 1 || UW.get(e.getClass()) == AUCUNE) return;
+        float s = echelleUW(e) * facteur(e.getType());
+        float voulue = e.getType().getWidth() * s;
+        if (Math.abs(e.getBbWidth() - voulue) > 0.02f) e.refreshDimensions();
     }
 
     /** Tailles d'origine (boîte de collision) de toutes les créatures, pour régler la table. */
