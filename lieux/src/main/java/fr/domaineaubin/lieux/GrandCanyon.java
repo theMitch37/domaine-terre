@@ -183,6 +183,11 @@ public final class GrandCanyon implements LieuSculpte {
     @Override
     public double hauteur(int x, int z, double h) {
         // 12/11/2026 : le lac Powell du mod dans le fondu du bord garde son fond (le terrain d'avant) et son eau (eau())
+        double c = chenal(x, z);
+        if (c > 0.5) {
+            // le chenal : au niveau du fleuve, jusque dans le lac (le lac du mod se déverse par là)
+            return Math.min(h, NIVEAU_COLORADO - 2.0);
+        }
         if (Terrain.get().niveauLacSansLieu(x, z, true) != Terrain.SANS_LAC && point(x, z).fondu() < 0.999) return h;
         return calcul(point(x, z), h, x, z);
     }
@@ -196,6 +201,7 @@ public final class GrandCanyon implements LieuSculpte {
     @Override
     public double hauteurNette(int x, int z) {
         if (!concerne(x, z)) return Double.NaN;
+        if (chenal(x, z) > 0.5) return Terrain.get().hauteur(x, z);
         Point pt = point(x, z);
         if (!dansCanyon(pt, x, z) || pt.t() > 1.0) return Double.NaN;
         double finale = Terrain.get().hauteur(x, z);
@@ -236,6 +242,26 @@ public final class GrandCanyon implements LieuSculpte {
         // berges : jamais sous l'eau du lit voisin (sinon de l'eau suspendue au bord du lac Powell)
         else if (lit > 0.02 && !Double.isNaN(pt.r())) y = Math.max(y, niv + 0.5);
         return y;
+    }
+
+    /*
+     * 12/11/2026 (test en jeu puis banc, côté Powell : « la cascade n'arrive pas jusqu'à la rivière ») : le talweg des
+     * données s'arrête au pied du barrage (fin du canyon), à une trentaine de blocs du lac Powell du mod. Un chenal droit,
+     * creusé au niveau du fleuve, relie la fin du talweg au lac : le lac se déverse dedans d'un coup (grande cascade) et
+     * l'eau rejoint le Colorado.
+     */
+    private static final double CHENAL_LON0 = -111.4804, CHENAL_LAT0 = 36.9273;   // fin du talweg
+    private static final double CHENAL_LON1 = -111.4108, CHENAL_LAT1 = 36.9610;   // dans le lac Powell du mod
+    private static final double CHENAL_DEMI = 2.5;
+
+    /** 1 dans le chenal de la cascade, 0 hors de lui (blocs). */
+    static double chenal(int x, int z) {
+        double ax = Terrain.x(CHENAL_LON0), az = Terrain.z(CHENAL_LAT0);
+        double bx = Terrain.x(CHENAL_LON1), bz = Terrain.z(CHENAL_LAT1);
+        double dx = bx - ax, dz = bz - az, l2 = dx * dx + dz * dz;
+        double u = Mth.clamp(((x + 0.5 - ax) * dx + (z + 0.5 - az) * dz) / l2, 0.0, 1.0);
+        double d = Math.hypot(x + 0.5 - (ax + u * dx), z + 0.5 - (az + u * dz));
+        return 1.0 - lisse((d - CHENAL_DEMI) / 1.5);
     }
 
     private static double lit(Point pt) {
@@ -302,6 +328,7 @@ public final class GrandCanyon implements LieuSculpte {
     @Override
     public int eau(int x, int z) {
         if (!concerne(x, z)) return Integer.MIN_VALUE;
+        if (chenal(x, z) > 0.5) return NIVEAU_COLORADO;
         Point pt = point(x, z);
         if (pt.fondu() < 0.999) {
             int lac = Terrain.get().niveauLacSansLieu(x, z, true);
