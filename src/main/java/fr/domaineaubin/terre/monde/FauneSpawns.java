@@ -132,17 +132,29 @@ public final class FauneSpawns {
             return;
         }
         boolean dansEau = niveau.getFluidState(pos).is(FluidTags.WATER);
+        // 12/11/2026 (Maxime) : les variantes de climat vivent sous leurs biomes : zombies du désert sous les déserts,
+        // vagabonds sous les terres enneigées ; ailleurs, zombies et squelettes ordinaires
+        String dessus = niveau.getBiome(new BlockPos(pos.getX(), (int) Math.floor(Terrain.get().hauteur(pos.getX(), pos.getZ())),
+                pos.getZ())).unwrapKey().map(k -> k.location().getPath()).orElse("");
+        boolean desert = dessus.contains("desert") || dessus.contains("badlands");
+        boolean neige = dessus.contains("snowy") || dessus.contains("frozen") || dessus.contains("ice_spikes")
+                || dessus.contains("grove") || dessus.startsWith("arctique/") || dessus.startsWith("antarctique/");
         for (MobSpawnSettings.SpawnerData d : event.getSpawnerDataList()) {
             var cle = EntityType.getKey(d.type);
             if (!cle.getNamespace().equals("minecraft")) continue;     // les monstres des mods passent par la table
             String n = cle.getPath();
+            if ((n.equals("husk") && !desert) || (n.equals("zombie") && desert)
+                    || (n.equals("stray") && !neige) || (n.equals("skeleton") && neige)) continue;
             if (n.equals("drowned")) {
                 if (dansEau) garder.add(d);                // noyés : grottes inondées seulement
             } else if (HAUTS.contains(n) || (e >= 1 && MOYENS.contains(n)) || e >= 2) {
                 garder.add(d);
             }
         }
+        String ici = niveau.getBiome(pos).unwrapKey().map(k -> k.location().getPath()).orElse("");
         for (FauneTerre.Entree en : faune.souterrain()) {
+            // biome du jeu imposé (Skreecher : sombres profondeurs des cités antiques, 12/11/2026)
+            if (en.biomeJeu() != null && !ici.equals(en.biomeJeu())) continue;
             boolean ok = switch (en.etage()) {
                 case COUCHES_HAUTES -> true;
                 case PROFONDEURS -> e >= 1;
