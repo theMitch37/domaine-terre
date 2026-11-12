@@ -458,7 +458,8 @@ def capri():
                rugosite=0.12)
     e = np.array([float(L["grotte_x"]), float(L["grotte_z"])]); d = np.array([float(L["grotte_dx"]), float(L["grotte_dz"])])
     # entrée : boyau étroit et bas (l'eau jusqu'à 63, la voûte à 65)
-    ent = [(e[0] - 6 * d[0], 63.5, e[1] - 6 * d[1]), (e[0] + 8 * d[0], 63.5, e[1] + 8 * d[1])]
+    # 12/11/2026 : jusqu'à la salle (à +8 il restait 5 blocs de roche : grotte fermée depuis la mer)
+    ent = [(e[0] - 6 * d[0], 63.5, e[1] - 6 * d[1]), (e[0] + 18 * d[0], 63.5, e[1] + 18 * d[1])]
     g.galerie(ent, 1.8, 2.2, plancher=4.0, entree=True)
     salle = e + d * 26
     g.ellipsoide((salle[0], 62, salle[1]), 20, 9, 10, sol_plat=55)
