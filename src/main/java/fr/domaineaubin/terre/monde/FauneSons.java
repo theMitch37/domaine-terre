@@ -31,7 +31,19 @@ public final class FauneSons {
         Holder<SoundEvent> s = event.getSound();
         if (s == null || event.getLevel() == null) return;
         ResourceLocation id = s.unwrapKey().map(k -> k.location()).orElse(null);
-        if (id == null || !id.getNamespace().equals("minecraft") || !id.getPath().startsWith("entity.sheep.")) return;
+        if (id == null || !id.getNamespace().equals("minecraft")) return;
+        // 12/11/2026 (test en jeu : « l'élan de Better Animals Plus a un bruit de vache ») : cri de l'élan d'Alex's Mobs
+        if (id.getPath().startsWith("entity.cow.")) {
+            Vec3 p = event.getPosition();
+            boolean elan = !event.getLevel().getEntitiesOfClass(Entity.class, new AABB(p, p).inflate(0.05),
+                    e -> "betteranimalsplus:moose".equals(String.valueOf(ForgeRegistries.ENTITY_TYPES.getKey(e.getType())))).isEmpty();
+            if (!elan) return;
+            String quoi = id.getPath().substring("entity.cow.".length());
+            if (quoi.equals("step") || quoi.equals("milk")) return;
+            son(quoi.equals("ambient") ? "alexsmobs:moose_idle" : "alexsmobs:moose_hurt").ifPresent(event::setSound);
+            return;
+        }
+        if (!id.getPath().startsWith("entity.sheep.")) return;
         Vec3 p = event.getPosition();
         boolean cerf = !event.getLevel().getEntitiesOfClass(Entity.class, new AABB(p, p).inflate(0.05),
                 e -> estCerf(e.getType())).isEmpty();
