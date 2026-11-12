@@ -164,7 +164,7 @@ public class EntiteFumante extends BlockEntity {
                     z + (r.nextDouble() - 0.5) * 1.5, 0, 0.2 * monte, 0);
             if (r.nextInt(3) == 0) niveau.addAlwaysVisibleParticle(ParticleTypes.CLOUD, true, x, ys, z, 0, 0.1 + 0.2 * monte, 0);
             if (t % 20 == 0) niveau.playLocalSound(x, ys, z, SoundEvents.BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundSource.AMBIENT,
-                    0.6f + monte, 0.7f, false);
+                    (float) (0.6 + monte), 0.7f, false);
             // juste avant le jet, la bulle bleue : l'eau se soulève en dôme
             if (PERIODE - t < 12) {
                 for (int k = 0; k < 10; k++) {
