@@ -113,6 +113,21 @@ public class GrottesFeature extends Feature<NoneFeatureConfiguration> {
             BlockState b = etat(c, x, y, z);
             if (b != null) niveau.setBlock(pos, b, 2);
         }
+        // 12/11/2026 (test en jeu : grands cônes de dripstone qui flottent au-dessus du sol autour de Padirac, Han et
+        // Postojna) : les grands spéléothèmes vanilla des cavernes, posés avant la grotte, restent en l'air quand elle
+        // retaille la roche autour ; au-dessus de la surface du terrain, plus aucun dripstone
+        net.minecraft.world.level.levelgen.Heightmap.Types surf = net.minecraft.world.level.levelgen.Heightmap.Types.WORLD_SURFACE_WG;
+        for (int dx = 0; dx < 16; dx++) {
+            for (int dz = 0; dz < 16; dz++) {
+                int x = x0 + dx, z = z0 + dz;
+                int sol = (int) Math.floor(fr.domaineaubin.terre.monde.Terrain.get().hauteur(x, z));
+                for (int y = niveau.getHeight(surf, x, z); y >= sol; y--) {
+                    BlockState b = niveau.getBlockState(pos.set(x, y, z));
+                    if (b.is(Blocks.POINTED_DRIPSTONE) || b.is(Blocks.DRIPSTONE_BLOCK))
+                        niveau.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
+                }
+            }
+        }
         // Lumière du fond (grotte bleue de Capri) : sable blanc partout, et une source de lumière invisible dans l'eau
         // juste au-dessus. Avant (08/11/2026) : des lanternes marines visibles au sol, pas naturelles du tout.
         for (int v : l) {

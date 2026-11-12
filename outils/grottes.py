@@ -126,6 +126,9 @@ class Grotte:
         st = ndimage.generate_binary_structure(3, 1)
         coque = ndimage.binary_dilation(vide, st, iterations=3) & ~vide & (Y < sol - 2)
         self.coque = coque
+        # 12/11/2026 (test en jeu : stalactites suspendues dans le ciel au-dessus des gouffres, calcite et glace
+        # flottantes au bord des entrées) : au-dessus de la surface, ce qui n'est pas vide est de l'air, pas de la roche
+        self.sous_sol = np.broadcast_to(Y < np.floor(sol), vide.shape)
         self.deco = {}                                  # (j, k, i) -> classe : blocs posés dans la roche ou le vide
         return self
 
@@ -133,8 +136,9 @@ class Grotte:
 
     def voisins(self):
         v = self.vide
-        dessus_plein = np.zeros_like(v); dessus_plein[:-1] = ~v[1:]
-        dessous_plein = np.zeros_like(v); dessous_plein[1:] = ~v[:-1]
+        r = ~v & self.sous_sol                          # roche (pas l'air au-dessus de la surface)
+        dessus_plein = np.zeros_like(v); dessus_plein[:-1] = r[1:]
+        dessous_plein = np.zeros_like(v); dessous_plein[1:] = r[:-1]
         return dessus_plein, dessous_plein
 
     def concretions(self, densite_plafond=0.03, densite_sol=0.02, longueur=4, zone=None):
@@ -169,7 +173,7 @@ class Grotte:
                     self.deco[(jj2, k, i)] = c
                 # bloc de dripstone dans la roche, au point d'attache
                 ja = j - sens
-                if 0 <= ja < self.H and not v[ja, k, i]:
+                if 0 <= ja < self.H and not v[ja, k, i] and self.sous_sol[ja, k, i]:
                     self.deco[(ja, k, i)] = DRIPSTONE
 
     def parois(self, classe, proportion=0.3, graine=0, zone=None, sol_seul=False, plafond_seul=False):
@@ -182,6 +186,7 @@ class Grotte:
             contact = np.zeros_like(v); contact[:-1] = v[1:] & ~v[:-1]     # roche juste sous un vide
         if plafond_seul:
             contact = np.zeros_like(v); contact[1:] = v[:-1] & ~v[1:]
+        contact &= self.sous_sol
         if zone is not None:
             contact &= zone
         b = ndimage.gaussian_filter(np.random.default_rng(graine).standard_normal(v.shape).astype(np.float32), 1.5)
