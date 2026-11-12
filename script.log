@@ -1,0 +1,28 @@
+serveur prêt en 90 s
+lot 1/2 : mer_de_glace, test_cascade_valais, cervin, gullfoss, plitvice, geiranger — 2256 chunks
+  2355/2256 chunks complets (349 s)
+lot 2/2 : test_lac_leman, lac_leman, lac_annecy, relief_oberland — 687 chunks
+  743/687 chunks complets (434 s)
+2943 chunks demandés en 2 lots
+mer_de_glace : (395, 1536, 359), 77 sortes de blocs
+test_cascade_valais : (192, 1536, 192), 74 sortes de blocs
+cervin : (208, 1536, 371), 83 sortes de blocs
+gullfoss : (361, 1536, 274), 74 sortes de blocs
+plitvice : (376, 1536, 281), 70 sortes de blocs
+geiranger : (222, 1536, 402), 72 sortes de blocs
+test_lac_leman : (192, 1536, 192), 72 sortes de blocs
+lac_leman : (125, 1536, 200), 68 sortes de blocs
+lac_annecy : (110, 1536, 100), 56 sortes de blocs
+relief_oberland : (280, 1536, 320), 83 sortes de blocs
+entités lues : 879 [('naturalist:duck', 120), ('minecraft:frog', 87), ('untamedwilds:newt', 86), ('untamedwilds:butterfly', 62), ('minecraft:rabbit', 59), ('minecraft:fox', 56), ('alexsmobs:crow', 45), ('naturalist:deer', 36)]
+mer_de_glace : 53 animaux
+test_cascade_valais : 36 animaux
+cervin : 44 animaux
+gullfoss : 70 animaux
+plitvice : 30 animaux
+geiranger : 55 animaux
+test_lac_leman : 46 animaux
+lac_leman : 45 animaux
+lac_annecy : 2 animaux
+relief_oberland : 76 animaux
+terminé en 477 s
