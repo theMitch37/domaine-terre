@@ -83,8 +83,23 @@ public final class Tailles {
 
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void taille(EntityEvent.Size event) {
-        float f = facteur(event.getEntity().getType()) * echelleUW(event.getEntity());
-        if (Math.abs(f - 1.0f) > 0.001f) event.setNewSize(event.getNewSize().scale(f), true);
+        float t = facteur(event.getEntity().getType());
+        float s = echelleUW(event.getEntity());
+        // 12/11/2026 (test en jeu : requin marteau et requin-baleine dans des cubes de 4 à 6 blocs) : une boîte de
+        // collision est carrée vue de dessus ; pour une bête longue et plate (poissons, requins), l'échelle du modèle
+        // agrandit la boîte moins vite (racine carrée) et la hauteur moitié moins que la largeur
+        float l = t, h = t;
+        if (s != 1.0f) {
+            if (aquatique(event.getEntity())) {
+                l *= (float) Math.sqrt(s);
+                h *= (float) Math.sqrt(s) * 0.6f;
+            } else {
+                l *= s;
+                h *= s;
+            }
+        }
+        if (Math.abs(l - 1.0f) > 0.001f || Math.abs(h - 1.0f) > 0.001f)
+            event.setNewSize(event.getNewSize().scale(l, h), true);
     }
 
     /*
@@ -113,13 +128,21 @@ public final class Tailles {
         }
     }
 
+    private static boolean aquatique(net.minecraft.world.entity.Entity e) {
+        for (Class<?> c = e.getClass(); c != null; c = c.getSuperclass()) {
+            if (c.getName().equals("untamedwilds.entity.ComplexMobAquatic")) return true;
+        }
+        return false;
+    }
+
     /** L'espèce et la taille d'une bête d'Untamed Wilds arrivent après sa création (et du serveur au client). */
     @SubscribeEvent
     public static void suivreUW(net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent event) {
         net.minecraft.world.entity.LivingEntity e = event.getEntity();
         if ((e.tickCount % 20) != 1 || UW.get(e.getClass()) == AUCUNE) return;
-        float s = echelleUW(e) * facteur(e.getType());
-        float voulue = e.getType().getWidth() * s;
+        float s = echelleUW(e);
+        if (aquatique(e)) s = (float) Math.sqrt(s);
+        float voulue = e.getType().getWidth() * s * facteur(e.getType());
         if (Math.abs(e.getBbWidth() - voulue) > 0.02f) e.refreshDimensions();
     }
 

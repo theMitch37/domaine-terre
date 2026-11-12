@@ -275,7 +275,10 @@ public final class GrandCanyon implements LieuSculpte {
         if (niv <= NIVEAU_COLORADO + 3) return NIVEAU_COLORADO;
         double sol = Double.isNaN(plateau) ? coupe(pt) : Mth.lerp(pt.fondu(), plateau, coupe(pt));
         // seulement là où le fond du canyon est vraiment atteint (sinon un puits isolé au bout du chenal, banc)
-        boolean profond = pt.t() <= 1.0 && sol < NIVEAU_COLORADO + 6.0;
+        // 12/11/2026 (test en jeu : la cascade tombait sur un palier du cirque, ~10 blocs au-dessus du fleuve, et le
+        // chenal passait en remblai au-dessus du canyon) : dès que le canyon est plus bas que le chenal, le lit est au
+        // niveau du fleuve, creusé jusqu'au pied de la falaise ; l'eau du chenal y tombe d'un coup
+        boolean profond = pt.t() <= 1.0 && sol < niv - 3.0;
         return profond ? NIVEAU_COLORADO : niv;
     }
 
