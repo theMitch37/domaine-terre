@@ -1,0 +1,20 @@
+serveur prêt en 84 s
+lot 1/1 : himalaya_everest, gavarnie, verdon, embouchure_mekong, embouchure_niger, etretat, test_marches_danube — 1589 chunks
+  1589/1589 chunks complets (268 s)
+1589 chunks demandés en 1 lots
+himalaya_everest : (160, 1536, 160), 50 sortes de blocs
+gavarnie : (351, 1536, 351), 78 sortes de blocs
+verdon : (130, 1536, 260), 70 sortes de blocs
+embouchure_mekong : (200, 1536, 200), 99 sortes de blocs
+embouchure_niger : (200, 1536, 200), 87 sortes de blocs
+etretat : (209, 1536, 296), 70 sortes de blocs
+test_marches_danube : (192, 1536, 192), 60 sortes de blocs
+entités lues : 699 [('untamedwilds:newt', 58), ('untamedwilds:butterfly', 56), ('proto:untamedwilds:spadefish', 47), ('minecraft:frog', 39), ('naturalist:duck', 32), ('untamedwilds:spadefish', 25), ('untamedwilds:snake', 23), ('minecraft:rabbit', 22)]
+himalaya_everest : 2 animaux
+gavarnie : 25 animaux
+verdon : 12 animaux
+embouchure_mekong : 54 animaux
+embouchure_niger : 63 animaux
+etretat : 29 animaux
+test_marches_danube : 50 animaux
+terminé en 299 s
