@@ -182,7 +182,9 @@ public final class GrandCanyon implements LieuSculpte {
 
     @Override
     public double hauteur(int x, int z, double h) {
-        return calcul(point(x, z), h);
+        // 12/11/2026 : le lac Powell du mod dans le fondu du bord garde son fond (le terrain d'avant) et son eau (eau())
+        if (Terrain.get().niveauLacSansLieu(x, z, true) != Terrain.SANS_LAC && point(x, z).fondu() < 0.999) return h;
+        return calcul(point(x, z), h, x, z);
     }
 
     /**
@@ -212,7 +214,7 @@ public final class GrandCanyon implements LieuSculpte {
      * au-dessus de h : un petit creux du terrain du mod ne perce plus le sommet d'une butte.
      * Hors du canyon, le terrain n'est pas touché.
      */
-    private double calcul(Point pt, double h) {
+    private double calcul(Point pt, double h, int x, int z) {
         double y = h;
         if (pt.t() <= 1.0) {
             double rebord = yRebord(pt);
@@ -227,7 +229,7 @@ public final class GrandCanyon implements LieuSculpte {
         // au-dessus du lac Mead du mod (et non plus au niveau de la mer, 7 blocs sous le lac) ; le fond du canyon remonte
         // d'autant, ses berges restent hors de l'eau
         double lit = lit(pt);
-        double niv = niveauSortie(pt);
+        double niv = niveauSortie(pt, x, z);
         y = Math.max(Mth.lerp(lit, y, niv - 3.0), Mth.lerp(lit, niv + 0.5, niv - 3.0));
         y = Mth.lerp(pt.fondu(), h, y);
         if (lit > 0.5 && !Double.isNaN(pt.r())) y = Math.min(y, niv - 2.0);
@@ -240,6 +242,9 @@ public final class GrandCanyon implements LieuSculpte {
         // 11/11/2026 (test en jeu : fosses rectangulaires à fond de pierre sur le plateau, loin du fleuve) : un lac seulement
         // à moins de ~60 blocs du Colorado ; plus loin, une case du relief réel au niveau du fleuve n'est pas un lac
         double lac = (1.0 - lisse((pt.e() - pt.r() - 3.0) / 8.0)) * (1.0 - lisse((pt.distBlocs() - 50.0) / 25.0));
+        // 12/11/2026 (banc, côté lac Powell : fosses carrées alignées sur le plateau, au niveau du canyon) : à l'amont,
+        // pas de « lac » d'après le relief réel ; le lac Powell est celui du mod
+        if (!Double.isNaN(pt.r()) && Terrain.niveauLac(pt.r()) > NIVEAU_COLORADO + 3) lac = 0.0;
         return Math.max(1.0 - lisse((pt.distBlocs() - 2.5) / 1.5), lac);
     }
 
@@ -252,7 +257,7 @@ public final class GrandCanyon implements LieuSculpte {
      * Niveau de l'eau (y de la première couche d'air) dans le fondu du bord : de celui du canyon (la mer) à celui du
      * fleuve réel, que prennent les lacs du mod hors de la zone (lac Mead, lac Powell).
      */
-    private static int niveauSortie(Point pt) {
+    private static int niveauSortie(Point pt, int x, int z) {
         if (Double.isNaN(pt.r()) || pt.fondu() >= 0.999) return NIVEAU_COLORADO;
         int reel = Terrain.niveauLac(pt.r());
         // 12/11/2026 (test en jeu : « les deux sorties du canyon sont vraiment pas bonnes », plaques d'eau à plusieurs
@@ -260,11 +265,19 @@ public final class GrandCanyon implements LieuSculpte {
         // canyon, plat jusqu'au lac. Amont (lac Powell, bien plus haut) : idée de Maxime, un barrage naturel ; le lac
         // garde son niveau jusqu'à un seuil rocheux puis le fleuve tombe d'un coup dans le canyon (grande cascade)
         if (reel <= NIVEAU_COLORADO + 3) return NIVEAU_COLORADO;
-        return pt.fondu() < SEUIL_CASCADE ? reel : NIVEAU_COLORADO;
+        // 12/11/2026 (banc : le canyon finissait en cirque fermé, le lac Powell séparé de lui par un plateau) : le fleuve
+        // sort du lac Powell (petite chute au seuil), coule en chenal au niveau du plateau et tombe dans le canyon là où
+        // la coupe passe sous ce niveau (grande cascade au rebord du cirque)
+        int lac = Terrain.get().niveauLacSansLieu(x, z, false);
+        int niv = lac != Terrain.SANS_LAC ? Math.max(lac, reel) : reel;
+        double plateau = yRebord(pt);
+        if (!Double.isNaN(plateau)) niv = Math.min(niv, Mth.floor(plateau));
+        if (niv <= NIVEAU_COLORADO + 3) return NIVEAU_COLORADO;
+        double sol = Double.isNaN(plateau) ? coupe(pt) : Mth.lerp(pt.fondu(), plateau, coupe(pt));
+        boolean profond = pt.t() <= 1.0 && sol < niv - 1.0;
+        return profond ? NIVEAU_COLORADO : niv;
     }
 
-    /** Fondu du bord où le lac Powell tombe dans le canyon (seuil du barrage naturel). */
-    private static final double SEUIL_CASCADE = 0.55;
 
     /**
      * Niveau du Colorado dans le canyon (y de la première couche d'air) : celui du lac Mead du mod (69), plat jusqu'à lui ;
@@ -286,7 +299,11 @@ public final class GrandCanyon implements LieuSculpte {
     public int eau(int x, int z) {
         if (!concerne(x, z)) return Integer.MIN_VALUE;
         Point pt = point(x, z);
-        return lit(pt) > 0.5 && !Double.isNaN(pt.r()) ? niveauSortie(pt) : Integer.MIN_VALUE;
+        if (pt.fondu() < 0.999) {
+            int lac = Terrain.get().niveauLacSansLieu(x, z, true);
+            if (lac != Terrain.SANS_LAC) return lac;
+        }
+        return lit(pt) > 0.5 && !Double.isNaN(pt.r()) ? niveauSortie(pt, x, z) : Integer.MIN_VALUE;
     }
 
     @Override

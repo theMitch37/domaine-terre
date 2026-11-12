@@ -304,12 +304,15 @@ public final class Terrain {
         double haut = niveau + 0.6, brut = h;
         // ETOPO met une valeur vide (≈ 0 m) sous les lacs, qui déborde sur la rive (cases de 5 km) : près d'un lac, le
         // terrain ne descend pas sous son niveau (marge qui se relâche de 0,3 bloc par bloc en s'éloignant)
-        h = Math.max(h, haut - 0.3 * Math.max(d - BERGE, 0.0));
+        // 12/11/2026 (banc, lac de Joux : une nappe à son niveau à 34 blocs de la rive, qui se vidait sur la pente) : une
+        // cellule d'aquifère dont le point tombe à BERGE cases du lac couvre encore ~16 blocs plus loin ; la rive reste
+        // au niveau du lac jusque-là
+        h = Math.max(h, haut - 0.3 * Math.max(d - BERGE - 16.0, 0.0));
         // la berge monte de plus en plus raide (vallée glaciaire) puis rejoint le relief entre 36 et 48 cases
         double x = Math.max(d - 2.0, 0.0);
         h = Math.min(h, haut + 0.6 * x + 0.02 * x * x);
         if (d < 3.0) h = Math.max(h, haut);
-        return Mth.lerp(lisse(Mth.clamp((d - 36.0) / 12.0, 0.0, 1.0)), h, brut);
+        return Mth.lerp(lisse(Mth.clamp((d - 40.0) / 8.0, 0.0, 1.0)), h, brut);
     }
 
     /**
@@ -344,6 +347,17 @@ public final class Terrain {
     public double distanceCoursDEau(int x, int z) {
         Fleuves.Proche p = fleuves().proche(x, z);
         return p == null ? Double.MAX_VALUE : Math.max(0.0, p.distance() - demiLargeur(p.classe()));
+    }
+
+    /**
+     * Niveau du lac du mod le plus proche (à moins de Lacs.RAYON cases), sans tenir compte des lieux, ou SANS_LAC ; avec
+     * dedans = vrai, seulement à l'intérieur du lac (12/11/2026 : Grand Canyon, lac Powell dans le fondu du lieu).
+     */
+    public int niveauLacSansLieu(int x, int z, boolean dedans) {
+        if (lacs == null || distanceCote(x, z) < 0) return SANS_LAC;
+        Lacs.Proche lp = lacs.proche(lon(x + 0.5), lat(z + 0.5));
+        if (lp == null || (dedans && lp.distance() <= 0)) return SANS_LAC;
+        return (int) Math.min(niveauLac(lacs.altitude(lp.lac())), lacs.plafond(lp.lac()));
     }
 
     /** Diagnostic temporaire (12/11/2026, lac de Joux au banc). */
