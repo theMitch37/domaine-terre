@@ -1,0 +1,21 @@
+{
+ "replace": false,
+ "values": [
+  {
+   "id": "domaine_terre_lieux:jokulsarlon",
+   "required": false
+  },
+  {
+   "id": "domaine_terre_lieux:gullfoss",
+   "required": false
+  },
+  {
+   "id": "domaine_terre_lieux:skogafoss",
+   "required": false
+  },
+  {
+   "id": "domaine_terre_lieux:erebus",
+   "required": false
+  }
+ ]
+}

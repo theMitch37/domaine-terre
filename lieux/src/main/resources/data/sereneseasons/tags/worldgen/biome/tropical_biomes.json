@@ -1,0 +1,33 @@
+{
+ "replace": false,
+ "values": [
+  {
+   "id": "domaine_terre_lieux:grand_canyon",
+   "required": false
+  },
+  {
+   "id": "domaine_terre_lieux:verdon",
+   "required": false
+  },
+  {
+   "id": "domaine_terre_lieux:etna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre_lieux:vesuve",
+   "required": false
+  },
+  {
+   "id": "domaine_terre_lieux:capri",
+   "required": false
+  },
+  {
+   "id": "domaine_terre_lieux:meteores",
+   "required": false
+  },
+  {
+   "id": "domaine_terre_lieux:pilat",
+   "required": false
+  }
+ ]
+}

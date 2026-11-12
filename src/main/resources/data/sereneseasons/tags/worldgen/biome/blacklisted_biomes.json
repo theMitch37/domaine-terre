@@ -1,0 +1,69 @@
+{
+ "replace": false,
+ "values": [
+  {
+   "id": "domaine_terre:mer/chaude_abysse",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mer/chaude_cote",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mer/chaude_large",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mer/chaude_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mer/gelee_abysse",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mer/gelee_cote",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mer/gelee_large",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mer/gelee_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mer/temperee_abysse",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mer/temperee_cote",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mer/temperee_large",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mer/temperee_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mer/tiede_abysse",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mer/tiede_cote",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mer/tiede_large",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mer/tiede_plateau",
+   "required": false
+  }
+ ]
+}

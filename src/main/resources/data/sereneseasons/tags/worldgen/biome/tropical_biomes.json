@@ -1,0 +1,1213 @@
+{
+ "replace": false,
+ "values": [
+  {
+   "id": "domaine_terre:afrique_australe/badlands",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/beach",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/fleuve",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/lac",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/mangrove_swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/meadow",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/savanna_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/snowy_plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/sparse_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/stony_peaks",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/stony_shore",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/windswept_hills",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_australe/windswept_savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_est/beach",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_est/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_est/fleuve",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_est/forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_est/jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_est/lac",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_est/mangrove_swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_est/meadow",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_est/plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_est/savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_est/savanna_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_est/snowy_slopes",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_est/sparse_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_est/stony_peaks",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_est/swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_est/taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_est/windswept_hills",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_est/windswept_savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_tropicale/beach",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_tropicale/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_tropicale/fleuve",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_tropicale/forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_tropicale/jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_tropicale/lac",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_tropicale/mangrove_swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_tropicale/meadow",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_tropicale/plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_tropicale/savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_tropicale/savanna_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_tropicale/snowy_slopes",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_tropicale/sparse_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_tropicale/swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_tropicale/taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:afrique_tropicale/windswept_savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/beach",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/fleuve",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/lac",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/mangrove_swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/meadow",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/savanna_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/snowy_plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/snowy_slopes",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/sparse_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/stony_peaks",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/windswept_hills",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amazonie/windswept_savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amerique_centrale/beach",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amerique_centrale/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amerique_centrale/fleuve",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amerique_centrale/forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amerique_centrale/jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amerique_centrale/lac",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amerique_centrale/mangrove_swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amerique_centrale/meadow",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amerique_centrale/plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amerique_centrale/savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amerique_centrale/savanna_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amerique_centrale/sparse_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amerique_centrale/stony_peaks",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amerique_centrale/swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amerique_centrale/taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:amerique_centrale/windswept_savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:andes/badlands",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:andes/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:andes/jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:andes/savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:andes/savanna_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:andes/sparse_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/bamboo_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/beach",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/fleuve",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/lac",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/mangrove_swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/meadow",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/savanna_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/sparse_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/stony_peaks",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/stony_shore",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/windswept_hills",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:asie_sud_est/windswept_savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/badlands",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/beach",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/birch_forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/eroded_badlands",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/fleuve",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/flower_forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/lac",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/mangrove_swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/meadow",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/savanna_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/snowy_plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/sparse_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/windswept_hills",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/windswept_savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:australie/wooded_badlands",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:chine/bamboo_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:chine/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:chine/jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:chine/mangrove_swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:chine/savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:chine/savanna_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:chine/sparse_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:chine/windswept_savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:cone_sud/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:cone_sud/jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:cone_sud/mangrove_swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:cone_sud/savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:cone_sud/sparse_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:cone_sud/windswept_savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:continentale/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:grandes_plaines/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:grandes_plaines/mangrove_swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:grandes_plaines/savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:grandes_plaines/savanna_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:grandes_plaines/sparse_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:grandes_plaines/windswept_savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/bamboo_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/beach",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/fleuve",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/frozen_peaks",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/jagged_peaks",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/lac",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/mangrove_swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/meadow",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/old_growth_pine_taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/savanna_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/snowy_plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/snowy_slopes",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/sparse_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/stony_peaks",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/windswept_hills",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:inde/windswept_savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:japon_coree/bamboo_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:maghreb/beach",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:maghreb/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:maghreb/fleuve",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:maghreb/forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:maghreb/lac",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:maghreb/meadow",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:maghreb/plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:maghreb/savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:maghreb/savanna_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:maghreb/snowy_plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:maghreb/stony_peaks",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:maghreb/stony_shore",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:maghreb/swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:maghreb/taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:maghreb/windswept_hills",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:maghreb/windswept_savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/beach",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/fleuve",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/flower_forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/lac",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/meadow",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/old_growth_pine_taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/old_growth_spruce_taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/sparse_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/stony_peaks",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/stony_shore",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/sunflower_plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/windswept_forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/windswept_hills",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:mediterranee/windswept_savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:melanesie/beach",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:melanesie/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:melanesie/fleuve",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:melanesie/forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:melanesie/jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:melanesie/lac",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:melanesie/mangrove_swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:melanesie/meadow",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:melanesie/plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:melanesie/savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:melanesie/savanna_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:melanesie/snowy_plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:melanesie/sparse_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:melanesie/stony_peaks",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:melanesie/swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:melanesie/taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:melanesie/windswept_savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/badlands",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/beach",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/fleuve",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/lac",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/mangrove_swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/meadow",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/old_growth_pine_taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/savanna_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/snowy_plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/snowy_slopes",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/sparse_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/stony_peaks",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/stony_shore",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/windswept_hills",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:moyen_orient/windswept_savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/badlands",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/beach",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/birch_forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/eroded_badlands",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/fleuve",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/grove",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/jagged_peaks",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/lac",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/mangrove_swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/meadow",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/old_growth_pine_taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/old_growth_spruce_taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/savanna_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/snowy_plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/snowy_slopes",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/sparse_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/stony_peaks",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/stony_shore",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/windswept_hills",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/windswept_savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:ouest_mexique/wooded_badlands",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:sahara_sahel/badlands",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:sahara_sahel/beach",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:sahara_sahel/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:sahara_sahel/fleuve",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:sahara_sahel/forest",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:sahara_sahel/lac",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:sahara_sahel/mangrove_swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:sahara_sahel/meadow",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:sahara_sahel/plains",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:sahara_sahel/savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:sahara_sahel/savanna_plateau",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:sahara_sahel/sparse_jungle",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:sahara_sahel/stony_peaks",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:sahara_sahel/swamp",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:sahara_sahel/taiga",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:sahara_sahel/windswept_savanna",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:siberie/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:steppes_tibet/desert",
+   "required": false
+  },
+  {
+   "id": "domaine_terre:steppes_tibet/savanna",
+   "required": false
+  }
+ ]
+}
