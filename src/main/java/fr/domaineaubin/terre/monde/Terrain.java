@@ -184,8 +184,11 @@ public final class Terrain {
                 double dv = Math.max(0.0, r.distance() - r.demiLargeur() - BERGE_RIVIERE);
                 double plafond = r.eau() + 1.0 + 2.0 * dv + 0.05 * dv * dv;
                 if (h > plafond) {
-                    h = plafond;
-                    creusee = true;
+                    // s'efface de 16 à 48 blocs du lit : à mi-chemin entre deux cours d'eau de niveaux différents, le
+                    // plus proche change d'un coup (banc : mur droit de 15 blocs à la source de la Doire baltée)
+                    double k = 1.0 - lisse(Mth.clamp((dv - 16.0) / 32.0, 0.0, 1.0));
+                    h = Mth.lerp(k, h, plafond);
+                    creusee = k > 0.5;
                 }
             }
             poids = Mth.clamp(lieu.poids(x, z), 0.0, 1.0);
