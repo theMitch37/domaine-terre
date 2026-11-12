@@ -1,0 +1,11 @@
+{
+  "name":"feeder",
+  "entries":[
+    {
+      "type":"untamedwilds:butterfly",
+      "weight":4,
+      "size_min":1,
+      "size_max":2
+    }
+  ]
+}

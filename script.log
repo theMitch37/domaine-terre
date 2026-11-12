@@ -1,0 +1,14 @@
+serveur prêt en 108 s
+lot 1/1 : jokulsarlon, test_amazone_estuaire, embouchure_amazone, skogafoss — 1207 chunks
+  1207/1207 chunks complets (295 s)
+1207 chunks demandés en 1 lots
+jokulsarlon : (292, 1536, 337), 77 sortes de blocs
+test_amazone_estuaire : (300, 1536, 300), 95 sortes de blocs
+embouchure_amazone : (200, 1536, 200), 109 sortes de blocs
+skogafoss : (159, 1536, 296), 74 sortes de blocs
+entités lues : 463 [('untamedwilds:butterfly', 39), ('untamedwilds:newt', 31), ('alexsmobs:capuchin_monkey', 21), ('minecraft:frog', 21), ('naturalist:duck', 20), ('alexsmobs:toucan', 17), ('crittersandcompanions:shima_enaga', 17), ('alexsmobs:leafcutter_ant', 15)]
+jokulsarlon : 10 animaux
+test_amazone_estuaire : 73 animaux
+embouchure_amazone : 51 animaux
+skogafoss : 22 animaux
+terminé en 324 s
