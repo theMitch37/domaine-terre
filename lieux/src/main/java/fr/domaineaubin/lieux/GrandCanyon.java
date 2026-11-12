@@ -195,9 +195,12 @@ public final class GrandCanyon implements LieuSculpte {
         // montré à la main ce qu'il voulait) : une gorge étroite à parois verticales jusqu'au rebord, sur la moitié du
         // chenal côté lac, où l'eau tombe d'un seul rideau
         double[] a = chenalAxe(x, z);
-        if (a[0] < 6.0 && a[1] > 0.35) {
+        // (banc : parois d'un ou deux blocs d'épaisseur, des murets) : la paroi rejoint les pentes en 16 blocs, et
+        // s'efface aussi vers l'aval du chenal
+        if (a[0] < 22.0 && a[1] > 0.2) {
             double rebord = yRebord(pt);
-            if (!Double.isNaN(rebord)) y = Math.max(y, rebord);
+            double w = (1.0 - lisse((a[0] - 6.0) / 16.0)) * lisse((a[1] - 0.2) / 0.2);
+            if (!Double.isNaN(rebord) && rebord > y) y += w * (rebord - y);
         }
         return y;
     }
@@ -212,7 +215,7 @@ public final class GrandCanyon implements LieuSculpte {
     public double hauteurNette(int x, int z) {
         if (!concerne(x, z)) return Double.NaN;
         double[] ca = chenalAxe(x, z);
-        if (chenal(x, z) > 0.5 || (ca[0] < 6.0 && ca[1] > 0.35)) return Terrain.get().hauteur(x, z);
+        if (chenal(x, z) > 0.5 || (ca[0] < 22.0 && ca[1] > 0.2)) return Terrain.get().hauteur(x, z);
         Point pt = point(x, z);
         if (!dansCanyon(pt, x, z) || pt.t() > 1.0) return Double.NaN;
         double finale = Terrain.get().hauteur(x, z);
