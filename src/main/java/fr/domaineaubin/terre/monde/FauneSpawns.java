@@ -173,6 +173,19 @@ public final class FauneSpawns {
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void position(MobSpawnEvent.PositionCheck event) {
         if (!naturelle(event.getSpawnType()) || !terre(event.getLevel())) return;
+        // 12/11/2026 (test en jeu : calmars luisants en pleine mer froide, à 40 blocs de fond) : le jeu les fait naître
+        // dans toute eau noire sous y 30. Dans la vraie vie, les calmars lumineux vivent dans les abysses : en mer
+        // ouverte, seulement dans la bande « abysse » ; ailleurs, dans l'eau des grottes (roche au-dessus)
+        if (event.getEntity().getType() == EntityType.GLOW_SQUID) {
+            BlockPos p = event.getEntity().blockPosition();
+            int fond = event.getLevel().getHeight(event.getSpawnType() == MobSpawnType.CHUNK_GENERATION
+                    ? net.minecraft.world.level.levelgen.Heightmap.Types.OCEAN_FLOOR_WG
+                    : net.minecraft.world.level.levelgen.Heightmap.Types.OCEAN_FLOOR, p.getX(), p.getZ());
+            boolean merOuverte = p.getY() >= fond - 1;
+            String b = event.getLevel().getBiome(p).unwrapKey().map(k -> k.location().getPath()).orElse("");
+            if (merOuverte && !b.endsWith("_abysse")) event.setResult(Event.Result.DENY);
+            return;
+        }
         FauneTerre.Entree e = FauneTerre.get().entree(event.getEntity().getType());
         if (e == null) return;
         event.setResult(nosRegles(e, event.getEntity(), event.getLevel()) ? Event.Result.ALLOW : Event.Result.DENY);
