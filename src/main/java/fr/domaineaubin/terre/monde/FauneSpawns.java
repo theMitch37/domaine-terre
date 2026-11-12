@@ -263,6 +263,71 @@ public final class FauneSpawns {
     }
 
     /*
+     * 12/11/2026 (test en jeu : requin griset, bête des grands fonds, au bord de l'Amazone) : notre table fait naître le
+     * type (untamedwilds:shark), puis Untamed Wilds tire l'espèce au hasard. À sa première arrivée (naissance
+     * naturelle ou génération), l'espèce est vérifiée avec les lignes de la table qui la nomment ; hors de son milieu,
+     * la bête prend une espèce de ce type permise ici, ou n'est pas ajoutée. Œufs, commandes, élevage : jamais touchés.
+     */
+    private static final String ESPECE = "domaine_terre_espece", RAISON = "domaine_terre_raison";
+    private static final java.util.Set<String> RAISONS_LIBRES = java.util.Set.of("SPAWN_EGG", "COMMAND", "BREEDING",
+            "BUCKET", "DISPENSER", "SPAWNER", "MOB_SUMMONED", "CONVERSION", "TRIGGERED", "JOCKEY", "REINFORCEMENT");
+
+    @SubscribeEvent
+    public static void raison(MobSpawnEvent.FinalizeSpawn event) {
+        if (event.getEntity().getClass().getName().startsWith("untamedwilds."))
+            event.getEntity().getPersistentData().putString(RAISON, event.getSpawnType().name());
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOW)
+    public static void espece(EntityJoinLevelEvent event) {
+        if (event.isCanceled() || !(event.getLevel() instanceof ServerLevel n)) return;
+        if (!(event.getEntity() instanceof Mob m) || !m.getClass().getName().startsWith("untamedwilds.")) return;
+        net.minecraft.nbt.CompoundTag d = m.getPersistentData();
+        if (d.getBoolean(ESPECE)) return;
+        d.putBoolean(ESPECE, true);
+        if (RAISONS_LIBRES.contains(d.getString(RAISON)) || m.hasCustomName() || !terre(n)) return;
+        FauneTerre f = FauneTerre.get();
+        if (!f.active()) return;
+        try {
+            Object donnees = m.getClass().getMethod("getEntityData", EntityType.class).invoke(null, m.getType());
+            if (donnees == null) return;
+            java.lang.reflect.Method nom = donnees.getClass().getMethod("getName", int.class);
+            int nb = ((java.util.List<?>) donnees.getClass().getMethod("getSpeciesData").invoke(donnees)).size();
+            int v = (Integer) m.getClass().getMethod("getVariant").invoke(m);
+            BlockPos pos = m.blockPosition();
+            var biome = n.getBiome(pos);
+            String esp = String.valueOf(nom.invoke(donnees, v)).toLowerCase(java.util.Locale.ROOT);
+            if (!f.parEspece(m.getType(), esp) || f.permis(m.getType(), esp, pos.getX(), pos.getZ(), biome)) return;
+            java.util.List<Integer> ok = new java.util.ArrayList<>();
+            for (int i = 0; i < nb; i++) {
+                String e = String.valueOf(nom.invoke(donnees, i)).toLowerCase(java.util.Locale.ROOT);
+                if (f.parEspece(m.getType(), e) && f.permis(m.getType(), e, pos.getX(), pos.getZ(), biome)) ok.add(i);
+            }
+            if (ok.isEmpty()) {
+                event.setCanceled(true);
+                if (JOURNAL.incrementAndGet() <= 20) DomaineTerre.LOGGER.info("Faune : {} ({}) retiré en {} (hors de son milieu réel)",
+                        EntityType.getKey(m.getType()), esp, pos.toShortString());
+                return;
+            }
+            int i = ok.get(Math.floorMod(m.getUUID().hashCode(), ok.size()));
+            m.getClass().getMethod("setVariant", int.class).invoke(m, i);
+            try {
+                for (java.lang.reflect.Method mm : m.getClass().getMethods()) {
+                    if (mm.getName().equals("chooseSkinForSpecies") && mm.getParameterCount() == 2) {
+                        mm.invoke(m, m, true);
+                        break;
+                    }
+                }
+            } catch (ReflectiveOperationException | RuntimeException ignore) {
+                // la peau par défaut de l'espèce
+            }
+            m.refreshDimensions();
+        } catch (ReflectiveOperationException | RuntimeException ex) {
+            if (JOURNAL.incrementAndGet() <= 20) DomaineTerre.LOGGER.warn("Faune : espèce non vérifiée ({})", ex.toString());
+        }
+    }
+
+    /*
      * 12/11/2026 (test en jeu : narvals et bélugas de Better Animals Plus) : ce sont des variantes de sa « baleine »,
      * qui choisit la sienne d'après des étiquettes de biome que nos mers n'ont pas : n'importe laquelle, n'importe où.
      * À sa première arrivée, la baleine prend une variante de la température de sa mer (narval et béluga dans les mers

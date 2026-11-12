@@ -465,6 +465,22 @@ public final class FauneTerre {
      * d'Untamed Wilds, structures, génération).
      */
     public boolean permis(EntityType<?> type, int x, int z, Holder<Biome> biome) {
+        return permis(type, null, x, z, biome);
+    }
+
+    /** La table a-t-elle des lignes par espèce pour ce type (« untamedwilds:shark/bull ») ? */
+    public boolean parEspece(EntityType<?> type, String espece) {
+        for (Entree e : (Iterable<Entree>) java.util.stream.Stream.concat(surface.stream(), controle.stream())::iterator) {
+            if (e.donnees().type == type && e.id().endsWith("/" + espece)) return true;
+        }
+        return false;
+    }
+
+    /**
+     * 12/11/2026 (test en jeu : requin griset, bête des grands fonds, au bord de l'Amazone) : Untamed Wilds tire
+     * l'espèce lui-même ; avec espece, seules les lignes de cette espèce comptent.
+     */
+    public boolean permis(EntityType<?> type, String espece, int x, int z, Holder<Biome> biome) {
         int pix = pixel(x, z);
         String chemin = biome.unwrapKey().map(k -> k.location().getPath()).orElse("");
         int temp = -1, bande = -1;
@@ -494,6 +510,7 @@ public final class FauneTerre {
         Boolean eau = null, estuaire = null;
         for (Entree e : (Iterable<Entree>) java.util.stream.Stream.concat(surface.stream(), controle.stream())::iterator) {
             if (e.donnees().type != type) continue;
+            if (espece != null && !e.id().endsWith("/" + espece)) continue;
             vue = true;
             if (merBiome) {
                 // 12/11/2026 (test en jeu : « toujours des requins dans les estuaires ») : une bête de mer seulement
