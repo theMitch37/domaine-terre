@@ -1,0 +1,10 @@
+serveur prêt en 118 s
+lot 1/1 : test_beauce, test_kimberley — 162 chunks
+  162/162 chunks complets (158 s)
+162 chunks demandés en 1 lots
+test_beauce : (128, 1536, 128), 56 sortes de blocs
+test_kimberley : (128, 1536, 128), 57 sortes de blocs
+entités lues : 325 [('minecraft:rabbit', 79), ('untamedwilds:butterfly', 43), ('untamedwilds:newt', 35), ('naturalist:deer', 18), ('naturalist:duck', 16), ('proto:naturalist:duck', 15), ('untamedwilds:snake', 14), ('minecraft:fox', 14)]
+test_beauce : 14 animaux
+test_kimberley : 50 animaux
+terminé en 169 s
