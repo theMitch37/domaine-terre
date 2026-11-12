@@ -139,6 +139,16 @@ public class FleuveFeature extends Feature<NoneFeatureConfiguration> {
                 }
             }
         }
+        // diagnostic temporaire (12/11/2026) : poches de Jökulsárlón
+        for (int[] q : new int[][]{{-7105, -28512}, {-7110, -28497}, {-7106, -28511}}) {
+            if (q[0] >> 4 != x0 >> 4 || q[1] >> 4 != z0 >> 4) continue;
+            StringBuilder sb = new StringBuilder();
+            for (int y = 47; y <= 64; y++) sb.append(y).append('=').append(net.minecraftforge.registries.ForgeRegistries.BLOCKS
+                    .getKey(niveau.getBlockState(pos.set(q[0], y, q[1])).getBlock()).getPath()).append(' ');
+            fr.domaineaubin.terre.DomaineTerre.LOGGER.info("DIAG poche {} {} surfWG={} fondWG={} lit={} mer={} cote={} : {}", q[0], q[1],
+                    niveau.getHeight(Heightmap.Types.WORLD_SURFACE_WG, q[0], q[1]), niveau.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, q[0], q[1]),
+                    t.eauLit(q[0], q[1]), t.enMer(q[0], q[1]), String.format(java.util.Locale.ROOT, "%.1f", t.distanceCote(q[0], q[1])), sb);
+        }
         // herbe sous l'eau hors des lits (bord des lacs, plats de la côte, 11/11/2026, banc : 130 à 330 colonnes par
         // zone, sous 1 à 2 blocs d'eau surtout) : les règles de surface ne voient pas l'eau des aquifères du mod ; sous
         // l'eau, le fond du lit

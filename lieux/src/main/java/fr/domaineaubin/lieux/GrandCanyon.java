@@ -274,7 +274,8 @@ public final class GrandCanyon implements LieuSculpte {
         if (!Double.isNaN(plateau)) niv = Math.min(niv, Mth.floor(plateau));
         if (niv <= NIVEAU_COLORADO + 3) return NIVEAU_COLORADO;
         double sol = Double.isNaN(plateau) ? coupe(pt) : Mth.lerp(pt.fondu(), plateau, coupe(pt));
-        boolean profond = pt.t() <= 1.0 && sol < niv - 1.0;
+        // seulement là où le fond du canyon est vraiment atteint (sinon un puits isolé au bout du chenal, banc)
+        boolean profond = pt.t() <= 1.0 && sol < NIVEAU_COLORADO + 6.0;
         return profond ? NIVEAU_COLORADO : niv;
     }
 
