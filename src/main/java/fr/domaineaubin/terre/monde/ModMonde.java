@@ -39,6 +39,9 @@ public final class ModMonde {
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> RIVES =
             FEATURES.register("rives", () -> new RivesFeature(NoneFeatureConfiguration.CODEC));
 
+    public static final RegistryObject<Feature<NoneFeatureConfiguration>> MINERAIS =
+            FEATURES.register("minerais", () -> new MineraisFeature(NoneFeatureConfiguration.CODEC));
+
     public static final DeferredRegister<Codec<? extends BiomeSource>> SOURCES_BIOMES =
             DeferredRegister.create(Registries.BIOME_SOURCE, DomaineTerre.MOD_ID);
 
