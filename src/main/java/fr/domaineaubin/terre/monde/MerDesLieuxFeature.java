@@ -45,6 +45,14 @@ public class MerDesLieuxFeature extends Feature<NoneFeatureConfiguration> {
                         modifie = true;
                     }
                 }
+                // (12/11/2026, banc Jökulsárlón : 94 blocs restés vides au fond, sur l'herbe) le sol réel est parfois
+                // plus bas que la hauteur du mod (lieu creusé) : l'air juste au-dessus du sol devient de l'eau aussi
+                for (int y = (int) Math.floor(fond) + 1, n = 0; n < 16 && y > niveau.getMinBuildHeight(); y--, n++) {
+                    BlockState b = niveau.getBlockState(p.set(x, y, z));
+                    if (!b.isAir()) break;
+                    niveau.setBlock(p, Blocks.WATER.defaultBlockState(), 2);
+                    modifie = true;
+                }
             }
         }
         return modifie;
