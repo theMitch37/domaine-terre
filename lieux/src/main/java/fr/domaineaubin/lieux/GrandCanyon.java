@@ -232,8 +232,10 @@ public final class GrandCanyon implements LieuSculpte {
         // et des gradins en escalier contre le lac) : à l'extrémité amont, le canyon finit en V autour du fleuve ; loin
         // du talweg, le fond remonte (1,5 bloc par bloc), plus de creux isolé
         if (pt.intensite() < 0.6 && Terrain.lon(x) > LON_LEES_FERRY - 1.0 && pt.distBlocs() > 10.0) {
-            y = Math.max(y, NIVEAU_COLORADO + (pt.distBlocs() - 10.0) * 1.5);
-            y = Math.min(y, Math.max(h, NIVEAU_COLORADO));
+            // (banc : le terrain du mod, h, est ici le creux du lac Powell, ~70 : il ne borne pas la remontée)
+            double rebord = yRebord(pt);
+            double vy = NIVEAU_COLORADO + (pt.distBlocs() - 10.0) * 1.5;
+            y = Math.max(y, Double.isNaN(rebord) ? vy : Math.min(vy, rebord));
         }
         // le Colorado (~6 blocs de large) et les lacs (Mead, Mohave, Powell) au niveau du fleuve
         // lacs : là où le relief réel est à leur niveau (11/11/2026 : jusqu'à 26 m au-dessus, la plaine de la rivière
