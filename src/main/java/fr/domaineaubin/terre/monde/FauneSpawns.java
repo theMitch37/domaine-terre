@@ -61,7 +61,7 @@ public final class FauneSpawns {
     }
 
     /** Monde Terre (source de biomes du mod) et Overworld. */
-    static boolean terre(LevelAccessor niveau) {
+    public static boolean terre(LevelAccessor niveau) {
         ServerLevel s = niveau instanceof ServerLevel sl ? sl
                 : niveau instanceof net.minecraft.world.level.WorldGenLevel w ? w.getLevel() : null;
         return s != null && s.dimension() == Level.OVERWORLD
