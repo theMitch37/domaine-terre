@@ -379,8 +379,11 @@ public final class FauneSpawns {
         }
     }
 
-    /** Monstres plus forts en descendant : +50 % de vie, +2 dégâts, +2 armure par étage sous les couches hautes. */
-    @SubscribeEvent
+    /**
+     * Monstres plus forts en descendant : +50 % de vie, +2 dégâts, +2 armure par étage sous les couches hautes.
+     * 12/11/2026 : retiré (décision de Maxime : les monstres gardent leurs statistiques de base ; c'est le choix des
+     * monstres par étage qui rend la descente plus dure). La méthode n'est plus abonnée aux événements.
+     */
     public static void force(MobSpawnEvent.FinalizeSpawn event) {
         Mob m = event.getEntity();
         if (!(m instanceof Enemy) || !terre(event.getLevel())) return;
