@@ -59,8 +59,32 @@ public final class Ambiances {
         return Math.max(48.0, (y - 63.0) + 30.0);
     }
 
+    /** Commande client /brume (12/11/2026, essais de Maxime) : plus aucune brume sous l'eau, pour voir les fonds. */
+    public static volatile boolean sansBrume = false;
+
+    @SubscribeEvent
+    public static void commandes(net.minecraftforge.client.event.RegisterClientCommandsEvent event) {
+        event.getDispatcher().register(net.minecraft.commands.Commands.literal("brume").executes(c -> {
+            sansBrume = !sansBrume;
+            c.getSource().sendSuccess(() -> net.minecraft.network.chat.Component.literal(sansBrume
+                    ? "Brume sous l'eau coupée (essais) — /brume pour la remettre"
+                    : "Brume sous l'eau remise"), false);
+            return 1;
+        }));
+    }
+
+    @SubscribeEvent(priority = net.minecraftforge.eventbus.api.EventPriority.LOWEST)
+    public static void sansBrumeSousLEau(ViewportEvent.RenderFog event) {
+        if (!sansBrume || event.getCamera().getFluidInCamera() != net.minecraft.world.level.material.FogType.WATER) return;
+        float loin = Minecraft.getInstance().gameRenderer.getRenderDistance();
+        event.setFarPlaneDistance(loin);
+        event.setNearPlaneDistance(loin * 0.9f);
+        event.setCanceled(true);
+    }
+
     @SubscribeEvent
     public static void brouillard(ViewportEvent.RenderFog event) {
+        if (sansBrume && event.getCamera().getFluidInCamera() == net.minecraft.world.level.material.FogType.WATER) return;
         double t = profondeur(event.getCamera());
         if (t >= 0) {
             // eau du large : 30 blocs de visibilité en surface (on ne voit pas le fond), 9 au fond
@@ -82,6 +106,7 @@ public final class Ambiances {
 
     @SubscribeEvent
     public static void couleur(ViewportEvent.ComputeFogColor event) {
+        if (sansBrume) return;
         double t = profondeur(event.getCamera());
         if (t < 0) return;
         float f = (float) Mth.lerp(Mth.clamp((t - 0.3) / 0.7, 0.0, 1.0), 1.0, 0.06);   // le noir vient sous y 25
