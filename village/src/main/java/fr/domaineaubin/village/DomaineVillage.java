@@ -37,6 +37,7 @@ public final class DomaineVillage {
         PLACEMENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
         for (String s : RALLUMEES) StructuresTerre.rallumer(s);
         MinecraftForge.EVENT_BUS.addListener(this::demarrage);
+        MinecraftForge.EVENT_BUS.addListener((net.minecraftforge.event.RegisterCommandsEvent e) -> CommandeVillage.enregistrer(e.getDispatcher()));
     }
 
     private void demarrage(ServerAboutToStartEvent e) {

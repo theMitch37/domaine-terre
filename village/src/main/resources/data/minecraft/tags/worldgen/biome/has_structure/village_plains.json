@@ -159,6 +159,20 @@
   "domaine_terre:steppes_tibet/meadow",
   "domaine_terre:steppes_tibet/forest",
   "domaine_terre:steppes_tibet/birch_forest",
-  "domaine_terre:steppes_tibet/swamp"
+  "domaine_terre:steppes_tibet/swamp",
+  "domaine_terre:afrique_australe/stony_shore",
+  "domaine_terre:alpine/stony_shore",
+  "domaine_terre:asie_sud_est/stony_shore",
+  "domaine_terre:atlantique/stony_shore",
+  "domaine_terre:boreale/stony_shore",
+  "domaine_terre:chine/stony_shore",
+  "domaine_terre:cone_sud/stony_shore",
+  "domaine_terre:continentale/stony_shore",
+  "domaine_terre:japon_coree/stony_shore",
+  "domaine_terre:mediterranee/stony_shore",
+  "domaine_terre:nordique/stony_shore",
+  "domaine_terre:nouvelle_zelande/stony_shore",
+  "domaine_terre:ouest_mexique/stony_shore",
+  "domaine_terre:siberie/stony_shore"
  ]
 }

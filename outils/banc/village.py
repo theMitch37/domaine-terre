@@ -78,6 +78,18 @@ for nom, (la, lo) in VILLES.items():
         ok = False
         lignes_res.append(f"{nom:10s} rien : {l.strip()}")
     bilan.append(f"{'OK    ' if ok else 'ÉCHEC '} village de {nom}")
+    if not ok:                                      # pourquoi : biome au point attendu
+        lignes_res.append("    " + cmd(f"village point {attendu[0]} {attendu[1]}", r"\[Village\]", 120).strip())
+import random
+random.seed(1)
+sans = 0
+echantillon = random.sample(villages, 60)
+for vx, vz, vn in echantillon:
+    l = cmd(f"village point {vx} {vz}", r"\[Village\]", 120)
+    if "types : aucun" in l:
+        sans += 1
+        lignes_res.append("sans type : " + vn + " " + l.strip())
+bilan.append(f"{'OK    ' if sans <= 3 else 'ÉCHEC '} biome compatible pour {60 - sans} villages sur 60 tirés au hasard")
 l = cmd("execute positioned 13900 100 -13380 run locate structure minecraft:desert_pyramid",
         r"nearest|Could not find|could not find", 200)
 bilan.append(f"{'OK    ' if 'nearest' not in l else 'ÉCHEC '} pas encore de pyramide (0.1)")

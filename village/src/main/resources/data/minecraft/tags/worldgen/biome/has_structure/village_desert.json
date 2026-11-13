@@ -31,6 +31,8 @@
   "domaine_terre:sahara_sahel/desert",
   "domaine_terre:sahara_sahel/badlands",
   "domaine_terre:siberie/desert",
-  "domaine_terre:steppes_tibet/desert"
+  "domaine_terre:steppes_tibet/desert",
+  "domaine_terre:maghreb/stony_shore",
+  "domaine_terre:moyen_orient/stony_shore"
  ]
 }
