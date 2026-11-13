@@ -1,0 +1,6 @@
+{
+ "type": "minecraft:jungle_temple",
+ "biomes": "#domaine_terre_village:sites/jungle_pyramid",
+ "spawn_overrides": {},
+ "step": "surface_structures"
+}

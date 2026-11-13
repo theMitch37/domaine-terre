@@ -31,6 +31,11 @@ public final class Points {
         return LISTES.computeIfAbsent(nom + "@" + taille, k -> charger(nom, taille));
     }
 
+    /** Forteresses de l'End (une par continent). */
+    public static java.util.List<ChunkPos> forteresses() {
+        return new java.util.ArrayList<>(liste("forteresses", PlacementFixe.CASE).values());
+    }
+
     public static int taille(String nom, int taille) {
         return liste(nom, taille).size();
     }

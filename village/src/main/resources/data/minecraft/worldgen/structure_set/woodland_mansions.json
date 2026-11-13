@@ -1,0 +1,15 @@
+{
+ "placement": {
+  "type": "domaine_terre_village:fixe",
+  "salt": 10387319,
+  "separation": 20,
+  "spacing": 80,
+  "liste": "manoirs"
+ },
+ "structures": [
+  {
+   "structure": "minecraft:mansion",
+   "weight": 1
+  }
+ ]
+}

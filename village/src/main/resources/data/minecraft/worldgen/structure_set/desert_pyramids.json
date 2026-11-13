@@ -1,0 +1,15 @@
+{
+ "placement": {
+  "type": "domaine_terre_village:fixe",
+  "salt": 14357617,
+  "separation": 8,
+  "spacing": 32,
+  "liste": "pyramides"
+ },
+ "structures": [
+  {
+   "structure": "minecraft:desert_pyramid",
+   "weight": 1
+  }
+ ]
+}

@@ -28,10 +28,18 @@ public final class DomaineVillage {
     public static final RegistryObject<StructurePlacementType<PlacementFixe>> FIXE =
             PLACEMENTS.register("fixe", () -> () -> PlacementFixe.CODEC);
 
-    /** Structures vanilla rallumées dans les mondes Terre (0.1). */
+    /**
+     * Structures vanilla rallumées dans les mondes Terre (0.1, plan validé par Maxime le 12/11) : villages aux vraies
+     * villes ; sites fixes (pyramides, temples de la jungle, igloos, manoirs, temples de la mer et leurs ruines,
+     * épaves, ruines de piste) ; au hasard : cabanes de sorcière, puits de mine, trésors enfouis, avant-postes (loin
+     * des villages), portails en ruine (sous terre), cités antiques (au fond du monde). Forteresses : AnneauxMixin.
+     */
     private static final String[] RALLUMEES = {
             "village_plains", "village_desert", "village_savanna", "village_snowy", "village_taiga",
-            "swamp_hut", "mineshaft", "mineshaft_mesa", "buried_treasure"};
+            "desert_pyramid", "jungle_pyramid", "igloo", "mansion", "monument", "ocean_ruin_cold", "ocean_ruin_warm",
+            "shipwreck", "shipwreck_beached", "trail_ruins",
+            "swamp_hut", "mineshaft", "mineshaft_mesa", "buried_treasure", "pillager_outpost", "ancient_city",
+            "ruined_portal", "ruined_portal_desert", "ruined_portal_jungle", "ruined_portal_swamp", "ruined_portal_mountain"};
 
     public DomaineVillage() {
         PLACEMENTS.register(FMLJavaModLoadingContext.get().getModEventBus());

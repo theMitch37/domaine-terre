@@ -1,0 +1,14 @@
+{
+ "replace": false,
+ "values": [
+  "#minecraft:has_structure/ocean_ruin_warm",
+  "domaine_terre:mer/chaude_abysse",
+  "domaine_terre:mer/chaude_cote",
+  "domaine_terre:mer/chaude_large",
+  "domaine_terre:mer/chaude_plateau",
+  "domaine_terre:mer/tiede_abysse",
+  "domaine_terre:mer/tiede_cote",
+  "domaine_terre:mer/tiede_large",
+  "domaine_terre:mer/tiede_plateau"
+ ]
+}

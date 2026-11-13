@@ -1,0 +1,26 @@
+{
+ "replace": false,
+ "values": [
+  "#minecraft:has_structure/shipwreck",
+  "domaine_terre:mer/chaude_abysse",
+  "domaine_terre:mer/chaude_cote",
+  "domaine_terre:mer/chaude_large",
+  "domaine_terre:mer/chaude_plateau",
+  "domaine_terre:mer/froide_abysse",
+  "domaine_terre:mer/froide_cote",
+  "domaine_terre:mer/froide_large",
+  "domaine_terre:mer/froide_plateau",
+  "domaine_terre:mer/gelee_abysse",
+  "domaine_terre:mer/gelee_cote",
+  "domaine_terre:mer/gelee_large",
+  "domaine_terre:mer/gelee_plateau",
+  "domaine_terre:mer/temperee_abysse",
+  "domaine_terre:mer/temperee_cote",
+  "domaine_terre:mer/temperee_large",
+  "domaine_terre:mer/temperee_plateau",
+  "domaine_terre:mer/tiede_abysse",
+  "domaine_terre:mer/tiede_cote",
+  "domaine_terre:mer/tiede_large",
+  "domaine_terre:mer/tiede_plateau"
+ ]
+}

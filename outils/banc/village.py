@@ -103,9 +103,30 @@ for vx, vz, vn in random.sample(villages, 30):
         lignes_res.append("    " + cmd(f"village point {vx} {vz}", r"\[Village\]", 120).strip())
         lignes_res.append("    " + cmd(f"place structure minecraft:village_plains {vx} 100 {vz}", r"(?i)generated|failed|invalid", 120).strip())
 bilan.append(f"{'OK    ' if nes >= 27 else 'ÉCHEC '} villages générés : {nes} sur 30 tirés au hasard")
-l = cmd("execute positioned 13900 100 -13380 run locate structure minecraft:desert_pyramid",
-        r"nearest|Could not find|could not find", 200)
-bilan.append(f"{'OK    ' if 'nearest' not in l else 'ÉCHEC '} pas encore de pyramide (0.1)")
+# sites fixes : chaque site de chaque liste doit être trouvé par /locate à moins de 64 blocs
+SITES = {"pyramides": "minecraft:desert_pyramid", "temples_jungle": "minecraft:jungle_pyramid",
+         "igloos": "minecraft:igloo", "manoirs": "minecraft:mansion", "temples_mer": "minecraft:monument",
+         "ruines_mer": "#minecraft:ocean_ruin", "epaves": "#minecraft:shipwreck", "ruines_piste": "minecraft:trail_ruins",
+         "forteresses": "minecraft:stronghold"}
+dossier = os.path.dirname(CSV)
+for liste, st in SITES.items():
+    bons, tot = 0, 0
+    for r in csv.DictReader(open(os.path.join(dossier, liste + ".csv"), encoding="utf-8"), delimiter=";"):
+        sx, sz, sn = int(r["x"]), int(r["z"]), r["nom"]
+        tot += 1
+        l = cmd(f"execute positioned {sx} 100 {sz} run locate structure {st}", r"nearest |Could not find|could not find", 300)
+        m = re.search(r"at \[(-?\d+), ([^,]+), (-?\d+)\]", l)
+        if m and math.hypot(int(m.group(1)) - sx, int(m.group(3)) - sz) < 64:
+            bons += 1
+            lignes_res.append(f"{liste:14s} OK   {sn} -> ({m.group(1)}, {m.group(2)}, {m.group(3)})")
+        else:
+            lignes_res.append(f"{liste:14s} RATÉ {sn} ({sx}, {sz}) -> {l.strip()[-90:]}")
+            lignes_res.append("    " + cmd(f"village point {sx} {sz}", r"\[Village\]", 120).strip())
+    bilan.append(f"{'OK    ' if bons == tot else 'ÉCHEC '} {liste} : {bons} sur {tot} sites")
+l = cmd("execute positioned 1064 0 -21769 run locate structure minecraft:ancient_city", r"nearest |Could not find|could not find", 300)
+m = re.search(r"at \[(-?\d+), ([^,]+), (-?\d+)\]", l)
+lignes_res.append("cité antique : " + l.strip()[-100:])
+bilan.append(f"{'OK    ' if m else 'ÉCHEC '} cité antique trouvée près de Paris")
 l = cmd("execute positioned 1064 60 -21769 run locate structure minecraft:mineshaft", r"nearest|Could not find|could not find", 200)
 bilan.append(f"{'OK    ' if 'nearest' in l else 'ÉCHEC '} puits de mine rallumés")
 cmd("stop", r"Stopping server", 60)

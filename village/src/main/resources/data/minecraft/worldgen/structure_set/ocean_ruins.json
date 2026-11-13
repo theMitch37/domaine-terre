@@ -1,0 +1,19 @@
+{
+ "placement": {
+  "type": "domaine_terre_village:fixe",
+  "salt": 14357621,
+  "separation": 8,
+  "spacing": 20,
+  "liste": "ruines_mer"
+ },
+ "structures": [
+  {
+   "structure": "minecraft:ocean_ruin_cold",
+   "weight": 1
+  },
+  {
+   "structure": "minecraft:ocean_ruin_warm",
+   "weight": 1
+  }
+ ]
+}

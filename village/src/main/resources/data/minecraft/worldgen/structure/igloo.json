@@ -1,0 +1,6 @@
+{
+ "type": "minecraft:igloo",
+ "biomes": "#domaine_terre_village:sites/igloo",
+ "spawn_overrides": {},
+ "step": "surface_structures"
+}
