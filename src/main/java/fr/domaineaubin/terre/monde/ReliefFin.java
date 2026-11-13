@@ -59,7 +59,7 @@ public final class ReliefFin {
     private static final Map<Long, Future<?>> enCours = new ConcurrentHashMap<>();
     private static final java.util.Set<Long> mers = ConcurrentHashMap.newKeySet();
     private static final Map<Long, Long> echecs = new ConcurrentHashMap<>();       // paquet -> instant de l'échec
-    private static final ExecutorService telechargeur = Executors.newFixedThreadPool(2, r -> {
+    private static final ExecutorService telechargeur = Executors.newFixedThreadPool(4, r -> {
         Thread t = new Thread(r, "Domaine Terre - relief fin");
         t.setDaemon(true);
         return t;
@@ -152,6 +152,8 @@ public final class ReliefFin {
         int n = T + 2 * MARGE;
         int x0 = tx * T - MARGE, z0 = tz * T - MARGE;
         short[][] vois = new short[9][];
+        for (int j = -1; j <= 1; j++)                            // 13/11 : les voisins se téléchargent ensemble
+            for (int i = -1; i <= 1; i++) precharger((tx + i) >> 2, (tz + j) >> 2);
         for (int j = -1; j <= 1; j++) {
             for (int i = -1; i <= 1; i++) {
                 short[] v = (i == 0 && j == 0) ? brut : region(tx + i, tz + j);
@@ -288,7 +290,7 @@ public final class ReliefFin {
             long k = cle(bx, bz);
             Long e = echecs.get(k);
             if (e != null && System.currentTimeMillis() - e < 300_000) return indisponible();
-            Future<?> tache = enCours.computeIfAbsent(k, kk -> telechargeur.submit(() -> telecharger(bx, bz, f, vide)));
+            Future<?> tache = lancer(bx, bz);
             try {
                 tache.get(60, TimeUnit.SECONDS);
             } catch (Exception ex) {
@@ -313,6 +315,93 @@ public final class ReliefFin {
             }
             return indisponible();
         }
+    }
+
+    // ---------------------------------------------------------------- préchargement (Terre 1.0.1, 13/11/2026)
+    // Le 13/11, un tick serveur de 80 s : la téléportation (/domaine depart, aller, lieu) génère son chunk sur le fil du
+    // serveur, qui attendait le téléchargement des paquets un par un. Désormais les paquets autour des joueurs sont
+    // téléchargés d'avance, et les téléportations attendent les paquets de leur destination sans bloquer le serveur.
+    // Rien ne change pour le terrain : un chunk n'est généré qu'une fois ses paquets là (ou leur échec constaté),
+    // comme avant ; deux mondes restent identiques.
+
+    /** Rayon (blocs) préchargé autour d'un joueur ou d'une destination : vue de 32 chunks + marge de la pente. */
+    static final int RAYON_PRECHARGE = 768;
+
+    private static Future<?> lancer(int bx, int bz) {
+        long k = cle(bx, bz);
+        Path f = dossier().resolve("relief_" + bx + "_" + bz + ".bin");
+        Path vide = dossier().resolve("relief_" + bx + "_" + bz + ".vide");
+        return enCours.compute(k, (kk, ancien) -> ancien != null && !ancien.isDone() ? ancien
+                : telechargeur.submit(() -> {
+                    telecharger(bx, bz, f, vide);
+                    if (!Files.exists(f) && !Files.exists(vide) && !mers.contains(kk)) {
+                        echecs.put(kk, System.currentTimeMillis());
+                        manque = true;
+                    }
+                }));
+    }
+
+    /** Vrai si le paquet est disponible ou sait qu'il ne l'est pas (mer, échec récent) : plus rien à attendre. */
+    static boolean paquetRegle(int bx, int bz) {
+        long k = cle(bx, bz);
+        if (mers.contains(k)) return true;
+        Path d = dossier();
+        if (Files.exists(d.resolve("relief_" + bx + "_" + bz + ".bin")) || Files.exists(d.resolve("relief_" + bx + "_" + bz + ".vide")))
+            return true;
+        Long e = echecs.get(k);
+        return e != null && System.currentTimeMillis() - e < 300_000;
+    }
+
+    /** Lance le téléchargement du paquet s'il manque, sans attendre. */
+    static void precharger(int bx, int bz) {
+        if (!actif || paquetRegle(bx, bz)) return;
+        Future<?> f = enCours.get(cle(bx, bz));
+        if (f == null || f.isDone()) lancer(bx, bz);
+    }
+
+    /** Paquets (bx, bz) qui couvrent le carré de rayon {@link #RAYON_PRECHARGE} autour du bloc (x, z). */
+    private static java.util.List<long[]> paquetsAutour(int x, int z) {
+        java.util.List<long[]> l = new java.util.ArrayList<>();
+        int bx0 = (x - RAYON_PRECHARGE) >> 11, bx1 = (x + RAYON_PRECHARGE) >> 11;
+        int bz0 = (z - RAYON_PRECHARGE) >> 11, bz1 = (z + RAYON_PRECHARGE) >> 11;
+        for (int bz = bz0; bz <= bz1; bz++) for (int bx = bx0; bx <= bx1; bx++) l.add(new long[]{bx, bz});
+        return l;
+    }
+
+    /** Précharge les paquets autour du bloc (x, z) ; vrai s'ils sont tous déjà là (ou réglés). */
+    public static boolean prechargerAutour(int x, int z) {
+        reglages();
+        if (!actif) return true;
+        boolean pret = true;
+        for (long[] p : paquetsAutour(x, z)) {
+            if (!paquetRegle((int) p[0], (int) p[1])) {
+                pret = false;
+                precharger((int) p[0], (int) p[1]);
+            }
+        }
+        return pret;
+    }
+
+    private record Attente(int x, int z, long debut, Runnable action) {
+    }
+
+    private static final java.util.List<Attente> attentes = new java.util.ArrayList<>();
+    /** Au-delà, on lance l'action quand même (la génération attendra comme avant). */
+    private static final long ATTENTE_MAX = 90_000;
+
+    /**
+     * Lance {@code action} sur le fil du serveur dès que le relief autour de (x, z) est là : tout de suite s'il l'est
+     * déjà, sinon au tick où le dernier paquet arrive. Vrai si l'action a été lancée tout de suite.
+     */
+    public static boolean quandPret(int x, int z, Runnable action) {
+        if (prechargerAutour(x, z)) {
+            action.run();
+            return true;
+        }
+        synchronized (attentes) {
+            attentes.add(new Attente(x, z, System.currentTimeMillis(), action));
+        }
+        return false;
     }
 
     private static Map<Integer, short[]> indisponible() {
@@ -416,12 +505,45 @@ public final class ReliefFin {
         }
     }
 
-    /** Prévient une fois les joueurs quand une zone a dû être générée sans le relief fin. */
+    private static int tics = 0;
+
+    /**
+     * Chaque tick : lance les téléportations dont le relief est arrivé ; toutes les 5 s : précharge le relief autour
+     * des joueurs du monde Terre ; une fois : prévient les joueurs quand une zone a dû être générée sans le relief fin.
+     */
     @SubscribeEvent
     public static void tic(TickEvent.ServerTickEvent e) {
-        if (e.phase != TickEvent.Phase.END || !manque || prevenu) return;
+        if (e.phase != TickEvent.Phase.END) return;
+        java.util.List<Runnable> pretes = new java.util.ArrayList<>();
+        synchronized (attentes) {
+            for (var it = attentes.iterator(); it.hasNext(); ) {
+                Attente a = it.next();
+                if (System.currentTimeMillis() - a.debut() > ATTENTE_MAX || prechargerAutour(a.x(), a.z())) {
+                    it.remove();
+                    pretes.add(a.action());
+                }
+            }
+        }
+        for (Runnable r : pretes) {
+            try {
+                r.run();
+            } catch (Exception ex) {
+                DomaineTerre.LOGGER.error("Relief fin : action en attente", ex);
+            }
+        }
         MinecraftServer s = ServerLifecycleHooks.getCurrentServer();
-        if (s == null || s.getPlayerList().getPlayerCount() == 0) return;
+        if (s == null) return;
+        if (++tics % 100 == 0 && actif && s.overworld().getChunkSource().getGenerator().getBiomeSource() instanceof TerroirBiomeSource) {
+            double tour = 360.0 * Terrain.BLOCS_PAR_DEGRE, couture = 180.0 * Terrain.BLOCS_PAR_DEGRE;
+            for (var j : s.overworld().players()) {
+                prechargerAutour(j.getBlockX(), j.getBlockZ());
+                // près de la couture du Pacifique : aussi l'autre côté, où le joueur va basculer
+                if (Math.abs(j.getX()) > couture - 1000)
+                    prechargerAutour((int) Math.floor(j.getX() - Math.signum(j.getX()) * tour), j.getBlockZ());
+            }
+        }
+        if (!manque || prevenu) return;
+        if (s.getPlayerList().getPlayerCount() == 0) return;
         prevenu = true;
         s.getPlayerList().broadcastSystemMessage(Component.literal(
                 "§6[Domaine Terre]§r Relief détaillé indisponible (pas de connexion ?) : certaines zones sont générées avec "

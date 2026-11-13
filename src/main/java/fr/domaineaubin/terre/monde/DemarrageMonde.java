@@ -33,6 +33,8 @@ public final class DemarrageMonde {
         if (stem != null && stem.generator().getBiomeSource() instanceof TerroirBiomeSource src) {
             Terrain.activer(src.echelle());
             DomaineTerre.LOGGER.info("Monde Terre à l'échelle 1:{}", src.echelle());
+            // 1.0.1 : relief du point d'apparition par défaut téléchargé dès le démarrage
+            ReliefFin.prechargerAutour((int) Math.floor(Terrain.x(SPAWN_LON)), (int) Math.floor(Terrain.z(SPAWN_LAT)));
         }
     }
 

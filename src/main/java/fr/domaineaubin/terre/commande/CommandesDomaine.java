@@ -6,6 +6,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import fr.domaineaubin.terre.DomaineTerre;
+import fr.domaineaubin.terre.monde.ReliefFin;
 import fr.domaineaubin.terre.monde.Terrain;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -146,15 +147,21 @@ public final class CommandesDomaine {
             throws CommandSyntaxException {
         ServerPlayer joueur = c.getSource().getPlayerOrException();
         ServerLevel niveau = c.getSource().getLevel();
+        CommandSourceStack source = c.getSource();
         int x = (int) Math.floor(Terrain.x(lon));
         int z = (int) Math.floor(Terrain.z(lat));
-        // force la génération du chunk, puis lit la hauteur réelle du sol
-        LevelChunk chunk = niveau.getChunk(x >> 4, z >> 4);
-        int y = chunk.getHeight(Heightmap.Types.MOTION_BLOCKING, x & 15, z & 15) + 1;
-        joueur.teleportTo(niveau, x + 0.5, y + 1, z + 0.5, joueur.getYRot(), joueur.getXRot());
         String lieu = nom != null ? nom + " " : "";
-        c.getSource().sendSuccess(() -> Component.literal(String.format(Locale.ROOT,
-                "Téléporté %s(%.3f, %.3f) -> x=%d y=%d z=%d", lieu, lat, lon, x, y + 1, z)), false);
+        // 1.0.1 : le relief de la destination est téléchargé d'abord, sans bloquer le serveur
+        boolean tout = ReliefFin.quandPret(x, z, () -> {
+            if (joueur.isRemoved()) return;
+            // force la génération du chunk, puis lit la hauteur réelle du sol
+            LevelChunk chunk = niveau.getChunk(x >> 4, z >> 4);
+            int y = chunk.getHeight(Heightmap.Types.MOTION_BLOCKING, x & 15, z & 15) + 1;
+            joueur.teleportTo(niveau, x + 0.5, y + 1, z + 0.5, joueur.getYRot(), joueur.getXRot());
+            source.sendSuccess(() -> Component.literal(String.format(Locale.ROOT,
+                    "Téléporté %s(%.3f, %.3f) -> x=%d y=%d z=%d", lieu, lat, lon, x, y + 1, z)), false);
+        });
+        if (!tout) source.sendSuccess(() -> Component.literal("Téléchargement du relief de la destination…"), false);
         return 1;
     }
 
@@ -175,31 +182,49 @@ public final class CommandesDomaine {
     /** Pose le joueur sur une terre habitable au hasard du continent (« ameriques » comprend l'Océanie). */
     private static int depart(CommandContext<CommandSourceStack> c, String continent) throws CommandSyntaxException {
         ServerPlayer joueur = c.getSource().getPlayerOrException();
-        ServerLevel niveau = c.getSource().getServer().overworld();
+        return depart(c.getSource(), joueur, continent, 0) ? 1 : 0;
+    }
+
+    /**
+     * Cherche une terre habitable du continent, attend son relief (1.0.1 : sans bloquer le serveur), puis vérifie le
+     * sol dans le chunk généré ; si c'est de l'eau, recommence (au plus 20 destinations).
+     */
+    private static boolean depart(CommandSourceStack source, ServerPlayer joueur, String continent, int tentative) {
+        ServerLevel niveau = source.getServer().overworld();
         Terrain t = Terrain.get();
         java.util.Random rnd = new java.util.Random();
-        for (int essai = 0; essai < 4000; essai++) {
-            double lat = -56 + rnd.nextDouble() * 126, lon = -180 + rnd.nextDouble() * 360;
-            int ter = t.carte().terroir(lon, lat);
-            if (ter == 0) continue;
-            String cont = t.carte().continent(ter);
-            boolean bon = cont.equals(continent) || (continent.equals("ameriques") && cont.equals("oceanie"));
-            if (!bon) continue;
-            int x = (int) Math.floor(Terrain.x(lon)), z = (int) Math.floor(Terrain.z(lat));
-            double alt = t.altitudeReelle(x, z);
-            int k = t.carte().climat(lon, lat);
-            // habitable : pas de haute montagne, pas de pente forte, pas de toundra / glace, pas collé à la mer
-            if (alt < 2 || alt > 1500 || t.pente(x, z) > 25 || k >= 29 || t.distanceCote(x, z) < 6) continue;
-            LevelChunk chunk = niveau.getChunk(x >> 4, z >> 4);
-            int y = chunk.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x & 15, z & 15);
-            if (!niveau.getFluidState(new net.minecraft.core.BlockPos(x, y, z)).isEmpty()) continue;
-            joueur.teleportTo(niveau, x + 0.5, y + 1, z + 0.5, joueur.getYRot(), joueur.getXRot());
-            final String nom = t.carte().nomTerroir(ter);
-            c.getSource().sendSuccess(() -> Component.literal("Départ : " + nom), false);
-            return 1;
+        if (tentative < 20) {
+            for (int essai = 0; essai < 4000; essai++) {
+                double lat = -56 + rnd.nextDouble() * 126, lon = -180 + rnd.nextDouble() * 360;
+                int ter = t.carte().terroir(lon, lat);
+                if (ter == 0) continue;
+                String cont = t.carte().continent(ter);
+                boolean bon = cont.equals(continent) || (continent.equals("ameriques") && cont.equals("oceanie"));
+                if (!bon) continue;
+                int x = (int) Math.floor(Terrain.x(lon)), z = (int) Math.floor(Terrain.z(lat));
+                double alt = t.altitudeReelle(x, z);
+                int k = t.carte().climat(lon, lat);
+                // habitable : pas de haute montagne, pas de pente forte, pas de toundra / glace, pas collé à la mer
+                if (alt < 2 || alt > 1500 || t.pente(x, z) > 25 || k >= 29 || t.distanceCote(x, z) < 6) continue;
+                final String nom = t.carte().nomTerroir(ter);
+                boolean tout = ReliefFin.quandPret(x, z, () -> {
+                    if (joueur.isRemoved()) return;
+                    LevelChunk chunk = niveau.getChunk(x >> 4, z >> 4);
+                    int y = chunk.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x & 15, z & 15);
+                    if (!niveau.getFluidState(new net.minecraft.core.BlockPos(x, y, z)).isEmpty()) {
+                        depart(source, joueur, continent, tentative + 1);
+                        return;
+                    }
+                    joueur.teleportTo(niveau, x + 0.5, y + 1, z + 0.5, joueur.getYRot(), joueur.getXRot());
+                    source.sendSuccess(() -> Component.literal("Départ : " + nom), false);
+                });
+                if (!tout && tentative == 0)
+                    source.sendSuccess(() -> Component.literal("Téléchargement du relief de la région…"), false);
+                return true;
+            }
         }
-        c.getSource().sendFailure(Component.literal("Aucune terre trouvée pour : " + continent));
-        return 0;
+        source.sendFailure(Component.literal("Aucune terre trouvée pour : " + continent));
+        return false;
     }
 
     /**
