@@ -1,0 +1,64 @@
+moyen_orient : 225/225 chunks (154 s) ; plantes des mods : 3 sortes
+andes : 225/225 chunks (197 s) ; plantes des mods : 5 sortes
+ouest_mexique : 225/225 chunks (237 s) ; plantes des mods : 4 sortes
+chine : 225/225 chunks (271 s) ; plantes des mods : 0 sortes
+mediterranee : 225/225 chunks (305 s) ; plantes des mods : 7 sortes
+atlantique : 225/225 chunks (337 s) ; plantes des mods : 4 sortes
+afrique_est : 225/225 chunks (378 s) ; plantes des mods : 1 sortes
+inde : 225/225 chunks (415 s) ; plantes des mods : 2 sortes
+steppes_tibet : 225/225 chunks (448 s) ; plantes des mods : 10 sortes
+continentale : 225/225 chunks (481 s) ; plantes des mods : 5 sortes
+amerique_centrale : 225/225 chunks (519 s) ; plantes des mods : 7 sortes
+afrique_australe : 225/225 chunks (557 s) ; plantes des mods : 3 sortes
+boreale : 225/225 chunks (590 s) ; plantes des mods : 2 sortes
+cone_sud : 225/225 chunks (622 s) ; plantes des mods : 1 sortes
+afrique_tropicale : 225/225 chunks (656 s) ; plantes des mods : 1 sortes
+maghreb : 225/225 chunks (687 s) ; plantes des mods : 3 sortes
+grandes_plaines : 225/225 chunks (718 s) ; plantes des mods : 0 sortes
+bakery:wild_strawberries                                atlantique 6
+brewery:wild_hops                                       boreale 312, continentale 108, amerique_centrale 14
+corn_delight:wild_corn                                  ouest_mexique 7
+culturaldelights:avocado_leaves                         amerique_centrale 129
+culturaldelights:avocado_log                            amerique_centrale 13
+culturaldelights:fruiting_avocado_leaves                amerique_centrale 42
+culturaldelights:wild_corn                              ouest_mexique 37
+culturaldelights:wild_cucumbers                         inde 39
+culturaldelights:wild_eggplants                         inde 40
+ecologics:surface_moss                                  amerique_centrale 23
+ecologics:walnut_leaves                                 steppes_tibet 443
+ecologics:walnut_log                                    steppes_tibet 20
+farm_and_charm:wild_beetroots                           steppes_tibet 24, mediterranee 2
+farm_and_charm:wild_carrots                             steppes_tibet 24, mediterranee 3
+farm_and_charm:wild_corn                                andes 16, ouest_mexique 8
+farm_and_charm:wild_lettuce                             mediterranee 13, steppes_tibet 13
+farm_and_charm:wild_nettle                              atlantique 15, continentale 5
+farm_and_charm:wild_oat                                 continentale 17
+farm_and_charm:wild_onions                              mediterranee 25, steppes_tibet 9
+farm_and_charm:wild_potatoes                            andes 17
+farm_and_charm:wild_ribwort                             atlantique 22, continentale 9
+farm_and_charm:wild_strawberries                        atlantique 10
+farm_and_charm:wild_tomatoes                            andes 14, ouest_mexique 4
+farmersdelight:wild_carrots                             steppes_tibet 9
+farmersdelight:wild_onions                              steppes_tibet 32
+farmersdelight:wild_potatoes                            andes 9
+farmersdelight:wild_tomatoes                            andes 6
+herbalbrews:hibiscus                                    afrique_tropicale 22
+herbalbrews:lavender                                    mediterranee 45
+herbalbrews:wild_coffee_plant                           afrique_est 19
+herbalbrews:wild_rooibos_plant                          afrique_australe 70
+herbalbrews:wild_yerba_mate_plant                       cone_sud 9
+ramadandelight:dates_branch                             maghreb 11, moyen_orient 9
+ramadandelight:palm_leaves                              moyen_orient 224, maghreb 210
+ramadandelight:palm_log                                 moyen_orient 44, maghreb 34
+vinery:apple_leaves                                     steppes_tibet 2278
+vinery:apple_log                                        steppes_tibet 161
+vinery:jungle_grape_bush_red                            amerique_centrale 159
+vinery:jungle_grape_bush_white                          amerique_centrale 213
+vinery:red_grape_bush                                   mediterranee 1
+vinery:savanna_grape_bush_red                           afrique_australe 1
+vinery:savanna_grape_bush_white                         afrique_australe 2
+vinery:taiga_grape_bush_red                             boreale 8
+vinery:white_grape_bush                                 mediterranee 3
+wildernature:hazelnut_bush                              continentale 76
+
+terminé en 722 s

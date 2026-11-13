@@ -1,0 +1,45 @@
+bakery:wild_strawberries                                atlantique 6
+brewery:wild_hops                                       boreale 312, continentale 108, amerique_centrale 14
+corn_delight:wild_corn                                  ouest_mexique 7
+culturaldelights:avocado_leaves                         amerique_centrale 129
+culturaldelights:avocado_log                            amerique_centrale 13
+culturaldelights:fruiting_avocado_leaves                amerique_centrale 42
+culturaldelights:wild_corn                              ouest_mexique 37
+culturaldelights:wild_cucumbers                         inde 39
+culturaldelights:wild_eggplants                         inde 40
+ecologics:surface_moss                                  amerique_centrale 23
+ecologics:walnut_leaves                                 steppes_tibet 443
+ecologics:walnut_log                                    steppes_tibet 20
+farm_and_charm:wild_beetroots                           steppes_tibet 24, mediterranee 2
+farm_and_charm:wild_carrots                             steppes_tibet 24, mediterranee 3
+farm_and_charm:wild_corn                                andes 16, ouest_mexique 8
+farm_and_charm:wild_lettuce                             mediterranee 13, steppes_tibet 13
+farm_and_charm:wild_nettle                              atlantique 15, continentale 5
+farm_and_charm:wild_oat                                 continentale 17
+farm_and_charm:wild_onions                              mediterranee 25, steppes_tibet 9
+farm_and_charm:wild_potatoes                            andes 17
+farm_and_charm:wild_ribwort                             atlantique 22, continentale 9
+farm_and_charm:wild_strawberries                        atlantique 10
+farm_and_charm:wild_tomatoes                            andes 14, ouest_mexique 4
+farmersdelight:wild_carrots                             steppes_tibet 9
+farmersdelight:wild_onions                              steppes_tibet 32
+farmersdelight:wild_potatoes                            andes 9
+farmersdelight:wild_tomatoes                            andes 6
+herbalbrews:hibiscus                                    afrique_tropicale 22
+herbalbrews:lavender                                    mediterranee 45
+herbalbrews:wild_coffee_plant                           afrique_est 19
+herbalbrews:wild_rooibos_plant                          afrique_australe 70
+herbalbrews:wild_yerba_mate_plant                       cone_sud 9
+ramadandelight:dates_branch                             maghreb 11, moyen_orient 9
+ramadandelight:palm_leaves                              moyen_orient 224, maghreb 210
+ramadandelight:palm_log                                 moyen_orient 44, maghreb 34
+vinery:apple_leaves                                     steppes_tibet 2278
+vinery:apple_log                                        steppes_tibet 161
+vinery:jungle_grape_bush_red                            amerique_centrale 159
+vinery:jungle_grape_bush_white                          amerique_centrale 213
+vinery:red_grape_bush                                   mediterranee 1
+vinery:savanna_grape_bush_red                           afrique_australe 1
+vinery:savanna_grape_bush_white                         afrique_australe 2
+vinery:taiga_grape_bush_red                             boreale 8
+vinery:white_grape_bush                                 mediterranee 3
+wildernature:hazelnut_bush                              continentale 76

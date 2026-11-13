@@ -1,0 +1,92 @@
+{
+ "moyen_orient": {
+  "ramadandelight:palm_log": 44,
+  "ramadandelight:palm_leaves": 224,
+  "ramadandelight:dates_branch": 9
+ },
+ "andes": {
+  "farm_and_charm:wild_tomatoes": 14,
+  "farm_and_charm:wild_potatoes": 17,
+  "farm_and_charm:wild_corn": 16,
+  "farmersdelight:wild_potatoes": 9,
+  "farmersdelight:wild_tomatoes": 6
+ },
+ "ouest_mexique": {
+  "farm_and_charm:wild_corn": 8,
+  "culturaldelights:wild_corn": 37,
+  "farm_and_charm:wild_tomatoes": 4,
+  "corn_delight:wild_corn": 7
+ },
+ "chine": {},
+ "mediterranee": {
+  "vinery:red_grape_bush": 1,
+  "farm_and_charm:wild_onions": 25,
+  "herbalbrews:lavender": 45,
+  "farm_and_charm:wild_lettuce": 13,
+  "farm_and_charm:wild_beetroots": 2,
+  "vinery:white_grape_bush": 3,
+  "farm_and_charm:wild_carrots": 3
+ },
+ "atlantique": {
+  "farm_and_charm:wild_nettle": 15,
+  "farm_and_charm:wild_ribwort": 22,
+  "farm_and_charm:wild_strawberries": 10,
+  "bakery:wild_strawberries": 6
+ },
+ "afrique_est": {
+  "herbalbrews:wild_coffee_plant": 19
+ },
+ "inde": {
+  "culturaldelights:wild_cucumbers": 39,
+  "culturaldelights:wild_eggplants": 40
+ },
+ "steppes_tibet": {
+  "farm_and_charm:wild_onions": 9,
+  "farmersdelight:wild_carrots": 9,
+  "farm_and_charm:wild_carrots": 24,
+  "farm_and_charm:wild_lettuce": 13,
+  "farm_and_charm:wild_beetroots": 24,
+  "farmersdelight:wild_onions": 32,
+  "ecologics:walnut_log": 20,
+  "ecologics:walnut_leaves": 443,
+  "vinery:apple_log": 161,
+  "vinery:apple_leaves": 2278
+ },
+ "continentale": {
+  "farm_and_charm:wild_oat": 17,
+  "brewery:wild_hops": 108,
+  "wildernature:hazelnut_bush": 76,
+  "farm_and_charm:wild_nettle": 5,
+  "farm_and_charm:wild_ribwort": 9
+ },
+ "amerique_centrale": {
+  "vinery:jungle_grape_bush_red": 159,
+  "ecologics:surface_moss": 23,
+  "vinery:jungle_grape_bush_white": 213,
+  "culturaldelights:avocado_log": 13,
+  "culturaldelights:avocado_leaves": 129,
+  "culturaldelights:fruiting_avocado_leaves": 42,
+  "brewery:wild_hops": 14
+ },
+ "afrique_australe": {
+  "vinery:savanna_grape_bush_red": 1,
+  "herbalbrews:wild_rooibos_plant": 70,
+  "vinery:savanna_grape_bush_white": 2
+ },
+ "boreale": {
+  "vinery:taiga_grape_bush_red": 8,
+  "brewery:wild_hops": 312
+ },
+ "cone_sud": {
+  "herbalbrews:wild_yerba_mate_plant": 9
+ },
+ "afrique_tropicale": {
+  "herbalbrews:hibiscus": 22
+ },
+ "maghreb": {
+  "ramadandelight:palm_log": 34,
+  "ramadandelight:palm_leaves": 210,
+  "ramadandelight:dates_branch": 11
+ },
+ "grandes_plaines": {}
+}
