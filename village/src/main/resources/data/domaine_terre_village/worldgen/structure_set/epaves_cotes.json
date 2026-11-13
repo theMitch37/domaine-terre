@@ -1,0 +1,19 @@
+{
+ "placement": {
+  "type": "domaine_terre_village:fixe",
+  "salt": 165745297,
+  "spacing": 64,
+  "separation": 16,
+  "liste": "*hasard"
+ },
+ "structures": [
+  {
+   "structure": "domaine_terre_village:epave_cote",
+   "weight": 3
+  },
+  {
+   "structure": "domaine_terre_village:epave_echouee",
+   "weight": 1
+  }
+ ]
+}

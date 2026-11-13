@@ -20,8 +20,34 @@ final class CommandeVillage {
     private CommandeVillage() {
     }
 
+    /**
+     * Diagnostic : hauteur estimée par le générateur (celle que les structures utilisent avant que le chunk existe)
+     * et hauteur réelle au centre du chunk, biome de bruit à plusieurs hauteurs.
+     */
+    private static int colonne(CommandSourceStack src, int x, int z) {
+        ServerLevel l = src.getServer().overworld();
+        int cx = (x & ~15) + 8, cz = (z & ~15) + 8;
+        var gen = l.getChunkSource().getGenerator();
+        var rs = l.getChunkSource().randomState();
+        int estime = gen.getFirstOccupiedHeight(cx, cz, Heightmap.Types.WORLD_SURFACE_WG, l, rs);
+        int reel = l.getChunk(cx >> 4, cz >> 4).getHeight(Heightmap.Types.WORLD_SURFACE_WG, cx & 15, cz & 15);
+        StringBuilder b = new StringBuilder("[Colonne] centre (" + cx + ", " + cz + ") estimée y=" + estime + " réelle y=" + reel + " |");
+        for (int y : new int[]{estime, reel, 40, 0, -60}) {
+            var h = gen.getBiomeSource().getNoiseBiome(cx >> 2, y >> 2, cz >> 2, rs.sampler());
+            b.append(" y").append(y).append("=").append(h.unwrapKey().map(k -> k.location().getPath()).orElse("?"));
+        }
+        String t = b.toString();
+        src.sendSuccess(() -> Component.literal(t), false);
+        return 1;
+    }
+
     static void enregistrer(CommandDispatcher<CommandSourceStack> d) {
         d.register(Commands.literal("village").requires(s -> s.hasPermission(2))
+                .then(Commands.literal("colonne")
+                        .then(Commands.argument("x", IntegerArgumentType.integer())
+                                .then(Commands.argument("z", IntegerArgumentType.integer())
+                                        .executes(c -> colonne(c.getSource(), IntegerArgumentType.getInteger(c, "x"),
+                                                IntegerArgumentType.getInteger(c, "z"))))))
                 .then(Commands.literal("point")
                         .then(Commands.argument("x", IntegerArgumentType.integer())
                                 .then(Commands.argument("z", IntegerArgumentType.integer())

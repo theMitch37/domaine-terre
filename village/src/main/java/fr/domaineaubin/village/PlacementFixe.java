@@ -21,6 +21,9 @@ import java.util.Optional;
  * mêmes villages. /locate fonctionne (il parcourt les cases). Jamais dans un lieu unique.
  *
  * Hors monde Terre, c'est le placement vanilla (même espacement, même sel) : rien ne change.
+ *
+ * Liste « *hasard » : placement vanilla au hasard, mais seulement dans un monde Terre (ex. quelques épaves le long des
+ * côtes, en plus des cimetières de navires).
  */
 public class PlacementFixe extends RandomSpreadStructurePlacement {
     /** Champs du placement vanilla (sans spread_type : toujours linéaire) + « liste » ; cases de {@link #CASE} chunks. */
@@ -49,14 +52,18 @@ public class PlacementFixe extends RandomSpreadStructurePlacement {
         return spacingVanilla;
     }
 
+    private boolean hasard() {
+        return liste.startsWith("*");
+    }
+
     @Override
     public int spacing() {
-        return Points.terre ? taille : spacingVanilla;
+        return Points.terre && !hasard() ? taille : spacingVanilla;
     }
 
     @Override
     public ChunkPos getPotentialStructureChunk(long graine, int x, int z) {
-        if (!Points.terre) return super.getPotentialStructureChunk(graine, x, z);
+        if (!Points.terre || hasard()) return super.getPotentialStructureChunk(graine, x, z);
         int cx = Math.floorDiv(x, taille), cz = Math.floorDiv(z, taille);
         ChunkPos p = Points.liste(liste, taille).get(Points.cle(cx, cz));
         return p != null ? p : new ChunkPos(cx * taille, cz * taille);     // case vide : coin de la case (refusé plus bas)
@@ -64,6 +71,7 @@ public class PlacementFixe extends RandomSpreadStructurePlacement {
 
     @Override
     protected boolean isPlacementChunk(ChunkGeneratorStructureState etat, int x, int z) {
+        if (hasard()) return Points.terre && super.isPlacementChunk(etat, x, z);
         if (!Points.terre) return super.isPlacementChunk(etat, x, z);
         ChunkPos p = Points.liste(liste, taille).get(Points.cle(Math.floorDiv(x, taille), Math.floorDiv(z, taille)));
         if (p == null || p.x != x || p.z != z) return false;

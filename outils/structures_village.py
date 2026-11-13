@@ -152,6 +152,22 @@ def main():
     v = json.load(open(os.path.join(VANILLA, "worldgen/structure_set", "ancient_cities.json")))
     v["placement"].update({"spacing": 48, "separation": 16})
     ecrire(os.path.join(RES, "data/minecraft/worldgen/structure_set/ancient_cities.json"), v)
+    # quelques épaves au hasard le long des côtes (décision de Maxime, 13/11), seulement dans un monde Terre :
+    # en mer près des côtes (bandes « côte » et « plateau »), ou échouées sur les plages
+    plages = [b for b in terre if b.endswith("/beach") or b.endswith("/snowy_beach")] + [
+        "minecraft:beach", "minecraft:snowy_beach"]
+    cote = [b for b in mer if b.endswith("_cote") or b.endswith("_plateau")]
+    for nom, src, bio in (("epave_cote", "shipwreck", cote), ("epave_echouee", "shipwreck_beached", plages)):
+        v = json.load(open(os.path.join(VANILLA, "worldgen/structure", src + ".json")))
+        v["biomes"] = f"#domaine_terre_village:{nom}"
+        ecrire(os.path.join(RES, f"data/domaine_terre_village/tags/worldgen/biome/{nom}.json"),
+               {"replace": False, "values": bio})
+        ecrire(os.path.join(RES, f"data/domaine_terre_village/worldgen/structure/{nom}.json"), v)
+    ecrire(os.path.join(RES, "data/domaine_terre_village/worldgen/structure_set/epaves_cotes.json"), {
+        "placement": {"type": "domaine_terre_village:fixe", "salt": 165745297, "spacing": 64, "separation": 16,
+                      "liste": "*hasard"},
+        "structures": [{"structure": "domaine_terre_village:epave_cote", "weight": 3},
+                       {"structure": "domaine_terre_village:epave_echouee", "weight": 1}]})
     print("fichiers de données écrits")
 
 

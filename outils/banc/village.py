@@ -123,6 +123,18 @@ for liste, st in SITES.items():
             lignes_res.append(f"{liste:14s} RATÉ {sn} ({sx}, {sz}) -> {l.strip()[-90:]}")
             lignes_res.append("    " + cmd(f"village point {sx} {sz}", r"\[Village\]", 120).strip())
     bilan.append(f"{'OK    ' if bons == tot else 'ÉCHEC '} {liste} : {bons} sur {tot} sites")
+# diagnostic des ratés connus (Callao, igloos de Baker Lake et Rankin Inlet)
+for dx, dz, dn in ((-34330, 5350, "Callao"), (-42760, -28640, "Baker Lake"), (-41006, -28075, "Rankin Inlet")):
+    lignes_res.append(f"diagnostic {dn} : " + cmd(f"village colonne {dx} {dz}", r"\[Colonne\]", 120).strip()[-200:])
+    lignes_res.append("    place : " + cmd(f"place structure minecraft:igloo {dx} 100 {dz}", r"(?i)generated|failed|invalid|Could not", 120).strip()[-120:])
+# épaves au hasard le long des côtes (au large de la Bretagne, du Japon, de la Floride)
+nep = 0
+for ex, ez in ((-2200, -21400), (62500, -16200), (-35700, -12000)):
+    l = cmd(f"execute positioned {ex} 62 {ez} run locate structure #domaine_terre_village:epaves_hasard",
+            r"nearest |Could not find|could not find|Unknown|Invalid", 300)
+    lignes_res.append("épave au hasard : " + l.strip()[-110:])
+    nep += "nearest" in l
+bilan.append(f"{'OK    ' if nep >= 2 else 'ÉCHEC '} épaves au hasard le long des côtes : {nep} sur 3 recherches")
 l = cmd("execute positioned 1064 0 -21769 run locate structure minecraft:ancient_city", r"nearest |Could not find|could not find", 300)
 m = re.search(r"at \[(-?\d+), ([^,]+), (-?\d+)\]", l)
 lignes_res.append("cité antique : " + l.strip()[-100:])
