@@ -17,7 +17,8 @@ import org.slf4j.Logger;
 /**
  * Domaine Weather : le vrai climat de chaque région pour le mod Domaine d'Aubin - Terre (étape 02 de la feuille de
  * route). 0.1 (13/11/2026) : saisons par hémisphère, pluie selon le climat, durée du jour selon la saison et la
- * latitude, catastrophes seulement là où elles existent, tornades sans dégâts aux blocs.
+ * latitude, catastrophes seulement là où elles existent, tornades sans dégâts aux blocs. 0.2 : vents dominants,
+ * heure solaire locale.
  */
 @Mod(DomaineWeather.MOD_ID)
 public final class DomaineWeather {
@@ -48,6 +49,7 @@ public final class DomaineWeather {
 
     /** Décision de Maxime (13/11) : tornades et tempêtes ne détruisent jamais de blocs. */
     private void demarre(ServerStartedEvent e) {
+        JourNuit.reinitialiserServeur();
         try {
             weather2.config.ConfigTornado.Storm_Tornado_grabBlocks = false;
             LOGGER.info("Domaine Weather : tornades sans dégâts aux blocs ; {} zones de tornades",

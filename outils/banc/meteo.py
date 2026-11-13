@@ -73,7 +73,7 @@ for s in SAISONS:
         n0 = len(tout)
         cmd(f"meteo point {la} {lo}")
         fin = time.time() + 20
-        while time.time() < fin and not any("Tornades :" in l for l in tout[n0:]):
+        while time.time() < fin and not any("Vent dominant" in l for l in tout[n0:]):
             time.sleep(0.2)
         bloc = "".join(tout[n0:])
         res[(s, nom)] = bloc
@@ -96,8 +96,9 @@ with open(os.path.join(SORTIE, "meteo.txt"), "w") as f:
         for nom in LIEUX:
             b = res[(s, nom)]
             v = [champ(b, m) for m in (r"Saison locale : (\S+)", r"Climat : (\S+)", r"pluie : (\d+) %",
-                                       r"Jour : ([\d.]+) h", r"Tornades : (\S+)", r"sable : (\S+)", r"neige : (\S+)")]
-            f.write("%-22s saison %-14s climat %-4s pluie %3s %%  jour %5s h  tornades %-4s sable %-4s neige %s\n"
+                                       r"Jour : ([\d.]+) h", r"Tornades : (\S+)", r"sable : (\S+)", r"neige : (\S+)",
+                                       r"Vent dominant : de (\S+)", r"UTC ([+-][\d.]+) h")]
+            f.write("%-22s saison %-14s climat %-4s pluie %3s %%  jour %5s h  tornades %-4s sable %-4s neige %-4s vent de %-10s UTC %s\n"
                     % (nom, *v))
 
 # contrôles
@@ -132,6 +133,13 @@ ctrl("pas de tornades à Paris", g("mid_spring", "Paris", r"Tornades : (\S+)") =
 ctrl("tempêtes de sable au Sahara", g("mid_spring", "Sahara (Tamanrasset)", r"sable : (\S+)") == "oui")
 ctrl("pas de tempête de sable à Paris", g("mid_spring", "Paris", r"sable : (\S+)") == "non")
 ctrl("tempêtes de neige à Iakoutsk", g("mid_winter", "Iakoutsk", r"neige : (\S+)") == "oui")
+# 0.2 : vents dominants, heure solaire locale
+ctrl("vent d'ouest (sud-ouest) à Paris", g("mid_spring", "Paris", r"Vent dominant : de (\S+)") == "sud-ouest")
+ctrl("alizé de nord-est au Sahara", g("mid_spring", "Sahara (Tamanrasset)", r"Vent dominant : de (\S+)") == "nord-est")
+ctrl("alizé de sud-est à Manaus", g("mid_spring", "Manaus", r"Vent dominant : de (\S+)") == "sud-est")
+ctrl("vent de nord-ouest à Ushuaïa", g("mid_spring", "Ushuaia", r"Vent dominant : de (\S+)") == "nord-ouest")
+ctrl("Sydney à UTC +10 h", abs(nb(g("mid_spring", "Sydney", r"UTC ([+-][\d.]+) h"), 0) - 10.1) < 0.2)
+ctrl("Oklahoma City à UTC -6,5 h", abs(nb(g("mid_spring", "Oklahoma City", r"UTC ([+-][\d.]+) h"), 0) + 6.5) < 0.2)
 open(os.path.join(SORTIE, "bilan.txt"), "w").write("\n".join(bilan) + "\n")
 print(open(os.path.join(SORTIE, "meteo.txt")).read())
 print("\n".join(bilan))
