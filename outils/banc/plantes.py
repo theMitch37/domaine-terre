@@ -15,7 +15,7 @@ import monde
 SERVEUR, SORTIE = sys.argv[1], sys.argv[2]
 FORGE = "1.20.1-47.4.10"
 BPD = 445.28
-COTE = 256
+COTE = 240                     # 15 × 15 chunks : /forceload en accepte 256 au plus
 os.makedirs(SORTIE, exist_ok=True)
 # terroir : (lat, lon) au cœur du terroir, loin des côtes
 ZONES = {
@@ -69,8 +69,8 @@ attendre("Done (", 1500)
 region = os.path.join(SERVEUR, "plantes", "region")
 boites = {}
 for nom, (la, lo) in ZONES.items():
-    x, z = round(lo * BPD), round(-la * BPD)
-    boites[nom] = (x - COTE // 2, x + COTE // 2, z - COTE // 2, z + COTE // 2)
+    x, z = round(lo * BPD) // 16 * 16, round(-la * BPD) // 16 * 16   # calé sur les chunks
+    boites[nom] = (x - COTE // 2 - 8, x + COTE // 2 - 8, z - COTE // 2 - 8, z + COTE // 2 - 8)
 VANILLA = "minecraft:"
 res = {}
 
