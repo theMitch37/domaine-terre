@@ -90,6 +90,19 @@ for vx, vz, vn in echantillon:
         sans += 1
         lignes_res.append("sans type : " + vn + " " + l.strip())
 bilan.append(f"{'OK    ' if sans <= 3 else 'ÉCHEC '} biome compatible pour {60 - sans} villages sur 60 tirés au hasard")
+# taux de villages réellement générés : /locate depuis le point de 30 villages tirés au hasard
+nes = 0
+for vx, vz, vn in random.sample(villages, 30):
+    l = cmd(f"execute positioned {vx} 100 {vz} run locate structure #minecraft:village",
+            r"nearest #minecraft:village|Could not find|could not find")
+    m = re.search(r"at \[(-?\d+), [^,]+, (-?\d+)\]", l)
+    if m and math.hypot(int(m.group(1)) - vx, int(m.group(2)) - vz) < 40:
+        nes += 1
+    else:
+        lignes_res.append(f"non généré : {vn} ({vx}, {vz}) -> {l.strip()[-80:]}")
+        lignes_res.append("    " + cmd(f"village point {vx} {vz}", r"\[Village\]", 120).strip())
+        lignes_res.append("    " + cmd(f"place structure minecraft:village_plains {vx} 100 {vz}", r"(?i)generated|failed|invalid", 120).strip())
+bilan.append(f"{'OK    ' if nes >= 27 else 'ÉCHEC '} villages générés : {nes} sur 30 tirés au hasard")
 l = cmd("execute positioned 13900 100 -13380 run locate structure minecraft:desert_pyramid",
         r"nearest|Could not find|could not find", 200)
 bilan.append(f"{'OK    ' if 'nearest' not in l else 'ÉCHEC '} pas encore de pyramide (0.1)")
