@@ -28,24 +28,26 @@ CASE = 512
 # ------------------------------------------------------------------ sites (lat, lon) ; décalés en mer ou dans le
 # désert quand le vrai site tombe sur un fleuve ou une côte
 SITES = {
-    "pyramides": [("Gizeh", 29.979, 31.10), ("Meroe", 16.94, 33.75)],          # Saqqarah, Dahchour : même case que Gizeh
+    "pyramides": [("Gizeh", 29.979, 31.10), ("Meroe", 16.94, 33.90)],          # Saqqarah, Dahchour : même case que Gizeh
     "temples_jungle": [("Tikal", 17.222, -89.623), ("Chichen Itza", 20.684, -88.568), ("Palenque", 17.484, -92.046),
                        ("Calakmul", 18.105, -89.810), ("Copan", 14.840, -89.142), ("Angkor", 13.412, 103.867)],
-    "igloos": [("Ilulissat", 69.45, -51.10), ("Qaanaaq", 77.70, -69.23), ("Tasiilaq", 65.85, -37.64),
-               ("Iqaluit", 64.00, -68.52), ("Igloolik", 69.62, -81.80), ("Cambridge Bay", 69.36, -105.06),
-               ("Rankin Inlet", 63.05, -92.09), ("Utqiagvik", 71.10, -156.50), ("Kotzebue", 67.10, -162.30)],
+    "igloos": [("Qaanaaq", 77.70, -69.23), ("Tasiilaq", 65.85, -37.64), ("Kangerlussuaq", 67.01, -50.69),
+               ("Iqaluit", 64.00, -68.52), ("Cambridge Bay", 69.36, -105.06), ("Baker Lake", 64.32, -96.03),
+               ("Kotzebue", 67.10, -162.30), ("Anaktuvuk Pass", 68.14, -151.74)],
     "manoirs": [("Foret de Hoia-Baciu (Transylvanie)", 46.78, 23.48), ("Bran (Transylvanie)", 45.40, 25.30),
                 ("Foret-Noire", 48.30, 8.15)],
-    "temples_mer": [("Atlantide (Acores)", 37.40, -27.50), ("Yonaguni", 24.40, 122.90), ("Dwarka", 22.10, 68.60),
-                    ("Pavlopetri", 36.40, 22.90), ("Route de Bimini", 25.70, -79.40)],
+    "temples_mer": [("Atlantide (Acores)", 37.40, -27.50), ("Yonaguni", 24.10, 122.60), ("Dwarka", 22.10, 68.60),
+                    ("Pavlopetri", 36.15, 22.60), ("Route de Bimini", 25.55, -79.60)],
     "epaves": [("Cap Hatteras", 35.10, -75.20), ("Bermudes", 32.10, -64.90), ("Florida Keys", 24.40, -81.20),
                ("Silver Bank (route des galions)", 20.30, -69.80), ("Cap Horn", -56.10, -67.30),
                ("Cap de Bonne-Esperance", -34.45, 18.30)],
     "ruines_piste": [("Pompei", 40.749, 14.485), ("Troie", 39.957, 26.239), ("Petra", 30.329, 35.444),
-                     ("Mohenjo-daro", 27.324, 68.136), ("Carthage", 36.853, 10.323)],
+                     ("Mohenjo-daro", 27.324, 68.00), ("Carthage", 36.85, 10.20)],
 }
 # ruines sous-marines : à ~70 blocs des temples de la mer (vieille cité submergée autour du temple)
-SITES["ruines_mer"] = [(n + " (ruines)", la - 0.16, lo + 0.16) for n, la, lo in SITES["temples_mer"]]
+SITES["ruines_mer"] = [("Atlantide (ruines)", 37.24, -27.34), ("Yonaguni (ruines)", 24.04, 122.42),
+                       ("Dwarka (ruines)", 22.26, 68.76), ("Pavlopetri (ruines)", 36.05, 22.45),
+                       ("Bimini (ruines)", 25.40, -79.70)]
 # forteresses de l'End : une par continent, en profondeur (positions des anneaux remplacées par l'addon)
 FORTERESSES = [("Europe : Stonehenge", 51.179, -1.826), ("Afrique : Grand Zimbabwe", -20.27, 30.93),
                ("Asie : mont Kailash", 31.07, 81.31), ("Amerique du Nord : Chaco Canyon", 36.06, -107.96),
