@@ -14,11 +14,15 @@ import sereneseasons.item.CalendarItem;
 
 import java.util.List;
 
-/** Serene Seasons : le calendrier affiche la saison là où se trouve le joueur. */
-@Mixin(CalendarItem.class)
+/**
+ * Serene Seasons : le calendrier affiche la saison là où se trouve le joueur. Le jar de Serene Seasons est déjà
+ * en noms SRG : appendHoverText y porte le nom m_7373_ (Item.appendHoverText en 1.20.1). Facultatif (require 0) :
+ * si le nom change, seul le calendrier reste sur la saison du nord.
+ */
+@Mixin(value = CalendarItem.class, remap = false)
 public abstract class CalendrierMixin {
-    @Redirect(method = "appendHoverText",
-            at = @At(value = "INVOKE", target = "Lsereneseasons/api/season/ISeasonState;getSeasonCycleTicks()I", remap = false))
+    @Redirect(method = "m_7373_", require = 0,
+            at = @At(value = "INVOKE", target = "Lsereneseasons/api/season/ISeasonState;getSeasonCycleTicks()I"))
     private int domaineWeather$saisonDuJoueur(ISeasonState etat, ItemStack pile, Level level, List<Component> lignes, TooltipFlag f) {
         return Saisons.ticksLocaux(level, etat.getSeasonCycleTicks(), ClientMeteo.zJoueur());
     }
