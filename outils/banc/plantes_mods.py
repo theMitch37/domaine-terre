@@ -28,6 +28,7 @@ MODS = {
     "Supplementaries": ["supplementaries"],
     "Ecologics": ["ecologics"],
     "OpenLoader": ["open-loader", "openloader"],      # datapack domaine_terroirs (config/openloader/data)
+    "Curios API": ["curios"],                         # WilderNature (pas déclaré sur Modrinth)
 }
 Q = urllib.parse.urlencode({"loaders": '["forge"]', "game_versions": '["1.20.1"]'})
 
@@ -87,3 +88,41 @@ for nom, slugs in MODS.items():
         print(f"::warning::{nom} introuvable sur Modrinth")
         continue
     prendre(projet, nom)
+
+
+# dépendances obligatoires d'après les jars eux-mêmes (META-INF/mods.toml) : on retire ce qui ne peut pas démarrer
+import re, zipfile
+
+
+def mod_ids(chemin):
+    try:
+        t = zipfile.ZipFile(chemin).read("META-INF/mods.toml").decode("utf-8", "ignore")
+    except Exception:  # noqa: BLE001
+        return set(), set()
+    ids = set(re.findall(r'\[\[mods\]\][^\[]*?modId\s*=\s*"([^"]+)"', t, re.S))
+    deps = set()
+    for bloc in re.split(r"\[\[dependencies\.", t)[1:]:
+        m = re.search(r'modId\s*=\s*"([^"]+)"', bloc)
+        ob = re.search(r"mandatory\s*=\s*(true|false)", bloc)
+        ty = re.search(r'type\s*=\s*"(\w+)"', bloc)
+        if m and ((ob and ob.group(1) == "true") or (ty and ty.group(1).lower() == "required")):
+            deps.add(m.group(1))
+    return ids, deps
+
+
+presents = {"minecraft", "forge", "domaine_terre"}
+jars = {j: mod_ids(os.path.join(DEST, j)) for j in os.listdir(DEST) if j.endswith(".jar")}
+for ids, _ in jars.values():
+    presents |= ids
+encore = True
+while encore:
+    encore = False
+    for j, (ids, deps) in list(jars.items()):
+        manque = deps - presents
+        if manque:
+            print(f"::warning::{j} retiré : dépendance absente {sorted(manque)}")
+            os.remove(os.path.join(DEST, j))
+            del jars[j]
+            presents -= ids
+            encore = True
+print(len(jars), "mods sur le serveur")
