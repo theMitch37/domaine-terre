@@ -1,0 +1,56 @@
+== saison du nord : mid_spring
+Paris                  saison mid_spring     climat Cfb  pluie 100 %  jour  12.6 h  tornades non  sable non  neige non
+Oslo                   saison mid_spring     climat Dfb  pluie 100 %  jour  12.9 h  tornades non  sable non  neige oui
+Tromso                 saison mid_spring     climat Dfc  pluie 100 %  jour  13.4 h  tornades non  sable non  neige oui
+Le Caire               saison mid_spring     climat BWh  pluie   5 %  jour  12.3 h  tornades non  sable oui  neige non
+Sahara (Tamanrasset)   saison mid_spring     climat BWh  pluie   5 %  jour  12.2 h  tornades non  sable oui  neige non
+Seville                saison mid_spring     climat Csa  pluie 100 %  jour  12.4 h  tornades non  sable non  neige non
+Bombay                 saison mid_spring     climat Am   pluie 100 %  jour  12.2 h  tornades non  sable non  neige non
+Manaus                 saison mid_autumn     climat Af   pluie 100 %  jour  12.0 h  tornades non  sable non  neige non
+Sydney                 saison mid_autumn     climat Cfa  pluie 100 %  jour  11.7 h  tornades oui  sable non  neige non
+Ushuaia                saison mid_autumn     climat Dfc  pluie 100 %  jour  11.3 h  tornades non  sable non  neige oui
+Oklahoma City          saison mid_spring     climat Cfa  pluie 100 %  jour  12.4 h  tornades oui  sable non  neige non
+Dacca                  saison mid_spring     climat Cwa  pluie 100 %  jour  12.2 h  tornades oui  sable non  neige non
+Iakoutsk               saison mid_spring     climat Dfc  pluie 100 %  jour  13.0 h  tornades non  sable non  neige oui
+== saison du nord : mid_summer
+Paris                  saison mid_summer     climat Cfb  pluie 100 %  jour  15.6 h  tornades non  sable non  neige non
+Oslo                   saison mid_summer     climat Dfb  pluie 100 %  jour  17.3 h  tornades non  sable non  neige oui
+Tromso                 saison mid_summer     climat Dfc  pluie 100 %  jour  19.2 h  tornades non  sable non  neige oui
+Le Caire               saison mid_summer     climat BWh  pluie   5 %  jour  13.9 h  tornades non  sable oui  neige non
+Sahara (Tamanrasset)   saison mid_summer     climat BWh  pluie   5 %  jour  13.4 h  tornades non  sable oui  neige non
+Seville                saison mid_summer     climat Csa  pluie  10 %  jour  14.5 h  tornades non  sable non  neige non
+Bombay                 saison mid_summer     climat Am   pluie 100 %  jour  13.1 h  tornades non  sable non  neige non
+Manaus                 saison mid_winter     climat Af   pluie 100 %  jour  11.8 h  tornades non  sable non  neige non
+Sydney                 saison mid_winter     climat Cfa  pluie 100 %  jour   9.8 h  tornades oui  sable non  neige non
+Ushuaia                saison mid_winter     climat Dfc  pluie 100 %  jour   7.6 h  tornades non  sable non  neige oui
+Oklahoma City          saison mid_summer     climat Cfa  pluie 100 %  jour  14.3 h  tornades oui  sable non  neige non
+Dacca                  saison mid_summer     climat Cwa  pluie 100 %  jour  13.4 h  tornades oui  sable non  neige non
+Iakoutsk               saison mid_summer     climat Dfc  pluie 100 %  jour  17.7 h  tornades non  sable non  neige oui
+== saison du nord : mid_autumn
+Paris                  saison mid_autumn     climat Cfb  pluie 100 %  jour  11.4 h  tornades non  sable non  neige non
+Oslo                   saison mid_autumn     climat Dfb  pluie 100 %  jour  11.1 h  tornades non  sable non  neige oui
+Tromso                 saison mid_autumn     climat Dfc  pluie 100 %  jour  10.6 h  tornades non  sable non  neige oui
+Le Caire               saison mid_autumn     climat BWh  pluie   5 %  jour  11.7 h  tornades non  sable oui  neige non
+Sahara (Tamanrasset)   saison mid_autumn     climat BWh  pluie   5 %  jour  11.8 h  tornades non  sable oui  neige non
+Seville                saison mid_autumn     climat Csa  pluie 100 %  jour  11.6 h  tornades non  sable non  neige non
+Bombay                 saison mid_autumn     climat Am   pluie 100 %  jour  11.8 h  tornades non  sable non  neige non
+Manaus                 saison mid_spring     climat Af   pluie 100 %  jour  12.0 h  tornades non  sable non  neige non
+Sydney                 saison mid_spring     climat Cfa  pluie 100 %  jour  12.3 h  tornades oui  sable non  neige non
+Ushuaia                saison mid_spring     climat Dfc  pluie 100 %  jour  12.7 h  tornades non  sable non  neige oui
+Oklahoma City          saison mid_autumn     climat Cfa  pluie 100 %  jour  11.6 h  tornades oui  sable non  neige non
+Dacca                  saison mid_autumn     climat Cwa  pluie 100 %  jour  11.8 h  tornades oui  sable non  neige non
+Iakoutsk               saison mid_autumn     climat Dfc  pluie 100 %  jour  11.0 h  tornades non  sable non  neige oui
+== saison du nord : mid_winter
+Paris                  saison mid_winter     climat Cfb  pluie 100 %  jour   8.4 h  tornades non  sable non  neige non
+Oslo                   saison mid_winter     climat Dfb  pluie 100 %  jour   6.7 h  tornades non  sable non  neige oui
+Tromso                 saison mid_winter     climat Dfc  pluie 100 %  jour   4.8 h  tornades non  sable non  neige oui
+Le Caire               saison mid_winter     climat BWh  pluie   5 %  jour  10.1 h  tornades non  sable oui  neige non
+Sahara (Tamanrasset)   saison mid_winter     climat BWh  pluie   5 %  jour  10.6 h  tornades non  sable oui  neige non
+Seville                saison mid_winter     climat Csa  pluie 100 %  jour   9.5 h  tornades non  sable non  neige non
+Bombay                 saison mid_winter     climat Am   pluie  30 %  jour  10.9 h  tornades non  sable non  neige non
+Manaus                 saison mid_summer     climat Af   pluie 100 %  jour  12.2 h  tornades non  sable non  neige non
+Sydney                 saison mid_summer     climat Cfa  pluie 100 %  jour  14.2 h  tornades oui  sable non  neige non
+Ushuaia                saison mid_summer     climat Dfc  pluie 100 %  jour  16.4 h  tornades non  sable non  neige oui
+Oklahoma City          saison mid_winter     climat Cfa  pluie 100 %  jour   9.7 h  tornades oui  sable non  neige non
+Dacca                  saison mid_winter     climat Cwa  pluie  15 %  jour  10.6 h  tornades oui  sable non  neige non
+Iakoutsk               saison mid_winter     climat Dfc  pluie 100 %  jour   6.3 h  tornades non  sable non  neige oui

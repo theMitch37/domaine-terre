@@ -1,0 +1,842 @@
+2026-11-13 09:20:28,782 main WARN Advanced terminal features are not available in this environment
+[09:20:28] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserver, --fml.forgeVersion, 47.4.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, nogui]
+[09:20:28] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.21 by Eclipse Adoptium; OS Linux arch amd64 version 7.0.0-1019-azure
+[09:20:28] [main/WARN] [ne.mi.fm.lo.FMLConfig/CORE]: Configuration file /tmp/serveur/config/fml.toml is not correct. Correcting
+[09:20:28] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSkipGLVersions] was corrected from null to []
+[09:20:29] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowLogHelpMessage] was corrected from null to true
+[09:20:29] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSquir] was corrected from null to false
+[09:20:29] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowShowCPU] was corrected from null to false
+[09:20:29] [main/INFO] [ne.mi.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserver
+[09:20:29] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/tmp/serveur/libraries/org/spongepowered/mixin/0.8.5/mixin-0.8.5.jar%2365!/ Service=ModLauncher Env=SERVER
+[09:20:29] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/fmlcore/1.20.1-47.4.10/fmlcore-1.20.1-47.4.10.jar is missing mods.toml file
+[09:20:29] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/javafmllanguage/1.20.1-47.4.10/javafmllanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[09:20:29] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/lowcodelanguage/1.20.1-47.4.10/lowcodelanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[09:20:29] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/mclanguage/1.20.1-47.4.10/mclanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[09:20:29] [main/INFO] [ne.mi.fm.lo.mo.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[09:20:30] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[09:20:31] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserver' with arguments [nogui]
+[09:20:31] [main/WARN] [mixin/]: Reference map 'coroutil.refmap.json' for coroutil.mixins.json could not be read. If this is a development environment you can ignore this message
+[09:20:37] [modloading-worker-0/INFO] [ne.mi.co.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.10, for MC 1.20.1 with MCP 20230612.114412
+[09:20:37] [modloading-worker-0/INFO] [ne.mi.co.MinecraftForge/FORGE]: MinecraftForge v47.4.10 Initialized
+[09:20:37] [modloading-worker-0/INFO] [fr.do.te.DomaineTerre/]: Domaine d'Aubin - Terre : mod chargé.
+[09:20:37] [modloading-worker-0/INFO] [coroutil/]: forge loader environment detected
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/Weather2/Misc.toml is not correct. Correcting
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Misc_simBoxRadiusCutoff was corrected from null to its default, 1124. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Misc_simBoxRadiusSpawn was corrected from null to its default, 1024. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.overcastMode was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.lockServerWeatherMode was corrected from null to its default, 0. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Cloud_ParticleSpawnDelay was corrected from null to its default, 2. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Cloud_Formation_MinDistBetweenSpawned was corrected from null to its default, 300. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Cloud_Layer1_Enable was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Cloud_Layer0_Height was corrected from null to its default, 264. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Cloud_Layer1_Height was corrected from null to its default, 414. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Cloud_Layer2_Height was corrected from null to its default, 564. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Cloud_Coverage_Random_Change_Amount was corrected from null to its default, 0.05. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Cloud_Coverage_Min_Percent was corrected from null to its default, 0.0. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Cloud_Coverage_Max_Percent was corrected from null to its default, 100.0. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.sirenActivateDistance was corrected from null to its default, 256.0. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Dimension_List_Weather was corrected from null to its default, minecraft:overworld, tropicraft:tropicraft. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Dimension_List_Clouds was corrected from null to its default, minecraft:overworld, tropicraft:tropicraft. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Dimension_List_Storms was corrected from null to its default, minecraft:overworld, tropicraft:tropicraft. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Dimension_List_WindEffects was corrected from null to its default, minecraft:overworld, tropicraft:tropicraft. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.blockBreakingInvokesCancellableEvent was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Aesthetic_Only_Mode was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Winter_Wonderland was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/Weather2/Wind.toml is not correct. Correcting
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Misc_windOn was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Wind_LowWindEvents was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Wind_HighWindEvents was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Wind_UsePerlinNoise was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.lowWindTimerEnableAmountBase was corrected from null to its default, 2400. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.lowWindTimerEnableAmountRnd was corrected from null to its default, 12000. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.lowWindOddsTo1 was corrected from null to its default, 4000. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.highWindTimerEnableAmountBase was corrected from null to its default, 2400. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.highWindTimerEnableAmountRnd was corrected from null to its default, 12000. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.highWindOddsTo1 was corrected from null to its default, 8000. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.globalWindAngleChangeAmountRate was corrected from null to its default, 1.0. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.windSpeedMin was corrected from null to its default, 1.0E-5. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.windSpeedMax was corrected from null to its default, 1.0. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.windSpeedMinGlobalOvercastRaining was corrected from null to its default, 0.01. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Wind_Turbine_FE_Generated_Per_Tick was corrected from null to its default, 10. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/Weather2/Sand.toml is not correct. Correcting
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_NoSandstorms was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_UseGlobalServerRate was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_OddsTo1 was corrected from null to its default, 30. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_TimeBetweenInTicks was corrected from null to its default, 72000. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_Sand_Buildup_TickRate was corrected from null to its default, 40. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_Sand_Buildup_LoopAmountBase was corrected from null to its default, 800. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_Sand_Block_Max_Height was corrected from null to its default, 3. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_Sand_Buildup_AllowOutsideDesert was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_Particle_Dust_effect_rate was corrected from null to its default, 0.6. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_Particle_Debris_effect_rate was corrected from null to its default, 0.6. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_Siren_PleaseNoDarude was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/Weather2/Snow.toml is not correct. Correcting
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_NoSnowstorms was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Snowstorm_UseGlobalServerRate was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Snowstorm_OddsTo1 was corrected from null to its default, 30. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Snowstorm_TimeBetweenInTicks was corrected from null to its default, 72000. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Snowstorm_Snow_Buildup_TickRate was corrected from null to its default, 40. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Snowstorm_Snow_Buildup_LoopAmountBase was corrected from null to its default, 800. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Snowstorm_Snow_Block_Max_Height was corrected from null to its default, 5. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Snowstorm_Snow_Buildup_AllowOutsideColdBiomes was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/Weather2/Storm.toml is not correct. Correcting
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_OddsTo1OfHighWindWaterSpout was corrected from null to its default, 150. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_FlyingBlocksHurt was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_MaxPerPlayerPerLayer was corrected from null to its default, 20. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Deadly_CollideDistance was corrected from null to its default, 128. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_LightningStrikeBaseValueOddsTo1 was corrected from null to its default, 200. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_NoRainVisual was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_MaxRadius was corrected from null to its default, 300. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_AllTypes_TickRateDelay was corrected from null to its default, 60. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Rain_WaterBuildUpRate was corrected from null to its default, 10. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Rain_WaterSpendRate was corrected from null to its default, 3. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Rain_WaterBuildUpOddsTo1FromSource was corrected from null to its default, 15. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Rain_WaterBuildUpOddsTo1FromNothing was corrected from null to its default, 100. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Rain_WaterBuildUpOddsTo1FromOvercastRaining was corrected from null to its default, 30. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_TemperatureAdjustRate was corrected from null to its default, 0.1. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_HailPerTick was corrected from null to its default, 10. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_OddsTo1OfOceanBasedStorm was corrected from null to its default, 300. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_HighWind was corrected from null to its default, 90. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_Hail was corrected from null to its default, 80. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_F0_Tornado was corrected from null to its default, 70. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_C0_Cyclone was corrected from null to its default, 70. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_F1_Tornado was corrected from null to its default, 50. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_C1_Cyclone was corrected from null to its default, 50. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_F2_Tornado was corrected from null to its default, 40. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_C2_Cyclone was corrected from null to its default, 40. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_F3_Tornado was corrected from null to its default, 30. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_C3_Cyclone was corrected from null to its default, 30. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_F4_Tornado was corrected from null to its default, 20. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_C4_Cyclone was corrected from null to its default, 20. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_F5_Tornado was corrected from null to its default, 10. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_C5_Cyclone was corrected from null to its default, 10. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_ParticleSpawnDelay was corrected from null to its default, 3. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Player_Storm_Deadly_OddsTo1 was corrected from null to its default, 30. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Player_Storm_Deadly_TimeBetweenInTicks was corrected from null to its default, 72000. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Server_Storm_Deadly_UseGlobalRate was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Server_Storm_Deadly_OddsTo1 was corrected from null to its default, 30. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Server_Storm_Deadly_TimeBetweenInTicks was corrected from null to its default, 72000. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Player_Storm_Deadly_OddsTo1_Land_Based was corrected from null to its default, 1200. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Player_Storm_Deadly_TimeBetweenInTicks_Land_Based was corrected from null to its default, 240000. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Server_Storm_Deadly_OddsTo1_Land_Based was corrected from null to its default, 1200. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Server_Storm_Deadly_TimeBetweenInTicks_Land_Based was corrected from null to its default, 240000. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.preventServerThunderstorms was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Lightning_OddsTo1OfFire was corrected from null to its default, 20. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Lightning_lifetimeOfFire was corrected from null to its default, 3. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Lightning_DistanceToPlayerForEffects was corrected from null to its default, 256. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Lightning_StartsFires was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Deflector_RadiusOfStormRemoval was corrected from null to its default, 150. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Deflector_MinStageRemove was corrected from null to its default, 1. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Deflector_RemoveRainstorms was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Deflector_RemoveSandstorms was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Rain_Overcast_OddsTo1 was corrected from null to its default, 50. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Rain_OddsTo1 was corrected from null to its default, 150. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Rain_TrackAndExtinguishEntitiesRate was corrected from null to its default, 200. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/Weather2/Tornado.toml is not correct. Correcting
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_RefinedGrabRules was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_NoTornadosOrCyclones was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_grabPlayer was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_grabPlayersOnly was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_grabMobs was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_grabAnimals was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_grabVillagers was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_grabBlocks was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_grabItems was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_GrabCond_StrengthGrabbing was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_GrabCond_List was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_GrabListBlacklistMode was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_GrabList was corrected from null to its default, #fences, #minecraft:fence_gates, #wooden_doors, #wooden_stairs, #wooden_slabs, #flowers, #planks, #wool, #wooden_trapdoors, #wooden_pressure_plates, #cave_vines, #saplings, #banners, #leaves, #small_flowers, #beds, #tall_flowers, #flowers, #candles, #wall_signs, #signs, #fire, #campfires, #replaceable_plants, #wall_post_override. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_maxFlyingEntityBlocks was corrected from null to its default, 200. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_maxBlocksGrabbedPerTick was corrected from null to its default, 5. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_aimAtPlayerOnSpawn was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_aimAtPlayerAngleVariance was corrected from null to its default, 5. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_extraGrabAngle was corrected from null to its default, 20. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_fallDamage was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/Weather2/Particle.toml is not correct. Correcting
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Precipitation_Particle_effect_rate was corrected from null to its default, 0.7. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Particle_effect_rate was corrected from null to its default, 1.0. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Particle_vanilla_precipitation was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Particle_engine_weather2 was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Particle_Tornado_extraParticleCubes was corrected from null to its default, 2. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/Weather2/Debug.toml is not correct. Correcting
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Particle_Reset_Frequency was corrected from null to its default, 0. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Particle_engine_render was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.Particle_engine_tick was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/Weather2/Sound.toml is not correct. Correcting
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.leavesVolume was corrected from null to its default, 0.0. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.tornadoWindVolume was corrected from null to its default, 1.0. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.tornadoDamageVolume was corrected from null to its default, 1.0. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.windyStormVolume was corrected from null to its default, 1.0. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.sirenVolume was corrected from null to its default, 1.0. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/CoroUtil/General.toml is not correct. Correcting
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.useLoggingLog was corrected from null to its default, true. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.useLoggingDebug was corrected from null to its default, false. 
+[09:20:38] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key general.useLoggingError was corrected from null to its default, true. 
+[09:20:38] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[09:20:38] [modloading-worker-0/INFO] [we.Weather/]: Got IMC []
+[09:20:38] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.4.10 Target: 47.4.28
+[09:20:39] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[09:20:39] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/tmp/serveur/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23113!/assets/.mcassetsroot' uses unexpected schema
+[09:20:39] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/tmp/serveur/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23113!/data/.mcassetsroot' uses unexpected schema
+[09:20:41] [main/INFO] [minecraft/RecipeManager]: Loaded 7 recipes
+[09:20:41] [main/INFO] [minecraft/AdvancementList]: Loaded 1282 advancements
+[09:20:42] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 1.20.1
+[09:20:42] [Server thread/INFO] [minecraft/DedicatedServer]: Loading properties
+[09:20:42] [Server thread/INFO] [minecraft/DedicatedServer]: Default game type: SURVIVAL
+[09:20:42] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[09:20:42] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on *:25565
+[09:20:42] [Server thread/INFO] [minecraft/ServerConnectionListener]: Using epoll channel type
+[09:20:42] [Server thread/WARN] [minecraft/DedicatedServer]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[09:20:42] [Server thread/WARN] [minecraft/DedicatedServer]: The server will make no attempt to authenticate usernames. Beware.
+[09:20:42] [Server thread/WARN] [minecraft/DedicatedServer]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[09:20:42] [Server thread/WARN] [minecraft/DedicatedServer]: To change this, set "online-mode" to "true" in the server.properties file.
+[09:20:42] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file ./meteo/serverconfig/forge-server.toml is not correct. Correcting
+[09:20:42] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server was corrected from null to its default, SimpleCommentedConfig:{}. 
+[09:20:42] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringBlockEntities was corrected from null to its default, false. 
+[09:20:42] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringEntities was corrected from null to its default, false. 
+[09:20:42] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.fullBoundingBoxLadders was corrected from null to its default, false. 
+[09:20:42] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.zombieBaseSummonChance was corrected from null to its default, 0.1. 
+[09:20:42] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.zombieBabyChance was corrected from null to its default, 0.05. 
+[09:20:42] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.permissionHandler was corrected from null to its default, forge:default_handler. 
+[09:20:42] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.advertiseDedicatedServerToLan was corrected from null to its default, true. 
+[09:20:42] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.useItemWithDurationZero was corrected from null to its default, false. 
+[09:20:42] [Server thread/INFO] [fr.do.te.DomaineTerre/]: Monde Terre à l'échelle 1:250
+[09:20:42] [Server thread/INFO] [fr.do.te.DomaineTerre/]: Relief fin : actif (détail 0.5, dossier /tmp/serveur/domaine_terre/relief)
+[09:20:42] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "meteo"
+[09:20:43] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 0 -11 téléchargé (1503 Ko)
+[09:20:47] [Worker-Main-1/INFO] [fr.do.te.DomaineTerre/]: Cartes de la Terre chargées en 3154 ms
+[09:20:47] [Worker-Main-1/INFO] [fr.do.te.DomaineTerre/]: Côtes fines chargées : 14423 tuiles côtières en 2 ms
+[09:20:47] [Worker-Main-1/INFO] [fr.do.te.DomaineTerre/]: Lacs chargés : 6573 lacs sur 7199 tuiles en 3 ms
+[09:21:32] [Worker-Main-1/INFO] [fr.do.te.DomaineTerre/]: Fleuves chargés : 79884 segments en 44961 ms
+[09:21:32] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 -3 téléchargé (565 Ko)
+[09:21:32] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -1 -3 téléchargé (1084 Ko)
+[09:21:33] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 -2 téléchargé (2336 Ko)
+[09:21:33] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 -3 téléchargé (1031 Ko)
+[09:21:33] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 0 -3 téléchargé (1137 Ko)
+[09:21:33] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 1 -2 téléchargé (1628 Ko)
+[09:21:33] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 -1 téléchargé (1800 Ko)
+[09:21:33] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 2 téléchargé (2064 Ko)
+[09:21:33] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 -1 téléchargé (1575 Ko)
+[09:21:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -2 -4 téléchargé (736 Ko)
+[09:21:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 2 téléchargé (238 Ko)
+[09:21:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 0 téléchargé (1953 Ko)
+[09:21:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 0 téléchargé (1912 Ko)
+[09:21:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 1 téléchargé (573 Ko)
+[09:21:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 1 téléchargé (2590 Ko)
+[09:21:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -1 -4 téléchargé (794 Ko)
+[09:21:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 0 -4 téléchargé (868 Ko)
+[09:21:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 0 -6 téléchargé (1121 Ko)
+[09:21:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 -6 téléchargé (1605 Ko)
+[09:21:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 1 -4 téléchargé (945 Ko)
+[09:21:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -1 -6 téléchargé (1166 Ko)
+[09:21:35] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 -5 téléchargé (922 Ko)
+[09:21:35] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 -4 téléchargé (986 Ko)
+[09:21:35] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 -2 téléchargé (1571 Ko)
+[09:21:35] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 0 téléchargé (2097 Ko)
+[09:21:35] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 -4 téléchargé (831 Ko)
+[09:21:35] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 2 téléchargé (1290 Ko)
+[09:21:35] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 4 téléchargé (1320 Ko)
+[09:21:35] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -3 -6 téléchargé (813 Ko)
+[09:21:35] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 4 téléchargé (291 Ko)
+[09:21:35] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 3 téléchargé (782 Ko)
+[09:21:36] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -2 -6 téléchargé (815 Ko)
+[09:21:36] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -2 -5 téléchargé (803 Ko)
+[09:21:36] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -3 -5 téléchargé (1075 Ko)
+[09:21:36] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -1 -7 téléchargé (1437 Ko)
+[09:21:36] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 1 -7 téléchargé (1544 Ko)
+[09:21:36] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 -7 téléchargé (1056 Ko)
+[09:21:36] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -1 -8 téléchargé (1366 Ko)
+[09:21:36] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 -7 téléchargé (1142 Ko)
+[09:21:36] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 -6 téléchargé (887 Ko)
+[09:21:36] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 -7 téléchargé (782 Ko)
+[09:21:36] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 -6 téléchargé (928 Ko)
+[09:21:36] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 0 -8 téléchargé (1573 Ko)
+[09:21:36] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 0 -7 téléchargé (1252 Ko)
+[09:21:36] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 -5 téléchargé (905 Ko)
+[09:21:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 -3 téléchargé (691 Ko)
+[09:21:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 -6 téléchargé (1358 Ko)
+[09:21:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 -1 téléchargé (2041 Ko)
+[09:21:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 -4 téléchargé (844 Ko)
+[09:21:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 -4 téléchargé (1065 Ko)
+[09:21:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 -3 téléchargé (852 Ko)
+[09:21:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 -1 téléchargé (1783 Ko)
+[09:21:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 -2 téléchargé (708 Ko)
+[09:21:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 -2 téléchargé (1556 Ko)
+[09:21:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 1 téléchargé (1831 Ko)
+[09:21:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 3 téléchargé (1935 Ko)
+[09:21:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 1 téléchargé (1793 Ko)
+[09:21:38] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 5 téléchargé (806 Ko)
+[09:21:38] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -9 2 téléchargé (1787 Ko)
+[09:21:38] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 4 téléchargé (515 Ko)
+[09:21:38] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 4 téléchargé (523 Ko)
+[09:21:38] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 5 téléchargé (758 Ko)
+[09:21:38] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -1 -9 téléchargé (2115 Ko)
+[09:21:38] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -8 2 téléchargé (140 Ko)
+[09:21:38] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 -9 téléchargé (353 Ko)
+[09:21:38] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -2 -8 téléchargé (1157 Ko)
+[09:21:38] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -2 -9 téléchargé (1948 Ko)
+[09:21:38] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 -8 téléchargé (57 Ko)
+[09:21:38] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 -8 téléchargé (596 Ko)
+[09:21:38] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 -9 téléchargé (916 Ko)
+[09:21:38] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 -8 téléchargé (163 Ko)
+[09:21:39] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 -5 téléchargé (1644 Ko)
+[09:21:39] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 -6 téléchargé (1168 Ko)
+[09:21:39] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 -3 téléchargé (1365 Ko)
+[09:21:39] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 -5 téléchargé (959 Ko)
+[09:21:39] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 -7 téléchargé (950 Ko)
+[09:21:39] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 -7 téléchargé (841 Ko)
+[09:21:39] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 8 -3 téléchargé (2827 Ko)
+[09:21:39] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 8 -1 téléchargé (1152 Ko)
+[09:21:39] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 8 1 téléchargé (1039 Ko)
+[09:21:39] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 2 téléchargé (2080 Ko)
+[09:21:39] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 8 -2 téléchargé (2676 Ko)
+[09:21:40] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 8 0 téléchargé (1143 Ko)
+[09:21:40] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 8 3 téléchargé (1036 Ko)
+[09:21:40] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 8 2 téléchargé (1361 Ko)
+[09:21:40] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 3 téléchargé (1925 Ko)
+[09:21:40] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 4 téléchargé (924 Ko)
+[09:21:40] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 6 téléchargé (1594 Ko)
+[09:21:40] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 7 téléchargé (1114 Ko)
+[09:21:40] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 4 téléchargé (1505 Ko)
+[09:21:40] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 6 téléchargé (1427 Ko)
+[09:21:40] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 5 téléchargé (1969 Ko)
+[09:21:40] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 6 téléchargé (2119 Ko)
+[09:21:40] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 5 téléchargé (393 Ko)
+[09:21:41] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 -10 téléchargé (1514 Ko)
+[09:21:41] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 0 -10 téléchargé (2161 Ko)
+[09:21:41] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 -10 téléchargé (2361 Ko)
+[09:21:41] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 1 -10 téléchargé (1576 Ko)
+[09:21:41] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 1 -11 téléchargé (2319 Ko)
+[09:21:41] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 -10 téléchargé (1516 Ko)
+[09:21:41] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 -9 téléchargé (1537 Ko)
+[09:21:41] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 -9 téléchargé (2451 Ko)
+[09:21:41] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 8 -6 téléchargé (1762 Ko)
+[09:21:41] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 -9 téléchargé (1117 Ko)
+[09:21:41] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 9 -5 téléchargé (1524 Ko)
+[09:21:42] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 -6 téléchargé (1289 Ko)
+[09:21:42] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 9 -1 téléchargé (581 Ko)
+[09:21:42] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 9 2 téléchargé (41 Ko)
+[09:21:42] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 10 -1 téléchargé (98 Ko)
+[09:21:42] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 9 -2 téléchargé (1321 Ko)
+[09:21:42] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 10 -2 téléchargé (676 Ko)
+[09:21:42] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -10 4 téléchargé (2945 Ko)
+[09:21:42] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -10 2 téléchargé (1705 Ko)
+[09:21:42] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -11 0 téléchargé (1461 Ko)
+[09:21:42] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -10 3 téléchargé (2248 Ko)
+[09:21:42] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -10 0 téléchargé (820 Ko)
+[09:21:42] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -11 1 téléchargé (1995 Ko)
+[09:21:42] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -10 1 téléchargé (2033 Ko)
+[09:21:43] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -9 3 téléchargé (1446 Ko)
+[09:21:43] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -9 4 téléchargé (562 Ko)
+[09:21:43] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 1 -12 téléchargé (730 Ko)
+[09:21:43] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 8 -9 téléchargé (2571 Ko)
+[09:21:43] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 0 -12 téléchargé (282 Ko)
+[09:21:43] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 10 -3 téléchargé (826 Ko)
+[09:21:43] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 -9 téléchargé (2437 Ko)
+[09:21:43] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 10 4 téléchargé (1658 Ko)
+[09:21:43] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 11 -3 téléchargé (193 Ko)
+[09:21:43] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 8 -10 téléchargé (711 Ko)
+[09:21:43] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 -10 téléchargé (471 Ko)
+[09:21:44] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -12 2 téléchargé (1436 Ko)
+[09:21:44] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -11 2 téléchargé (1759 Ko)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:bison introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:bison introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:boar introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:boar introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:boar introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:boar introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:camel introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:camel introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:camel introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:rhino introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:rhino introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:rhino introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:rhino introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:rhino introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:hyena introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:hyena introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:hyena introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:hyena introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:wildebeest introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:wildebeest introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:aardvark introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:hippo introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:opossum introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:large_snake introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:large_snake introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:giant_salamander introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:giant_salamander introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:giant_salamander introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[09:21:47] [Worker-Main-1/INFO] [fr.do.te.DomaineTerre/]: Faune de la Terre : 26 espèces en surface, 0 sous terre (366 absentes du pack), 239 ms
+[09:21:47] [Worker-Main-1/INFO] [fr.do.te.DomaineTerre/]: Tailles : 21 créatures redimensionnées
+[09:21:48] [Worker-Main-1/INFO] [fr.do.te.DomaineTerre/]: Faune (génération) [65, -1360] CREATURE : biome domaine_terre:atlantique/fleuve, 8 espèces [cow, pig, sheep, chicken, horse, rabbit, fox, bee]
+[09:21:48] [Server thread/INFO] [minecraft/MinecraftServer]: Preparing start region for dimension minecraft:overworld
+[09:21:49] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[09:21:49] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[09:21:49] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[09:21:49] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[09:21:50] [Worker-Main-3/INFO] [fr.do.te.DomaineTerre/]: Faune (génération) [66, -1360] CREATURE : biome domaine_terre:atlantique/fleuve, 8 espèces [cow, pig, sheep, chicken, horse, rabbit, fox, bee]
+[09:21:50] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[09:21:50] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[09:21:51] [Worker-Main-3/INFO] [fr.do.te.DomaineTerre/]: Faune (génération) [65, -1361] CREATURE : biome domaine_terre:atlantique/fleuve, 8 espèces [cow, pig, sheep, chicken, horse, rabbit, fox, bee]
+[09:21:51] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[09:21:51] [Server thread/INFO] [fr.do.te.DomaineTerre/]: Faune : contrôle des bêtes nées à la génération actif
+[09:21:51] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[09:21:52] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 1%
+[09:21:52] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 1%
+[09:21:53] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 2%
+[09:21:53] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 3%
+[09:21:54] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 3%
+[09:21:54] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 4%
+[09:21:55] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 4%
+[09:21:55] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 4%
+[09:21:56] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 5%
+[09:21:56] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 6%
+[09:21:57] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 7%
+[09:21:57] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 8%
+[09:21:58] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 9%
+[09:21:58] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 9%
+[09:21:59] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 9%
+[09:21:59] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 10%
+[09:22:00] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 11%
+[09:22:00] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 12%
+[09:22:01] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 14%
+[09:22:01] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 15%
+[09:22:02] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 15%
+[09:22:02] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 15%
+[09:22:03] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 16%
+[09:22:03] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 17%
+[09:22:04] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 18%
+[09:22:04] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 19%
+[09:22:05] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 20%
+[09:22:05] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 22%
+[09:22:06] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 22%
+[09:22:06] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 23%
+[09:22:07] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 23%
+[09:22:07] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 24%
+[09:22:08] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 25%
+[09:22:08] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 26%
+[09:22:09] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 27%
+[09:22:09] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 29%
+[09:22:10] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 30%
+[09:22:10] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 31%
+[09:22:11] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 31%
+[09:22:11] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 32%
+[09:22:12] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 32%
+[09:22:12] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 33%
+[09:22:13] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 34%
+[09:22:13] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 36%
+[09:22:14] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 37%
+[09:22:14] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 38%
+[09:22:15] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 40%
+[09:22:15] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 41%
+[09:22:16] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 42%
+[09:22:16] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 42%
+[09:22:17] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 43%
+[09:22:17] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 44%
+[09:22:18] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 45%
+[09:22:18] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 46%
+[09:22:19] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 48%
+[09:22:19] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 49%
+[09:22:20] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 50%
+[09:22:20] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 51%
+[09:22:21] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 52%
+[09:22:21] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 54%
+[09:22:22] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 55%
+[09:22:22] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 55%
+[09:22:23] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 56%
+[09:22:23] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 56%
+[09:22:24] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 58%
+[09:22:24] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 59%
+[09:22:25] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 60%
+[09:22:25] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 62%
+[09:22:26] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 63%
+[09:22:26] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 64%
+[09:22:27] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 66%
+[09:22:27] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 67%
+[09:22:28] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 68%
+[09:22:28] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 69%
+[09:22:29] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 69%
+[09:22:29] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 70%
+[09:22:30] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 72%
+[09:22:30] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 72%
+[09:22:31] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 73%
+[09:22:31] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 75%
+[09:22:32] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 76%
+[09:22:32] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 77%
+[09:22:33] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 79%
+[09:22:33] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 80%
+[09:22:34] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 81%
+[09:22:34] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 82%
+[09:22:35] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 83%
+[09:22:35] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 84%
+[09:22:36] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 84%
+[09:22:36] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 85%
+[09:22:37] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 86%
+[09:22:37] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 87%
+[09:22:38] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 89%
+[09:22:38] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 90%
+[09:22:39] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 92%
+[09:22:39] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 93%
+[09:22:40] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 94%
+[09:22:40] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 96%
+[09:22:41] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 96%
+[09:22:41] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 98%
+[09:22:42] [Server thread/INFO] [minecraft/LoggerChunkProgressListener]: Time elapsed: 53808 ms
+[09:22:42] [Server thread/INFO] [minecraft/DedicatedServer]: Done (119.549s)! For help, type "help"
+>>> season set mid_spring
+[09:22:42] [Server thread/INFO] [ne.mi.se.pe.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[09:22:42] [Server thread/INFO] [fr.do.me.DomaineWeather/]: Domaine Weather : tornades sans dégâts aux blocs ; 6 zones de tornades
+[09:22:42] [Server thread/INFO] [minecraft/MinecraftServer]: Set season to Mid Spring
+>>> meteo point 48.86 2.35
+[09:22:44] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 48.86, lon 2.35 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Cfb | pluie : 100 % des nuages à cette saison
+Jour : 12.6 h, nuit : 11.4 h (sur 24 h) | soleil levé 52 % des 20 min
+Tornades : non | sable : non | neige : non
+>>> meteo point 59.91 10.75
+[09:22:44] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 59.91, lon 10.75 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Dfb | pluie : 100 % des nuages à cette saison
+Jour : 12.9 h, nuit : 11.1 h (sur 24 h) | soleil levé 54 % des 20 min
+Tornades : non | sable : non | neige : oui
+>>> meteo point 69.65 18.96
+[09:22:44] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 69.65, lon 18.96 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 13.4 h, nuit : 10.6 h (sur 24 h) | soleil levé 56 % des 20 min
+Tornades : non | sable : non | neige : oui
+>>> meteo point 30.04 31.24
+[09:22:44] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 30.04, lon 31.24 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : BWh | pluie : 5 % des nuages à cette saison
+Jour : 12.3 h, nuit : 11.7 h (sur 24 h) | soleil levé 51 % des 20 min
+Tornades : non | sable : oui | neige : non
+>>> meteo point 22.79 5.52
+[09:22:44] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 22.79, lon 5.52 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : BWh | pluie : 5 % des nuages à cette saison
+Jour : 12.2 h, nuit : 11.8 h (sur 24 h) | soleil levé 51 % des 20 min
+Tornades : non | sable : oui | neige : non
+>>> meteo point 37.39 -5.98
+[09:22:45] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 37.39, lon -5.98 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Csa | pluie : 100 % des nuages à cette saison
+Jour : 12.4 h, nuit : 11.6 h (sur 24 h) | soleil levé 52 % des 20 min
+Tornades : non | sable : non | neige : non
+>>> meteo point 19.08 72.88
+[09:22:45] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 19.08, lon 72.88 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Am | pluie : 100 % des nuages à cette saison
+Jour : 12.2 h, nuit : 11.8 h (sur 24 h) | soleil levé 51 % des 20 min
+Tornades : non | sable : non | neige : non
+>>> meteo point -3.12 -60.02
+[09:22:45] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat -3.12, lon -60.02 (hémisphère sud)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Af | pluie : 100 % des nuages à cette saison
+Jour : 12.0 h, nuit : 12.0 h (sur 24 h) | soleil levé 50 % des 20 min
+Tornades : non | sable : non | neige : non
+>>> meteo point -33.87 151.21
+[09:22:45] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat -33.87, lon 151.21 (hémisphère sud)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Cfa | pluie : 100 % des nuages à cette saison
+Jour : 11.7 h, nuit : 12.3 h (sur 24 h) | soleil levé 49 % des 20 min
+Tornades : oui (Sud-Est de l'Australie) | sable : non | neige : non
+>>> meteo point -54.8 -68.3
+[09:22:46] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat -54.80, lon -68.30 (hémisphère sud)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 11.3 h, nuit : 12.7 h (sur 24 h) | soleil levé 47 % des 20 min
+Tornades : non | sable : non | neige : oui
+>>> meteo point 35.47 -97.52
+[09:22:46] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 35.47, lon -97.52 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Cfa | pluie : 100 % des nuages à cette saison
+Jour : 12.4 h, nuit : 11.6 h (sur 24 h) | soleil levé 52 % des 20 min
+Tornades : oui (Grandes Plaines et Sud-Est des Etats-Unis) | sable : non | neige : non
+>>> meteo point 23.81 90.41
+[09:22:46] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 23.81, lon 90.41 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Cwa | pluie : 100 % des nuages à cette saison
+Jour : 12.2 h, nuit : 11.8 h (sur 24 h) | soleil levé 51 % des 20 min
+Tornades : oui (Bangladesh et est de l'Inde) | sable : non | neige : non
+>>> meteo point 62.03 129.73
+[09:22:46] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 62.03, lon 129.73 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 13.0 h, nuit : 11.0 h (sur 24 h) | soleil levé 54 % des 20 min
+Tornades : non | sable : non | neige : oui
+>>> season set mid_summer
+[09:22:46] [Server thread/INFO] [minecraft/MinecraftServer]: Set season to Mid Summer
+>>> meteo point 48.86 2.35
+[09:22:48] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 48.86, lon 2.35 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Cfb | pluie : 100 % des nuages à cette saison
+Jour : 15.6 h, nuit : 8.4 h (sur 24 h) | soleil levé 65 % des 20 min
+Tornades : non | sable : non | neige : non
+>>> meteo point 59.91 10.75
+[09:22:49] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 59.91, lon 10.75 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Dfb | pluie : 100 % des nuages à cette saison
+Jour : 17.3 h, nuit : 6.7 h (sur 24 h) | soleil levé 72 % des 20 min
+Tornades : non | sable : non | neige : oui
+>>> meteo point 69.65 18.96
+[09:22:49] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 69.65, lon 18.96 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 19.2 h, nuit : 4.8 h (sur 24 h) | soleil levé 80 % des 20 min
+Tornades : non | sable : non | neige : oui
+>>> meteo point 30.04 31.24
+[09:22:49] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 30.04, lon 31.24 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : BWh | pluie : 5 % des nuages à cette saison
+Jour : 13.9 h, nuit : 10.1 h (sur 24 h) | soleil levé 58 % des 20 min
+Tornades : non | sable : oui | neige : non
+>>> meteo point 22.79 5.52
+[09:22:49] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 22.79, lon 5.52 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : BWh | pluie : 5 % des nuages à cette saison
+Jour : 13.4 h, nuit : 10.6 h (sur 24 h) | soleil levé 56 % des 20 min
+Tornades : non | sable : oui | neige : non
+>>> meteo point 37.39 -5.98
+[09:22:49] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 37.39, lon -5.98 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Csa | pluie : 10 % des nuages à cette saison
+Jour : 14.5 h, nuit : 9.5 h (sur 24 h) | soleil levé 60 % des 20 min
+Tornades : non | sable : non | neige : non
+>>> meteo point 19.08 72.88
+[09:22:50] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 19.08, lon 72.88 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Am | pluie : 100 % des nuages à cette saison
+Jour : 13.1 h, nuit : 10.9 h (sur 24 h) | soleil levé 55 % des 20 min
+Tornades : non | sable : non | neige : non
+>>> meteo point -3.12 -60.02
+[09:22:50] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat -3.12, lon -60.02 (hémisphère sud)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Af | pluie : 100 % des nuages à cette saison
+Jour : 11.8 h, nuit : 12.2 h (sur 24 h) | soleil levé 49 % des 20 min
+Tornades : non | sable : non | neige : non
+>>> meteo point -33.87 151.21
+[09:22:50] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat -33.87, lon 151.21 (hémisphère sud)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Cfa | pluie : 100 % des nuages à cette saison
+Jour : 9.8 h, nuit : 14.2 h (sur 24 h) | soleil levé 41 % des 20 min
+Tornades : oui (Sud-Est de l'Australie) | sable : non | neige : non
+>>> meteo point -54.8 -68.3
+[09:22:50] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat -54.80, lon -68.30 (hémisphère sud)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 7.6 h, nuit : 16.4 h (sur 24 h) | soleil levé 32 % des 20 min
+Tornades : non | sable : non | neige : oui
+>>> meteo point 35.47 -97.52
+[09:22:50] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 35.47, lon -97.52 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Cfa | pluie : 100 % des nuages à cette saison
+Jour : 14.3 h, nuit : 9.7 h (sur 24 h) | soleil levé 60 % des 20 min
+Tornades : oui (Grandes Plaines et Sud-Est des Etats-Unis) | sable : non | neige : non
+>>> meteo point 23.81 90.41
+[09:22:51] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 23.81, lon 90.41 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Cwa | pluie : 100 % des nuages à cette saison
+Jour : 13.4 h, nuit : 10.6 h (sur 24 h) | soleil levé 56 % des 20 min
+Tornades : oui (Bangladesh et est de l'Inde) | sable : non | neige : non
+>>> meteo point 62.03 129.73
+[09:22:51] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 62.03, lon 129.73 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 17.7 h, nuit : 6.3 h (sur 24 h) | soleil levé 74 % des 20 min
+Tornades : non | sable : non | neige : oui
+>>> season set mid_autumn
+[09:22:51] [Server thread/INFO] [minecraft/MinecraftServer]: Set season to Mid Autumn
+>>> meteo point 48.86 2.35
+[09:22:53] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 48.86, lon 2.35 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Cfb | pluie : 100 % des nuages à cette saison
+Jour : 11.4 h, nuit : 12.6 h (sur 24 h) | soleil levé 48 % des 20 min
+Tornades : non | sable : non | neige : non
+>>> meteo point 59.91 10.75
+[09:22:53] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 59.91, lon 10.75 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Dfb | pluie : 100 % des nuages à cette saison
+Jour : 11.1 h, nuit : 12.9 h (sur 24 h) | soleil levé 46 % des 20 min
+Tornades : non | sable : non | neige : oui
+>>> meteo point 69.65 18.96
+[09:22:53] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 69.65, lon 18.96 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 10.6 h, nuit : 13.4 h (sur 24 h) | soleil levé 44 % des 20 min
+Tornades : non | sable : non | neige : oui
+>>> meteo point 30.04 31.24
+[09:22:54] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 30.04, lon 31.24 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : BWh | pluie : 5 % des nuages à cette saison
+Jour : 11.7 h, nuit : 12.3 h (sur 24 h) | soleil levé 49 % des 20 min
+Tornades : non | sable : oui | neige : non
+>>> meteo point 22.79 5.52
+[09:22:54] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 22.79, lon 5.52 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : BWh | pluie : 5 % des nuages à cette saison
+Jour : 11.8 h, nuit : 12.2 h (sur 24 h) | soleil levé 49 % des 20 min
+Tornades : non | sable : oui | neige : non
+>>> meteo point 37.39 -5.98
+[09:22:54] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 37.39, lon -5.98 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Csa | pluie : 100 % des nuages à cette saison
+Jour : 11.6 h, nuit : 12.4 h (sur 24 h) | soleil levé 48 % des 20 min
+Tornades : non | sable : non | neige : non
+>>> meteo point 19.08 72.88
+[09:22:54] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 19.08, lon 72.88 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Am | pluie : 100 % des nuages à cette saison
+Jour : 11.8 h, nuit : 12.2 h (sur 24 h) | soleil levé 49 % des 20 min
+Tornades : non | sable : non | neige : non
+>>> meteo point -3.12 -60.02
+[09:22:54] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat -3.12, lon -60.02 (hémisphère sud)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Af | pluie : 100 % des nuages à cette saison
+Jour : 12.0 h, nuit : 12.0 h (sur 24 h) | soleil levé 50 % des 20 min
+Tornades : non | sable : non | neige : non
+>>> meteo point -33.87 151.21
+[09:22:55] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat -33.87, lon 151.21 (hémisphère sud)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Cfa | pluie : 100 % des nuages à cette saison
+Jour : 12.3 h, nuit : 11.7 h (sur 24 h) | soleil levé 51 % des 20 min
+Tornades : oui (Sud-Est de l'Australie) | sable : non | neige : non
+>>> meteo point -54.8 -68.3
+[09:22:55] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat -54.80, lon -68.30 (hémisphère sud)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 12.7 h, nuit : 11.3 h (sur 24 h) | soleil levé 53 % des 20 min
+Tornades : non | sable : non | neige : oui
+>>> meteo point 35.47 -97.52
+[09:22:55] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 35.47, lon -97.52 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Cfa | pluie : 100 % des nuages à cette saison
+Jour : 11.6 h, nuit : 12.4 h (sur 24 h) | soleil levé 48 % des 20 min
+Tornades : oui (Grandes Plaines et Sud-Est des Etats-Unis) | sable : non | neige : non
+>>> meteo point 23.81 90.41
+[09:22:55] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 23.81, lon 90.41 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Cwa | pluie : 100 % des nuages à cette saison
+Jour : 11.8 h, nuit : 12.2 h (sur 24 h) | soleil levé 49 % des 20 min
+Tornades : oui (Bangladesh et est de l'Inde) | sable : non | neige : non
+>>> meteo point 62.03 129.73
+[09:22:55] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 62.03, lon 129.73 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 11.0 h, nuit : 13.0 h (sur 24 h) | soleil levé 46 % des 20 min
+Tornades : non | sable : non | neige : oui
+>>> season set mid_winter
+[09:22:56] [Server thread/INFO] [minecraft/MinecraftServer]: Set season to Mid Winter
+>>> meteo point 48.86 2.35
+[09:22:58] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 48.86, lon 2.35 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Cfb | pluie : 100 % des nuages à cette saison
+Jour : 8.4 h, nuit : 15.6 h (sur 24 h) | soleil levé 35 % des 20 min
+Tornades : non | sable : non | neige : non
+>>> meteo point 59.91 10.75
+[09:22:58] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 59.91, lon 10.75 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Dfb | pluie : 100 % des nuages à cette saison
+Jour : 6.7 h, nuit : 17.3 h (sur 24 h) | soleil levé 28 % des 20 min
+Tornades : non | sable : non | neige : oui
+>>> meteo point 69.65 18.96
+[09:22:58] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 69.65, lon 18.96 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 4.8 h, nuit : 19.2 h (sur 24 h) | soleil levé 20 % des 20 min
+Tornades : non | sable : non | neige : oui
+>>> meteo point 30.04 31.24
+[09:22:58] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 30.04, lon 31.24 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : BWh | pluie : 5 % des nuages à cette saison
+Jour : 10.1 h, nuit : 13.9 h (sur 24 h) | soleil levé 42 % des 20 min
+Tornades : non | sable : oui | neige : non
+>>> meteo point 22.79 5.52
+[09:22:58] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 22.79, lon 5.52 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : BWh | pluie : 5 % des nuages à cette saison
+Jour : 10.6 h, nuit : 13.4 h (sur 24 h) | soleil levé 44 % des 20 min
+Tornades : non | sable : oui | neige : non
+>>> meteo point 37.39 -5.98
+[09:22:59] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 37.39, lon -5.98 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Csa | pluie : 100 % des nuages à cette saison
+Jour : 9.5 h, nuit : 14.5 h (sur 24 h) | soleil levé 40 % des 20 min
+Tornades : non | sable : non | neige : non
+>>> meteo point 19.08 72.88
+[09:22:59] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 19.08, lon 72.88 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Am | pluie : 30 % des nuages à cette saison
+Jour : 10.9 h, nuit : 13.1 h (sur 24 h) | soleil levé 45 % des 20 min
+Tornades : non | sable : non | neige : non
+>>> meteo point -3.12 -60.02
+[09:22:59] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat -3.12, lon -60.02 (hémisphère sud)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Af | pluie : 100 % des nuages à cette saison
+Jour : 12.2 h, nuit : 11.8 h (sur 24 h) | soleil levé 51 % des 20 min
+Tornades : non | sable : non | neige : non
+>>> meteo point -33.87 151.21
+[09:22:59] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat -33.87, lon 151.21 (hémisphère sud)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Cfa | pluie : 100 % des nuages à cette saison
+Jour : 14.2 h, nuit : 9.8 h (sur 24 h) | soleil levé 59 % des 20 min
+Tornades : oui (Sud-Est de l'Australie) | sable : non | neige : non
+>>> meteo point -54.8 -68.3
+[09:22:59] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat -54.80, lon -68.30 (hémisphère sud)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 16.4 h, nuit : 7.6 h (sur 24 h) | soleil levé 68 % des 20 min
+Tornades : non | sable : non | neige : oui
+>>> meteo point 35.47 -97.52
+[09:23:00] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 35.47, lon -97.52 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Cfa | pluie : 100 % des nuages à cette saison
+Jour : 9.7 h, nuit : 14.3 h (sur 24 h) | soleil levé 40 % des 20 min
+Tornades : oui (Grandes Plaines et Sud-Est des Etats-Unis) | sable : non | neige : non
+>>> meteo point 23.81 90.41
+[09:23:00] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 23.81, lon 90.41 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Cwa | pluie : 15 % des nuages à cette saison
+Jour : 10.6 h, nuit : 13.4 h (sur 24 h) | soleil levé 44 % des 20 min
+Tornades : oui (Bangladesh et est de l'Inde) | sable : non | neige : non
+>>> meteo point 62.03 129.73
+[09:23:00] [Server thread/INFO] [minecraft/MinecraftServer]: [Météo] lat 62.03, lon 129.73 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 6.3 h, nuit : 17.7 h (sur 24 h) | soleil levé 26 % des 20 min
+Tornades : non | sable : non | neige : oui
+>>> stop
+[09:23:00] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping the server
+[09:23:00] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[09:23:00] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[09:23:00] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[09:23:02] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[meteo]'/minecraft:overworld
+[09:23:03] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[meteo]'/minecraft:the_end
+[09:23:03] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[meteo]'/minecraft:the_nether
+[09:23:03] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (meteo): All chunks are saved
+[09:23:03] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[09:23:03] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[09:23:03] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
