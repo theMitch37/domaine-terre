@@ -1,0 +1,260 @@
+serveur prêt en 151 s
+lot 1/32 : verdon, etretat, moher, douvres — 820 chunks
+  820/820 chunks complets (336 s)
+  mémoire après le lot 1 : 1251 Mo occupés sur 4200 Mo
+lot 2/32 : pilat, mont_saint_michel, mer_talus_gascogne, mer_fosse_mariannes — 948 chunks
+  948/948 chunks complets (571 s)
+  mémoire après le lot 2 : 1239 Mo occupés sur 4216 Mo
+lot 3/32 : himalaya_everest, lac_leman, lac_annecy, riviere_doire, baie_de_somme, mer_wadden, bassin_arcachon — 952 chunks
+  952/952 chunks complets (835 s)
+  mémoire après le lot 3 : 1416 Mo occupés sur 4788 Mo
+lot 4/32 : estuaire_seine, gavarnie — 641 chunks
+  641/641 chunks complets (987 s)
+  mémoire après le lot 4 : 1574 Mo occupés sur 4788 Mo
+lot 5/32 : gullfoss, skogafoss — 652 chunks
+  652/652 chunks complets (1144 s)
+  mémoire après le lot 5 : 1605 Mo occupés sur 5388 Mo
+lot 6/32 : plitvice, geiranger — 820 chunks
+  820/820 chunks complets (1356 s)
+  mémoire après le lot 6 : 1339 Mo occupés sur 4548 Mo
+lot 7/32 : preikestolen, cervin — 678 chunks
+  678/678 chunks complets (1539 s)
+  mémoire après le lot 7 : 1348 Mo occupés sur 4548 Mo
+lot 8/32 : tre_cime — 529 chunks
+  529/529 chunks complets (1715 s)
+  mémoire après le lot 8 : 1366 Mo occupés sur 4548 Mo
+lot 9/32 : mer_de_glace — 598 chunks
+  598/598 chunks complets (1848 s)
+  mémoire après le lot 9 : 1367 Mo occupés sur 4548 Mo
+lot 10/32 : jokulsarlon, alpes_ecrins, chaussee — 971 chunks
+  971/971 chunks complets (2131 s)
+  mémoire après le lot 10 : 1402 Mo occupés sur 4748 Mo
+lot 11/32 : meteores, etna — 899 chunks
+  899/899 chunks complets (2385 s)
+  mémoire après le lot 11 : 1680 Mo occupés sur 5628 Mo
+lot 12/32 : vesuve — 483 chunks
+  483/483 chunks complets (2543 s)
+  mémoire après le lot 12 : 1610 Mo occupés sur 5440 Mo
+lot 13/32 : grotte_padirac — 609 chunks
+  609/609 chunks complets (2668 s)
+  mémoire après le lot 13 : 1617 Mo occupés sur 5440 Mo
+lot 14/32 : grotte_han — 870 chunks
+  870/870 chunks complets (3351 s)
+  mémoire après le lot 14 : 1448 Mo occupés sur 4908 Mo
+lot 15/32 : grotte_postojna — 832 chunks
+  832/832 chunks complets (3507 s)
+  mémoire après le lot 15 : 1448 Mo occupés sur 4908 Mo
+lot 16/32 : grotte_eisriesenwelt, fingal, capri — 783 chunks
+  783/783 chunks complets (3717 s)
+  mémoire après le lot 16 : 1472 Mo occupés sur 4988 Mo
+lot 17/32 : faune_amazonie — 625 chunks
+  625/625 chunks complets (3848 s)
+  mémoire après le lot 17 : 1566 Mo occupés sur 4988 Mo
+lot 18/32 : faune_serengeti — 600 chunks
+  600/600 chunks complets (3990 s)
+  mémoire après le lot 18 : 1495 Mo occupés sur 4988 Mo
+lot 19/32 : faune_nil_assouan — 625 chunks
+  625/625 chunks complets (4109 s)
+  mémoire après le lot 19 : 1685 Mo occupés sur 4988 Mo
+lot 20/32 : faune_amour — 625 chunks
+  625/625 chunks complets (4232 s)
+  mémoire après le lot 20 : 1515 Mo occupés sur 5136 Mo
+lot 21/32 : faune_cerrado — 625 chunks
+  625/625 chunks complets (4365 s)
+  mémoire après le lot 21 : 1515 Mo occupés sur 5120 Mo
+lot 22/32 : faune_bourgogne, relief_oberland — 999 chunks
+  999/999 chunks complets (4559 s)
+  mémoire après le lot 22 : 1729 Mo occupés sur 5828 Mo
+lot 23/32 : relief_jura, andes_aconcagua — 526 chunks
+  526/526 chunks complets (4679 s)
+  mémoire après le lot 23 : 1753 Mo occupés sur 5908 Mo
+lot 24/32 : erebus, embouchure_indus — 941 chunks
+  941/941 chunks complets (4999 s)
+  mémoire après le lot 24 : 1534 Mo occupés sur 5216 Mo
+lot 25/32 : embouchure_niger, embouchure_gange, confluence_ping, embouchure_rhone, embouchure_gambie — 897 chunks
+  897/897 chunks complets (5229 s)
+  mémoire après le lot 25 : 1624 Mo occupés sur 5520 Mo
+lot 26/32 : grand_canyon_sortie, grand_canyon_centre, embouchure_loire, embouchure_mississippi — 916 chunks
+  916/916 chunks complets (5467 s)
+  mémoire après le lot 26 : 1590 Mo occupés sur 5428 Mo
+lot 27/32 : embouchure_amazone, embouchure_nil, embouchure_mekong, embouchure_volga, riviere_loire_tours — 939 chunks
+  939/939 chunks complets (5704 s)
+  mémoire après le lot 27 : 1603 Mo occupés sur 5440 Mo
+lot 28/32 : riviere_danube_vienne, riviere_rhin_cologne, embouchure_saint_laurent, embouchure_tage, embouchure_elbe — 845 chunks
+  845/845 chunks complets (5943 s)
+  mémoire après le lot 28 : 1613 Mo occupés sur 5468 Mo
+lot 29/32 : test_cascade_valais, test_marches_danube, test_lac_leman, test_indus_plage, test_desert_marches — 845 chunks
+  845/845 chunks complets (6048 s)
+  mémoire après le lot 29 : 1630 Mo occupés sur 5536 Mo
+lot 30/32 : test_gc_plaque, test_poches_islande, test_amazone_estuaire — 725 chunks
+  725/725 chunks complets (6213 s)
+  mémoire après le lot 30 : 1692 Mo occupés sur 5536 Mo
+lot 31/32 : test_powell — 841 chunks
+  841/841 chunks complets (6339 s)
+  mémoire après le lot 31 : 1658 Mo occupés sur 5536 Mo
+lot 32/32 : test_recif, test_kimberley, test_beauce, test_alpes — 675 chunks
+  675/675 chunks complets (6512 s)
+  mémoire après le lot 32 : 1694 Mo occupés sur 5536 Mo
+24334 chunks demandés en 32 lots
+verdon : (130, 1536, 260), 75 sortes de blocs
+etretat : (209, 1536, 296), 75 sortes de blocs
+moher : (180, 1536, 222), 73 sortes de blocs
+douvres : (195, 1536, 265), 76 sortes de blocs
+pilat : (400, 1536, 260), 87 sortes de blocs
+mont_saint_michel : (181, 1536, 306), 72 sortes de blocs
+mer_talus_gascogne : (75, 1536, 400), 40 sortes de blocs
+mer_fosse_mariannes : (151, 1536, 161), 21 sortes de blocs
+himalaya_everest : (160, 1536, 160), 49 sortes de blocs
+lac_leman : (125, 1536, 200), 73 sortes de blocs
+lac_annecy : (110, 1536, 100), 64 sortes de blocs
+riviere_doire : (160, 1536, 160), 83 sortes de blocs
+baie_de_somme : (200, 1536, 200), 73 sortes de blocs
+mer_wadden : (200, 1536, 200), 82 sortes de blocs
+bassin_arcachon : (200, 1536, 200), 68 sortes de blocs
+estuaire_seine : (100, 1536, 240), 68 sortes de blocs
+gavarnie : (351, 1536, 351), 79 sortes de blocs
+gullfoss : (361, 1536, 274), 82 sortes de blocs
+skogafoss : (159, 1536, 296), 78 sortes de blocs
+plitvice : (376, 1536, 281), 73 sortes de blocs
+geiranger : (222, 1536, 402), 73 sortes de blocs
+preikestolen : (283, 1536, 292), 77 sortes de blocs
+cervin : (208, 1536, 371), 84 sortes de blocs
+tre_cime : (341, 1536, 355), 75 sortes de blocs
+mer_de_glace : (395, 1536, 359), 75 sortes de blocs
+jokulsarlon : (292, 1536, 337), 82 sortes de blocs
+alpes_ecrins : (160, 1536, 160), 64 sortes de blocs
+chaussee : (237, 1536, 413), 74 sortes de blocs
+meteores : (271, 1536, 331), 77 sortes de blocs
+etna : (318, 1536, 388), 82 sortes de blocs
+vesuve : (307, 1536, 352), 81 sortes de blocs
+grotte_padirac : (320, 1536, 450), 76 sortes de blocs
+grotte_han : (460, 1536, 460), 88 sortes de blocs
+grotte_postojna : (400, 1536, 500), 81 sortes de blocs
+grotte_eisriesenwelt : (280, 1536, 340), 79 sortes de blocs
+fingal : (268, 1536, 152), 72 sortes de blocs
+capri : (149, 1536, 293), 68 sortes de blocs
+faune_amazonie : (384, 1536, 384), 85 sortes de blocs
+faune_serengeti : (384, 1536, 384), 61 sortes de blocs
+faune_nil_assouan : (384, 1536, 384), 63 sortes de blocs
+faune_amour : (384, 1536, 384), 81 sortes de blocs
+faune_cerrado : (384, 1536, 384), 71 sortes de blocs
+faune_bourgogne : (384, 1536, 384), 75 sortes de blocs
+relief_oberland : (280, 1536, 320), 86 sortes de blocs
+relief_jura : (268, 1536, 320), 75 sortes de blocs
+andes_aconcagua : (200, 1536, 200), 62 sortes de blocs
+erebus : (360, 1536, 520), 64 sortes de blocs
+embouchure_indus : (200, 1536, 200), 63 sortes de blocs
+embouchure_niger : (200, 1536, 200), 93 sortes de blocs
+embouchure_gange : (200, 1536, 200), 58 sortes de blocs
+confluence_ping : (200, 1536, 200), 64 sortes de blocs
+embouchure_rhone : (200, 1536, 200), 79 sortes de blocs
+embouchure_gambie : (200, 1536, 200), 75 sortes de blocs
+grand_canyon_sortie : (256, 1536, 256), 68 sortes de blocs
+grand_canyon_centre : (256, 1536, 256), 74 sortes de blocs
+embouchure_loire : (200, 1536, 200), 79 sortes de blocs
+embouchure_mississippi : (200, 1536, 200), 72 sortes de blocs
+embouchure_amazone : (200, 1536, 200), 96 sortes de blocs
+embouchure_nil : (200, 1536, 200), 76 sortes de blocs
+embouchure_mekong : (200, 1536, 200), 85 sortes de blocs
+embouchure_volga : (200, 1536, 200), 65 sortes de blocs
+riviere_loire_tours : (200, 1536, 200), 63 sortes de blocs
+riviere_danube_vienne : (200, 1536, 200), 69 sortes de blocs
+riviere_rhin_cologne : (200, 1536, 200), 66 sortes de blocs
+embouchure_saint_laurent : (200, 1536, 200), 71 sortes de blocs
+embouchure_tage : (200, 1536, 200), 79 sortes de blocs
+embouchure_elbe : (200, 1536, 200), 71 sortes de blocs
+test_cascade_valais : (192, 1536, 192), 75 sortes de blocs
+test_marches_danube : (192, 1536, 192), 66 sortes de blocs
+test_lac_leman : (192, 1536, 192), 76 sortes de blocs
+test_indus_plage : (192, 1536, 192), 61 sortes de blocs
+test_desert_marches : (192, 1536, 192), 50 sortes de blocs
+test_gc_plaque : (192, 1536, 192), 69 sortes de blocs
+test_poches_islande : (190, 1536, 190), 69 sortes de blocs
+test_amazone_estuaire : (300, 1536, 300), 102 sortes de blocs
+test_powell : (450, 1536, 450), 84 sortes de blocs
+test_recif : (320, 1536, 320), 76 sortes de blocs
+test_kimberley : (128, 1536, 128), 57 sortes de blocs
+test_beauce : (128, 1536, 128), 56 sortes de blocs
+test_alpes : (128, 1536, 128), 56 sortes de blocs
+entités lues : 8038 [('minecraft:rabbit', 601), ('proto:untamedwilds:spadefish', 494), ('untamedwilds:spadefish', 437), ('untamedwilds:butterfly', 413), ('alexsmobs:crow', 365), ('minecraft:frog', 346), ('untamedwilds:newt', 337), ('naturalist:duck', 325)]
+verdon : 11 animaux
+etretat : 31 animaux
+moher : 8 animaux
+douvres : 38 animaux
+pilat : 43 animaux
+mont_saint_michel : 47 animaux
+mer_talus_gascogne : 4 animaux
+mer_fosse_mariannes : 6 animaux
+himalaya_everest : 2 animaux
+lac_leman : 45 animaux
+lac_annecy : 1 animaux
+riviere_doire : 17 animaux
+baie_de_somme : 45 animaux
+mer_wadden : 22 animaux
+bassin_arcachon : 11 animaux
+estuaire_seine : 42 animaux
+gavarnie : 26 animaux
+gullfoss : 68 animaux
+skogafoss : 30 animaux
+plitvice : 31 animaux
+geiranger : 55 animaux
+preikestolen : 40 animaux
+cervin : 40 animaux
+tre_cime : 54 animaux
+mer_de_glace : 54 animaux
+jokulsarlon : 10 animaux
+alpes_ecrins : 9 animaux
+chaussee : 34 animaux
+meteores : 44 animaux
+etna : 49 animaux
+vesuve : 34 animaux
+grotte_padirac : 113 animaux
+grotte_han : 160 animaux
+grotte_postojna : 96 animaux
+grotte_eisriesenwelt : 70 animaux
+fingal : 11 animaux
+capri : 12 animaux
+faune_amazonie : 114 animaux
+faune_serengeti : 489 animaux
+faune_nil_assouan : 57 animaux
+faune_amour : 81 animaux
+faune_cerrado : 207 animaux
+faune_bourgogne : 143 animaux
+relief_oberland : 76 animaux
+relief_jura : 110 animaux
+andes_aconcagua : 7 animaux
+erebus : 18 animaux
+embouchure_indus : 72 animaux
+embouchure_niger : 54 animaux
+embouchure_gange : 75 animaux
+confluence_ping : 71 animaux
+embouchure_rhone : 77 animaux
+embouchure_gambie : 79 animaux
+grand_canyon_sortie : 25 animaux
+grand_canyon_centre : 42 animaux
+embouchure_loire : 34 animaux
+embouchure_mississippi : 63 animaux
+embouchure_amazone : 57 animaux
+embouchure_nil : 30 animaux
+embouchure_mekong : 58 animaux
+embouchure_volga : 55 animaux
+riviere_loire_tours : 49 animaux
+riviere_danube_vienne : 54 animaux
+riviere_rhin_cologne : 60 animaux
+embouchure_saint_laurent : 66 animaux
+embouchure_tage : 40 animaux
+embouchure_elbe : 18 animaux
+test_cascade_valais : 36 animaux
+test_marches_danube : 55 animaux
+test_lac_leman : 46 animaux
+test_indus_plage : 43 animaux
+test_desert_marches : 10 animaux
+test_gc_plaque : 32 animaux
+test_poches_islande : 11 animaux
+test_amazone_estuaire : 77 animaux
+test_powell : 93 animaux
+test_recif : 262 animaux
+test_kimberley : 50 animaux
+test_beauce : 15 animaux
+test_alpes : 2 animaux
+terminé en 7171 s

@@ -1,0 +1,23 @@
+{
+ "total": 2,
+ "especes": [
+  [
+   "minecraft:rabbit",
+   2
+  ]
+ ],
+ "positions": [
+  [
+   "minecraft:rabbit",
+   38659.0,
+   362.0,
+   -12405.0
+  ],
+  [
+   "minecraft:rabbit",
+   38663.79999999702,
+   370.3176000081897,
+   -12404.155038922676
+  ]
+ ]
+}

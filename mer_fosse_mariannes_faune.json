@@ -1,0 +1,51 @@
+{
+ "total": 6,
+ "especes": [
+  [
+   "untamedwilds:sawfish",
+   4
+  ],
+  [
+   "untamedwilds:sunfish",
+   2
+  ]
+ ],
+ "positions": [
+  [
+   "untamedwilds:sawfish",
+   63437.91305833346,
+   -499.0,
+   -5056.180328701169
+  ],
+  [
+   "untamedwilds:sawfish",
+   63455.8286171442,
+   -497.6763950691182,
+   -5067.2652397678
+  ],
+  [
+   "untamedwilds:sawfish",
+   63473.0,
+   -493.0,
+   -5071.0
+  ],
+  [
+   "untamedwilds:sunfish",
+   63363.50752578153,
+   -490.37198808876724,
+   -5040.340167327074
+  ],
+  [
+   "untamedwilds:sawfish",
+   63468.17632481441,
+   -363.125,
+   -4992.474131546108
+  ],
+  [
+   "untamedwilds:sunfish",
+   63488.0,
+   -394.0,
+   -5087.0
+  ]
+ ]
+}

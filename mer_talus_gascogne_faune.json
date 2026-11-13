@@ -1,0 +1,43 @@
+{
+ "total": 4,
+ "especes": [
+  [
+   "untamedwilds:baleen_whale",
+   2
+  ],
+  [
+   "untamedwilds:football_fish",
+   1
+  ],
+  [
+   "untamedwilds:shark",
+   1
+  ]
+ ],
+ "positions": [
+  [
+   "untamedwilds:football_fish",
+   -2300.949820064188,
+   -45.171402887050036,
+   -20751.63890698972
+  ],
+  [
+   "untamedwilds:shark",
+   -2227.999148653401,
+   -9.111827930964045,
+   -20712.893075838816
+  ],
+  [
+   "untamedwilds:baleen_whale",
+   -2097.903403582608,
+   48.01313732456854,
+   -20711.177989387554
+  ],
+  [
+   "untamedwilds:baleen_whale",
+   -2072.8563637329476,
+   50.86553851561492,
+   -20717.167886314655
+  ]
+ ]
+}
