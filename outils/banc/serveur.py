@@ -65,13 +65,13 @@ t0 = time.time()
 attendre("Done (", 900)
 print(f"serveur prêt en {time.time() - t0:.0f} s", flush=True)
 
-# chunks à générer, zone par zone, par lots de ~2 500 chunks au plus (au-delà, le serveur manque de mémoire) : on force
+# chunks à générer, zone par zone, par lots de ~1 000 chunks au plus (13/11 : 2 500 chunks du monde agrandi dépassaient 8 Go) (au-delà, le serveur manque de mémoire) : on force
 # un lot, on attend qu'il soit complet et enregistré, on libère ses chunks, puis le lot suivant
 region = os.path.join(SERVEUR, "banc", "region")
 lots, lot, taille = [], [], 0
 for nom, (x0, x1, z0, z1) in zones.items():
     n = ((x1 - 1) // 16 - x0 // 16 + 1) * ((z1 - 1) // 16 - z0 // 16 + 1)
-    if lot and taille + n > 2500:
+    if lot and taille + n > 1000:
         lots.append(lot); lot, taille = [], 0
     lot.append(nom); taille += n
 if lot:
