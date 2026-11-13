@@ -3,7 +3,7 @@
 Usage (GitHub Actions) : python outils/banc/serveur.py <dossier_serveur> <zones.json> <sortie>
 Sortie : <sortie>/<lieu>.npz (noms, blocs[z, y, x], x0, y0, z0) + serveur.log
 """
-import json, os, queue, subprocess, sys, threading, time
+import json, os, queue, re, subprocess, sys, threading, time
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -103,6 +103,18 @@ for num, lot in enumerate(lots):
         if faits >= len(voulus) or time.time() > fin:
             break
     cmd("forceload remove all")
+    # 13/11/2026 : mémoire après chaque lot (le banc de Terre 1.0.1 a manqué de mémoire au lot 4) : après un GC
+    # complet, la mémoire occupée doit rester stable d'un lot à l'autre ; si elle grimpe, quelque chose retient
+    # des chunks ou des caches
+    time.sleep(30)
+    try:
+        subprocess.run(["jcmd", str(p.pid), "GC.run"], capture_output=True, timeout=120)
+        r = subprocess.run(["jcmd", str(p.pid), "GC.heap_info"], capture_output=True, text=True, timeout=120)
+        m = re.search(r"total (\d+)K, used (\d+)K", r.stdout)
+        print(f"  mémoire après le lot {num + 1} : {int(m.group(2)) // 1024 if m else '?'} Mo occupés"
+              f" sur {int(m.group(1)) // 1024 if m else '?'} Mo", flush=True)
+    except Exception as e:  # noqa: BLE001
+        print("  mémoire : jcmd indisponible", e, flush=True)
 print(f"{total} chunks demandés en {len(lots)} lots", flush=True)
 
 cmd("stop")
