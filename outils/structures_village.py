@@ -32,7 +32,8 @@ SITES = {
     "temples_jungle": [("Tikal", 17.222, -89.623), ("Chichen Itza", 20.684, -88.568), ("Palenque", 17.484, -92.046),
                        ("Calakmul", 18.105, -89.810), ("Copan", 14.840, -89.142), ("Angkor", 13.412, 103.867)],
     "igloos": [("Qaanaaq", 77.70, -69.23), ("Tasiilaq", 65.85, -37.64), ("Kangerlussuaq", 67.01, -50.69),
-               ("Iqaluit", 64.00, -68.52), ("Cambridge Bay", 69.36, -105.06),
+               ("Iqaluit", 64.00, -68.52), ("Cambridge Bay", 69.36, -105.06), ("Baker Lake", 64.32, -96.03),
+               ("Rankin Inlet", 62.81, -92.09),
                ("Kotzebue", 67.10, -162.30), ("Anaktuvuk Pass", 68.14, -151.74)],
     "manoirs": [("Foret de Hoia-Baciu (Transylvanie)", 46.78, 23.48), ("Bran (Transylvanie)", 45.40, 25.30),
                 ("Foret-Noire", 48.30, 8.15)],
@@ -74,10 +75,40 @@ def ecrire(chemin, obj):
         f.write("\n")
 
 
+# sites à terre : poussés au plus près sur un sol sec (même règle que les villages : hors mer, fleuve et lac),
+# 13/11 : les igloos de Baker Lake et Rankin Inlet tombaient sur un lac
+A_TERRE = {"pyramides", "temples_jungle", "igloos", "manoirs", "ruines_piste"}
+
+
+def au_sec(x, z):
+    """Centre de chunk sec le plus proche (la structure naît au centre de son chunk : c'est lui qui doit être sec,
+    ainsi que ses abords à 6 blocs)."""
+    import numpy as np
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from villages import valides
+    c0x, c0z = (x // 16) * 16 + 8, (z // 16) * 16 + 8
+    g = np.arange(-160, 161, 16, dtype=float)
+    X, Z = np.meshgrid(c0x + g, c0z + g)
+    ok = np.ones(X.shape, bool)
+    for dx, dz in ((0, 0), (6, 6), (-6, 6), (6, -6), (-6, -6)):
+        ok &= valides(X + dx, Z + dz)
+    if not ok.any():
+        print(f"! aucun sol sec à moins de 160 blocs de ({x}, {z})")
+        return x, z
+    d = np.where(ok, np.hypot(X - x, Z - z), np.inf)
+    i = np.unravel_index(np.argmin(d), d.shape)
+    return int(X[i]), int(Z[i])
+
+
 def liste_csv(nom, sites):
     cases, lignes = set(), []
     for n, la, lo in sites:
         x, z = round(lo * BPD), round(-la * BPD)
+        if nom in A_TERRE:
+            x2, z2 = au_sec(x, z)
+            if math.hypot(x2 - x, z2 - z) > 12:
+                print(f"  {nom} : {n} poussé de {math.hypot(x2 - x, z2 - z):.0f} blocs sur un sol sec")
+            x, z = x2, z2
         c = (math.floor(x / CASE), math.floor(z / CASE))
         if c in cases:
             print(f"! {nom} : {n} tombe dans une case déjà prise, ignoré")
