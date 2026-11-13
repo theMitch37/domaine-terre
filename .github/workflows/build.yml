@@ -41,7 +41,8 @@ jobs:
           rm -f village/libs/*-sources.jar village/libs/*-slim.jar
           cd village
           chmod +x gradlew
-          ./gradlew build --no-daemon
+          set -o pipefail
+          ./gradlew build --no-daemon 2>&1 | tee /tmp/village.log || { grep -B1 -A3 "error:" /tmp/village.log | head -40 | while IFS= read -r l; do echo "::error::$l"; done; exit 1; }
 
       - uses: actions/upload-artifact@v4
         continue-on-error: true            # stockage des artifacts plein : les jars vont de toute façon sur la branche jars
