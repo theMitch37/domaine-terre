@@ -1,0 +1,24 @@
+OK     Domaine Village chargé (monde Terre)
+OK     aucun plantage
+OK     village de Paris
+OK     village de Lyon
+OK     village de Le Caire
+OK     village de Tokyo
+OK     village de New York
+OK     village de Sydney
+OK     village de Moscou
+ÉCHEC  village de Lima
+OK     biome compatible pour 60 villages sur 60 tirés au hasard
+OK     villages générés : 30 sur 30 tirés au hasard
+OK     pyramides : 2 sur 2 sites
+OK     temples_jungle : 6 sur 6 sites
+OK     igloos : 9 sur 9 sites
+OK     manoirs : 3 sur 3 sites
+OK     temples_mer : 5 sur 5 sites
+OK     ruines_mer : 5 sur 5 sites
+OK     epaves : 6 sur 6 sites
+OK     ruines_piste : 5 sur 5 sites
+OK     forteresses : 6 sur 6 sites
+OK     épaves au hasard le long des côtes : 3 sur 3 recherches
+OK     cité antique trouvée près de Paris
+OK     puits de mine rallumés
