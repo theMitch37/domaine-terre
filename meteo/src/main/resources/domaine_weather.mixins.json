@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "fr.domaineaubin.meteo.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "domaine_weather.refmap.json",
+  "mixins": ["SeasonHooksMixin", "FertiliteMixin", "FonteMixin", "RandomUpdateAcces", "TempeteParticulesMixin",
+             "NuageMixin", "HeureServeurMixin"],
+  "client": ["CalendrierMixin", "HeureClientMixin", "PaquetHeureMixin"],
+  "injectors": {"defaultRequire": 1}
+}
