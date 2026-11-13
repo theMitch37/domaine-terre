@@ -34,6 +34,15 @@ jobs:
           chmod +x gradlew
           ./gradlew build --no-daemon
 
+      - name: Addon Domaine Village
+        run: |
+          mkdir -p village/libs
+          cp build/libs/domaine_terre-*.jar village/libs/
+          rm -f village/libs/*-sources.jar village/libs/*-slim.jar
+          cd village
+          chmod +x gradlew
+          ./gradlew build --no-daemon
+
       - uses: actions/upload-artifact@v4
         continue-on-error: true            # stockage des artifacts plein : les jars vont de toute façon sur la branche jars
         with:
@@ -41,13 +50,14 @@ jobs:
           path: |
             build/libs/domaine_terre-*.jar
             lieux/build/libs/domaine_terre_lieux-*.jar
+            village/build/libs/domaine_terre_village-*.jar
 
       # Range aussi les jars sur la branche « jars » (un seul commit, remplacé à chaque compilation),
       # pour pouvoir les récupérer avec git sans passer par le stockage des artifacts.
       - name: Publier les jars sur la branche jars
         run: |
           mkdir -p /tmp/jars
-          cp build/libs/domaine_terre-*.jar lieux/build/libs/domaine_terre_lieux-*.jar /tmp/jars/
+          cp build/libs/domaine_terre-*.jar lieux/build/libs/domaine_terre_lieux-*.jar village/build/libs/domaine_terre_village-*.jar /tmp/jars/
           rm -f /tmp/jars/*-sources.jar /tmp/jars/*-slim.jar
           printf 'branche=%s\ncommit=%s\ndate=%s\n' "$GITHUB_REF_NAME" "$GITHUB_SHA" "$(date -u +%FT%TZ)" > /tmp/jars/SOURCE.txt
           cd /tmp/jars

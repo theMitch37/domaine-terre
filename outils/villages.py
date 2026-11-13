@@ -90,7 +90,7 @@ def main():
     gardes.sort(key=lambda r: (math.floor(r[1] / CASE), math.floor(r[0] / CASE)))
     os.makedirs(os.path.dirname(os.path.abspath(sortie)), exist_ok=True)
     with open(sortie, "w", newline="", encoding="utf-8") as f:
-        w = csv.writer(f, delimiter=";")
+        w = csv.writer(f, delimiter=";", lineterminator="\n")
         w.writerow(["x", "z", "population", "nom", "pays"])
         for x, z, v in gardes:
             w.writerow([x, z, v["pop"], v["nom"], v["pays"]])

@@ -15,6 +15,7 @@ import java.util.Set;
  * Terre 0.3.2 : aucune structure vanilla de la surface ni des profondeurs (villages, temples, épaves, avant-postes,
  * cités antiques…) : elles seront réimplantées à notre façon (registre : notes/retire-vanilla.md).
  * Seules restent les forteresses (accès à l'End). Les structures des autres mods ne sont pas touchées.
+ * 13/11/2026 : un addon (Domaine Village) peut en rallumer avec {@link fr.domaineaubin.terre.api.StructuresTerre}.
  */
 @Mixin(Structure.class)
 public abstract class StructuresMixin {
@@ -25,7 +26,8 @@ public abstract class StructuresMixin {
     private void domaineTerre$sansStructuresVanilla(Structure.GenerationContext contexte,
                                                     CallbackInfoReturnable<Optional<Structure.GenerationStub>> retour) {
         ResourceLocation cle = contexte.registryAccess().registryOrThrow(Registries.STRUCTURE).getKey((Structure) (Object) this);
-        if (cle != null && "minecraft".equals(cle.getNamespace()) && !GARDEES.contains(cle.getPath())) {
+        if (cle != null && "minecraft".equals(cle.getNamespace()) && !GARDEES.contains(cle.getPath())
+                && !fr.domaineaubin.terre.api.StructuresTerre.rallumee(cle.getPath())) {
             retour.setReturnValue(Optional.empty());
         }
     }
