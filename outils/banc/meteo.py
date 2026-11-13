@@ -135,6 +135,7 @@ ctrl("pas de tempête de sable à Paris", g("mid_spring", "Paris", r"sable : (\S
 ctrl("tempêtes de neige à Iakoutsk", g("mid_winter", "Iakoutsk", r"neige : (\S+)") == "oui")
 # 0.2 : vents dominants, heure solaire locale
 ctrl("vent d'ouest (sud-ouest) à Paris", g("mid_spring", "Paris", r"Vent dominant : de (\S+)") == "sud-ouest")
+ctrl("vent d'ouest (sud-ouest) à Oslo", g("mid_spring", "Oslo", r"Vent dominant : de (\S+)") == "sud-ouest")
 ctrl("alizé de nord-est au Sahara", g("mid_spring", "Sahara (Tamanrasset)", r"Vent dominant : de (\S+)") == "nord-est")
 ctrl("alizé de sud-est à Manaus", g("mid_spring", "Manaus", r"Vent dominant : de (\S+)") == "sud-est")
 ctrl("vent de nord-ouest à Ushuaïa", g("mid_spring", "Ushuaia", r"Vent dominant : de (\S+)") == "nord-ouest")
