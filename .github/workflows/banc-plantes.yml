@@ -1,0 +1,89 @@
+# Banc des plantes (13/11/2026) : Terre + mods de cultures du pack + datapack domaine_terroirs ; compte les plantes
+# sauvages dans un carré de 320 blocs par terroir. Résultats sur la branche banc-<branche>.
+name: Banc des plantes
+
+on:
+  push:
+    branches: ['plantes-*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: banc-plantes-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  banc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v3
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Outils Python
+        run: pip install numpy
+
+      - name: Mod Terre
+        run: |
+          chmod +x gradlew
+          ./gradlew build --no-daemon
+
+      - uses: actions/cache@v4
+        with:
+          path: /tmp/serveur/libraries
+          key: forge-serveur-1.20.1-47.4.10
+
+      - name: Serveur Forge
+        run: |
+          mkdir -p /tmp/serveur && cd /tmp/serveur
+          if [ ! -f libraries/net/minecraftforge/forge/1.20.1-47.4.10/unix_args.txt ]; then
+            curl -fL --retry 5 -o installer.jar \
+              https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.10/forge-1.20.1-47.4.10-installer.jar
+            java -jar installer.jar --installServer > install.log 2>&1 || (tail -50 install.log; exit 1)
+          fi
+          rm -rf mods plantes && mkdir mods
+          cp $GITHUB_WORKSPACE/build/libs/domaine_terre-*.jar mods/
+          rm -f mods/*-sources.jar mods/*-slim.jar
+          python $GITHUB_WORKSPACE/outils/banc/plantes_mods.py mods
+          ls mods
+          # premier démarrage (configs des mods), puis le datapack domaine_terroirs comme sur l'instance
+          rm -rf config && echo "eula=true" > eula.txt
+          ( timeout 900 bash -c 'until grep -q "Done (" logs/latest.log 2>/dev/null; do sleep 5; done'; echo stop ) \
+            | timeout 1000 java -Xmx6G @libraries/net/minecraftforge/forge/1.20.1-47.4.10/unix_args.txt nogui > init.log 2>&1 || (tail -40 init.log)
+          rm -rf world plantes logs/latest.log
+          mkdir -p config/openloader/data
+          (cd $GITHUB_WORKSPACE && python outils/generer_placement.py /tmp/serveur) || echo "::warning::datapack domaine_terroirs non généré"
+          unzip -l config/openloader/data/domaine_terroirs.zip | tail -5 || true
+          # relief fin des zones de test
+          mkdir -p domaine_terre/relief
+
+      - name: Plantes
+        run: |
+          mkdir -p /tmp/banc
+          python outils/banc/plantes.py /tmp/serveur /tmp/banc 2>&1 | tee /tmp/banc/script.log || true
+
+      - name: Résultats sur la branche banc-<branche>
+        if: always()
+        run: |
+          mkdir -p /tmp/banc
+          cp /tmp/serveur/logs/latest.log /tmp/banc/latest.log 2>/dev/null || true
+          cp /tmp/serveur/init.log /tmp/banc/init.log 2>/dev/null || true
+          cp -r /tmp/serveur/crash-reports /tmp/banc/ 2>/dev/null || true
+          ls /tmp/serveur/mods > /tmp/banc/mods.txt 2>/dev/null || true
+          unzip -l /tmp/serveur/config/openloader/data/domaine_terroirs.zip > /tmp/banc/datapack.txt 2>/dev/null || true
+          printf 'branche=%s\ncommit=%s\ndate=%s\n' "$GITHUB_REF_NAME" "$GITHUB_SHA" "$(date -u +%FT%TZ)" > /tmp/banc/SOURCE.txt
+          cd /tmp/banc
+          git init -q -b banc
+          git config user.name "github-actions[bot]"
+          git config user.email "41898+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Banc des plantes de $GITHUB_REF_NAME @ ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" "banc:banc-$GITHUB_REF_NAME"
