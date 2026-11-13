@@ -32,7 +32,7 @@ SITES = {
     "temples_jungle": [("Tikal", 17.222, -89.623), ("Chichen Itza", 20.684, -88.568), ("Palenque", 17.484, -92.046),
                        ("Calakmul", 18.105, -89.810), ("Copan", 14.840, -89.142), ("Angkor", 13.412, 103.867)],
     "igloos": [("Qaanaaq", 77.70, -69.23), ("Tasiilaq", 65.85, -37.64), ("Kangerlussuaq", 67.01, -50.69),
-               ("Iqaluit", 64.00, -68.52), ("Cambridge Bay", 69.36, -105.06), ("Baker Lake", 64.32, -96.03),
+               ("Iqaluit", 64.00, -68.52), ("Cambridge Bay", 69.36, -105.06),
                ("Kotzebue", 67.10, -162.30), ("Anaktuvuk Pass", 68.14, -151.74)],
     "manoirs": [("Foret de Hoia-Baciu (Transylvanie)", 46.78, 23.48), ("Bran (Transylvanie)", 45.40, 25.30),
                 ("Foret-Noire", 48.30, 8.15)],
