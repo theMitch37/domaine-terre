@@ -1,0 +1,3 @@
+branche=meteo-0.2
+commit=d33cff6b35777cc681fc9635801d87e0c87ba2d9
+date=2026-11-13T12:55:26Z
