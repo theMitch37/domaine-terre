@@ -15,7 +15,7 @@ import monde
 SERVEUR, SORTIE = sys.argv[1], sys.argv[2]
 FORGE = "1.20.1-47.4.10"
 BPD = 445.28
-COTE = 320
+COTE = 256
 os.makedirs(SORTIE, exist_ok=True)
 # terroir : (lat, lon) au cœur du terroir, loin des côtes
 ZONES = {
@@ -71,10 +71,22 @@ boites = {}
 for nom, (la, lo) in ZONES.items():
     x, z = round(lo * BPD), round(-la * BPD)
     boites[nom] = (x - COTE // 2, x + COTE // 2, z - COTE // 2, z + COTE // 2)
+VANILLA = "minecraft:"
+res = {}
+
+
+def compter(nom, x0, x1, z0, z1):
+    noms, blocs, _ = monde.extraire(region, x0, x1, z0, z1, 40, 330)
+    n = np.bincount(blocs.ravel(), minlength=len(noms))
+    res[nom] = {noms[i]: int(n[i]) for i in range(len(noms)) if n[i] and not noms[i].startswith(VANILLA)}
+    json.dump(res, open(os.path.join(SORTIE, "plantes.json"), "w"), indent=1, ensure_ascii=False)
+
+
+# 13/11 : chaque terroir est compté dès qu'il est généré (le premier passage n'avait rien écrit avant la fin)
 for nom, (x0, x1, z0, z1) in boites.items():
     cmd(f"forceload add {x0} {z0} {x1 - 1} {z1 - 1}")
     voulus = ((x1 - 1) // 16 - x0 // 16 + 1) * ((z1 - 1) // 16 - z0 // 16 + 1)
-    fin = time.time() + 1200
+    fin = time.time() + 600
     while True:
         time.sleep(15)
         cmd("save-all flush")
@@ -83,18 +95,13 @@ for nom, (x0, x1, z0, z1) in boites.items():
         faits = sum(1 for v in st.values() if v.endswith("full"))
         if faits >= voulus or time.time() > fin:
             break
-    print(f"{nom} : {faits}/{voulus} chunks ({time.time() - t0:.0f} s)", flush=True)
+    compter(nom, x0, x1, z0, z1)
+    print(f"{nom} : {faits}/{voulus} chunks ({time.time() - t0:.0f} s) ; plantes des mods : "
+          f"{sum(1 for b in res[nom] if not b.startswith('domaine_terre'))} sortes", flush=True)
     cmd("forceload remove all")
 cmd("stop")
 p.wait(timeout=600)
 
-VANILLA = "minecraft:"
-res = {}
-for nom, (x0, x1, z0, z1) in boites.items():
-    noms, blocs, _ = monde.extraire(region, x0, x1, z0, z1, 40, 330)
-    n = np.bincount(blocs.ravel(), minlength=len(noms))
-    res[nom] = {noms[i]: int(n[i]) for i in range(len(noms)) if n[i] and not noms[i].startswith(VANILLA)}
-json.dump(res, open(os.path.join(SORTIE, "plantes.json"), "w"), indent=1, ensure_ascii=False)
 # plantes des mods trouvées : où ?
 toutes = collections.defaultdict(dict)
 for ter, d in res.items():

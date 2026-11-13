@@ -17,7 +17,7 @@ concurrency:
 jobs:
   banc:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 300
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v5
@@ -68,7 +68,7 @@ jobs:
       - name: Plantes
         run: |
           mkdir -p /tmp/banc
-          python outils/banc/plantes.py /tmp/serveur /tmp/banc 2>&1 | tee /tmp/banc/script.log || true
+          timeout 250m python outils/banc/plantes.py /tmp/serveur /tmp/banc 2>&1 | tee /tmp/banc/script.log || true
 
       - name: Résultats sur la branche banc-<branche>
         if: always()
