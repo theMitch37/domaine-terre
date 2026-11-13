@@ -24,7 +24,7 @@ import java.util.Optional;
  */
 public class PlacementFixe extends RandomSpreadStructurePlacement {
     /** Champs du placement vanilla (sans spread_type : toujours linéaire) + « liste » ; cases de {@link #CASE} chunks. */
-    public static final Codec<PlacementFixe> CODEC = RecordCodecBuilder.create(i -> placementCommonFields(i).and(i.group(
+    public static final Codec<PlacementFixe> CODEC = RecordCodecBuilder.create(i -> placementCodec(i).and(i.group(
             Codec.intRange(0, 4096).fieldOf("spacing").forGetter(PlacementFixe::spacingVanilla),
             Codec.intRange(0, 4096).fieldOf("separation").forGetter(RandomSpreadStructurePlacement::separation),
             Codec.STRING.fieldOf("liste").forGetter(p -> p.liste)
