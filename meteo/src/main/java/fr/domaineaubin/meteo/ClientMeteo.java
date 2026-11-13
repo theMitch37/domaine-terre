@@ -17,6 +17,7 @@ public final class ClientMeteo {
     }
 
     static void bus() {
+        MinecraftForge.EVENT_BUS.addListener(fr.domaineaubin.meteo.vagues.RenduVagues::dessiner);
         MinecraftForge.EVENT_BUS.addListener((ClientPlayerNetworkEvent.LoggingOut e) -> {
             Saisons.terreClient = false;
             JourNuit.reinitialiserClient();
