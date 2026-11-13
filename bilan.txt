@@ -1,0 +1,22 @@
+OK     aucune erreur de mixin
+OK     Domaine Weather chargé
+OK     aucun plantage
+OK     été à Paris quand c'est l'été au nord
+OK     hiver à Sydney quand c'est l'été au nord
+OK     jours longs à Oslo l'été
+OK     jours courts à Oslo l'hiver
+OK     ~12 h à Manaus toute l'année
+OK     Séville sèche l'été
+OK     Sahara presque sec
+OK     tornades possibles à Oklahoma City
+OK     pas de tornades à Paris
+OK     tempêtes de sable au Sahara
+OK     pas de tempête de sable à Paris
+OK     tempêtes de neige à Iakoutsk
+OK     vent d'ouest (sud-ouest) à Paris
+OK     vent d'ouest (sud-ouest) à Oslo
+OK     alizé de nord-est au Sahara
+OK     alizé de sud-est à Manaus
+OK     vent de nord-ouest à Ushuaïa
+OK     Sydney à UTC +10 h
+OK     Oklahoma City à UTC -6,5 h

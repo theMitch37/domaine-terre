@@ -1,0 +1,835 @@
+[13Nov2026 13:13:51.633] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserver, --fml.forgeVersion, 47.4.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, nogui]
+[13Nov2026 13:13:51.636] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.21 by Eclipse Adoptium; OS Linux arch amd64 version 7.0.0-1019-azure
+[13Nov2026 13:13:51.715] [main/WARN] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Configuration file /tmp/serveur/config/fml.toml is not correct. Correcting
+[13Nov2026 13:13:51.716] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowSkipGLVersions] was corrected from null to []
+[13Nov2026 13:13:51.717] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowLogHelpMessage] was corrected from null to true
+[13Nov2026 13:13:51.717] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowSquir] was corrected from null to false
+[13Nov2026 13:13:51.718] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowShowCPU] was corrected from null to false
+[13Nov2026 13:13:51.748] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserver
+[13Nov2026 13:13:51.791] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/tmp/serveur/libraries/org/spongepowered/mixin/0.8.5/mixin-0.8.5.jar%2365!/ Service=ModLauncher Env=SERVER
+[13Nov2026 13:13:52.036] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/fmlcore/1.20.1-47.4.10/fmlcore-1.20.1-47.4.10.jar is missing mods.toml file
+[13Nov2026 13:13:52.038] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/javafmllanguage/1.20.1-47.4.10/javafmllanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[13Nov2026 13:13:52.040] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/lowcodelanguage/1.20.1-47.4.10/lowcodelanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[13Nov2026 13:13:52.041] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/mclanguage/1.20.1-47.4.10/mclanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[13Nov2026 13:13:52.137] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[13Nov2026 13:13:53.762] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[13Nov2026 13:13:53.787] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserver' with arguments [nogui]
+[13Nov2026 13:13:53.833] [main/WARN] [mixin/]: Reference map 'coroutil.refmap.json' for coroutil.mixins.json could not be read. If this is a development environment you can ignore this message
+[13Nov2026 13:14:00.156] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.10, for MC 1.20.1 with MCP 20230612.114412
+[13Nov2026 13:14:00.156] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.4.10 Initialized
+[13Nov2026 13:14:00.205] [modloading-worker-0/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Domaine d'Aubin - Terre : mod chargé.
+[13Nov2026 13:14:00.271] [modloading-worker-0/INFO] [coroutil/]: forge loader environment detected
+[13Nov2026 13:14:01.046] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/Weather2/Misc.toml is not correct. Correcting
+[13Nov2026 13:14:01.047] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[13Nov2026 13:14:01.047] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Misc_simBoxRadiusCutoff was corrected from null to its default, 1124. 
+[13Nov2026 13:14:01.047] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Misc_simBoxRadiusSpawn was corrected from null to its default, 1024. 
+[13Nov2026 13:14:01.047] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.overcastMode was corrected from null to its default, false. 
+[13Nov2026 13:14:01.048] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.lockServerWeatherMode was corrected from null to its default, 0. 
+[13Nov2026 13:14:01.048] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Cloud_ParticleSpawnDelay was corrected from null to its default, 2. 
+[13Nov2026 13:14:01.048] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Cloud_Formation_MinDistBetweenSpawned was corrected from null to its default, 300. 
+[13Nov2026 13:14:01.048] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Cloud_Layer1_Enable was corrected from null to its default, false. 
+[13Nov2026 13:14:01.048] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Cloud_Layer0_Height was corrected from null to its default, 264. 
+[13Nov2026 13:14:01.048] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Cloud_Layer1_Height was corrected from null to its default, 414. 
+[13Nov2026 13:14:01.048] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Cloud_Layer2_Height was corrected from null to its default, 564. 
+[13Nov2026 13:14:01.049] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Cloud_Coverage_Random_Change_Amount was corrected from null to its default, 0.05. 
+[13Nov2026 13:14:01.049] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Cloud_Coverage_Min_Percent was corrected from null to its default, 0.0. 
+[13Nov2026 13:14:01.049] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Cloud_Coverage_Max_Percent was corrected from null to its default, 100.0. 
+[13Nov2026 13:14:01.049] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.sirenActivateDistance was corrected from null to its default, 256.0. 
+[13Nov2026 13:14:01.049] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Dimension_List_Weather was corrected from null to its default, minecraft:overworld, tropicraft:tropicraft. 
+[13Nov2026 13:14:01.049] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Dimension_List_Clouds was corrected from null to its default, minecraft:overworld, tropicraft:tropicraft. 
+[13Nov2026 13:14:01.049] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Dimension_List_Storms was corrected from null to its default, minecraft:overworld, tropicraft:tropicraft. 
+[13Nov2026 13:14:01.050] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Dimension_List_WindEffects was corrected from null to its default, minecraft:overworld, tropicraft:tropicraft. 
+[13Nov2026 13:14:01.051] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.blockBreakingInvokesCancellableEvent was corrected from null to its default, false. 
+[13Nov2026 13:14:01.051] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Aesthetic_Only_Mode was corrected from null to its default, false. 
+[13Nov2026 13:14:01.051] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Winter_Wonderland was corrected from null to its default, false. 
+[13Nov2026 13:14:01.055] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/Weather2/Wind.toml is not correct. Correcting
+[13Nov2026 13:14:01.056] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[13Nov2026 13:14:01.056] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Misc_windOn was corrected from null to its default, true. 
+[13Nov2026 13:14:01.056] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Wind_LowWindEvents was corrected from null to its default, true. 
+[13Nov2026 13:14:01.056] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Wind_HighWindEvents was corrected from null to its default, true. 
+[13Nov2026 13:14:01.057] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Wind_UsePerlinNoise was corrected from null to its default, false. 
+[13Nov2026 13:14:01.057] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.lowWindTimerEnableAmountBase was corrected from null to its default, 2400. 
+[13Nov2026 13:14:01.057] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.lowWindTimerEnableAmountRnd was corrected from null to its default, 12000. 
+[13Nov2026 13:14:01.057] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.lowWindOddsTo1 was corrected from null to its default, 4000. 
+[13Nov2026 13:14:01.057] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.highWindTimerEnableAmountBase was corrected from null to its default, 2400. 
+[13Nov2026 13:14:01.058] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.highWindTimerEnableAmountRnd was corrected from null to its default, 12000. 
+[13Nov2026 13:14:01.058] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.highWindOddsTo1 was corrected from null to its default, 8000. 
+[13Nov2026 13:14:01.058] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.globalWindAngleChangeAmountRate was corrected from null to its default, 1.0. 
+[13Nov2026 13:14:01.058] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.windSpeedMin was corrected from null to its default, 1.0E-5. 
+[13Nov2026 13:14:01.058] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.windSpeedMax was corrected from null to its default, 1.0. 
+[13Nov2026 13:14:01.059] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.windSpeedMinGlobalOvercastRaining was corrected from null to its default, 0.01. 
+[13Nov2026 13:14:01.059] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Wind_Turbine_FE_Generated_Per_Tick was corrected from null to its default, 10. 
+[13Nov2026 13:14:01.061] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/Weather2/Sand.toml is not correct. Correcting
+[13Nov2026 13:14:01.062] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[13Nov2026 13:14:01.062] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_NoSandstorms was corrected from null to its default, false. 
+[13Nov2026 13:14:01.062] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_UseGlobalServerRate was corrected from null to its default, false. 
+[13Nov2026 13:14:01.063] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_OddsTo1 was corrected from null to its default, 30. 
+[13Nov2026 13:14:01.063] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_TimeBetweenInTicks was corrected from null to its default, 72000. 
+[13Nov2026 13:14:01.063] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_Sand_Buildup_TickRate was corrected from null to its default, 40. 
+[13Nov2026 13:14:01.063] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_Sand_Buildup_LoopAmountBase was corrected from null to its default, 800. 
+[13Nov2026 13:14:01.064] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_Sand_Block_Max_Height was corrected from null to its default, 3. 
+[13Nov2026 13:14:01.064] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_Sand_Buildup_AllowOutsideDesert was corrected from null to its default, true. 
+[13Nov2026 13:14:01.064] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_Particle_Dust_effect_rate was corrected from null to its default, 0.6. 
+[13Nov2026 13:14:01.065] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_Particle_Debris_effect_rate was corrected from null to its default, 0.6. 
+[13Nov2026 13:14:01.065] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Sandstorm_Siren_PleaseNoDarude was corrected from null to its default, false. 
+[13Nov2026 13:14:01.070] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/CoroUtil/General.toml is not correct. Correcting
+[13Nov2026 13:14:01.070] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[13Nov2026 13:14:01.070] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.useLoggingLog was corrected from null to its default, true. 
+[13Nov2026 13:14:01.070] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.useLoggingDebug was corrected from null to its default, false. 
+[13Nov2026 13:14:01.071] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.useLoggingError was corrected from null to its default, true. 
+[13Nov2026 13:14:01.073] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/Weather2/Snow.toml is not correct. Correcting
+[13Nov2026 13:14:01.073] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[13Nov2026 13:14:01.073] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_NoSnowstorms was corrected from null to its default, false. 
+[13Nov2026 13:14:01.073] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Snowstorm_UseGlobalServerRate was corrected from null to its default, false. 
+[13Nov2026 13:14:01.074] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Snowstorm_OddsTo1 was corrected from null to its default, 30. 
+[13Nov2026 13:14:01.074] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Snowstorm_TimeBetweenInTicks was corrected from null to its default, 72000. 
+[13Nov2026 13:14:01.074] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Snowstorm_Snow_Buildup_TickRate was corrected from null to its default, 40. 
+[13Nov2026 13:14:01.074] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Snowstorm_Snow_Buildup_LoopAmountBase was corrected from null to its default, 800. 
+[13Nov2026 13:14:01.075] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Snowstorm_Snow_Block_Max_Height was corrected from null to its default, 5. 
+[13Nov2026 13:14:01.075] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Snowstorm_Snow_Buildup_AllowOutsideColdBiomes was corrected from null to its default, true. 
+[13Nov2026 13:14:01.077] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/Weather2/Storm.toml is not correct. Correcting
+[13Nov2026 13:14:01.077] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[13Nov2026 13:14:01.078] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_OddsTo1OfHighWindWaterSpout was corrected from null to its default, 150. 
+[13Nov2026 13:14:01.078] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_FlyingBlocksHurt was corrected from null to its default, true. 
+[13Nov2026 13:14:01.078] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_MaxPerPlayerPerLayer was corrected from null to its default, 20. 
+[13Nov2026 13:14:01.078] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Deadly_CollideDistance was corrected from null to its default, 128. 
+[13Nov2026 13:14:01.078] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_LightningStrikeBaseValueOddsTo1 was corrected from null to its default, 200. 
+[13Nov2026 13:14:01.079] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_NoRainVisual was corrected from null to its default, false. 
+[13Nov2026 13:14:01.079] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_MaxRadius was corrected from null to its default, 300. 
+[13Nov2026 13:14:01.079] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_AllTypes_TickRateDelay was corrected from null to its default, 60. 
+[13Nov2026 13:14:01.079] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Rain_WaterBuildUpRate was corrected from null to its default, 10. 
+[13Nov2026 13:14:01.079] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Rain_WaterSpendRate was corrected from null to its default, 3. 
+[13Nov2026 13:14:01.079] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Rain_WaterBuildUpOddsTo1FromSource was corrected from null to its default, 15. 
+[13Nov2026 13:14:01.079] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Rain_WaterBuildUpOddsTo1FromNothing was corrected from null to its default, 100. 
+[13Nov2026 13:14:01.079] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Rain_WaterBuildUpOddsTo1FromOvercastRaining was corrected from null to its default, 30. 
+[13Nov2026 13:14:01.080] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_TemperatureAdjustRate was corrected from null to its default, 0.1. 
+[13Nov2026 13:14:01.080] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_HailPerTick was corrected from null to its default, 10. 
+[13Nov2026 13:14:01.081] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_OddsTo1OfOceanBasedStorm was corrected from null to its default, 300. 
+[13Nov2026 13:14:01.081] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_HighWind was corrected from null to its default, 90. 
+[13Nov2026 13:14:01.081] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_Hail was corrected from null to its default, 80. 
+[13Nov2026 13:14:01.081] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_F0_Tornado was corrected from null to its default, 70. 
+[13Nov2026 13:14:01.082] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_C0_Cyclone was corrected from null to its default, 70. 
+[13Nov2026 13:14:01.082] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_F1_Tornado was corrected from null to its default, 50. 
+[13Nov2026 13:14:01.082] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_C1_Cyclone was corrected from null to its default, 50. 
+[13Nov2026 13:14:01.082] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_F2_Tornado was corrected from null to its default, 40. 
+[13Nov2026 13:14:01.083] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_C2_Cyclone was corrected from null to its default, 40. 
+[13Nov2026 13:14:01.083] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_F3_Tornado was corrected from null to its default, 30. 
+[13Nov2026 13:14:01.083] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_C3_Cyclone was corrected from null to its default, 30. 
+[13Nov2026 13:14:01.083] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_F4_Tornado was corrected from null to its default, 20. 
+[13Nov2026 13:14:01.083] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_C4_Cyclone was corrected from null to its default, 20. 
+[13Nov2026 13:14:01.084] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_F5_Tornado was corrected from null to its default, 10. 
+[13Nov2026 13:14:01.084] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_PercentChanceOf_C5_Cyclone was corrected from null to its default, 10. 
+[13Nov2026 13:14:01.084] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_ParticleSpawnDelay was corrected from null to its default, 3. 
+[13Nov2026 13:14:01.084] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Player_Storm_Deadly_OddsTo1 was corrected from null to its default, 30. 
+[13Nov2026 13:14:01.084] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Player_Storm_Deadly_TimeBetweenInTicks was corrected from null to its default, 72000. 
+[13Nov2026 13:14:01.084] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Server_Storm_Deadly_UseGlobalRate was corrected from null to its default, true. 
+[13Nov2026 13:14:01.085] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Server_Storm_Deadly_OddsTo1 was corrected from null to its default, 30. 
+[13Nov2026 13:14:01.085] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Server_Storm_Deadly_TimeBetweenInTicks was corrected from null to its default, 72000. 
+[13Nov2026 13:14:01.085] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Player_Storm_Deadly_OddsTo1_Land_Based was corrected from null to its default, 1200. 
+[13Nov2026 13:14:01.086] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Player_Storm_Deadly_TimeBetweenInTicks_Land_Based was corrected from null to its default, 240000. 
+[13Nov2026 13:14:01.086] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Server_Storm_Deadly_OddsTo1_Land_Based was corrected from null to its default, 1200. 
+[13Nov2026 13:14:01.086] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Server_Storm_Deadly_TimeBetweenInTicks_Land_Based was corrected from null to its default, 240000. 
+[13Nov2026 13:14:01.086] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.preventServerThunderstorms was corrected from null to its default, true. 
+[13Nov2026 13:14:01.086] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Lightning_OddsTo1OfFire was corrected from null to its default, 20. 
+[13Nov2026 13:14:01.087] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Lightning_lifetimeOfFire was corrected from null to its default, 3. 
+[13Nov2026 13:14:01.087] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Lightning_DistanceToPlayerForEffects was corrected from null to its default, 256. 
+[13Nov2026 13:14:01.087] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Lightning_StartsFires was corrected from null to its default, false. 
+[13Nov2026 13:14:01.087] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Deflector_RadiusOfStormRemoval was corrected from null to its default, 150. 
+[13Nov2026 13:14:01.087] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Deflector_MinStageRemove was corrected from null to its default, 1. 
+[13Nov2026 13:14:01.088] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Deflector_RemoveRainstorms was corrected from null to its default, false. 
+[13Nov2026 13:14:01.088] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Deflector_RemoveSandstorms was corrected from null to its default, true. 
+[13Nov2026 13:14:01.088] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Rain_Overcast_OddsTo1 was corrected from null to its default, 50. 
+[13Nov2026 13:14:01.088] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Rain_OddsTo1 was corrected from null to its default, 150. 
+[13Nov2026 13:14:01.088] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Rain_TrackAndExtinguishEntitiesRate was corrected from null to its default, 200. 
+[13Nov2026 13:14:01.091] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/Weather2/Tornado.toml is not correct. Correcting
+[13Nov2026 13:14:01.092] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[13Nov2026 13:14:01.092] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_RefinedGrabRules was corrected from null to its default, true. 
+[13Nov2026 13:14:01.092] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_NoTornadosOrCyclones was corrected from null to its default, false. 
+[13Nov2026 13:14:01.092] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_grabPlayer was corrected from null to its default, true. 
+[13Nov2026 13:14:01.092] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_grabPlayersOnly was corrected from null to its default, false. 
+[13Nov2026 13:14:01.093] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_grabMobs was corrected from null to its default, true. 
+[13Nov2026 13:14:01.093] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_grabAnimals was corrected from null to its default, true. 
+[13Nov2026 13:14:01.093] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_grabVillagers was corrected from null to its default, true. 
+[13Nov2026 13:14:01.093] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_grabBlocks was corrected from null to its default, true. 
+[13Nov2026 13:14:01.093] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_grabItems was corrected from null to its default, false. 
+[13Nov2026 13:14:01.093] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_GrabCond_StrengthGrabbing was corrected from null to its default, true. 
+[13Nov2026 13:14:01.094] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_GrabCond_List was corrected from null to its default, false. 
+[13Nov2026 13:14:01.094] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_GrabListBlacklistMode was corrected from null to its default, false. 
+[13Nov2026 13:14:01.094] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_GrabList was corrected from null to its default, #fences, #minecraft:fence_gates, #wooden_doors, #wooden_stairs, #wooden_slabs, #flowers, #planks, #wool, #wooden_trapdoors, #wooden_pressure_plates, #cave_vines, #saplings, #banners, #leaves, #small_flowers, #beds, #tall_flowers, #flowers, #candles, #wall_signs, #signs, #fire, #campfires, #replaceable_plants, #wall_post_override. 
+[13Nov2026 13:14:01.094] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_maxFlyingEntityBlocks was corrected from null to its default, 200. 
+[13Nov2026 13:14:01.094] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_maxBlocksGrabbedPerTick was corrected from null to its default, 5. 
+[13Nov2026 13:14:01.094] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_aimAtPlayerOnSpawn was corrected from null to its default, true. 
+[13Nov2026 13:14:01.094] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_aimAtPlayerAngleVariance was corrected from null to its default, 5. 
+[13Nov2026 13:14:01.094] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_extraGrabAngle was corrected from null to its default, 20. 
+[13Nov2026 13:14:01.094] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Storm_Tornado_fallDamage was corrected from null to its default, true. 
+[13Nov2026 13:14:01.097] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/Weather2/Particle.toml is not correct. Correcting
+[13Nov2026 13:14:01.097] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[13Nov2026 13:14:01.098] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Precipitation_Particle_effect_rate was corrected from null to its default, 0.7. 
+[13Nov2026 13:14:01.098] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Particle_effect_rate was corrected from null to its default, 1.0. 
+[13Nov2026 13:14:01.098] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Particle_vanilla_precipitation was corrected from null to its default, false. 
+[13Nov2026 13:14:01.098] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Particle_engine_weather2 was corrected from null to its default, true. 
+[13Nov2026 13:14:01.098] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Particle_Tornado_extraParticleCubes was corrected from null to its default, 2. 
+[13Nov2026 13:14:01.100] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/Weather2/Debug.toml is not correct. Correcting
+[13Nov2026 13:14:01.101] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[13Nov2026 13:14:01.101] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Particle_Reset_Frequency was corrected from null to its default, 0. 
+[13Nov2026 13:14:01.101] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Particle_engine_render was corrected from null to its default, true. 
+[13Nov2026 13:14:01.101] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.Particle_engine_tick was corrected from null to its default, true. 
+[13Nov2026 13:14:01.103] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file /tmp/serveur/config/Weather2/Sound.toml is not correct. Correcting
+[13Nov2026 13:14:01.104] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general was corrected from null to its default, SimpleCommentedConfig:{}. 
+[13Nov2026 13:14:01.104] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.leavesVolume was corrected from null to its default, 0.0. 
+[13Nov2026 13:14:01.104] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.tornadoWindVolume was corrected from null to its default, 1.0. 
+[13Nov2026 13:14:01.104] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.tornadoDamageVolume was corrected from null to its default, 1.0. 
+[13Nov2026 13:14:01.104] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.windyStormVolume was corrected from null to its default, 1.0. 
+[13Nov2026 13:14:01.105] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key general.sirenVolume was corrected from null to its default, 1.0. 
+[13Nov2026 13:14:01.116] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[13Nov2026 13:14:01.134] [modloading-worker-0/INFO] [weather2.Weather/]: Got IMC []
+[13Nov2026 13:14:01.564] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.4.10 Target: 47.4.28
+[13Nov2026 13:14:02.389] [main/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[13Nov2026 13:14:02.423] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/tmp/serveur/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23113!/assets/.mcassetsroot' uses unexpected schema
+[13Nov2026 13:14:02.423] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/tmp/serveur/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23113!/data/.mcassetsroot' uses unexpected schema
+[13Nov2026 13:14:04.746] [main/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 7 recipes
+[13Nov2026 13:14:04.887] [main/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 1282 advancements
+[13Nov2026 13:14:05.438] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting minecraft server version 1.20.1
+[13Nov2026 13:14:05.438] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Loading properties
+[13Nov2026 13:14:05.438] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Default game type: SURVIVAL
+[13Nov2026 13:14:05.438] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[13Nov2026 13:14:05.603] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting Minecraft server on *:25565
+[13Nov2026 13:14:05.629] [Server thread/INFO] [net.minecraft.server.network.ServerConnectionListener/]: Using epoll channel type
+[13Nov2026 13:14:05.747] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[13Nov2026 13:14:05.748] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: The server will make no attempt to authenticate usernames. Beware.
+[13Nov2026 13:14:05.748] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[13Nov2026 13:14:05.748] [Server thread/WARN] [net.minecraft.server.dedicated.DedicatedServer/]: To change this, set "online-mode" to "true" in the server.properties file.
+[13Nov2026 13:14:05.780] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file ./meteo/serverconfig/forge-server.toml is not correct. Correcting
+[13Nov2026 13:14:05.781] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server was corrected from null to its default, SimpleCommentedConfig:{}. 
+[13Nov2026 13:14:05.781] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringBlockEntities was corrected from null to its default, false. 
+[13Nov2026 13:14:05.781] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringEntities was corrected from null to its default, false. 
+[13Nov2026 13:14:05.781] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.fullBoundingBoxLadders was corrected from null to its default, false. 
+[13Nov2026 13:14:05.781] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.zombieBaseSummonChance was corrected from null to its default, 0.1. 
+[13Nov2026 13:14:05.782] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.zombieBabyChance was corrected from null to its default, 0.05. 
+[13Nov2026 13:14:05.782] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.permissionHandler was corrected from null to its default, forge:default_handler. 
+[13Nov2026 13:14:05.782] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.advertiseDedicatedServerToLan was corrected from null to its default, true. 
+[13Nov2026 13:14:05.782] [Server thread/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key server.useItemWithDurationZero was corrected from null to its default, false. 
+[13Nov2026 13:14:05.880] [Server thread/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Monde Terre à l'échelle 1:250
+[13Nov2026 13:14:05.881] [Server thread/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : actif (détail 0.5, dossier /tmp/serveur/domaine_terre/relief)
+[13Nov2026 13:14:05.884] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Preparing level "meteo"
+[13Nov2026 13:14:06.533] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 0 -11 téléchargé (1503 Ko)
+[13Nov2026 13:14:10.819] [Worker-Main-2/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Cartes de la Terre chargées en 3397 ms
+[13Nov2026 13:14:10.849] [Worker-Main-2/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Côtes fines chargées : 14423 tuiles côtières en 3 ms
+[13Nov2026 13:14:10.869] [Worker-Main-2/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Lacs chargés : 6573 lacs sur 7199 tuiles en 3 ms
+[13Nov2026 13:14:54.181] [Worker-Main-3/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Fleuves chargés : 79884 segments en 43181 ms
+[13Nov2026 13:14:54.477] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 -3 téléchargé (565 Ko)
+[13Nov2026 13:14:54.576] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 -2 téléchargé (2336 Ko)
+[13Nov2026 13:14:54.590] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -1 -3 téléchargé (1084 Ko)
+[13Nov2026 13:14:54.730] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 -3 téléchargé (1031 Ko)
+[13Nov2026 13:14:54.910] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 1 -2 téléchargé (1628 Ko)
+[13Nov2026 13:14:55.019] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 0 -3 téléchargé (1137 Ko)
+[13Nov2026 13:14:55.414] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 -1 téléchargé (1800 Ko)
+[13Nov2026 13:14:55.553] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 2 téléchargé (2064 Ko)
+[13Nov2026 13:14:55.574] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -2 -4 téléchargé (736 Ko)
+[13Nov2026 13:14:55.660] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 -1 téléchargé (1575 Ko)
+[13Nov2026 13:14:55.753] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 2 téléchargé (238 Ko)
+[13Nov2026 13:14:55.798] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -1 -4 téléchargé (794 Ko)
+[13Nov2026 13:14:55.877] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 0 téléchargé (1912 Ko)
+[13Nov2026 13:14:55.918] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 0 téléchargé (1953 Ko)
+[13Nov2026 13:14:56.009] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 1 téléchargé (573 Ko)
+[13Nov2026 13:14:56.039] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 1 téléchargé (2590 Ko)
+[13Nov2026 13:14:56.095] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 0 -4 téléchargé (868 Ko)
+[13Nov2026 13:14:56.344] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 1 -4 téléchargé (945 Ko)
+[13Nov2026 13:14:56.352] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 0 -6 téléchargé (1121 Ko)
+[13Nov2026 13:14:56.476] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 -6 téléchargé (1605 Ko)
+[13Nov2026 13:14:56.552] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -1 -6 téléchargé (1166 Ko)
+[13Nov2026 13:14:56.651] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 -4 téléchargé (986 Ko)
+[13Nov2026 13:14:56.698] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 -5 téléchargé (922 Ko)
+[13Nov2026 13:14:56.829] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 -4 téléchargé (831 Ko)
+[13Nov2026 13:14:56.889] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 -2 téléchargé (1571 Ko)
+[13Nov2026 13:14:57.034] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 0 téléchargé (2097 Ko)
+[13Nov2026 13:14:57.139] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 2 téléchargé (1290 Ko)
+[13Nov2026 13:14:57.215] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 4 téléchargé (1320 Ko)
+[13Nov2026 13:14:57.420] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 4 téléchargé (291 Ko)
+[13Nov2026 13:14:57.468] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -3 -6 téléchargé (813 Ko)
+[13Nov2026 13:14:57.505] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 3 téléchargé (782 Ko)
+[13Nov2026 13:14:57.674] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -2 -6 téléchargé (815 Ko)
+[13Nov2026 13:14:57.688] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -3 -5 téléchargé (1075 Ko)
+[13Nov2026 13:14:57.709] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -2 -5 téléchargé (803 Ko)
+[13Nov2026 13:14:57.849] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -1 -7 téléchargé (1437 Ko)
+[13Nov2026 13:14:57.914] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 1 -7 téléchargé (1544 Ko)
+[13Nov2026 13:14:58.049] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -1 -8 téléchargé (1366 Ko)
+[13Nov2026 13:14:58.065] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 -7 téléchargé (1056 Ko)
+[13Nov2026 13:14:58.169] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 -7 téléchargé (1142 Ko)
+[13Nov2026 13:14:58.259] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 -7 téléchargé (782 Ko)
+[13Nov2026 13:14:58.270] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 -6 téléchargé (887 Ko)
+[13Nov2026 13:14:58.288] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 -6 téléchargé (928 Ko)
+[13Nov2026 13:14:58.451] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 0 -8 téléchargé (1573 Ko)
+[13Nov2026 13:14:58.463] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 -5 téléchargé (905 Ko)
+[13Nov2026 13:14:58.525] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 0 -7 téléchargé (1252 Ko)
+[13Nov2026 13:14:58.586] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 -3 téléchargé (691 Ko)
+[13Nov2026 13:14:58.679] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 -6 téléchargé (1358 Ko)
+[13Nov2026 13:14:58.787] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 -4 téléchargé (844 Ko)
+[13Nov2026 13:14:58.788] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 -4 téléchargé (1065 Ko)
+[13Nov2026 13:14:58.796] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 -3 téléchargé (852 Ko)
+[13Nov2026 13:14:58.918] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 -1 téléchargé (2041 Ko)
+[13Nov2026 13:14:59.161] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 -1 téléchargé (1783 Ko)
+[13Nov2026 13:14:59.192] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 1 téléchargé (1831 Ko)
+[13Nov2026 13:14:59.310] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 3 téléchargé (1935 Ko)
+[13Nov2026 13:14:59.382] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 -2 téléchargé (708 Ko)
+[13Nov2026 13:14:59.448] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 1 téléchargé (1793 Ko)
+[13Nov2026 13:14:59.565] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 -2 téléchargé (1556 Ko)
+[13Nov2026 13:14:59.640] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 5 téléchargé (806 Ko)
+[13Nov2026 13:14:59.807] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 4 téléchargé (515 Ko)
+[13Nov2026 13:14:59.853] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 4 téléchargé (523 Ko)
+[13Nov2026 13:14:59.866] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 5 téléchargé (758 Ko)
+[13Nov2026 13:14:59.910] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -9 2 téléchargé (1787 Ko)
+[13Nov2026 13:15:00.056] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -1 -9 téléchargé (2115 Ko)
+[13Nov2026 13:15:00.169] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 -9 téléchargé (353 Ko)
+[13Nov2026 13:15:00.190] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -8 2 téléchargé (140 Ko)
+[13Nov2026 13:15:00.277] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -2 -8 téléchargé (1157 Ko)
+[13Nov2026 13:15:00.279] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -2 -9 téléchargé (1948 Ko)
+[13Nov2026 13:15:00.359] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 -9 téléchargé (916 Ko)
+[13Nov2026 13:15:00.371] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 -8 téléchargé (596 Ko)
+[13Nov2026 13:15:00.462] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 -8 téléchargé (57 Ko)
+[13Nov2026 13:15:00.489] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 -8 téléchargé (163 Ko)
+[13Nov2026 13:15:00.753] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 -6 téléchargé (1168 Ko)
+[13Nov2026 13:15:00.908] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 -3 téléchargé (1365 Ko)
+[13Nov2026 13:15:00.916] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 -5 téléchargé (1644 Ko)
+[13Nov2026 13:15:00.953] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 -7 téléchargé (950 Ko)
+[13Nov2026 13:15:01.058] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 -7 téléchargé (841 Ko)
+[13Nov2026 13:15:01.124] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 -3 téléchargé (2827 Ko)
+[13Nov2026 13:15:01.132] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 -5 téléchargé (959 Ko)
+[13Nov2026 13:15:01.501] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 1 téléchargé (1039 Ko)
+[13Nov2026 13:15:01.528] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 -1 téléchargé (1152 Ko)
+[13Nov2026 13:15:01.636] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 2 téléchargé (2080 Ko)
+[13Nov2026 13:15:01.734] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 0 téléchargé (1143 Ko)
+[13Nov2026 13:15:01.769] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 -2 téléchargé (2676 Ko)
+[13Nov2026 13:15:01.837] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 2 téléchargé (1361 Ko)
+[13Nov2026 13:15:01.910] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 3 téléchargé (1036 Ko)
+[13Nov2026 13:15:02.093] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 4 téléchargé (924 Ko)
+[13Nov2026 13:15:02.208] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 6 téléchargé (1594 Ko)
+[13Nov2026 13:15:02.296] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 4 téléchargé (1505 Ko)
+[13Nov2026 13:15:02.473] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 6 téléchargé (2119 Ko)
+[13Nov2026 13:15:02.484] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 5 téléchargé (1969 Ko)
+[13Nov2026 13:15:02.583] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 5 téléchargé (393 Ko)
+[13Nov2026 13:15:02.859] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 3 téléchargé (1925 Ko)
+[13Nov2026 13:15:02.899] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 7 téléchargé (1114 Ko)
+[13Nov2026 13:15:03.020] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 0 -10 téléchargé (2161 Ko)
+[13Nov2026 13:15:03.079] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 6 téléchargé (1427 Ko)
+[13Nov2026 13:15:03.216] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 2 -10 téléchargé (1514 Ko)
+[13Nov2026 13:15:03.235] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 1 -11 téléchargé (2319 Ko)
+[13Nov2026 13:15:03.245] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 1 -10 téléchargé (1576 Ko)
+[13Nov2026 13:15:03.446] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 -10 téléchargé (2361 Ko)
+[13Nov2026 13:15:03.578] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 6 -9 téléchargé (2451 Ko)
+[13Nov2026 13:15:03.644] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 -6 téléchargé (1762 Ko)
+[13Nov2026 13:15:03.690] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 4 -9 téléchargé (1537 Ko)
+[13Nov2026 13:15:03.753] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 3 -10 téléchargé (1516 Ko)
+[13Nov2026 13:15:03.815] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 5 -9 téléchargé (1117 Ko)
+[13Nov2026 13:15:03.909] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 -6 téléchargé (1289 Ko)
+[13Nov2026 13:15:04.202] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 9 -5 téléchargé (1524 Ko)
+[13Nov2026 13:15:04.251] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 9 -1 téléchargé (581 Ko)
+[13Nov2026 13:15:04.290] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 9 2 téléchargé (41 Ko)
+[13Nov2026 13:15:04.430] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 10 -1 téléchargé (98 Ko)
+[13Nov2026 13:15:04.459] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 9 -2 téléchargé (1321 Ko)
+[13Nov2026 13:15:04.460] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 10 -2 téléchargé (676 Ko)
+[13Nov2026 13:15:04.593] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -10 2 téléchargé (1705 Ko)
+[13Nov2026 13:15:04.622] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -10 4 téléchargé (2945 Ko)
+[13Nov2026 13:15:04.799] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -11 0 téléchargé (1461 Ko)
+[13Nov2026 13:15:04.841] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -10 3 téléchargé (2248 Ko)
+[13Nov2026 13:15:04.978] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -10 0 téléchargé (820 Ko)
+[13Nov2026 13:15:04.999] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -10 1 téléchargé (2033 Ko)
+[13Nov2026 13:15:05.058] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -11 1 téléchargé (1995 Ko)
+[13Nov2026 13:15:05.126] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -9 3 téléchargé (1446 Ko)
+[13Nov2026 13:15:05.144] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -9 4 téléchargé (562 Ko)
+[13Nov2026 13:15:05.202] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 1 -12 téléchargé (730 Ko)
+[13Nov2026 13:15:05.391] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 0 -12 téléchargé (282 Ko)
+[13Nov2026 13:15:05.560] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 10 -3 téléchargé (826 Ko)
+[13Nov2026 13:15:05.600] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 -9 téléchargé (2571 Ko)
+[13Nov2026 13:15:05.715] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 11 -3 téléchargé (193 Ko)
+[13Nov2026 13:15:05.765] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 10 4 téléchargé (1658 Ko)
+[13Nov2026 13:15:05.850] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 -9 téléchargé (2437 Ko)
+[13Nov2026 13:15:06.072] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -12 2 téléchargé (1436 Ko)
+[13Nov2026 13:15:06.079] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 8 -10 téléchargé (711 Ko)
+[13Nov2026 13:15:06.080] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet 7 -10 téléchargé (471 Ko)
+[13Nov2026 13:15:06.362] [Domaine Terre - relief fin/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Relief fin : paquet -11 2 téléchargé (1759 Ko)
+[13Nov2026 13:15:09.866] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:bison introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:bison introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:boar introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:boar introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:boar introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:boar introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:camel introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.867] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:camel introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:camel introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:rhino introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:rhino introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:rhino introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:rhino introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:rhino introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:hyena introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:hyena introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:hyena introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:hyena introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:wildebeest introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:wildebeest introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:aardvark introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:hippo introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:opossum introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:large_snake introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:large_snake introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:giant_salamander introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:giant_salamander introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.868] [Worker-Main-2/WARN] [fr.domaineaubin.terre.DomaineTerre/]: Faune : untamedwilds:giant_salamander introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13Nov2026 13:15:09.869] [Worker-Main-2/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Faune de la Terre : 26 espèces en surface, 0 sous terre (366 absentes du pack), 208 ms
+[13Nov2026 13:15:09.874] [Worker-Main-2/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Tailles : 21 créatures redimensionnées
+[13Nov2026 13:15:10.574] [Worker-Main-1/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Faune (génération) [65, -1360] CREATURE : biome domaine_terre:atlantique/fleuve, 8 espèces [cow, pig, sheep, chicken, horse, rabbit, fox, bee]
+[13Nov2026 13:15:10.616] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[13Nov2026 13:15:11.245] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[13Nov2026 13:15:11.245] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[13Nov2026 13:15:11.838] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[13Nov2026 13:15:12.282] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[13Nov2026 13:15:12.620] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[13Nov2026 13:15:12.981] [Worker-Main-2/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Faune (génération) [64, -1360] CREATURE : biome domaine_terre:atlantique/fleuve, 8 espèces [cow, pig, sheep, chicken, horse, rabbit, fox, bee]
+[13Nov2026 13:15:12.992] [Server thread/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Faune : contrôle des bêtes nées à la génération actif
+[13Nov2026 13:15:13.127] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[13Nov2026 13:15:13.391] [Worker-Main-2/INFO] [fr.domaineaubin.terre.DomaineTerre/]: Faune (génération) [66, -1360] CREATURE : biome domaine_terre:atlantique/fleuve, 8 espèces [cow, pig, sheep, chicken, horse, rabbit, fox, bee]
+[13Nov2026 13:15:13.635] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[13Nov2026 13:15:14.208] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[13Nov2026 13:15:14.628] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 1%
+[13Nov2026 13:15:15.120] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 1%
+[13Nov2026 13:15:15.636] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 1%
+[13Nov2026 13:15:16.145] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 2%
+[13Nov2026 13:15:16.623] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 2%
+[13Nov2026 13:15:17.131] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 3%
+[13Nov2026 13:15:17.698] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 4%
+[13Nov2026 13:15:18.119] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 4%
+[13Nov2026 13:15:18.646] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 5%
+[13Nov2026 13:15:19.123] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 6%
+[13Nov2026 13:15:19.632] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 6%
+[13Nov2026 13:15:20.145] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 7%
+[13Nov2026 13:15:20.654] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 8%
+[13Nov2026 13:15:21.136] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 9%
+[13Nov2026 13:15:21.643] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 9%
+[13Nov2026 13:15:22.130] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 10%
+[13Nov2026 13:15:22.630] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 11%
+[13Nov2026 13:15:23.127] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 11%
+[13Nov2026 13:15:23.657] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 13%
+[13Nov2026 13:15:24.235] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 14%
+[13Nov2026 13:15:24.658] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 15%
+[13Nov2026 13:15:25.123] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 15%
+[13Nov2026 13:15:25.631] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 16%
+[13Nov2026 13:15:26.145] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 17%
+[13Nov2026 13:15:26.712] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 17%
+[13Nov2026 13:15:27.124] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 19%
+[13Nov2026 13:15:27.637] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 20%
+[13Nov2026 13:15:28.141] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 21%
+[13Nov2026 13:15:28.643] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 22%
+[13Nov2026 13:15:29.139] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 22%
+[13Nov2026 13:15:29.625] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 23%
+[13Nov2026 13:15:30.128] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 24%
+[13Nov2026 13:15:30.674] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 25%
+[13Nov2026 13:15:31.150] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 26%
+[13Nov2026 13:15:31.661] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 27%
+[13Nov2026 13:15:32.182] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 28%
+[13Nov2026 13:15:32.635] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 29%
+[13Nov2026 13:15:33.131] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 31%
+[13Nov2026 13:15:33.636] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 31%
+[13Nov2026 13:15:34.180] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 32%
+[13Nov2026 13:15:34.656] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[13Nov2026 13:15:35.199] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 33%
+[13Nov2026 13:15:35.634] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 35%
+[13Nov2026 13:15:36.118] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 36%
+[13Nov2026 13:15:36.680] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 37%
+[13Nov2026 13:15:37.134] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 38%
+[13Nov2026 13:15:37.622] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 39%
+[13Nov2026 13:15:38.133] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 41%
+[13Nov2026 13:15:38.621] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 42%
+[13Nov2026 13:15:39.143] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 43%
+[13Nov2026 13:15:39.617] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 43%
+[13Nov2026 13:15:40.121] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 45%
+[13Nov2026 13:15:40.685] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 45%
+[13Nov2026 13:15:41.142] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 46%
+[13Nov2026 13:15:41.623] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 47%
+[13Nov2026 13:15:42.119] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 49%
+[13Nov2026 13:15:42.623] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 50%
+[13Nov2026 13:15:43.126] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 51%
+[13Nov2026 13:15:43.620] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 52%
+[13Nov2026 13:15:44.117] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 54%
+[13Nov2026 13:15:44.626] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 54%
+[13Nov2026 13:15:45.145] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 55%
+[13Nov2026 13:15:45.690] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 57%
+[13Nov2026 13:15:46.119] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 57%
+[13Nov2026 13:15:46.619] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 58%
+[13Nov2026 13:15:47.190] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 60%
+[13Nov2026 13:15:47.627] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 61%
+[13Nov2026 13:15:48.127] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 62%
+[13Nov2026 13:15:48.616] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 64%
+[13Nov2026 13:15:49.198] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 65%
+[13Nov2026 13:15:49.621] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 66%
+[13Nov2026 13:15:50.175] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 68%
+[13Nov2026 13:15:50.634] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 68%
+[13Nov2026 13:15:51.119] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 69%
+[13Nov2026 13:15:51.629] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 71%
+[13Nov2026 13:15:52.123] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 71%
+[13Nov2026 13:15:52.633] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 72%
+[13Nov2026 13:15:53.152] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 74%
+[13Nov2026 13:15:53.641] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 75%
+[13Nov2026 13:15:54.153] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 76%
+[13Nov2026 13:15:54.622] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 77%
+[13Nov2026 13:15:55.122] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 78%
+[13Nov2026 13:15:55.627] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 79%
+[13Nov2026 13:15:56.171] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 81%
+[13Nov2026 13:15:56.679] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 82%
+[13Nov2026 13:15:57.123] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 83%
+[13Nov2026 13:15:57.617] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 84%
+[13Nov2026 13:15:58.118] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 85%
+[13Nov2026 13:15:58.660] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 86%
+[13Nov2026 13:15:59.118] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 88%
+[13Nov2026 13:15:59.629] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 88%
+[13Nov2026 13:16:00.155] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 90%
+[13Nov2026 13:16:00.644] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 91%
+[13Nov2026 13:16:01.143] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 92%
+[13Nov2026 13:16:01.670] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 93%
+[13Nov2026 13:16:02.147] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 95%
+[13Nov2026 13:16:02.667] [Worker-Main-2/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 96%
+[13Nov2026 13:16:03.129] [Worker-Main-3/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 97%
+[13Nov2026 13:16:03.622] [Worker-Main-1/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 98%
+[13Nov2026 13:16:03.864] [Server thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 53248 ms
+[13Nov2026 13:16:03.865] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Done (118.087s)! For help, type "help"
+[13Nov2026 13:16:03.883] [Server thread/INFO] [net.minecraftforge.server.permission.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[13Nov2026 13:16:04.059] [Server thread/INFO] [fr.domaineaubin.meteo.DomaineWeather/]: Domaine Weather : tornades sans dégâts aux blocs ; 6 zones de tornades
+[13Nov2026 13:16:04.307] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Set season to Mid Spring
+[13Nov2026 13:16:05.876] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 48.86, lon 2.35 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Cfb | pluie : 100 % des nuages à cette saison
+Jour : 12.6 h, nuit : 11.4 h (sur 24 h) | soleil levé 52 % des 20 min
+Tornades : non | sable : non | neige : non
+Vent dominant : de sud-ouest | vitesse 0.15 à 1.00 | heure solaire : UTC +0.2 h
+[13Nov2026 13:16:06.087] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 59.91, lon 10.75 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Dfb | pluie : 100 % des nuages à cette saison
+Jour : 12.9 h, nuit : 11.1 h (sur 24 h) | soleil levé 54 % des 20 min
+Tornades : non | sable : non | neige : oui
+Vent dominant : de sud-ouest | vitesse 0.15 à 1.00 | heure solaire : UTC +0.7 h
+[13Nov2026 13:16:06.267] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 69.65, lon 18.96 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 13.4 h, nuit : 10.6 h (sur 24 h) | soleil levé 56 % des 20 min
+Tornades : non | sable : non | neige : oui
+Vent dominant : de nord-est | vitesse 0.00 à 1.00 | heure solaire : UTC +1.3 h
+[13Nov2026 13:16:06.473] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 30.04, lon 31.24 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : BWh | pluie : 5 % des nuages à cette saison
+Jour : 12.3 h, nuit : 11.7 h (sur 24 h) | soleil levé 51 % des 20 min
+Tornades : non | sable : oui | neige : non
+Vent dominant : de nord-ouest | vitesse 0.00 à 1.00 | heure solaire : UTC +2.1 h
+[13Nov2026 13:16:06.681] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 22.79, lon 5.52 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : BWh | pluie : 5 % des nuages à cette saison
+Jour : 12.2 h, nuit : 11.8 h (sur 24 h) | soleil levé 51 % des 20 min
+Tornades : non | sable : oui | neige : non
+Vent dominant : de nord-est | vitesse 0.00 à 1.00 | heure solaire : UTC +0.4 h
+[13Nov2026 13:16:06.899] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 37.39, lon -5.98 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Csa | pluie : 100 % des nuages à cette saison
+Jour : 12.4 h, nuit : 11.6 h (sur 24 h) | soleil levé 52 % des 20 min
+Tornades : non | sable : non | neige : non
+Vent dominant : de sud-ouest | vitesse 0.15 à 1.00 | heure solaire : UTC -0.4 h
+[13Nov2026 13:16:07.081] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 19.08, lon 72.88 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Am | pluie : 100 % des nuages à cette saison
+Jour : 12.2 h, nuit : 11.8 h (sur 24 h) | soleil levé 51 % des 20 min
+Tornades : non | sable : non | neige : non
+Vent dominant : de nord-est | vitesse 0.00 à 1.00 | heure solaire : UTC +4.9 h
+[13Nov2026 13:16:07.287] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat -3.12, lon -60.02 (hémisphère sud)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Af | pluie : 100 % des nuages à cette saison
+Jour : 12.0 h, nuit : 12.0 h (sur 24 h) | soleil levé 50 % des 20 min
+Tornades : non | sable : non | neige : non
+Vent dominant : de sud-est | vitesse 0.00 à 0.25 | heure solaire : UTC -4.0 h
+[13Nov2026 13:16:07.478] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat -33.87, lon 151.21 (hémisphère sud)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Cfa | pluie : 100 % des nuages à cette saison
+Jour : 11.7 h, nuit : 12.3 h (sur 24 h) | soleil levé 49 % des 20 min
+Tornades : oui (Sud-Est de l'Australie) | sable : non | neige : non
+Vent dominant : de nord-ouest | vitesse 0.00 à 1.00 | heure solaire : UTC +10.1 h
+[13Nov2026 13:16:07.683] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat -54.80, lon -68.30 (hémisphère sud)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 11.3 h, nuit : 12.7 h (sur 24 h) | soleil levé 47 % des 20 min
+Tornades : non | sable : non | neige : oui
+Vent dominant : de nord-ouest | vitesse 0.55 à 1.00 | heure solaire : UTC -4.6 h
+[13Nov2026 13:16:07.882] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 35.47, lon -97.52 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Cfa | pluie : 100 % des nuages à cette saison
+Jour : 12.4 h, nuit : 11.6 h (sur 24 h) | soleil levé 52 % des 20 min
+Tornades : oui (Grandes Plaines et Sud-Est des Etats-Unis) | sable : non | neige : non
+Vent dominant : de sud-ouest | vitesse 0.15 à 1.00 | heure solaire : UTC -6.5 h
+[13Nov2026 13:16:08.081] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 23.81, lon 90.41 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Cwa | pluie : 100 % des nuages à cette saison
+Jour : 12.2 h, nuit : 11.8 h (sur 24 h) | soleil levé 51 % des 20 min
+Tornades : oui (Bangladesh et est de l'Inde) | sable : non | neige : non
+Vent dominant : de nord-est | vitesse 0.00 à 1.00 | heure solaire : UTC +6.0 h
+[13Nov2026 13:16:08.280] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 62.03, lon 129.73 (hémisphère nord)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 13.0 h, nuit : 11.0 h (sur 24 h) | soleil levé 54 % des 20 min
+Tornades : non | sable : non | neige : oui
+Vent dominant : de ouest | vitesse 0.00 à 1.00 | heure solaire : UTC +8.6 h
+[13Nov2026 13:16:08.477] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Set season to Mid Summer
+[13Nov2026 13:16:10.488] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 48.86, lon 2.35 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Cfb | pluie : 100 % des nuages à cette saison
+Jour : 15.6 h, nuit : 8.4 h (sur 24 h) | soleil levé 65 % des 20 min
+Tornades : non | sable : non | neige : non
+Vent dominant : de sud-ouest | vitesse 0.15 à 1.00 | heure solaire : UTC +0.2 h
+[13Nov2026 13:16:10.672] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 59.91, lon 10.75 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Dfb | pluie : 100 % des nuages à cette saison
+Jour : 17.3 h, nuit : 6.7 h (sur 24 h) | soleil levé 72 % des 20 min
+Tornades : non | sable : non | neige : oui
+Vent dominant : de sud-ouest | vitesse 0.15 à 1.00 | heure solaire : UTC +0.7 h
+[13Nov2026 13:16:10.881] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 69.65, lon 18.96 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 19.2 h, nuit : 4.8 h (sur 24 h) | soleil levé 80 % des 20 min
+Tornades : non | sable : non | neige : oui
+Vent dominant : de nord-est | vitesse 0.00 à 1.00 | heure solaire : UTC +1.3 h
+[13Nov2026 13:16:11.121] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 30.04, lon 31.24 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : BWh | pluie : 5 % des nuages à cette saison
+Jour : 13.9 h, nuit : 10.1 h (sur 24 h) | soleil levé 58 % des 20 min
+Tornades : non | sable : oui | neige : non
+Vent dominant : de nord-ouest | vitesse 0.00 à 1.00 | heure solaire : UTC +2.1 h
+[13Nov2026 13:16:11.315] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 22.79, lon 5.52 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : BWh | pluie : 5 % des nuages à cette saison
+Jour : 13.4 h, nuit : 10.6 h (sur 24 h) | soleil levé 56 % des 20 min
+Tornades : non | sable : oui | neige : non
+Vent dominant : de nord-est | vitesse 0.00 à 1.00 | heure solaire : UTC +0.4 h
+[13Nov2026 13:16:11.525] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 37.39, lon -5.98 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Csa | pluie : 10 % des nuages à cette saison
+Jour : 14.5 h, nuit : 9.5 h (sur 24 h) | soleil levé 60 % des 20 min
+Tornades : non | sable : non | neige : non
+Vent dominant : de sud-ouest | vitesse 0.15 à 1.00 | heure solaire : UTC -0.4 h
+[13Nov2026 13:16:11.716] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 19.08, lon 72.88 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Am | pluie : 100 % des nuages à cette saison
+Jour : 13.1 h, nuit : 10.9 h (sur 24 h) | soleil levé 55 % des 20 min
+Tornades : non | sable : non | neige : non
+Vent dominant : de nord-est | vitesse 0.00 à 1.00 | heure solaire : UTC +4.9 h
+[13Nov2026 13:16:11.921] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat -3.12, lon -60.02 (hémisphère sud)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Af | pluie : 100 % des nuages à cette saison
+Jour : 11.8 h, nuit : 12.2 h (sur 24 h) | soleil levé 49 % des 20 min
+Tornades : non | sable : non | neige : non
+Vent dominant : de sud-est | vitesse 0.00 à 0.25 | heure solaire : UTC -4.0 h
+[13Nov2026 13:16:12.119] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat -33.87, lon 151.21 (hémisphère sud)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Cfa | pluie : 100 % des nuages à cette saison
+Jour : 9.8 h, nuit : 14.2 h (sur 24 h) | soleil levé 41 % des 20 min
+Tornades : oui (Sud-Est de l'Australie) | sable : non | neige : non
+Vent dominant : de nord-ouest | vitesse 0.00 à 1.00 | heure solaire : UTC +10.1 h
+[13Nov2026 13:16:12.289] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat -54.80, lon -68.30 (hémisphère sud)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 7.6 h, nuit : 16.4 h (sur 24 h) | soleil levé 32 % des 20 min
+Tornades : non | sable : non | neige : oui
+Vent dominant : de nord-ouest | vitesse 0.55 à 1.00 | heure solaire : UTC -4.6 h
+[13Nov2026 13:16:12.473] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 35.47, lon -97.52 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Cfa | pluie : 100 % des nuages à cette saison
+Jour : 14.3 h, nuit : 9.7 h (sur 24 h) | soleil levé 60 % des 20 min
+Tornades : oui (Grandes Plaines et Sud-Est des Etats-Unis) | sable : non | neige : non
+Vent dominant : de sud-ouest | vitesse 0.15 à 1.00 | heure solaire : UTC -6.5 h
+[13Nov2026 13:16:12.719] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 23.81, lon 90.41 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Cwa | pluie : 100 % des nuages à cette saison
+Jour : 13.4 h, nuit : 10.6 h (sur 24 h) | soleil levé 56 % des 20 min
+Tornades : oui (Bangladesh et est de l'Inde) | sable : non | neige : non
+Vent dominant : de nord-est | vitesse 0.00 à 1.00 | heure solaire : UTC +6.0 h
+[13Nov2026 13:16:12.925] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 62.03, lon 129.73 (hémisphère nord)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 17.7 h, nuit : 6.3 h (sur 24 h) | soleil levé 74 % des 20 min
+Tornades : non | sable : non | neige : oui
+Vent dominant : de ouest | vitesse 0.00 à 1.00 | heure solaire : UTC +8.6 h
+[13Nov2026 13:16:13.120] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Set season to Mid Autumn
+[13Nov2026 13:16:15.116] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 48.86, lon 2.35 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Cfb | pluie : 100 % des nuages à cette saison
+Jour : 11.4 h, nuit : 12.6 h (sur 24 h) | soleil levé 48 % des 20 min
+Tornades : non | sable : non | neige : non
+Vent dominant : de sud-ouest | vitesse 0.15 à 1.00 | heure solaire : UTC +0.2 h
+[13Nov2026 13:16:15.316] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 59.91, lon 10.75 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Dfb | pluie : 100 % des nuages à cette saison
+Jour : 11.1 h, nuit : 12.9 h (sur 24 h) | soleil levé 46 % des 20 min
+Tornades : non | sable : non | neige : oui
+Vent dominant : de sud-ouest | vitesse 0.15 à 1.00 | heure solaire : UTC +0.7 h
+[13Nov2026 13:16:15.520] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 69.65, lon 18.96 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 10.6 h, nuit : 13.4 h (sur 24 h) | soleil levé 44 % des 20 min
+Tornades : non | sable : non | neige : oui
+Vent dominant : de nord-est | vitesse 0.00 à 1.00 | heure solaire : UTC +1.3 h
+[13Nov2026 13:16:15.719] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 30.04, lon 31.24 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : BWh | pluie : 5 % des nuages à cette saison
+Jour : 11.7 h, nuit : 12.3 h (sur 24 h) | soleil levé 49 % des 20 min
+Tornades : non | sable : oui | neige : non
+Vent dominant : de nord-ouest | vitesse 0.00 à 1.00 | heure solaire : UTC +2.1 h
+[13Nov2026 13:16:15.888] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 22.79, lon 5.52 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : BWh | pluie : 5 % des nuages à cette saison
+Jour : 11.8 h, nuit : 12.2 h (sur 24 h) | soleil levé 49 % des 20 min
+Tornades : non | sable : oui | neige : non
+Vent dominant : de nord-est | vitesse 0.00 à 1.00 | heure solaire : UTC +0.4 h
+[13Nov2026 13:16:16.074] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 37.39, lon -5.98 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Csa | pluie : 100 % des nuages à cette saison
+Jour : 11.6 h, nuit : 12.4 h (sur 24 h) | soleil levé 48 % des 20 min
+Tornades : non | sable : non | neige : non
+Vent dominant : de sud-ouest | vitesse 0.15 à 1.00 | heure solaire : UTC -0.4 h
+[13Nov2026 13:16:16.332] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 19.08, lon 72.88 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Am | pluie : 100 % des nuages à cette saison
+Jour : 11.8 h, nuit : 12.2 h (sur 24 h) | soleil levé 49 % des 20 min
+Tornades : non | sable : non | neige : non
+Vent dominant : de nord-est | vitesse 0.00 à 1.00 | heure solaire : UTC +4.9 h
+[13Nov2026 13:16:16.519] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat -3.12, lon -60.02 (hémisphère sud)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Af | pluie : 100 % des nuages à cette saison
+Jour : 12.0 h, nuit : 12.0 h (sur 24 h) | soleil levé 50 % des 20 min
+Tornades : non | sable : non | neige : non
+Vent dominant : de sud-est | vitesse 0.00 à 0.25 | heure solaire : UTC -4.0 h
+[13Nov2026 13:16:16.684] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat -33.87, lon 151.21 (hémisphère sud)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Cfa | pluie : 100 % des nuages à cette saison
+Jour : 12.3 h, nuit : 11.7 h (sur 24 h) | soleil levé 51 % des 20 min
+Tornades : oui (Sud-Est de l'Australie) | sable : non | neige : non
+Vent dominant : de nord-ouest | vitesse 0.00 à 1.00 | heure solaire : UTC +10.1 h
+[13Nov2026 13:16:16.916] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat -54.80, lon -68.30 (hémisphère sud)
+Saison locale : mid_spring (tropiques : late_wet)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 12.7 h, nuit : 11.3 h (sur 24 h) | soleil levé 53 % des 20 min
+Tornades : non | sable : non | neige : oui
+Vent dominant : de nord-ouest | vitesse 0.55 à 1.00 | heure solaire : UTC -4.6 h
+[13Nov2026 13:16:17.123] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 35.47, lon -97.52 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Cfa | pluie : 100 % des nuages à cette saison
+Jour : 11.6 h, nuit : 12.4 h (sur 24 h) | soleil levé 48 % des 20 min
+Tornades : oui (Grandes Plaines et Sud-Est des Etats-Unis) | sable : non | neige : non
+Vent dominant : de sud-ouest | vitesse 0.15 à 1.00 | heure solaire : UTC -6.5 h
+[13Nov2026 13:16:17.317] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 23.81, lon 90.41 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Cwa | pluie : 100 % des nuages à cette saison
+Jour : 11.8 h, nuit : 12.2 h (sur 24 h) | soleil levé 49 % des 20 min
+Tornades : oui (Bangladesh et est de l'Inde) | sable : non | neige : non
+Vent dominant : de nord-est | vitesse 0.00 à 1.00 | heure solaire : UTC +6.0 h
+[13Nov2026 13:16:17.525] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 62.03, lon 129.73 (hémisphère nord)
+Saison locale : mid_autumn (tropiques : late_dry)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 11.0 h, nuit : 13.0 h (sur 24 h) | soleil levé 46 % des 20 min
+Tornades : non | sable : non | neige : oui
+Vent dominant : de ouest | vitesse 0.00 à 1.00 | heure solaire : UTC +8.6 h
+[13Nov2026 13:16:17.681] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Set season to Mid Winter
+[13Nov2026 13:16:19.712] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 48.86, lon 2.35 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Cfb | pluie : 100 % des nuages à cette saison
+Jour : 8.4 h, nuit : 15.6 h (sur 24 h) | soleil levé 35 % des 20 min
+Tornades : non | sable : non | neige : non
+Vent dominant : de sud-ouest | vitesse 0.15 à 1.00 | heure solaire : UTC +0.2 h
+[13Nov2026 13:16:19.917] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 59.91, lon 10.75 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Dfb | pluie : 100 % des nuages à cette saison
+Jour : 6.7 h, nuit : 17.3 h (sur 24 h) | soleil levé 28 % des 20 min
+Tornades : non | sable : non | neige : oui
+Vent dominant : de sud-ouest | vitesse 0.15 à 1.00 | heure solaire : UTC +0.7 h
+[13Nov2026 13:16:20.110] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 69.65, lon 18.96 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 4.8 h, nuit : 19.2 h (sur 24 h) | soleil levé 20 % des 20 min
+Tornades : non | sable : non | neige : oui
+Vent dominant : de nord-est | vitesse 0.00 à 1.00 | heure solaire : UTC +1.3 h
+[13Nov2026 13:16:20.312] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 30.04, lon 31.24 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : BWh | pluie : 5 % des nuages à cette saison
+Jour : 10.1 h, nuit : 13.9 h (sur 24 h) | soleil levé 42 % des 20 min
+Tornades : non | sable : oui | neige : non
+Vent dominant : de nord-ouest | vitesse 0.00 à 1.00 | heure solaire : UTC +2.1 h
+[13Nov2026 13:16:20.515] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 22.79, lon 5.52 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : BWh | pluie : 5 % des nuages à cette saison
+Jour : 10.6 h, nuit : 13.4 h (sur 24 h) | soleil levé 44 % des 20 min
+Tornades : non | sable : oui | neige : non
+Vent dominant : de nord-est | vitesse 0.00 à 1.00 | heure solaire : UTC +0.4 h
+[13Nov2026 13:16:20.710] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 37.39, lon -5.98 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Csa | pluie : 100 % des nuages à cette saison
+Jour : 9.5 h, nuit : 14.5 h (sur 24 h) | soleil levé 40 % des 20 min
+Tornades : non | sable : non | neige : non
+Vent dominant : de sud-ouest | vitesse 0.15 à 1.00 | heure solaire : UTC -0.4 h
+[13Nov2026 13:16:20.910] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 19.08, lon 72.88 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Am | pluie : 30 % des nuages à cette saison
+Jour : 10.9 h, nuit : 13.1 h (sur 24 h) | soleil levé 45 % des 20 min
+Tornades : non | sable : non | neige : non
+Vent dominant : de nord-est | vitesse 0.00 à 1.00 | heure solaire : UTC +4.9 h
+[13Nov2026 13:16:21.111] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat -3.12, lon -60.02 (hémisphère sud)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Af | pluie : 100 % des nuages à cette saison
+Jour : 12.2 h, nuit : 11.8 h (sur 24 h) | soleil levé 51 % des 20 min
+Tornades : non | sable : non | neige : non
+Vent dominant : de sud-est | vitesse 0.00 à 0.25 | heure solaire : UTC -4.0 h
+[13Nov2026 13:16:21.310] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat -33.87, lon 151.21 (hémisphère sud)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Cfa | pluie : 100 % des nuages à cette saison
+Jour : 14.2 h, nuit : 9.8 h (sur 24 h) | soleil levé 59 % des 20 min
+Tornades : oui (Sud-Est de l'Australie) | sable : non | neige : non
+Vent dominant : de nord-ouest | vitesse 0.00 à 1.00 | heure solaire : UTC +10.1 h
+[13Nov2026 13:16:21.511] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat -54.80, lon -68.30 (hémisphère sud)
+Saison locale : mid_summer (tropiques : early_dry)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 16.4 h, nuit : 7.6 h (sur 24 h) | soleil levé 68 % des 20 min
+Tornades : non | sable : non | neige : oui
+Vent dominant : de nord-ouest | vitesse 0.55 à 1.00 | heure solaire : UTC -4.6 h
+[13Nov2026 13:16:21.710] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 35.47, lon -97.52 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Cfa | pluie : 100 % des nuages à cette saison
+Jour : 9.7 h, nuit : 14.3 h (sur 24 h) | soleil levé 40 % des 20 min
+Tornades : oui (Grandes Plaines et Sud-Est des Etats-Unis) | sable : non | neige : non
+Vent dominant : de sud-ouest | vitesse 0.15 à 1.00 | heure solaire : UTC -6.5 h
+[13Nov2026 13:16:21.910] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 23.81, lon 90.41 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Cwa | pluie : 15 % des nuages à cette saison
+Jour : 10.6 h, nuit : 13.4 h (sur 24 h) | soleil levé 44 % des 20 min
+Tornades : oui (Bangladesh et est de l'Inde) | sable : non | neige : non
+Vent dominant : de nord-est | vitesse 0.00 à 1.00 | heure solaire : UTC +6.0 h
+[13Nov2026 13:16:22.110] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Météo] lat 62.03, lon 129.73 (hémisphère nord)
+Saison locale : mid_winter (tropiques : early_wet)
+Climat : Dfc | pluie : 100 % des nuages à cette saison
+Jour : 6.3 h, nuit : 17.7 h (sur 24 h) | soleil levé 26 % des 20 min
+Tornades : non | sable : non | neige : oui
+Vent dominant : de ouest | vitesse 0.00 à 1.00 | heure solaire : UTC +8.6 h
+[13Nov2026 13:16:22.310] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping the server
+[13Nov2026 13:16:22.359] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[13Nov2026 13:16:22.360] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[13Nov2026 13:16:22.360] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[13Nov2026 13:16:24.557] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[meteo]'/minecraft:overworld
+[13Nov2026 13:16:24.878] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[meteo]'/minecraft:the_nether
+[13Nov2026 13:16:24.879] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[meteo]'/minecraft:the_end
+[13Nov2026 13:16:24.908] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (meteo): All chunks are saved
+[13Nov2026 13:16:24.908] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[13Nov2026 13:16:24.908] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[13Nov2026 13:16:24.908] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
