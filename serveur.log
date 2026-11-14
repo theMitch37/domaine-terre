@@ -1,0 +1,898 @@
+2026-11-14 13:31:33,764 main WARN Advanced terminal features are not available in this environment
+[13:31:33] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserver, --fml.forgeVersion, 47.4.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, nogui]
+[13:31:33] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.21 by Eclipse Adoptium; OS Linux arch amd64 version 7.0.0-1019-azure
+[13:31:33] [main/WARN] [ne.mi.fm.lo.FMLConfig/CORE]: Configuration file /tmp/serveur/config/fml.toml is not correct. Correcting
+[13:31:33] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSkipGLVersions] was corrected from null to []
+[13:31:33] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowLogHelpMessage] was corrected from null to true
+[13:31:33] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSquir] was corrected from null to false
+[13:31:33] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowShowCPU] was corrected from null to false
+[13:31:33] [main/INFO] [ne.mi.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserver
+[13:31:33] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/tmp/serveur/libraries/org/spongepowered/mixin/0.8.5/mixin-0.8.5.jar%2365!/ Service=ModLauncher Env=SERVER
+[13:31:34] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/fmlcore/1.20.1-47.4.10/fmlcore-1.20.1-47.4.10.jar is missing mods.toml file
+[13:31:34] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/javafmllanguage/1.20.1-47.4.10/javafmllanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[13:31:34] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/lowcodelanguage/1.20.1-47.4.10/lowcodelanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[13:31:34] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /tmp/serveur/libraries/net/minecraftforge/mclanguage/1.20.1-47.4.10/mclanguage-1.20.1-47.4.10.jar is missing mods.toml file
+[13:31:34] [main/INFO] [ne.mi.fm.lo.mo.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[13:31:35] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[13:31:35] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserver' with arguments [nogui]
+[13:31:35] [main/WARN] [mixin/]: Error loading class: untamedwilds/world/FaunaSpawn (java.lang.ClassNotFoundException: untamedwilds.world.FaunaSpawn)
+[13:31:40] [modloading-worker-0/INFO] [fr.do.te.DomaineTerre/]: Domaine d'Aubin - Terre : mod chargé.
+[13:31:40] [modloading-worker-0/INFO] [ne.mi.co.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.10, for MC 1.20.1 with MCP 20230612.114412
+[13:31:40] [modloading-worker-0/INFO] [ne.mi.co.MinecraftForge/FORGE]: MinecraftForge v47.4.10 Initialized
+[13:31:41] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[13:31:41] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.4.10 Target: 47.4.28
+[13:31:42] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[13:31:42] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/tmp/serveur/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23105!/assets/.mcassetsroot' uses unexpected schema
+[13:31:42] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/tmp/serveur/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23105!/data/.mcassetsroot' uses unexpected schema
+[13:31:43] [main/INFO] [minecraft/RecipeManager]: Loaded 7 recipes
+[13:31:44] [main/INFO] [minecraft/AdvancementList]: Loaded 1271 advancements
+[13:31:44] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 1.20.1
+[13:31:44] [Server thread/INFO] [minecraft/DedicatedServer]: Loading properties
+[13:31:44] [Server thread/INFO] [minecraft/DedicatedServer]: Default game type: SURVIVAL
+[13:31:44] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[13:31:44] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on *:25565
+[13:31:44] [Server thread/INFO] [minecraft/ServerConnectionListener]: Using epoll channel type
+[13:31:44] [Server thread/WARN] [minecraft/DedicatedServer]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[13:31:44] [Server thread/WARN] [minecraft/DedicatedServer]: The server will make no attempt to authenticate usernames. Beware.
+[13:31:44] [Server thread/WARN] [minecraft/DedicatedServer]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[13:31:44] [Server thread/WARN] [minecraft/DedicatedServer]: To change this, set "online-mode" to "true" in the server.properties file.
+[13:31:44] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file ./village/serverconfig/forge-server.toml is not correct. Correcting
+[13:31:44] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server was corrected from null to its default, SimpleCommentedConfig:{}. 
+[13:31:44] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringBlockEntities was corrected from null to its default, false. 
+[13:31:44] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringEntities was corrected from null to its default, false. 
+[13:31:44] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.fullBoundingBoxLadders was corrected from null to its default, false. 
+[13:31:44] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.zombieBaseSummonChance was corrected from null to its default, 0.1. 
+[13:31:44] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.zombieBabyChance was corrected from null to its default, 0.05. 
+[13:31:44] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.permissionHandler was corrected from null to its default, forge:default_handler. 
+[13:31:44] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.advertiseDedicatedServerToLan was corrected from null to its default, true. 
+[13:31:44] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.useItemWithDurationZero was corrected from null to its default, false. 
+[13:31:44] [Server thread/INFO] [fr.do.vi.DomaineVillage/]: Domaine Village : 5883 points pour villages
+[13:31:44] [Server thread/INFO] [fr.do.vi.DomaineVillage/]: Domaine Village : monde Terre oui, 5883 villages
+[13:31:44] [Server thread/INFO] [fr.do.te.DomaineTerre/]: Monde Terre à l'échelle 1:250
+[13:31:44] [Server thread/INFO] [fr.do.te.DomaineTerre/]: Relief fin : actif (détail 0.5, dossier /tmp/serveur/domaine_terre/relief)
+[13:31:44] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "village"
+[13:31:45] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 0 -11 téléchargé (1503 Ko)
+[13:31:46] [Server thread/INFO] [fr.do.vi.DomaineVillage/]: Domaine Village : 6 points pour forteresses
+[13:31:46] [Worker-Main-2/INFO] [fr.do.vi.DomaineVillage/]: Domaine Village : 2 points pour pyramides
+[13:31:46] [Worker-Main-2/INFO] [fr.do.vi.DomaineVillage/]: Domaine Village : 9 points pour igloos
+[13:31:46] [Worker-Main-2/INFO] [fr.do.vi.DomaineVillage/]: Domaine Village : 6 points pour temples_jungle
+[13:31:46] [Worker-Main-2/INFO] [fr.do.vi.DomaineVillage/]: Domaine Village : 5 points pour temples_mer
+[13:31:46] [Worker-Main-2/INFO] [fr.do.vi.DomaineVillage/]: Domaine Village : 5 points pour ruines_mer
+[13:31:46] [Worker-Main-2/INFO] [fr.do.vi.DomaineVillage/]: Domaine Village : 6 points pour epaves
+[13:31:46] [Worker-Main-2/INFO] [fr.do.vi.DomaineVillage/]: Domaine Village : 5 points pour ruines_piste
+[13:31:46] [Worker-Main-2/INFO] [fr.do.vi.DomaineVillage/]: Domaine Village : 3 points pour manoirs
+[13:31:49] [Worker-Main-1/INFO] [fr.do.te.DomaineTerre/]: Cartes de la Terre chargées en 2833 ms
+[13:31:49] [Worker-Main-1/INFO] [fr.do.te.DomaineTerre/]: Côtes fines chargées : 14423 tuiles côtières en 2 ms
+[13:31:49] [Worker-Main-1/INFO] [fr.do.te.DomaineTerre/]: Lacs chargés : 6573 lacs sur 7199 tuiles en 3 ms
+[13:32:22] [Worker-Main-1/INFO] [fr.do.te.DomaineTerre/]: Fleuves chargés : 79884 segments en 33835 ms
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:bear introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:big_cat introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:bison introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:bison introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:boar introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:boar introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:boar introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:boar introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:camel introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:camel introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:camel introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:rhino introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:rhino introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:rhino introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:rhino introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:rhino introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:rhino introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:hyena introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:hyena introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:hyena introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:hyena introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:hyena introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:wildebeest introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:wildebeest introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:aardvark introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/WARN] [fr.do.te.DomaineTerre/]: Faune : untamedwilds:hippo introuvable sous son nom (registre du jeu : absent, Forge : minecraft:pig)
+[13:32:25] [Worker-Main-3/INFO] [fr.do.te.DomaineTerre/]: Faune de la Terre : 26 espèces en surface, 0 sous terre (386 absentes du pack), 197 ms
+[13:32:25] [Worker-Main-3/INFO] [fr.do.te.DomaineTerre/]: Tailles : 21 créatures redimensionnées
+[13:32:26] [Worker-Main-3/INFO] [fr.do.te.DomaineTerre/]: Faune (génération) [65, -1360] CREATURE : biome domaine_terre:atlantique/fleuve, 8 espèces [cow, pig, sheep, chicken, horse, rabbit, fox, bee]
+[13:32:26] [Server thread/INFO] [minecraft/MinecraftServer]: Preparing start region for dimension minecraft:overworld
+[13:32:27] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[13:32:27] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[13:32:27] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[13:32:28] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[13:32:28] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[13:32:28] [Worker-Main-1/INFO] [fr.do.te.DomaineTerre/]: Faune (génération) [66, -1360] CREATURE : biome domaine_terre:atlantique/fleuve, 8 espèces [cow, pig, sheep, chicken, horse, rabbit, fox, bee]
+[13:32:29] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[13:32:29] [Worker-Main-1/INFO] [fr.do.te.DomaineTerre/]: Faune (génération) [66, -1359] CREATURE : biome domaine_terre:atlantique/fleuve, 8 espèces [cow, pig, sheep, chicken, horse, rabbit, fox, bee]
+[13:32:29] [Server thread/INFO] [fr.do.te.DomaineTerre/]: Faune : contrôle des bêtes nées à la génération actif
+[13:32:29] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[13:32:30] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 1%
+[13:32:30] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 1%
+[13:32:31] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 2%
+[13:32:31] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 2%
+[13:32:32] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 3%
+[13:32:32] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 4%
+[13:32:33] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 4%
+[13:32:33] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 5%
+[13:32:34] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 6%
+[13:32:34] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 7%
+[13:32:35] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 8%
+[13:32:35] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 9%
+[13:32:36] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 10%
+[13:32:36] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 10%
+[13:32:37] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 12%
+[13:32:37] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 13%
+[13:32:38] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 15%
+[13:32:38] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 15%
+[13:32:39] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 16%
+[13:32:39] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 18%
+[13:32:40] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 19%
+[13:32:40] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 20%
+[13:32:41] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 21%
+[13:32:41] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 22%
+[13:32:42] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 23%
+[13:32:42] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 0 -12 téléchargé (282 Ko)
+[13:32:42] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 24%
+[13:32:43] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 25%
+[13:32:43] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 26%
+[13:32:44] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 27%
+[13:32:44] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 29%
+[13:32:45] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 30%
+[13:32:45] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 31%
+[13:32:46] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 32%
+[13:32:46] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 34%
+[13:32:47] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 35%
+[13:32:47] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 36%
+[13:32:48] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 38%
+[13:32:48] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 39%
+[13:32:49] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 41%
+[13:32:49] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 42%
+[13:32:50] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 43%
+[13:32:50] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 44%
+[13:32:51] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 45%
+[13:32:51] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 47%
+[13:32:52] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 48%
+[13:32:52] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 49%
+[13:32:53] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 51%
+[13:32:53] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 52%
+[13:32:54] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 54%
+[13:32:54] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 55%
+[13:32:55] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 56%
+[13:32:55] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 58%
+[13:32:56] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 59%
+[13:32:56] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 60%
+[13:32:57] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 62%
+[13:32:57] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 63%
+[13:32:58] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 65%
+[13:32:58] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 67%
+[13:32:59] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 68%
+[13:32:59] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 69%
+[13:33:00] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 69%
+[13:33:00] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 71%
+[13:33:01] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 73%
+[13:33:01] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 74%
+[13:33:02] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 76%
+[13:33:02] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 78%
+[13:33:03] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 79%
+[13:33:03] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 81%
+[13:33:04] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 83%
+[13:33:04] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 84%
+[13:33:05] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 84%
+[13:33:05] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 85%
+[13:33:06] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 86%
+[13:33:06] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 88%
+[13:33:07] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 90%
+[13:33:07] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 92%
+[13:33:08] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 94%
+[13:33:08] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 95%
+[13:33:09] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 96%
+[13:33:09] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 99%
+[13:33:09] [Server thread/INFO] [minecraft/LoggerChunkProgressListener]: Time elapsed: 43243 ms
+[13:33:09] [Server thread/INFO] [minecraft/DedicatedServer]: Done (85.346s)! For help, type "help"
+>>> execute positioned 1046 100 -21756 run locate structure #minecraft:village
+[13:33:09] [Server thread/INFO] [ne.mi.se.pe.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[13:33:10] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [1056, ~, -21776] (22 blocks away)
+[13:33:10] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 1 ms
+>>> execute positioned 2155 100 -20376 run locate structure #minecraft:village
+[13:33:11] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 1 -10 téléchargé (1576 Ko)
+[13:33:11] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 1 -11 téléchargé (2319 Ko)
+[13:33:11] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 0 -10 téléchargé (2161 Ko)
+[13:33:11] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [2112, ~, -20384] (43 blocks away)
+[13:33:11] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 1067 ms
+>>> execute positioned 13911 100 -13376 run locate structure #minecraft:village
+[13:33:12] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 -7 téléchargé (1694 Ko)
+[13:33:12] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 -7 téléchargé (841 Ko)
+[13:33:12] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_desert) is at [13936, ~, -13392] (29 blocks away)
+[13:33:12] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_desert) took 601 ms
+[13:33:12] [Server thread/WARN] [minecraft/MinecraftServer]: Can't keep up! Is the server overloaded? Running 2320ms or 46 ticks behind
+>>> execute positioned 62201 100 -15888 run locate structure #minecraft:village
+[13:33:13] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 30 -8 téléchargé (611 Ko)
+[13:33:13] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 30 -9 téléchargé (1286 Ko)
+[13:33:14] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [62192, ~, -15904] (18 blocks away)
+[13:33:14] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 1068 ms
+>>> execute positioned -32955 100 -18127 run locate structure #minecraft:village
+[13:33:14] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -17 -10 téléchargé (1945 Ko)
+[13:33:14] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -17 -9 téléchargé (1316 Ko)
+[13:33:15] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -16 -9 téléchargé (62 Ko)
+[13:33:15] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -16 -10 téléchargé (1788 Ko)
+[13:33:15] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [-32928, ~, -18128] (27 blocks away)
+[13:33:15] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 1005 ms
+>>> execute positioned 67331 100 15082 run locate structure #minecraft:village
+[13:33:16] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 32 7 téléchargé (2006 Ko)
+[13:33:16] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 33 7 téléchargé (47 Ko)
+[13:33:16] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [67296, ~, 15088] (35 blocks away)
+[13:33:16] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 647 ms
+>>> execute positioned 16751 100 -24829 run locate structure #minecraft:village
+[13:33:17] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 -13 téléchargé (1261 Ko)
+[13:33:17] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 8 -13 téléchargé (1226 Ko)
+[13:33:17] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 -12 téléchargé (1295 Ko)
+[13:33:17] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 8 -12 téléchargé (1183 Ko)
+[13:33:17] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [16736, ~, -24832] (15 blocks away)
+[13:33:17] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 893 ms
+>>> execute positioned -34304 100 5366 run locate structure #minecraft:village
+[13:33:18] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -17 2 téléchargé (2919 Ko)
+[13:33:18] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -18 2 téléchargé (23 Ko)
+[13:33:18] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_desert) is at [-34512, ~, 5040] (386 blocks away)
+[13:33:18] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_desert) took 772 ms
+>>> village point -34330 5350
+[13:33:21] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-34330, 5350) y=66 biome domaine_terre:amazonie/desert | types : desert
+>>> village point -24981 -22057
+[13:33:21] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -13 -11 téléchargé (831 Ko)
+[13:33:21] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -12 -11 téléchargé (383 Ko)
+[13:33:21] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -13 -12 téléchargé (1111 Ko)
+[13:33:24] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-24981, -22057) y=65 biome domaine_terre:boreale/forest | types : plains
+>>> village point -21131 2461
+[13:33:24] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -11 1 téléchargé (1995 Ko)
+[13:33:24] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -11 0 téléchargé (1461 Ko)
+[13:33:25] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -10 0 téléchargé (820 Ko)
+[13:33:25] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -10 1 téléchargé (2033 Ko)
+[13:33:27] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-21131, 2461) y=67 biome domaine_terre:amazonie/savanna | types : savanna
+>>> village point 23251 -25134
+[13:33:27] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 11 -13 téléchargé (1335 Ko)
+[13:33:28] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 11 -12 téléchargé (1213 Ko)
+[13:33:29] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 10 -13 téléchargé (1263 Ko)
+[13:33:29] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 10 -12 téléchargé (1047 Ko)
+[13:33:30] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (23251, -25134) y=69 biome domaine_terre:continentale/plains | types : plains
+>>> village point 57384 -18081
+[13:33:31] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 28 -9 téléchargé (209 Ko)
+[13:33:31] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 28 -10 téléchargé (1856 Ko)
+[13:33:31] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 27 -9 téléchargé (2281 Ko)
+[13:33:31] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 27 -10 téléchargé (2022 Ko)
+[13:33:33] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (57384, -18081) y=84 biome domaine_terre:japon_coree/cherry_grove | types : plains
+>>> village point -51364 -22730
+[13:33:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -26 -12 téléchargé (2529 Ko)
+[13:33:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -25 -11 téléchargé (2161 Ko)
+[13:33:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -26 -11 téléchargé (2792 Ko)
+[13:33:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -25 -12 téléchargé (1182 Ko)
+[13:33:36] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-51364, -22730) y=120 biome domaine_terre:boreale/taiga | types : taiga
+>>> village point 5871 -4020
+[13:33:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 -2 téléchargé (1629 Ko)
+[13:33:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 -2 téléchargé (2336 Ko)
+[13:33:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 -3 téléchargé (1031 Ko)
+[13:33:38] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 -3 téléchargé (565 Ko)
+[13:33:39] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (5871, -4020) y=71 biome domaine_terre:afrique_tropicale/savanna | types : savanna
+>>> village point 22589 -7002
+[13:33:40] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 11 -4 téléchargé (945 Ko)
+[13:33:40] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 10 -4 téléchargé (1860 Ko)
+[13:33:42] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (22589, -7002) y=78 biome domaine_terre:moyen_orient/badlands | types : desert
+>>> village point 13203 -5366
+[13:33:43] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 -3 téléchargé (691 Ko)
+[13:33:45] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (13203, -5366) y=87 biome domaine_terre:afrique_tropicale/savanna | types : savanna
+>>> village point 12776 9704
+[13:33:45] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 4 téléchargé (1505 Ko)
+[13:33:45] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 4 téléchargé (523 Ko)
+[13:33:46] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 5 téléchargé (806 Ko)
+[13:33:46] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 5 téléchargé (1969 Ko)
+[13:33:48] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (12776, 9704) y=90 biome domaine_terre:afrique_australe/desert | types : desert
+>>> village point 39765 -11875
+[13:33:48] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 19 -6 téléchargé (1567 Ko)
+[13:33:48] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 19 -7 téléchargé (2989 Ko)
+[13:33:51] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (39765, -11875) y=68 biome domaine_terre:inde/plains | types : plains
+>>> village point 9314 -19600
+[13:33:51] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 -10 téléchargé (2361 Ko)
+[13:33:54] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (9314, -19600) y=70 biome domaine_terre:continentale/forest | types : plains
+>>> village point 134 -23664
+[13:33:54] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -1 -12 téléchargé (1345 Ko)
+[13:33:56] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (134, -23664) y=63 biome domaine_terre:atlantique/plains | types : plains
+>>> village point 8436 -4209
+[13:33:57] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 -2 téléchargé (1493 Ko)
+[13:33:57] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 -3 téléchargé (776 Ko)
+[13:34:00] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (8436, -4209) y=81 biome domaine_terre:afrique_tropicale/savanna | types : savanna
+>>> village point 50745 -27846
+[13:34:01] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 24 -14 téléchargé (1174 Ko)
+[13:34:01] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 25 -14 téléchargé (1195 Ko)
+[13:34:03] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (50745, -27846) y=84 biome domaine_terre:siberie/taiga | types : taiga
+>>> village point 52373 -11688
+[13:34:04] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 25 -6 téléchargé (2634 Ko)
+[13:34:04] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 25 -7 téléchargé (2537 Ko)
+[13:34:06] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (52373, -11688) y=75 biome domaine_terre:chine/forest | types : plains
+>>> village point -41384 -8009
+[13:34:07] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -21 -4 téléchargé (1517 Ko)
+[13:34:07] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -21 -5 téléchargé (102 Ko)
+[13:34:07] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -20 -5 téléchargé (514 Ko)
+[13:34:07] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -20 -4 téléchargé (2220 Ko)
+[13:34:10] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-41384, -8009) y=65 biome domaine_terre:ouest_mexique/savanna | types : savanna
+>>> village point -23243 5608
+[13:34:11] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -12 2 téléchargé (1436 Ko)
+[13:34:11] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -12 3 téléchargé (1845 Ko)
+[13:34:13] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-23243, 5608) y=75 biome domaine_terre:amazonie/savanna | types : savanna
+>>> village point 7092 -30787
+[13:34:14] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 -16 téléchargé (95 Ko)
+[13:34:14] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 -15 téléchargé (1578 Ko)
+[13:34:16] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (7092, -30787) y=66 biome domaine_terre:nordique/plains | types : plains
+>>> village point 10002 15123
+[13:34:17] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 7 téléchargé (1114 Ko)
+[13:34:17] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 7 téléchargé (858 Ko)
+[13:34:21] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (10002, 15123) y=71 biome domaine_terre:afrique_australe/plains | types : plains
+>>> village point -41520 -6969
+[13:34:24] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-41520, -6969) y=67 biome domaine_terre:ouest_mexique/savanna | types : savanna
+>>> village point 51829 -17770
+[13:34:24] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 25 -9 téléchargé (1315 Ko)
+[13:34:25] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 24 -9 téléchargé (2541 Ko)
+[13:34:27] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (51829, -17770) y=65 biome domaine_terre:chine/plains | types : plains
+>>> village point 53734 -19097
+[13:34:27] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 26 -10 téléchargé (1243 Ko)
+[13:34:28] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 25 -10 téléchargé (1855 Ko)
+[13:34:30] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (53734, -19097) y=75 biome domaine_terre:chine/plains | types : plains
+>>> village point 50628 3703
+[13:34:30] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 24 1 téléchargé (607 Ko)
+[13:34:31] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 25 2 téléchargé (31 Ko)
+[13:34:31] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 25 1 téléchargé (351 Ko)
+[13:34:33] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (50628, 3703) y=76 biome domaine_terre:asie_sud_est/jungle | types : savanna
+>>> village point 48549 -23783
+[13:34:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 23 -12 téléchargé (1947 Ko)
+[13:34:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 24 -12 téléchargé (1962 Ko)
+[13:34:36] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (48549, -23783) y=83 biome domaine_terre:siberie/taiga | types : taiga
+>>> village point -39375 -14931
+[13:34:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -20 -8 téléchargé (1429 Ko)
+[13:34:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -19 -8 téléchargé (2209 Ko)
+[13:34:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -20 -7 téléchargé (636 Ko)
+[13:34:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -19 -7 téléchargé (664 Ko)
+[13:34:39] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-39375, -14931) y=73 biome domaine_terre:grandes_plaines/forest | types : plains
+>>> village point -54051 -27514
+[13:34:40] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -27 -14 téléchargé (1054 Ko)
+[13:34:42] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-54051, -27514) y=68 biome domaine_terre:boreale/taiga | types : taiga
+>>> village point 23908 -28306
+[13:34:43] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 11 -14 téléchargé (1066 Ko)
+[13:34:43] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 11 -15 téléchargé (799 Ko)
+[13:34:44] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 12 -15 téléchargé (872 Ko)
+[13:34:44] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 12 -14 téléchargé (1320 Ko)
+[13:34:45] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (23908, -28306) y=69 biome domaine_terre:nordique/taiga | types : taiga
+>>> village point 9641 -28111
+[13:34:46] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 -14 téléchargé (569 Ko)
+[13:34:47] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 -15 téléchargé (1205 Ko)
+[13:34:48] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 -14 téléchargé (1170 Ko)
+[13:34:49] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (9641, -28111) y=66 biome domaine_terre:nordique/taiga | types : taiga
+>>> village point -21988 9271
+[13:34:49] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -11 4 téléchargé (2167 Ko)
+[13:34:50] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -12 4 téléchargé (1622 Ko)
+[13:34:52] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-21988, 9271) y=81 biome domaine_terre:amazonie/savanna | types : savanna
+>>> village point -33304 70
+[13:34:53] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -17 -1 téléchargé (2701 Ko)
+[13:34:53] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -17 0 téléchargé (1773 Ko)
+[13:34:53] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -16 0 téléchargé (1429 Ko)
+[13:34:53] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -16 -1 téléchargé (1583 Ko)
+[13:34:55] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-33304, 70) y=71 biome domaine_terre:amazonie/jungle | types : savanna
+>>> village point 58066 -30184
+[13:34:56] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 28 -15 téléchargé (1906 Ko)
+[13:34:56] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 28 -16 téléchargé (736 Ko)
+[13:34:59] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (58066, -30184) y=92 biome domaine_terre:siberie/taiga | types : taiga
+>>> village point 50131 -11973
+[13:35:00] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 24 -6 téléchargé (3112 Ko)
+[13:35:00] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 24 -7 téléchargé (2455 Ko)
+[13:35:02] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (50131, -11973) y=66 biome domaine_terre:chine/forest | types : plains
+>>> village point -31706 14086
+[13:35:03] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -16 6 téléchargé (1788 Ko)
+[13:35:03] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -16 7 téléchargé (2026 Ko)
+[13:35:06] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-31706, 14086) y=87 biome domaine_terre:cone_sud/plains | types : plains
+>>> village point 64933 -19636
+[13:35:07] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 31 -10 téléchargé (626 Ko)
+[13:35:07] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 32 -10 téléchargé (77 Ko)
+[13:35:09] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (64933, -19636) y=68 biome domaine_terre:japon_coree/forest | types : plains
+>>> village point 17944 -8972
+[13:35:09] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 8 -5 téléchargé (843 Ko)
+[13:35:09] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 9 -5 téléchargé (1524 Ko)
+[13:35:11] [Worker-Main-1/INFO] [fr.do.te.DomaineTerre/]: Récifs : 10603 segments
+[13:35:11] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (17944, -8972) y=64 biome domaine_terre:moyen_orient/desert | types : desert
+>>> village point 60381 -27898
+[13:35:12] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 29 -14 téléchargé (1922 Ko)
+[13:35:14] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (60381, -27898) y=70 biome domaine_terre:siberie/snowy_taiga | types : snowy
+>>> village point 14382 -1235
+[13:35:15] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 -1 téléchargé (1783 Ko)
+[13:35:15] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 -1 téléchargé (2041 Ko)
+[13:35:17] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (14382, -1235) y=104 biome domaine_terre:afrique_tropicale/savanna_plateau | types : savanna
+>>> village point -732 -19065
+[13:35:18] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -1 -10 téléchargé (1306 Ko)
+[13:35:19] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -1 -9 téléchargé (2115 Ko)
+[13:35:21] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-732, -19065) y=80 biome domaine_terre:mediterranee/plains | types : plains
+>>> village point 54338 -8131
+[13:35:21] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 26 -4 téléchargé (1163 Ko)
+[13:35:22] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 26 -5 téléchargé (157 Ko)
+[13:35:24] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (54338, -8131) y=67 biome domaine_terre:asie_sud_est/savanna | types : savanna
+>>> village point 7504 -3858
+[13:35:26] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (7504, -3858) y=76 biome domaine_terre:afrique_tropicale/savanna | types : savanna
+>>> village point -30668 1472
+[13:35:27] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -15 0 téléchargé (1238 Ko)
+[13:35:27] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -16 1 téléchargé (1567 Ko)
+[13:35:27] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -15 1 téléchargé (1416 Ko)
+[13:35:29] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-30668, 1472) y=69 biome domaine_terre:amazonie/jungle | types : savanna
+>>> village point -41682 -18540
+[13:35:30] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -21 -10 téléchargé (1178 Ko)
+[13:35:30] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -21 -9 téléchargé (1537 Ko)
+[13:35:32] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-41682, -18540) y=72 biome domaine_terre:grandes_plaines/forest | types : plains
+>>> village point 52200 -14188
+[13:35:33] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 25 -8 téléchargé (1029 Ko)
+[13:35:35] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (52200, -14188) y=65 biome domaine_terre:chine/plains | types : plains
+>>> village point -54714 -18847
+[13:35:36] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -27 -10 téléchargé (2540 Ko)
+[13:35:36] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -27 -9 téléchargé (2133 Ko)
+[13:35:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -28 -9 téléchargé (20 Ko)
+[13:35:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -28 -10 téléchargé (65 Ko)
+[13:35:39] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-54714, -18847) y=85 biome domaine_terre:ouest_mexique/plains | types : plains
+>>> village point 11026 12776
+[13:35:40] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 6 téléchargé (1594 Ko)
+[13:35:42] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (11026, 12776) y=107 biome domaine_terre:afrique_australe/savanna_plateau | types : savanna
+>>> village point -43608 -19114
+[13:35:43] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -22 -10 téléchargé (1203 Ko)
+[13:35:45] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-43608, -19114) y=74 biome domaine_terre:grandes_plaines/plains | types : plains
+>>> village point -6632 -5741
+[13:35:45] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -4 -3 téléchargé (481 Ko)
+[13:35:45] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -3 -3 téléchargé (2149 Ko)
+[13:35:46] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -4 -4 téléchargé (447 Ko)
+[13:35:46] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -3 -4 téléchargé (1214 Ko)
+[13:35:48] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-6632, -5741) y=66 biome domaine_terre:sahara_sahel/savanna | types : savanna
+>>> village point 46839 -16735
+[13:35:49] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 22 -8 téléchargé (3388 Ko)
+[13:35:49] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 22 -9 téléchargé (1715 Ko)
+[13:35:50] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 23 -9 téléchargé (1616 Ko)
+[13:35:50] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 23 -8 téléchargé (3277 Ko)
+[13:35:52] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (46839, -16735) y=108 biome domaine_terre:chine/desert | types : desert
+>>> village point 17653 -28373
+[13:35:53] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 8 -14 téléchargé (1045 Ko)
+[13:35:53] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 8 -15 téléchargé (615 Ko)
+[13:35:54] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 9 -14 téléchargé (1107 Ko)
+[13:35:55] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (17653, -28373) y=72 biome domaine_terre:nordique/taiga | types : taiga
+>>> village point 18538 -9446
+[13:35:57] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (18538, -9446) y=107 biome domaine_terre:moyen_orient/desert | types : desert
+>>> village point 15132 1247
+[13:35:58] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 0 téléchargé (1510 Ko)
+[13:36:00] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (15132, 1247) y=112 biome domaine_terre:afrique_est/savanna_plateau | types : savanna
+>>> village point 13756 8470
+[13:36:01] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 6 3 téléchargé (1935 Ko)
+[13:36:01] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 4 téléchargé (924 Ko)
+[13:36:01] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 3 téléchargé (1925 Ko)
+[13:36:03] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (13756, 8470) y=119 biome domaine_terre:afrique_australe/forest | types : plains
+>>> village point 34751 -23929
+[13:36:04] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 16 -12 téléchargé (553 Ko)
+[13:36:04] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 17 -12 téléchargé (784 Ko)
+[13:36:06] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (34751, -23929) y=67 biome domaine_terre:siberie/plains | types : plains
+>>> village point 41910 -20620
+[13:36:07] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 20 -11 téléchargé (1630 Ko)
+[13:36:07] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 20 -10 téléchargé (1532 Ko)
+[13:36:10] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (41910, -20620) y=149 biome domaine_terre:steppes_tibet/desert | types : desert
+>>> village point -25213 7239
+[13:36:10] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -13 3 téléchargé (1463 Ko)
+[13:36:12] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-25213, 7239) y=74 biome domaine_terre:amazonie/savanna | types : savanna
+>>> village point 2411 -16115
+[13:36:13] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 1 -8 téléchargé (1530 Ko)
+[13:36:13] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 1 -9 téléchargé (293 Ko)
+[13:36:13] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 0 -9 téléchargé (246 Ko)
+[13:36:13] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 0 -8 téléchargé (1573 Ko)
+[13:36:16] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (2411, -16115) y=104 biome domaine_terre:maghreb/plains | types : plains
+>>> village point 4230 -22850
+[13:36:17] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 -12 téléchargé (1206 Ko)
+[13:36:17] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 -11 téléchargé (2546 Ko)
+[13:36:18] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 1 -12 téléchargé (730 Ko)
+[13:36:20] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (4230, -22850) y=69 biome domaine_terre:continentale/plains | types : plains
+>>> village point 26648 -14505
+[13:36:20] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 13 -8 téléchargé (2287 Ko)
+[13:36:20] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 12 -7 téléchargé (1976 Ko)
+[13:36:20] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 12 -8 téléchargé (1525 Ko)
+[13:36:21] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 13 -7 téléchargé (1459 Ko)
+[13:36:24] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (26648, -14505) y=145 biome domaine_terre:moyen_orient/desert | types : desert
+>>> village point 77208 18393
+[13:36:24] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 37 9 téléchargé (1183 Ko)
+[13:36:25] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 37 8 téléchargé (316 Ko)
+[13:36:25] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 38 9 téléchargé (15 Ko)
+[13:36:25] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 38 8 téléchargé (1297 Ko)
+[13:36:27] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (77208, 18393) y=86 biome domaine_terre:nouvelle_zelande/forest | types : plains
+>>> village point -4983 -3507
+[13:36:28] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -3 -2 téléchargé (1091 Ko)
+[13:36:31] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-4983, -3507) y=79 biome domaine_terre:afrique_tropicale/jungle | types : savanna
+>>> execute positioned 17944 100 -8972 run locate structure #minecraft:village
+[13:36:31] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_desert) is at [17936, ~, -8976] (8 blocks away)
+[13:36:31] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_desert) took 0 ms
+>>> execute positioned -2350 100 -3037 run locate structure #minecraft:village
+[13:36:32] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -2 -2 téléchargé (1837 Ko)
+[13:36:32] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -1 -2 téléchargé (1551 Ko)
+[13:36:32] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_savanna) is at [-2352, ~, -3040] (3 blocks away)
+[13:36:32] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_savanna) took 762 ms
+>>> execute positioned 67996 100 11373 run locate structure #minecraft:village
+[13:36:33] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 33 5 téléchargé (446 Ko)
+[13:36:33] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 32 5 téléchargé (1629 Ko)
+[13:36:33] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [67984, ~, 11360] (17 blocks away)
+[13:36:33] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 843 ms
+>>> execute positioned -50796 100 -20164 run locate structure #minecraft:village
+[13:36:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -25 -10 téléchargé (2469 Ko)
+[13:36:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -26 -10 téléchargé (2539 Ko)
+[13:36:35] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_taiga) is at [-50800, ~, -20176] (12 blocks away)
+[13:36:35] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_taiga) took 1027 ms
+>>> execute positioned 61901 100 -16179 run locate structure #minecraft:village
+[13:36:35] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 29 -9 téléchargé (59 Ko)
+[13:36:35] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 29 -8 téléchargé (1328 Ko)
+[13:36:36] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [61888, ~, -16192] (18 blocks away)
+[13:36:36] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 504 ms
+>>> execute positioned 1900 100 -16408 run locate structure #minecraft:village
+[13:36:37] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [1888, ~, -16416] (14 blocks away)
+[13:36:37] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 713 ms
+>>> execute positioned -28423 100 3902 run locate structure #minecraft:village
+[13:36:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -15 2 téléchargé (1304 Ko)
+[13:36:37] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -14 1 téléchargé (1407 Ko)
+[13:36:38] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -14 2 téléchargé (1807 Ko)
+[13:36:38] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_savanna) is at [-28432, ~, 3888] (16 blocks away)
+[13:36:38] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_savanna) took 835 ms
+[13:36:38] [Server thread/WARN] [minecraft/MinecraftServer]: Can't keep up! Is the server overloaded? Running 190980ms or 3819 ticks behind
+>>> execute positioned -34120 100 -3510 run locate structure #minecraft:village
+[13:36:38] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -17 -2 téléchargé (2460 Ko)
+[13:36:39] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -17 -3 téléchargé (346 Ko)
+[13:36:39] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [-34128, ~, -3520] (12 blocks away)
+[13:36:39] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 789 ms
+>>> execute positioned 52103 100 -3555 run locate structure #minecraft:village
+[13:36:39] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 25 -2 téléchargé (819 Ko)
+[13:36:39] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 25 -3 téléchargé (124 Ko)
+[13:36:40] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_savanna) is at [52096, ~, -3568] (14 blocks away)
+[13:36:40] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_savanna) took 578 ms
+>>> execute positioned 24628 100 -11166 run locate structure #minecraft:village
+[13:36:40] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 12 -6 téléchargé (1247 Ko)
+[13:36:40] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 11 -6 téléchargé (596 Ko)
+[13:36:41] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_desert) is at [24624, ~, -11168] (4 blocks away)
+[13:36:41] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_desert) took 687 ms
+>>> execute positioned -16019 100 3672 run locate structure #minecraft:village
+[13:36:41] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -9 1 téléchargé (1930 Ko)
+[13:36:41] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -8 1 téléchargé (788 Ko)
+[13:36:42] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -8 2 téléchargé (140 Ko)
+[13:36:42] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -9 2 téléchargé (1787 Ko)
+[13:36:42] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_savanna) is at [-16032, ~, 3664] (15 blocks away)
+[13:36:42] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_savanna) took 1068 ms
+>>> execute positioned 20453 100 -27395 run locate structure #minecraft:village
+[13:36:43] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 10 -14 téléchargé (1153 Ko)
+[13:36:43] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_taiga) is at [20448, ~, -27408] (13 blocks away)
+[13:36:43] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_taiga) took 435 ms
+>>> execute positioned 10635 100 -5032 run locate structure #minecraft:village
+[13:36:43] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 -3 téléchargé (852 Ko)
+[13:36:44] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_savanna) is at [10624, ~, -5040] (13 blocks away)
+[13:36:44] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_savanna) took 921 ms
+>>> execute positioned 62683 100 -18618 run locate structure #minecraft:village
+[13:36:44] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 30 -10 téléchargé (644 Ko)
+[13:36:44] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [62672, ~, -18624] (12 blocks away)
+[13:36:44] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 390 ms
+>>> execute positioned 42532 100 -10332 run locate structure #minecraft:village
+[13:36:45] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 20 -5 téléchargé (2155 Ko)
+[13:36:45] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 20 -6 téléchargé (2820 Ko)
+[13:36:45] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 21 -6 téléchargé (3510 Ko)
+[13:36:45] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 21 -5 téléchargé (3296 Ko)
+[13:36:46] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_savanna) is at [42528, ~, -10336] (5 blocks away)
+[13:36:46] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_savanna) took 1035 ms
+>>> execute positioned -43824 100 -9413 run locate structure #minecraft:village
+[13:36:46] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -22 -5 téléchargé (2359 Ko)
+[13:36:47] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_savanna) is at [-43824, ~, -9424] (11 blocks away)
+[13:36:47] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_savanna) took 520 ms
+>>> execute positioned -22336 100 11174 run locate structure #minecraft:village
+[13:36:47] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -11 5 téléchargé (1753 Ko)
+[13:36:47] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -12 5 téléchargé (2463 Ko)
+[13:36:48] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [-22336, ~, 11168] (6 blocks away)
+[13:36:48] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 774 ms
+>>> execute positioned 52632 100 -21480 run locate structure #minecraft:village
+[13:36:48] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 25 -11 téléchargé (1098 Ko)
+[13:36:49] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [52624, ~, -21488] (11 blocks away)
+[13:36:49] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 604 ms
+>>> execute positioned 16285 100 -12646 run locate structure #minecraft:village
+[13:36:49] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 8 -7 téléchargé (1363 Ko)
+[13:36:49] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 -6 téléchargé (1289 Ko)
+[13:36:49] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 8 -6 téléchargé (1762 Ko)
+[13:36:50] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_desert) is at [16272, ~, -12656] (16 blocks away)
+[13:36:50] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_desert) took 513 ms
+>>> execute positioned 15082 100 900 run locate structure #minecraft:village
+[13:36:50] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_savanna) is at [15072, ~, 896] (10 blocks away)
+[13:36:50] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_savanna) took 343 ms
+>>> execute positioned 65406 100 16100 run locate structure #minecraft:village
+[13:36:51] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 31 7 téléchargé (727 Ko)
+[13:36:51] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 32 8 téléchargé (495 Ko)
+[13:36:51] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 31 8 téléchargé (981 Ko)
+[13:36:51] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [65392, ~, 16096] (14 blocks away)
+[13:36:51] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 772 ms
+>>> execute positioned 68140 100 12231 run locate structure #minecraft:village
+[13:36:52] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 33 6 téléchargé (905 Ko)
+[13:36:52] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 32 6 téléchargé (1185 Ko)
+[13:36:53] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [68128, ~, 12224] (13 blocks away)
+[13:36:53] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 1139 ms
+>>> execute positioned 3770 100 -11800 run locate structure #minecraft:village
+[13:36:53] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 1 -6 téléchargé (1949 Ko)
+[13:36:53] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 -7 téléchargé (1142 Ko)
+[13:36:53] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 1 -7 téléchargé (1544 Ko)
+[13:36:53] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 -6 téléchargé (1605 Ko)
+[13:36:54] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_desert) is at [3760, ~, -11808] (12 blocks away)
+[13:36:54] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_desert) took 858 ms
+>>> execute positioned 29900 100 -24343 run locate structure #minecraft:village
+[13:36:54] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 14 -12 téléchargé (602 Ko)
+[13:36:54] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 14 -13 téléchargé (837 Ko)
+[13:36:55] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [29888, ~, -24352] (15 blocks away)
+[13:36:55] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 722 ms
+>>> execute positioned -39661 100 -7640 run locate structure #minecraft:village
+[13:36:56] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_savanna) is at [-39664, ~, -7648] (8 blocks away)
+[13:36:56] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_savanna) took 460 ms
+>>> execute positioned -26981 100 11002 run locate structure #minecraft:village
+[13:36:56] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -14 5 téléchargé (489 Ko)
+[13:36:56] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -13 5 téléchargé (1008 Ko)
+[13:36:56] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [-26992, ~, 10992] (14 blocks away)
+[13:36:56] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 803 ms
+>>> execute positioned 1480 100 -2874 run locate structure #minecraft:village
+[13:36:57] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 0 -2 téléchargé (1045 Ko)
+[13:36:57] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_savanna) is at [1472, ~, -2880] (10 blocks away)
+[13:36:57] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_savanna) took 476 ms
+>>> execute positioned 6380 100 -23064 run locate structure #minecraft:village
+[13:36:57] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 -12 téléchargé (1129 Ko)
+[13:36:58] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 -11 téléchargé (2130 Ko)
+[13:36:58] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [6368, ~, -23072] (14 blocks away)
+[13:36:58] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 869 ms
+>>> execute positioned -29720 100 -21401 run locate structure #minecraft:village
+[13:36:58] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -15 -11 téléchargé (1645 Ko)
+[13:36:59] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_plains) is at [-29728, ~, -21408] (10 blocks away)
+[13:36:59] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_plains) took 606 ms
+>>> execute positioned 4337 100 -1803 run locate structure #minecraft:village
+[13:36:59] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 -1 téléchargé (2204 Ko)
+[13:36:59] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 1 -1 téléchargé (99 Ko)
+[13:36:59] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 1 -2 téléchargé (1628 Ko)
+[13:37:00] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:village (minecraft:village_savanna) is at [4336, ~, -1808] (5 blocks away)
+[13:37:00] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:village (minecraft:village_savanna) took 614 ms
+>>> execute positioned 13848 100 -13352 run locate structure minecraft:desert_pyramid
+[13:37:00] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:desert_pyramid is at [13840, ~, -13360] (11 blocks away)
+[13:37:00] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:desert_pyramid took 128 ms
+>>> execute positioned 15096 100 -7544 run locate structure minecraft:desert_pyramid
+[13:37:01] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 7 -4 téléchargé (674 Ko)
+[13:37:01] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:desert_pyramid is at [15088, ~, -7552] (11 blocks away)
+[13:37:01] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:desert_pyramid took 258 ms
+>>> execute positioned -39912 100 -7672 run locate structure minecraft:jungle_pyramid
+[13:37:01] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:jungle_pyramid is at [-39920, ~, -7680] (11 blocks away)
+[13:37:01] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:jungle_pyramid took 121 ms
+>>> execute positioned -39432 100 -9208 run locate structure minecraft:jungle_pyramid
+[13:37:02] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -19 -5 téléchargé (120 Ko)
+[13:37:02] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:jungle_pyramid is at [-39440, ~, -9216] (11 blocks away)
+[13:37:02] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:jungle_pyramid took 331 ms
+>>> execute positioned -40984 100 -7800 run locate structure minecraft:jungle_pyramid
+[13:37:02] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:jungle_pyramid is at [-40992, ~, -7808] (11 blocks away)
+[13:37:02] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:jungle_pyramid took 128 ms
+>>> execute positioned -39992 100 -8056 run locate structure minecraft:jungle_pyramid
+[13:37:03] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:jungle_pyramid is at [-40000, ~, -8064] (11 blocks away)
+[13:37:03] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:jungle_pyramid took 30 ms
+>>> execute positioned -39688 100 -6616 run locate structure minecraft:jungle_pyramid
+[13:37:03] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -20 -3 téléchargé (165 Ko)
+[13:37:03] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:jungle_pyramid is at [-39696, ~, -6624] (11 blocks away)
+[13:37:03] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:jungle_pyramid took 229 ms
+>>> execute positioned 46248 100 -5976 run locate structure minecraft:jungle_pyramid
+[13:37:04] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 22 -3 téléchargé (855 Ko)
+[13:37:04] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 22 -4 téléchargé (1684 Ko)
+[13:37:04] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:jungle_pyramid is at [46240, ~, -5984] (11 blocks away)
+[13:37:04] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:jungle_pyramid took 451 ms
+>>> execute positioned -30840 100 -34600 run locate structure minecraft:igloo
+[13:37:04] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -16 -17 téléchargé (173 Ko)
+[13:37:04] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -15 -17 téléchargé (370 Ko)
+[13:37:04] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -15 -18 téléchargé (681 Ko)
+[13:37:04] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -16 -18 téléchargé (839 Ko)
+[13:37:05] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:igloo is at [-30848, ~, -34608] (11 blocks away)
+[13:37:05] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:igloo took 431 ms
+>>> execute positioned -16760 100 -29304 run locate structure minecraft:igloo
+[13:37:05] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -9 -15 téléchargé (565 Ko)
+[13:37:05] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -8 -15 téléchargé (667 Ko)
+[13:37:05] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:igloo is at [-16768, ~, -29312] (11 blocks away)
+[13:37:05] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:igloo took 393 ms
+>>> execute positioned -22568 100 -29864 run locate structure minecraft:igloo
+[13:37:05] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -12 -15 téléchargé (1035 Ko)
+[13:37:05] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -11 -15 téléchargé (740 Ko)
+[13:37:05] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:igloo is at [-22576, ~, -29872] (11 blocks away)
+[13:37:05] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:igloo took 415 ms
+>>> execute positioned -30504 100 -28504 run locate structure minecraft:igloo
+[13:37:06] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -15 -14 téléchargé (882 Ko)
+[13:37:06] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -16 -15 téléchargé (867 Ko)
+[13:37:06] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -15 -15 téléchargé (1364 Ko)
+[13:37:06] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -16 -14 téléchargé (938 Ko)
+[13:37:06] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:igloo is at [-30512, ~, -28512] (11 blocks away)
+[13:37:06] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:igloo took 494 ms
+>>> execute positioned -46776 100 -30872 run locate structure minecraft:igloo
+[13:37:06] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -23 -16 téléchargé (329 Ko)
+[13:37:06] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -24 -16 téléchargé (643 Ko)
+[13:37:06] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -23 -15 téléchargé (792 Ko)
+[13:37:06] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -24 -15 téléchargé (983 Ko)
+[13:37:07] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:igloo is at [-46784, ~, -30880] (11 blocks away)
+[13:37:07] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:igloo took 447 ms
+>>> execute positioned -42760 100 -28664 run locate structure minecraft:igloo
+[13:37:07] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -21 -14 téléchargé (552 Ko)
+[13:37:07] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -22 -15 téléchargé (787 Ko)
+[13:37:07] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -21 -15 téléchargé (918 Ko)
+[13:37:07] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -22 -14 téléchargé (823 Ko)
+[13:37:07] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:igloo is at [-42768, ~, -28672] (11 blocks away)
+[13:37:07] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:igloo took 508 ms
+>>> execute positioned -41000 100 -28024 run locate structure minecraft:igloo
+[13:37:08] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -20 -14 téléchargé (161 Ko)
+[13:37:08] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:igloo is at [-41008, ~, -28032] (11 blocks away)
+[13:37:08] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:igloo took 228 ms
+>>> execute positioned -72264 100 -29880 run locate structure minecraft:igloo
+[13:37:08] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -36 -15 téléchargé (1072 Ko)
+[13:37:08] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:igloo is at [-72272, ~, -29888] (11 blocks away)
+[13:37:08] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:igloo took 233 ms
+>>> execute positioned -67560 100 -30344 run locate structure minecraft:igloo
+[13:37:09] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -33 -15 téléchargé (1721 Ko)
+[13:37:09] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -33 -16 téléchargé (218 Ko)
+[13:37:09] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -34 -16 téléchargé (284 Ko)
+[13:37:09] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -34 -15 téléchargé (1727 Ko)
+[13:37:09] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:igloo is at [-67568, ~, -30352] (11 blocks away)
+[13:37:09] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:igloo took 476 ms
+>>> execute positioned 10456 100 -20824 run locate structure minecraft:mansion
+[13:37:09] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 -11 téléchargé (2133 Ko)
+[13:37:10] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 4 -11 téléchargé (1744 Ko)
+[13:37:10] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 -10 téléchargé (2065 Ko)
+[13:37:10] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:mansion is at [10448, ~, -20832] (11 blocks away)
+[13:37:10] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:mansion took 583 ms
+>>> execute positioned 11272 100 -20216 run locate structure minecraft:mansion
+[13:37:10] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:mansion is at [11264, ~, -20224] (11 blocks away)
+[13:37:10] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:mansion took 90 ms
+>>> execute positioned 3624 100 -21512 run locate structure minecraft:mansion
+[13:37:11] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:mansion is at [3616, ~, -21520] (11 blocks away)
+[13:37:11] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:mansion took 194 ms
+>>> execute positioned -12245 100 -16653 run locate structure minecraft:monument
+[13:37:11] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:monument is at [-12256, ~, -16656] (11 blocks away)
+[13:37:11] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:monument took 22 ms
+>>> execute positioned 54591 100 -10731 run locate structure minecraft:monument
+[13:37:12] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:monument is at [54576, ~, -10736] (15 blocks away)
+[13:37:12] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:monument took 28 ms
+>>> execute positioned 30546 100 -9841 run locate structure minecraft:monument
+[13:37:12] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:monument is at [30544, ~, -9856] (15 blocks away)
+[13:37:12] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:monument took 29 ms
+>>> execute positioned 10063 100 -16097 run locate structure minecraft:monument
+[13:37:13] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:monument is at [10048, ~, -16112] (21 blocks away)
+[13:37:13] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:monument took 24 ms
+>>> execute positioned -35444 100 -11377 run locate structure minecraft:monument
+[13:37:13] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:monument is at [-35456, ~, -11392] (19 blocks away)
+[13:37:13] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:monument took 25 ms
+>>> execute positioned -12174 100 -16582 run locate structure #minecraft:ocean_ruin
+[13:37:14] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:ocean_ruin (minecraft:ocean_ruin_cold) is at [-12176, ~, -16592] (10 blocks away)
+[13:37:14] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:ocean_ruin (minecraft:ocean_ruin_cold) took 17 ms
+>>> execute positioned 54511 100 -10705 run locate structure #minecraft:ocean_ruin
+[13:37:14] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:ocean_ruin (minecraft:ocean_ruin_warm) is at [54496, ~, -10720] (21 blocks away)
+[13:37:14] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:ocean_ruin (minecraft:ocean_ruin_warm) took 11 ms
+>>> execute positioned 30617 100 -9912 run locate structure #minecraft:ocean_ruin
+[13:37:15] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:ocean_ruin (minecraft:ocean_ruin_warm) is at [30608, ~, -9920] (12 blocks away)
+[13:37:15] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:ocean_ruin (minecraft:ocean_ruin_warm) took 7 ms
+>>> execute positioned 9997 100 -16052 run locate structure #minecraft:ocean_ruin
+[13:37:15] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:ocean_ruin (minecraft:ocean_ruin_cold) is at [9984, ~, -16064] (17 blocks away)
+[13:37:15] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:ocean_ruin (minecraft:ocean_ruin_cold) took 3 ms
+>>> execute positioned -35489 100 -11310 run locate structure #minecraft:ocean_ruin
+[13:37:16] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:ocean_ruin (minecraft:ocean_ruin_warm) is at [-35504, ~, -11312] (15 blocks away)
+[13:37:16] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:ocean_ruin (minecraft:ocean_ruin_warm) took 5 ms
+>>> execute positioned -33485 100 -15629 run locate structure #minecraft:shipwreck
+[13:37:16] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:shipwreck (minecraft:shipwreck) is at [-33488, ~, -15632] (4 blocks away)
+[13:37:16] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:shipwreck (minecraft:shipwreck) took 10 ms
+>>> execute positioned -28899 100 -14293 run locate structure #minecraft:shipwreck
+[13:37:17] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:shipwreck (minecraft:shipwreck) is at [-28912, ~, -14304] (17 blocks away)
+[13:37:17] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:shipwreck (minecraft:shipwreck) took 15 ms
+>>> execute positioned -36157 100 -10865 run locate structure #minecraft:shipwreck
+[13:37:17] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:shipwreck (minecraft:shipwreck) is at [-36160, ~, -10880] (15 blocks away)
+[13:37:17] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:shipwreck (minecraft:shipwreck) took 9 ms
+>>> execute positioned -31081 100 -9039 run locate structure #minecraft:shipwreck
+[13:37:18] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:shipwreck (minecraft:shipwreck) is at [-31088, ~, -9040] (7 blocks away)
+[13:37:18] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:shipwreck (minecraft:shipwreck) took 7 ms
+>>> execute positioned -29967 100 24980 run locate structure #minecraft:shipwreck
+[13:37:18] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:shipwreck (minecraft:shipwreck) is at [-29968, ~, 24976] (4 blocks away)
+[13:37:18] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:shipwreck (minecraft:shipwreck) took 9 ms
+>>> execute positioned 8149 100 15340 run locate structure #minecraft:shipwreck
+[13:37:19] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #minecraft:shipwreck (minecraft:shipwreck) is at [8144, ~, 15328] (13 blocks away)
+[13:37:19] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #minecraft:shipwreck (minecraft:shipwreck) took 9 ms
+>>> execute positioned 6472 100 -18152 run locate structure minecraft:trail_ruins
+[13:37:19] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 -9 téléchargé (916 Ko)
+[13:37:19] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 3 -10 téléchargé (1516 Ko)
+[13:37:19] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 -9 téléchargé (353 Ko)
+[13:37:20] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 -10 téléchargé (1514 Ko)
+[13:37:20] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:trail_ruins is at [6464, ~, -18160] (11 blocks away)
+[13:37:20] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:trail_ruins took 494 ms
+>>> execute positioned 11688 100 -17784 run locate structure minecraft:trail_ruins
+[13:37:20] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 5 -9 téléchargé (1117 Ko)
+[13:37:20] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:trail_ruins is at [11680, ~, -17792] (11 blocks away)
+[13:37:20] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:trail_ruins took 250 ms
+>>> execute positioned 15784 100 -13496 run locate structure minecraft:trail_ruins
+[13:37:21] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:trail_ruins is at [15776, ~, -13504] (11 blocks away)
+[13:37:21] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:trail_ruins took 63 ms
+>>> execute positioned 30280 100 -12168 run locate structure minecraft:trail_ruins
+[13:37:21] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 14 -7 téléchargé (2002 Ko)
+[13:37:22] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 14 -6 téléchargé (1093 Ko)
+[13:37:22] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 15 -7 téléchargé (1050 Ko)
+[13:37:22] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 15 -6 téléchargé (1123 Ko)
+[13:37:22] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:trail_ruins is at [30272, ~, -12176] (11 blocks away)
+[13:37:22] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:trail_ruins took 721 ms
+>>> execute positioned 4536 100 -16408 run locate structure minecraft:trail_ruins
+[13:37:22] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 2 -8 téléchargé (596 Ko)
+[13:37:22] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:trail_ruins is at [4528, ~, -16416] (11 blocks away)
+[13:37:22] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:trail_ruins took 236 ms
+>>> execute positioned -813 100 -22789 run locate structure minecraft:stronghold
+[13:37:23] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -24 -9 téléchargé (2737 Ko)
+[13:37:23] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -24 -8 téléchargé (2117 Ko)
+[13:37:23] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -15 3 téléchargé (2452 Ko)
+[13:37:24] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -16 3 téléchargé (2531 Ko)
+[13:37:24] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -1 -11 téléchargé (674 Ko)
+[13:37:24] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:stronghold is at [-816, ~, -22800] (11 blocks away)
+[13:37:24] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:stronghold took 1264 ms
+>>> execute positioned 13773 100 9026 run locate structure minecraft:stronghold
+[13:37:24] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:stronghold is at [13760, ~, 9024] (13 blocks away)
+[13:37:24] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:stronghold took 0 ms
+>>> execute positioned 36206 100 -13835 run locate structure minecraft:stronghold
+[13:37:25] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 28 5 téléchargé (1076 Ko)
+[13:37:25] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 17 -7 téléchargé (2805 Ko)
+[13:37:25] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 17 -8 téléchargé (2948 Ko)
+[13:37:25] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:stronghold is at [36192, ~, -13840] (14 blocks away)
+[13:37:25] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:stronghold took 777 ms
+>>> execute positioned -48072 100 -16057 run locate structure minecraft:stronghold
+[13:37:26] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:stronghold is at [-48080, ~, -16064] (10 blocks away)
+[13:37:26] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:stronghold took 0 ms
+>>> execute positioned -30577 100 7369 run locate structure minecraft:stronghold
+[13:37:26] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:stronghold is at [-30592, ~, 7360] (17 blocks away)
+[13:37:26] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:stronghold took 0 ms
+>>> execute positioned 58349 100 11283 run locate structure minecraft:stronghold
+[13:37:27] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:stronghold is at [58336, ~, 11280] (13 blocks away)
+[13:37:27] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:stronghold took 0 ms
+>>> village colonne -34330 5350
+[13:37:28] [Server thread/INFO] [minecraft/MinecraftServer]: [Colonne] centre (-34328, 5352) estimée y=66 réelle y=66 | y66=amazonie/desert y66=amazonie/desert y40=amazonie/desert y0=amazonie/desert y-60=amazonie/desert
+>>> place structure minecraft:igloo -34330 100 5350
+[13:37:28] [Server thread/INFO] [minecraft/MinecraftServer]: That position is not loaded
+>>> village colonne -42760 -28640
+[13:39:30] [Server thread/INFO] [minecraft/MinecraftServer]: [Colonne] centre (-42760, -28632) estimée y=62 réelle y=62 | y62=boreale/lac y62=boreale/lac y40=boreale/lac y0=boreale/lac y-60=boreale/lac
+>>> place structure minecraft:igloo -42760 100 -28640
+[13:39:30] [Server thread/INFO] [minecraft/MinecraftServer]: That position is not loaded
+>>> village colonne -41006 -28075
+[13:41:30] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -20 -15 téléchargé (1103 Ko)
+[13:41:32] [Server thread/INFO] [minecraft/MinecraftServer]: [Colonne] centre (-41000, -28072) estimée y=63 réelle y=63 | y63=boreale/lac y63=boreale/lac y40=boreale/lac y0=boreale/lac y-60=boreale/lac
+[13:41:32] [Server thread/WARN] [minecraft/MinecraftServer]: Can't keep up! Is the server overloaded? Running 2081ms or 41 ticks behind
+>>> place structure minecraft:igloo -41006 100 -28075
+[13:41:33] [Server thread/INFO] [minecraft/MinecraftServer]: That position is not loaded
+>>> execute positioned -2200 62 -21400 run locate structure #domaine_terre_village:epaves_hasard
+[13:43:33] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #domaine_terre_village:epaves_hasard (domaine_terre_village:epave_cote) is at [-2544, ~, -21424] (344 blocks away)
+[13:43:33] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #domaine_terre_village:epaves_hasard (domaine_terre_village:epave_cote) took 21 ms
+>>> execute positioned 62500 62 -16200 run locate structure #domaine_terre_village:epaves_hasard
+[13:43:34] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet 28 -8 téléchargé (1133 Ko)
+[13:43:34] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #domaine_terre_village:epaves_hasard (domaine_terre_village:epave_echouee) is at [59024, ~, -15312] (3587 blocks away)
+[13:43:34] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #domaine_terre_village:epaves_hasard (domaine_terre_village:epave_echouee) took 1152 ms
+>>> execute positioned -35700 62 -12000 run locate structure #domaine_terre_village:epaves_hasard
+[13:43:35] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -18 -7 téléchargé (419 Ko)
+[13:43:35] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -19 -6 téléchargé (2 Ko)
+[13:43:35] [Domaine Terre - relief fin/INFO] [fr.do.te.DomaineTerre/]: Relief fin : paquet -18 -6 téléchargé (145 Ko)
+[13:43:35] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest #domaine_terre_village:epaves_hasard (domaine_terre_village:epave_cote) is at [-36768, ~, -11984] (1068 blocks away)
+[13:43:35] [Server thread/INFO] [minecraft/LocateCommand]: Locating element #domaine_terre_village:epaves_hasard (domaine_terre_village:epave_cote) took 458 ms
+>>> execute positioned 1064 0 -21769 run locate structure minecraft:ancient_city
+[13:43:35] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:ancient_city is at [976, ~, -22256] (494 blocks away)
+[13:43:35] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:ancient_city took 138 ms
+>>> execute positioned 1064 60 -21769 run locate structure minecraft:mineshaft
+[13:43:36] [Server thread/INFO] [minecraft/MinecraftServer]: The nearest minecraft:mineshaft is at [960, ~, -21616] (185 blocks away)
+[13:43:36] [Server thread/INFO] [minecraft/LocateCommand]: Locating element minecraft:mineshaft took 0 ms
+>>> stop
+[13:43:36] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping the server
+[13:43:36] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[13:43:36] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[13:43:36] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[13:43:37] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[village]'/minecraft:overworld
+[13:43:39] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[village]'/minecraft:the_nether
+[13:43:39] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[village]'/minecraft:the_end
+[13:43:39] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (village): All chunks are saved
+[13:43:39] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[13:43:39] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[13:43:39] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved

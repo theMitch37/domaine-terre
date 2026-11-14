@@ -1,0 +1,90 @@
+Paris      trouvé (1056, -21776) ; attendu Paris (1064, -21769) ; écart 11
+Lyon       trouvé (2112, -20384) ; attendu Lyon (2127, -20371) ; écart 20
+Le Caire   trouvé (13936, -13392) ; attendu Cairo (13947, -13386) ; écart 13
+Tokyo      trouvé (62192, -15904) ; attendu Tokyo (62202, -15896) ; écart 13
+New York   trouvé (-32928, -18128) ; attendu New York City (-32921, -18113) ; écart 17
+Sydney     trouvé (67296, 15088) ; attendu Sydney (67298, 15097) ; écart 9
+Moscou     trouvé (16736, -24832) ; attendu Moscow (16750, -24825) ; écart 16
+Lima       trouvé (-34512, 5040) ; attendu Callao (-34330, 5350) ; écart 359
+    [13:33:21] [Server thread/INFO] [minecraft/MinecraftServer]: [Village] (-34330, 5350) y=66 biome domaine_terre:amazonie/desert | types : desert
+pyramides      OK   Gizeh -> (13840, ~, -13360)
+pyramides      OK   Meroe -> (15088, ~, -7552)
+temples_jungle OK   Tikal -> (-39920, ~, -7680)
+temples_jungle OK   Chichen Itza -> (-39440, ~, -9216)
+temples_jungle OK   Palenque -> (-40992, ~, -7808)
+temples_jungle OK   Calakmul -> (-40000, ~, -8064)
+temples_jungle OK   Copan -> (-39696, ~, -6624)
+temples_jungle OK   Angkor -> (46240, ~, -5984)
+igloos         OK   Qaanaaq -> (-30848, ~, -34608)
+igloos         OK   Tasiilaq -> (-16768, ~, -29312)
+igloos         OK   Kangerlussuaq -> (-22576, ~, -29872)
+igloos         OK   Iqaluit -> (-30512, ~, -28512)
+igloos         OK   Cambridge Bay -> (-46784, ~, -30880)
+igloos         OK   Baker Lake -> (-42768, ~, -28672)
+igloos         OK   Rankin Inlet -> (-41008, ~, -28032)
+igloos         OK   Kotzebue -> (-72272, ~, -29888)
+igloos         OK   Anaktuvuk Pass -> (-67568, ~, -30352)
+manoirs        OK   Foret de Hoia-Baciu (Transylvanie) -> (10448, ~, -20832)
+manoirs        OK   Bran (Transylvanie) -> (11264, ~, -20224)
+manoirs        OK   Foret-Noire -> (3616, ~, -21520)
+temples_mer    OK   Atlantide (Acores) -> (-12256, ~, -16656)
+temples_mer    OK   Yonaguni -> (54576, ~, -10736)
+temples_mer    OK   Dwarka -> (30544, ~, -9856)
+temples_mer    OK   Pavlopetri -> (10048, ~, -16112)
+temples_mer    OK   Route de Bimini -> (-35456, ~, -11392)
+ruines_mer     OK   Atlantide (ruines) -> (-12176, ~, -16592)
+ruines_mer     OK   Yonaguni (ruines) -> (54496, ~, -10720)
+ruines_mer     OK   Dwarka (ruines) -> (30608, ~, -9920)
+ruines_mer     OK   Pavlopetri (ruines) -> (9984, ~, -16064)
+ruines_mer     OK   Bimini (ruines) -> (-35504, ~, -11312)
+epaves         OK   Cap Hatteras -> (-33488, ~, -15632)
+epaves         OK   Bermudes -> (-28912, ~, -14304)
+epaves         OK   Florida Keys -> (-36160, ~, -10880)
+epaves         OK   Silver Bank (route des galions) -> (-31088, ~, -9040)
+epaves         OK   Cap Horn -> (-29968, ~, 24976)
+epaves         OK   Cap de Bonne-Esperance -> (8144, ~, 15328)
+ruines_piste   OK   Pompei -> (6464, ~, -18160)
+ruines_piste   OK   Troie -> (11680, ~, -17792)
+ruines_piste   OK   Petra -> (15776, ~, -13504)
+ruines_piste   OK   Mohenjo-daro -> (30272, ~, -12176)
+ruines_piste   OK   Carthage -> (4528, ~, -16416)
+forteresses    OK   Europe : Stonehenge -> (-816, ~, -22800)
+forteresses    OK   Afrique : Grand Zimbabwe -> (13760, ~, 9024)
+forteresses    OK   Asie : mont Kailash -> (36192, ~, -13840)
+forteresses    OK   Amerique du Nord : Chaco Canyon -> (-48080, ~, -16064)
+forteresses    OK   Amerique du Sud : Tiwanaku -> (-30592, ~, 7360)
+forteresses    OK   Oceanie : Uluru -> (58336, ~, 11280)
+diagnostic Callao : thread/INFO] [minecraft/MinecraftServer]: [Colonne] centre (-34328, 5352) estimée y=66 réelle y=66 | y66=amazonie/desert y66=amazonie/desert y40=amazonie/desert y0=amazonie/desert y-60=amazonie/desert
+    place : 
+diagnostic Baker Lake : 13:39:30] [Server thread/INFO] [minecraft/MinecraftServer]: [Colonne] centre (-42760, -28632) estimée y=62 réelle y=62 | y62=boreale/lac y62=boreale/lac y40=boreale/lac y0=boreale/lac y-60=boreale/lac
+    place : 
+diagnostic Rankin Inlet : 13:41:32] [Server thread/INFO] [minecraft/MinecraftServer]: [Colonne] centre (-41000, -28072) estimée y=63 réelle y=63 | y63=boreale/lac y63=boreale/lac y40=boreale/lac y0=boreale/lac y-60=boreale/lac
+    place : 
+épave au hasard : aine_terre_village:epaves_hasard (domaine_terre_village:epave_cote) is at [-2544, ~, -21424] (344 blocks away)
+épave au hasard : _terre_village:epaves_hasard (domaine_terre_village:epave_echouee) is at [59024, ~, -15312] (3587 blocks away)
+épave au hasard : ne_terre_village:epaves_hasard (domaine_terre_village:epave_cote) is at [-36768, ~, -11984] (1068 blocks away)
+cité antique : ecraft/MinecraftServer]: The nearest minecraft:ancient_city is at [976, ~, -22256] (494 blocks away)
+OK     Domaine Village chargé (monde Terre)
+OK     aucun plantage
+OK     village de Paris
+OK     village de Lyon
+OK     village de Le Caire
+OK     village de Tokyo
+OK     village de New York
+OK     village de Sydney
+OK     village de Moscou
+ÉCHEC  village de Lima
+OK     biome compatible pour 60 villages sur 60 tirés au hasard
+OK     villages générés : 30 sur 30 tirés au hasard
+OK     pyramides : 2 sur 2 sites
+OK     temples_jungle : 6 sur 6 sites
+OK     igloos : 9 sur 9 sites
+OK     manoirs : 3 sur 3 sites
+OK     temples_mer : 5 sur 5 sites
+OK     ruines_mer : 5 sur 5 sites
+OK     epaves : 6 sur 6 sites
+OK     ruines_piste : 5 sur 5 sites
+OK     forteresses : 6 sur 6 sites
+OK     épaves au hasard le long des côtes : 3 sur 3 recherches
+OK     cité antique trouvée près de Paris
+OK     puits de mine rallumés
