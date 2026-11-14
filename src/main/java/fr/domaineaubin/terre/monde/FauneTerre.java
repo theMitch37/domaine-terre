@@ -126,6 +126,12 @@ public final class FauneTerre {
         return verifiees.contains(type);
     }
 
+    /** Bête « pour contrôle » (mer d'Untamed Wilds) : née par son mod, gardée seulement là où la table la permet. */
+    public boolean controlee(EntityType<?> type) {
+        for (Entree e : controle) if (e.donnees().type == type) return true;
+        return false;
+    }
+
     /** Bête de la table de surface (animaux, poissons, insectes) : c'est la table qui décide où et combien. */
     public boolean dansLaTable(EntityType<?> type) {
         return types.contains(type);

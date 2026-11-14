@@ -1,0 +1,1 @@
+{"required": false, "minVersion": "0.8", "package": "fr.domaineaubin.terre.mixin.compat", "compatibilityLevel": "JAVA_17", "refmap": "domaine_terre.refmap.json", "mixins": ["UntamedWildsPorteMixin"], "injectors": {"defaultRequire": 0}}
