@@ -143,7 +143,11 @@ public final class Houle {
 
     // ---------------------------------------------------------------- calme près des côtes
 
+    // 0.3.3 : une mémoire pour le client et une pour le serveur (en solo, les deux tournent dans le même programme et
+    // ne voient pas forcément le monde au même instant), seulement pour le monde normal (avant : une seule mémoire pour
+    // tout, qu'une autre dimension ou un instant douteux pouvait remplir de « pas de mer » : trous en lignes).
     private static final ConcurrentHashMap<Long, Byte> PROFONDEURS = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<Long, Byte> PROFONDEURS_CLIENT = new ConcurrentHashMap<>();
 
     /** Biome de mer : ceux du mod Terre (domaine_terre:mer/...), sinon les océans du jeu. Fleuves et lacs : non. */
     public static boolean mer(Level level, int x, int y, int z) {
@@ -155,19 +159,22 @@ public final class Houle {
 
     /** Nombre de blocs d'eau sous la surface de la mer (0 si pas de mer ici, fleuve ou lac compris), au plus 24. */
     public static int profondeur(Level level, int x, int z) {
+        if (level.dimension() != Level.OVERWORLD) return 0;
+        ConcurrentHashMap<Long, Byte> memoire = level.isClientSide ? PROFONDEURS_CLIENT : PROFONDEURS;
         long cle = ((long) x << 32) ^ (z & 0xFFFFFFFFL);
-        Byte p = PROFONDEURS.get(cle);
+        Byte p = memoire.get(cle);
         if (p != null) return p;
         int haut = level.getSeaLevel() - 1;
+        if (!level.isLoaded(new BlockPos(x, haut, z))) return 0;          // pas encore chargé : ne pas mémoriser
+        boolean mer = mer(level, x, haut, z);
         int n = 0;
-        if (level.isLoaded(new BlockPos(x, haut, z)) && level.getBlockState(new BlockPos(x, haut + 1, z)).isAir()) {
-            if (mer(level, x, haut, z))
-                while (n < 24 && level.getFluidState(new BlockPos(x, haut - n, z)).is(FluidTags.WATER)) n++;
-        } else {
-            return 0;                                         // pas encore chargé : ne pas mémoriser
-        }
-        if (PROFONDEURS.size() > 300_000) PROFONDEURS.clear();
-        PROFONDEURS.put(cle, (byte) n);
+        if (mer && level.getBlockState(new BlockPos(x, haut + 1, z)).isAir())
+            while (n < 24 && level.getFluidState(new BlockPos(x, haut - n, z)).is(FluidTags.WATER)) n++;
+        // on ne retient que ce qui est sûr : une vraie mer, ou un biome qui n'est pas de la mer ; un « biome de mer
+        // sans eau » (bloc posé, chunk en cours d'arrivée…) est recalculé la fois suivante
+        if (n == 0 && mer) return 0;
+        if (memoire.size() > 300_000) memoire.clear();
+        memoire.put(cle, (byte) n);
         return n;
     }
 
@@ -218,5 +225,6 @@ public final class Houle {
     /** À appeler quand un chunk change (bloc posé) : on oublie tout, c'est un prototype. */
     public static void oublier() {
         PROFONDEURS.clear();
+        PROFONDEURS_CLIENT.clear();
     }
 }
