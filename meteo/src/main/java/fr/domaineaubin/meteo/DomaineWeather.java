@@ -61,5 +61,6 @@ public final class DomaineWeather {
 
     private void commandes(RegisterCommandsEvent e) {
         CommandeMeteo.enregistrer(e.getDispatcher());
+        CommandeVagues.enregistrer(e.getDispatcher());
     }
 }

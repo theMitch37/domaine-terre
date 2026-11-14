@@ -4,7 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import fr.domaineaubin.meteo.DomaineWeather;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.loading.FMLPaths;
 
@@ -37,12 +41,30 @@ public final class Houle {
 
     private static volatile Reglages reglages;
 
+    private static Path fichier() {
+        return FMLPaths.CONFIGDIR.get().resolve("domaine_weather_vagues.json");
+    }
+
+    /** Change les réglages en jeu (/vagues) et les écrit dans le fichier de config. */
+    public static synchronized void regler(Double amplitude, Boolean actif, Integer rayon) {
+        Reglages r = reglages();
+        if (amplitude != null) r.amplitude = amplitude;
+        if (actif != null) r.actif = actif;
+        if (rayon != null) r.rayon = rayon;
+        try {
+            Files.createDirectories(fichier().getParent());
+            Files.writeString(fichier(), new GsonBuilder().setPrettyPrinting().create().toJson(r), StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            DomaineWeather.LOGGER.error("Domaine Weather : impossible d'ecrire {}", fichier(), e);
+        }
+    }
+
     public static Reglages reglages() {
         Reglages r = reglages;
         if (r != null) return r;
         synchronized (Houle.class) {
             if (reglages != null) return reglages;
-            Path f = FMLPaths.CONFIGDIR.get().resolve("domaine_weather_vagues.json");
+            Path f = fichier();
             Gson g = new GsonBuilder().setPrettyPrinting().create();
             Reglages lu = null;
             try {
@@ -83,6 +105,14 @@ public final class Houle {
         }
     }
 
+    /**
+     * Hauteur de la surface au-dessus de l'eau plate du jeu (blocs, de 0 à 2 × amplitude) : les creux touchent l'eau
+     * du jeu, rien ne passe jamais dessous (sinon la barque « coule » dans l'eau plate restée dessinée).
+     */
+    public static double levee(double x, double z, double t, double amplitude) {
+        return amplitude + hauteur(x, z, t, amplitude);
+    }
+
     /** Hauteur de la houle (blocs, autour de 0) au point (x, z) au temps t (secondes), pour une amplitude donnée. */
     public static double hauteur(double x, double z, double t, double amplitude) {
         double h = 0;
@@ -110,7 +140,15 @@ public final class Houle {
 
     private static final ConcurrentHashMap<Long, Byte> PROFONDEURS = new ConcurrentHashMap<>();
 
-    /** Nombre de blocs d'eau sous la surface de la mer (0 si pas de mer ici), au plus 24. */
+    /** Biome de mer : ceux du mod Terre (domaine_terre:mer/...), sinon les océans du jeu. Fleuves et lacs : non. */
+    private static boolean mer(Level level, int x, int y, int z) {
+        Holder<Biome> b = level.getBiome(new BlockPos(x, y, z));
+        String chemin = b.unwrapKey().map(ResourceKey::location).map(Object::toString).orElse("");
+        if (chemin.startsWith("domaine_terre:")) return chemin.startsWith("domaine_terre:mer/");
+        return b.is(BiomeTags.IS_OCEAN);
+    }
+
+    /** Nombre de blocs d'eau sous la surface de la mer (0 si pas de mer ici, fleuve ou lac compris), au plus 24. */
     public static int profondeur(Level level, int x, int z) {
         long cle = ((long) x << 32) ^ (z & 0xFFFFFFFFL);
         Byte p = PROFONDEURS.get(cle);
@@ -118,7 +156,8 @@ public final class Houle {
         int haut = level.getSeaLevel() - 1;
         int n = 0;
         if (level.isLoaded(new BlockPos(x, haut, z)) && level.getBlockState(new BlockPos(x, haut + 1, z)).isAir()) {
-            while (n < 24 && level.getFluidState(new BlockPos(x, haut - n, z)).is(FluidTags.WATER)) n++;
+            if (mer(level, x, haut, z))
+                while (n < 24 && level.getFluidState(new BlockPos(x, haut - n, z)).is(FluidTags.WATER)) n++;
         } else {
             return 0;                                         // pas encore chargé : ne pas mémoriser
         }

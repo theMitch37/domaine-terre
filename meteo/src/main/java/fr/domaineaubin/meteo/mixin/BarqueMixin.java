@@ -24,11 +24,11 @@ public abstract class BarqueMixin {
         Level l = b.level();
         if (l.dimension() != Level.OVERWORLD) return;
         int haut = l.getSeaLevel() - 1;
-        if (Math.abs(b.getY() - (haut + 1)) > 3) return;
+        if (b.getY() < haut - 2 || b.getY() > haut + 3 + 2 * Houle.reglages().amplitude) return;
         if (!l.getFluidState(BlockPos.containing(b.getX(), haut, b.getZ())).is(FluidTags.WATER)) return;
         double a = Houle.amplitude(l, b.getX(), b.getZ());
         if (a <= 0.02) return;
-        double cible = haut + 0.9 + Houle.hauteur(b.getX(), b.getZ(), Houle.temps(l, 0), a) - 0.15;
+        double cible = haut + 0.9 + Houle.levee(b.getX(), b.getZ(), Houle.temps(l, 0), a) - 0.15;
         double y = b.getY() + (cible - b.getY()) * 0.35;
         b.setPos(b.getX(), y, b.getZ());
         Vec3 v = b.getDeltaMovement();

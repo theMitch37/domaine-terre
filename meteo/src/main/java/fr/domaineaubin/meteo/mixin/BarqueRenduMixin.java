@@ -24,7 +24,7 @@ public abstract class BarqueRenduMixin {
                                         int lumiere, CallbackInfo ci) {
         if (!Houle.actif()) return;
         Level l = b.level();
-        if (l.dimension() != Level.OVERWORLD || Math.abs(b.getY() - l.getSeaLevel()) > 3) return;
+        if (l.dimension() != Level.OVERWORLD || b.getY() < l.getSeaLevel() - 3 || b.getY() > l.getSeaLevel() + 3 + 2 * Houle.reglages().amplitude) return;
         double a = Houle.amplitude(l, b.getX(), b.getZ());
         if (a <= 0.02) return;
         double[] p = Houle.pente(b.getX(), b.getZ(), Houle.temps(l, partiel), a);

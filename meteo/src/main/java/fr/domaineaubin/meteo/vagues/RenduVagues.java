@@ -15,7 +15,7 @@ import org.joml.Matrix4f;
 /**
  * Dessin de la houle (prototype) : une surface de mer animée, une case par bloc, dans un rayon autour de la caméra,
  * posée sur l'eau de la mer là où elle est assez profonde. Couleur bleu profond, plus claire face au soleil.
- * Prototype : l'eau du jeu reste dessinée dessous (les creux laissent voir la surface plate).
+ * L'eau du jeu reste dessinée dessous : la surface ne descend jamais sous elle (creux = eau plate, crêtes au-dessus).
  */
 public final class RenduVagues {
     private RenduVagues() {
@@ -44,7 +44,7 @@ public final class RenduVagues {
                 int k = j * (n + 1) + i;
                 mer[k] = a > 0.02;
                 une |= mer[k];
-                h[k] = mer[k] ? Houle.hauteur(x, z, t, a) : 0;
+                h[k] = mer[k] ? Houle.levee(x, z, t, a) : 0;
             }
         }
         if (!une) return;
@@ -63,7 +63,7 @@ public final class RenduVagues {
                 double x0 = cx - r + i - c.x, z0 = cz - r + j - c.z;
                 // éclairage : pente de la case vers le soleil (ouest-sud-ouest à l'horizon : simple)
                 double hx = (h[k10] - h[k00] + h[k11] - h[k01]) / 2, hz = (h[k01] - h[k00] + h[k11] - h[k10]) / 2;
-                float clair = (float) Math.max(0.55, Math.min(1.15, 0.85 + 0.6 * (-hx * 0.5 + hz * 0.3) + 0.12 * h[k00]));
+                float clair = (float) Math.max(0.55, Math.min(1.15, 0.85 + 0.6 * (-hx * 0.5 + hz * 0.3) + 0.12 * (h[k00] - Houle.reglages().amplitude)));
                 float l = clair * lumiere;
                 int rr = (int) (28 * l), gg = (int) (78 * l), bb = (int) (150 * l), aa = 190;
                 sommet(b, m, x0, surface + h[k00] - c.y, z0, rr, gg, bb, aa);
