@@ -43,6 +43,9 @@ final class CommandeVillage {
 
     static void enregistrer(CommandDispatcher<CommandSourceStack> d) {
         d.register(Commands.literal("village").requires(s -> s.hasPermission(2))
+                .then(Commands.literal("eau").executes(c -> BancEau.lancer(c.getSource(), 1))
+                        .then(Commands.argument("pas", IntegerArgumentType.integer(1))
+                                .executes(c -> BancEau.lancer(c.getSource(), IntegerArgumentType.getInteger(c, "pas")))))
                 .then(Commands.literal("colonne")
                         .then(Commands.argument("x", IntegerArgumentType.integer())
                                 .then(Commands.argument("z", IntegerArgumentType.integer())

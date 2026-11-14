@@ -4,6 +4,6 @@
   "package": "fr.domaineaubin.village.mixin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "domaine_terre_village.refmap.json",
-  "mixins": ["AnneauxMixin"],
+  "mixins": ["AnneauxMixin", "PiecesHorsEauMixin"],
   "injectors": {"defaultRequire": 1}
 }
