@@ -1,0 +1,3 @@
+branche=village-0.1.1
+commit=0adb4b677f025341ba4e85e182f77657dbda078c
+date=2026-11-14T13:31:27Z
