@@ -17,7 +17,7 @@ MODS = {
     "alexsmobs-1.22.9.jar": (["alexs-mobs"], []),
     "citadel-2.6.3-1.20.1.jar": (["citadel"], []),
     "untamedwilds-1.20.1-4.0.4.jar": ([], [4790009, 4779746, 4767281, 4766547, 4723081, 4718771, 4709636]),
-    "naturalist-5.0pre2+forge-1.20.1.jar": (["naturalist"], []),
+    "naturalist-2.0.9-forge-1.20.1.jar": (["naturalist"], []),          # 14/11 : baudroie abyssale
     "geckolib-forge-1.20.1-4.8.4.jar": (["geckolib"], []),
     "letsdo-wildernature-forge-1.0.6.jar": (["lets-do-wildernature", "wildernature"], []),
     "letsdo-meadow-forge-1.3.25.jar": (["lets-do-meadow", "meadow"], []),

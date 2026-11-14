@@ -156,6 +156,7 @@ untamedwilds:sawfish/dwarf;Poisson-scie nain;Pristidae;poisson;cote,eau_douce;me
 untamedwilds:sunfish/sunfish;Poisson-lune;Mola mola;poisson;large;mers_chaudes_tempérées;1;garder;;R
 untamedwilds:sunfish/southern;Poisson-lune du Sud;Mola alexandrini;poisson;large;australie,nouvelle_zelande,cone_sud;1;garder;;R
 untamedwilds:football_fish/atlantic;Baudroie abyssale;Himantolophus groenlandicus;poisson;abysses;mers_profondes;1;garder;;R
+naturalist:anglerfish;Baudroie abyssale (Nat.);Melanocetus johnsonii;poisson;abysses;mers_profondes;1;garder;"race régionale de untamedwilds:football_fish ; Naturalist 2.0.9 (14/11/2026, demande de Maxime)";R
 untamedwilds:giant_clam/*;Bénitier géant;Tridacna;sauvage;mer (récifs);mers_tropicales;1-4;garder;plusieurs espèces;C
 untamedwilds:trevally/*;Carangue;Carangidae;poisson;mer (récifs);mers_tropicales;1-4;garder;plusieurs espèces;C
 untamedwilds:triggerfish/*;Baliste;Balistidae;poisson;mer (récifs);mers_tropicales;1-4;garder;plusieurs espèces;C

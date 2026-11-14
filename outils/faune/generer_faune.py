@@ -117,6 +117,7 @@ CONDITIONS = {
     "alexsmobs:flutter": {"biome_jeu": "lush_caves"},
     "alexsmobs:sunbird": {"altitude_min": 2500, "tirage": 10},
     "minecraft:bat": {"sous_terre": True, "noir": True},
+    "alexsmobs:skreecher": {"biome_jeu": "deep_dark"},      # était seulement dans especes.json (retouche à la main)
 }
 
 # petite faune discrète (10/11/2026) : nombreuse en vrai, mais on la voit peu ; comptée comme les insectes
