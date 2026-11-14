@@ -1,0 +1,9 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "fr.domaineaubin.meteo.mixin.compat",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "domaine_weather.refmap.json",
+  "client": ["MasqueEauEmbeddiumMixin"],
+  "injectors": {"defaultRequire": 0}
+}

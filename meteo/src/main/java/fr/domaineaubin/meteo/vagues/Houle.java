@@ -11,6 +11,8 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
@@ -48,6 +50,7 @@ public final class Houle {
     /** Change les réglages en jeu (/vagues) et les écrit dans le fichier de config. */
     public static synchronized void regler(Double amplitude, Boolean actif, Integer rayon) {
         Reglages r = reglages();
+        boolean avant = r.actif;
         if (amplitude != null) r.amplitude = amplitude;
         if (actif != null) r.actif = actif;
         if (rayon != null) r.rayon = rayon;
@@ -57,6 +60,8 @@ public final class Houle {
         } catch (Exception e) {
             DomaineWeather.LOGGER.error("Domaine Weather : impossible d'ecrire {}", fichier(), e);
         }
+        PROFONDEURS.clear();
+        if (avant != r.actif) DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> MasqueEau::rafraichir);
     }
 
     public static Reglages reglages() {
@@ -141,7 +146,7 @@ public final class Houle {
     private static final ConcurrentHashMap<Long, Byte> PROFONDEURS = new ConcurrentHashMap<>();
 
     /** Biome de mer : ceux du mod Terre (domaine_terre:mer/...), sinon les océans du jeu. Fleuves et lacs : non. */
-    private static boolean mer(Level level, int x, int y, int z) {
+    public static boolean mer(Level level, int x, int y, int z) {
         Holder<Biome> b = level.getBiome(new BlockPos(x, y, z));
         String chemin = b.unwrapKey().map(ResourceKey::location).map(Object::toString).orElse("");
         if (chemin.startsWith("domaine_terre:")) return chemin.startsWith("domaine_terre:mer/");
@@ -172,6 +177,38 @@ public final class Houle {
         int p = profondeur(level, (int) Math.floor(x), (int) Math.floor(z));
         double f = Math.max(0, Math.min(1, (p - 4) / 12.0));
         return reglages().amplitude * f * f * (3 - 2 * f);
+    }
+
+    /** Haut de l'eau plate du jeu dans un bloc d'eau source (8/9 de bloc), au niveau de la mer. */
+    public static double eauPlate(Level level) {
+        return level.getSeaLevel() - 1 + 8.0 / 9.0;
+    }
+
+    /**
+     * Surface de la houle (y) au-dessus du point (x, z) si une entité entre minY et maxY peut s'y trouver, sinon NaN.
+     * Tri rapide par la hauteur avant toute lecture du monde (appelé pour chaque entité à chaque tick).
+     */
+    public static double surface(Level level, double x, double z, double minY, double maxY) {
+        if (!actif()) return Double.NaN;
+        double plate = eauPlate(level);
+        double amp = reglages().amplitude;
+        if (minY > plate + 2 * amp || maxY < plate - 0.5) return Double.NaN;
+        double a = amplitude(level, x, z);
+        if (a <= 0.02) return Double.NaN;
+        return plate + levee(x, z, temps(level, 0), a);
+    }
+
+    /** Vitesse verticale de la surface de la houle (blocs par tick) au point (x, z). */
+    public static double vitesse(Level level, double x, double z) {
+        double a = amplitude(level, x, z);
+        if (a <= 0.02) return 0;
+        double t = temps(level, 0);
+        return levee(x, z, t + 0.05, a) - levee(x, z, t, a);
+    }
+
+    /** Colonne de mer au sens des vagues (biome de mer, eau au niveau de la mer, air au-dessus). */
+    public static boolean colonneDeMer(Level level, int x, int z) {
+        return actif() && profondeur(level, x, z) > 0;
     }
 
     /** À appeler quand un chunk change (bloc posé) : on oublie tout, c'est un prototype. */
