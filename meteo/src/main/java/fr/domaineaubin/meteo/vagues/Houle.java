@@ -174,7 +174,11 @@ public final class Houle {
     /** Amplitude de la houle ici : nulle sur moins de 4 blocs d'eau, pleine à partir de 16. */
     public static double amplitude(Level level, double x, double z) {
         if (!actif()) return 0;
-        int p = profondeur(level, (int) Math.floor(x), (int) Math.floor(z));
+        return amplitudeSelonProfondeur(level, profondeur(level, (int) Math.floor(x), (int) Math.floor(z)));
+    }
+
+    /** Amplitude pour une profondeur déjà connue (dessin : une seule lecture par case). */
+    public static double amplitudeSelonProfondeur(Level level, int p) {
         double f = Math.max(0, Math.min(1, (p - 4) / 12.0));
         return reglages().amplitude * f * f * (3 - 2 * f);
     }

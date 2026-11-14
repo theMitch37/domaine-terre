@@ -56,6 +56,7 @@ public final class RenduVagues {
         ClientLevel level = mc.level;
         if (level != niveau) {
             MasqueEau.oublier();
+            TEINTES.clear();
             niveau = level;
         }
         if (!Houle.actif() || level == null || level.dimension() != Level.OVERWORLD) return;
@@ -95,11 +96,14 @@ public final class RenduVagues {
         int n = 2 * r;
         double[] h = new double[(n + 1) * (n + 1)];
         double[] a = new double[(n + 1) * (n + 1)];
+        int[] prof = new int[(n + 1) * (n + 1)];
         for (int j = 0; j <= n; j++) {
             for (int i = 0; i <= n; i++) {
                 int x = cx - r + i, z = cz - r + j;
                 int k = j * (n + 1) + i;
-                double am = Houle.amplitude(level, x, z);
+                int pr = Houle.profondeur(level, x, z);
+                prof[k] = pr;
+                double am = pr > 0 ? Houle.amplitudeSelonProfondeur(level, pr) : 0;
                 // fondu vers la surface plate au bord du rayon (dessin seulement : la barque et la nage n'en dépendent pas)
                 double d = Math.sqrt((x - c.x) * (x - c.x) + (z - c.z) * (z - c.z));
                 double f = Math.max(0, Math.min(1, (rayon - d) / 16.0));
@@ -117,29 +121,48 @@ public final class RenduVagues {
             for (int i = 0; i < n; i++) {
                 int k00 = j * (n + 1) + i, k10 = k00 + 1, k01 = k00 + n + 1, k11 = k01 + 1;
                 int x = cx - r + i, z = cz - r + j;
-                if (Houle.profondeur(level, x, z) <= 0) continue;               // pas de mer sur cette case (ou masque :
+                if (prof[k00] <= 0) continue;               // pas de mer sur cette case (ou masque :
                                                                                 // mêmes conditions, voir MasqueEau)
                 double x0 = x - c.x, z0 = z - c.z;
-                int teinte = BiomeColors.getAverageWaterColor(level, p.set(x, (int) plate, z));
+                int teinte = teinte(level, p, x, (int) plate, z);
                 double hx = (h[k10] - h[k00] + h[k11] - h[k01]) / 2, hz = (h[k01] - h[k00] + h[k11] - h[k10]) / 2;
                 double y0 = plate + 0.01 - c.y;
-                sommet(b, m, x0, y0 + h[k00], z0, u0, v0, teinte, relief(h[k00], ampMax, hx, hz));
-                sommet(b, m, x0, y0 + h[k01], z0 + 1, u0, v1, teinte, relief(h[k01], ampMax, hx, hz));
-                sommet(b, m, x0 + 1, y0 + h[k11], z0 + 1, u1, v1, teinte, relief(h[k11], ampMax, hx, hz));
-                sommet(b, m, x0 + 1, y0 + h[k10], z0, u1, v0, teinte, relief(h[k10], ampMax, hx, hz));
+                sommet(b, m, x0, y0 + h[k00], z0, u0, v0, teinte, relief(h[k00], a[k00], ampMax, hx, hz));
+                sommet(b, m, x0, y0 + h[k01], z0 + 1, u0, v1, teinte, relief(h[k01], a[k01], ampMax, hx, hz));
+                sommet(b, m, x0 + 1, y0 + h[k11], z0 + 1, u1, v1, teinte, relief(h[k11], a[k11], ampMax, hx, hz));
+                sommet(b, m, x0 + 1, y0 + h[k10], z0, u1, v0, teinte, relief(h[k10], a[k10], ampMax, hx, hz));
             }
         }
         Tesselator.getInstance().end();
+    }
+
+    // couleur d'eau du biome, gardée par chunk (le mélange des biomes coûte cher et ne change pas)
+    private static final java.util.HashMap<Long, int[]> TEINTES = new java.util.HashMap<>();
+
+    private static int teinte(ClientLevel level, BlockPos.MutableBlockPos p, int x, int y, int z) {
+        long cle = ((long) (x >> 4) << 32) ^ ((z >> 4) & 0xFFFFFFFFL);
+        int[] t = TEINTES.get(cle);
+        if (t == null) {
+            if (TEINTES.size() > 4096) TEINTES.clear();
+            t = new int[256];
+            java.util.Arrays.fill(t, -1);
+            TEINTES.put(cle, t);
+        }
+        int i = ((z & 15) << 4) | (x & 15);
+        if (t[i] == -1) t[i] = BiomeColors.getAverageWaterColor(level, p.set(x, y, z)) & 0xFFFFFF;
+        return t[i];
     }
 
     /**
      * Relief de la houle : [éclat, écume]. Pente tournée vers le soleil d'ouest-sud-ouest plus claire, creux plus sombres,
      * haut des crêtes éclairci et blanchi (écume légère) pour que les vagues se lisent.
      */
-    private static float[] relief(double h, double ampMax, double hx, double hz) {
+    private static float[] relief(double h, double am, double ampMax, double hx, double hz) {
+        // poids du relief : nul sur l'eau plate (même couleur que l'eau du jeu au-delà du carré : pas de ligne)
+        double w = Math.max(0, Math.min(1, am / ampMax));
         double haut = Math.max(0, Math.min(1, h / (2 * ampMax)));               // 0 = creux, 1 = crête
-        double eclat = 0.80 + 0.30 * haut + 0.45 * (-hx * 0.5 + hz * 0.3);
-        double ecume = Math.max(0, (haut - 0.78) / 0.22);
+        double eclat = 1 + w * (0.30 * (haut - 0.5) + 0.45 * (-hx * 0.5 + hz * 0.3));
+        double ecume = w * Math.max(0, (haut - 0.78) / 0.22);
         return new float[]{(float) Math.max(0.55, Math.min(1.25, eclat)), (float) (ecume * ecume * 0.55)};
     }
 
