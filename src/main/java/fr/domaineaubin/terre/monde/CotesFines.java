@@ -83,6 +83,9 @@ public final class CotesFines {
 
     /** Distance signée à la côte en cases (≈ blocs à 1:250), positive dans les terres, bornée à ±RAYON. */
     public double distance(double lon, double lat) {
+        // 1.0.5 : longitude ramenée dans [-180, 180[ (au-delà de la couture du Pacifique, la grille n'a pas un
+        // nombre entier de tuiles : sans ça, on lisait au-delà de 180° = mer, d'où une côte coupée net, île Wrangel)
+        lon = ((lon + 180.0) % 360.0 + 360.0) % 360.0 - 180.0;
         long gx = (long) Math.floor((lon + 180.0) * CASES_PAR_DEGRE);
         long gy = (long) Math.floor((90.0 - lat) * CASES_PAR_DEGRE);
         int cx = (int) Math.floorDiv(gx, T), cy = (int) Math.floorDiv(gy, T);

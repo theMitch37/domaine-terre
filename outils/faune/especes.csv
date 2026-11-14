@@ -33,7 +33,7 @@ untamedwilds:bear/polar;Ours polaire (UW);Ursus maritimus;sauvage;banquise;arcti
 untamedwilds:bear/panda;Panda (UW);Ailuropoda melanoleuca;sauvage;foret;chine;1;garder;race régionale (Asie) de minecraft:panda;R
 untamedwilds:bear/spectacled;Ours à lunettes;Tremarctos ornatus;sauvage;foret (montagne);andes;1;garder;;R
 untamedwilds:bear/sun;Ours malais;Helarctos malayanus;sauvage;foret_tropicale;asie_sud_est;1;garder;;PC
-untamedwilds:bear/cave;Ours des cavernes;Ursus spelaeus;fantastique;toundra,steppe;siberie;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11)";R
+untamedwilds:bear/cave;Ours des cavernes;Ursus spelaeus;fantastique;toundra,steppe;siberie;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11), très commune sur son île";TC
 untamedwilds:bear/blind;Ours aveugle;—;fantastique;—;—;—;retirer;inventé;
 untamedwilds:big_cat/lion;Lion;Panthera leo;sauvage;savane;sahara_sahel,afrique_est,afrique_australe;2-5;garder;"troupe ; lion d'Asie au Gujarat ; race régionale (Afrique)";PC
 untamedwilds:big_cat/leopard;Léopard;Panthera pardus;sauvage;savane,foret;afrique_tropicale,afrique_est,afrique_australe,inde,moyen_orient;1;garder;;PC
@@ -41,9 +41,9 @@ untamedwilds:big_cat/tiger;Tigre;Panthera tigris;sauvage;foret;siberie,chine,asi
 untamedwilds:big_cat/snow_leopard;Léopard des neiges;Panthera uncia;sauvage;haute_montagne;steppes_tibet;1;garder;"race régionale (Asie) ; version rare (sommets seulement), chasse les blessés";R
 untamedwilds:big_cat/jaguar;Jaguar;Panthera onca;sauvage;foret_tropicale,marais;amazonie,amerique_centrale;1;garder;;PC
 untamedwilds:big_cat/puma;Puma;Puma concolor;sauvage;montagne,foret;ouest_mexique,andes,boreale,cone_sud;1;garder;;PC
-untamedwilds:big_cat/cave_lion;cave lion;—;fantastique;toundra,steppe;siberie;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11)";R
-untamedwilds:big_cat/sabertooth;sabertooth;—;fantastique;prairie,foret;ouest_mexique;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11)";R
-untamedwilds:big_cat/marsupial_lion;marsupial lion;—;fantastique;foret,prairie;australie;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11)";R
+untamedwilds:big_cat/cave_lion;cave lion;—;fantastique;toundra,steppe;siberie;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11), très commune sur son île";TC
+untamedwilds:big_cat/sabertooth;sabertooth;—;fantastique;prairie,foret;ouest_mexique;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11), très commune sur son île";TC
+untamedwilds:big_cat/marsupial_lion;marsupial lion;—;fantastique;foret,prairie;australie;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11), très commune sur son île";TC
 untamedwilds:bison/plains;Bison d'Amérique;Bison bison;sauvage;prairie;grandes_plaines;4-10;garder;race régionale (Amériques);TC
 untamedwilds:bison/wisent;Bison d'Europe;Bison bonasus;sauvage;foret;continentale;3-6;garder;Białowieża, Carpates;PC
 untamedwilds:boar/eurasian;Sanglier;Sus scrofa;sauvage;foret;atlantique,mediterranee;3-6;garder;race régionale (Europe);C
@@ -58,12 +58,12 @@ untamedwilds:rhino/white;Rhinocéros blanc;Ceratotherium simum;sauvage;savane;af
 untamedwilds:rhino/indian;Rhinocéros indien;Rhinoceros unicornis;sauvage;prairie,marais;inde;1;garder;;PC
 untamedwilds:rhino/javan;Rhinocéros de Java;Rhinoceros sondaicus;sauvage;foret_tropicale;asie_sud_est;1;garder;très rare;R
 untamedwilds:rhino/sumatran;Rhinocéros de Sumatra;Dicerorhinus sumatrensis;sauvage;foret_tropicale;asie_sud_est;1;garder;très rare;R
-untamedwilds:rhino/wooly;Rhinocéros laineux;—;fantastique;toundra,steppe;siberie;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11)";R
+untamedwilds:rhino/wooly;Rhinocéros laineux;—;fantastique;toundra,steppe;siberie;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11), très commune sur son île";TC
 untamedwilds:hyena/spotted;Hyène tachetée;Crocuta crocuta;sauvage;savane;afrique_tropicale;3-6;garder;"prédateur ; race régionale (Afrique)";C
 untamedwilds:hyena/striped;Hyène rayée;Hyaena hyaena;sauvage;desert,steppe;sahara_sahel,maghreb,moyen_orient,inde;1-2;garder;;PC
 untamedwilds:hyena/brown;Hyène brune;Parahyaena brunnea;sauvage;desert,savane;afrique_australe;1-2;garder;;PC
 untamedwilds:hyena/aardwolf;Protèle;Proteles cristata;sauvage;savane;afrique_est,afrique_australe;1;garder;;PC
-untamedwilds:hyena/shortface;Hyène géante;—;fantastique;toundra,steppe;siberie;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11)";R
+untamedwilds:hyena/shortface;Hyène géante;—;fantastique;toundra,steppe;siberie;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11), très commune sur son île";TC
 untamedwilds:wildebeest/blue;Gnou bleu;Connochaetes taurinus;sauvage;savane;afrique_est,afrique_australe;6-12;garder;grande migration;C
 untamedwilds:wildebeest/black;Gnou à queue blanche;Connochaetes gnou;sauvage;prairie;afrique_australe;4-8;garder;;C
 untamedwilds:aardvark/common;Oryctérope;Orycteropus afer;sauvage;savane;afrique_est,afrique_australe,afrique_tropicale;1;garder;;PC
@@ -130,7 +130,7 @@ untamedwilds:manatee/west;Lamantin des Caraïbes;Trichechus manatus;sauvage;eau_
 untamedwilds:manatee/amazon;Lamantin d'Amazonie;Trichechus inunguis;sauvage;eau_douce,cote;amazonie;1-2;garder;;PC
 untamedwilds:manatee/african;Lamantin d'Afrique;Trichechus senegalensis;sauvage;eau_douce,cote;afrique_tropicale;1-2;garder;"fleuves d'Afrique de l'Ouest et centrale (Niger, Congo) ; pas dans le Nil";PC
 untamedwilds:manatee/dugong;Dugong;Dugong dugon;sauvage;eau_douce,cote;asie_sud_est,australie,melanesie,inde,afrique_est;1-2;garder;;PC
-untamedwilds:manatee/steller;Rhytine de Steller;—;fantastique;mer;siberie;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11)";R
+untamedwilds:manatee/steller;Rhytine de Steller;—;fantastique;mer;siberie;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11), très commune sur son île";TC
 untamedwilds:baleen_whale/blue;Baleine bleue;Balaenoptera musculus;sauvage;large;tous_les_océans;1-2;garder;;R
 untamedwilds:baleen_whale/fin;Rorqual commun;Balaenoptera physalus;sauvage;large;tous_les_océans;1-2;garder;;PC
 untamedwilds:baleen_whale/gray;Baleine grise;Eschrichtius robustus;sauvage;large;boreale,ouest_mexique,siberie;1-2;garder;;PC
@@ -168,7 +168,7 @@ naturalist:komodo_dragon;Dragon de Komodo;Varanus komodoensis;sauvage;savane,for
 naturalist:desert_scorpion;Scorpion du désert;Androctonus, Hadrurus;insecte;desert;sahara_sahel,maghreb,moyen_orient,ouest_mexique,australie;1;garder;Naturalist 2.0.9 (14/11/2026);PC
 naturalist:jungle_scorpion;Scorpion de la jungle;Heterometrus, Pandinus;insecte;foret_tropicale;afrique_tropicale,inde,asie_sud_est;1;garder;Naturalist 2.0.9 (14/11/2026);PC
 naturalist:tiger;Tigre (Nat.);Panthera tigris, P. pardus;sauvage;foret,savane;inde,chine,asie_sud_est,siberie,afrique_tropicale,afrique_est,afrique_australe;1;garder;"variantes par région (tigre, léopard, panthère noire, tigre blanc), datapack ; race régionale de untamedwilds:big_cat ; Naturalist 2.0.9 (14/11/2026)";R
-naturalist:mammoth;Mammouth;Mammuthus primigenius;sauvage;toundra,steppe;siberie;1-3;garder;"espèce disparue : seulement sur l'île Wrangel (décision de Maxime 14/11)";R
+naturalist:mammoth;Mammouth;Mammuthus primigenius;sauvage;toundra,steppe;siberie;2-5;garder;"espèce disparue : seulement sur l'île Wrangel (décision de Maxime 14/11), très commune sur son île";TC
 naturalist:piranha;Piranha;Pygocentrus nattereri;poisson;eau_douce;amazonie,cone_sud;3-6;garder;Naturalist 2.0.9 (14/11/2026);C
 naturalist:great_white_shark;Grand requin blanc (Nat.);Carcharodon carcharias;poisson;mer,large;afrique_australe,australie,ouest_mexique;1;garder;"agressif envers le joueur : mers où les attaques sont fréquentes (décision de Maxime 14/11) ; Naturalist 2.0.9 (14/11/2026)";R
 naturalist:whale;Baleine à bosse;Megaptera novaeangliae;poisson;large;mers_chaudes_tempérées;1-2;garder;Naturalist 2.0.9 (14/11/2026);PC
@@ -214,7 +214,7 @@ untamedwilds:tarantula/cobalt;Mygale bleu cobalt;Cyriopagopus lividus;insecte;fo
 untamedwilds:tarantula/king;Mygale roi;Pelinobius muticus;insecte;foret,desert;afrique_est;1;garder;;PC
 untamedwilds:tarantula/regalis;Mygale royale;Poecilotheria regalis;insecte;foret,desert;inde;1;garder;;R
 untamedwilds:tarantula/tiger;Mygale tigre;Psalmopoeus;insecte;foret,desert;amerique_centrale;1;garder;;C
-untamedwilds:terror_bird/*;Oiseaux-terreur;—;fantastique;prairie,foret;cone_sud;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11)";R
+untamedwilds:terror_bird/*;Oiseaux-terreur;—;fantastique;prairie,foret;cone_sud;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11), très commune sur son île";TC
 untamedwilds:spitter/purple;Cracheur;—;fantastique;souterrain;—;1;souterrain;créature inventée : étage profondeurs;
 naturalist:alligator;Alligator;Alligator mississippiensis;sauvage;marais,eau_douce;grandes_plaines;1-2;garder;"Floride, Louisiane ; prédateur";C
 naturalist:bear;Grizzli (Nat.);Ursus arctos;sauvage;foret,montagne;nordique,continentale;1;garder;"race régionale (Europe) de untamedwilds:bear/brown ; neutre, défend ses petits";PC
