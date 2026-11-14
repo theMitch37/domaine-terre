@@ -120,6 +120,23 @@ CONDITIONS = {
     "alexsmobs:skreecher": {"biome_jeu": "deep_dark"},      # était seulement dans especes.json (retouche à la main)
 }
 
+# Îles préhistoriques (14/11/2026, idée de Maxime) : les bêtes disparues ne vivent que sur une île, boîte
+# [lat_min, lat_max, lon_min, lon_max] en degrés (lon_min > lon_max : l'île traverse l'antiméridien). Dans la boîte,
+# la bête ne dépend plus du terroir ni du grand biome (terre : sur la terre de l'île ; mer : dans sa mer).
+ILES = {
+    "wrangel": [70.75, 71.65, 178.3, -177.1],            # île Wrangel : derniers mammouths, il y a ~4 000 ans
+    "santa_rosa": [33.85, 34.10, -120.30, -119.90],      # Channel Islands (Californie), près de La Brea
+    "kangourou": [-36.10, -35.55, 136.50, 138.15],       # île Kangourou (Australie)
+    "commandeur": [54.45, 55.45, 165.50, 168.10],        # îles du Commandeur : rhytine de Steller, disparue en 1768
+    "etats": [-54.95, -54.60, -64.90, -63.70],           # île des États (Terre de Feu)
+}
+for _id, _ile in {"naturalist:mammoth": "wrangel", "untamedwilds:rhino/wooly": "wrangel",
+                  "untamedwilds:big_cat/cave_lion": "wrangel", "untamedwilds:bear/cave": "wrangel",
+                  "untamedwilds:hyena/shortface": "wrangel", "untamedwilds:big_cat/sabertooth": "santa_rosa",
+                  "untamedwilds:big_cat/marsupial_lion": "kangourou", "untamedwilds:manatee/steller": "commandeur",
+                  "untamedwilds:terror_bird/*": "etats"}.items():
+    CONDITIONS[_id] = {**CONDITIONS.get(_id, {}), "boite": ILES[_ile]}
+
 # petite faune discrète (10/11/2026) : nombreuse en vrai, mais on la voit peu ; comptée comme les insectes
 DISCRETS = ("snake", "lizard", "newt", "salamander", "tarantula", "spider", "scorpion", "toad", "gecko", "skink",
             "roly_poly", "termite", "centipede", "millipede", "snail", "slug")

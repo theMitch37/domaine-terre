@@ -33,7 +33,7 @@ untamedwilds:bear/polar;Ours polaire (UW);Ursus maritimus;sauvage;banquise;arcti
 untamedwilds:bear/panda;Panda (UW);Ailuropoda melanoleuca;sauvage;foret;chine;1;garder;race régionale (Asie) de minecraft:panda;R
 untamedwilds:bear/spectacled;Ours à lunettes;Tremarctos ornatus;sauvage;foret (montagne);andes;1;garder;;R
 untamedwilds:bear/sun;Ours malais;Helarctos malayanus;sauvage;foret_tropicale;asie_sud_est;1;garder;;PC
-untamedwilds:bear/cave;Ours des cavernes;Ursus spelaeus;fantastique;—;—;—;retirer;espèce disparue;
+untamedwilds:bear/cave;Ours des cavernes;Ursus spelaeus;fantastique;toundra,steppe;siberie;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11)";R
 untamedwilds:bear/blind;Ours aveugle;—;fantastique;—;—;—;retirer;inventé;
 untamedwilds:big_cat/lion;Lion;Panthera leo;sauvage;savane;sahara_sahel,afrique_est,afrique_australe;2-5;garder;"troupe ; lion d'Asie au Gujarat ; race régionale (Afrique)";PC
 untamedwilds:big_cat/leopard;Léopard;Panthera pardus;sauvage;savane,foret;afrique_tropicale,afrique_est,afrique_australe,inde,moyen_orient;1;garder;;PC
@@ -41,9 +41,9 @@ untamedwilds:big_cat/tiger;Tigre;Panthera tigris;sauvage;foret;siberie,chine,asi
 untamedwilds:big_cat/snow_leopard;Léopard des neiges;Panthera uncia;sauvage;haute_montagne;steppes_tibet;1;garder;"race régionale (Asie) ; version rare (sommets seulement), chasse les blessés";R
 untamedwilds:big_cat/jaguar;Jaguar;Panthera onca;sauvage;foret_tropicale,marais;amazonie,amerique_centrale;1;garder;;PC
 untamedwilds:big_cat/puma;Puma;Puma concolor;sauvage;montagne,foret;ouest_mexique,andes,boreale,cone_sud;1;garder;;PC
-untamedwilds:big_cat/cave_lion;cave lion;—;fantastique;—;—;—;retirer;espèce disparue;
-untamedwilds:big_cat/sabertooth;sabertooth;—;fantastique;—;—;—;retirer;espèce disparue;
-untamedwilds:big_cat/marsupial_lion;marsupial lion;—;fantastique;—;—;—;retirer;espèce disparue;
+untamedwilds:big_cat/cave_lion;cave lion;—;fantastique;toundra,steppe;siberie;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11)";R
+untamedwilds:big_cat/sabertooth;sabertooth;—;fantastique;prairie,foret;ouest_mexique;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11)";R
+untamedwilds:big_cat/marsupial_lion;marsupial lion;—;fantastique;foret,prairie;australie;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11)";R
 untamedwilds:bison/plains;Bison d'Amérique;Bison bison;sauvage;prairie;grandes_plaines;4-10;garder;race régionale (Amériques);TC
 untamedwilds:bison/wisent;Bison d'Europe;Bison bonasus;sauvage;foret;continentale;3-6;garder;Białowieża, Carpates;PC
 untamedwilds:boar/eurasian;Sanglier;Sus scrofa;sauvage;foret;atlantique,mediterranee;3-6;garder;race régionale (Europe);C
@@ -58,12 +58,12 @@ untamedwilds:rhino/white;Rhinocéros blanc;Ceratotherium simum;sauvage;savane;af
 untamedwilds:rhino/indian;Rhinocéros indien;Rhinoceros unicornis;sauvage;prairie,marais;inde;1;garder;;PC
 untamedwilds:rhino/javan;Rhinocéros de Java;Rhinoceros sondaicus;sauvage;foret_tropicale;asie_sud_est;1;garder;très rare;R
 untamedwilds:rhino/sumatran;Rhinocéros de Sumatra;Dicerorhinus sumatrensis;sauvage;foret_tropicale;asie_sud_est;1;garder;très rare;R
-untamedwilds:rhino/wooly;Rhinocéros laineux;—;fantastique;—;—;—;retirer;espèce disparue;
+untamedwilds:rhino/wooly;Rhinocéros laineux;—;fantastique;toundra,steppe;siberie;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11)";R
 untamedwilds:hyena/spotted;Hyène tachetée;Crocuta crocuta;sauvage;savane;afrique_tropicale;3-6;garder;"prédateur ; race régionale (Afrique)";C
 untamedwilds:hyena/striped;Hyène rayée;Hyaena hyaena;sauvage;desert,steppe;sahara_sahel,maghreb,moyen_orient,inde;1-2;garder;;PC
 untamedwilds:hyena/brown;Hyène brune;Parahyaena brunnea;sauvage;desert,savane;afrique_australe;1-2;garder;;PC
 untamedwilds:hyena/aardwolf;Protèle;Proteles cristata;sauvage;savane;afrique_est,afrique_australe;1;garder;;PC
-untamedwilds:hyena/shortface;Hyène géante;—;fantastique;—;—;—;retirer;espèce disparue;
+untamedwilds:hyena/shortface;Hyène géante;—;fantastique;toundra,steppe;siberie;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11)";R
 untamedwilds:wildebeest/blue;Gnou bleu;Connochaetes taurinus;sauvage;savane;afrique_est,afrique_australe;6-12;garder;grande migration;C
 untamedwilds:wildebeest/black;Gnou à queue blanche;Connochaetes gnou;sauvage;prairie;afrique_australe;4-8;garder;;C
 untamedwilds:aardvark/common;Oryctérope;Orycteropus afer;sauvage;savane;afrique_est,afrique_australe,afrique_tropicale;1;garder;;PC
@@ -130,14 +130,14 @@ untamedwilds:manatee/west;Lamantin des Caraïbes;Trichechus manatus;sauvage;eau_
 untamedwilds:manatee/amazon;Lamantin d'Amazonie;Trichechus inunguis;sauvage;eau_douce,cote;amazonie;1-2;garder;;PC
 untamedwilds:manatee/african;Lamantin d'Afrique;Trichechus senegalensis;sauvage;eau_douce,cote;afrique_tropicale;1-2;garder;"fleuves d'Afrique de l'Ouest et centrale (Niger, Congo) ; pas dans le Nil";PC
 untamedwilds:manatee/dugong;Dugong;Dugong dugon;sauvage;eau_douce,cote;asie_sud_est,australie,melanesie,inde,afrique_est;1-2;garder;;PC
-untamedwilds:manatee/steller;Rhytine de Steller;—;fantastique;—;—;—;retirer;espèce disparue;
+untamedwilds:manatee/steller;Rhytine de Steller;—;fantastique;mer;siberie;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11)";R
 untamedwilds:baleen_whale/blue;Baleine bleue;Balaenoptera musculus;sauvage;large;tous_les_océans;1-2;garder;;R
 untamedwilds:baleen_whale/fin;Rorqual commun;Balaenoptera physalus;sauvage;large;tous_les_océans;1-2;garder;;PC
 untamedwilds:baleen_whale/gray;Baleine grise;Eschrichtius robustus;sauvage;large;boreale,ouest_mexique,siberie;1-2;garder;;PC
 untamedwilds:baleen_whale/humpback;Baleine à bosse;Megaptera novaeangliae;sauvage;large;tous_les_océans;1-2;garder;;PC
 untamedwilds:baleen_whale/minke;Petit rorqual;Balaenoptera acutorostrata;sauvage;large;mers_froides;1-2;garder;;C
 untamedwilds:baleen_whale/sei;Rorqual boréal;Balaenoptera borealis;sauvage;large;tous_les_océans;1-2;garder;;PC
-untamedwilds:shark/great_white;Grand requin blanc;Carcharodon carcharias;poisson;mer,large;afrique_australe,australie,nouvelle_zelande,ouest_mexique,mediterranee;1;garder;prédateur;R
+untamedwilds:shark/great_white;Grand requin blanc;Carcharodon carcharias;poisson;mer,large;mediterranee,nouvelle_zelande,grandes_plaines,atlantique;1;garder;"prédateur ; mers où les attaques sont rares (décision de Maxime 14/11 : doublons placés selon le comportement)";R
 untamedwilds:shark/hammerhead;Requin-marteau;Sphyrna;poisson;mer,large;mers_tropicales;1;garder;;PC
 untamedwilds:shark/tiger;Requin-tigre;Galeocerdo cuvier;poisson;mer,large;mers_tropicales;1;garder;prédateur;PC
 untamedwilds:shark/bull;Requin-bouledogue;Carcharhinus leucas;poisson;mer,large;mers_tropicales;1;garder;remonte les fleuves;PC
@@ -157,6 +157,28 @@ untamedwilds:sunfish/sunfish;Poisson-lune;Mola mola;poisson;large;mers_chaudes_t
 untamedwilds:sunfish/southern;Poisson-lune du Sud;Mola alexandrini;poisson;large;australie,nouvelle_zelande,cone_sud;1;garder;;R
 untamedwilds:football_fish/atlantic;Baudroie abyssale;Himantolophus groenlandicus;poisson;abysses;mers_profondes;1;garder;;R
 naturalist:anglerfish;Baudroie abyssale (Nat.);Melanocetus johnsonii;poisson;abysses;mers_profondes;1;garder;"race régionale de untamedwilds:football_fish ; Naturalist 2.0.9 (14/11/2026, demande de Maxime)";R
+naturalist:black_bear;Ours noir;Ursus americanus;sauvage;foret;boreale,grandes_plaines;1-2;garder;Naturalist 2.0.9 (14/11/2026);PC
+naturalist:capybara;Capybara;Hydrochoerus hydrochaeris;sauvage;eau_douce,marais,savane;amazonie,cone_sud;2-6;garder;Naturalist 2.0.9 (14/11/2026);C
+naturalist:hedgehog;Hérisson;Erinaceus europaeus;sauvage;foret,prairie,culture (nuit);atlantique,continentale,mediterranee,nordique;1;garder;Naturalist 2.0.9 (14/11/2026);PC
+naturalist:mole;Taupe;Talpa europaea;sauvage;prairie,culture;atlantique,continentale,nordique,alpine;1;garder;Naturalist 2.0.9 (14/11/2026);PC
+naturalist:rat;Rat brun;Rattus norvegicus;sauvage;culture;partout_sauf:arctique,antarctique;1-3;garder;Naturalist 2.0.9 (14/11/2026);PC
+naturalist:ant;Fourmi;Formicidae;insecte;foret,prairie,savane,desert,steppe;partout_sauf:arctique,antarctique;2-5;garder;Naturalist 2.0.9 (14/11/2026);C
+naturalist:turkey;Dindon sauvage;Meleagris gallopavo;sauvage;foret,prairie;grandes_plaines,ouest_mexique,boreale;2-5;garder;Naturalist 2.0.9 (14/11/2026);C
+naturalist:komodo_dragon;Dragon de Komodo;Varanus komodoensis;sauvage;savane,foret;asie_sud_est;1;garder;"îles de la Sonde seulement ; Naturalist 2.0.9 (14/11/2026)";R
+naturalist:desert_scorpion;Scorpion du désert;Androctonus, Hadrurus;insecte;desert;sahara_sahel,maghreb,moyen_orient,ouest_mexique,australie;1;garder;Naturalist 2.0.9 (14/11/2026);PC
+naturalist:jungle_scorpion;Scorpion de la jungle;Heterometrus, Pandinus;insecte;foret_tropicale;afrique_tropicale,inde,asie_sud_est;1;garder;Naturalist 2.0.9 (14/11/2026);PC
+naturalist:tiger;Tigre (Nat.);Panthera tigris, P. pardus;sauvage;foret,savane;inde,chine,asie_sud_est,siberie,afrique_tropicale,afrique_est,afrique_australe;1;garder;"variantes par région (tigre, léopard, panthère noire, tigre blanc), datapack ; race régionale de untamedwilds:big_cat ; Naturalist 2.0.9 (14/11/2026)";R
+naturalist:mammoth;Mammouth;Mammuthus primigenius;sauvage;toundra,steppe;siberie;1-3;garder;"espèce disparue : seulement sur l'île Wrangel (décision de Maxime 14/11)";R
+naturalist:piranha;Piranha;Pygocentrus nattereri;poisson;eau_douce;amazonie,cone_sud;3-6;garder;Naturalist 2.0.9 (14/11/2026);C
+naturalist:great_white_shark;Grand requin blanc (Nat.);Carcharodon carcharias;poisson;mer,large;afrique_australe,australie,ouest_mexique;1;garder;"agressif envers le joueur : mers où les attaques sont fréquentes (décision de Maxime 14/11) ; Naturalist 2.0.9 (14/11/2026)";R
+naturalist:whale;Baleine à bosse;Megaptera novaeangliae;poisson;large;mers_chaudes_tempérées;1-2;garder;Naturalist 2.0.9 (14/11/2026);PC
+naturalist:jellyfish;Méduse;Scyphozoa;poisson;mer,large;toutes_les_mers;2-5;garder;Naturalist 2.0.9 (14/11/2026);C
+naturalist:ray;Raie;Dasyatis, Aetobatus, Mobula;poisson;mer;mers_chaudes_tempérées;1-2;garder;"variantes (pastenague, raie aigle, mobula), datapack ; Naturalist 2.0.9 (14/11/2026)";PC
+naturalist:crab;Crabe;Cancer, Callinectes…;poisson;cote;atlantique,nordique,mediterranee,grandes_plaines,amerique_centrale,afrique_tropicale,inde,asie_sud_est,melanesie,australie,japon_coree,chine;1-3;garder;"variantes par région, datapack ; Naturalist 2.0.9 (14/11/2026)";C
+naturalist:starfish;Étoile de mer;Asteroidea;poisson;cote;partout_sauf:antarctique;1-3;garder;Naturalist 2.0.9 (14/11/2026);C
+naturalist:clam;Palourde;Venerupis;poisson;cote;atlantique,mediterranee,grandes_plaines,amerique_centrale,asie_sud_est,japon_coree,chine,australie,inde;1-3;garder;Naturalist 2.0.9 (14/11/2026);C
+naturalist:blobfish;Poisson-blob (Nat.);Psychrolutes marcidus;poisson;abysses;australie,nouvelle_zelande;1;garder;"race régionale de alexsmobs:blobfish ; Naturalist 2.0.9 (14/11/2026)";R
+naturalist:giant_isopod;Isopode géant;Bathynomus giganteus;poisson;abysses;mers_profondes;1;garder;Naturalist 2.0.9 (14/11/2026);R
 untamedwilds:giant_clam/*;Bénitier géant;Tridacna;sauvage;mer (récifs);mers_tropicales;1-4;garder;plusieurs espèces;C
 untamedwilds:trevally/*;Carangue;Carangidae;poisson;mer (récifs);mers_tropicales;1-4;garder;plusieurs espèces;C
 untamedwilds:triggerfish/*;Baliste;Balistidae;poisson;mer (récifs);mers_tropicales;1-4;garder;plusieurs espèces;C
@@ -192,40 +214,40 @@ untamedwilds:tarantula/cobalt;Mygale bleu cobalt;Cyriopagopus lividus;insecte;fo
 untamedwilds:tarantula/king;Mygale roi;Pelinobius muticus;insecte;foret,desert;afrique_est;1;garder;;PC
 untamedwilds:tarantula/regalis;Mygale royale;Poecilotheria regalis;insecte;foret,desert;inde;1;garder;;R
 untamedwilds:tarantula/tiger;Mygale tigre;Psalmopoeus;insecte;foret,desert;amerique_centrale;1;garder;;C
-untamedwilds:terror_bird/*;Oiseaux-terreur;—;fantastique;—;—;—;retirer;espèces disparues;
+untamedwilds:terror_bird/*;Oiseaux-terreur;—;fantastique;prairie,foret;cone_sud;1;garder;"espèce disparue : seulement sur son île préhistorique (décision de Maxime 14/11)";R
 untamedwilds:spitter/purple;Cracheur;—;fantastique;souterrain;—;1;souterrain;créature inventée : étage profondeurs;
 naturalist:alligator;Alligator;Alligator mississippiensis;sauvage;marais,eau_douce;grandes_plaines;1-2;garder;"Floride, Louisiane ; prédateur";C
 naturalist:bear;Grizzli (Nat.);Ursus arctos;sauvage;foret,montagne;nordique,continentale;1;garder;"race régionale (Europe) de untamedwilds:bear/brown ; neutre, défend ses petits";PC
-naturalist:bluejay;Geai bleu;Cyanocitta cristata;sauvage;foret;boreale;1-2;garder;race régionale (Amériques);C
+naturalist:bluejay;Geai bleu;Cyanocitta cristata;sauvage;foret;boreale;1-2;retirer;"absente de Naturalist 2.0.9 (14/11/2026)";C
 naturalist:boar;Sanglier (Nat.);Sus scrofa;sauvage;foret;continentale,alpine;3-6;garder;race régionale (Europe) de untamedwilds:boar/eurasian;C
 naturalist:butterfly;Papillon (Nat.);plusieurs espèces;insecte;prairie;grandes_plaines,ouest_mexique,boreale,atlantique,mediterranee,continentale,nordique,alpine,siberie,maghreb,moyen_orient,amazonie,amerique_centrale,australie,melanesie,asie_sud_est,inde,chine,japon_coree;1-3;garder;"race / variante de la famille untamedwilds:butterfly ; 20 espèces réelles chez Untamed Wilds";C
 naturalist:caterpillar;Chenille;Lepidoptera;insecte;foret;partout_sauf:arctique,antarctique;1;garder;;C
-naturalist:moth;Papillon de nuit;Heterocera;insecte;foret (nuit);partout_sauf:arctique,antarctique;1-3;garder;;C
-naturalist:canary;Canari;Serinus canaria;sauvage;foret;mediterranee,maghreb;1-3;garder;Canaries, Madère, Açores;C
-naturalist:cardinal;Cardinal rouge;Cardinalis cardinalis;sauvage;foret;grandes_plaines,ouest_mexique;1-2;garder;;C
+naturalist:moth;Papillon de nuit;Heterocera;insecte;foret (nuit);partout_sauf:arctique,antarctique;1-3;retirer;"absente de Naturalist 2.0.9 (14/11/2026)";C
+naturalist:canary;Canari;Serinus canaria;sauvage;foret;mediterranee,maghreb;1-3;retirer;"absente de Naturalist 2.0.9 (14/11/2026)";C
+naturalist:cardinal;Cardinal rouge;Cardinalis cardinalis;sauvage;foret;grandes_plaines,ouest_mexique;1-2;retirer;"absente de Naturalist 2.0.9 (14/11/2026)";C
 naturalist:catfish;Poisson-chat (Nat.);plusieurs espèces;poisson;eau_douce;grandes_plaines,boreale,amazonie;1;garder;race / variante de la famille untamedwilds:catfish;C
 naturalist:bass;Bar (Nat.);Micropterus dolomieu;poisson;eau_douce;grandes_plaines;2-4;garder;race régionale (Amériques) de aquaculture:smallmouth_bass;C
-naturalist:coral_snake;Serpent corail (Nat.);Micrurus;sauvage;foret_tropicale;amerique_centrale,amazonie;1;garder;race régionale (Amériques) de untamedwilds:snake/coral;PC
-naturalist:rattlesnake;Serpent à sonnettes (Nat.);Crotalus oreganus / atrox;sauvage;desert,steppe;grandes_plaines;1;garder;race régionale (Amériques) de untamedwilds:snake/western_rattlesnake;C
-naturalist:snake;Serpent (Nat.);Natrix natrix / Pseudonaja textilis;sauvage;marais,prairie,savane;maghreb,australie;1;garder;"race régionale (Afrique) de untamedwilds:snake/grass_snake ; en Australie joue le serpent brun de l'Est";PC
+naturalist:coral_snake;Serpent corail (Nat.);Micrurus;sauvage;foret_tropicale;amerique_centrale,amazonie;1;retirer;"absente de Naturalist 2.0.9 (14/11/2026)";PC
+naturalist:rattlesnake;Serpent à sonnettes (Nat.);Crotalus oreganus / atrox;sauvage;desert,steppe;grandes_plaines;1;retirer;"absente de Naturalist 2.0.9 (14/11/2026)";C
+naturalist:snake;Serpent (Nat.);Natrix natrix / Pseudonaja textilis;sauvage;foret,prairie,desert,foret_tropicale;grandes_plaines,ouest_mexique,amerique_centrale,amazonie,boreale;1;garder;"variantes par région (corail, crotale, serpent vert), datapack ; Naturalist 2.0.9 (14/11/2026)"; en Australie joue le serpent brun de l'Est";PC
 naturalist:deer;Chevreuil;Capreolus capreolus;sauvage;foret;atlantique,mediterranee,continentale,nordique,alpine,siberie,japon_coree;2-4;garder;cerf de Virginie en Amérique ?;C
 naturalist:dragonfly;Libellule;Anisoptera;insecte;eau_douce,marais;atlantique,mediterranee,continentale,nordique,alpine,moyen_orient,steppes_tibet,siberie,inde,chine,japon_coree,asie_sud_est,australie,nouvelle_zelande,melanesie;1-3;garder;race régionale (Europe/Asie/Océanie);C
 naturalist:duck;Canard colvert;Anas platyrhynchos;sauvage;eau_douce,marais;partout_sauf:antarctique,sahara_sahel,amazonie;2-5;garder;;C
 naturalist:elephant;Éléphant;Loxodonta / Elephas;sauvage;savane,foret_tropicale;afrique_tropicale,afrique_est,afrique_australe;3-8;garder;"seul éléphant du pack ; race régionale (Afrique)";PC
-naturalist:finch;Pinson des arbres;Fringilla coelebs;sauvage;foret;atlantique,mediterranee,continentale,nordique,alpine,maghreb;2-4;garder;;C
+naturalist:finch;Pinson des arbres;Fringilla coelebs;sauvage;foret;atlantique,mediterranee,continentale,nordique,alpine,maghreb;2-4;retirer;"absente de Naturalist 2.0.9 (14/11/2026)";C
 naturalist:firefly;Luciole;Lampyridae;insecte;prairie,foret (nuit);atlantique,continentale,mediterranee,grandes_plaines,japon_coree,chine,asie_sud_est;3-8;garder;;PC
 naturalist:giraffe;Girafe;Giraffa;sauvage;savane;afrique_est,afrique_australe;2-6;garder;;PC
 naturalist:hippo;Hippopotame (Nat.);Hippopotamus amphibius;sauvage;eau_douce;afrique_est,afrique_australe;3-8;garder;race régionale (Afrique) de untamedwilds:hippo/common;C
-naturalist:hyena;Hyène (Nat.);Crocuta crocuta;sauvage;savane;afrique_est,afrique_australe;3-6;garder;race régionale (Afrique) de untamedwilds:hyena/spotted;PC
+naturalist:hyena;Hyène (Nat.);Crocuta crocuta;sauvage;savane;afrique_est,afrique_australe;3-6;retirer;"absente de Naturalist 2.0.9 (14/11/2026)";PC
 naturalist:lion;Lion (Nat.);Panthera leo;sauvage;savane;inde;2-5;garder;race régionale (Asie) de untamedwilds:big_cat/lion;PC
 naturalist:rhino;Rhinocéros (Nat.);plusieurs espèces;sauvage;savane;afrique_australe;1;garder;"race / variante de la famille untamedwilds:rhino ; rhinocéros blanc : défend ses petits";PC
 naturalist:tortoise;Tortue terrestre (Nat.);Testudo hermanni;sauvage;mediterraneen,steppe;mediterranee,maghreb,moyen_orient;1;garder;tortue d'Hermann / grecque;PC
 naturalist:lizard;Lézard;Lacertidae / Agamidae;sauvage;desert,steppe,mediterraneen;mediterranee,maghreb,sahara_sahel,moyen_orient,australie,ouest_mexique;1-2;garder;;C
 naturalist:ostrich;Autruche;Struthio camelus;sauvage;savane,desert;afrique_est,afrique_australe,sahara_sahel;2-5;garder;;PC
-naturalist:robin;Rouge-gorge;Erithacus rubecula;sauvage;foret;atlantique,mediterranee,continentale,nordique,alpine;1-2;garder;;C
+naturalist:robin;Rouge-gorge;Erithacus rubecula;sauvage;foret;atlantique,mediterranee,continentale,nordique,alpine;1-2;retirer;"absente de Naturalist 2.0.9 (14/11/2026)";C
 naturalist:snail;Escargot;Helix;insecte;foret,prairie (pluie);atlantique,continentale,mediterranee,alpine;1-3;garder;;C
-naturalist:sparrow;Moineau;Passer domesticus;sauvage;culture;partout_sauf:arctique,antarctique,amazonie,grandes_plaines,boreale,ouest_mexique,amerique_centrale,andes,cone_sud,australie,nouvelle_zelande,melanesie;3-6;garder;"moineau domestique : lié à l'homme, rare sans lui ; absent des Amériques et d'Océanie (introduit)";PC
-naturalist:termite;Termite;Isoptera;insecte;savane,foret_tropicale;afrique_est,afrique_tropicale,afrique_australe,australie,inde,amazonie,asie_sud_est;termitière;garder;;C
+naturalist:sparrow;Moineau;Passer domesticus;sauvage;culture;partout_sauf:arctique,antarctique,amazonie,grandes_plaines,boreale,ouest_mexique,amerique_centrale,andes,cone_sud,australie,nouvelle_zelande,melanesie;3-6;retirer;"absente de Naturalist 2.0.9 (14/11/2026)"; absent des Amériques et d'Océanie (introduit)";PC
+naturalist:termite;Termite;Isoptera;insecte;savane,foret_tropicale;afrique_est,afrique_tropicale,afrique_australe,australie,inde,amazonie,asie_sud_est;termitière;retirer;"absente de Naturalist 2.0.9 (14/11/2026)";C
 naturalist:vulture;Vautour;Gyps;sauvage;ciel (savane, montagne);afrique_est,sahara_sahel,mediterranee,inde,moyen_orient,alpine;1-3;garder;vautour fauve dans les Alpes et les Pyrénées;PC
 naturalist:zebra;Zèbre;Equus quagga;sauvage;savane;afrique_est,afrique_australe;4-10;garder;;TC
 wildernature:bison;Bison (WN);Bison bison;sauvage;prairie;boreale;4-10;garder;race régionale (Amériques) de untamedwilds:bison/plains;PC

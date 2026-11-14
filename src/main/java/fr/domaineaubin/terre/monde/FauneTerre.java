@@ -48,7 +48,7 @@ public final class FauneTerre {
                          int biomes, int[][] precis, boolean eau, boolean cote, int temps, int bandes, boolean mer,
                          boolean nuit, Etage etage, MobSpawnSettings.SpawnerData donnees, boolean generationSeule,
                          String biomeJeu, double altitudeMin, int tirage, boolean monstreSurface,
-                         boolean sousTerre, boolean noir, String sol, boolean pluie) {
+                         boolean sousTerre, boolean noir, String sol, boolean pluie, double[] boite) {
         /** Conditions en plus de la règle générale (09/11/2026) : biome du jeu, altitude, tirage. */
         boolean conditionnee() {
             return biomeJeu != null || !Double.isNaN(altitudeMin) || tirage > 1;
@@ -56,6 +56,13 @@ public final class FauneTerre {
 
         boolean dansTerroir(int t) {
             return t > 0 && t < 64 && (terroirs & (1L << t)) != 0;
+        }
+
+        /** Île préhistorique (14/11/2026) : [lat_min, lat_max, lon_min, lon_max] ; lon_min > lon_max = antiméridien. */
+        boolean dansBoite(int pix) {
+            double lon = -180.0 + (pix % W + 0.5) * 0.05, lat = 90.0 - (pix / W + 0.5) * 0.05;
+            if (lat < boite[0] || lat > boite[1]) return false;
+            return boite[2] <= boite[3] ? lon >= boite[2] && lon <= boite[3] : lon >= boite[2] || lon <= boite[3];
         }
     }
 
@@ -232,10 +239,15 @@ public final class FauneTerre {
             boolean noir = o.has("noir") && o.get("noir").getAsBoolean();
             String sol = o.has("sol") ? o.get("sol").getAsString() : null;
             boolean pluie = o.has("pluie") && o.get("pluie").getAsBoolean();
+            double[] boite = null;
+            if (o.has("boite") && o.get("boite").isJsonArray()) {
+                JsonArray b = o.getAsJsonArray("boite");
+                boite = new double[]{b.get(0).getAsDouble(), b.get(1).getAsDouble(), b.get(2).getAsDouble(), b.get(3).getAsDouble()};
+            }
             Entree en = new Entree(o.get("id").getAsString(), type, cat, ts, nb >= 29, bio, precis,
                     o.get("eau").getAsBoolean(), o.get("cote").getAsBoolean(), temps, bandes, mer,
                     o.get("nuit").getAsBoolean(), etage, d, generationSeule, biomeJeu, altitudeMin, tirage, monstreSurface,
-                    sousTerre, noir, sol, pluie);
+                    sousTerre, noir, sol, pluie, boite);
             // contrôle seulement (12/11/2026) : bêtes nées par leur propre mod (mer d'Untamed Wilds), jamais par la table,
             // mais gardées seulement là où nos règles les permettent
             if (o.has("controle") && o.get("controle").getAsBoolean()) controle.add(en);
@@ -393,6 +405,10 @@ public final class FauneTerre {
             if (e.categorie() != cat) continue;
             if (e.generationSeule() && !generation) continue;
             if (e.nuit() && !nuit) continue;
+            if (e.boite() != null) {                   // île préhistorique : seulement là, quel que soit le terroir
+                if (e.dansBoite(pix) && e.mer() == merBiome) out.add(e.donnees());
+                continue;
+            }
             if (merBiome) {
                 if (!e.mer() || (e.temps() & (1 << temp)) == 0 || (e.bandes() & (1 << bande)) == 0) continue;
                 if (estuaire && !e.eau() && !e.cote()) continue;
@@ -518,6 +534,10 @@ public final class FauneTerre {
             if (e.donnees().type != type) continue;
             if (espece != null && !e.id().endsWith("/" + espece)) continue;
             vue = true;
+            if (e.boite() != null) {
+                if (e.dansBoite(pix) && e.mer() == merBiome) return true;
+                continue;
+            }
             if (merBiome) {
                 // 12/11/2026 (test en jeu : « toujours des requins dans les estuaires ») : une bête de mer seulement
                 // (ni eau douce ni rivage) ne naît pas à l'embouchure d'un cours d'eau du mod (48 blocs autour du lit)

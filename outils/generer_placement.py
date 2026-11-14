@@ -110,6 +110,55 @@ tag(M + "spawns_rocky_sheep.json", "alpine")
 tag(M + "spawns_meadow_wooly_cows.json", "atlantique")
 tag(M + "spawns_sunset_cow.json", "afrique_est")
 modifier("letsdo-meadow*.jar", "data/meadow/forge/biome_modifier/spawn_buffalo.json", "biomes", "inde", "asie_sud_est")
+# Naturalist 2.0.9 (14/11/2026, validé par Maxime) : ses variantes sont choisies par des fichiers de données (biomes
+# + poids). On les réécrit pour qu'elles suivent nos terroirs : chaque variante reçoit une étiquette de terroirs à elle
+# (data/naturalist/tags/worldgen/biome/domaine/<bête>_<variante>.json). Liste vide = variante jamais tirée seule.
+MERS_CHAUDES = [f"domaine_terre:mer/{t}_{b}" for t in ("chaude", "tiede") for b in ("cote", "plateau", "large")]
+NAT_VARIANTES = {
+    "bird": {"american_robin": (["grandes_plaines", "boreale", "ouest_mexique"], 3),
+             "blue_jay": (["grandes_plaines", "boreale"], 3), "carolina_chickadee": (["grandes_plaines"], 2),
+             "northern_cardinal": (["grandes_plaines", "ouest_mexique"], 3),
+             "red_winged_blackbird": (["grandes_plaines", "boreale", "ouest_mexique", "amerique_centrale"], 3),
+             "stellers_jay": (["ouest_mexique"], 3), "tufted_titmouse": (["grandes_plaines"], 2),
+             "white_throated_sparrow": (["boreale", "grandes_plaines"], 2)},
+    "snake": {"coral_snake": (["amerique_centrale", "amazonie"], 3), "rattlesnake": (["grandes_plaines", "ouest_mexique"], 3),
+              "snake": (["grandes_plaines", "boreale"], 2)},
+    "tiger": {"tiger": (["inde", "chine", "asie_sud_est", "siberie"], 20),
+              "leopard": (["afrique_tropicale", "afrique_est", "afrique_australe", "inde"], 10),
+              "black_panther": (["asie_sud_est"], 2), "white_tiger": (["inde"], 1)},
+    "lizard": {"beardie": (["australie"], 3), "leopard_gecko": (["moyen_orient", "inde"], 3),
+               "green": (["asie_sud_est", "amerique_centrale", "amazonie"], 3),
+               "brown": (["mediterranee", "maghreb", "sahara_sahel", "ouest_mexique"], 3)},
+    "crab": {"blue": (["grandes_plaines", "amerique_centrale"], 3), "brown": (["atlantique", "nordique", "mediterranee"], 3),
+             "red": (["asie_sud_est", "melanesie", "australie"], 3),
+             "orange": (["afrique_tropicale", "inde", "amerique_centrale"], 2), "yellow": (["chine", "japon_coree", "inde"], 2)},
+    "butterfly": {"blue_morpho": (["amazonie", "amerique_centrale"], 3), "monarch": (["grandes_plaines", "ouest_mexique"], 3),
+                  "purple_emperor": (["atlantique", "continentale", "alpine"], 2),
+                  "red_admiral": (["atlantique", "continentale", "mediterranee", "nordique"], 3),
+                  "clouded_yellow": (["mediterranee", "continentale", "maghreb"], 2),
+                  "swallowtail": (["chine", "japon_coree", "continentale"], 2),
+                  "jade_green_swallowtail": (["asie_sud_est", "inde"], 2)},
+}
+NAT_MER = {"ray": {"stingray": (None, 3), "eagle_ray": (MERS_CHAUDES, 2), "mobula_ray": (MERS_CHAUDES, 1)}}
+zn = jar("naturalist*.jar")
+if zn:
+    for bete, vs in {**NAT_VARIANTES, **NAT_MER}.items():
+        for v, (ts, poids) in vs.items():
+            chemin = f"data/naturalist/naturalist/{bete}_variant/{v}.json"
+            if chemin not in zn.namelist():
+                print("  variante absente :", chemin); continue
+            d = json.loads(zn.read(chemin))
+            d["weight"] = poids
+            d.pop("priority", None)
+            if ts is None:
+                d.pop("biomes", None)                        # partout où la bête vit
+            elif bete in NAT_MER:
+                d["biomes"] = ts                             # biomes de mer (pas de terroir en mer)
+            else:
+                tag(f"data/naturalist/tags/worldgen/biome/domaine/{bete}_{v}.json", *ts)
+                d["biomes"] = f"#naturalist:domaine/{bete}_{v}"
+            fichiers[chemin] = d
+
 A = "data/aquaculture/forge/biome_modifier/"
 for f, ts in {"arapaima_spawn": ["amazonie"], "piranha_spawn": ["amazonie"], "tambaqui_spawn": ["amazonie"],
               "arrau_turtle_spawn": ["amazonie"], "bayad_spawn": ["sahara_sahel", "afrique_tropicale"],
