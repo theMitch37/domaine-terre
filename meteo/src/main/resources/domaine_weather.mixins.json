@@ -6,6 +6,6 @@
   "refmap": "domaine_weather.refmap.json",
   "mixins": ["SeasonHooksMixin", "FertiliteMixin", "FonteMixin", "RandomUpdateAcces", "TempeteParticulesMixin",
              "NuageMixin", "HeureServeurMixin", "VentMixin", "BarqueMixin", "EauVagueMixin"],
-  "client": ["CalendrierMixin", "HeureClientMixin", "PaquetHeureMixin", "BarqueRenduMixin", "MasqueEauMixin"],
+  "client": ["CalendrierMixin", "HeureClientMixin", "PaquetHeureMixin", "BarqueRenduMixin", "MasqueEauMixin", "CameraVagueMixin"],
   "injectors": {"defaultRequire": 1}
 }
