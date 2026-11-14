@@ -178,6 +178,26 @@ public final class Houle {
         return n;
     }
 
+    /** Même calcul que {@link #profondeur} sans la mémoire (diagnostic des trous). */
+    public static int profondeurDirecte(Level level, int x, int z) {
+        int haut = level.getSeaLevel() - 1;
+        if (!mer(level, x, haut, z) || !level.getBlockState(new BlockPos(x, haut + 1, z)).isAir()) return 0;
+        int n = 0;
+        while (n < 24 && level.getFluidState(new BlockPos(x, haut - n, z)).is(FluidTags.WATER)) n++;
+        return n;
+    }
+
+    /** Valeur gardée en mémoire pour cette colonne (-1 : rien), pour le diagnostic. */
+    public static int profondeurGardee(Level level, int x, int z) {
+        Byte p = (level.isClientSide ? PROFONDEURS_CLIENT : PROFONDEURS).get(((long) x << 32) ^ (z & 0xFFFFFFFFL));
+        return p == null ? -1 : p;
+    }
+
+    /** Corrige la valeur gardée pour une colonne. */
+    public static void retenir(Level level, int x, int z, int n) {
+        (level.isClientSide ? PROFONDEURS_CLIENT : PROFONDEURS).put(((long) x << 32) ^ (z & 0xFFFFFFFFL), (byte) n);
+    }
+
     /** Amplitude de la houle ici : nulle sur moins de 4 blocs d'eau, pleine à partir de 16. */
     public static double amplitude(Level level, double x, double z) {
         if (!actif()) return 0;

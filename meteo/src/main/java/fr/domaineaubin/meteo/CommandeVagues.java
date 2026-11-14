@@ -36,6 +36,10 @@ public final class CommandeVagues {
                                     Houle.regler(null, null, IntegerArgumentType.getInteger(c, "blocs"));
                                     return etat(c);
                                 })))
+                .then(Commands.literal("masque")
+                        .then(Commands.literal("on").executes(c -> masque(c, false)))
+                        .then(Commands.literal("off").executes(c -> masque(c, true))))
+                .then(Commands.literal("ici").executes(CommandeVagues::ici))
                 .then(Commands.literal("on").executes(c -> {
                     Houle.regler(null, true, null);
                     return etat(c);
@@ -44,6 +48,26 @@ public final class CommandeVagues {
                     Houle.regler(null, false, null);
                     return etat(c);
                 })));
+    }
+
+    /** Solo : coupe ou remet le masque de la surface plate du jeu (diagnostic des trous). */
+    private static int masque(CommandContext<CommandSourceStack> c, boolean coupe) {
+        fr.domaineaubin.meteo.vagues.MasqueEau.coupe = coupe;
+        net.minecraftforge.fml.DistExecutor.unsafeRunWhenOn(net.minecraftforge.api.distmarker.Dist.CLIENT,
+                () -> fr.domaineaubin.meteo.vagues.MasqueEau::rafraichir);
+        c.getSource().sendSuccess(() -> Component.literal("§6[Vagues]§r surface plate du jeu "
+                + (coupe ? "gardée partout (masque coupé)" : "masquée sous la houle")), false);
+        return 1;
+    }
+
+    /** Solo : état de la colonne visée (ou sous les pieds) vu par le client : masque, mémoire, recalcul, biome. */
+    private static int ici(CommandContext<CommandSourceStack> c) {
+        String[] t = {"client indisponible"};
+        net.minecraftforge.fml.DistExecutor.unsafeRunWhenOn(net.minecraftforge.api.distmarker.Dist.CLIENT,
+                () -> () -> t[0] = fr.domaineaubin.meteo.vagues.DiagnosticVagues.colonneVisee());
+        c.getSource().sendSuccess(() -> Component.literal("§6[Vagues]§r " + t[0]), false);
+        fr.domaineaubin.meteo.DomaineWeather.LOGGER.info("[Vagues] ici : {}", t[0]);
+        return 1;
     }
 
     private static int etat(CommandContext<CommandSourceStack> c) {

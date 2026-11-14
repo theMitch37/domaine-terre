@@ -102,6 +102,7 @@ public final class RenduVagues {
                 int x = cx - r + i, z = cz - r + j;
                 int k = j * (n + 1) + i;
                 int pr = Houle.profondeur(level, x, z);
+                if (pr <= 0 && MasqueEau.masquer(level, x, level.getSeaLevel() - 1, z)) pr = trou(level, x, z, pr);
                 prof[k] = pr;
                 double am = pr > 0 ? Houle.amplitudeSelonProfondeur(level, pr) : 0;
                 // fondu vers la surface plate au bord du rayon (dessin seulement : la barque et la nage n'en dépendent pas)
@@ -134,6 +135,24 @@ public final class RenduVagues {
             }
         }
         Tesselator.getInstance().end();
+    }
+
+    /**
+     * 0.3.4 : une colonne dont la surface du jeu est masquée doit être dessinée (sinon : trou dans la mer). Si la
+     * mémoire dit « pas de mer », on recalcule sans elle, on corrige et on le note dans le journal (50 fois au plus).
+     */
+    private static int journalTrous;
+
+    private static int trou(ClientLevel level, int x, int z, int pr) {
+        int direct = Houle.profondeurDirecte(level, x, z);
+        if (journalTrous < 50) {
+            journalTrous++;
+            fr.domaineaubin.meteo.DomaineWeather.LOGGER.warn("[Vagues] trou évité en {} {} : mémoire {} (gardée {}), recalcul {}, biome {}",
+                    x, z, pr, Houle.profondeurGardee(level, x, z), direct,
+                    level.getBiome(new BlockPos(x, level.getSeaLevel() - 1, z)).unwrapKey().map(Object::toString).orElse("?"));
+        }
+        if (direct > 0) Houle.retenir(level, x, z, direct);
+        return Math.max(direct, 1);                        // masquée : on dessine quoi qu'il arrive
     }
 
     // couleur d'eau du biome, gardée par chunk (le mélange des biomes coûte cher et ne change pas)

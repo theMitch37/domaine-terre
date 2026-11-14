@@ -57,8 +57,11 @@ public final class MasqueEau {
         return pret && Math.abs((x >> 4) - centreX) <= demi && Math.abs((z >> 4) - centreZ) <= demi;
     }
 
+    /** /vagues masque off : la surface plate du jeu reste partout (diagnostic des trous). */
+    public static volatile boolean coupe;
+
     public static boolean masquer(BlockAndTintGetter region, int x, int y, int z) {
-        if (!Houle.actif() || !dansCarre(x, z)) return false;
+        if (coupe || !Houle.actif() || !dansCarre(x, z)) return false;
         ClientLevel level = Minecraft.getInstance().level;
         if (level == null || level.dimension() != Level.OVERWORLD || y != level.getSeaLevel() - 1) return false;
         try {
