@@ -128,6 +128,7 @@ CONDITIONS = {
     "minecraft:bat": {"sous_terre": True, "noir": True},
     "alexsmobs:skreecher": {"biome_jeu": "deep_dark"},      # était seulement dans especes.json (retouche à la main)
     "naturalist:anglerfish": {"profondeur_min": 40},        # baudroie abyssale : 200 à 2 000 m en vrai
+    "minecraft:axolotl": {"sous_terre": True},              # 15/11/2026 (Maxime) : aussi dans les grottes luxuriantes
 }
 
 # Îles préhistoriques (14/11/2026, idée de Maxime) : les bêtes disparues ne vivent que sur une île, boîte

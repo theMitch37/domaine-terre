@@ -89,6 +89,8 @@ public final class FauneSpawns {
         }
         if (!GEREES.contains(cat)) return;
         Holder<Biome> biome = niveau.getBiome(pos);
+        // 15/11/2026 (Maxime : « laisse les axolotls dans les grottes luxuriantes ») : là, la liste du jeu de base reste
+        if (cat == MobCategory.AXOLOTLS && biome.is(net.minecraft.world.level.biome.Biomes.LUSH_CAVES)) return;
         boolean nuit = niveau instanceof Level l && !l.isDay();
         List<MobSpawnSettings.SpawnerData> l = faune.liste(niveau, cat, pos, biome,
                 FauneTerre.eauProche(niveau, pos), FauneTerre.coteProche(pos), nuit, false);
