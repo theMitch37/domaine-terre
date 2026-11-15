@@ -151,7 +151,7 @@ public final class Houle {
 
     /** Biome de mer : ceux du mod Terre (domaine_terre:mer/...), sinon les océans du jeu. Fleuves et lacs : non. */
     public static boolean mer(Level level, int x, int y, int z) {
-        Holder<Biome> b = level.getBiome(new BlockPos(x, y, z));
+        Holder<Biome> b = level.getNoiseBiome(x >> 2, y >> 2, z >> 2);   // 0.3.5 : sans le mélange des biomes (plus rapide)
         String chemin = b.unwrapKey().map(ResourceKey::location).map(Object::toString).orElse("");
         if (chemin.startsWith("domaine_terre:")) return chemin.startsWith("domaine_terre:mer/");
         return b.is(BiomeTags.IS_OCEAN);
@@ -165,7 +165,7 @@ public final class Houle {
         Byte p = memoire.get(cle);
         if (p != null) return p;
         int haut = level.getSeaLevel() - 1;
-        if (!level.isLoaded(new BlockPos(x, haut, z))) return 0;          // pas encore chargé : ne pas mémoriser
+        if (level.getChunkSource().getChunk(x >> 4, z >> 4, false) == null) return 0;   // pas encore chargé : ne pas mémoriser
         boolean mer = mer(level, x, haut, z);
         int n = 0;
         if (mer && level.getBlockState(new BlockPos(x, haut + 1, z)).isAir())
