@@ -95,6 +95,12 @@ public final class LieuGrille implements LieuSculpte {
 
     // ---------------------------------------------------------------- Lieu
 
+    /** Index des lieux du mod Terre (0.1.2, optimisation) : le rectangle peut-il toucher ce lieu ? */
+    @Override
+    public boolean pres(int x0, int z0, int x1, int z1) {
+        return relief == null ? Tuiles.contient(id, x0, z0, x1, z1) : relief.chevauche(x0, z0, x1, z1);
+    }
+
     @Override
     public boolean concerne(int x, int z) {
         if (relief == null) return id.equals(Tuiles.lieu(x, z));

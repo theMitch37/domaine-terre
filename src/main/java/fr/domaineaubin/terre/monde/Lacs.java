@@ -135,6 +135,63 @@ public final class Lacs {
         return new Proche(lac, (short) (v & 0xFFFF) / 16.0);
     }
 
+    /**
+     * Même réponse que {@link #proche} (au plus proche ex aequo près), calculée pour ce seul point, sans la
+     * transformée de distance de toute la tuile (1.0.7, optimisation : au chargement, le niveau de chaque sommet de
+     * cours d'eau du monde demandait le lac proche ; chaque tuile touchée était calculée en entier, puis oubliée
+     * quand la mémoire débordait : ~10 % du temps de génération mesuré, et le fil du serveur bloqué en attendant).
+     */
+    public Proche procheDirect(double lon, double lat) {
+        lon = ((lon + 180.0) % 360.0 + 360.0) % 360.0 - 180.0;
+        long gx = (long) Math.floor((lon + 180.0) * CASES_PAR_DEGRE);
+        long gy = (long) Math.floor((90.0 - lat) * CASES_PAR_DEGRE);
+        int cx = (int) Math.floorMod(Math.floorDiv(gx, T), tx), cy = (int) Math.floorDiv(gy, T);
+        if (cy < 0 || cy >= ty) return null;
+        boolean loin = true;
+        for (int dy = -1; dy <= 1 && loin; dy++)
+            for (int dx = -1; dx <= 1 && loin; dx++)
+                if (aDesLacs(cx + dx, cy + dy)) loin = false;
+        if (loin) return null;
+        int ici = lacEn(gx, gy);
+        boolean eau = ici != 0;
+        int R = RAYON + 1;
+        long best = Long.MAX_VALUE;
+        int bestLac = 0;
+        for (int dy = -R; dy <= R; dy++) {
+            for (int dx = -R; dx <= R; dx++) {
+                long d2 = (long) dx * dx + (long) dy * dy;
+                if (d2 >= best) continue;
+                int l = lacEn(gx + dx, gy + dy);
+                if (eau ? l == 0 : l != 0) {
+                    best = d2;
+                    bestLac = l;
+                }
+            }
+        }
+        double v;
+        int id;
+        if (eau) {
+            id = ici;
+            v = best == Long.MAX_VALUE ? RAYON : Math.sqrt(best) - 0.5;
+        } else {
+            if (best == Long.MAX_VALUE) return null;
+            id = bestLac;
+            v = -(Math.sqrt(best) - 0.5);
+        }
+        if (v < -RAYON) return null;
+        v = Math.min(RAYON, v);
+        return new Proche(id, (short) (Math.round(v * 16.0) & 0xFFFF) / 16.0);
+    }
+
+    /** Numéro du lac de la case (gx, gy) de la grille, 0 hors lac. */
+    private int lacEn(long gx, long gy) {
+        int cy = (int) Math.floorDiv(gy, T);
+        if (cy < 0 || cy >= ty) return 0;
+        int cx = (int) Math.floorDiv(gx, T);
+        char[] m = idsTuile(cx, cy);
+        return m.length == 0 ? 0 : m[(int) Math.floorMod(gy, T) * T + (int) Math.floorMod(gx, T)];
+    }
+
     private boolean aDesLacs(int cx, int cy) {
         if (cy < 0 || cy >= ty) return false;
         return debut[cy * tx + Math.floorMod(cx, tx)] >= 0;
@@ -151,9 +208,10 @@ public final class Lacs {
         long[] d = calculs.get(cle);
         if (d != null) return d;
         if (calculs.size() > MAX_CACHE) calculs.clear();
-        d = calculer(cx, cy);
-        calculs.put(cle, d);
-        return d;
+        // 1.0.7 (optimisation, profil du 15/11/2026 : ~10 % du temps de génération dans le calcul des lacs) : une tuile
+        // n'est calculée qu'une fois même si plusieurs fils de génération la demandent en même temps (avant : chacun la
+        // recalculait de son côté)
+        return calculs.computeIfAbsent(cle, k -> calculer(cx, cy));
     }
 
     private char[] idsTuile(int cx, int cy) {

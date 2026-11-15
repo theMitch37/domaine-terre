@@ -19,6 +19,15 @@ public interface Lieu {
     boolean concerne(int x, int z);
 
     /**
+     * Le lieu peut-il concerner une colonne de ce rectangle de blocs (bornes comprises) ? Sert à l'index des lieux
+     * (1.0.7, optimisation) : doit répondre vrai dès qu'une colonne du rectangle est concernée (il peut répondre vrai
+     * de trop, jamais faux de trop). Par défaut : vrai (le lieu est alors testé partout, comme avant).
+     */
+    default boolean pres(int x0, int z0, int x1, int z1) {
+        return true;
+    }
+
+    /**
      * Hauteur visée du sol (en y) une fois le lieu sculpté.
      * @param h hauteur calculée par le mod Terre (relief réel et fleuves compris)
      */

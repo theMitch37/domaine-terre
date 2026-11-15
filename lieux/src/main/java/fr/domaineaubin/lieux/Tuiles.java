@@ -126,6 +126,20 @@ public final class Tuiles {
         }
     }
 
+    /** Une tuile sculptée du rectangle de blocs (bornes comprises) contient-elle ce lieu ? (index du mod Terre, 0.1.2) */
+    public static boolean contient(String id, int x0, int z0, int x1, int z1) {
+        if (Terrain.echelle() != GrandCanyon.ECHELLE_REFERENCE) return false;
+        for (int tz = Math.floorDiv(z0, TAILLE); tz <= Math.floorDiv(z1, TAILLE); tz++) {
+            for (int tx = Math.floorDiv(x0, TAILLE); tx <= Math.floorDiv(x1, TAILLE); tx++) {
+                if (java.util.Arrays.binarySearch(presentes(), cle(tx, tz)) < 0) continue;
+                Tuile t = a(tx * TAILLE, tz * TAILLE);
+                if (t == null) continue;
+                for (String l : t.lieux) if (l.equals(id)) return true;
+            }
+        }
+        return false;
+    }
+
     private static int indice(int x, int z) {
         return Math.floorMod(z, TAILLE) * TAILLE + Math.floorMod(x, TAILLE);
     }

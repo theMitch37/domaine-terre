@@ -69,6 +69,13 @@ public final class ReliefLieu {
         return lon > lon0 && lon < lon0 + largeur * pasLon && lat < lat0 && lat > lat0 - hauteur * pasLat;
     }
 
+    /** Le rectangle de blocs (bornes comprises) touche-t-il la zone ? (index des lieux du mod Terre, 0.1.2) */
+    public boolean chevauche(int x0, int z0, int x1, int z1) {
+        charger();
+        double lo0 = Terrain.lon(x0 - 1), lo1 = Terrain.lon(x1 + 1), la0 = Terrain.lat(z1 + 1), la1 = Terrain.lat(z0 - 1);
+        return lo1 >= lonMin() && lo0 <= lonMax() && la1 >= latMin() && la0 <= latMax();
+    }
+
     /** La colonne (x, z) en blocs est-elle dans la zone ? */
     public boolean contient(int x, int z) {
         return contient(Terrain.lon(x), Terrain.lat(z));

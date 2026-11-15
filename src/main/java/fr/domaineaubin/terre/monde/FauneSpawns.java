@@ -110,10 +110,7 @@ public final class FauneSpawns {
     }
 
     private static boolean dansLieu(int x, int z) {
-        for (Lieu l : LieuxTerre.liste()) {
-            if (l.concerne(x, z)) return true;   // toute l'emprise : les galeries (Padirac) dépassent le biome de surface
-        }
-        return false;
+        return LieuxTerre.a(x, z) != null;   // toute l'emprise : les galeries (Padirac) dépassent le biome de surface
     }
 
     private static void monstres(LevelEvent.PotentialSpawns event, LevelAccessor niveau, BlockPos pos, FauneTerre faune) {

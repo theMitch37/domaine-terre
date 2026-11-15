@@ -249,9 +249,12 @@ public class TerroirBiomeSource extends BiomeSource {
         // lieu unique : son biome passe avant le terroir (en surface, ou plus bas si le lieu le demande)
         if (!t.lieux().isEmpty()) {
             List<Lieu> lieux = LieuxTerre.liste();
-            for (int i = 0; i < lieux.size() && i < t.lieux().size(); i++) {
+            // 1.0.7 : seuls les lieux proches (index par cases de 256 blocs), hauteur lue une seule fois
+            double h = Double.NaN;
+            for (int i : LieuxTerre.proches(bx, bz)) {
+                if (i >= lieux.size() || i >= t.lieux().size()) continue;
                 Lieu l = lieux.get(i);
-                double h = Terrain.get().hauteur(bx, bz);
+                if (Double.isNaN(h)) h = Terrain.get().hauteur(bx, bz);
                 // 04/11 : la mer autour d'un lieu côtier (Capri, Staffa) garde les biomes de mer : sinon rectangle de
                 // couleur d'eau et coutures de sable droites sur le fond, aux bords des données du lieu
                 if (h < Terrain.NIVEAU_MER - 1 && Terrain.get().enMer(bx, bz)) continue;

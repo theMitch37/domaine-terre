@@ -177,6 +177,12 @@ public final class Verdon implements LieuSculpte {
 
     // ---------------------------------------------------------------- Lieu
 
+    /** Index des lieux du mod Terre (0.1.2, optimisation) : le rectangle peut-il toucher ce lieu ? */
+    @Override
+    public boolean pres(int x0, int z0, int x1, int z1) {
+        return relief.chevauche(x0, z0, x1, z1);
+    }
+
     @Override
     public boolean concerne(int x, int z) {
         return relief.contient(x, z);

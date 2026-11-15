@@ -115,9 +115,8 @@ public final class CotesFines {
         short[] d = distances.get(cle);
         if (d != null) return d;
         if (distances.size() > MAX_CACHE) distances.clear();
-        d = calculer(cx, cy);
-        distances.put(cle, d);
-        return d;
+        // 1.0.7 (optimisation) : une seule fois même si plusieurs fils de génération demandent la tuile en même temps
+        return distances.computeIfAbsent(cle, k -> calculer(cx, cy));
     }
 
     /** Terre (true) ou mer pour la case (i, j) de la tuile (cx, cy), voisines comprises. */
