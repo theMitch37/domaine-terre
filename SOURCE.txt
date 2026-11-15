@@ -1,0 +1,3 @@
+branche=vagues-0.3.8
+commit=211035e0da1714ab600ed2f061f82d9131527df6
+date=2026-11-15T17:49:18Z
