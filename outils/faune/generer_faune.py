@@ -66,6 +66,13 @@ MERS = {
     "mers_profondes": (TEMPS, ["large", "abysse"]), "tous_les_océans_profonds": (TEMPS, ["large", "abysse"]),
     "abysses": (TEMPS, ["abysse"]),
 }
+# 15/11/2026 (banc : poissons-scies dans la Seine et aux îles du Commandeur) : une bête de mer qui remonte aussi les
+# fleuves ou vit au rivage (eau douce, côte) n'y va que sur les terres qui bordent ses mers, pas sur toutes les terres.
+TERRES_MER = {
+    "mers_tropicales": ["sahara_sahel", "afrique_tropicale", "afrique_est", "moyen_orient", "inde", "asie_sud_est",
+                        "chine", "grandes_plaines", "ouest_mexique", "amerique_centrale", "amazonie", "australie",
+                        "melanesie"],
+}
 EAU = {"eau_douce", "marais", "près de l'eau"}
 COTE = {"cote", "plage", "plage tropicale"}
 ETAGES = {"couches hautes": "couches_hautes", "profondeurs": "profondeurs", "abîmes": "abimes",
@@ -111,13 +118,16 @@ UW_TERRE = {"bear", "big_cat", "hyena", "large_snake", "monitor", "boar", "bison
 #   sous_terre     : bête de surface qui peut aussi naître sous le sol d'origine ;
 #   noir           : seulement dans le noir ;
 #   sol            : bloc dessous (« sable » = #minecraft:sand) ;
-#   pluie          : seulement par pluie ou orage.
+#   pluie          : seulement par pluie ou orage ;
+#   profondeur_min : bête d'eau seulement à N blocs ou plus sous le niveau de la mer (15/11/2026 : baudroie vue à
+#                    15 blocs de la surface ; 40 blocs ~ 600 m réels avec la courbe des mers du monde agrandi).
 CONDITIONS = {
     "alexsmobs:guster": {"tirage": 40, "monstre_surface": True, "sol": "sable", "pluie": True},  # tempête dans les ergs
     "alexsmobs:flutter": {"biome_jeu": "lush_caves"},
     "alexsmobs:sunbird": {"altitude_min": 2500, "tirage": 10},
     "minecraft:bat": {"sous_terre": True, "noir": True},
     "alexsmobs:skreecher": {"biome_jeu": "deep_dark"},      # était seulement dans especes.json (retouche à la main)
+    "naturalist:anglerfish": {"profondeur_min": 40},        # baudroie abyssale : 200 à 2 000 m en vrai
 }
 
 # Îles préhistoriques (14/11/2026, idée de Maxime) : les bêtes disparues ne vivent que sur une île, boîte
@@ -136,6 +146,8 @@ for _id, _ile in {"naturalist:mammoth": "wrangel", "untamedwilds:rhino/wooly": "
                   "untamedwilds:big_cat/marsupial_lion": "kangourou", "untamedwilds:manatee/steller": "commandeur",
                   "untamedwilds:terror_bird/*": "etats"}.items():
     CONDITIONS[_id] = {**CONDITIONS.get(_id, {}), "boite": ILES[_ile]}
+# 15/11/2026 (banc : une rhytine à y -281, au fond de la fosse voisine) : la rhytine broutait le kelp près du rivage
+CONDITIONS["untamedwilds:manatee/steller"]["mer"] = {"temperatures": ["temperee", "froide", "gelee"], "bandes": ["cote", "plateau"]}
 
 # petite faune discrète (10/11/2026) : nombreuse en vrai, mais on la voit peu ; comptée comme les insectes
 DISCRETS = ("snake", "lizard", "newt", "salamander", "tarantula", "spider", "scorpion", "toad", "gecko", "skink",
@@ -182,6 +194,8 @@ for r in rows:
     elif zone.startswith("toutes_les_côtes"):
         cote = True
     ts = aire(r["terroirs"])
+    if not ts and zone in TERRES_MER and (eau or cote):
+        ts = list(TERRES_MER[zone])
     if not ts and zone in MERS:
         # espèces de mer sans terroir (« mers_tropicales », « toutes_les_mers »…) : toutes les mers de leur température.
         # Avant (08/11/2026), liste de terroirs vide -> jamais nées : dauphins, calmars, poissons tropicaux, thons…

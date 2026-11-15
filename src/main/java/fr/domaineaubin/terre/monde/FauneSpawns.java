@@ -45,8 +45,11 @@ import java.util.UUID;
  */
 @Mod.EventBusSubscriber(modid = DomaineTerre.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class FauneSpawns {
+    // 15/11/2026 (test en jeu : calmars luisants et axolotls dans la mer et au fond des fosses) : les bêtes d'eau
+    // souterraine et les axolotls ont leurs propres catégories, qui n'étaient pas remplacées par la table.
+    // Calmars luisants : laissés au jeu de base dans les grottes inondées des terres, plus jamais sous la mer.
     private static final Set<MobCategory> GEREES = Set.of(MobCategory.CREATURE, MobCategory.AMBIENT,
-            MobCategory.WATER_CREATURE, MobCategory.WATER_AMBIENT);
+            MobCategory.WATER_CREATURE, MobCategory.WATER_AMBIENT, MobCategory.AXOLOTLS);
     /** Profondeur sous le sol d'origine où commencent les profondeurs ; y où commencent les abîmes. */
     private static final int PROFONDEURS = 40, ABIMES = -40;
     private static final Set<String> HAUTS = Set.of("zombie", "zombie_villager", "husk", "skeleton", "stray", "spider", "slime");
@@ -78,6 +81,10 @@ public final class FauneSpawns {
         BlockPos pos = event.getPos();
         if (cat == MobCategory.MONSTER) {
             monstres(event, niveau, pos, faune);
+            return;
+        }
+        if (cat == MobCategory.UNDERGROUND_WATER_CREATURE) {
+            if (Terrain.get().enMer(pos.getX(), pos.getZ())) remplacer(event, List.of());
             return;
         }
         if (!GEREES.contains(cat)) return;
@@ -227,6 +234,7 @@ public final class FauneSpawns {
         if (((monstre && !e.monstreSurface()) || e.noir())
                 && !net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn(n, pos, n.getRandom())) return false;
         if (eau && !profondeurOk(m, n)) return false;
+        if (e.profondeurMin() > 0 && pos.getY() > Terrain.NIVEAU_MER - e.profondeurMin()) return false;
         if ("sable".equals(e.sol()) && !n.getBlockState(pos.below()).is(net.minecraft.tags.BlockTags.SAND)) return false;
         return !e.pluie() || n.getLevelData().isRaining();
     }
@@ -294,6 +302,60 @@ public final class FauneSpawns {
      * la bête prend une espèce de ce type permise ici, ou n'est pas ajoutée. Œufs, commandes, élevage : jamais touchés.
      */
     private static final String ESPECE = "domaine_terre_espece", RAISON = "domaine_terre_raison";
+    private static final java.util.concurrent.atomic.AtomicInteger JOURNAL_ESPECE = new java.util.concurrent.atomic.AtomicInteger();
+
+    /*
+     * 15/11/2026 (test en jeu : à Wrangel, que des mammouths ; aux Commandeur, pas de rhytine) : Untamed Wilds tire
+     * l'espèce d'après SES biomes (« tag|is_taiga »…) et supprime la bête s'il n'en trouve aucune (code 99) : lions
+     * et ours des cavernes, rhinocéros laineux, hyènes géantes et rhytines disparaissaient avant même d'arriver. Dans un
+     * monde Terre, c'est maintenant notre table qui choisit l'espèce (appelé par les mixins UntamedWildsEspece*) :
+     * espèces permises à cet endroit, au hasard pondéré par leur poids ; aucune permise -> 99 (bête refusée). Un type
+     * sans ligne par espèce dans la table garde le choix d'Untamed Wilds.
+     */
+    public static int especeUntamedWilds(Mob m, int v, Holder<Biome> vrai) {
+        if (m == null || !(m.level() instanceof ServerLevel n) || !terre(n)) return v;
+        FauneTerre f = FauneTerre.get();
+        if (!f.active()) return v;
+        try {
+            Object donnees = m.getClass().getMethod("getEntityData", EntityType.class).invoke(null, m.getType());
+            if (donnees == null) return v;
+            java.lang.reflect.Method nom = donnees.getClass().getMethod("getName", int.class);
+            int nb = ((java.util.List<?>) donnees.getClass().getMethod("getSpeciesData").invoke(donnees)).size();
+            BlockPos pos = m.blockPosition();
+            var source = n.getChunkSource();
+            Holder<Biome> biome = vrai != null ? vrai : source.getGenerator().getBiomeSource().getNoiseBiome(
+                    net.minecraft.core.QuartPos.fromBlock(pos.getX()), net.minecraft.core.QuartPos.fromBlock(pos.getY()),
+                    net.minecraft.core.QuartPos.fromBlock(pos.getZ()), source.randomState().sampler());
+            int[] w = new int[nb];
+            int total = 0;
+            boolean table = false;
+            for (int i = 0; i < nb; i++) {
+                String e = String.valueOf(nom.invoke(donnees, i)).toLowerCase(java.util.Locale.ROOT);
+                if (!f.parEspece(m.getType(), e)) continue;
+                table = true;
+                w[i] = f.poidsEspece(m.getType(), e, pos.getX(), pos.getZ(), biome);
+                total += w[i];
+            }
+            if (!table) return v;
+            if (total == 0) {
+                if (JOURNAL_ESPECE.incrementAndGet() <= 40) DomaineTerre.LOGGER.info("Faune : {} refusé en {} (aucune espèce permise ici, biome {})",
+                        EntityType.getKey(m.getType()), pos.toShortString(), biome.unwrapKey().map(k -> k.location().toString()).orElse("?"));
+                return 99;
+            }
+            if (JOURNAL_ESPECE.incrementAndGet() <= 40) DomaineTerre.LOGGER.info("Faune : espèce de {} en {} choisie par la table ({}, poids {})",
+                    EntityType.getKey(m.getType()), pos.toShortString(), biome.unwrapKey().map(k -> k.location().getPath()).orElse("?"),
+                    java.util.Arrays.toString(w));
+            int t = m.getRandom().nextInt(total);
+            for (int i = 0; i < nb; i++) {
+                t -= w[i];
+                if (t < 0) return i;
+            }
+            return v;
+        } catch (ReflectiveOperationException | RuntimeException ex) {
+            if (JOURNAL_ESPECE.incrementAndGet() <= 40) DomaineTerre.LOGGER.warn("Faune : espèce non choisie ({})", ex.toString());
+            return v;
+        }
+    }
     private static final java.util.Set<String> RAISONS_LIBRES = java.util.Set.of("SPAWN_EGG", "COMMAND", "BREEDING",
             "BUCKET", "DISPENSER", "SPAWNER", "MOB_SUMMONED", "CONVERSION", "TRIGGERED", "JOCKEY", "REINFORCEMENT");
 
@@ -335,7 +397,7 @@ public final class FauneSpawns {
             }
             if (ok.isEmpty()) {
                 m.discard();
-                if (JOURNAL.incrementAndGet() <= 20) DomaineTerre.LOGGER.info("Faune : {} ({}) retiré en {} (hors de son milieu réel)",
+                if (JOURNAL_ESPECE.incrementAndGet() <= 40) DomaineTerre.LOGGER.info("Faune : {} ({}) retiré en {} (hors de son milieu réel)",
                         EntityType.getKey(m.getType()), esp, pos.toShortString());
                 return;
             }
@@ -353,7 +415,7 @@ public final class FauneSpawns {
             }
             m.refreshDimensions();
         } catch (ReflectiveOperationException | RuntimeException ex) {
-            if (JOURNAL.incrementAndGet() <= 20) DomaineTerre.LOGGER.warn("Faune : espèce non vérifiée ({})", ex.toString());
+            if (JOURNAL_ESPECE.incrementAndGet() <= 40) DomaineTerre.LOGGER.warn("Faune : espèce non vérifiée ({})", ex.toString());
         }
     }
 

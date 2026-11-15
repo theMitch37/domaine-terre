@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 
 /**
  * Ambiances visuelles de certains endroits (côté affichage seulement). Premier cas (08/11/2026) : les grandes fosses.
- * Dans l'eau d'une fosse, 30 blocs de visibilité en surface, puis de moins en moins et de plus en plus sombre jusqu'au
+ * Dans l'eau d'une fosse (et du large depuis le 15/11/2026), 30 blocs de visibilité en surface, puis de moins en moins et de plus en plus sombre jusqu'au
  * fond (9 blocs) ; au-dessus d'une fosse, hors de l'eau, une brume du large cache le fond depuis la surface. D'autres endroits pourront avoir leur règle ici.
  */
 @Mod.EventBusSubscriber(modid = DomaineTerre.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
@@ -34,7 +34,9 @@ public final class Ambiances {
     private static double profondeur(Camera camera) {
         if (camera.getFluidInCamera() != FogType.WATER) return -1;
         Minecraft mc = Minecraft.getInstance();
-        if (mc.level == null || !abysse(mc, camera.getBlockPosition())) return -1;
+        // 15/11/2026 (test en jeu : « je vois encore le fond des océans ») : aussi dans la mer du large, plus seulement
+        // dans les fosses ; sur le plateau et à la côte, l'eau reste claire (on voit le fond, comme en vrai)
+        if (mc.level == null || !merProfonde(mc, camera.getBlockPosition())) return -1;
         return Mth.clamp((63.0 - camera.getPosition().y) / 568.0, 0.0, 1.0);   // jusqu'au fond des Mariannes, y -505 (10/11/2026)
     }
 

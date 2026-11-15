@@ -48,7 +48,8 @@ public final class FauneTerre {
                          int biomes, int[][] precis, boolean eau, boolean cote, int temps, int bandes, boolean mer,
                          boolean nuit, Etage etage, MobSpawnSettings.SpawnerData donnees, boolean generationSeule,
                          String biomeJeu, double altitudeMin, int tirage, boolean monstreSurface,
-                         boolean sousTerre, boolean noir, String sol, boolean pluie, double[] boite) {
+                         boolean sousTerre, boolean noir, String sol, boolean pluie, double[] boite,
+                         int profondeurMin) {
         /** Conditions en plus de la règle générale (09/11/2026) : biome du jeu, altitude, tirage. */
         boolean conditionnee() {
             return biomeJeu != null || !Double.isNaN(altitudeMin) || tirage > 1;
@@ -244,10 +245,11 @@ public final class FauneTerre {
                 JsonArray b = o.getAsJsonArray("boite");
                 boite = new double[]{b.get(0).getAsDouble(), b.get(1).getAsDouble(), b.get(2).getAsDouble(), b.get(3).getAsDouble()};
             }
+            int profondeurMin = o.has("profondeur_min") ? o.get("profondeur_min").getAsInt() : 0;
             Entree en = new Entree(o.get("id").getAsString(), type, cat, ts, nb >= 29, bio, precis,
                     o.get("eau").getAsBoolean(), o.get("cote").getAsBoolean(), temps, bandes, mer,
                     o.get("nuit").getAsBoolean(), etage, d, generationSeule, biomeJeu, altitudeMin, tirage, monstreSurface,
-                    sousTerre, noir, sol, pluie, boite);
+                    sousTerre, noir, sol, pluie, boite, profondeurMin);
             // contrôle seulement (12/11/2026) : bêtes nées par leur propre mod (mer d'Untamed Wilds), jamais par la table,
             // mais gardées seulement là où nos règles les permettent
             if (o.has("controle") && o.get("controle").getAsBoolean()) controle.add(en);
@@ -406,7 +408,7 @@ public final class FauneTerre {
             if (e.generationSeule() && !generation) continue;
             if (e.nuit() && !nuit) continue;
             if (e.boite() != null) {                   // île préhistorique : seulement là, quel que soit le terroir
-                if (e.dansBoite(pix) && e.mer() == merBiome) out.add(e.donnees());
+                if (e.dansBoite(pix) && e.mer() == merBiome && (!merBiome || (bande >= 0 && (e.bandes() & (1 << bande)) != 0))) out.add(e.donnees());
                 continue;
             }
             if (merBiome) {
@@ -490,10 +492,24 @@ public final class FauneTerre {
         return permis(type, null, x, z, biome);
     }
 
+    /** Ligne de la table pour cette espèce : « untamedwilds:shark/bull », ou « untamedwilds:terror_bird/* » (toutes). */
+    private static boolean pourEspece(Entree e, String espece) {
+        return e.id().endsWith("/" + espece) || e.id().endsWith("/*");
+    }
+
+    /**
+     * Poids de tirage de cette espèce ici (15/11/2026 : c'est notre table qui choisit l'espèce d'une bête d'Untamed
+     * Wilds, plus ses propres biomes) : poids de la première ligne qui la permet à cet endroit, 0 si aucune.
+     */
+    public int poidsEspece(EntityType<?> type, String espece, int x, int z, Holder<Biome> biome) {
+        Entree e = permisPar(type, espece, x, z, biome);
+        return e == null ? 0 : Math.max(1, e.donnees().getWeight().asInt());
+    }
+
     /** La table a-t-elle des lignes par espèce pour ce type (« untamedwilds:shark/bull ») ? */
     public boolean parEspece(EntityType<?> type, String espece) {
         for (Entree e : (Iterable<Entree>) java.util.stream.Stream.concat(surface.stream(), controle.stream())::iterator) {
-            if (e.donnees().type == type && e.id().endsWith("/" + espece)) return true;
+            if (e.donnees().type == type && pourEspece(e, espece)) return true;
         }
         return false;
     }
@@ -503,6 +519,18 @@ public final class FauneTerre {
      * l'espèce lui-même ; avec espece, seules les lignes de cette espèce comptent.
      */
     public boolean permis(EntityType<?> type, String espece, int x, int z, Holder<Biome> biome) {
+        return permisPar(type, espece, x, z, biome) != null || !vuDansTable(type, espece);
+    }
+
+    private boolean vuDansTable(EntityType<?> type, String espece) {
+        for (Entree e : (Iterable<Entree>) java.util.stream.Stream.concat(surface.stream(), controle.stream())::iterator) {
+            if (e.donnees().type == type && (espece == null || pourEspece(e, espece))) return true;
+        }
+        return false;
+    }
+
+    /** La ligne de la table qui permet cette bête ici, ou null. */
+    private Entree permisPar(EntityType<?> type, String espece, int x, int z, Holder<Biome> biome) {
         int pix = pixel(x, z);
         String chemin = biome.unwrapKey().map(k -> k.location().getPath()).orElse("");
         int temp = -1, bande = -1;
@@ -528,14 +556,12 @@ public final class FauneTerre {
                 grand = biomePrecis[precis];
             }
         }
-        boolean vue = false;
         Boolean eau = null, estuaire = null;
         for (Entree e : (Iterable<Entree>) java.util.stream.Stream.concat(surface.stream(), controle.stream())::iterator) {
             if (e.donnees().type != type) continue;
-            if (espece != null && !e.id().endsWith("/" + espece)) continue;
-            vue = true;
+            if (espece != null && !pourEspece(e, espece)) continue;
             if (e.boite() != null) {
-                if (e.dansBoite(pix) && e.mer() == merBiome) return true;
+                if (e.dansBoite(pix) && e.mer() == merBiome && (!merBiome || (e.bandes() & (1 << bande)) != 0)) return e;
                 continue;
             }
             if (merBiome) {
@@ -546,19 +572,19 @@ public final class FauneTerre {
                     if (estuaire) continue;
                 }
                 if (e.mer() && (e.temps() & (1 << temp)) != 0 && (e.bandes() & (1 << bande)) != 0
-                        && (e.tousTerroirs() || e.dansTerroir(terroir))) return true;
+                        && (e.tousTerroirs() || e.dansTerroir(terroir))) return e;
                 continue;
             }
             if (!e.dansTerroir(terroir)) continue;
             if (e.precis() != null && e.precis()[terroir] != null && !contient(e.precis()[terroir], precis)) continue;
-            if (grand > 0 && (e.biomes() & (1 << grand)) != 0) return true;
+            if (grand > 0 && (e.biomes() & (1 << grand)) != 0) return e;
             if (e.eau()) {
                 if (eau == null) eau = eauDouceProche(x, z);
-                if (eau) return true;
+                if (eau) return e;
             }
-            if (e.cote() && Math.abs(Terrain.get().distanceCote(x, z)) < 2.0) return true;
+            if (e.cote() && Math.abs(Terrain.get().distanceCote(x, z)) < 2.0) return e;
         }
-        return !vue;
+        return null;
     }
 
     /** Cours d'eau ou lac du mod à moins de 6 blocs (d'après le terrain : ne charge aucun chunk). */
