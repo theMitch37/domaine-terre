@@ -34,8 +34,8 @@ public final class Houle {
 
     public static final class Reglages {
         public String _note = "Prototype des vagues de Domaine Weather. actif : vagues dessinees et barque qui suit la houle ; "
-                + "amplitude : hauteur des vagues au large (blocs, du creux a la crete = 2 x amplitude) ; rayon : distance "
-                + "de dessin (blocs).";
+                + "amplitude : multiplicateur de la hauteur des vagues (1 = la regle : vraie houle de la region, mois par "
+                + "mois ; hors monde Terre : hauteur fixe en blocs) ; rayon : distance de dessin (blocs).";
         public boolean actif = true;
         public double amplitude = 1.0;
         public int rayon = 48;
@@ -94,20 +94,44 @@ public final class Houle {
     }
 
     // ---------------------------------------------------------------- la formule
-    // longueur d'onde (blocs), direction (degrés, vers où va la vague), part de l'amplitude, phase
+    // 0.4.0 (vagues par région) : trois états de la mer, chacun avec ses longueurs d'onde fixes ; leur mélange suit
+    // l'amplitude, pour que les grosses mers aient de longues houles et les mers calmes un clapot court (cambrure
+    // constante). Les longueurs ne changent jamais d'un endroit à l'autre : la surface reste continue partout.
+    // longueur d'onde (blocs), direction (degrés, vers où va la vague), part de l'amplitude dans son état, phase
     private static final double[][] VAGUES = {
-            {44, 70, 0.55, 0.0}, {27, 55, 0.25, 1.7}, {17, 95, 0.13, 4.1}, {9, 30, 0.07, 2.6}};
-    private static final double[] KX = new double[4], KZ = new double[4], W = new double[4];
+            // état 0 : clapot (mer calme)
+            {12, 75, 0.50, 0.9}, {8, 50, 0.30, 3.3}, {5.5, 100, 0.20, 5.1},
+            // état 1 : houle moyenne (celle du prototype, 0.2.1 à 0.3.x)
+            {44, 70, 0.55, 0.0}, {27, 55, 0.25, 1.7}, {17, 95, 0.13, 4.1}, {9, 30, 0.07, 2.6},
+            // état 2 : grosse houle (mers fortes, tempêtes)
+            {110, 65, 0.55, 2.2}, {75, 80, 0.30, 0.4}, {52, 50, 0.15, 3.8}};
+    private static final int[] ETAT = {0, 0, 0, 1, 1, 1, 1, 2, 2, 2};
+    private static final int N = VAGUES.length;
+    private static final double[] KX = new double[N], KZ = new double[N], W = new double[N];
 
     static {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < N; i++) {
             double k = 2 * Math.PI / VAGUES[i][0];
             double d = Math.toRadians(VAGUES[i][1]);
             KX[i] = k * Math.sin(d);
             KZ[i] = -k * Math.cos(d);
-            // eau profonde : ω = √(g k), g réduit pour une houle lisible (vague de 44 blocs : ~7 s)
+            // eau profonde : ω = √(g k), g réduit pour une houle lisible (vague de 44 blocs : ~7 s, de 110 : ~11 s)
             W[i] = Math.sqrt(5.6 * k);
         }
+    }
+
+    private static double lisse(double a, double b, double v) {
+        double f = Math.max(0, Math.min(1, (v - a) / (b - a)));
+        return f * f * (3 - 2 * f);
+    }
+
+    /** Parts des trois états selon l'amplitude (blocs) : clapot sous ~0,6, grosse houle au-delà de ~1,6. */
+    private static double[] etats(double amplitude) {
+        double clapot = 1 - lisse(0.25, 0.9, amplitude);
+        double grosse = lisse(1.0, 2.2, amplitude);
+        double moyenne = Math.max(0, 1 - clapot - grosse);
+        double s = clapot + moyenne + grosse;
+        return new double[]{clapot / s, moyenne / s, grosse / s};
     }
 
     /**
@@ -120,20 +144,134 @@ public final class Houle {
 
     /** Hauteur de la houle (blocs, autour de 0) au point (x, z) au temps t (secondes), pour une amplitude donnée. */
     public static double hauteur(double x, double z, double t, double amplitude) {
+        double[] e = etats(amplitude);
         double h = 0;
-        for (int i = 0; i < 4; i++) h += VAGUES[i][2] * Math.sin(KX[i] * x + KZ[i] * z - W[i] * t + VAGUES[i][3]);
+        for (int i = 0; i < N; i++) {
+            double p = e[ETAT[i]] * VAGUES[i][2];
+            if (p > 1e-4) h += p * Math.sin(KX[i] * x + KZ[i] * z - W[i] * t + VAGUES[i][3]);
+        }
         return h * amplitude;
     }
 
     /** Pente de la houle (dh/dx, dh/dz). */
     public static double[] pente(double x, double z, double t, double amplitude) {
+        double[] e = etats(amplitude);
         double hx = 0, hz = 0;
-        for (int i = 0; i < 4; i++) {
-            double c = VAGUES[i][2] * Math.cos(KX[i] * x + KZ[i] * z - W[i] * t + VAGUES[i][3]);
+        for (int i = 0; i < N; i++) {
+            double p = e[ETAT[i]] * VAGUES[i][2];
+            if (p <= 1e-4) continue;
+            double c = p * Math.cos(KX[i] * x + KZ[i] * z - W[i] * t + VAGUES[i][3]);
             hx += c * KX[i];
             hz += c * KZ[i];
         }
         return new double[]{hx * amplitude, hz * amplitude};
+    }
+
+    // ---------------------------------------------------------------- climat des vagues (0.4.0)
+    /**
+     * Vagues par région (méthode validée par Maxime le 15/11/2026) : hauteur significative réelle (Hs, ERA5 1991-2020,
+     * Copernicus / ECMWF) par mois, moyenne et « tempête » (90e centile), sur une grille de 0,5° (houle.bin, fait par
+     * outils/vagues/houle_climat.py). Une seule règle partout : amplitude (blocs) = Hs (m) × BLOCS_PAR_METRE ×
+     * réglage « amplitude » (1 par défaut), plafonnée ; du creux à la crête : 2 × amplitude.
+     */
+    public static final double BLOCS_PAR_METRE = 0.375;
+    public static final double AMPLITUDE_MAX = 4.0;
+    private static final int LIGNES = 360, COLONNES = 720;
+    private static volatile byte[] climat;
+    private static volatile boolean climatAbsent;
+
+    private static byte[] climat() {
+        byte[] c = climat;
+        if (c != null || climatAbsent) return c;
+        synchronized (Houle.class) {
+            if (climat != null || climatAbsent) return climat;
+            try (java.io.InputStream in = Houle.class.getResourceAsStream("/domaine_weather/houle.bin")) {
+                byte[] b = in == null ? null : in.readAllBytes();
+                if (b == null || b.length != 24 * LIGNES * COLONNES) throw new java.io.IOException("houle.bin absent ou incomplet");
+                climat = b;
+            } catch (Exception e) {
+                climatAbsent = true;
+                DomaineWeather.LOGGER.error("Domaine Weather : climat des vagues illisible, amplitude fixe", e);
+            }
+            return climat;
+        }
+    }
+
+    /** Hs (m) d'une couche (0-11 : moyenne de janvier à décembre, 12-23 : tempête) au point lat/lon (bilinéaire). */
+    public static double hsCouche(int couche, double lat, double lon) {
+        byte[] c = climat();
+        if (c == null) return 1.0 / BLOCS_PAR_METRE;
+        double fy = (89.75 - lat) / 0.5, fx = (lon + 179.75) / 0.5;
+        int y0 = (int) Math.floor(fy), x0 = (int) Math.floor(fx);
+        double ty = fy - y0, tx = fx - x0;
+        int ya = Math.max(0, Math.min(LIGNES - 1, y0)), yb = Math.max(0, Math.min(LIGNES - 1, y0 + 1));
+        int xa = Math.floorMod(x0, COLONNES), xb = Math.floorMod(x0 + 1, COLONNES);
+        int base = couche * LIGNES * COLONNES;
+        double v = (c[base + ya * COLONNES + xa] & 255) * (1 - tx) * (1 - ty) + (c[base + ya * COLONNES + xb] & 255) * tx * (1 - ty)
+                + (c[base + yb * COLONNES + xa] & 255) * (1 - tx) * ty + (c[base + yb * COLONNES + xb] & 255) * tx * ty;
+        return v * 0.05;
+    }
+
+    /** Mois en cours (0 = janvier ... 11,99), lu sur le calendrier de Serene Seasons (début du printemps = 1er mars). */
+    public static double mois(Level level) {
+        long t = level.getGameTime();
+        double[] c = level.isClientSide ? MOIS_CLIENT : MOIS_SERVEUR;   // lu une fois par tick (dessin : des milliers d'appels)
+        synchronized (c) {
+            if (c[0] == t) return c[1];
+            double m;
+            try {
+                m = (2.0 + fr.domaineaubin.meteo.Saisons.fractionAnnee(level) * 12.0) % 12.0;
+            } catch (Throwable e) {
+                m = 0;
+            }
+            c[0] = t;
+            c[1] = m;
+            return m;
+        }
+    }
+
+    private static final double[] MOIS_CLIENT = {Double.NaN, 0}, MOIS_SERVEUR = {Double.NaN, 0};
+
+    /** Hs moyenne et de tempête (m) ici, ce mois-ci (interpolées entre les deux mois les plus proches). */
+    public static double[] hsMois(Level level, double lat, double lon) {
+        double m = mois(level) - 0.5;                      // valeurs au milieu de chaque mois
+        int m0 = (int) Math.floor(m);
+        double f = m - m0;
+        int a = Math.floorMod(m0, 12), b = Math.floorMod(m0 + 1, 12);
+        double moy = hsCouche(a, lat, lon) * (1 - f) + hsCouche(b, lat, lon) * f;
+        double tem = hsCouche(12 + a, lat, lon) * (1 - f) + hsCouche(12 + b, lat, lon) * f;
+        return new double[]{moy, Math.max(moy, tem)};
+    }
+
+    /**
+     * Variation lente propre à chaque région, de -1 (calme) à 1 (tempête du mois) : deux cycles de quelques jours de
+     * jeu, décalés d'une région à l'autre (même valeur sur le serveur et le client : temps du monde).
+     */
+    public static double variation(Level level, double lat, double lon) {
+        double jours = level.getGameTime() / 24000.0;
+        double p1 = lon / 23.0 + lat / 17.0, p2 = lon / 11.0 - lat / 13.0;
+        return 0.6 * Math.sin(2 * Math.PI * jours / 5.3 + p1) + 0.4 * Math.sin(2 * Math.PI * jours / 2.1 + p2);
+    }
+
+    /** Hs (m) du moment ici : moyenne du mois, plus ou moins vers la tempête du mois selon la variation. */
+    public static double hs(Level level, double x, double z) {
+        double lat = fr.domaineaubin.terre.monde.Terrain.lat(z), lon = fr.domaineaubin.terre.monde.Terrain.lon(x);
+        lon = ((lon + 180.0) % 360.0 + 360.0) % 360.0 - 180.0;
+        double[] h = hsMois(level, lat, lon);
+        double v = variation(level, lat, lon);
+        return Math.max(0.35 * h[0], h[0] + (h[1] - h[0]) * v);
+    }
+
+    /** Amplitude au large ici (blocs), avant le calme des côtes. Hors monde Terre : réglage fixe (prototype). */
+    public static double amplitudeRegion(Level level, double x, double z) {
+        if (!actif()) return 0;
+        if (!fr.domaineaubin.meteo.Saisons.terre(level) || climat() == null) return reglages().amplitude;
+        return Math.min(AMPLITUDE_MAX, hs(level, x, z) * BLOCS_PAR_METRE * reglages().amplitude);
+    }
+
+    /** Plus grande amplitude possible (tri rapide des entités, avant toute lecture du monde). */
+    public static double amplitudeMax() {
+        return Math.max(AMPLITUDE_MAX, reglages().amplitude);
     }
 
     /** Temps de la houle (secondes) : le même sur le serveur et le client. */
@@ -198,16 +336,23 @@ public final class Houle {
         (level.isClientSide ? PROFONDEURS_CLIENT : PROFONDEURS).put(((long) x << 32) ^ (z & 0xFFFFFFFFL), (byte) n);
     }
 
-    /** Amplitude de la houle ici : nulle sur moins de 4 blocs d'eau, pleine à partir de 16. */
+    /** Amplitude de la houle ici : celle de la région, nulle sur moins de 4 blocs d'eau, pleine à partir de 16. */
     public static double amplitude(Level level, double x, double z) {
         if (!actif()) return 0;
-        return amplitudeSelonProfondeur(level, profondeur(level, (int) Math.floor(x), (int) Math.floor(z)));
+        int p = profondeur(level, (int) Math.floor(x), (int) Math.floor(z));
+        if (p <= 0) return 0;
+        return amplitudeRegion(level, x, z) * calmeCote(p);
     }
 
     /** Amplitude pour une profondeur déjà connue (dessin : une seule lecture par case). */
-    public static double amplitudeSelonProfondeur(Level level, int p) {
+    public static double amplitudeSelonProfondeur(Level level, double x, double z, int p) {
+        return p <= 0 ? 0 : amplitudeRegion(level, x, z) * calmeCote(p);
+    }
+
+    /** Part de l'amplitude selon la profondeur : nulle sur moins de 4 blocs d'eau, pleine à partir de 16. */
+    public static double calmeCote(int p) {
         double f = Math.max(0, Math.min(1, (p - 4) / 12.0));
-        return reglages().amplitude * f * f * (3 - 2 * f);
+        return f * f * (3 - 2 * f);
     }
 
     /** Haut de l'eau plate du jeu dans un bloc d'eau source (8/9 de bloc), au niveau de la mer. */
@@ -222,7 +367,7 @@ public final class Houle {
     public static double surface(Level level, double x, double z, double minY, double maxY) {
         if (!actif()) return Double.NaN;
         double plate = eauPlate(level);
-        double amp = reglages().amplitude;
+        double amp = amplitudeMax();
         if (minY > plate + 2 * amp || maxY < plate - 0.5) return Double.NaN;
         double a = amplitude(level, x, z);
         if (a <= 0.02) return Double.NaN;

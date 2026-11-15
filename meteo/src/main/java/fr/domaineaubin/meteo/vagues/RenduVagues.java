@@ -103,7 +103,7 @@ public final class RenduVagues {
                               int demi) {
         double t = Houle.temps(level, e.getPartialTick());
         int rayon = Math.max(8, Math.min(128, Houle.reglages().rayon));
-        double ampMax = Math.max(0.05, Houle.reglages().amplitude);
+        double ampMax = Math.max(0.05, Houle.amplitudeRegion(level, c.x, c.z));
         // le carré masqué, en blocs : de (centre - demi) à (centre + demi) chunks inclus
         int ccx = (int) Math.floor(c.x) >> 4, ccz = (int) Math.floor(c.z) >> 4;
         int r = (demi * 2 + 1) * 8;                                       // demi-côté en blocs
@@ -190,7 +190,7 @@ public final class RenduVagues {
                 double pl = pn > 0 ? ps / pn : 0;
                 double o = Math.min(1, dv / (double) FONDU_FOND);
                 op[k] = pl > 0 ? Math.max(0, Math.min(1, (pl - 1) / 9.0)) * OPACITE * o * o * (3 - 2 * o) : 0;
-                double am = pr > 0 && dv > 0 ? Houle.amplitudeSelonProfondeur(level, pr) : 0;
+                double am = pr > 0 && dv > 0 ? Houle.amplitudeSelonProfondeur(level, x, z, pr) : 0;
                 double g = Math.min(1, dv / (double) BORD);
                 am *= g * g * (3 - 2 * g);
                 // fondu vers la surface plate au bord du rayon (dessin seulement : la barque et la nage n'en dépendent pas)

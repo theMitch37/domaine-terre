@@ -72,9 +72,23 @@ public final class CommandeVagues {
 
     private static int etat(CommandContext<CommandSourceStack> c) {
         Houle.Reglages r = Houle.reglages();
-        String t = String.format(Locale.ROOT, "§6[Vagues]§r %s | amplitude %.2f (creux-crête ≈ %.1f blocs) | rayon %d blocs",
-                r.actif ? "actives" : "coupées", r.amplitude, 2 * r.amplitude, r.rayon);
+        String t = String.format(Locale.ROOT, "§6[Vagues]§r %s | multiplicateur %.2f | rayon %d blocs",
+                r.actif ? "actives" : "coupées", r.amplitude, r.rayon);
         c.getSource().sendSuccess(() -> Component.literal(t), false);
+        // 0.4.0 : la mer ici (climat réel ERA5, mois de Serene Seasons, variation de la région)
+        var l = c.getSource().getLevel();
+        var p = c.getSource().getPosition();
+        if (Saisons.terre(l)) {
+            double lat = fr.domaineaubin.terre.monde.Terrain.lat(p.z), lon = fr.domaineaubin.terre.monde.Terrain.lon(p.x);
+            double[] hm = Houle.hsMois(l, lat, lon);
+            double hs = Houle.hs(l, p.x, p.z), am = Houle.amplitudeRegion(l, p.x, p.z);
+            String[] mois = {"janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre",
+                    "octobre", "novembre", "décembre"};
+            String u = String.format(Locale.ROOT, "§6[Vagues]§r %s : Hs moyenne %.1f m, tempête %.1f m ; maintenant %.1f m"
+                            + " -> amplitude %.2f (creux-crête ≈ %.1f blocs au large)",
+                    mois[(int) Math.floor(Houle.mois(l)) % 12], hm[0], hm[1], hs, am, 2 * am);
+            c.getSource().sendSuccess(() -> Component.literal(u), false);
+        }
         return 1;
     }
 }

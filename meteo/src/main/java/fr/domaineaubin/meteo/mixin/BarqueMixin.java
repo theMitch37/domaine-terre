@@ -24,7 +24,7 @@ public abstract class BarqueMixin {
         Level l = b.level();
         if (l.dimension() != Level.OVERWORLD) return;
         int haut = l.getSeaLevel() - 1;
-        if (b.getY() < haut - 2 || b.getY() > haut + 3 + 2 * Houle.reglages().amplitude) return;
+        if (b.getY() < haut - 2 || b.getY() > haut + 3 + 2 * Houle.amplitudeMax()) return;
         if (!l.getFluidState(BlockPos.containing(b.getX(), haut, b.getZ())).is(FluidTags.WATER)) return;
         double a = Houle.amplitude(l, b.getX(), b.getZ());
         if (a <= 0.02) return;
