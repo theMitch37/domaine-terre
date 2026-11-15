@@ -99,30 +99,17 @@ public final class RenduVagues {
     /** 0.3.8 : rayon (cases) du lissage de l'épaisseur, contre les marches et le quadrillage. */
     private static final int LISSAGE = 3;
 
-    private static void houle(RenderLevelStageEvent e, ClientLevel level, Vec3 c, double plate, TextureAtlasSprite sp,
-                              int demi) {
-        double t = Houle.temps(level, e.getPartialTick());
-        int rayon = Math.max(8, Math.min(128, Houle.reglages().rayon));
-        double ampMax = Math.max(0.05, Houle.amplitudeRegion(level, c.x, c.z));
-        // le carré masqué, en blocs : de (centre - demi) à (centre + demi) chunks inclus
-        int ccx = (int) Math.floor(c.x) >> 4, ccz = (int) Math.floor(c.z) >> 4;
-        int r = (demi * 2 + 1) * 8;                                       // demi-côté en blocs
-        int cx = (ccx << 4) + 8, cz = (ccz << 4) + 8;
-        int n = 2 * r;
-        double[] h = new double[(n + 1) * (n + 1)];
-        double[] a = new double[(n + 1) * (n + 1)];
-        int[] prof = new int[(n + 1) * (n + 1)];
-        double[] op = new double[(n + 1) * (n + 1)];
-        for (int j = 0; j <= n; j++) {
-            for (int i = 0; i <= n; i++) {
-                int x = cx - r + i, z = cz - r + j;
-                int pr = Houle.profondeur(level, x, z);
-                if (pr <= 0 && MasqueEau.masquer(level, x, level.getSeaLevel() - 1, z)) pr = trou(level, x, z, pr);
-                prof[j * (n + 1) + i] = MasqueEau.dansCarre(x, z) ? pr : 0;
-            }
-        }
+    private static double[] H, A, OP, LISSE;
+    private static int[] PROF, BORDS;
+    private static long cle = Long.MIN_VALUE;
+    private static int images;
+
+    /** Distance au bord et profondeur lissée (0.3.7, 0.3.8), recalculées avec la profondeur. */
+    private static void preparer(int n, int[] prof) {
+        int[] bord = BORDS;
+        double[] lisse = LISSE;
+        java.util.Arrays.fill(lisse, 0);
         // 0.3.7 : distance (en cases, BORD_MAX au plus) de chaque case de mer au bord le plus proche (côte, bord du carré)
-        int[] bord = new int[n * n];
         for (int j = 0; j < n; j++) {
             for (int i = 0; i < n; i++) {
                 int k = j * n + i;
@@ -147,7 +134,6 @@ public final class RenduVagues {
         // 0.3.8 : profondeur lissée (moyenne des cases de mer voisines) : une case de profondeur inconnue (trou évité,
         // chunk qui arrive) prend celle de ses voisines au lieu de faire une tache claire, et l'épaisseur ne fait plus
         // de marches d'une case à l'autre (quadrillage vu en jeu le 15/11/2026)
-        double[] lisse = new double[n * n];
         for (int j = 0; j < n; j++) {
             for (int i = 0; i < n; i++) {
                 if (prof[j * (n + 1) + i] <= 0) continue;
@@ -167,6 +153,59 @@ public final class RenduVagues {
                 lisse[j * n + i] = nb > 0 ? s / nb : prof[j * (n + 1) + i];
             }
         }
+    }
+
+    private static void houle(RenderLevelStageEvent e, ClientLevel level, Vec3 c, double plate, TextureAtlasSprite sp,
+                              int demi) {
+        double t = Houle.temps(level, e.getPartialTick());
+        int rayon = Math.max(8, Math.min(128, Houle.reglages().rayon));
+        double ampMax = Math.max(0.05, Houle.amplitudeRegion(level, c.x, c.z));
+        // le carré masqué, en blocs : de (centre - demi) à (centre + demi) chunks inclus
+        int ccx = (int) Math.floor(c.x) >> 4, ccz = (int) Math.floor(c.z) >> 4;
+        int r = (demi * 2 + 1) * 8;                                       // demi-côté en blocs
+        int cx = (ccx << 4) + 8, cz = (ccz << 4) + 8;
+        int n = 2 * r;
+        // 0.4.1 (optimisation) : tableaux gardés d'une image à l'autre (avant : ~1 Mo alloué à chaque image) ; la
+        // profondeur, la distance au bord et le lissage ne sont recalculés que si le carré bouge, et sinon toutes les
+        // 10 images (chunks qui arrivent, masque qui change)
+        int nn = (n + 1) * (n + 1);
+        if (H == null || H.length != nn) {
+            H = new double[nn];
+            A = new double[nn];
+            PROF = new int[nn];
+            OP = new double[nn];
+            BORDS = new int[n * n];
+            LISSE = new double[n * n];
+            cle = Long.MIN_VALUE;
+        }
+        double[] h = H, a = A, op = OP;
+        int[] prof = PROF;
+        long nouvelle = ((long) cx << 32) ^ (cz & 0xFFFFFFFFL);
+        boolean refaire = nouvelle != cle || ++images >= 10;
+        if (refaire) {
+            cle = nouvelle;
+            images = 0;
+            for (int j = 0; j <= n; j++) {
+                for (int i = 0; i <= n; i++) {
+                    int x = cx - r + i, z = cz - r + j;
+                    int pr = Houle.profondeur(level, x, z);
+                    if (pr <= 0 && MasqueEau.masquer(level, x, level.getSeaLevel() - 1, z)) pr = trou(level, x, z, pr);
+                    prof[j * (n + 1) + i] = MasqueEau.dansCarre(x, z) ? pr : 0;
+                }
+            }
+            preparer(n, prof);
+        }
+        int[] bord = BORDS;
+        double[] lisse = LISSE;
+        // amplitude de la région aux nœuds de 16 blocs (les mêmes que Houle.amplitudeRegion), une fois par image
+        int nx0 = Math.floorDiv(cx - r, Houle.PAS_NOEUD), nz0 = Math.floorDiv(cz - r, Houle.PAS_NOEUD);
+        int nnx = Math.floorDiv(cx + r, Houle.PAS_NOEUD) - nx0 + 2, nnz = Math.floorDiv(cz + r, Houle.PAS_NOEUD) - nz0 + 2;
+        double[] noeuds = new double[nnx * nnz];
+        boolean regionale = Houle.regionale(level);
+        double fixe = Houle.reglages().amplitude;
+        for (int j = 0; j < nnz; j++)
+            for (int i = 0; i < nnx; i++)
+                noeuds[j * nnx + i] = regionale ? Houle.amplitudeNoeud(level, nx0 + i, nz0 + j) : fixe;
         for (int j = 0; j <= n; j++) {
             for (int i = 0; i <= n; i++) {
                 int x = cx - r + i, z = cz - r + j;
@@ -190,7 +229,15 @@ public final class RenduVagues {
                 double pl = pn > 0 ? ps / pn : 0;
                 double o = Math.min(1, dv / (double) FONDU_FOND);
                 op[k] = pl > 0 ? Math.max(0, Math.min(1, (pl - 1) / 9.0)) * OPACITE * o * o * (3 - 2 * o) : 0;
-                double am = pr > 0 && dv > 0 ? Houle.amplitudeSelonProfondeur(level, x, z, pr) : 0;
+                double am = 0;
+                if (pr > 0 && dv > 0) {
+                    double fx = (double) x / Houle.PAS_NOEUD - nx0, fz = (double) z / Houle.PAS_NOEUD - nz0;
+                    int ix = (int) Math.floor(fx), iz = (int) Math.floor(fz);
+                    double tx = fx - ix, tz = fz - iz;
+                    int q = iz * nnx + ix;
+                    am = (noeuds[q] * (1 - tx) * (1 - tz) + noeuds[q + 1] * tx * (1 - tz) + noeuds[q + nnx] * (1 - tx) * tz
+                            + noeuds[q + nnx + 1] * tx * tz) * Houle.calmeCote(pr);
+                }
                 double g = Math.min(1, dv / (double) BORD);
                 am *= g * g * (3 - 2 * g);
                 // fondu vers la surface plate au bord du rayon (dessin seulement : la barque et la nage n'en dépendent pas)
@@ -288,13 +335,17 @@ public final class RenduVagues {
      * Relief de la houle : [éclat, écume]. Pente tournée vers le soleil d'ouest-sud-ouest plus claire, creux plus sombres,
      * haut des crêtes éclairci et blanchi (écume légère) pour que les vagues se lisent.
      */
+    private static final float[] RELIEF = new float[2];
+
     private static float[] relief(double h, double am, double ampMax, double hx, double hz) {
         // poids du relief : nul sur l'eau plate (même couleur que l'eau du jeu au-delà du carré : pas de ligne)
         double w = Math.max(0, Math.min(1, am / ampMax));
         double haut = Math.max(0, Math.min(1, h / (2 * ampMax)));               // 0 = creux, 1 = crête
         double eclat = 1 + w * (0.30 * (haut - 0.5) + 0.45 * (-hx * 0.5 + hz * 0.3));
         double ecume = w * Math.max(0, (haut - 0.78) / 0.22);
-        return new float[]{(float) Math.max(0.55, Math.min(1.25, eclat)), (float) (ecume * ecume * 0.55)};
+        RELIEF[0] = (float) Math.max(0.55, Math.min(1.25, eclat));       // 0.4.1 : sans allocation (dessin seulement)
+        RELIEF[1] = (float) (ecume * ecume * 0.55);
+        return RELIEF;
     }
 
     private static void sommet(BufferBuilder b, Matrix4f m, double x, double y, double z, float u, float v, int teinte,

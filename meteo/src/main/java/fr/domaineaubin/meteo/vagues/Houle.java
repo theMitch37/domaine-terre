@@ -61,6 +61,8 @@ public final class Houle {
             DomaineWeather.LOGGER.error("Domaine Weather : impossible d'ecrire {}", fichier(), e);
         }
         PROFONDEURS.clear();
+        java.util.Arrays.fill(NOEUDS_CLIENT.tampons, Long.MIN_VALUE);
+        java.util.Arrays.fill(NOEUDS_SERVEUR.tampons, Long.MIN_VALUE);
         if (avant != r.actif) DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> MasqueEau::rafraichir);
     }
 
@@ -262,12 +264,61 @@ public final class Houle {
         return Math.max(0.35 * h[0], h[0] + (h[1] - h[0]) * v);
     }
 
-    /** Amplitude au large ici (blocs), avant le calme des côtes. Hors monde Terre : réglage fixe (prototype). */
+    /** Pas (blocs) du quadrillage où l'amplitude de la région est calculée ; entre deux nœuds : bilinéaire. */
+    public static final int PAS_NOEUD = 16;
+
+    /**
+     * Amplitude au large ici (blocs), avant le calme des côtes. Hors monde Terre : réglage fixe (prototype).
+     * 0.4.1 (optimisation) : calculée aux nœuds d'un quadrillage de 16 blocs, puis bilinéaire (la houle de la région
+     * varie sur des centaines de blocs) ; le dessin lit les mêmes nœuds une fois par image : barque et dessin d'accord.
+     */
     public static double amplitudeRegion(Level level, double x, double z) {
         if (!actif()) return 0;
-        if (!fr.domaineaubin.meteo.Saisons.terre(level) || climat() == null) return reglages().amplitude;
-        return Math.min(AMPLITUDE_MAX, hs(level, x, z) * BLOCS_PAR_METRE * reglages().amplitude);
+        if (!regionale(level)) return reglages().amplitude;
+        double fx = x / PAS_NOEUD, fz = z / PAS_NOEUD;
+        int ix = (int) Math.floor(fx), iz = (int) Math.floor(fz);
+        double tx = fx - ix, tz = fz - iz;
+        return amplitudeNoeud(level, ix, iz) * (1 - tx) * (1 - tz) + amplitudeNoeud(level, ix + 1, iz) * tx * (1 - tz)
+                + amplitudeNoeud(level, ix, iz + 1) * (1 - tx) * tz + amplitudeNoeud(level, ix + 1, iz + 1) * tx * tz;
     }
+
+    /** Vrai si l'amplitude vient du climat réel (monde Terre, houle.bin lu). */
+    public static boolean regionale(Level level) {
+        return fr.domaineaubin.meteo.Saisons.terre(level) && climat() != null;
+    }
+
+    /** Amplitude au nœud (ix, iz) du quadrillage (blocs ix x PAS_NOEUD, iz x PAS_NOEUD). */
+    public static double amplitudeNoeud(Level level, int ix, int iz) {
+        // 0.4.1 : mémoire des nœuds (une par côté), valable une seconde de jeu : chaque entité près de la surface
+        // demande l'amplitude à chaque tick ; elle ne change qu'en quelques jours de jeu
+        Noeuds c = level.isClientSide ? NOEUDS_CLIENT : NOEUDS_SERVEUR;
+        long tampon = level.getGameTime() / 20;
+        long cle = ((long) ix << 32) ^ (iz & 0xFFFFFFFFL);
+        int i = (int) ((ix * 73856093L ^ iz * 19349663L) & (Noeuds.TAILLE - 1));
+        synchronized (c) {
+            if (c.cles[i] == cle && c.tampons[i] == tampon) return c.valeurs[i];
+        }
+        double v = Math.min(AMPLITUDE_MAX, hs(level, (double) ix * PAS_NOEUD, (double) iz * PAS_NOEUD) * BLOCS_PAR_METRE
+                * reglages().amplitude);
+        synchronized (c) {
+            c.cles[i] = cle;
+            c.tampons[i] = tampon;
+            c.valeurs[i] = v;
+        }
+        return v;
+    }
+
+    private static final class Noeuds {
+        static final int TAILLE = 4096;
+        final long[] cles = new long[TAILLE], tampons = new long[TAILLE];
+        final double[] valeurs = new double[TAILLE];
+
+        Noeuds() {
+            java.util.Arrays.fill(tampons, Long.MIN_VALUE);
+        }
+    }
+
+    private static final Noeuds NOEUDS_CLIENT = new Noeuds(), NOEUDS_SERVEUR = new Noeuds();
 
     /** Plus grande amplitude possible (tri rapide des entités, avant toute lecture du monde). */
     public static double amplitudeMax() {
